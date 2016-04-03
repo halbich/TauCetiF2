@@ -3,17 +3,18 @@
 #pragma once
 
 #include "GameFramework/SaveGame.h"
+#include "Common/SaveGameCarrier.h"
 #include "TCF2SaveGame.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class TAUCETIF2_API UTCF2SaveGame : public USaveGame
 {
 	GENERATED_BODY()
-	
-	
+
+
 public:
 	UTCF2SaveGame();
 
@@ -26,7 +27,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = Basic)
 		uint32 UserIndex;
-	
+
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		void SaveGame();
@@ -35,6 +36,17 @@ public:
 		UTCF2SaveGame* LoadGame();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
-		static UTCF2SaveGame* GetEmpty();
-	
+		static UTCF2SaveGame* GetEmptySave();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
+		static USaveGameCarrier* GetEmptyCarrier();
+
+
+	void SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, bool bFullObject);
+	bool SaveGameDataToFile(const FString& FullFilePath, USaveGameCarrier& ToSave);
+
+	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
+		bool SaveBinary(USaveGameCarrier* carrier);
+
+
 };
