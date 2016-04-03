@@ -16,12 +16,11 @@ class TAUCETIF2_API UHelpers : public UObject
 public:
 
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
-		static TArray<FString> GetAllSaveGameSlotNames();
+		static TArray<FString> GetAllSaveGameSlots();
 
 
 	static void SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier);
-	static bool SaveGameDataToFile(const FString& FullFilePath, USaveGameCarrier& ToSave);
-	static bool LoadGameDataFromFile(const FString& FullFilePath, USaveGameCarrier& ToLoad);
+	 
 
 
 	static FORCEINLINE 	FString UHelpers::GetSaveFilePath() {

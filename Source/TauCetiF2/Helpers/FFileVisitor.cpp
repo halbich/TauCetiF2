@@ -9,8 +9,11 @@
 
 bool FFileVisitor::Visit(const TCHAR * FilenameOrDirectory, bool bIsDirectory)
 {
+	auto res = FString(FilenameOrDirectory);
 	// Pass back the file name
-	new(Result)FString(FPaths::GetCleanFilename(FilenameOrDirectory));
+	FPaths::NormalizeFilename(res);
+
+	new(Result)FString(res);
 
 	return true;
 }
