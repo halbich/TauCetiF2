@@ -10,7 +10,7 @@ USaveGameCarrier::USaveGameCarrier() {
 	SaveLoaded = false;
 
 
-	SaveName = TEXT("Prázdný save");
+	SaveName = TEXT("Prázdná pozice");
 	WorldName = TEXT("");
 	//PlayedTime(0);
 
@@ -106,6 +106,8 @@ bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bF
 	// Empty & Close Buffer 
 	TheBinaryArray.Empty();
 	FromBinary.Close();
+
+	this->FullFilePath = FString(FullFilePath);
 
 	return SaveLoaded;
 }

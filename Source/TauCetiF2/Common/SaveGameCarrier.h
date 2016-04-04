@@ -18,6 +18,9 @@ public:
 
 	static const uint8 CURRENT_VERSION;
 
+	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
+		FString FullFilePath;
+
 
 	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
 		bool ContainsFullSaveData;
