@@ -35,9 +35,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
 		FString SaveName;
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
-		FString WorldName;
-
 	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
 		FDateTime SavedDate;
 

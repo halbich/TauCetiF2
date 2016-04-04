@@ -19,13 +19,6 @@ public:
 		static TArray<FString> GetAllSaveGameSlots();
 
 
-	static void SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier);
-	 
-
-
-	static FORCEINLINE 	FString UHelpers::GetSaveFilePath() {
-		return FString::Printf(TEXT("%s\\SaveGames\\"), *FPaths::GameSavedDir());
-	}
 
 	static FORCEINLINE FString UHelpers::GetCleanSaveFileName(const FString& worldName, const FDateTime& saveTime) {
 		auto name = worldName.Replace(TEXT(" "), TEXT("_"));

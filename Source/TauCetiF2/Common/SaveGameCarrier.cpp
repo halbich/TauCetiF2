@@ -2,7 +2,7 @@
 #include "SaveGameCarrier.h"
 #include "Helpers/Helpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 0;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 1;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -11,7 +11,6 @@ USaveGameCarrier::USaveGameCarrier() {
 
 
 	SaveName = TEXT("Prázdná pozice");
-	WorldName = TEXT("");
 	//PlayedTime(0);
 
 	TimeOfDay = 0;
@@ -49,10 +48,13 @@ bool USaveGameCarrier::SaveBinary()
 {
 	SavedDate = FDateTime::Now();
 
-	auto saveName = UHelpers::GetCleanSaveFileName(WorldName, SavedDate);
-	auto filePath = FString::Printf(TEXT("%s\\SaveGames\\%s.sav"), *FPaths::GameSavedDir(), *saveName);
+	if (FullFilePath.Len() == 0) {
 
-	return SaveGameDataToFile(filePath);
+		auto saveName = UHelpers::GetCleanSaveFileName(TEXT("tcf2"), SavedDate);
+		FullFilePath = FString::Printf(TEXT("%s\\SaveGames\\%s.sav"), *FPaths::GameSavedDir(), *saveName);
+	}
+
+	return SaveGameDataToFile(FullFilePath);
 }
 
 bool USaveGameCarrier::LoadBinary(const FString& FilePath)
@@ -77,6 +79,10 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 			FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*save);
 		}
 	}
+
+	result.Sort([](const USaveGameCarrier& A, const USaveGameCarrier& B) {
+		return A.SavedDate > B.SavedDate;
+	});
 
 	return result;
 }
@@ -129,7 +135,6 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, boo
 		return;
 
 	Ar << carrier.SaveName;
-	Ar << carrier.WorldName;
 	Ar << carrier.SavedDate;
 	Ar << carrier.PlayedTime;
 

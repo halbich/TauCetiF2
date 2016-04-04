@@ -41,7 +41,7 @@ TArray<FString> UHelpers::GetAllSaveGameSlots()
 			myFileManager->Get().GetPlatformFile().IterateDirectory(*saveGamePath, FileMatch);
 
 		}
-
+		
 		// Return the array
 		return filePaths;
 
@@ -52,13 +52,6 @@ TArray<FString> UHelpers::GetAllSaveGameSlots()
 }
 
 
-
-void UHelpers::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier)
-{
-	/*Ar << SaveDataInt32;
-	Ar << SaveDataVector;
-	Ar << SaveDataRotatorArray;*/
-}
 
 
 
