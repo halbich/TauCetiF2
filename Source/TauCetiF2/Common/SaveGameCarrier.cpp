@@ -55,6 +55,11 @@ bool USaveGameCarrier::SaveBinary()
 	return SaveGameDataToFile(filePath);
 }
 
+bool USaveGameCarrier::LoadBinary(const FString& FilePath)
+{
+	return LoadGameDataFromFile(FilePath, true);
+}
+
 TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 {
 	TArray<USaveGameCarrier*> result;
@@ -74,6 +79,10 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 	}
 
 	return result;
+}
+
+void USaveGameCarrier::GetSaveForNewGame()
+{
 }
 
 bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject) {

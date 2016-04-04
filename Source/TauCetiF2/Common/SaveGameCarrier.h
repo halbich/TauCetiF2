@@ -67,9 +67,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		bool SaveBinary();
 
+	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
+		bool LoadBinary(const FString& FilePath);
+
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
 		static TArray<USaveGameCarrier*> GetSaveGameInfoList();
+
+	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
+		void GetSaveForNewGame();
 };
 
 
