@@ -2,7 +2,7 @@
 #include "SaveGameCarrier.h"
 #include "Helpers/Helpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 1;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 2;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -50,7 +50,7 @@ bool USaveGameCarrier::SaveBinary()
 
 	if (FullFilePath.Len() == 0) {
 
-		auto saveName = UHelpers::GetCleanSaveFileName(TEXT("tcf2"), SavedDate);
+		auto saveName = UHelpers::GetCleanSaveFileName(IsQuickSave ? TEXT("tcf2_quick") : TEXT("tcf2") , SavedDate);
 		FullFilePath = FString::Printf(TEXT("%s\\SaveGames\\%s.sav"), *FPaths::GameSavedDir(), *saveName);
 	}
 
@@ -67,12 +67,22 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 	TArray<USaveGameCarrier*> result;
 
 	auto saves = UHelpers::GetAllSaveGameSlots();
-
+	bool hasQuickSave = false;
 	for (auto save : saves)
 	{
 		auto carrier = NewObject<USaveGameCarrier>();
 		if (carrier->LoadGameDataFromFile(save, false)) {
-			result.Add(carrier);
+
+			if (carrier->IsQuickSave && hasQuickSave)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Found another quick save. Deleting %s."), *save);
+				FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*save);
+			}
+			else {
+				hasQuickSave |= carrier->IsQuickSave;
+				result.Add(carrier);
+			}
+
 		}
 		else {
 			UE_LOG(LogTemp, Warning, TEXT("Found save with incorrect version(%d / current: %d). Deleting %s."), carrier->SaveFileVersion, CURRENT_VERSION, *save);
@@ -137,6 +147,7 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, boo
 	Ar << carrier.SaveName;
 	Ar << carrier.SavedDate;
 	Ar << carrier.PlayedTime;
+	Ar << carrier.IsQuickSave;
 
 	carrier.SaveLoaded = true;
 	carrier.ContainsFullSaveData = bFullObject;

@@ -41,7 +41,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
 		FTimespan PlayedTime;
 
-
+	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+		bool IsQuickSave;
 
 	// game - related stuff
 
