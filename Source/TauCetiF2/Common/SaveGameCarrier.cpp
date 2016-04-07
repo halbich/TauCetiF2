@@ -2,7 +2,7 @@
 #include "SaveGameCarrier.h"
 #include "Helpers/Helpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 2;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 4;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -13,7 +13,6 @@ USaveGameCarrier::USaveGameCarrier() {
 	SaveName = TEXT("Prázdná pozice");
 	//PlayedTime(0);
 
-	TimeOfDay = 0;
 }
 
 USaveGameCarrier* USaveGameCarrier::GetEmptyCarrier()
@@ -50,7 +49,7 @@ bool USaveGameCarrier::SaveBinary()
 
 	if (FullFilePath.Len() == 0) {
 
-		auto saveName = UHelpers::GetCleanSaveFileName(IsQuickSave ? TEXT("tcf2_quick") : TEXT("tcf2") , SavedDate);
+		auto saveName = UHelpers::GetCleanSaveFileName(IsQuickSave ? TEXT("tcf2_quick") : TEXT("tcf2"), SavedDate);
 		FullFilePath = FString::Printf(TEXT("%s\\SaveGames\\%s.sav"), *FPaths::GameSavedDir(), *saveName);
 	}
 
@@ -99,6 +98,7 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 
 void USaveGameCarrier::GetSaveForNewGame()
 {
+	PlayerPosition = FVector(0, 0, 90);
 }
 
 bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject) {
@@ -137,6 +137,11 @@ bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bF
 	return SaveLoaded;
 }
 
+bool USaveGameCarrier::IsSaveCompatible(const USaveGameCarrier & carrier)
+{
+	return true;
+}
+
 void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, bool bFullObject)
 {
 	Ar << carrier.SaveFileVersion;
@@ -155,6 +160,11 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, boo
 	if (!bFullObject)
 		return;
 
-	Ar << carrier.TimeOfDay;
+	Ar << carrier.MinBoxSize;
+	Ar << carrier.PartOfDay;
+
+	Ar << carrier.PlayerPosition;
+	Ar << carrier.PlayerRotation;
+	Ar << carrier.PlayerCameraRotation;
 
 }

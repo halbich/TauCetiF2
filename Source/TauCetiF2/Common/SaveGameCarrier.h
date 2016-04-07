@@ -48,7 +48,22 @@ public:
 
 
 	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
-		uint8 TimeOfDay;
+		float PartOfDay;
+
+	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+		uint8 MinBoxSize;
+
+
+
+	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+		FVector PlayerPosition;
+
+	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+		FRotator PlayerRotation;
+
+	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+		FRotator PlayerCameraRotation;
+
 
 
 	// functions
@@ -59,8 +74,10 @@ public:
 
 	void SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, bool bFullObject = true);
 	bool SaveGameDataToFile(const FString& FullFilePath);
-
 	bool LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject = true);
+
+	bool IsSaveCompatible(const USaveGameCarrier& carrier);
+
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		bool SaveBinary();
@@ -74,6 +91,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		void GetSaveForNewGame();
+
+
+
 };
 
 
