@@ -4,6 +4,7 @@
 #define __TAUCETIF2_H__
 
 #include "Engine.h"
+#include "Common/Enums.h"
 
 #define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
 

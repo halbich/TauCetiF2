@@ -2,7 +2,7 @@
 #include "SaveGameCarrier.h"
 #include "Helpers/Helpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 4;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 5;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -13,6 +13,16 @@ USaveGameCarrier::USaveGameCarrier() {
 	SaveName = TEXT("Prázdná pozice");
 	//PlayedTime(0);
 
+}
+
+USaveGameCarrier::~USaveGameCarrier() {
+
+	for (auto block : UsedBlocks)
+	{
+		delete block;
+	}
+
+	UsedBlocks.Empty();
 }
 
 USaveGameCarrier* USaveGameCarrier::GetEmptyCarrier()
@@ -100,6 +110,12 @@ void USaveGameCarrier::GetSaveForNewGame()
 {
 	PlayerPosition = FVector(-400, 0, 90);
 	PartOfDay = 0.5f;
+
+
+	auto bl = new FBlockInfo();
+
+
+	UsedBlocks.Add(bl);
 }
 
 bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject) {
@@ -167,5 +183,7 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, boo
 	Ar << carrier.PlayerPosition;
 	Ar << carrier.PlayerRotation;
 	Ar << carrier.PlayerCameraRotation;
+
+	Ar << carrier.UsedBlocks;
 
 }

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Object.h"
+#include "Blocks/BlockInfo.h"
 #include "SaveGameCarrier.generated.h"
 
 /**
@@ -15,6 +16,7 @@ class TAUCETIF2_API USaveGameCarrier : public UObject
 
 public:
 	USaveGameCarrier();
+	~USaveGameCarrier();
 
 	static const uint8 CURRENT_VERSION;
 
@@ -47,7 +49,7 @@ public:
 	// game - related stuff
 
 
-	
+
 	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
 		float PartOfDay;	// interval [0,1]
 
@@ -65,6 +67,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
 		FRotator PlayerCameraRotation;
 
+
+	// blocks 
+	//UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+		TArray<FBlockInfo*> UsedBlocks;
 
 
 	// functions
