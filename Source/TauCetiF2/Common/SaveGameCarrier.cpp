@@ -98,7 +98,8 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 
 void USaveGameCarrier::GetSaveForNewGame()
 {
-	PlayerPosition = FVector(0, 0, 90);
+	PlayerPosition = FVector(-400, 0, 90);
+	PartOfDay = 0.5f;
 }
 
 bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject) {
