@@ -117,12 +117,17 @@ void USaveGameCarrier::GetSaveForNewGame()
 	FVector blockScale(1, 1, 1);
 	FRotator blockRotation;
 
-	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::Cube, EBlockType::Empty, EMaterialType::Empty));
-	loc += FVector(40, 0, 0);
-	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::CubeSide, EBlockType::Empty, EMaterialType::Empty));
-	loc += FVector(40, 0, 0);
+	UsedBlocks.Add(make(loc, blockScale + FVector(1, 0, 0), blockRotation, EShapeType::Cube, EBlockType::Empty, EMaterialType::Empty));
+	loc += FVector(2, 0, 0);
+	UsedBlocks.Add(make(loc, blockScale + FVector(0, 1, 0), blockRotation, EShapeType::CubeSide, EBlockType::Empty, EMaterialType::Empty));
+	loc += FVector(2, 0, 0);
 
-	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::CubeBody, EBlockType::Empty, EMaterialType::Empty));
+	UsedBlocks.Add(make(loc, blockScale + FVector(1, 0, 1), blockRotation, EShapeType::CubeBody, EBlockType::Empty, EMaterialType::Empty));
+
+	loc = FVector(0, 1, 0);
+	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::Cube, EBlockType::Empty, EMaterialType::Empty));
+
+	UsedBlocks.Add(make(FVector(-10, -10, 15), FVector(20,20,1), blockRotation, EShapeType::Cube, EBlockType::Empty, EMaterialType::Empty));
 }
 
 bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject) {

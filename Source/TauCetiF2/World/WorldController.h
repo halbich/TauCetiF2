@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "Common/WorldObject.h"
 #include "WorldController.generated.h"
 
 UCLASS()

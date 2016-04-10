@@ -20,9 +20,5 @@ class TAUCETIF2_API AWorldObject : public ADestructibleActor
 		UWorldObjectComponent* WorldObjectComponent;
 
 
-	virtual void PostInitProperties() override;
-	virtual void PostActorCreated() override;
-	virtual void PostLoad() override;
-
 	virtual void OnConstruction(const FTransform& Transform) override;
 };

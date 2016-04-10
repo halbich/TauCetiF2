@@ -29,6 +29,10 @@ void AWorldController::Tick(float DeltaTime)
 
 void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 
+	auto world = GetWorld();
+	if (!world)
+		return;
+
 	UsedBlocks.Empty();
 	UsedBlocks.Reserve(blocks.Num());
 	for (auto block : blocks)
@@ -37,6 +41,21 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 			continue;
 
 		print(TEXT("block"));
+
+		auto classBP = UHelpers::GetBlueprintByShape(block->ShapeType);
+		if (classBP) {
+
+			auto trans = UHelpers::GetSpawnTransform(block->Location, block->BlockScale);
+
+			auto actor = world->SpawnActorDeferred<AWorldObject>(classBP->GeneratedClass, trans);
+
+			if (actor)
+			{
+				actor->WorldObjectComponent->BlockInfo = block;
+				print(TEXT("actor"));
+				UGameplayStatics::FinishSpawningActor(actor, trans);
+			}
+		}
 
 		UsedBlocks.Add(block);
 	}

@@ -5,6 +5,7 @@
 
 #include "Engine.h"
 #include "Common/Enums.h"
+#include "Helpers/Helpers.h"
 #include "Helpers/ArchiveHelpers.h"
 
 #define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1,10, FColor::White,text)
