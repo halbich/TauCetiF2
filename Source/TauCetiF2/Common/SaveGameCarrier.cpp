@@ -1,5 +1,6 @@
 #include "TauCetiF2.h"
 #include "SaveGameCarrier.h"
+#include "Helpers/ArchiveHelpers.h"
 #include "Helpers/Helpers.h"
 
 const uint8 USaveGameCarrier::CURRENT_VERSION = 5;
@@ -15,14 +16,11 @@ USaveGameCarrier::USaveGameCarrier() {
 
 }
 
+
+
+
 USaveGameCarrier::~USaveGameCarrier() {
 
-	for (auto block : UsedBlocks)
-	{
-		delete block;
-	}
-
-	UsedBlocks.Empty();
 }
 
 USaveGameCarrier* USaveGameCarrier::GetEmptyCarrier()
@@ -33,6 +31,7 @@ USaveGameCarrier* USaveGameCarrier::GetEmptyCarrier()
 
 bool USaveGameCarrier::SaveGameDataToFile(const FString& FullFilePath)
 {
+	updateBeforeSave();
 	FBufferArchive ToBinary;
 	SaveLoadData(ToBinary, *this);
 
@@ -112,14 +111,14 @@ void USaveGameCarrier::GetSaveForNewGame()
 	PartOfDay = 0.5f;
 
 
-	auto bl = new FBlockInfo();
-
+	auto bl = NewObject< UBlockInfo>();
 
 	UsedBlocks.Add(bl);
 }
 
 bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject) {
 
+	
 	TArray<uint8> TheBinaryArray;
 	if (!FFileHelper::LoadFileToArray(TheBinaryArray, *FullFilePath))
 	{
@@ -150,6 +149,8 @@ bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bF
 	FromBinary.Close();
 
 	this->FullFilePath = FString(FullFilePath);
+
+	updateAfterLoad();
 
 	return SaveLoaded;
 }
@@ -184,6 +185,6 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, boo
 	Ar << carrier.PlayerRotation;
 	Ar << carrier.PlayerCameraRotation;
 
-	Ar << carrier.UsedBlocks;
+	Ar << carrier.blocks;
 
 }

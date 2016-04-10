@@ -2,18 +2,12 @@
 
 #pragma once
 
-//#include "FBlockInfo.generated.h"
+#include "BlockInfo.generated.h"
 
-/**
- *
- */
- //UCLASS()
-class TAUCETIF2_API FBlockInfo// : public UObject
+
+// Help class to save / load data as saveGame
+struct TAUCETIF2_API FBlockInfo
 {
-	//GENERATED_BODY()
-public:
-	FBlockInfo();
-	~FBlockInfo();
 
 	uint32 ID;
 	FVector Location;
@@ -24,17 +18,47 @@ public:
 
 };
 
-FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo* block)
+
+/**
+ *
+ */
+UCLASS(BlueprintType)
+class TAUCETIF2_API UBlockInfo : public UObject
 {
-	if (!block)
-		return Ar;
-	//~
+	GENERATED_BODY()
+public:
+	UBlockInfo();
+	~UBlockInfo();
 
-	Ar << block->ID;
-	Ar << block->Location;
-	Ar << block->BlockScale;
-	Ar << block->BlockRotation;
-	Ar << (uint8&)block->ShapeType;
+	uint32 ID;
+	FVector Location;
+	FVector BlockScale;
+	FRotator BlockRotation;
 
-	return Ar;
-}
+	EShapeType ShapeType;
+
+	FORCEINLINE FBlockInfo ToContainer() {
+		FBlockInfo result;
+		result.ID = ID;
+		result.Location = Location;
+		result.BlockScale = BlockScale;
+		result.BlockRotation = BlockRotation;
+		result.ShapeType = ShapeType;
+		return result;
+	}
+
+	FORCEINLINE void FromContainer(FBlockInfo& block) {
+		ID = block.ID;
+		Location = block.Location;
+		BlockScale = block.BlockScale;
+		BlockRotation = block.BlockRotation;
+		ShapeType = block.ShapeType;
+	}
+
+};
+
+
+
+
+
+

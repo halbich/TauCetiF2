@@ -4,18 +4,20 @@
 
 #include "Object.h"
 #include "Blocks/BlockInfo.h"
+#include "Helpers/ArchiveHelpers.h"
 #include "SaveGameCarrier.generated.h"
 
 /**
  *
  */
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, Transient)
 class TAUCETIF2_API USaveGameCarrier : public UObject
 {
 	GENERATED_BODY()
 
 public:
 	USaveGameCarrier();
+
 	~USaveGameCarrier();
 
 	static const uint8 CURRENT_VERSION;
@@ -69,8 +71,10 @@ public:
 
 
 	// blocks 
-	//UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
-		TArray<FBlockInfo*> UsedBlocks;
+	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+		TArray<UBlockInfo*> UsedBlocks;
+
+	TArray<FBlockInfo> blocks;
 
 
 	// functions
@@ -100,6 +104,26 @@ public:
 		void GetSaveForNewGame();
 
 
+	FORCEINLINE void updateBeforeSave() {
+
+		blocks.Empty();
+		for (auto usedBlock : UsedBlocks)
+		{
+			if (usedBlock)
+				blocks.Add(usedBlock->ToContainer());
+		}
+	}
+
+	FORCEINLINE void updateAfterLoad() {
+
+		UsedBlocks.Empty();
+		for (auto usedBlock : blocks)
+		{
+			auto newBlock = NewObject<UBlockInfo>();
+			newBlock->FromContainer(usedBlock);
+			UsedBlocks.Add(newBlock);
+		}
+	}
 
 };
 
