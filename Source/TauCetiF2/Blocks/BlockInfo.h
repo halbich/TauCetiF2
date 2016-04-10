@@ -15,6 +15,8 @@ struct TAUCETIF2_API FBlockInfo
 	FRotator BlockRotation;
 
 	EShapeType ShapeType;
+	EBlockType BlockType;
+	EMaterialType MaterialType;
 
 };
 
@@ -36,6 +38,8 @@ public:
 	FRotator BlockRotation;
 
 	EShapeType ShapeType;
+	EBlockType BlockType;
+	EMaterialType MaterialType;
 
 	FORCEINLINE FBlockInfo ToContainer() {
 		FBlockInfo result;
@@ -44,6 +48,8 @@ public:
 		result.BlockScale = BlockScale;
 		result.BlockRotation = BlockRotation;
 		result.ShapeType = ShapeType;
+		result.BlockType = BlockType;
+		result.MaterialType = MaterialType;
 		return result;
 	}
 
@@ -53,6 +59,8 @@ public:
 		BlockScale = block.BlockScale;
 		BlockRotation = block.BlockRotation;
 		ShapeType = block.ShapeType;
+		BlockType = block.BlockType;
+		MaterialType = block.MaterialType;
 	}
 
 };
