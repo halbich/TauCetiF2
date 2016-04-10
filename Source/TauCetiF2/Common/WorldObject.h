@@ -1,7 +1,7 @@
 
 
 #pragma once
-
+#include "Common/Enums.h"
 #include "Components/WorldObjectComponent.h"
 #include "WorldObject.generated.h"
 

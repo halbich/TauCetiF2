@@ -32,3 +32,17 @@ enum class EMaterialType : uint8
 };
 
 
+UENUM(BlueprintType)
+enum class EMaterialInstance : uint8
+{
+	Empty	 				UMETA(DisplayName = "Empty"),
+	InnerMaterial	 		UMETA(DisplayName = "InnerMaterial"),
+	BaseFloor				UMETA(DisplayName = "BaseFloor"),
+	BaseSide				UMETA(DisplayName = "BaseSide"),
+	Polycarbon				UMETA(DisplayName = "Polycarbon"),
+	ConstructRectangle		UMETA(DisplayName = "ConstructRectangle"),
+	ConstructRectangleBody	UMETA(DisplayName = "ConstructRectangleBody"),
+	ConstructTriangle		UMETA(DisplayName = "ConstructTriangle"),
+};
+
+

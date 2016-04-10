@@ -40,17 +40,15 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 		if (!block)
 			continue;
 
-		print(TEXT("block"));
 
-		auto classBP = UHelpers::GetBlueprintByShape(block->ShapeType);
+		auto classBP = GetClassByShape(block->ShapeType);
 		if (classBP) {
 
 			auto trans = UHelpers::GetSpawnTransform(block->Location, block->BlockScale);
 			
-			print(block->BlockRotation.ToString());
 			trans.SetRotation(FQuat::FQuat(block->BlockRotation));
 
-			auto actor = world->SpawnActorDeferred<AWorldObject>(classBP->GeneratedClass, trans);
+			auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans);
 
 			if (actor)
 			{

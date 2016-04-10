@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Common/SaveGameCarrier.h"
+
 #include "Helpers.generated.h"
 
 /**
@@ -54,9 +55,27 @@ public:
 		return LoadObjFromPath<UBlueprint>(name);
 	}
 
+
+
+
 	static FORCEINLINE UMaterial* GetMaterialByName(const FName& name) {
 
 		return LoadObjFromPath<UMaterial>(name);
+	}
+
+	static FORCEINLINE UMaterial* GetMaterialByInstance(const EMaterialInstance& instance) {
+		switch (instance)
+		{
+		case EMaterialInstance::InnerMaterial: return GetMaterialByName(TEXT("Material'/Game/Materials/BuildingObjects/InsideMat.InsideMat'"));
+		case EMaterialInstance::BaseFloor: return GetMaterialByName(TEXT("Material'/Game/Materials/BuildingObjects/MaterialBaseFloor.MaterialBaseFloor'"));
+		case EMaterialInstance::BaseSide: return GetMaterialByName(TEXT("Material'/Game/Materials/BuildingObjects/MaterialBaseSide.MaterialBaseSide'"));
+		case EMaterialInstance::Polycarbon: return GetMaterialByName(TEXT("Material'/Game/Materials/BuildingObjects/MaterialGlass.MaterialGlass'"));
+		case EMaterialInstance::ConstructRectangle: return GetMaterialByName(TEXT("Material'/Game/Materials/BuildingObjects/MaterialRectangle.MaterialRectangle'"));
+		case EMaterialInstance::ConstructRectangleBody: return GetMaterialByName(TEXT("Material'/Game/Materials/BuildingObjects/MaterialRectangleBody.MaterialRectangleBody'"));
+		case EMaterialInstance::ConstructTriangle: return GetMaterialByName(TEXT("Material'/Game/Materials/BuildingObjects/MaterialTriangle.MaterialTriangle'"));
+		default:
+			return nullptr;
+		}
 	}
 
 	static FORCEINLINE FVector GetWorldCoordinate(const FVector& vect)

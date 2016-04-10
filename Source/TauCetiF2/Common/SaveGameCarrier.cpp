@@ -110,21 +110,21 @@ void USaveGameCarrier::GetSaveForNewGame()
 	PlayerPosition = FVector(-400, 0, 90);
 	PartOfDay = 0.5f;
 
-	UsedBlocks.Add(make(FVector(-10, -10, 15), FVector(20,20,1), FRotator(90,0,0), EShapeType::Cube, EBlockType::Empty, EMaterialType::Empty));
+	UsedBlocks.Add(make(FVector(-10, -10, 15), FVector(20,20,1), FRotator(90,0,0), EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));
 
 	FVector loc;
 	FVector blockScale(1, 1, 1);
 	FRotator blockRotation(0,0,0);
 
-	UsedBlocks.Add(make(loc, blockScale + FVector(4, 4, 0), blockRotation, EShapeType::Cube, EBlockType::Base, EMaterialType::Empty));
+	UsedBlocks.Add(make(loc, blockScale + FVector(4, 4, 1), blockRotation, EShapeType::Cube, EBlockType::Base, EMaterialType::Steel));
 	loc += FVector(2, 6, 0);
-	UsedBlocks.Add(make(loc, blockScale + FVector(0, 1, 0), blockRotation, EShapeType::CubeSide, EBlockType::Empty, EMaterialType::Empty));
+	UsedBlocks.Add(make(loc, blockScale + FVector(0, 1, 0), blockRotation, EShapeType::CubeSide, EBlockType::Empty, EMaterialType::Polycarbon));
 	loc += FVector(2, 0, 0);
 
-	UsedBlocks.Add(make(loc, blockScale + FVector(1, 0, 1), blockRotation, EShapeType::CubeBody, EBlockType::Empty, EMaterialType::Empty));
+	UsedBlocks.Add(make(loc, blockScale + FVector(1, 0, 1), blockRotation, EShapeType::CubeBody, EBlockType::Empty, EMaterialType::Polycarbon));
 
 	loc = FVector(0, -5, 0);
-	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::Cube, EBlockType::Empty, EMaterialType::Empty));
+	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));
 
 }
 
