@@ -21,4 +21,15 @@ class TAUCETIF2_API AWorldObject : public ADestructibleActor
 
 
 	virtual void OnConstruction(const FTransform& Transform) override;
+
+	virtual void BeginPlay() override;
+
+	FORCEINLINE void GetBoundingBox(FVector& min,FVector& max ) {
+		auto location = GetActorLocation();
+		auto scale = GetActorRotation().RotateVector( GetActorScale3D() * 10);
+
+		min = location - scale;
+		max = location + scale;
+
+	}
 };

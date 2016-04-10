@@ -46,15 +46,19 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 		if (classBP) {
 
 			auto trans = UHelpers::GetSpawnTransform(block->Location, block->BlockScale);
+			
+			print(block->BlockRotation.ToString());
+			trans.SetRotation(FQuat::FQuat(block->BlockRotation));
 
 			auto actor = world->SpawnActorDeferred<AWorldObject>(classBP->GeneratedClass, trans);
 
 			if (actor)
 			{
 				actor->WorldObjectComponent->BlockInfo = block;
-				print(TEXT("actor"));
 				UGameplayStatics::FinishSpawningActor(actor, trans);
 			}
+
+
 		}
 
 		UsedBlocks.Add(block);

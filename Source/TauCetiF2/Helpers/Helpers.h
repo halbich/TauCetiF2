@@ -54,6 +54,11 @@ public:
 		return LoadObjFromPath<UBlueprint>(name);
 	}
 
+	static FORCEINLINE UMaterial* GetMaterialByName(const FName& name) {
+
+		return LoadObjFromPath<UMaterial>(name);
+	}
+
 	static FORCEINLINE FVector GetWorldCoordinate(const FVector& vect)
 	{
 		return FVector(vect) * 20;
@@ -64,8 +69,12 @@ public:
 	{
 		FTransform trans;
 		trans.SetScale3D(size);
-		auto transMove = FVector( (int32)(size.X + 1)% 2, (int32)(size.Y + 1) % 2, (int32)(size.Z + 1) % 2) * 0.5;
+		auto transMove = FVector((int32)(size.X + 1) % 2, (int32)(size.Y + 1) % 2, (int32)(size.Z + 1) % 2) * 0.5;
 		trans.SetLocation(GetWorldCoordinate(localPosition + transMove));
 		return trans;
 	}
+
+
+	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
+		static void DrawDebugBox(AActor* caller, FVector start, FVector end);
 };
