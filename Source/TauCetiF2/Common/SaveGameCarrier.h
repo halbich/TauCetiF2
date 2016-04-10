@@ -125,6 +125,29 @@ public:
 		}
 	}
 
+	FORCEINLINE UBlockInfo* make(
+		FVector location,
+		FVector blockScale,
+		FRotator blockRotation,
+
+		EShapeType shapeType,
+		EBlockType blockType,
+		EMaterialType materialType
+		) {
+		auto ret = NewObject<UBlockInfo>();
+
+		ret->Location = location;
+		ret->BlockScale = blockScale;
+		ret->BlockRotation = blockRotation;
+		ret->ShapeType = shapeType;
+		ret->BlockType = blockType;
+		ret->MaterialType = materialType;
+
+
+		return ret;
+
+	}
+
 };
 
 

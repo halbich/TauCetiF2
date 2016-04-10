@@ -22,5 +22,8 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category= WorldController)
 	TArray<UBlockInfo*> UsedBlocks;
+
+	UFUNCTION(BlueprintCallable, Category = WorldController)
+		void LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks);
 	
 };

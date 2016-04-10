@@ -113,12 +113,21 @@ void USaveGameCarrier::GetSaveForNewGame()
 
 	auto bl = NewObject< UBlockInfo>();
 
-	UsedBlocks.Add(bl);
+	FVector loc;
+	FVector blockScale(1, 1, 1);
+	FRotator blockRotation;
+
+	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::Cube, EBlockType::Empty, EMaterialType::Empty));
+	loc += FVector(40, 0, 0);
+	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::CubeSide, EBlockType::Empty, EMaterialType::Empty));
+	loc += FVector(40, 0, 0);
+
+	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::CubeBody, EBlockType::Empty, EMaterialType::Empty));
 }
 
 bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject) {
 
-	
+
 	TArray<uint8> TheBinaryArray;
 	if (!FFileHelper::LoadFileToArray(TheBinaryArray, *FullFilePath))
 	{
