@@ -3,27 +3,20 @@
 #include "TauCetiF2.h"
 #include "WorldController.h"
 
-
-// Sets default values
-AWorldController::AWorldController()
+AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
+	RootBox = new FMinMaxBox(FVector(-500, -500, -10), FVector(500, 500, 150));
+	
 }
 
-// Called when the game starts or when spawned
-void AWorldController::BeginPlay()
-{
-	Super::BeginPlay();
-
-}
-
-// Called every frame
-void AWorldController::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
+AWorldController::~AWorldController() {
+	
+	if (RootBox)
+	{
+		delete RootBox;
+		RootBox = nullptr;
+	}
 }
 
 
@@ -45,7 +38,7 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 		if (classBP) {
 
 			auto trans = UHelpers::GetSpawnTransform(block->Location, block->BlockScale);
-			
+
 			trans.SetRotation(FQuat::FQuat(block->BlockRotation));
 
 			auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans);
@@ -62,4 +55,13 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 		UsedBlocks.Add(block);
 	}
 
+}
+
+void AWorldController::DEBUGShowMinMaxBoxes() {
+	print(TEXT("DEBUG Boxes!"));
+
+	if (RootBox)
+		RootBox->DEBUGDrawContainingBox(GetWorld());
+	else
+		print(TEXT("NO Root!"));
 }

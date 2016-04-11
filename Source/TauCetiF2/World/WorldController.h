@@ -7,28 +7,30 @@
 #include "Blocks/CubeObject.h"
 #include "Blocks/CubeSideObject.h"
 #include "Blocks/CubeBodyObject.h"
+#include "MinMaxBox.h"
 #include "WorldController.generated.h"
 
 UCLASS()
 class TAUCETIF2_API AWorldController : public AActor
 {
-	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	AWorldController();
+	GENERATED_UCLASS_BODY()
 
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-	
-	// Called every frame
-	virtual void Tick( float DeltaSeconds ) override;
+public:
+	~AWorldController();
 
-	UPROPERTY(BlueprintReadWrite, Category= WorldController)
-	TArray<UBlockInfo*> UsedBlocks;
+	UPROPERTY(BlueprintReadWrite, Category = WorldController)
+		TArray<UBlockInfo*> UsedBlocks;
 
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks);
+	
+
+	UFUNCTION(BlueprintCallable, Category = WorldController)
+		void DEBUGShowMinMaxBoxes();
+
+private:
+		FMinMaxBox* RootBox;
+
 
 	static FORCEINLINE UClass* GetClassByShape(const EShapeType shape) {
 
@@ -43,5 +45,5 @@ public:
 		}
 
 	}
-	
+
 };
