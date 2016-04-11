@@ -16,6 +16,11 @@ class TAUCETIF2_API UHelpers : public UObject
 
 public:
 
+	static const FVector WorldBorders;
+	static const FVector WorldCenterMapping;
+	static const float CubeMinSize;
+
+
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
 		static TArray<FString> GetAllSaveGameSlots();
 
@@ -80,7 +85,15 @@ public:
 
 	static FORCEINLINE FVector GetWorldCoordinate(const FVector& vect)
 	{
-		return FVector(vect) * 20;
+		return FVector(vect) * CubeMinSize;
+	}
+
+
+
+	static FORCEINLINE FVector BorderToWorld(const FVector& border)
+	{
+		return border - WorldCenterMapping;
+
 	}
 
 

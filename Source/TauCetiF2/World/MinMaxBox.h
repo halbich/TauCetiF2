@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Common/WorldObject.h"
 
 /**
  *
@@ -20,8 +21,20 @@ public:
 
 	FMinMaxBox* B2;
 
-
+	AWorldObject* containingObject;
 
 	void DEBUGDrawContainingBox(UWorld* world);
+
+	void AddToTree(FMinMaxBox* box);
+
+	static FMinMaxBox* FromWorldObject(AWorldObject* object) {
+
+		FVector min;
+		FVector max;
+		object->GetBoundingBox(min, max);
+		auto ret = new FMinMaxBox(min, max);
+		ret->containingObject = object;
+		return ret;
+	}
 
 };

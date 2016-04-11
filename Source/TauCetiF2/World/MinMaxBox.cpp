@@ -3,7 +3,7 @@
 #include "TauCetiF2.h"
 #include "MinMaxBox.h"
 
-FMinMaxBox::FMinMaxBox(FVector min, FVector max) : B1(nullptr), B2(nullptr), Min(min), Max(max)
+FMinMaxBox::FMinMaxBox(FVector min, FVector max) : B1(nullptr), B2(nullptr), Min(min), Max(max), containingObject(nullptr)
 {
 	B1 = nullptr;
 	B2 = nullptr;
@@ -24,6 +24,16 @@ FMinMaxBox::~FMinMaxBox()
 	}
 }
 
+void FMinMaxBox::AddToTree(FMinMaxBox* box) {
+
+	ensure(box != nullptr);
+
+	//TODO 
+	if (B1)
+		B1->AddToTree(box);
+	else
+		B1 = box;
+}
 
 void FMinMaxBox::DEBUGDrawContainingBox(UWorld* world)
 {
