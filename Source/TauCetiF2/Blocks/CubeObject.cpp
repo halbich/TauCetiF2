@@ -9,14 +9,23 @@
 ACubeObject::ACubeObject(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	auto dc = GetDestructibleComponent();
-	if (!dc)
+	//auto dc = GetDestructibleComponent();
+	//if (!dc)
+	//	return;
+
+	//ConstructorHelpers::FObjectFinder<UDestructibleMesh> destructible(TEXT("DestructibleMesh'/Game/BuildingObjects/DestructibleMeshes/box_DM.box_DM'"));
+
+	//if (destructible.Succeeded())
+	//	dc->SetDestructibleMesh(destructible.Object);
+
+	auto mc = GetStaticMeshComponent();
+	if (!mc)
 		return;
 
-	ConstructorHelpers::FObjectFinder<UDestructibleMesh> destructible(TEXT("DestructibleMesh'/Game/BuildingObjects/DestructibleMeshes/box_DM.box_DM'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> mesh(TEXT("StaticMesh'/Game/BuildingObjects/Meshes/box.box'"));
 
-	if (destructible.Succeeded())
-		dc->SetDestructibleMesh(destructible.Object);
+	if (mesh.Succeeded())
+		mc->SetStaticMesh(mesh.Object);
 
 }
 
@@ -24,11 +33,6 @@ ACubeObject::ACubeObject(const FObjectInitializer& ObjectInitializer)
 void  ACubeObject::OnConstruction(const FTransform& Transform) {
 
 	Super::OnConstruction(Transform);
-
-	auto dc = GetDestructibleComponent();
-	if (!dc)
-		return;
-
 
 	EMaterialInstance matI1 = EMaterialInstance::Empty;
 	EMaterialInstance matI2 = EMaterialInstance::Empty;
@@ -43,9 +47,9 @@ void  ACubeObject::OnConstruction(const FTransform& Transform) {
 
 	auto scale = GetActorScale3D();
 
-	setMaterial(matTop, dc, 0, scale.X, scale.Y);
-	setMaterial(matSide1, dc, 1, scale.X, scale.Z);
-	setMaterial(matSide2, dc, 2, scale.Y, scale.Z);
+	setMaterial(matTop, 0, scale.X, scale.Y);
+	setMaterial(matSide1, 1, scale.X, scale.Z);
+	setMaterial(matSide2, 2, scale.Y, scale.Z);
 
 
 }

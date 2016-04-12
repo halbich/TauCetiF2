@@ -46,17 +46,6 @@ public:
 		}
 	}
 
-	FORCEINLINE void setMaterial(UMaterial* material, UDestructibleComponent* dc, int32 index, float scaleX, float scaleY) {
 
-		UMaterialInstanceDynamic* mi = nullptr;
-		if (material) {
-			mi = UMaterialInstanceDynamic::Create(material, this);
-			if (mi)
-			{
-				mi->SetScalarParameterValue(TEXT("Kx"), scaleX);
-				mi->SetScalarParameterValue(TEXT("Ky"), scaleY);
-			}
-		}
-		dc->SetMaterial(index, mi);
-	}
+
 };

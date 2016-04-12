@@ -107,18 +107,66 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 
 void USaveGameCarrier::GetSaveForNewGame()
 {
-	PlayerPosition = FVector(-400, 0, 90);
+	PlayerPosition = FVector(-600, 0, 90);
 	PartOfDay = 0.5f;
 
-	UsedBlocks.Add(make(FVector(-10, -10, 15), FVector(20,20,2), FRotator(90,0,0), EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));
+
+	FRotator baseRotation(0, 0, 0);
+	FVector BaseSize(20, 20, 4);
 
 
-	FVector loc;
+	UsedBlocks.Add(make(FVector(-10, -10, 1), BaseSize, FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Base, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(10, -10, 1), BaseSize, FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Base, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(-10, 10, 1), BaseSize, FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Base, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(10, 10, 1), BaseSize, FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Base, EMaterialType::Steel));
+
+
+
+	UsedBlocks.Add(make(FVector(-26, 0, 1), FVector(8, 12, 4), FRotator(0, 90,0 ), EShapeType::CubeSide, EBlockType::Base, EMaterialType::Steel));
+
+
+	FVector RoofSize(20, 20, 1);
+
+	UsedBlocks.Add(make(FVector(-10, -10, 20), RoofSize, FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(10, -10, 20), RoofSize, FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(-10, 10, 20), RoofSize, FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(10, 10, 20), RoofSize, FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+
+
+	UsedBlocks.Add(make(FVector(-9, -19, 5), FVector(19,1,4), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(10, -19, 5), FVector(19, 1, 4), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(0, -19, 13), FVector(8, 1,12), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+
+
+	UsedBlocks.Add(make(FVector(-9, +20, 5), FVector(19, 1, 4), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(10, +20, 5), FVector(19, 1, 4), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(0, 20, 13), FVector(8, 1, 12), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+
+	// sloup
+	UsedBlocks.Add(make(FVector(0, 0, 11), FVector(2, 2, 16), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+
+	// vstup
+	UsedBlocks.Add(make(FVector(-19, -12, 11), FVector(1, 16, 16), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(20, -12, 11), FVector(1, 16, 16), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+
+	UsedBlocks.Add(make(FVector(-19, 12, 11), FVector(1, 16, 16), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+	UsedBlocks.Add(make(FVector(20, 12, 11), FVector(1, 16, 16), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Steel));
+
+
+	UsedBlocks.Add(make(FVector(20, 0, 11), FVector(1, 8, 16), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));
+
+
+	UsedBlocks.Add(make(FVector(-11, -19, 13), FVector(15, 1, 12), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));
+	UsedBlocks.Add(make(FVector(-11, 20, 13), FVector(15, 1, 12), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));
+
+	UsedBlocks.Add(make(FVector(12, -19, 13), FVector(15, 1, 12), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));
+	UsedBlocks.Add(make(FVector(12, 20, 13), FVector(15, 1, 12), FRotator(0, 0, 0), EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));
+
+	/*FVector loc;
 	FVector blockScale(1, 1, 1);
-	FRotator blockRotation(0,0,0);
 
 	UsedBlocks.Add(make(loc, blockScale + FVector(4, 4, 1), blockRotation, EShapeType::Cube, EBlockType::Base, EMaterialType::Steel));
-	
+
 
 	loc += FVector(2, 6, 0);
 	UsedBlocks.Add(make(loc, blockScale + FVector(0, 1, 0), blockRotation, EShapeType::CubeSide, EBlockType::Empty, EMaterialType::Polycarbon));
@@ -127,7 +175,7 @@ void USaveGameCarrier::GetSaveForNewGame()
 	UsedBlocks.Add(make(loc, blockScale + FVector(1, 0, 1), blockRotation, EShapeType::CubeBody, EBlockType::Empty, EMaterialType::Polycarbon));
 
 	loc = FVector(0, -5, 0);
-	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));
+	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));*/
 
 }
 
