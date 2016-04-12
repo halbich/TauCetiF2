@@ -11,7 +11,7 @@ class TAUCETIF2_API FMinMaxBox
 {
 
 public:
-	FMinMaxBox(FVector min, FVector max);
+	FMinMaxBox(FVector min, FVector max, int8 dividingIndex);
 	~FMinMaxBox();
 
 	FVector Min;
@@ -23,18 +23,57 @@ public:
 
 	AWorldObject* containingObject;
 
+	int32 DividingIndex;
+
+	FMinMaxBox* SingleChild;
+
+	FString name;
+
 	void DEBUGDrawContainingBox(UWorld* world);
 
-	void AddToTree(FMinMaxBox* box);
+	void AddToTree(FMinMaxBox* box, bool forceIsert = false);
 
-	static FMinMaxBox* FromWorldObject(AWorldObject* object) {
 
+
+	static FMinMaxBox& FromWorldObject(AWorldObject* object) {
+
+		print(object->GetName());
 		FVector min;
 		FVector max;
 		object->GetBoundingBox(min, max);
-		auto ret = new FMinMaxBox(min, max);
+		print(min.ToString());
+		print(max.ToString());
+		auto ret = new FMinMaxBox(min, max, 0);
 		ret->containingObject = object;
-		return ret;
+		return *ret;
 	}
+
+	static FMinMaxBox& FromMinMaxBox(FMinMaxBox* boxObject) {
+
+		FVector min;
+		FVector max;
+		auto ret = new FMinMaxBox(boxObject->Min, boxObject->Max, boxObject->DividingIndex);
+		ret->containingObject = boxObject->containingObject;
+		ret->name = FString(boxObject->name);
+		return *ret;
+	}
+
+private:
+
+	void addToTreeByX(FMinMaxBox* box, float& dividingCoord);
+	void addToTreeByY(FMinMaxBox* box, float dividingCoord);
+	void addToTreeByZ(FMinMaxBox* box, float dividingCoord);
+
+
+	FORCEINLINE bool GtMin(const FVector& min)
+	{
+		return Min.X <= min.X && Min.Y <= min.Y && Min.Z <= min.Z;
+	}
+
+	FORCEINLINE bool LtMax(const FVector& max)
+	{
+		return Max.X >= max.X && Max.Y >= max.Y && Max.Z >= max.Z;
+	}
+
 
 };

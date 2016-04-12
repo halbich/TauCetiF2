@@ -40,9 +40,6 @@ void  ACubeObject::OnConstruction(const FTransform& Transform) {
 	UMaterial* matSide1 = UHelpers::GetMaterialByInstance(matI2);
 	UMaterial* matSide2 = UHelpers::GetMaterialByInstance(matI3);
 
-	if (matTop)
-		print(matTop->GetName());
-	print(matTop ? TEXT("mattop") : TEXT("noooooo  mattop"));
 
 	auto scale = GetActorScale3D();
 
@@ -50,7 +47,6 @@ void  ACubeObject::OnConstruction(const FTransform& Transform) {
 	setMaterial(matSide1, dc, 1, scale.X, scale.Z);
 	setMaterial(matSide2, dc, 2, scale.Y, scale.Z);
 
-	print(TEXT("mat"));
 
 }
 

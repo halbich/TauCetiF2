@@ -8,15 +8,13 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 {
 
 	auto minCube = UHelpers::BorderToWorld(FVector(0, 0, 0));
-	print(minCube.ToString());
-
 	auto maxCube = UHelpers::BorderToWorld(UHelpers::WorldBorders);
-	print(maxCube.ToString());
 
 	FVector min((minCube.X - 0.5) * UHelpers::CubeMinSize, (minCube.Y - 0.5) * UHelpers::CubeMinSize, (minCube.Z-0.5)*UHelpers::CubeMinSize);
 	FVector max((maxCube.X + 0.5) * UHelpers::CubeMinSize, (maxCube.Y + 0.5) * UHelpers::CubeMinSize, (maxCube.Z + 0.5)*UHelpers::CubeMinSize);
 
-	RootBox = new FMinMaxBox(min, max);
+	RootBox = new FMinMaxBox(min, max, 0);
+	RootBox->name = TEXT("ROOT");
 
 }
 
@@ -57,9 +55,13 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 			{
 				actor->WorldObjectComponent->BlockInfo = block;
 
-				if (ensure(RootBox != nullptr))
-					RootBox->AddToTree(FMinMaxBox::FromWorldObject(actor));
+				UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 
+
+				if (ensure(RootBox != nullptr))
+					RootBox->AddToTree(&FMinMaxBox::FromWorldObject(actor));
+
+				UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 
 				UGameplayStatics::FinishSpawningActor(actor, trans);
 			}
@@ -73,7 +75,6 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 }
 
 void AWorldController::DEBUGShowMinMaxBoxes() {
-	print(TEXT("DEBUG Boxes!"));
 
 	if (RootBox)
 		RootBox->DEBUGDrawContainingBox(GetWorld());

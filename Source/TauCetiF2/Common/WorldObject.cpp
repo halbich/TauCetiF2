@@ -17,27 +17,7 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 
 	Super::OnConstruction(Transform);
 
-	if (WorldObjectComponent && WorldObjectComponent->BlockInfo)
-	{
-		// TODO naplnit vlastnosti komponent
-
-		auto bi = WorldObjectComponent->BlockInfo;
-
-		if (bi->BlockType == EBlockType::Base) {
-
-			auto matName = UHelpers::GetMaterialByName(TEXT("Material'/Game/Materials/BuildingObjects/MaterialBaseFloor.MaterialBaseFloor'"));
-			if (matName) {
-
-				auto matInst = UMaterialInstanceDynamic::Create(matName, this);
-				if (matInst)
-				{
-					matInst->SetScalarParameterValue(TEXT("Kx"), 1);
-					matInst->SetScalarParameterValue(TEXT("Ky"), 1);
-				//	DestructibleComponent->SetMaterial(0, matInst);
-				}
-			}
-		}
-	}
+	
 
 }
 
