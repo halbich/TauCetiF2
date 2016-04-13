@@ -2,6 +2,8 @@
 
 #include "TauCetiF2.h"
 #include "WorldController.h"
+#include "Blocks/FBlockDefinition.h"
+#include "Blocks/FBlockDefinitionHolder.h"
 
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -41,8 +43,14 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 		if (!block)
 			continue;
 
+		auto definition = FBlockDefinitionHolder::Instance().GetDefinition(block->ID, false);
+		if (!definition)
+		{
+			UE_LOG(LogTemp, Error, TEXT("Neznámé ID (%d) objektu. Vynechávám"), block->ID);
+			continue;
+		}
 
-		auto classBP = GetClassByShape(block->ShapeType);
+		auto classBP = GetClassByShape(definition->ShapeType);
 		if (classBP) {
 
 			auto trans = UHelpers::GetSpawnTransform(block->Location, block->BlockScale);

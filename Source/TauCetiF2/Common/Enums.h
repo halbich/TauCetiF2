@@ -21,17 +21,24 @@ enum class EBlockType : uint8
 	Custom		UMETA(DisplayName = "Custom"),
 };
 
+
+/*
+	Enum for block definition
+*/
 UENUM(BlueprintType)
 enum class EMaterialType : uint8
 {
 	Empty	 		UMETA(DisplayName = "Empty"),
-	Polycarbon		UMETA(DisplayName = "Polycarbon"),
+	Polycarbonate	UMETA(DisplayName = "Polycarbonate"),
 	Steel			UMETA(DisplayName = "Steel"),
 	Alloy			UMETA(DisplayName = "Alloy"),
 	SuperAlloy		UMETA(DisplayName = "SuperAlloy"),
 };
 
 
+/*
+	Enum for asset references
+*/
 UENUM(BlueprintType)
 enum class EMaterialInstance : uint8
 {
@@ -39,10 +46,19 @@ enum class EMaterialInstance : uint8
 	InnerMaterial	 		UMETA(DisplayName = "InnerMaterial"),
 	BaseFloor				UMETA(DisplayName = "BaseFloor"),
 	BaseSide				UMETA(DisplayName = "BaseSide"),
-	Polycarbon				UMETA(DisplayName = "Polycarbon"),
+	Polycarbonate			UMETA(DisplayName = "Polycarbonate"),
 	ConstructRectangle		UMETA(DisplayName = "ConstructRectangle"),
 	ConstructRectangleBody	UMETA(DisplayName = "ConstructRectangleBody"),
 	ConstructTriangle		UMETA(DisplayName = "ConstructTriangle"),
+};
+
+
+UENUM(BlueprintType)
+enum class EBlockName : uint8
+{
+	ConstructCube 				UMETA(DisplayName = "ConstructCube"),
+	BaseCube 					UMETA(DisplayName = "BaseCube"),
+	WindowCube 					UMETA(DisplayName = "WindowCube"),
 };
 
 

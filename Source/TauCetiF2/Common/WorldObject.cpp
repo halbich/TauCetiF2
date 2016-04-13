@@ -2,6 +2,8 @@
 
 #include "TauCetiF2.h"
 #include "WorldObject.h"
+#include "Blocks/FBlockDefinition.h"
+#include "Blocks/FBlockDefinitionHolder.h"
 
 
 AWorldObject::AWorldObject(const FObjectInitializer& ObjectInitializer)
@@ -21,6 +23,31 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->RegisterTargetPrimitiveComponent(GetStaticMeshComponent());
+
+	auto definition = FBlockDefinitionHolder::Instance().GetDefinition(WorldObjectComponent->BlockInfo->ID);
+
+	auto scale = GetActorScale3D();
+
+	bool hasPolycarbonate = false;
+	for (size_t i = 0; i < definition->UsedMaterials.Num(); i++)
+	{
+		auto mat = definition->UsedMaterials[i];
+
+		setMaterial(mat.MaterialInstance, i, mat.ApplyCoordinates * scale);
+		hasPolycarbonate = hasPolycarbonate || mat.MaterialInstance == EMaterialInstance::Polycarbonate;
+	}
+
+
+
+	if (hasPolycarbonate)
+	{
+		TranslucentSelectMesh->SetWorldScale3D(Transform.GetScale3D());
+		TranslucentSelectMesh->SetWorldLocationAndRotation(Transform.GetLocation(), Transform.GetRotation());
+		TranslucentSelectMesh->Activate();
+		SelectTargetComponent->RegisterTargetPrimitiveComponent(TranslucentSelectMesh);
+	}
+	else
+		TranslucentSelectMesh->DestroyComponent();
 
 }
 

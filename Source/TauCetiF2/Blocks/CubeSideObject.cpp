@@ -2,6 +2,7 @@
 
 #include "TauCetiF2.h"
 #include "CubeSideObject.h"
+
 #include "Engine/DestructibleMesh.h"
 
 
@@ -32,20 +33,4 @@ void  ACubeSideObject::OnConstruction(const FTransform& Transform) {
 
 	Super::OnConstruction(Transform);
 
-	EMaterialInstance matI1 = EMaterialInstance::Empty;
-	EMaterialInstance matI2 = EMaterialInstance::Empty;
-	EMaterialInstance matI3 = EMaterialInstance::Empty;
-
-
-	prepareMaterials(matI1, matI2, matI3);
-	UMaterial* matTop = UHelpers::GetMaterialByInstance(matI1);
-	UMaterial* matSide1 = UHelpers::GetMaterialByInstance(matI2);
-	UMaterial* matSide2 = UHelpers::GetMaterialByInstance(matI3);
-
-
-	auto scale = GetActorScale3D();
-
-	setMaterial(matTop, 0, scale.X, scale.Y);
-	setMaterial(matSide1, 1, scale.X, scale.Z);
-	setMaterial(matSide2, 2, scale.Y, scale.Z);
 }

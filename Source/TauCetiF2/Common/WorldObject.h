@@ -23,7 +23,7 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldObject)
 		USelectTargetComponent* SelectTargetComponent;
-	
+
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldObject)
 		UStaticMeshComponent* TranslucentSelectMesh;
@@ -55,6 +55,32 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 			{
 				mi->SetScalarParameterValue(TEXT("Kx"), scaleX);
 				mi->SetScalarParameterValue(TEXT("Ky"), scaleY);
+			}
+		}
+		sm->SetMaterial(index, mi);
+	}
+
+	FORCEINLINE void setMaterial(EMaterialInstance& instance, int32 index, FVector scale) {
+		auto sm = GetStaticMeshComponent();
+		if (!sm)
+			return;
+		UMaterial* material = UHelpers::GetMaterialByInstance(instance);
+
+		check(material && "Failed to find given material");
+
+		UMaterialInstanceDynamic* mi = nullptr;
+		if (material) {
+			mi = UMaterialInstanceDynamic::Create(material, this);
+			if (mi)
+			{
+				int8 currIndex(0);
+				const FString names[] = { TEXT("Kx"), TEXT("Ky"), TEXT("Kz") };
+				if (scale.X != 0)
+					mi->SetScalarParameterValue(*names[currIndex++], scale.X);
+				if (scale.Y != 0)
+					mi->SetScalarParameterValue(*names[currIndex++], scale.Y);
+				if (scale.Z != 0)
+					mi->SetScalarParameterValue(*names[currIndex++], scale.Z);
 			}
 		}
 		sm->SetMaterial(index, mi);
