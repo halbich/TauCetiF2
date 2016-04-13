@@ -24,6 +24,12 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 
 	SelectTargetComponent->RegisterTargetPrimitiveComponent(GetStaticMeshComponent());
 
+	if (WorldObjectComponent == nullptr || WorldObjectComponent->BlockInfo == nullptr)
+		return;
+
+	//TODO assert
+
+
 	auto definition = FBlockDefinitionHolder::Instance().GetDefinition(WorldObjectComponent->BlockInfo->ID);
 
 	auto scale = GetActorScale3D();
