@@ -25,8 +25,15 @@ ACubeSideObject::ACubeSideObject(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> mesh(TEXT("StaticMesh'/Game/BuildingObjects/Meshes/box1.box1'"));
 
 	if (mesh.Succeeded())
+	{
 		mc->SetStaticMesh(mesh.Object);
+		TranslucentSelectMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TranslucentMeshSelector"));
+		TranslucentSelectMesh->SetStaticMesh(mesh.Object);
+		TranslucentSelectMesh->SetRenderInMainPass(false);
+		TranslucentSelectMesh->Deactivate();
 
+
+	}
 }
 
 void  ACubeSideObject::OnConstruction(const FTransform& Transform) {

@@ -24,7 +24,15 @@ ACubeBodyObject::ACubeBodyObject(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> mesh(TEXT("StaticMesh'/Game/BuildingObjects/Meshes/box2.box2'"));
 
 	if (mesh.Succeeded())
+	{
 		mc->SetStaticMesh(mesh.Object);
+		TranslucentSelectMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TranslucentMeshSelector"));
+		TranslucentSelectMesh->SetStaticMesh(mesh.Object);
+		TranslucentSelectMesh->SetRenderInMainPass(false);
+		TranslucentSelectMesh->Deactivate();
+
+
+	}
 
 }
 

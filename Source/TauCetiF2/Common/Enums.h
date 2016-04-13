@@ -59,6 +59,8 @@ enum class EBlockName : uint8
 	ConstructCube 				UMETA(DisplayName = "ConstructCube"),
 	BaseCube 					UMETA(DisplayName = "BaseCube"),
 	WindowCube 					UMETA(DisplayName = "WindowCube"),
+	ConstructCubeSide 					UMETA(DisplayName = "ConstructCubeSide"),
+	BaseRamp 					UMETA(DisplayName = "BaseRamp"),
 };
 
 

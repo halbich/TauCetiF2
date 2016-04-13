@@ -7,15 +7,45 @@
 class TAUCETIF2_API FBlockMaterialDefinition
 {
 public:
-
-	FVector ApplyCoordinates;
+	
 	EMaterialInstance MaterialInstance;
 
-	FBlockMaterialDefinition(const EMaterialInstance instance, bool useX, bool useY, bool useZ) : 
+	EAxis::Type KX;
+	EAxis::Type KY;
+
+
+	FBlockMaterialDefinition(const EMaterialInstance instance, EAxis::Type kX, EAxis::Type kY) :
 		MaterialInstance(instance),
-		ApplyCoordinates(useX ? 1 : 0, useY ? 1 : 0, useZ ? 1 : 0)
+		KX(kX),
+		KY(kY)
 	{
 	};
+
+
+	FVector2D GetParams(const FVector& scale) {
+		FVector2D res;
+
+		switch (KX) {
+		case EAxis::Type::X: res.X = scale.X;break;
+		case EAxis::Type::Y: res.X = scale.Y;break;
+		case EAxis::Type::Z: res.X = scale.Z;break;
+		default: 
+			checkNoEntry();
+			break;
+		}
+
+		switch (KY) {
+		case EAxis::Type::X: res.Y = scale.X; break;
+		case EAxis::Type::Y: res.Y = scale.Y; break;
+		case EAxis::Type::Z: res.Y = scale.Z; break;
+		default:
+			checkNoEntry();
+			break;
+		}
+
+		return res;
+
+	}
 
 };
 

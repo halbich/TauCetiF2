@@ -39,11 +39,12 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 	{
 		auto mat = definition->UsedMaterials[i];
 
-		setMaterial(mat.MaterialInstance, i, mat.ApplyCoordinates * scale);
+		setMaterial(mat.MaterialInstance, i, mat.GetParams(scale));
 		hasPolycarbonate = hasPolycarbonate || mat.MaterialInstance == EMaterialInstance::Polycarbonate;
 	}
 
-
+	if (!TranslucentSelectMesh)
+		return;
 
 	if (hasPolycarbonate)
 	{

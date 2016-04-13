@@ -60,7 +60,7 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 		sm->SetMaterial(index, mi);
 	}
 
-	FORCEINLINE void setMaterial(EMaterialInstance& instance, int32 index, FVector scale) {
+	FORCEINLINE void setMaterial(EMaterialInstance& instance, int32 index, FVector2D scale) {
 		auto sm = GetStaticMeshComponent();
 		if (!sm)
 			return;
@@ -73,14 +73,8 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 			mi = UMaterialInstanceDynamic::Create(material, this);
 			if (mi)
 			{
-				int8 currIndex(0);
-				const FString names[] = { TEXT("Kx"), TEXT("Ky"), TEXT("Kz") };
-				if (scale.X != 0)
-					mi->SetScalarParameterValue(*names[currIndex++], scale.X);
-				if (scale.Y != 0)
-					mi->SetScalarParameterValue(*names[currIndex++], scale.Y);
-				if (scale.Z != 0)
-					mi->SetScalarParameterValue(*names[currIndex++], scale.Z);
+				mi->SetScalarParameterValue(TEXT("Kx"), scale.X);
+				mi->SetScalarParameterValue(TEXT("Ky"), scale.Y);
 			}
 		}
 		sm->SetMaterial(index, mi);

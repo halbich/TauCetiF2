@@ -124,7 +124,7 @@ void USaveGameCarrier::GetSaveForNewGame()
 	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, -10, 1), BaseSize, FRotator(0, 0, 0)));
 
 
-	//UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-26, 0, 1), FVector(8, 12, 4), FRotator(0, 90, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseRamp, FVector(-26, 0, 1), FVector(8, 12, 4), FRotator(0, 90, 0)));
 
 
 	FVector RoofSize(20, 20, 1);
