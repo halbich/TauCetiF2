@@ -44,24 +44,7 @@ public:
 		return Cast<ObjClass>(StaticLoadObject(ObjClass::StaticClass(), NULL, *Path.ToString()));
 	}
 
-	static FORCEINLINE UBlueprint* GetBlueprintByShape(const EShapeType shape) {
-
-		FName name;
-		switch (shape)
-		{
-		case EShapeType::Cube: name = TEXT("Blueprint'/Game/BuildingObjects/Shapes/ShapeCube.ShapeCube'"); break;
-		case EShapeType::CubeSide: name = TEXT("Blueprint'/Game/BuildingObjects/Shapes/ShapeCubeSide.ShapeCubeSide'"); break;
-		case EShapeType::CubeBody: name = TEXT("Blueprint'/Game/BuildingObjects/Shapes/ShapeCubeBody.ShapeCubeBody'"); break;
-		default:
-			return nullptr;
-			break;
-		}
-
-		return LoadObjFromPath<UBlueprint>(name);
-	}
-
-
-
+	
 
 	static FORCEINLINE UMaterial* GetMaterialByName(const FName& name) {
 
@@ -106,7 +89,4 @@ public:
 		return trans;
 	}
 
-
-	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
-		static void DrawDebugBox(AActor* caller, FVector start, FVector end);
 };

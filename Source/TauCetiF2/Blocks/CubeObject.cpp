@@ -31,7 +31,7 @@ ACubeObject::ACubeObject(const FObjectInitializer& ObjectInitializer)
 		TranslucentSelectMesh->SetStaticMesh(mesh.Object);
 		TranslucentSelectMesh->SetRenderInMainPass(false);
 		TranslucentSelectMesh->Deactivate();
-		TranslucentSelectMesh->SetMobility(EComponentMobility::Static);
+		
 		
 	}
 
@@ -66,6 +66,7 @@ void  ACubeObject::OnConstruction(const FTransform& Transform) {
 		TranslucentSelectMesh->SetWorldLocationAndRotation(Transform.GetLocation(), Transform.GetRotation());
 		TranslucentSelectMesh->Activate();
 		SelectTargetComponent->RegisterTargetPrimitiveComponent(TranslucentSelectMesh);
+		//TranslucentSelectMesh->SetMobility(EComponentMobility::Static);
 	}
 	else
 		TranslucentSelectMesh->DestroyComponent();
