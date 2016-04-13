@@ -72,10 +72,6 @@ void UHelpers::DrawDebugBox(AActor* caller, FVector start, FVector end) {
 	auto b = FVector(FMath::Min(start.X, end.X), FMath::Min(start.Y, end.Y), FMath::Min(start.Z, end.Z));
 	auto e = FVector(FMath::Max(start.X, end.X), FMath::Max(start.Y, end.Y), FMath::Max(start.Z, end.Z));
 
-	print(TEXT("--------"));
-	print(b.ToString());
-
-	print(e.ToString());
 
 	TArray<FVector> points;
 	points.AddDefaulted(8);

@@ -1,6 +1,7 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/Character.h"
+#include "Components/SelectorComponent.h"
 #include "TauCetiF2Character.generated.h"
 
 UCLASS(config=Game)
@@ -15,6 +16,10 @@ class ATauCetiF2Character : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Selector, meta = (AllowPrivateAccess = "true"))
+	class USelectorComponent* Selector;
+
 public:
 	ATauCetiF2Character();
 

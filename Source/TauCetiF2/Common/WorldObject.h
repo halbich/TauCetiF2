@@ -3,6 +3,8 @@
 #pragma once
 #include "Common/Enums.h"
 #include "Components/WorldObjectComponent.h"
+#include "Components/SelectTargetComponent.h"
+
 #include "WorldObject.generated.h"
 
 /**
@@ -18,6 +20,10 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldObject)
 		UWorldObjectComponent* WorldObjectComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldObject)
+		USelectTargetComponent* SelectTargetComponent;
+	
 
 
 	virtual void OnConstruction(const FTransform& Transform) override;

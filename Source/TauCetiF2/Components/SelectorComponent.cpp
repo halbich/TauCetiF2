@@ -1,0 +1,149 @@
+
+
+#include "TauCetiF2.h"
+#include "SelectorComponent.h"
+
+
+// Sets default values for this component's properties
+USelectorComponent::USelectorComponent()
+{
+	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
+	// off to improve performance if you don't need them.
+	bWantsBeginPlay = true;
+	PrimaryComponentTick.bCanEverTick = true;
+
+	// ...
+}
+
+
+void USelectorComponent::BeginPlay()
+{
+	Super::BeginPlay();
+
+	
+}
+
+
+
+// Called every frame
+void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (!world)
+	{
+		world = GetWorld();
+
+		cameraManager = UGameplayStatics::GetPlayerCameraManager(world, 0);
+		playerPawn = UGameplayStatics::GetPlayerPawn(world, 0);
+	}
+
+	auto cameraLoc = cameraManager->GetCameraLocation();
+
+
+	auto rot = playerPawn->GetControlRotation();
+	auto hitEnd = FRotationMatrix(rot).GetScaledAxis(EAxis::X) * 1500 + cameraLoc;
+
+	const FName TraceTag("MyTraceTag");
+
+	World->DebugDrawTraceTag = TraceTag;
+
+	FHitResult result;
+	FCollisionObjectQueryParams params;
+
+	params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldStatic);
+	params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldDynamic);
+
+	FCollisionQueryParams CollisionParams;
+	//CollisionParams.TraceTag = TraceTag;
+	CollisionParams.AddIgnoredActor(traceIgnoreActor);
+
+	if (!world->LineTraceSingleByObjectType(result, cameraLoc, hitEnd, params, CollisionParams))
+	{
+		deselectComponent();
+		return;
+	}
+
+	auto act = result.GetActor();
+	if (!act)
+	{
+		deselectComponent();
+		return;
+	}
+
+
+
+	auto worldAct = Cast<AWorldObject>(act);
+	if (!worldAct)
+	{
+		if (!act->ActorHasTag(TEXT("Selectable")))
+		{
+			deselectComponent();
+			return;
+		}
+	}
+
+
+
+	float cubeSize = UHelpers::CubeMinSize;
+
+	ImpactPoint = result.ImpactPoint;
+	ImpactNormal = result.ImpactNormal;
+	ImpactPointWithSnap = FVector(FMath::RoundToInt(ImpactPoint.X / cubeSize) * cubeSize,
+		FMath::RoundToInt(ImpactPoint.Y / cubeSize) * cubeSize,
+		FMath::RoundToInt(ImpactPoint.Z / cubeSize) * cubeSize);
+
+	selectComponent(act, worldAct);
+
+
+
+}
+
+
+void USelectorComponent::ShowPlane()
+{
+	if (!spawnedPlane)
+	{
+		if (!LockingPlane)
+			return;
+
+		spawnedPlane = GetWorld()->SpawnActor(LockingPlane->GeneratedClass);
+	}
+
+	if (!spawnedPlane)
+	{
+		return;
+	}
+
+
+
+	print(TEXT("showing"));
+
+	if (false) {
+
+		DrawDebugDirectionalArrow(GetWorld(), ImpactPoint, ImpactPoint + (ImpactNormal * 100), 300, FColor::Red, false, 10);
+
+		auto rotator = ImpactNormal.Rotation() + FRotator(-90, 0, 0);
+
+		FQuat rot(rotator);
+
+		float angle(0);
+		spawnedPlane->SetActorLocationAndRotation(ImpactPoint + ImpactNormal, rot); // UKismetMathLibrary::FindLookAtRotation(UGameplayStatics::GetPlayerPawn(GetWorld(), 0)->GetActorLocation(), ImpactPoint));
+		spawnedPlane->SetActorHiddenInGame(false);
+		spawnedPlane->SetActorEnableCollision(true);
+
+	}
+}
+
+void USelectorComponent::HidePlane()
+{
+	if (!spawnedPlane)
+	{
+		return;
+	}
+
+	spawnedPlane->SetActorHiddenInGame(true);
+	spawnedPlane->SetActorEnableCollision(false);
+
+}
+

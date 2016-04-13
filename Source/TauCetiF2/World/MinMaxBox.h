@@ -37,12 +37,9 @@ public:
 
 	static FMinMaxBox& FromWorldObject(AWorldObject* object) {
 
-		print(object->GetName());
 		FVector min;
 		FVector max;
 		object->GetBoundingBox(min, max);
-		print(min.ToString());
-		print(max.ToString());
 		auto ret = new FMinMaxBox(min, max, 0);
 		ret->containingObject = object;
 		return *ret;
