@@ -88,6 +88,7 @@ private:
 		}
 
 		SelectedTarget = nullptr;
+		SelectedActor = nullptr;
 	}
 
 	UPROPERTY()

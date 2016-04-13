@@ -42,7 +42,7 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 
 
 	auto rot = playerPawn->GetControlRotation();
-	auto hitEnd = FRotationMatrix(rot).GetScaledAxis(EAxis::X) * 1500 + cameraLoc;
+	auto hitEnd = FRotationMatrix(rot).GetScaledAxis(EAxis::X) * 1000 + cameraLoc;
 
 	const FName TraceTag("MyTraceTag");
 
