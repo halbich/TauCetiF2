@@ -25,7 +25,15 @@ ACubeObject::ACubeObject(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> mesh(TEXT("StaticMesh'/Game/BuildingObjects/Meshes/box.box'"));
 
 	if (mesh.Succeeded())
+	{
 		mc->SetStaticMesh(mesh.Object);
+		TranslucentSelectMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TranslucentMeshSelector"));
+		TranslucentSelectMesh->SetStaticMesh(mesh.Object);
+		TranslucentSelectMesh->SetRenderInMainPass(false);
+		TranslucentSelectMesh->Deactivate();
+		TranslucentSelectMesh->SetMobility(EComponentMobility::Static);
+		
+	}
 
 }
 
@@ -50,6 +58,17 @@ void  ACubeObject::OnConstruction(const FTransform& Transform) {
 	setMaterial(matTop, 0, scale.X, scale.Y);
 	setMaterial(matSide1, 1, scale.X, scale.Z);
 	setMaterial(matSide2, 2, scale.Y, scale.Z);
+
+
+	if (WorldObjectComponent->BlockInfo->MaterialType == EMaterialType::Polycarbon)
+	{
+		TranslucentSelectMesh->SetWorldScale3D(Transform.GetScale3D());
+		TranslucentSelectMesh->SetWorldLocationAndRotation(Transform.GetLocation(), Transform.GetRotation());
+		TranslucentSelectMesh->Activate();
+		SelectTargetComponent->RegisterTargetPrimitiveComponent(TranslucentSelectMesh);
+	}
+	else
+		TranslucentSelectMesh->DestroyComponent();
 
 
 }

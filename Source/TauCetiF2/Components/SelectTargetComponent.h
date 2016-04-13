@@ -17,9 +17,6 @@ public:
 	// Sets default values for this component's properties
 	USelectTargetComponent();
 
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
 
 	UPROPERTY(EditAnywhere, Category = MySettings)
 		bool HasOutline;
@@ -27,4 +24,6 @@ public:
 	virtual void Select();
 
 	virtual void Deselect();
+
+	void RegisterTargetPrimitiveComponent(UPrimitiveComponent* comp);
 };

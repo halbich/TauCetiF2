@@ -17,27 +17,6 @@ USelectTargetComponent::USelectTargetComponent()
 }
 
 
-// Called when the game starts
-void USelectTargetComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	auto owner = GetOwner();
-	if (!owner)
-		return;
-
-	primitive = Cast<UPrimitiveComponent>(owner->FindComponentByClass<UStaticMeshComponent>());
-	if (!primitive)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Actor %s failed to get component!"), *(owner->GetName()));
-		return;
-	}
-
-	HasOutline = true;
-
-
-}
-
 
 void USelectTargetComponent::Select()
 {
@@ -46,24 +25,18 @@ void USelectTargetComponent::Select()
 		primitive->SetRenderCustomDepth(true);
 		return;
 	}
-
-	auto owner = GetOwner();
-	if (!owner)
-		return;
-
-	primitive = Cast<UPrimitiveComponent>(owner->FindComponentByClass<UStaticMeshComponent>());
-	if (!primitive)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Actor %s failed to get component!"), *(owner->GetName()));
-		return;
-	}
-
-	HasOutline = true;
-
 }
 
 void USelectTargetComponent::Deselect()
 {
 	if (HasOutline && primitive)
 		primitive->SetRenderCustomDepth(false);
+}
+
+void USelectTargetComponent::RegisterTargetPrimitiveComponent(UPrimitiveComponent* comp) {
+	primitive = comp;
+	if (comp != nullptr && comp->IsValidLowLevel()) {
+		HasOutline = true;
+	}
+
 }

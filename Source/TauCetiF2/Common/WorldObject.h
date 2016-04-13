@@ -25,6 +25,9 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 		USelectTargetComponent* SelectTargetComponent;
 	
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldObject)
+		UStaticMeshComponent* TranslucentSelectMesh;
+
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 

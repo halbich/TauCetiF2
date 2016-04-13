@@ -63,12 +63,18 @@ private:
 		SelectedActor = actor;
 		SelectedTarget = worldObj;
 
-		if (SelectedTarget && SelectedTarget->IsValidLowLevel() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevel())
+		if (SelectedTarget && SelectedTarget->IsValidLowLevel())
 		{
-			SelectedTarget->SelectTargetComponent->Select();
+			if (SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevel())
+			{
+				SelectedTarget->SelectTargetComponent->Select();
+			}
+			else {
+				SelectedActor = nullptr;
+				SelectedTarget = nullptr;
+			}
 
 		}
-
 	}
 
 	FORCEINLINE void deselectComponent()
