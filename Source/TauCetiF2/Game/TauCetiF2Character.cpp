@@ -42,6 +42,7 @@ ATauCetiF2Character::ATauCetiF2Character()
 
 
 	Selector = CreateDefaultSubobject<USelectorComponent>(TEXT("Selector"));
+	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
 }
 
 //////////////////////////////////////////////////////////////////////////

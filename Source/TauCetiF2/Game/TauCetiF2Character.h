@@ -2,6 +2,7 @@
 #pragma once
 #include "GameFramework/Character.h"
 #include "Components/SelectorComponent.h"
+#include "Components/InventoryComponent.h"
 #include "TauCetiF2Character.generated.h"
 
 UCLASS(config=Game)
@@ -19,6 +20,9 @@ class ATauCetiF2Character : public ACharacter
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Selector, meta = (AllowPrivateAccess = "true"))
 	class USelectorComponent* Selector;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
+	class UInventoryComponent* Inventory;
 
 public:
 	ATauCetiF2Character();
