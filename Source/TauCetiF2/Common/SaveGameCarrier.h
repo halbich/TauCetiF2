@@ -74,7 +74,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
 		TArray<UBlockInfo*> UsedBlocks;
 
-	TArray<FBlockInfo> blocks;
+	// Serializable array
+	TArray<FBlockInfo> usedBlocks;
+
+
 
 
 	// functions
@@ -106,18 +109,18 @@ public:
 
 	FORCEINLINE void updateBeforeSave() {
 
-		blocks.Empty();
+		usedBlocks.Empty();
 		for (auto usedBlock : UsedBlocks)
 		{
 			if (usedBlock)
-				blocks.Add(usedBlock->ToContainer());
+				usedBlocks.Add(usedBlock->ToContainer());
 		}
 	}
 
 	FORCEINLINE void updateAfterLoad() {
 
 		UsedBlocks.Empty();
-		for (auto usedBlock : blocks)
+		for (auto usedBlock : usedBlocks)
 		{
 			auto newBlock = NewObject<UBlockInfo>();
 			newBlock->FromContainer(usedBlock);
@@ -135,8 +138,8 @@ public:
 		auto ret = NewObject<UBlockInfo>();
 		ret->ID = id;
 		ret->Location = location;
-		ret->BlockScale = blockScale;
-		ret->BlockRotation = blockRotation;
+		ret->Scale = blockScale;
+		ret->Rotation = blockRotation;
 
 
 		return ret;

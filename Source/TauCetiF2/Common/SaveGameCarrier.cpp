@@ -259,6 +259,6 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, boo
 	Ar << carrier.PlayerRotation;
 	Ar << carrier.PlayerCameraRotation;
 
-	Ar << carrier.blocks;
+	Ar << carrier.usedBlocks;
 
 }

@@ -4,20 +4,32 @@
 
 #include "BlockInfo.generated.h"
 
-
 // Help class to save / load data as saveGame
-struct TAUCETIF2_API FBlockInfo
-{
+struct TAUCETIF2_API FBlockBaseInfo {
 
 	uint32 ID;
+	FVector Scale;
+	FString Name;
+
+	FBlockBaseInfo() : ID(0), Scale(FVector::ZeroVector), Name(TEXT("")) {};
+
+};
+
+// Help class to save / load data as saveGame
+struct TAUCETIF2_API FBlockInfo : FBlockBaseInfo
+{
+
 	FVector Location;
-	FVector BlockScale;
-	FRotator BlockRotation;
+	FRotator Rotation;
 
-	EShapeType ShapeType;
-	EBlockType BlockType;
-	EMaterialType MaterialType;
+	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator) {};
+};
 
+struct TAUCETIF2_API FInventoryBlockInfo : FBlockBaseInfo
+{
+
+	TArray<FString> Tags;
+	FInventoryBlockInfo() : FBlockBaseInfo(), Tags() {};
 };
 
 
@@ -32,25 +44,32 @@ public:
 	UBlockInfo();
 	~UBlockInfo();
 
-	uint32 ID;
-	FVector Location;
-	FVector BlockScale;
-	FRotator BlockRotation;
+	UPROPERTY()
+		uint32 ID;
+
+	UPROPERTY()
+		FVector Location;
+
+	UPROPERTY()
+		FVector Scale;
+
+	UPROPERTY()
+		FRotator Rotation;
 
 	FORCEINLINE FBlockInfo ToContainer() {
 		FBlockInfo result;
 		result.ID = ID;
 		result.Location = Location;
-		result.BlockScale = BlockScale;
-		result.BlockRotation = BlockRotation;
+		result.Scale = Scale;
+		result.Rotation = Rotation;
 		return result;
 	}
 
 	FORCEINLINE void FromContainer(FBlockInfo& block) {
 		ID = block.ID;
 		Location = block.Location;
-		BlockScale = block.BlockScale;
-		BlockRotation = block.BlockRotation;
+		Scale = block.Scale;
+		Rotation = block.Rotation;
 	}
 
 };

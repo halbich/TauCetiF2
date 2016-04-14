@@ -52,9 +52,9 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 		auto classBP = GetClassByShape(*definition);
 		if (classBP) {
 
-			auto trans = UHelpers::GetSpawnTransform(block->Location, block->BlockScale);
+			auto trans = UHelpers::GetSpawnTransform(block->Location, block->Scale);
 
-			trans.SetRotation(FQuat::FQuat(block->BlockRotation));
+			trans.SetRotation(FQuat::FQuat(block->Rotation));
 
 			auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans);
 
