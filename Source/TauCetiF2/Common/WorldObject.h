@@ -33,14 +33,7 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 
 	virtual void BeginPlay() override;
 
-	FORCEINLINE void GetBoundingBox(FVector& min, FVector& max) {
-		auto location = GetActorLocation();
-		auto scale = GetActorRotation().RotateVector(GetActorScale3D() * 10);
-
-		min = location - scale;
-		max = location + scale;
-
-	}
+	virtual void GetBoundingBox(FVector& min, FVector& max);
 
 
 	FORCEINLINE void setMaterial(UMaterial* material, int32 index, float scaleX, float scaleY) {
@@ -58,6 +51,33 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 			}
 		}
 		sm->SetMaterial(index, mi);
+	}
+
+	FORCEINLINE void setTranslucentMaterials(int32 count) {
+		auto sm = TranslucentSelectMesh;
+		if (!sm)
+			return;
+
+		UMaterial* material = UHelpers::GetMaterialByInstance(EMaterialInstance::Empty);
+		check(material && "Failed to find given material");
+
+		for (size_t i = 0; i < count; i++)
+		{
+			UMaterialInstanceDynamic* mi = nullptr;
+			if (material) {
+				mi = UMaterialInstanceDynamic::Create(material, this);
+				if (mi)
+				{
+					mi->SetScalarParameterValue(TEXT("Kx"), 1);
+					mi->SetScalarParameterValue(TEXT("Ky"),1);
+				}
+			}
+			sm->SetMaterial(i, mi);
+		}
+
+
+
+
 	}
 
 	FORCEINLINE void setMaterial(EMaterialInstance& instance, int32 index, FVector2D scale) {

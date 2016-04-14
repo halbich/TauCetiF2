@@ -34,20 +34,22 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 
 	auto scale = GetActorScale3D();
 
-	bool hasPolycarbonate = false;
+	bool hasTranslucent = false;
 	for (size_t i = 0; i < definition->UsedMaterials.Num(); i++)
 	{
 		auto mat = definition->UsedMaterials[i];
 
 		setMaterial(mat.MaterialInstance, i, mat.GetParams(scale));
-		hasPolycarbonate = hasPolycarbonate || mat.MaterialInstance == EMaterialInstance::Polycarbonate;
+		hasTranslucent = hasTranslucent || mat.IsTranslucent;
 	}
 
 	if (!TranslucentSelectMesh)
 		return;
 
-	if (hasPolycarbonate)
+	if (hasTranslucent)
 	{
+		setTranslucentMaterials(definition->UsedMaterials.Num());
+
 		TranslucentSelectMesh->SetWorldScale3D(Transform.GetScale3D());
 		TranslucentSelectMesh->SetWorldLocationAndRotation(Transform.GetLocation(), Transform.GetRotation());
 		TranslucentSelectMesh->Activate();
@@ -63,3 +65,12 @@ void AWorldObject::BeginPlay() {
 
 }
 
+
+void AWorldObject::GetBoundingBox(FVector& min, FVector& max) {
+	auto location = GetActorLocation();
+	auto scale = GetActorRotation().RotateVector(GetActorScale3D() * 10);
+
+	min = location - scale;
+	max = location + scale;
+
+}

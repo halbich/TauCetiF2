@@ -111,6 +111,10 @@ void USaveGameCarrier::GetSaveForNewGame()
 	PartOfDay = 0.5f;
 
 
+	UsedBlocks.Add(make(EBlockName::Terminal, FVector(-30, -50, 13), FVector(1, 1, 1), FRotator(0, 0, 0)));
+
+	return;
+
 	FRotator baseRotation(0, 0, 0);
 	FVector BaseSize(20, 20, 4);
 
@@ -165,6 +169,11 @@ void USaveGameCarrier::GetSaveForNewGame()
 	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(12, -19, 13), FVector(15, 1, 12), FRotator(0, 0, 0)));
 	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(12, 20, 13), FVector(15, 1, 12), FRotator(0, 0, 0)));
 
+	UsedBlocks.Add(make(EBlockName::ConstructCubeBody, FVector(-30, -30, 13), FVector(10, 5, 2), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::ConstructCubeSide, FVector(-30, -50, 13), FVector(10, 5, 2), FRotator(0, 0, 0)));
+
+	
+	
 	/*FVector loc;
 	FVector blockScale(1, 1, 1);
 
@@ -172,7 +181,6 @@ void USaveGameCarrier::GetSaveForNewGame()
 
 
 	loc += FVector(2, 6, 0);
-	UsedBlocks.Add(make(loc, blockScale + FVector(0, 1, 0), blockRotation, EShapeType::CubeSide, EBlockType::Empty, EMaterialType::Polycarbon));
 	loc += FVector(2, 0, 0);
 
 	UsedBlocks.Add(make(loc, blockScale + FVector(1, 0, 1), blockRotation, EShapeType::CubeBody, EBlockType::Empty, EMaterialType::Polycarbon));

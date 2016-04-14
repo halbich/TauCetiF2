@@ -39,9 +39,9 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 
 	FBlockDefinition cubeWindow(EBlockName::WindowCube, EShapeType::Cube);
 	cubeWindow.AddMaterials(3,
-		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Y),
-		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Z),
-		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::Y, EAxis::Type::Z));
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Y, true),
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Z, true),
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::Y, EAxis::Type::Z, true));
 
 	definitions.Add(cubeWindow.ID, cubeWindow);
 
@@ -68,8 +68,20 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	definitions.Add(baseRamp.ID, baseRamp);
 
 
+
+
+	FBlockDefinition constructCubeBody(EBlockName::ConstructCubeBody, EShapeType::CubeBody);
+	constructCubeBody.AddMaterials(4,
+		FBlockMaterialDefinition(EMaterialInstance::ConstructTriangle, EAxis::Type::Z, EAxis::Type::X),
+		FBlockMaterialDefinition(EMaterialInstance::ConstructTriangle, EAxis::Type::Y, EAxis::Type::Z),
+		FBlockMaterialDefinition(EMaterialInstance::ConstructTriangle, EAxis::Type::X, EAxis::Type::Y),
+		FBlockMaterialDefinition(EMaterialInstance::ConstructTriangle, EAxis::Type::None, EAxis::Type::None));
+
+	definitions.Add(constructCubeBody.ID, constructCubeBody);
+
+
 	/*
-	
+
 	cube side
 
 	rectangle x z
@@ -84,7 +96,16 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	y z
 	x y
 	0 0
-	
+
 	*/
+
+
+
+	FBlockDefinition terminal(EBlockName::Terminal, EShapeType::Custom);
+	terminal.AddMaterials(2,
+		FBlockMaterialDefinition(EMaterialInstance::TerminalBase, EAxis::Type::X, EAxis::Type::X),
+		FBlockMaterialDefinition(EMaterialInstance::TerminalScreen, EAxis::Type::X, EAxis::Type::X, true));
+
+	definitions.Add(terminal.ID, terminal);
 
 }

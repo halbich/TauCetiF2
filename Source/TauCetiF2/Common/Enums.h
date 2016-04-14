@@ -50,6 +50,8 @@ enum class EMaterialInstance : uint8
 	ConstructRectangle		UMETA(DisplayName = "ConstructRectangle"),
 	ConstructRectangleBody	UMETA(DisplayName = "ConstructRectangleBody"),
 	ConstructTriangle		UMETA(DisplayName = "ConstructTriangle"),
+	TerminalScreen			UMETA(DisplayName = "TerminalScreen"),
+	TerminalBase			UMETA(DisplayName = "TerminalBase"),
 };
 
 
@@ -59,8 +61,10 @@ enum class EBlockName : uint8
 	ConstructCube 				UMETA(DisplayName = "ConstructCube"),
 	BaseCube 					UMETA(DisplayName = "BaseCube"),
 	WindowCube 					UMETA(DisplayName = "WindowCube"),
-	ConstructCubeSide 					UMETA(DisplayName = "ConstructCubeSide"),
+	ConstructCubeSide 			UMETA(DisplayName = "ConstructCubeSide"),
 	BaseRamp 					UMETA(DisplayName = "BaseRamp"),
+	ConstructCubeBody 			UMETA(DisplayName = "ConstructCubeBody"),
+	Terminal		 			UMETA(DisplayName = "Terminal"),
 };
 
 

@@ -2,8 +2,7 @@
 
 #include "TauCetiF2.h"
 #include "WorldController.h"
-#include "Blocks/FBlockDefinition.h"
-#include "Blocks/FBlockDefinitionHolder.h"
+
 
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -50,7 +49,7 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 			continue;
 		}
 
-		auto classBP = GetClassByShape(definition->ShapeType);
+		auto classBP = GetClassByShape(*definition);
 		if (classBP) {
 
 			auto trans = UHelpers::GetSpawnTransform(block->Location, block->BlockScale);

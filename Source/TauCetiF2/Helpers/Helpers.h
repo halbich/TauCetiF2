@@ -51,11 +51,12 @@ public:
 		return LoadObjFromPath<UMaterial>(name);
 	}
 
-	
+
 
 	static FORCEINLINE FString GetMaterialName(const EMaterialInstance& instance) {
 		switch (instance)
 		{
+		case EMaterialInstance::Empty: return TEXT("Material'/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial'");
 		case EMaterialInstance::InnerMaterial: return TEXT("Material'/Game/Materials/BuildingObjects/InsideMat.InsideMat'");
 		case EMaterialInstance::BaseFloor: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialBaseFloor.MaterialBaseFloor'");
 		case EMaterialInstance::BaseSide: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialBaseSide.MaterialBaseSide'");
@@ -63,6 +64,8 @@ public:
 		case EMaterialInstance::ConstructRectangle: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialRectangle.MaterialRectangle'");
 		case EMaterialInstance::ConstructRectangleBody: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialRectangleBody.MaterialRectangleBody'");
 		case EMaterialInstance::ConstructTriangle: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialTriangle.MaterialTriangle'");
+		case EMaterialInstance::TerminalScreen: return TEXT("Material'/Game/Materials/BuildingObjects/TerminalScreen.TerminalScreen'");
+		case EMaterialInstance::TerminalBase: return TEXT("Material'/Game/Materials/BuildingObjects/TerminalBase.TerminalBase'");
 		default:
 			return TEXT("");
 		}
