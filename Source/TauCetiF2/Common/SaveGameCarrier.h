@@ -3,8 +3,10 @@
 #pragma once
 
 #include "Object.h"
+#include "Helpers/Saving/ArchiveHelpers.h"
+#include "Helpers/Saving/BlockSaveInfo.h"
 #include "Blocks/BlockInfo.h"
-#include "Helpers/ArchiveHelpers.h"
+#include "Game/Inventory/BuildableBlockInfo.h"
 #include "SaveGameCarrier.generated.h"
 
 /**
@@ -17,8 +19,6 @@ class TAUCETIF2_API USaveGameCarrier : public UObject
 
 public:
 	USaveGameCarrier();
-
-	~USaveGameCarrier();
 
 	static const uint8 CURRENT_VERSION;
 
@@ -78,6 +78,13 @@ public:
 	TArray<FBlockInfo> usedBlocks;
 
 
+	// blocks 
+	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+		TArray<UBuildableBlockInfo*> BuildableBlocks;
+
+	// Serializable array
+	TArray<FInventoryBuildableBlockInfo> buildableBlocks;
+
 
 
 	// functions
@@ -115,6 +122,14 @@ public:
 			if (usedBlock)
 				usedBlocks.Add(usedBlock->ToContainer());
 		}
+
+
+		buildableBlocks.Empty();
+		for (auto buildableBlock : BuildableBlocks)
+		{
+			if (buildableBlock)
+				buildableBlocks.Add(buildableBlock->ToContainer());
+		}
 	}
 
 	FORCEINLINE void updateAfterLoad() {
@@ -125,6 +140,15 @@ public:
 			auto newBlock = NewObject<UBlockInfo>();
 			newBlock->FromContainer(usedBlock);
 			UsedBlocks.Add(newBlock);
+		}
+
+
+		BuildableBlocks.Empty();
+		for (auto buildableBlock : buildableBlocks)
+		{
+			auto buildableBlockInfoBlock = NewObject<UBuildableBlockInfo>();
+			buildableBlockInfoBlock->FromContainer(buildableBlock);
+			BuildableBlocks.Add(buildableBlockInfoBlock);
 		}
 	}
 

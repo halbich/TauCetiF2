@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Blocks/BlockInfo.h"
+#include "Helpers/Saving/BlockSaveInfo.h"
 
 FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo& block)
 {

@@ -1,6 +1,6 @@
 #include "TauCetiF2.h"
 #include "SaveGameCarrier.h"
-#include "Helpers/ArchiveHelpers.h"
+#include "Helpers/Saving/ArchiveHelpers.h"
 #include "Helpers/Helpers.h"
 
 const uint8 USaveGameCarrier::CURRENT_VERSION = 7;
@@ -19,9 +19,6 @@ USaveGameCarrier::USaveGameCarrier() {
 
 
 
-USaveGameCarrier::~USaveGameCarrier() {
-
-}
 
 USaveGameCarrier* USaveGameCarrier::GetEmptyCarrier()
 {

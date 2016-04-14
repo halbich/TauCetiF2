@@ -2,35 +2,10 @@
 
 #pragma once
 
+#include "Helpers/Saving/BlockSaveInfo.h"
 #include "BlockInfo.generated.h"
 
-// Help class to save / load data as saveGame
-struct TAUCETIF2_API FBlockBaseInfo {
 
-	uint32 ID;
-	FVector Scale;
-	FString Name;
-
-	FBlockBaseInfo() : ID(0), Scale(FVector::ZeroVector), Name(TEXT("")) {};
-
-};
-
-// Help class to save / load data as saveGame
-struct TAUCETIF2_API FBlockInfo : FBlockBaseInfo
-{
-
-	FVector Location;
-	FRotator Rotation;
-
-	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator) {};
-};
-
-struct TAUCETIF2_API FInventoryBlockInfo : FBlockBaseInfo
-{
-
-	TArray<FString> Tags;
-	FInventoryBlockInfo() : FBlockBaseInfo(), Tags() {};
-};
 
 
 /**
@@ -41,8 +16,6 @@ class TAUCETIF2_API UBlockInfo : public UObject
 {
 	GENERATED_BODY()
 public:
-	UBlockInfo();
-	~UBlockInfo();
 
 	UPROPERTY()
 		uint32 ID;

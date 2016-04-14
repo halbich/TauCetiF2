@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
+#include "Game/Inventory/BuildableBlockInfo.h"
 #include "InventoryComponent.generated.h"
 
 
@@ -22,5 +23,7 @@ public:
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 		
+	UPROPERTY()
+		TArray<UBuildableBlockInfo*> BuildableItems;
 	
 };
