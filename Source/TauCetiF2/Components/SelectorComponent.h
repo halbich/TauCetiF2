@@ -51,6 +51,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TargetSelector)
 		void HidePlane();
 
+	UFUNCTION(BlueprintCallable, Category = TargetSelector)
+		void TrySelect(AActor* selectingActor);
+
 private:
 
 	FORCEINLINE void selectComponent(AActor* actor, AWorldObject* worldObj)

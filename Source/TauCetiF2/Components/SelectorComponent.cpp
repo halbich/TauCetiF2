@@ -20,7 +20,7 @@ void USelectorComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+
 }
 
 
@@ -147,3 +147,18 @@ void USelectorComponent::HidePlane()
 
 }
 
+
+void USelectorComponent::TrySelect(AActor* selectingActor) {
+	
+	if (SelectedActor &&
+		SelectedTarget &&
+		SelectedTarget->IsValidLowLevel() &&
+		SelectedTarget->SelectTargetComponent &&
+		SelectedTarget->SelectTargetComponent->IsValidLowLevel() &&
+		SelectedTarget->SelectTargetComponent->IsUsable)
+	{
+
+		SelectedTarget->SelectTargetComponent->OnUse(selectingActor);
+	}
+
+}

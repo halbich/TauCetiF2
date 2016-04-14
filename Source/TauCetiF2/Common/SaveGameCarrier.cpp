@@ -111,7 +111,7 @@ void USaveGameCarrier::GetSaveForNewGame()
 	PartOfDay = 0.5f;
 
 
-	UsedBlocks.Add(make(EBlockName::Terminal, FVector(-30, -50, 13), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::Terminal, FVector(-30, -50, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
 
 	return;
 
