@@ -9,7 +9,7 @@
 AWorldObject::AWorldObject(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	SetMobility(EComponentMobility::Static);
+	SetMobility(EComponentMobility::Movable);
 
 	WorldObjectComponent = CreateDefaultSubobject<UWorldObjectComponent>(TEXT("WorldObjectComponent"));
 	SelectTargetComponent = CreateDefaultSubobject<USelectTargetComponent>(TEXT("SelectTarget"));
