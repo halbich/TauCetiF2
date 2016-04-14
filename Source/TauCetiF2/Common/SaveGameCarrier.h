@@ -143,7 +143,7 @@ public:
 		}
 
 
-		BuildableBlocks.Empty();
+	//	BuildableBlocks.Empty();
 		for (auto buildableBlock : buildableBlocks)
 		{
 			auto buildableBlockInfoBlock = NewObject<UBuildableBlockInfo>();
@@ -177,6 +177,19 @@ public:
 
 		) {
 		return make((uint32)id, location, blockScale, blockRotation);
+
+	}
+
+
+	FORCEINLINE UBuildableBlockInfo* makeBuildable(
+		EBlockName id,
+		FVector blockScale
+		) {
+		auto ret = NewObject<UBuildableBlockInfo>();
+		ret->ID = (int32)id;
+		ret->Scale = blockScale;
+
+		return ret;
 
 	}
 

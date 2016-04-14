@@ -14,6 +14,7 @@ USaveGameCarrier::USaveGameCarrier() {
 	SaveName = TEXT("Prázdná pozice");
 	//PlayedTime(0);
 
+	BuildableBlocks.Add(NewObject<UBuildableBlockInfo>());
 }
 
 
@@ -169,8 +170,8 @@ void USaveGameCarrier::GetSaveForNewGame()
 	UsedBlocks.Add(make(EBlockName::ConstructCubeBody, FVector(-30, -30, 13), FVector(10, 5, 2), FRotator(0, 0, 0)));
 	UsedBlocks.Add(make(EBlockName::ConstructCubeSide, FVector(-30, -50, 13), FVector(10, 5, 2), FRotator(0, 0, 0)));
 
-	
-	
+
+
 	/*FVector loc;
 	FVector blockScale(1, 1, 1);
 
@@ -184,6 +185,14 @@ void USaveGameCarrier::GetSaveForNewGame()
 
 	loc = FVector(0, -5, 0);
 	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));*/
+
+
+
+
+
+
+
+	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(4, 4, 4)));
 
 }
 

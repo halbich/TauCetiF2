@@ -7,6 +7,8 @@
 #include "InventoryComponent.generated.h"
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHudBuildableItemsChanged);
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TAUCETIF2_API UInventoryComponent : public UActorComponent
 {
@@ -19,11 +21,14 @@ public:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 	
-	// Called every frame
-	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 		
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, Category = InventoryComponent)
 		TArray<UBuildableBlockInfo*> BuildableItems;
 	
+	UPROPERTY(BlueprintAssignable, Category = InventoryComponent)
+		FHudBuildableItemsChanged OnHudBuildableItemsChanged;
+
+	UFUNCTION(BlueprintCallable, Category = InventoryComponent)
+		void ForceItemsChanged();
 };

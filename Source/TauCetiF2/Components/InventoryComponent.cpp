@@ -10,7 +10,7 @@ UInventoryComponent::UInventoryComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
 	// ...
 }
@@ -25,12 +25,8 @@ void UInventoryComponent::BeginPlay()
 	
 }
 
-
-// Called every frame
-void UInventoryComponent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
+void UInventoryComponent::ForceItemsChanged()
 {
-	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
-
-	// ...
+	OnHudBuildableItemsChanged.Broadcast();
 }
 

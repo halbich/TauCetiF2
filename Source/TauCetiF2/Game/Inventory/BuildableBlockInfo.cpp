@@ -6,3 +6,7 @@
 
 
 
+UBuildableBlockInfo::UBuildableBlockInfo() 
+{
+	ID = -1;
+}

@@ -8,11 +8,13 @@
 /**
  *
  */
-UCLASS()
+UCLASS(BlueprintType)
 class TAUCETIF2_API UBuildableBlockInfo : public UObject
 {
 	GENERATED_BODY()
 public:
+	UBuildableBlockInfo();
+
 
 	UPROPERTY()
 		uint32 ID;
