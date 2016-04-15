@@ -76,9 +76,6 @@ public:
 
 private:
 
-	void addToTreeByX(FMinMaxBox* box, float& dividingCoord);
-	void addToTreeByY(FMinMaxBox* box, float dividingCoord);
-	void addToTreeByZ(FMinMaxBox* box, float dividingCoord);
 	void addToTreeByCoord(FMinMaxBox* box);
 
 

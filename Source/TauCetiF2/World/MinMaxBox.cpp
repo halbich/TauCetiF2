@@ -52,23 +52,8 @@ void FMinMaxBox::AddToTree(FMinMaxBox* box, bool forceInsert) {
 		SingleChild = nullptr;
 	}
 
-	/*addToTreeByCoord(box);
-	return;*/
-
-
-	switch (DividingIndex % 3) {
-	case 0:
-		addToTreeByX(box, DividingCoordValue);
-		break;
-	case 1:
-		addToTreeByY(box, DividingCoordValue);
-
-		break;
-	case 2:
-		addToTreeByZ(box, DividingCoordValue);
-
-		break;
-	}
+	addToTreeByCoord(box);
+	return;
 }
 
 void FMinMaxBox::addToTreeByCoord(FMinMaxBox* box) {
@@ -102,127 +87,14 @@ void FMinMaxBox::addToTreeByCoord(FMinMaxBox* box) {
 	FMinMaxBox* newB1 = new FMinMaxBox(box->Min, box->Max, box->DividingIndex);
 	newB1->containingObject = box->containingObject;
 
-	box->Max = (FVector(1, 1, 1) - DividingCoord) *  Max + (DividingCoord * DividingCoordValue);
+	box->Max = (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue);
 	box->RecomputeDividingCoordValue();
-	newB1->Min = (FVector(1, 1, 1) - DividingCoord) *  Min + (DividingCoord * DividingCoordValue);
+	newB1->Min = (FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue);
 	newB1->RecomputeDividingCoordValue();
 	addToTreeByCoord(box);
 	addToTreeByCoord(newB1);
 
 
-}
-
-
-void FMinMaxBox::addToTreeByX(FMinMaxBox* box, float& dividingCoord) {
-
-	if (box->Max.X <= dividingCoord)		// whole object is in left plane
-	{
-		if (!B1)
-		{
-			B1 = new FMinMaxBox(Min, FVector(dividingCoord, Max.Y, Max.Z), DividingIndex + 1);
-			B1->name = FString::Printf(TEXT("%s > B1"), *name);
-		}
-		B1->AddToTree(box);
-		return;
-	}
-
-	if (box->Min.X >= dividingCoord)		// whole object is in right plane
-	{
-		if (!B2)
-		{
-			B2 = new FMinMaxBox(FVector(dividingCoord, Min.Y, Min.Z), Max, DividingIndex + 1);
-			B2->name = FString::Printf(TEXT("%s > B2"), *name);
-		}
-
-		B2->AddToTree(box);
-		return;
-	}
-
-	// object is in between. We need to split and then add object to both branches
-
-	FMinMaxBox* newB1 = new FMinMaxBox(box->Min, box->Max, box->DividingIndex);
-	newB1->containingObject = box->containingObject;
-
-	box->Max.X = dividingCoord;
-	newB1->Min.X = dividingCoord;
-	addToTreeByX(box, dividingCoord);
-	addToTreeByX(newB1, dividingCoord);
-
-
-
-}
-
-
-void FMinMaxBox::addToTreeByY(FMinMaxBox* box, float dividingCoord) {
-
-	if (box->Max.Y <= dividingCoord)		// whole object is in left plane
-	{
-		if (!B1)
-		{
-			B1 = new FMinMaxBox(Min, FVector(Max.X, dividingCoord, Max.Z), DividingIndex + 1);
-			B1->name = FString::Printf(TEXT("%s > B1"), *name);
-		}
-		B1->AddToTree(box);
-		return;
-	}
-
-	if (box->Min.Y >= dividingCoord)		// whole object is in right plane
-	{
-		if (!B2)
-		{
-			B2 = new FMinMaxBox(FVector(Min.X, dividingCoord, Min.Z), Max, DividingIndex + 1);
-			B2->name = FString::Printf(TEXT("%s > B2"), *name);
-		}
-		B2->AddToTree(box);
-		return;
-	}
-
-	// object is in between. We need to split and then add object to both branches
-
-
-	FMinMaxBox* newB1 = new FMinMaxBox(box->Min, box->Max, box->DividingIndex);
-	newB1->containingObject = box->containingObject;
-
-	box->Max.Y = dividingCoord;
-	newB1->Min.Y = dividingCoord;
-	addToTreeByY(box, dividingCoord);
-	addToTreeByY(newB1, dividingCoord);
-}
-
-void FMinMaxBox::addToTreeByZ(FMinMaxBox* box, float dividingCoord) {
-
-	if (box->Max.Z <= dividingCoord)		// whole object is in left plane
-	{
-		if (!B1)
-		{
-			B1 = new FMinMaxBox(Min, FVector(Max.X, Max.Y, dividingCoord), DividingIndex + 1);
-			B1->name = FString::Printf(TEXT("%s > B1"), *name);
-		}
-		B1->AddToTree(box);
-		return;
-	}
-
-	if (box->Min.Z >= dividingCoord)		// whole object is in right plane
-	{
-		if (!B2)
-		{
-			B2 = new FMinMaxBox(FVector(Min.X, Min.Y, dividingCoord), Max, DividingIndex + 1);
-			B2->name = FString::Printf(TEXT("%s > B1"), *name);
-		}
-		B2->AddToTree(box);
-		return;
-	}
-
-	// object is in between. We need to split and then add object to both branches
-
-
-	FMinMaxBox* newB1 = new FMinMaxBox(box->Min, box->Max, box->DividingIndex);
-	newB1->containingObject = box->containingObject;
-
-	box->Max.Z = dividingCoord;
-	newB1->Min.Z = dividingCoord;
-	addToTreeByZ(box, dividingCoord);
-	addToTreeByZ(newB1, dividingCoord);
 }
 
 
