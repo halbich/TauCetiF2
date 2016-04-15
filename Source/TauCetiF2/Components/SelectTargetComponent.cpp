@@ -16,6 +16,13 @@ USelectTargetComponent::USelectTargetComponent()
 
 }
 
+void USelectTargetComponent::BeginPlay()
+{
+	UActorComponent::BeginPlay();
+	owner = GetOwner();
+	if (!owner)
+		print(TEXT("No Owner! "));
+}
 
 
 void USelectTargetComponent::Select()

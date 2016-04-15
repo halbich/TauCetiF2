@@ -13,12 +13,17 @@ class TAUCETIF2_API USelectTargetComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+		UPROPERTY()
 		UPrimitiveComponent* primitive;
+
+	UPROPERTY()
+		AActor* owner;
 
 public:
 	// Sets default values for this component's properties
 	USelectTargetComponent();
 
+	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
 		bool HasOutline;
@@ -46,7 +51,7 @@ public:
 
 	FORCEINLINE bool IsInUsableArea(AActor* selectingActor)
 	{
-		return selectingActor && IsUsable && MaxDistance > 0 && FVector::Dist(GetOwner()->GetActorLocation(), selectingActor->GetActorLocation()) > MaxDistance;
+		return selectingActor && IsUsable && (MaxDistance < 0 || FVector::Dist(owner->GetActorLocation(), selectingActor->GetActorLocation()) <= MaxDistance);
 	}
 
 };

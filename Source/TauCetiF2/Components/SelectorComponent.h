@@ -76,12 +76,13 @@ private:
 
 	FORCEINLINE void updateUsableObjectTarget()
 	{
+
 		auto oldVal = usableObjectTargeted;
 		usableObjectTargeted = SelectedActor &&
 			SelectedTarget &&
-			SelectedTarget->IsValidLowLevelFast() &&
+			SelectedTarget->IsValidLowLevel() &&
 			SelectedTarget->SelectTargetComponent &&
-			SelectedTarget->SelectTargetComponent->IsValidLowLevelFast() &&
+			SelectedTarget->SelectTargetComponent->IsValidLowLevel() &&
 			SelectedTarget->SelectTargetComponent->IsInUsableArea(owner);
 
 		if (oldVal != usableObjectTargeted)
@@ -110,8 +111,12 @@ private:
 
 	FORCEINLINE void selectComponent(AActor* actor, AWorldObject* worldObj)
 	{
+
 		if (actor && actor == SelectedActor)
+		{
+			updateUsableObjectTarget();
 			return;
+		}
 
 		deselectComponent();
 
@@ -144,8 +149,8 @@ private:
 
 		SelectedTarget = nullptr;
 		SelectedActor = nullptr;
-
 		updateUsableObjectTarget();
+
 	}
 
 	UPROPERTY()

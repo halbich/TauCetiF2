@@ -3,28 +3,18 @@
 #pragma once
 
 #include "Object.h"
-#include "Blocks/BlockInfo.h"
+#include "Blocks/BlockBaseInfo.h"
 #include "BuildableBlockInfo.generated.h"
 
 /**
  *
  */
 UCLASS(BlueprintType)
-class TAUCETIF2_API UBuildableBlockInfo : public UObject
+class TAUCETIF2_API UBuildableBlockInfo : public UBlockBaseInfo
 {
 	GENERATED_BODY()
 public:
-	UBuildableBlockInfo();
 
-
-	UPROPERTY()
-		uint32 ID;
-
-	UPROPERTY()
-		FVector Scale;
-
-	UPROPERTY()
-		FString Name;
 
 	UPROPERTY()
 		TArray<FString> Tags;
@@ -37,19 +27,16 @@ public:
 
 
 	FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
-		FInventoryBuildableBlockInfo result;
-		result.ID = ID;
-		result.Scale = Scale;
-		result.Name = Name;
+		FInventoryBuildableBlockInfo result = ToBaseContainer();
 		result.Tags = Tags;
 		return result;
 	}
 
 	FORCEINLINE void FromContainer(FInventoryBuildableBlockInfo& info) {
-		ID = info.ID;
-		Scale = info.Scale;
-		Name = info.Name;
+		FromBaseContainer(info);
 		Tags = info.Tags;
 	}
+
+
 
 };

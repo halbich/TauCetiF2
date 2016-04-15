@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Helpers/Saving/BlockSaveInfo.h"
+#include "Blocks/BlockBaseInfo.h"
 #include "BlockInfo.generated.h"
 
 
@@ -12,36 +13,31 @@
  *
  */
 UCLASS(BlueprintType)
-class TAUCETIF2_API UBlockInfo : public UObject
+class TAUCETIF2_API UBlockInfo : public UBlockBaseInfo
 {
 	GENERATED_BODY()
 public:
 
-	UPROPERTY()
-		uint32 ID;
+	
 
 	UPROPERTY()
 		FVector Location;
 
-	UPROPERTY()
-		FVector Scale;
 
 	UPROPERTY()
 		FRotator Rotation;
 
 	FORCEINLINE FBlockInfo ToContainer() {
-		FBlockInfo result;
-		result.ID = ID;
+		FBlockInfo result = ToBaseContainer();
 		result.Location = Location;
-		result.Scale = Scale;
 		result.Rotation = Rotation;
 		return result;
 	}
 
 	FORCEINLINE void FromContainer(FBlockInfo& block) {
-		ID = block.ID;
+
+		FromBaseContainer(block);
 		Location = block.Location;
-		Scale = block.Scale;
 		Rotation = block.Rotation;
 	}
 

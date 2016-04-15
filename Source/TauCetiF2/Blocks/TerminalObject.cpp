@@ -42,7 +42,7 @@ void  ATerminalObject::OnConstruction(const FTransform& Transform) {
 
 	Super::OnConstruction(Transform);
 
-	SelectTargetComponent->EnableUse(150);
+	SelectTargetComponent->EnableUse(200);
 
 
 

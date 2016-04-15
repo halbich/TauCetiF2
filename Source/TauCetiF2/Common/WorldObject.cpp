@@ -61,7 +61,7 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 }
 
 void AWorldObject::BeginPlay() {
-
+	AStaticMeshActor::BeginPlay();
 
 }
 

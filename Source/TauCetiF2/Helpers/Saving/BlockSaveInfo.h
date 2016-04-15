@@ -22,6 +22,8 @@ struct TAUCETIF2_API FBlockInfo : FBlockBaseInfo
 	FRotator Rotation;
 
 	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator) {};
+
+	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator) {};
 };
 
 struct TAUCETIF2_API FInventoryBuildableBlockInfo : FBlockBaseInfo
@@ -29,4 +31,5 @@ struct TAUCETIF2_API FInventoryBuildableBlockInfo : FBlockBaseInfo
 
 	TArray<FString> Tags;
 	FInventoryBuildableBlockInfo() : FBlockBaseInfo(), Tags() {};
+	FInventoryBuildableBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Tags() {};
 };
