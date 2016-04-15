@@ -39,7 +39,10 @@ public:
 		AWorldObject* currentSpawnedObject;
 
 	UPROPERTY()
-	TMap<UBuildableBlockInfo*, AWorldObject*> usedObjects;
+		TMap<UBuildableBlockInfo*, AWorldObject*> usedObjects;
+
+	UPROPERTY()
+		FRotator currentBlockRotation;
 
 
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
@@ -48,9 +51,33 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
 		void SetWorldController(AWorldController* controller);
 
+
+	FVector GetSpawnPoint() {
+
+		check(currentBlockInfo != nullptr);
+
+		auto baseLocation = selector->ImpactPointWithSnap / UHelpers::CubeMinSize;
+		auto rotatedScale = currentBlockRotation.RotateVector(currentBlockInfo->Scale);
+		auto offset = selector->ImpactNormal * UHelpers::GetSpawnOffset(currentBlockRotation, currentBlockInfo->Scale);
+		auto normalAdd = selector->ImpactNormal * rotatedScale * 0.5 - offset;
+		auto normA = FVector(FMath::FloorToInt(normalAdd.X), FMath::FloorToInt(normalAdd.Y), FMath::FloorToInt(normalAdd.Z));
+		auto result = baseLocation + normA;
+
+		/*print(*result.ToString());
+		print(*normA.ToString());
+		print(*normalAdd.ToString());
+		print(*offset.ToString());
+		print(*rotatedScale.ToString());
+		print(*baseLocation.ToString());*/
+
+		return result;
+
+	}
+
+
 	void DoAction() {
 
-		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel())
+		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel() || !currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
 			return;
 
 		if (currentBlockInfo->IsEmptyHand)
@@ -60,5 +87,17 @@ public:
 
 		auto used = usedObjects.Find(currentBlockInfo);
 		check(used && "Failed to find currentBlockInfo object");
+
+
+		auto spawnBlock = NewObject<UBlockInfo>((UObject*)GetTransientPackage(), NAME_None, RF_NoFlags, currentSpawnedObject->WorldObjectComponent->BlockInfo);
+
+		spawnBlock->Location = GetSpawnPoint();
+		spawnBlock->Rotation = currentBlockRotation;
+		spawnBlock->UnderConstruction = false;
+
+		worldController->SpawnWorldObject(World, spawnBlock, true);
+
 	}
+
+
 };

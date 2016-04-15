@@ -33,7 +33,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	if (!currentSpawnedObject || !selector || !selector->IsValidLowLevelFast())
 		return;
 
-	currentSpawnedObject->SetActorLocation(selector->ImpactPointWithSnap);
+	currentSpawnedObject->SetActorLocation(UHelpers::GetSpawnCoords(GetSpawnPoint(), currentBlockInfo->Scale, currentBlockRotation));
 }
 
 
@@ -82,10 +82,10 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 		return;
 	}
 
-	used->SetActorHiddenInGame(true);
-	used->SetActorTickEnabled(false);
+	used->SetActorHiddenInGame(false);
+	used->SetActorTickEnabled(true);
 
-	used->SetActorLocationAndRotation(selector->ImpactPointWithSnap, FQuat(FRotator::ZeroRotator));
+	used->SetActorLocationAndRotation(UHelpers::GetSpawnCoords(GetSpawnPoint(), currentBlockInfo->Scale, currentBlockRotation), FQuat(currentBlockRotation));
 
 	currentSpawnedObject = used;
 	selector->traceIgnoreActor = currentSpawnedObject;

@@ -22,10 +22,8 @@ void USelectorComponent::BeginPlay()
 	owner = GetOwner();
 
 
-	world = GetWorld();
-
-	cameraManager = UGameplayStatics::GetPlayerCameraManager(world, 0);
-	playerPawn = UGameplayStatics::GetPlayerPawn(world, 0);
+	cameraManager = UGameplayStatics::GetPlayerCameraManager(World, 0);
+	playerPawn = UGameplayStatics::GetPlayerPawn(World, 0);
 }
 
 
@@ -57,7 +55,7 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	//CollisionParams.TraceTag = TraceTag;
 	CollisionParams.AddIgnoredActor(traceIgnoreActor);
 
-	if (!world->LineTraceSingleByObjectType(result, cameraLoc, hitEnd, params, CollisionParams))
+	if (!World->LineTraceSingleByObjectType(result, cameraLoc, hitEnd, params, CollisionParams))
 	{
 		deselectComponent();
 		return;

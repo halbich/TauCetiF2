@@ -18,10 +18,10 @@ public:
 	UPROPERTY()
 		uint32 ID;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
 		FVector Scale;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
 		FString Name;
 
 	FORCEINLINE FBlockBaseInfo ToBaseContainer() {

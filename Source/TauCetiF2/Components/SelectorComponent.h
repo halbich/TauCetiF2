@@ -161,9 +161,6 @@ private:
 		APlayerCameraManager* cameraManager;
 
 	UPROPERTY()
-		UWorld* world;
-
-	UPROPERTY()
 		APawn* playerPawn;
 
 

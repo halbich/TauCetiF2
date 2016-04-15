@@ -117,6 +117,8 @@ void USaveGameCarrier::GetSaveForNewGame()
 
 	UsedBlocks.Add(make(EBlockName::Terminal, FVector(-30, -50, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
 
+	UsedBlocks.Add(make(EBlockName::BaseCube,FVector(0, 0, 1), FVector(4,4,4) , FRotator::ZeroRotator));
+
 	return;
 
 	FRotator baseRotation(0, 0, 0);

@@ -32,10 +32,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void DEBUGShowMinMaxBoxes();
 
+	UFUNCTION(BlueprintCallable, Category = WorldController)
+		void DEBUGHideMinMaxBoxes();
+
 	AWorldObject* SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot);
 
 private:
 	FMinMaxBox* RootBox;
+
+	UPROPERTY()
+		bool debugBoxesShown;
 
 
 	static FORCEINLINE UClass* GetClassByShape(const FBlockDefinition& definition) {

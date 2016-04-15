@@ -39,13 +39,7 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 	UsedBlocks.Reserve(blocks.Num());
 	for (auto block : blocks)
 	{
-		auto actor = SpawnWorldObject(world,block, true);
-
-		if (!actor)
-			continue;
-
-
-		UsedBlocks.Add(block);
+		SpawnWorldObject(world, block, true);
 	}
 
 }
@@ -70,9 +64,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 	ensure(classBP != nullptr);
 
 
-	auto trans = UHelpers::GetSpawnTransform(block->Location, block->Scale);
-
-	trans.SetRotation(FQuat::FQuat(block->Rotation));
+	auto trans = UHelpers::GetSpawnTransform(block->Location, block->Scale, block->Rotation);
 
 	auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans);
 
@@ -95,6 +87,17 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 	}
 
 	UGameplayStatics::FinishSpawningActor(actor, trans);
+
+
+	if (addToRoot)
+	{
+		UsedBlocks.Add(block);
+		if (debugBoxesShown) {
+			DEBUGHideMinMaxBoxes();
+			DEBUGShowMinMaxBoxes();
+		}
+	}
+
 	return actor;
 
 
@@ -104,7 +107,23 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 void AWorldController::DEBUGShowMinMaxBoxes() {
 
 	if (RootBox)
+	{
+		debugBoxesShown = true;
 		RootBox->DEBUGDrawContainingBox(GetWorld());
+	}
+	else
+		print(TEXT("NO Root!"));
+}
+
+
+void AWorldController::DEBUGHideMinMaxBoxes() {
+
+	if (RootBox)
+	{
+		FlushPersistentDebugLines(GetWorld());
+		debugBoxesShown = false;
+		//
+	}
 	else
 		print(TEXT("NO Root!"));
 }

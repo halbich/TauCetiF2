@@ -105,20 +105,34 @@ public:
 	}
 
 
-
 	static FORCEINLINE FVector BorderToWorld(const FVector& border)
 	{
 		return border - WorldCenterMapping;
 
 	}
 
+	static FORCEINLINE FVector GetSpawnOffset(const FRotator& rotator, const FVector& size)
+	{
+		auto rotatedVect = rotator.RotateVector(size);
+		auto transMove = FVector((int32)(rotatedVect.X + 1) % 2, (int32)(rotatedVect.Y + 1) % 2, (int32)(rotatedVect.Z + 1) % 2) * 0.5;
+		return transMove;
+	}
 
-	static FORCEINLINE FTransform GetSpawnTransform(const FVector& localPosition, const FVector& size)
+
+	static FORCEINLINE FVector GetSpawnCoords(const FVector& localPosition, const FVector& size, const FRotator& rotator)
+	{
+		auto rotatedVect = rotator.RotateVector(size);
+		auto transMove = FVector((int32)(rotatedVect.X + 1) % 2, (int32)(rotatedVect.Y + 1) % 2, (int32)(rotatedVect.Z + 1) % 2) * 0.5;
+		return GetWorldCoordinate(localPosition + transMove);
+	}
+
+
+	static FORCEINLINE FTransform GetSpawnTransform(const FVector& localPosition, const FVector& size, const FRotator& rotator)
 	{
 		FTransform trans;
 		trans.SetScale3D(size);
-		auto transMove = FVector((int32)(size.X + 1) % 2, (int32)(size.Y + 1) % 2, (int32)(size.Z + 1) % 2) * 0.5;
-		trans.SetLocation(GetWorldCoordinate(localPosition + transMove));
+		trans.SetLocation(GetSpawnCoords(localPosition, size, rotator));
+		trans.SetRotation(FQuat(rotator));
 		return trans;
 	}
 

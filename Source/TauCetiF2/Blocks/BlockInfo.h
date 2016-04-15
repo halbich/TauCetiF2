@@ -18,13 +18,13 @@ class TAUCETIF2_API UBlockInfo : public UBlockBaseInfo
 	GENERATED_BODY()
 public:
 
-	
 
-	UPROPERTY()
+
+	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
 		FVector Location;
 
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
 		FRotator Rotation;
 
 	UPROPERTY()
