@@ -6,6 +6,7 @@
 #include "Components/SelectorComponent.h"
 #include "Game/Inventory/BuildableBlockInfo.h"
 #include "World/WorldController.h"
+#include "Common/WorldObject.h"
 #include "BuilderComponent.generated.h"
 
 
@@ -28,6 +29,14 @@ public:
 	UPROPERTY()
 		AWorldController* worldController;
 
+
+	UPROPERTY()
+		UBuildableBlockInfo* currentBlockInfo;
+
+	UPROPERTY()
+	TMap<UBuildableBlockInfo*, AWorldObject*> usedObjects;
+
+
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
 		void SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo);
 
@@ -36,9 +45,18 @@ public:
 
 	FORCEINLINE void DoAction() {
 
-		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel())
+		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel())
+			return;
+
+		if (currentBlockInfo->IsEmptyHand)
 			return;
 
 		print(TEXT("doing something"));
+
+		auto used = usedObjects.Find(currentBlockInfo);
+		if(!used)
+		{ 
+			print(TEXT("Item not used"));
+		}
 	}
 };

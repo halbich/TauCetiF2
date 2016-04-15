@@ -32,6 +32,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!blockInfo)
 		return;
 
+	currentBlockInfo = blockInfo;
 }
 
 void UBuilderComponent::SetWorldController(AWorldController* controller)
