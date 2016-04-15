@@ -43,7 +43,10 @@ ATauCetiF2Character::ATauCetiF2Character()
 
 	Selector = CreateDefaultSubobject<USelectorComponent>(TEXT("Selector"));
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
+	Builder = CreateDefaultSubobject<UBuilderComponent>(TEXT("Builder"));
+	Builder->selector = Selector;
 }
+
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -69,6 +72,8 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* Input
 	// handle touch devices
 	InputComponent->BindTouch(IE_Pressed, this, &ATauCetiF2Character::TouchStarted);
 	InputComponent->BindTouch(IE_Released, this, &ATauCetiF2Character::TouchStopped);
+
+	InputComponent->BindAction("LmbClick", IE_Pressed, this, &ATauCetiF2Character::BuilderDoAction);
 }
 
 
@@ -117,15 +122,20 @@ void ATauCetiF2Character::MoveForward(float Value)
 
 void ATauCetiF2Character::MoveRight(float Value)
 {
-	if ( (Controller != NULL) && (Value != 0.0f) )
+	if ((Controller != NULL) && (Value != 0.0f))
 	{
 		// find out which way is right
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
-	
+
 		// get right vector 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void ATauCetiF2Character::BuilderDoAction()
+{
+	Builder->DoAction();
 }

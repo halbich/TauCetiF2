@@ -31,6 +31,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category= BuildableBlockInfo)
 		bool IsEmptyHand;
 
+	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
+		bool AllowOutlineOnSelected;
+
 
 	FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
 		FInventoryBuildableBlockInfo result;

@@ -79,16 +79,13 @@ private:
 		auto oldVal = usableObjectTargeted;
 		usableObjectTargeted = SelectedActor &&
 			SelectedTarget &&
-			SelectedTarget->IsValidLowLevel() &&
+			SelectedTarget->IsValidLowLevelFast() &&
 			SelectedTarget->SelectTargetComponent &&
-			SelectedTarget->SelectTargetComponent->IsValidLowLevel() &&
+			SelectedTarget->SelectTargetComponent->IsValidLowLevelFast() &&
 			SelectedTarget->SelectTargetComponent->IsInUsableArea(owner);
 
 		if (oldVal != usableObjectTargeted)
-		{
 			OnUsableObjectTargetedChanged.Broadcast(usableObjectTargeted);
-			print(usableObjectTargeted ? TEXT("UsableObjectTargeted") : TEXT("NoTarget"));
-		}
 	}
 
 	FORCEINLINE void showOutline()
@@ -96,9 +93,9 @@ private:
 		if (!SelectedActor)
 			return;
 
-		if (SelectedTarget && SelectedTarget->IsValidLowLevel())
+		if (SelectedTarget && SelectedTarget->IsValidLowLevelFast())
 		{
-			if (SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevel())
+			if (SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
 			{
 				SelectedTarget->SelectTargetComponent->Select();
 			}
@@ -134,7 +131,7 @@ private:
 		if (!SelectedActor)
 			return;
 
-		if (SelectedTarget && SelectedTarget->IsValidLowLevel() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevel())
+		if (SelectedTarget && SelectedTarget->IsValidLowLevelFast() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
 		{
 			SelectedTarget->SelectTargetComponent->Deselect();
 		}

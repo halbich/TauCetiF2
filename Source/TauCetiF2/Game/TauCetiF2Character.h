@@ -3,6 +3,7 @@
 #include "GameFramework/Character.h"
 #include "Components/SelectorComponent.h"
 #include "Components/InventoryComponent.h"
+#include "COmponents/BuilderComponent.h"
 #include "TauCetiF2Character.generated.h"
 
 UCLASS(config=Game)
@@ -23,6 +24,9 @@ class ATauCetiF2Character : public ACharacter
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
 	class UInventoryComponent* Inventory;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
+	class UBuilderComponent* Builder;
 
 public:
 	ATauCetiF2Character();
@@ -60,6 +64,8 @@ protected:
 
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
+
+	void BuilderDoAction();
 
 protected:
 	// APawn interface
