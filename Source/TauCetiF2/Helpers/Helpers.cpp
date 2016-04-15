@@ -8,7 +8,7 @@
 
 
 const FVector UHelpers::WorldBorders(1000, 1000, 250);
-const FVector UHelpers::WorldCenterMapping(UHelpers::WorldBorders.X /2, UHelpers::WorldBorders.Y / 2, 0);
+const FVector UHelpers::WorldCenterMapping(UHelpers::WorldBorders.X / 2, UHelpers::WorldBorders.Y / 2, 0);
 const float UHelpers::CubeMinSize(20);
 
 
@@ -54,6 +54,56 @@ TArray<FString> UHelpers::GetAllSaveGameSlots()
 }
 
 
+UImage* UHelpers::GetImageForBlock(UBuildableBlockInfo* blockInfo)
+{
+	if (!blockInfo)
+		return nullptr;
+
+	auto tex = GetTexture2DForBlock(blockInfo);
+	if (!tex)
+		return nullptr;
+
+	UImage* res = NewObject<UImage>();
+
+	if (!res)
+		return nullptr;
+
+	res->SetBrushFromTexture(tex);
+
+	return res;
+}
+
+UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
+{
+	if (!blockInfo)
+		return nullptr;
+
+
+	const FString baseFolder = TEXT("Texture2D'/Game/Textures/HUD/%s");
+	//Texture2D'/Game/Textures/HUD/EmptyHand.EmptyHand'
+	if (blockInfo->IsEmptyHand)
+		return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("EmptyHand.EmptyHand'")));
+
+
+
+
+	auto id = (EBlockName)blockInfo->ID;
+
+	switch (id)
+	{
+
+	case EBlockName::ConstructCube: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BuildingBox.BuildingBox'")));
+	case EBlockName::BaseCube: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BaseBox.BaseBox'")));
+		//case EBlockName::WindowCube:		return					GetImageByName(*FString::Printf(*baseFolder, TEXT("MaterialBaseFloor.MaterialBaseFloor'")));
+	case EBlockName::ConstructCubeSide: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BuildingBoxSide.BuildingBoxSide'")));
+	case EBlockName::BaseRamp: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BaseBoxSide.BaseBoxSide'")));
+	case EBlockName::ConstructCubeBody: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BuildingBoxBody.BuildingBoxBody'")));
+	case EBlockName::Terminal: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("Terminal.Terminal'")));
+	default:
+		return nullptr;
+	}
+
+}
 
 
 

@@ -45,10 +45,7 @@ void USelectTargetComponent::OnUse(AActor* selectingActor) {
 
 
 
-	if (!selectingActor || !IsUsable)
-		return;
-
-	if (MaxDistance > 0 && FVector::Dist(GetOwner()->GetActorLocation(), selectingActor->GetActorLocation()) > MaxDistance)
+	if (!IsInUsableArea(selectingActor))
 		return;
 
 	print(TEXT("Using!"));

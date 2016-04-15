@@ -21,6 +21,10 @@ public:
 	USaveGameCarrier();
 
 	static const uint8 CURRENT_VERSION;
+	UPROPERTY()
+		bool IsSystemSave;
+
+
 
 	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
 		FString FullFilePath;
@@ -127,7 +131,7 @@ public:
 		buildableBlocks.Empty();
 		for (auto buildableBlock : BuildableBlocks)
 		{
-			if (buildableBlock)
+			if (buildableBlock && buildableBlock-> IsValidLowLevel() && !buildableBlock->IsEmptyHand)
 				buildableBlocks.Add(buildableBlock->ToContainer());
 		}
 	}
@@ -143,7 +147,10 @@ public:
 		}
 
 
-	//	BuildableBlocks.Empty();
+		BuildableBlocks.Empty();
+		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>());
+		BuildableBlocks[0]->IsEmptyHand = true;
+
 		for (auto buildableBlock : buildableBlocks)
 		{
 			auto buildableBlockInfoBlock = NewObject<UBuildableBlockInfo>();
@@ -192,6 +199,7 @@ public:
 		return ret;
 
 	}
+
 
 };
 

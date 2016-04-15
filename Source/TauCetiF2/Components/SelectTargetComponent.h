@@ -6,6 +6,8 @@
 #include "SelectTargetComponent.generated.h"
 
 
+
+
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TAUCETIF2_API USelectTargetComponent : public UActorComponent
 {
@@ -40,5 +42,11 @@ public:
 	}
 
 	void OnUse(AActor* selectingActor);
-	
+
+
+	FORCEINLINE bool IsInUsableArea(AActor* selectingActor)
+	{
+		return selectingActor && IsUsable && MaxDistance > 0 && FVector::Dist(GetOwner()->GetActorLocation(), selectingActor->GetActorLocation()) > MaxDistance;
+	}
+
 };

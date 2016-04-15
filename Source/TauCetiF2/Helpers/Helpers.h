@@ -3,6 +3,11 @@
 #pragma once
 
 #include "Common/SaveGameCarrier.h"
+#include "SlateBasics.h"
+#include "Runtime/UMG/Public/UMG.h"
+#include "Runtime/UMG/Public/Blueprint/UserWidget.h"
+#include "Runtime/UMG/Public/Components/Widget.h"
+#include "Runtime/UMG/Public/Components/Image.h"
 
 #include "Helpers.generated.h"
 
@@ -24,6 +29,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
 		static TArray<FString> GetAllSaveGameSlots();
 
+	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
+		static UImage* GetImageForBlock(UBuildableBlockInfo* blockInfo);
+
+	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
+		static UTexture2D* GetTexture2DForBlock(UBuildableBlockInfo* blockInfo);
 
 
 	static FORCEINLINE FString UHelpers::GetCleanSaveFileName(const FString& worldName, const FDateTime& saveTime) {
@@ -51,21 +61,33 @@ public:
 		return LoadObjFromPath<UMaterial>(name);
 	}
 
+	static FORCEINLINE UImage* GetImageByName(const FName& name) {
+		UE_LOG(LogTemp, Log, TEXT("%s"), *(name.ToString()));
+		return LoadObjFromPath<UImage>(name);
+	}
+
+	static FORCEINLINE UTexture2D* GetTexture2DByName(const FName& name) {
+		UE_LOG(LogTemp, Log, TEXT("%s"), *(name.ToString()));
+		return LoadObjFromPath<UTexture2D>(name);
+	}
+
 
 
 	static FORCEINLINE FString GetMaterialName(const EMaterialInstance& instance) {
+		const FString baseFolder = TEXT("Material'/Game/Materials/BuildingObjects/%s");
+
 		switch (instance)
 		{
 		case EMaterialInstance::Empty: return TEXT("Material'/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial'");
-		case EMaterialInstance::InnerMaterial: return TEXT("Material'/Game/Materials/BuildingObjects/InsideMat.InsideMat'");
-		case EMaterialInstance::BaseFloor: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialBaseFloor.MaterialBaseFloor'");
-		case EMaterialInstance::BaseSide: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialBaseSide.MaterialBaseSide'");
-		case EMaterialInstance::Polycarbonate: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialPolycarbonate.MaterialPolycarbonate'");
-		case EMaterialInstance::ConstructRectangle: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialRectangle.MaterialRectangle'");
-		case EMaterialInstance::ConstructRectangleBody: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialRectangleBody.MaterialRectangleBody'");
-		case EMaterialInstance::ConstructTriangle: return TEXT("Material'/Game/Materials/BuildingObjects/MaterialTriangle.MaterialTriangle'");
-		case EMaterialInstance::TerminalScreen: return TEXT("Material'/Game/Materials/BuildingObjects/TerminalScreen.TerminalScreen'");
-		case EMaterialInstance::TerminalBase: return TEXT("Material'/Game/Materials/BuildingObjects/TerminalBase.TerminalBase'");
+		case EMaterialInstance::InnerMaterial: return FString::Printf(*baseFolder, TEXT("InsideMat.InsideMat'"));
+		case EMaterialInstance::BaseFloor: return FString::Printf(*baseFolder, TEXT("MaterialBaseFloor.MaterialBaseFloor'"));
+		case EMaterialInstance::BaseSide: return FString::Printf(*baseFolder, TEXT("MaterialBaseSide.MaterialBaseSide'"));
+		case EMaterialInstance::Polycarbonate: return FString::Printf(*baseFolder, TEXT("MaterialPolycarbonate.MaterialPolycarbonate'"));
+		case EMaterialInstance::ConstructRectangle: return FString::Printf(*baseFolder, TEXT("MaterialRectangle.MaterialRectangle'"));
+		case EMaterialInstance::ConstructRectangleBody: return FString::Printf(*baseFolder, TEXT("MaterialRectangleBody.MaterialRectangleBody'"));
+		case EMaterialInstance::ConstructTriangle: return FString::Printf(*baseFolder, TEXT("MaterialTriangle.MaterialTriangle'"));
+		case EMaterialInstance::TerminalScreen: return FString::Printf(*baseFolder, TEXT("TerminalScreen.TerminalScreen'"));
+		case EMaterialInstance::TerminalBase: return FString::Printf(*baseFolder, TEXT("TerminalBase.TerminalBase'"));
 		default:
 			return TEXT("");
 		}

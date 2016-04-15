@@ -28,6 +28,9 @@ public:
 	UPROPERTY()
 		TArray<FString> Tags;
 
+	UPROPERTY(BlueprintReadOnly, Category= BuildableBlockInfo)
+		bool IsEmptyHand;
+
 
 	FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
 		FInventoryBuildableBlockInfo result;

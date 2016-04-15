@@ -19,9 +19,15 @@ USelectorComponent::USelectorComponent()
 void USelectorComponent::BeginPlay()
 {
 	Super::BeginPlay();
+	owner = GetOwner();
 
 
+	world = GetWorld();
+
+	cameraManager = UGameplayStatics::GetPlayerCameraManager(world, 0);
+	playerPawn = UGameplayStatics::GetPlayerPawn(world, 0);
 }
+
 
 
 
@@ -30,13 +36,6 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!world)
-	{
-		world = GetWorld();
-
-		cameraManager = UGameplayStatics::GetPlayerCameraManager(world, 0);
-		playerPawn = UGameplayStatics::GetPlayerPawn(world, 0);
-	}
 
 	auto cameraLoc = cameraManager->GetCameraLocation();
 
@@ -148,17 +147,25 @@ void USelectorComponent::HidePlane()
 }
 
 
-void USelectorComponent::TrySelect(AActor* selectingActor) {
-	
-	if (SelectedActor &&
-		SelectedTarget &&
-		SelectedTarget->IsValidLowLevel() &&
-		SelectedTarget->SelectTargetComponent &&
-		SelectedTarget->SelectTargetComponent->IsValidLowLevel() &&
-		SelectedTarget->SelectTargetComponent->IsUsable)
-	{
+void USelectorComponent::TrySelect() {
 
-		SelectedTarget->SelectTargetComponent->OnUse(selectingActor);
-	}
+	if (!usableObjectTargeted)
+		return;
 
+	SelectedTarget->SelectTargetComponent->OnUse(owner);
+
+}
+
+
+void USelectorComponent::SetOutlining(bool enableOutlining)
+{
+	if (outliningEnabled == enableOutlining)
+		return;
+
+	if (enableOutlining)
+		showOutline();
+	else
+		hideOutline();
+
+	outliningEnabled = enableOutlining;
 }

@@ -3,7 +3,7 @@
 #include "Helpers/Saving/ArchiveHelpers.h"
 #include "Helpers/Helpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 7;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 8;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -14,7 +14,7 @@ USaveGameCarrier::USaveGameCarrier() {
 	SaveName = TEXT("Prázdná pozice");
 	//PlayedTime(0);
 
-	BuildableBlocks.Add(NewObject<UBuildableBlockInfo>());
+
 }
 
 
@@ -105,8 +105,14 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 
 void USaveGameCarrier::GetSaveForNewGame()
 {
+	IsSystemSave = true;
 	PlayerPosition = FVector(-600, 0, 90);
 	PartOfDay = 0.5f;
+
+
+	BuildableBlocks.Add(NewObject<UBuildableBlockInfo>());
+	BuildableBlocks[0]->IsEmptyHand = true;
+	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(4, 4, 4)));
 
 
 	UsedBlocks.Add(make(EBlockName::Terminal, FVector(-30, -50, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
@@ -192,8 +198,6 @@ void USaveGameCarrier::GetSaveForNewGame()
 
 
 
-	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(4, 4, 4)));
-
 }
 
 bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject) {
@@ -266,5 +270,7 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, boo
 	Ar << carrier.PlayerCameraRotation;
 
 	Ar << carrier.usedBlocks;
+	Ar << carrier.buildableBlocks;
 
 }
+
