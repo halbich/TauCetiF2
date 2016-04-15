@@ -252,3 +252,8 @@ void FMinMaxBox::DEBUGDrawContainingBox(UWorld* world)
 
 }
 
+
+bool FMinMaxBox::IsPlaceEmpty(const FMinMaxBox& box) {
+
+	return false;
+}

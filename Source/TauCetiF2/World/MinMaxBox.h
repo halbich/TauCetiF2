@@ -32,7 +32,7 @@ public:
 	void DEBUGDrawContainingBox(UWorld* world);
 
 	void AddToTree(FMinMaxBox* box, bool forceIsert = false);
-
+	bool IsPlaceEmpty(const FMinMaxBox& box);
 
 
 	static FMinMaxBox& FromWorldObject(AWorldObject* object) {
