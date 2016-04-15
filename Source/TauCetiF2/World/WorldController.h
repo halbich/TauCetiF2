@@ -27,13 +27,15 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks);
-	
+
 
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void DEBUGShowMinMaxBoxes();
 
+	AWorldObject* SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot);
+
 private:
-		FMinMaxBox* RootBox;
+	FMinMaxBox* RootBox;
 
 
 	static FORCEINLINE UClass* GetClassByShape(const FBlockDefinition& definition) {
@@ -44,13 +46,13 @@ private:
 		case EShapeType::CubeSide: return ACubeSideObject::StaticClass();
 		case EShapeType::CubeBody: return ACubeBodyObject::StaticClass();
 		case EShapeType::Custom: {
-		
+
 			if (definition.ID == (uint32)EBlockName::Terminal)
 				return ATerminalObject::StaticClass();
 
 			break;
 		}
-		
+
 		default:
 
 			return nullptr;

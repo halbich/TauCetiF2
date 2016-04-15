@@ -22,6 +22,8 @@ public:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 
 	UPROPERTY()
 		USelectorComponent* selector;
@@ -34,6 +36,9 @@ public:
 		UBuildableBlockInfo* currentBlockInfo;
 
 	UPROPERTY()
+		AWorldObject* currentSpawnedObject;
+
+	UPROPERTY()
 	TMap<UBuildableBlockInfo*, AWorldObject*> usedObjects;
 
 
@@ -43,7 +48,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
 		void SetWorldController(AWorldController* controller);
 
-	FORCEINLINE void DoAction() {
+	void DoAction() {
 
 		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel())
 			return;
@@ -54,9 +59,6 @@ public:
 		print(TEXT("doing something"));
 
 		auto used = usedObjects.Find(currentBlockInfo);
-		if(!used)
-		{ 
-			print(TEXT("Item not used"));
-		}
+		check(used && "Failed to find currentBlockInfo object");
 	}
 };

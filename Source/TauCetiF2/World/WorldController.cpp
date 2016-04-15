@@ -39,49 +39,67 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 	UsedBlocks.Reserve(blocks.Num());
 	for (auto block : blocks)
 	{
-		if (!block)
+		auto actor = SpawnWorldObject(world,block, true);
+
+		if (!actor)
 			continue;
 
-		auto definition = FBlockDefinitionHolder::Instance().GetDefinition(block->ID, false);
-		
-		if (!definition)
-		{
-			UE_LOG(LogTemp, Error, TEXT("Neznámé ID (%d) objektu. Vynechávám"), block->ID);
-			continue;
-		}
-
-		auto classBP = GetClassByShape(*definition);
-
-		ensure(classBP != nullptr);
-
-
-		auto trans = UHelpers::GetSpawnTransform(block->Location, block->Scale);
-
-		trans.SetRotation(FQuat::FQuat(block->Rotation));
-
-		auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans);
-
-		if (actor)
-		{
-			actor->WorldObjectComponent->BlockInfo = block;
-
-			UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
-
-
-			if (ensure(RootBox != nullptr))
-				RootBox->AddToTree(&FMinMaxBox::FromWorldObject(actor));
-
-			UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
-
-			UGameplayStatics::FinishSpawningActor(actor, trans);
-
-
-		}
 
 		UsedBlocks.Add(block);
 	}
 
 }
+
+
+// TODO inline!
+AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot)
+{
+	if (!block)
+		return nullptr;
+
+	auto definition = FBlockDefinitionHolder::Instance().GetDefinition(block->ID, false);
+
+	if (!definition)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Neznámé ID (%d) objektu. Vynechávám"), block->ID);
+		return nullptr;
+	}
+
+	auto classBP = GetClassByShape(*definition);
+
+	ensure(classBP != nullptr);
+
+
+	auto trans = UHelpers::GetSpawnTransform(block->Location, block->Scale);
+
+	trans.SetRotation(FQuat::FQuat(block->Rotation));
+
+	auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans);
+
+	if (!actor)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Neznámé ID (%d) objektu. Vynechávám"), block->ID);
+		ensure(actor != nullptr);			// chceme vyhodit chybu
+		return nullptr;
+	}
+
+	actor->WorldObjectComponent->BlockInfo = block;
+
+	if (addToRoot) {
+
+		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
+		if (ensure(RootBox != nullptr))
+			RootBox->AddToTree(&FMinMaxBox::FromWorldObject(actor));
+
+		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
+	}
+
+	UGameplayStatics::FinishSpawningActor(actor, trans);
+	return actor;
+
+
+}
+
 
 void AWorldController::DEBUGShowMinMaxBoxes() {
 

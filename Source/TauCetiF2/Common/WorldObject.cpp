@@ -34,12 +34,28 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 
 	auto scale = GetActorScale3D();
 
+	if (WorldObjectComponent->BlockInfo->UnderConstruction)
+	{
+		for (size_t i = 0; i < definition->UsedMaterials.Num(); i++)
+		{
+			auto mat = definition->UsedMaterials[i];
+
+			setMaterial(mat.MaterialInstance, i, mat.GetParams(scale));
+		}
+
+		if (TranslucentSelectMesh)
+			TranslucentSelectMesh->DestroyComponent();
+
+		return;
+	}
+
+
 	bool hasTranslucent = false;
 	for (size_t i = 0; i < definition->UsedMaterials.Num(); i++)
 	{
 		auto mat = definition->UsedMaterials[i];
 
-		setMaterial(mat.MaterialInstance, i, mat.GetParams(scale));
+		setConstructionMaterial(mat.MaterialInstance, i, mat.GetParams(scale));
 		hasTranslucent = hasTranslucent || mat.IsTranslucent;
 	}
 

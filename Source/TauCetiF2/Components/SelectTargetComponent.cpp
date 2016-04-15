@@ -57,5 +57,4 @@ void USelectTargetComponent::OnUse(AActor* selectingActor) {
 
 	print(TEXT("Using!"));
 
-
 }

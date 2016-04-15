@@ -36,6 +36,9 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 	virtual void GetBoundingBox(FVector& min, FVector& max);
 
 
+
+
+
 	FORCEINLINE void setMaterial(UMaterial* material, int32 index, float scaleX, float scaleY) {
 		auto sm = GetStaticMeshComponent();
 		if (!sm)
@@ -52,6 +55,7 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 		}
 		sm->SetMaterial(index, mi);
 	}
+
 
 	FORCEINLINE void setTranslucentMaterials(int32 count) {
 		auto sm = TranslucentSelectMesh;
@@ -74,29 +78,23 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 			}
 			sm->SetMaterial(i, mi);
 		}
-
-
-
-
 	}
 
 	FORCEINLINE void setMaterial(EMaterialInstance& instance, int32 index, FVector2D scale) {
-		auto sm = GetStaticMeshComponent();
-		if (!sm)
-			return;
 		UMaterial* material = UHelpers::GetMaterialByInstance(instance);
 
 		check(material && "Failed to find given material");
 
-		UMaterialInstanceDynamic* mi = nullptr;
-		if (material) {
-			mi = UMaterialInstanceDynamic::Create(material, this);
-			if (mi)
-			{
-				mi->SetScalarParameterValue(TEXT("Kx"), scale.X);
-				mi->SetScalarParameterValue(TEXT("Ky"), scale.Y);
-			}
-		}
-		sm->SetMaterial(index, mi);
+		setMaterial(material, index, scale.X, scale.Y);
 	}
+
+	FORCEINLINE void setConstructionMaterial(EMaterialInstance& instance, int32 index, FVector2D scale) {
+		UMaterial* material = UHelpers::GetMaterialByInstance(instance, true);
+
+		check(material && "Failed to find given material");
+
+		setMaterial(material, index, scale.X, scale.Y);
+	}
+
+
 };

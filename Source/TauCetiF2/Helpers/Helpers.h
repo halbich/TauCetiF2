@@ -73,8 +73,8 @@ public:
 
 
 
-	static FORCEINLINE FString GetMaterialName(const EMaterialInstance& instance) {
-		const FString baseFolder = TEXT("Material'/Game/Materials/BuildingObjects/%s");
+	static FORCEINLINE FString GetMaterialName(const EMaterialInstance& instance, bool isConstruct = false) {
+		const FString baseFolder = isConstruct ? TEXT("Material'/Game/Materials/BuildingObjects/%s") : TEXT("Material'/Game/Materials/BuildingObjects/Construction/%s");
 
 		switch (instance)
 		{
@@ -94,8 +94,8 @@ public:
 	}
 
 
-	static FORCEINLINE UMaterial* GetMaterialByInstance(const EMaterialInstance& instance) {
-		auto name = GetMaterialName(instance);
+	static FORCEINLINE UMaterial* GetMaterialByInstance(const EMaterialInstance& instance, bool isConstruct = false) {
+		auto name = GetMaterialName(instance, isConstruct);
 		return name.Len() > 0 ? GetMaterialByName(*name) : nullptr;
 	}
 

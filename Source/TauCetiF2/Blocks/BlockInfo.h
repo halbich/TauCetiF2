@@ -27,6 +27,9 @@ public:
 	UPROPERTY()
 		FRotator Rotation;
 
+	UPROPERTY()
+		bool UnderConstruction;
+
 	FORCEINLINE FBlockInfo ToContainer() {
 		FBlockInfo result = ToBaseContainer();
 		result.Location = Location;
