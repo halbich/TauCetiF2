@@ -11,8 +11,11 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	auto minCube = UHelpers::BorderToWorld(FVector(0, 0, 0));
 	auto maxCube = UHelpers::BorderToWorld(UHelpers::WorldBorders);
 
-	FVector min((minCube.X - 0.5) * UHelpers::CubeMinSize, (minCube.Y - 0.5) * UHelpers::CubeMinSize, (minCube.Z - 0.5)*UHelpers::CubeMinSize);
-	FVector max((maxCube.X + 0.5) * UHelpers::CubeMinSize, (maxCube.Y + 0.5) * UHelpers::CubeMinSize, (maxCube.Z + 0.5)*UHelpers::CubeMinSize);
+
+	FVector min((minCube - 0.5 * FVector(1, 1, 1))* UHelpers::CubeMinSize);
+	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* UHelpers::CubeMinSize);
+	//FVector min((minCube.X - 0.5) * UHelpers::CubeMinSize, (minCube.Y - 0.5) * UHelpers::CubeMinSize, (minCube.Z - 0.5)*UHelpers::CubeMinSize);
+	//FVector max((maxCube.X + 0.5) * UHelpers::CubeMinSize, (maxCube.Y + 0.5) * UHelpers::CubeMinSize, (maxCube.Z + 0.5)*UHelpers::CubeMinSize);
 
 	RootBox = new FMinMaxBox(min, max, 0);
 	RootBox->name = TEXT("ROOT");

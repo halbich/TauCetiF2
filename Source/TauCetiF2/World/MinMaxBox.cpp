@@ -3,9 +3,21 @@
 #include "TauCetiF2.h"
 #include "MinMaxBox.h"
 
-FMinMaxBox::FMinMaxBox(FVector min, FVector max, int8 dividingIndex) : B1(nullptr), B2(nullptr), Min(min), Max(max), containingObject(nullptr), DividingIndex(dividingIndex), SingleChild(nullptr)
+FMinMaxBox::FMinMaxBox(FVector min, FVector max, int8 dividingIndex) :
+	B1(nullptr),
+	B2(nullptr),
+	Min(min),
+	Max(max),
+	containingObject(nullptr),
+	DividingIndex(dividingIndex),
+	SingleChild(nullptr),
+	DividingCoord(dividingIndex % 3 == 0 ? 1 : 0, dividingIndex % 3 == 1 ? 1 : 0, dividingIndex % 3 == 2 ? 1 : 0)
 {
 	name = TEXT("");
+
+
+	RecomputeDividingCoordValue();
+
 }
 
 FMinMaxBox::~FMinMaxBox()
@@ -25,22 +37,10 @@ FMinMaxBox::~FMinMaxBox()
 
 void FMinMaxBox::AddToTree(FMinMaxBox* box, bool forceInsert) {
 
-	/*if (DividingIndex >= )
-	{
-		UE_LOG(LogTemp, Log, TEXT("Dive EXCEEDED!"));
-		return;
-	}
-*/
 	ensure(box != nullptr);
-
-	/*UE_LOG(LogTemp, Log, TEXT("Adding box to %s ( (%s) , (%s))"), *name, *Min.ToString(), *Max.ToString());
-
-	if (box->containingObject && box->containingObject->IsValidLowLevel())
-		UE_LOG(LogTemp, Log, TEXT("Inner item name is %s"), *(box->containingObject->GetName()));*/
 
 	if (!B1 && !B2 && !SingleChild && GtMin(box->Min) && LtMax(box->Max))
 	{
-		//UE_LOG(LogTemp, Log, TEXT("Box %s has no child, adding Single"), *name);
 		SingleChild = box;
 		return;
 	}
@@ -48,57 +48,77 @@ void FMinMaxBox::AddToTree(FMinMaxBox* box, bool forceInsert) {
 
 	if (SingleChild && !forceInsert)
 	{
-		//UE_LOG(LogTemp, Log, TEXT(" ---- Box %s has single child, force add"), *name);
 		AddToTree(SingleChild, true); // forcing to insert
 		SingleChild = nullptr;
-		//UE_LOG(LogTemp, Log, TEXT(" ---- Box %s had single child, forcing done"), *name);
 	}
 
-	//UE_LOG(LogTemp, Log, TEXT("Searching where can be box (%s) stored in %s"), box->containingObject ? *(box->containingObject->GetName()) : TEXT("nothing"), *name);
+	/*addToTreeByCoord(box);
+	return;*/
 
 
-	float dividingCoord = 0;
 	switch (DividingIndex % 3) {
 	case 0:
-		dividingCoord = ((Min.X + Max.X)* 0.5);
-
-		if (((int32)FMath::Abs(Max.X - Min.X) / 20) % 2 == 1)
-		{
-			dividingCoord += 10.0f;
-		}
-		addToTreeByX(box, dividingCoord);
+		addToTreeByX(box, DividingCoordValue);
 		break;
 	case 1:
-		dividingCoord = (Min.Y + Max.Y)* 0.5;
-		if (((int32)FMath::Abs(Max.Y - Min.Y) / 20) % 2 == 1)
-		{
-			dividingCoord += 10.0f;
-		}
-		addToTreeByY(box, dividingCoord);
+		addToTreeByY(box, DividingCoordValue);
 
 		break;
 	case 2:
-		dividingCoord = (Min.Z + Max.Z)* 0.5;
-		if (((int32)FMath::Abs(Max.Z - Min.Z) / 20) % 2 == 1)
-		{
-			dividingCoord += 10.0f;
-		}
-		addToTreeByZ(box, dividingCoord);
+		addToTreeByZ(box, DividingCoordValue);
 
 		break;
 	}
 }
 
+void FMinMaxBox::addToTreeByCoord(FMinMaxBox* box) {
+
+
+	if (sum(box->Max * DividingCoord) <= DividingCoordValue)		// whole object is in left plane
+	{
+		if (!B1)
+		{
+			B1 = new FMinMaxBox(Min, (FVector(1, 1, 1) - DividingCoord) *  Max + (DividingCoord * DividingCoordValue), DividingIndex + 1);
+			B1->name = FString::Printf(TEXT("%s > B1"), *name);
+		}
+		B1->AddToTree(box);
+		return;
+	}
+
+	if (sum(box->Min *DividingCoord) >= DividingCoordValue)		// whole object is in right plane
+	{
+		if (!B2)
+		{
+			B2 = new FMinMaxBox((FVector(1, 1, 1) - DividingCoord) *  Min + (DividingCoord * DividingCoordValue), Max, DividingIndex + 1);
+			B2->name = FString::Printf(TEXT("%s > B2"), *name);
+		}
+
+		B2->AddToTree(box);
+		return;
+	}
+
+	// object is in between. We need to split and then add object to both branches
+
+	FMinMaxBox* newB1 = new FMinMaxBox(box->Min, box->Max, box->DividingIndex);
+	newB1->containingObject = box->containingObject;
+
+	box->Max = (FVector(1, 1, 1) - DividingCoord) *  Max + (DividingCoord * DividingCoordValue);
+	box->RecomputeDividingCoordValue();
+	newB1->Min = (FVector(1, 1, 1) - DividingCoord) *  Min + (DividingCoord * DividingCoordValue);
+	newB1->RecomputeDividingCoordValue();
+	addToTreeByCoord(box);
+	addToTreeByCoord(newB1);
+
+
+}
+
 
 void FMinMaxBox::addToTreeByX(FMinMaxBox* box, float& dividingCoord) {
-	//UE_LOG(LogTemp, Log, TEXT("Box %s has dividingCoord X  %f"), *name, dividingCoord);
 
 	if (box->Max.X <= dividingCoord)		// whole object is in left plane
 	{
-		//UE_LOG(LogTemp, Log, TEXT("Box %s is all in left plane of %s"), *(box->name), *name);
 		if (!B1)
 		{
-			//UE_LOG(LogTemp, Log, TEXT("Creating B1 for %s"), *name);
 			B1 = new FMinMaxBox(Min, FVector(dividingCoord, Max.Y, Max.Z), DividingIndex + 1);
 			B1->name = FString::Printf(TEXT("%s > B1"), *name);
 		}
@@ -108,10 +128,8 @@ void FMinMaxBox::addToTreeByX(FMinMaxBox* box, float& dividingCoord) {
 
 	if (box->Min.X >= dividingCoord)		// whole object is in right plane
 	{
-		//UE_LOG(LogTemp, Log, TEXT("Box %s is all in right plane of %s"), *(box->name), *name);
 		if (!B2)
 		{
-			//UE_LOG(LogTemp, Log, TEXT("Creating B2 for %s"), *name);
 			B2 = new FMinMaxBox(FVector(dividingCoord, Min.Y, Min.Z), Max, DividingIndex + 1);
 			B2->name = FString::Printf(TEXT("%s > B2"), *name);
 		}
@@ -122,11 +140,8 @@ void FMinMaxBox::addToTreeByX(FMinMaxBox* box, float& dividingCoord) {
 
 	// object is in between. We need to split and then add object to both branches
 
-	//UE_LOG(LogTemp, Log, TEXT("----   - ----Object %s needs to be divided (in %s)"), box->containingObject ? *(box->containingObject->GetName()) : TEXT("nothing"), *name);
-
 	FMinMaxBox* newB1 = new FMinMaxBox(box->Min, box->Max, box->DividingIndex);
 	newB1->containingObject = box->containingObject;
-
 
 	box->Max.X = dividingCoord;
 	newB1->Min.X = dividingCoord;
@@ -139,14 +154,11 @@ void FMinMaxBox::addToTreeByX(FMinMaxBox* box, float& dividingCoord) {
 
 
 void FMinMaxBox::addToTreeByY(FMinMaxBox* box, float dividingCoord) {
-	//UE_LOG(LogTemp, Log, TEXT("Box %s has dividingCoord Y %f"), *name, dividingCoord);
 
 	if (box->Max.Y <= dividingCoord)		// whole object is in left plane
 	{
-		//UE_LOG(LogTemp, Log, TEXT("Box %s is all in left plane of %s"), *(box->name), *name);
 		if (!B1)
 		{
-			//UE_LOG(LogTemp, Log, TEXT("Creating B1 for %s"), *name);
 			B1 = new FMinMaxBox(Min, FVector(Max.X, dividingCoord, Max.Z), DividingIndex + 1);
 			B1->name = FString::Printf(TEXT("%s > B1"), *name);
 		}
@@ -156,10 +168,8 @@ void FMinMaxBox::addToTreeByY(FMinMaxBox* box, float dividingCoord) {
 
 	if (box->Min.Y >= dividingCoord)		// whole object is in right plane
 	{
-		//UE_LOG(LogTemp, Log, TEXT("Box %s is all in right plane of %s"), *(box->name), *name);
 		if (!B2)
 		{
-			//UE_LOG(LogTemp, Log, TEXT("Creating B2 for %s"), *name);
 			B2 = new FMinMaxBox(FVector(Min.X, dividingCoord, Min.Z), Max, DividingIndex + 1);
 			B2->name = FString::Printf(TEXT("%s > B2"), *name);
 		}
@@ -169,7 +179,6 @@ void FMinMaxBox::addToTreeByY(FMinMaxBox* box, float dividingCoord) {
 
 	// object is in between. We need to split and then add object to both branches
 
-	//UE_LOG(LogTemp, Log, TEXT("Object %s needs to be divided (in %s)"), box->containingObject ? *(box->containingObject->GetName()) : TEXT("nothing"), *name);
 
 	FMinMaxBox* newB1 = new FMinMaxBox(box->Min, box->Max, box->DividingIndex);
 	newB1->containingObject = box->containingObject;
@@ -181,14 +190,11 @@ void FMinMaxBox::addToTreeByY(FMinMaxBox* box, float dividingCoord) {
 }
 
 void FMinMaxBox::addToTreeByZ(FMinMaxBox* box, float dividingCoord) {
-	//UE_LOG(LogTemp, Log, TEXT("Box %s has dividingCoord Z %f"), *name, dividingCoord);
 
 	if (box->Max.Z <= dividingCoord)		// whole object is in left plane
 	{
-		//UE_LOG(LogTemp, Log, TEXT("Box %s is all in left plane of %s"), *(box->name), *name);
 		if (!B1)
 		{
-			//UE_LOG(LogTemp, Log, TEXT("Creating B1 for %s"), *name);
 			B1 = new FMinMaxBox(Min, FVector(Max.X, Max.Y, dividingCoord), DividingIndex + 1);
 			B1->name = FString::Printf(TEXT("%s > B1"), *name);
 		}
@@ -198,10 +204,8 @@ void FMinMaxBox::addToTreeByZ(FMinMaxBox* box, float dividingCoord) {
 
 	if (box->Min.Z >= dividingCoord)		// whole object is in right plane
 	{
-		//UE_LOG(LogTemp, Log, TEXT("Box %s is all in right plane of %s"), *(box->name), *name);
 		if (!B2)
 		{
-			//UE_LOG(LogTemp, Log, TEXT("Creating B2 for %s"), *name);
 			B2 = new FMinMaxBox(FVector(Min.X, Min.Y, dividingCoord), Max, DividingIndex + 1);
 			B2->name = FString::Printf(TEXT("%s > B1"), *name);
 		}
@@ -211,7 +215,6 @@ void FMinMaxBox::addToTreeByZ(FMinMaxBox* box, float dividingCoord) {
 
 	// object is in between. We need to split and then add object to both branches
 
-	//UE_LOG(LogTemp, Log, TEXT("Object %s needs to be divided (in %s)"), box->containingObject ? *(box->containingObject->GetName()) : TEXT("nothing"), *name);
 
 	FMinMaxBox* newB1 = new FMinMaxBox(box->Min, box->Max, box->DividingIndex);
 	newB1->containingObject = box->containingObject;

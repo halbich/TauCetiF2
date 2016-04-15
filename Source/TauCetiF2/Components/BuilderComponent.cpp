@@ -33,6 +33,23 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	if (!currentSpawnedObject || !selector || !selector->IsValidLowLevelFast())
 		return;
 
+	if (!selector->SelectedActor)
+	{
+		if (currentSpawnedObject->IsActorTickEnabled())
+		{
+			currentSpawnedObject->SetActorHiddenInGame(true);
+			currentSpawnedObject->SetActorTickEnabled(false);
+		}
+	}
+	else
+	{
+		if (!currentSpawnedObject->IsActorTickEnabled())
+		{
+			currentSpawnedObject->SetActorHiddenInGame(false);
+			currentSpawnedObject->SetActorTickEnabled(true);
+		}
+	}
+
 	currentSpawnedObject->SetActorLocation(UHelpers::GetSpawnCoords(GetSpawnPoint(), currentBlockInfo->Scale, currentBlockRotation));
 }
 
@@ -90,7 +107,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	currentSpawnedObject = used;
 	selector->traceIgnoreActor = currentSpawnedObject;
 
-	
+
 }
 
 void UBuilderComponent::SetWorldController(AWorldController* controller)

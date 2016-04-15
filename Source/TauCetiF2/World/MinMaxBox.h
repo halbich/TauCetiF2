@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Common/WorldObject.h"
+#include "Helpers/Helpers.h"
 
 /**
  *
@@ -28,6 +29,10 @@ public:
 	FMinMaxBox* SingleChild;
 
 	FString name;
+
+	FVector DividingCoord;
+
+	float DividingCoordValue;
 
 	void DEBUGDrawContainingBox(UWorld* world);
 
@@ -55,11 +60,26 @@ public:
 		return *ret;
 	}
 
+	FORCEINLINE void RecomputeDividingCoordValue()
+	{
+		UE_LOG(LogTemp, Log, TEXT("%s"), *DividingCoord.ToString());
+
+		FVector dividingCoordVect = (Min + Max) * DividingCoord * 0.5;
+		DividingCoordValue = sum(dividingCoordVect);
+
+		if (((int32)FMath::Abs(sum((Max - Min) * DividingCoord)) / UHelpers::CubeMinSize) % 2 == 1)
+		{
+			DividingCoordValue += UHelpers::CubeMinSize / 2.0f;
+		}
+	}
+
+
 private:
 
 	void addToTreeByX(FMinMaxBox* box, float& dividingCoord);
 	void addToTreeByY(FMinMaxBox* box, float dividingCoord);
 	void addToTreeByZ(FMinMaxBox* box, float dividingCoord);
+	void addToTreeByCoord(FMinMaxBox* box);
 
 
 	FORCEINLINE bool GtMin(const FVector& min)
@@ -72,5 +92,11 @@ private:
 		return Max.X >= max.X && Max.Y >= max.Y && Max.Z >= max.Z;
 	}
 
+	FORCEINLINE float sum(const FVector& v)
+	{
+		return v.X + v.Y + v.Z;
+	}
+
+	
 
 };

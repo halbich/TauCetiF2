@@ -23,7 +23,7 @@ public:
 
 	static const FVector WorldBorders;
 	static const FVector WorldCenterMapping;
-	static const float CubeMinSize;
+	static const int32 CubeMinSize;
 
 
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)

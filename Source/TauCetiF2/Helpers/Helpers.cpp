@@ -9,7 +9,7 @@
 
 const FVector UHelpers::WorldBorders(1000, 1000, 250);
 const FVector UHelpers::WorldCenterMapping(UHelpers::WorldBorders.X / 2, UHelpers::WorldBorders.Y / 2, 0);
-const float UHelpers::CubeMinSize(20);
+const int32 UHelpers::CubeMinSize(20);
 
 
 TArray<FString> UHelpers::GetAllSaveGameSlots()
