@@ -54,7 +54,9 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 	if (!block)
 		return nullptr;
 
-	auto definition = FBlockDefinitionHolder::Instance().GetDefinition(block->ID, false);
+	check(RootBox != nullptr)
+
+		auto definition = FBlockDefinitionHolder::Instance().GetDefinition(block->ID, false);
 
 	if (!definition)
 	{
@@ -68,6 +70,12 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 
 
 	auto trans = UHelpers::GetSpawnTransform(block->Location, block->Scale, block->Rotation);
+	if (!IsValidSpawnPoint(trans))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Objekt nelze korektnì pøidat do stromu. Vynechávám."));
+		IsValidSpawnPoint(trans);
+		return nullptr;
+	}
 
 	auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans);
 
@@ -81,11 +89,8 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 	actor->WorldObjectComponent->BlockInfo = block;
 
 	if (addToRoot) {
-
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
-		if (ensure(RootBox != nullptr))
-			RootBox->AddToTree(&FMinMaxBox::FromWorldObject(actor));
-
+		RootBox->AddToTree(&FMinMaxBox::FromWorldObject(actor));
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 	}
 

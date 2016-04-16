@@ -117,9 +117,9 @@ void USaveGameCarrier::GetSaveForNewGame()
 
 	UsedBlocks.Add(make(EBlockName::Terminal, FVector(-30, -50, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
 
-	UsedBlocks.Add(make(EBlockName::BaseCube,FVector(0, 0, 1), FVector(4,4,4) , FRotator::ZeroRotator));
+	//UsedBlocks.Add(make(EBlockName::BaseCube,FVector(0, 0, 1), FVector(4,4,4) , FRotator::ZeroRotator));
 
-	return;
+	//return;
 
 	FRotator baseRotation(0, 0, 0);
 	FVector BaseSize(20, 20, 4);
@@ -131,8 +131,6 @@ void USaveGameCarrier::GetSaveForNewGame()
 	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 10, 1), BaseSize, FRotator(0, 0, 0)));
 	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(10, 10, 1), BaseSize, FRotator(0, 0, 0)));
 
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, -10, 1), BaseSize, FRotator(0, 0, 0)));
-
 
 	UsedBlocks.Add(make(EBlockName::BaseRamp, FVector(-26, 0, 1), FVector(8, 12, 4), FRotator(0, 90, 0)));
 
@@ -143,7 +141,6 @@ void USaveGameCarrier::GetSaveForNewGame()
 	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(10, -10, 20), RoofSize, FRotator(0, 0, 0)));
 	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-10, 10, 20), RoofSize, FRotator(0, 0, 0)));
 	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(10, 10, 20), RoofSize, FRotator(0, 0, 0)));
-
 
 	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-9, -19, 5), FVector(19, 1, 4), FRotator(0, 0, 0)));
 	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(10, -19, 5), FVector(19, 1, 4), FRotator(0, 0, 0)));

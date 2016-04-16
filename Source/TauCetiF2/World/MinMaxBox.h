@@ -13,6 +13,7 @@ class TAUCETIF2_API FMinMaxBox
 
 public:
 	FMinMaxBox(FVector min, FVector max, int8 dividingIndex);
+	FMinMaxBox(FTransform& transform);
 	~FMinMaxBox();
 
 	FVector Min;
@@ -77,6 +78,8 @@ public:
 private:
 
 	void addToTreeByCoord(FMinMaxBox* box);
+
+	bool isPlaceEmptySingleChild(const FMinMaxBox& box);
 
 
 	FORCEINLINE bool GtMin(const FVector& min)

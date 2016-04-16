@@ -20,6 +20,12 @@ FMinMaxBox::FMinMaxBox(FVector min, FVector max, int8 dividingIndex) :
 
 }
 
+FMinMaxBox::FMinMaxBox(FTransform& transform) : FMinMaxBox(FVector::ZeroVector, FVector::ZeroVector, 0)
+{
+	AWorldObject::GetBoundingBox(transform, Min, Max);
+	RecomputeDividingCoordValue();
+}
+
 FMinMaxBox::~FMinMaxBox()
 {
 	if (B1)
@@ -38,6 +44,7 @@ FMinMaxBox::~FMinMaxBox()
 void FMinMaxBox::AddToTree(FMinMaxBox* box, bool forceInsert) {
 
 	ensure(box != nullptr);
+	check(GtMin(box->Min) && LtMax(box->Max));
 
 	if (!B1 && !B2 && !SingleChild && GtMin(box->Min) && LtMax(box->Max))
 	{
@@ -130,5 +137,36 @@ void FMinMaxBox::DEBUGDrawContainingBox(UWorld* world)
 
 bool FMinMaxBox::IsPlaceEmpty(const FMinMaxBox& box) {
 
-	return false;
+	if (!(GtMin(box.Min) && LtMax(box.Max)))
+		return false;
+
+	if (SingleChild)
+		return SingleChild->isPlaceEmptySingleChild(box);
+
+	if (sum(box.Max * DividingCoord) <= DividingCoordValue)		// whole object is in left plane
+	{
+		return	!B1 ? true : B1->IsPlaceEmpty(box);
+	}
+
+	if (sum(box.Min *DividingCoord) >= DividingCoordValue)		// whole object is in right plane
+	{
+		return	!B2 ? true : B2->IsPlaceEmpty(box);
+	}
+
+	// object is in between. We need to split and then add object to both branches
+
+	FMinMaxBox newB1(box.Min, (FVector(1, 1, 1) - DividingCoord) *  box.Max + (DividingCoord * DividingCoordValue), box.DividingIndex);
+	FMinMaxBox newB2((FVector(1, 1, 1) - DividingCoord) *  box.Min + (DividingCoord * DividingCoordValue), box.Max, box.DividingIndex);
+
+	return IsPlaceEmpty(newB1) && IsPlaceEmpty(newB2);
+}
+
+
+bool FMinMaxBox::isPlaceEmptySingleChild(const FMinMaxBox& box)
+{
+	auto x = box.Max.X <= Min.X || box.Min.X >= Max.X;		// false if there is netrivial intersection
+	auto y = box.Max.Y <= Min.Y || box.Min.Y >= Max.Y;		// false if there is netrivial intersection
+	auto z = box.Max.Z <= Min.Z || box.Min.Z >= Max.Z;		// false if there is netrivial intersection
+
+	return x || y || z;
 }

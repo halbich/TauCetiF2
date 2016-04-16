@@ -44,6 +44,9 @@ public:
 	UPROPERTY()
 		FRotator currentBlockRotation;
 
+	UPROPERTY()
+		FVector currentValidSpawnPoint;
+
 
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
 		void SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo);
@@ -91,7 +94,7 @@ public:
 
 		auto spawnBlock = NewObject<UBlockInfo>((UObject*)GetTransientPackage(), NAME_None, RF_NoFlags, currentSpawnedObject->WorldObjectComponent->BlockInfo);
 
-		spawnBlock->Location = GetSpawnPoint();
+		spawnBlock->Location = currentValidSpawnPoint;
 		spawnBlock->Rotation = currentBlockRotation;
 		spawnBlock->UnderConstruction = false;
 

@@ -35,7 +35,14 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 
 	virtual void GetBoundingBox(FVector& min, FVector& max);
 
+	static FORCEINLINE void GetBoundingBox(const FTransform& transform, FVector& min, FVector& max) {
+		auto location = transform.GetLocation();
+		auto scale = transform.GetRotation().RotateVector(transform.GetScale3D() * UHelpers::CubeMinSize * 0.5);
 
+		min = location - scale;
+		max = location + scale;
+
+	}
 
 
 

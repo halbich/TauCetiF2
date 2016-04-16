@@ -37,6 +37,12 @@ public:
 
 	AWorldObject* SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot);
 
+	FORCEINLINE bool IsValidSpawnPoint(FTransform& transform)
+	{
+		FMinMaxBox box(transform);
+		return RootBox->IsPlaceEmpty(box);
+	}
+
 private:
 	FMinMaxBox* RootBox;
 

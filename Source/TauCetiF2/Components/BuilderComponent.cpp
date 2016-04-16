@@ -50,7 +50,17 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		}
 	}
 
-	currentSpawnedObject->SetActorLocation(UHelpers::GetSpawnCoords(GetSpawnPoint(), currentBlockInfo->Scale, currentBlockRotation));
+	auto newSpawnPoint = GetSpawnPoint();
+	if (newSpawnPoint == currentValidSpawnPoint)
+		return;
+
+	auto trans = UHelpers::GetSpawnTransform(GetSpawnPoint(), currentBlockInfo->Scale, currentBlockRotation);
+	if (!worldController->IsValidSpawnPoint(trans))
+		return;
+
+	currentValidSpawnPoint = newSpawnPoint;
+
+	currentSpawnedObject->SetActorLocation(UHelpers::GetSpawnCoords(currentValidSpawnPoint, currentBlockInfo->Scale, currentBlockRotation));
 }
 
 
@@ -68,6 +78,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 		currentSpawnedObject->SetActorHiddenInGame(true);
 		currentSpawnedObject->SetActorTickEnabled(false);
 		selector->traceIgnoreActor = nullptr;
+
 	}
 	currentBlockInfo = blockInfo;
 
@@ -85,14 +96,17 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 
 		auto cont = currentBlockInfo->ToBaseContainer();
 		info->FromBaseContainer(cont);
-		info->Location = selector->ImpactPointWithSnap;					//TODO
+		info->Location = GetSpawnPoint();					//TODO
+		info->Rotation = currentBlockRotation;
 		info->UnderConstruction = true;
 
-		auto spawnActor = worldController->SpawnWorldObject(GetWorld(), info, false);
+		auto spawnActor = worldController->SpawnWorldObject(World, info, false);
+		if (!spawnActor)
+			return;
 
-		ensure(spawnActor != nullptr);
+
 		spawnActor->SetActorEnableCollision(false);
-
+		currentValidSpawnPoint = info->Location;
 		usedObjects.Add(currentBlockInfo, spawnActor);
 		currentSpawnedObject = spawnActor;
 		selector->traceIgnoreActor = currentSpawnedObject;
