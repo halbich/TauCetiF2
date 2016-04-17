@@ -14,8 +14,6 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 
 	FVector min((minCube - 0.5 * FVector(1, 1, 1))* UHelpers::CubeMinSize);
 	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* UHelpers::CubeMinSize);
-	//FVector min((minCube.X - 0.5) * UHelpers::CubeMinSize, (minCube.Y - 0.5) * UHelpers::CubeMinSize, (minCube.Z - 0.5)*UHelpers::CubeMinSize);
-	//FVector max((maxCube.X + 0.5) * UHelpers::CubeMinSize, (maxCube.Y + 0.5) * UHelpers::CubeMinSize, (maxCube.Z + 0.5)*UHelpers::CubeMinSize);
 
 	RootBox = new FMinMaxBox(min, max, 0);
 	RootBox->name = TEXT("ROOT");
@@ -89,9 +87,12 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 	actor->WorldObjectComponent->BlockInfo = block;
 
 	if (addToRoot) {
+
+		auto MinMax = FMinMaxBox::FromWorldObject(actor);
+		(&MinMax)->DEBUGDrawContainingBox(GetWorld());
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
-		RootBox->AddToTree(&FMinMaxBox::FromWorldObject(actor));
-		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
+		RootBox->AddToTree(&MinMax);
+		//UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 	}
 
 	UGameplayStatics::FinishSpawningActor(actor, trans);

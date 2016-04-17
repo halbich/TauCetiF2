@@ -111,14 +111,19 @@ void FMinMaxBox::DEBUGDrawContainingBox(UWorld* world)
 		return;
 
 
-	auto center = (Max + Min) * 0.5;
-	auto extend = Max - center;
+	auto center = (Max + Min) * 0.5 * (FVector(1, 1, 1) - DividingCoord) + DividingCoord * DividingCoordValue;
+	auto extend = (Max - center) *  (FVector(1, 1, 1) - DividingCoord);
 
 
 
 	auto di = DividingIndex % 3;
 
-	DrawDebugBox(world, center, extend, di == 0 ? FColor::Red : (di == 1 ? FColor::Green : FColor::Blue), true);
+	if (B1 || B2)
+		DrawDebugBox(world, center, extend, di == 0 ? FColor::Red : (di == 1 ? FColor::Green : FColor::Blue), true);
+
+
+	if (containingObject)
+		DrawDebugBox(world, center, Max - center, FColor::White, true);
 
 	if (SingleChild)
 	{

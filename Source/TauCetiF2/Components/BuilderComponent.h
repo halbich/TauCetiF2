@@ -84,7 +84,10 @@ public:
 			return;
 
 		if (currentBlockInfo->IsEmptyHand)
+		{
+
 			return;
+		}
 
 		print(TEXT("doing something"));
 

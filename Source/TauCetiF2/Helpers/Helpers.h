@@ -99,7 +99,7 @@ public:
 		return name.Len() > 0 ? GetMaterialByName(*name) : nullptr;
 	}
 
-	static FORCEINLINE FVector GetWorldCoordinate(const FVector& vect)
+	static  FVector GetWorldCoordinate(const FVector& vect)
 	{
 		return FVector(vect) * CubeMinSize;
 	}
@@ -111,23 +111,26 @@ public:
 
 	}
 
-	static FORCEINLINE FVector GetSpawnOffset(const FRotator& rotator, const FVector& size)
+	static  FVector GetSpawnOffset(const FRotator& rotator, const FVector& size)
 	{
-		auto rotatedVect = rotator.RotateVector(size);
-		auto transMove = FVector((int32)(rotatedVect.X + 1) % 2, (int32)(rotatedVect.Y + 1) % 2, (int32)(rotatedVect.Z + 1) % 2) * 0.5;
-		return transMove;
+		//auto rotatedVect = rotator.RotateVector(size);
+		//auto transMove = FVector((int32)(rotatedVect.X + 1) % 2, (int32)(rotatedVect.Y + 1) % 2, (int32)(rotatedVect.Z + 1) % 2) * 0.5;
+		//return transMove;
+
+		auto transMove = FVector((int32)(size.X + 1) % 2, (int32)(size.Y + 1) % 2, (int32)(size.Z + 1) % 2) * 0.5;
+		auto rotatedVect = rotator.RotateVector(transMove);
+		return rotatedVect;
 	}
 
 
-	static FORCEINLINE FVector GetSpawnCoords(const FVector& localPosition, const FVector& size, const FRotator& rotator)
+	static  FVector GetSpawnCoords(const FVector& localPosition, const FVector& size, const FRotator& rotator)
 	{
-		auto rotatedVect = rotator.RotateVector(size);
-		auto transMove = FVector((int32)(rotatedVect.X + 1) % 2, (int32)(rotatedVect.Y + 1) % 2, (int32)(rotatedVect.Z + 1) % 2) * 0.5;
-		return GetWorldCoordinate(localPosition + transMove);
+		
+		return GetWorldCoordinate(localPosition + GetSpawnOffset(rotator, size));
 	}
 
 
-	static FORCEINLINE FTransform GetSpawnTransform(const FVector& localPosition, const FVector& size, const FRotator& rotator)
+	static  FTransform GetSpawnTransform(const FVector& localPosition, const FVector& size, const FRotator& rotator)
 	{
 		FTransform trans;
 		trans.SetScale3D(size);

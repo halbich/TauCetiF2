@@ -7,7 +7,7 @@
 #include "Helpers.h"
 
 
-const FVector UHelpers::WorldBorders(1000, 1000, 250);
+const FVector UHelpers::WorldBorders(100, 100, 30);
 const FVector UHelpers::WorldCenterMapping(UHelpers::WorldBorders.X / 2, UHelpers::WorldBorders.Y / 2, 0);
 const int32 UHelpers::CubeMinSize(20);
 

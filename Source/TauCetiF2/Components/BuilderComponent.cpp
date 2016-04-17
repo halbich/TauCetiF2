@@ -78,6 +78,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 		currentSpawnedObject->SetActorHiddenInGame(true);
 		currentSpawnedObject->SetActorTickEnabled(false);
 		selector->traceIgnoreActor = nullptr;
+		currentSpawnedObject = nullptr;
 
 	}
 	currentBlockInfo = blockInfo;

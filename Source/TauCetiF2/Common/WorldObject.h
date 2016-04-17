@@ -15,7 +15,9 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 {
 	GENERATED_UCLASS_BODY()
 
-		UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Enum)
+public:
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Enum)
 		EShapeType ShapeType;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldObject)
@@ -80,7 +82,7 @@ class TAUCETIF2_API AWorldObject : public AStaticMeshActor //ADestructibleActor
 				if (mi)
 				{
 					mi->SetScalarParameterValue(TEXT("Kx"), 1);
-					mi->SetScalarParameterValue(TEXT("Ky"),1);
+					mi->SetScalarParameterValue(TEXT("Ky"), 1);
 				}
 			}
 			sm->SetMaterial(i, mi);
