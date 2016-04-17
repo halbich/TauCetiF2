@@ -10,10 +10,7 @@ USaveGameCarrier::USaveGameCarrier() {
 	ContainsFullSaveData = false;
 	SaveLoaded = false;
 
-
 	SaveName = TEXT("Prázdná pozice");
-	//PlayedTime(0);
-
 
 }
 

@@ -11,7 +11,9 @@ FBlockDefinition::FBlockDefinition(uint32 id, EShapeType shapeType) :
 	ShapeType(shapeType),
 	AllowPitch(true),
 	AllowRoll(true),
-	AllowYaw(true)
+	AllowYaw(true),
+	MinBlockScale(FVector(1, 1, 1)),
+	MaxBlockScale(FVector(20, 20, 20))
 {
 
 }

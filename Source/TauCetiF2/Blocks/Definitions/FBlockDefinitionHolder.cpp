@@ -9,7 +9,6 @@ FBlockDefinitionHolder& FBlockDefinitionHolder::Instance()
 {
 
 	static	FBlockDefinitionHolder instance;
-
 	return instance;
 }
 
@@ -78,26 +77,6 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 		FBlockMaterialDefinition(EMaterialInstance::ConstructTriangle, EAxis::Type::None, EAxis::Type::None));
 
 	definitions.Add(constructCubeBody.ID, constructCubeBody);
-
-
-	/*
-
-	cube side
-
-	rectangle x z
-	rectangle body x y
-	rectangle x y
-	triangle z y
-	triangle y z
-
-
-	cube body
-	triangle z x
-	y z
-	x y
-	0 0wl
-
-	*/
 
 
 

@@ -18,22 +18,11 @@ ATerminalObject::ATerminalObject(const FObjectInitializer& ObjectInitializer)
 	//if (destructible.Succeeded())
 	//	dc->SetDestructibleMesh(destructible.Object);
 
-	auto mc = GetStaticMeshComponent();
-	if (!mc)
-		return;
-
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> mesh(TEXT("StaticMesh'/Game/BuildingObjects/Meshes/terminal.terminal'"));
 
-	if (mesh.Succeeded())
-	{
-		mc->SetStaticMesh(mesh.Object);
-		TranslucentSelectMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TranslucentMeshSelector"));
-		TranslucentSelectMesh->SetStaticMesh(mesh.Object);
-		TranslucentSelectMesh->SetRenderInMainPass(false);
-		TranslucentSelectMesh->Deactivate();
+	checkf(mesh.Succeeded(), TEXT("Failed to find mesh"));
 
-
-	}
+	constructorSetMeshes(mesh.Object);
 
 }
 
@@ -43,8 +32,6 @@ void  ATerminalObject::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(200);
-
-
 
 }
 

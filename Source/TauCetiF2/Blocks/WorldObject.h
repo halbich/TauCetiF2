@@ -49,7 +49,7 @@ public:
 
 
 
-	
+protected:
 
 
 	FORCEINLINE void setMaterial(UMaterial* material, int32 index, float scaleX, float scaleY) {
@@ -109,5 +109,15 @@ public:
 		setMaterial(material, index, scale.X, scale.Y);
 	}
 
+	FORCEINLINE void constructorSetMeshes(UStaticMesh* mesh)
+	{
+		auto mc = GetStaticMeshComponent();
+		checkf(mc, TEXT("Failed to find mesh component"));
 
+		mc->SetStaticMesh(mesh);
+		TranslucentSelectMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TranslucentMeshSelector"));
+		TranslucentSelectMesh->SetStaticMesh(mesh);
+		TranslucentSelectMesh->SetRenderInMainPass(false);
+		TranslucentSelectMesh->Deactivate();
+	}
 };

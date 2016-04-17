@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Blocks/Definitions/FBlockDefinition.h"
+#include "Blocks/Definitions/FBlockMaterialDefinition.h"
 
 /**
  *

@@ -14,6 +14,7 @@ public:
 	FString WildCard;
 	bool bFiles;
 	bool bDirectories;
+
 	FFileVisitor(TArray<FString>& InResult, const FString& InWildCard, bool bInFiles, bool bInDirectories)
 		: Result(InResult)
 		, WildCard(InWildCard)

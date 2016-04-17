@@ -14,7 +14,6 @@ class TAUCETIF2_API ACubeSideObject : public AWorldObject
 	GENERATED_UCLASS_BODY()
 
 public:
-	virtual void OnConstruction(const FTransform& Transform) override;
 
 
 

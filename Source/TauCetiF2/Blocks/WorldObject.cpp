@@ -13,8 +13,6 @@ AWorldObject::AWorldObject(const FObjectInitializer& ObjectInitializer)
 
 	WorldObjectComponent = CreateDefaultSubobject<UWorldObjectComponent>(TEXT("WorldObjectComponent"));
 	SelectTargetComponent = CreateDefaultSubobject<USelectTargetComponent>(TEXT("SelectTarget"));
-
-
 }
 
 
