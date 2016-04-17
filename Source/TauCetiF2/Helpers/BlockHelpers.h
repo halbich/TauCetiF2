@@ -82,12 +82,15 @@ public:
 
 		auto objectScale = GetCleaned(definition->GetObjectScale(blockInfo->Scale));
 		auto spawnCoord = GetSpawnCoords(blockInfo->Location, objectScale, blockInfo->Rotation);
-		auto scaleHalf = GetCleaned(blockInfo->Rotation.RotateVector(objectScale)) * GameDefinitions::CubeMinSize* 0.5;
+		auto scaleHalf = blockInfo->Rotation.RotateVector(objectScale) * GameDefinitions::CubeMinSize* 0.5;
 
 		print(*objectScale.ToString());
 		print(*spawnCoord.ToString());
 		print(*scaleHalf.ToString());
 
+		auto sp1 = spawnCoord - scaleHalf;
+
+		auto sp2 = spawnCoord + scaleHalf;
 		return NewObject<UMinMaxBox>()->InitBoxChecked(spawnCoord - scaleHalf, spawnCoord + scaleHalf);
 	}
 
