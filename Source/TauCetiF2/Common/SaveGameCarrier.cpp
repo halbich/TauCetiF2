@@ -110,6 +110,7 @@ void USaveGameCarrier::GetSaveForNewGame()
 	BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
 	BuildableBlocks[0]->IsEmptyHand = true;
 	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(4, 4, 4)));
+	BuildableBlocks.Add(makeBuildable(EBlockName::Terminal, FVector(1, 1, 1)));
 
 
 	//UsedBlocks.Add(make(EBlockName::BaseCube, FVector(1, 0, 5), FVector(1, 8, 5), FRotator::ZeroRotator));

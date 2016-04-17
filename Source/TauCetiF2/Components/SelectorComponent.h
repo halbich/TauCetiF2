@@ -86,7 +86,14 @@ private:
 			SelectedTarget->SelectTargetComponent->IsInUsableArea(owner);
 
 		if (oldVal != usableObjectTargeted)
+		{
+			if (usableObjectTargeted)
+				showOutline();
+			else
+				hideOutline();
+
 			OnUsableObjectTargetedChanged.Broadcast(usableObjectTargeted);
+		}
 	}
 
 	FORCEINLINE void showOutline()
@@ -124,7 +131,7 @@ private:
 		SelectedTarget = worldObj;
 
 
-		if (outliningEnabled)
+		if (outliningEnabled || usableObjectTargeted)
 			showOutline();
 
 		updateUsableObjectTarget();
