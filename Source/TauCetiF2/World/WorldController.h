@@ -9,6 +9,7 @@
 #include "Blocks/CubeBodyObject.h"
 #include "Blocks/TerminalObject.h"
 #include "MinMaxBox.h"
+#include "KDTree.h"
 #include "Blocks/FBlockDefinition.h"
 #include "Blocks/FBlockDefinitionHolder.h"
 
@@ -20,7 +21,6 @@ class TAUCETIF2_API AWorldController : public AActor
 	GENERATED_UCLASS_BODY()
 
 public:
-	~AWorldController();
 
 	UPROPERTY(BlueprintReadWrite, Category = WorldController)
 		TArray<UBlockInfo*> UsedBlocks;
@@ -37,14 +37,15 @@ public:
 
 	AWorldObject* SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot);
 
-	FORCEINLINE bool IsValidSpawnPoint(FTransform& transform)
+	FORCEINLINE bool IsValidSpawnPoint(const FTransform& transform)
 	{
-		FMinMaxBox box(transform);
+		UMinMaxBox* box = NewObject<UMinMaxBox>(this)->InitBox(transform);
 		return RootBox->IsPlaceEmpty(box);
 	}
 
+	UPROPERTY()
+		UKDTree* RootBox;
 private:
-	FMinMaxBox* RootBox;
 
 	UPROPERTY()
 		bool debugBoxesShown;

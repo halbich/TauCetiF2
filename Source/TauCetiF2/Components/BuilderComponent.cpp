@@ -93,7 +93,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!used)
 	{
 		print(TEXT("Item not used"));
-		UBlockInfo* info = NewObject<UBlockInfo>();
+		UBlockInfo* info = NewObject<UBlockInfo>(this);
 
 		auto cont = currentBlockInfo->ToBaseContainer();
 		info->FromBaseContainer(cont);

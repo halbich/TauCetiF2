@@ -15,19 +15,11 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	FVector min((minCube - 0.5 * FVector(1, 1, 1))* UHelpers::CubeMinSize);
 	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* UHelpers::CubeMinSize);
 
-	RootBox = new FMinMaxBox(min, max, 0);
-	RootBox->name = TEXT("ROOT");
+	RootBox = CreateDefaultSubobject<UKDTree>(TEXT("RootBox"));
+	RootBox->Init(min, max, 0);
 
 }
 
-AWorldController::~AWorldController() {
-
-	if (RootBox)
-	{
-		delete RootBox;
-		RootBox = nullptr;
-	}
-}
 
 
 void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
@@ -52,9 +44,9 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 	if (!block)
 		return nullptr;
 
-	check(RootBox != nullptr)
+	check(RootBox != nullptr);
 
-		auto definition = FBlockDefinitionHolder::Instance().GetDefinition(block->ID, false);
+	auto definition = FBlockDefinitionHolder::Instance().GetDefinition(block->ID, false);
 
 	if (!definition)
 	{
@@ -88,10 +80,10 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 
 	if (addToRoot) {
 
-		auto MinMax = FMinMaxBox::FromWorldObject(actor);
-		(&MinMax)->DEBUGDrawContainingBox(GetWorld());
+		auto MinMax = UKDTree::FromWorldObject(actor);
+		MinMax->DEBUGDrawContainingBox(GetWorld());
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
-		RootBox->AddToTree(&MinMax);
+		RootBox->AddToTree(MinMax);
 		//UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 	}
 

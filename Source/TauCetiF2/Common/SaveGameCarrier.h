@@ -141,19 +141,19 @@ public:
 		UsedBlocks.Empty();
 		for (auto usedBlock : usedBlocks)
 		{
-			auto newBlock = NewObject<UBlockInfo>();
+			auto newBlock = NewObject<UBlockInfo>(this);
 			newBlock->FromContainer(usedBlock);
 			UsedBlocks.Add(newBlock);
 		}
 
 
 		BuildableBlocks.Empty();
-		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>());
+		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
 		BuildableBlocks[0]->IsEmptyHand = true;
 
 		for (auto buildableBlock : buildableBlocks)
 		{
-			auto buildableBlockInfoBlock = NewObject<UBuildableBlockInfo>();
+			auto buildableBlockInfoBlock = NewObject<UBuildableBlockInfo>(this);
 			buildableBlockInfoBlock->FromContainer(buildableBlock);
 			BuildableBlocks.Add(buildableBlockInfoBlock);
 		}
@@ -166,7 +166,7 @@ public:
 		FRotator blockRotation
 
 		) {
-		auto ret = NewObject<UBlockInfo>();
+		auto ret = NewObject<UBlockInfo>(this);
 		ret->ID = id;
 		ret->Location = location;
 		ret->Scale = blockScale;
@@ -192,7 +192,7 @@ public:
 		EBlockName id,
 		FVector blockScale
 		) {
-		auto ret = NewObject<UBuildableBlockInfo>();
+		auto ret = NewObject<UBuildableBlockInfo>(this);
 		ret->ID = (int32)id;
 		ret->Scale = blockScale;
 

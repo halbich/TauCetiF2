@@ -110,7 +110,7 @@ void USaveGameCarrier::GetSaveForNewGame()
 	PartOfDay = 0.5f;
 
 
-	BuildableBlocks.Add(NewObject<UBuildableBlockInfo>());
+	BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
 	BuildableBlocks[0]->IsEmptyHand = true;
 	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(4, 4, 4)));
 
