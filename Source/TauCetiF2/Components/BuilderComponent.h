@@ -61,7 +61,7 @@ public:
 
 		check(currentBlockInfo != nullptr);
 
-		auto baseLocation = selector->ImpactPointWithSnap / UHelpers::CubeMinSize;
+		auto baseLocation = selector->ImpactPointWithSnap / GameDefinitions::CubeMinSize;
 		auto rotatedScale = currentBlockRotation.RotateVector(currentBlockInfo->Scale);
 		auto offset = selector->ImpactNormal * UHelpers::GetSpawnOffset(currentBlockRotation, currentBlockInfo->Scale);
 		auto normalAdd = selector->ImpactNormal * rotatedScale * 0.5 - offset;

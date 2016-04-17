@@ -60,9 +60,9 @@ private:
 		FVector dividingCoordVect = (Min + Max) * DividingCoord * 0.5;
 		DividingCoordValue = sum(dividingCoordVect);
 
-		if (((int32)FMath::Abs(sum((Max - Min) * DividingCoord)) / UHelpers::CubeMinSize) % 2 == 1)
+		if (((int32)FMath::Abs(sum((Max - Min) * DividingCoord)) / GameDefinitions::CubeMinSize) % 2 == 1)
 		{
-			DividingCoordValue += UHelpers::CubeMinSize / 2.0f;
+			DividingCoordValue += GameDefinitions::CubeMinSize / 2.0f;
 		}
 	}
 

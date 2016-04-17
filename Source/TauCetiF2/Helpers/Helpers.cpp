@@ -7,9 +7,7 @@
 #include "Helpers.h"
 
 
-const FVector UHelpers::WorldBorders(500, 500, 200);
-const FVector UHelpers::WorldCenterMapping(UHelpers::WorldBorders.X / 2, UHelpers::WorldBorders.Y / 2, 0);
-const int32 UHelpers::CubeMinSize(20);
+
 
 
 TArray<FString> UHelpers::GetAllSaveGameSlots()

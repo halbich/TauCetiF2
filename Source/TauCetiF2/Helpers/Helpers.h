@@ -22,9 +22,7 @@ class TAUCETIF2_API UHelpers : public UObject
 
 public:
 
-	static const FVector WorldBorders;
-	static const FVector WorldCenterMapping;
-	static const int32 CubeMinSize;
+	
 
 
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
@@ -100,16 +98,12 @@ public:
 		return name.Len() > 0 ? GetMaterialByName(*name) : nullptr;
 	}
 
-	static FORCEINLINE FVector BorderToWorld(const FVector& border)
-	{
-		return border - WorldCenterMapping;
-
-	}
+	
 
 public:
 	static FORCEINLINE FVector GetWorldCoordinate(const FVector& vect)
 	{
-		return FVector(vect) * CubeMinSize;
+		return FVector(vect) * GameDefinitions::CubeMinSize;
 	}
 
 	static FORCEINLINE FVector GetSpawnOffset(const FRotator& rotator, const FVector& size)

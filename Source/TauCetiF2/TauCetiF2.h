@@ -7,6 +7,7 @@
 
 #include "Engine.h"
 #include "Common/Enums.h"
+#include "Game/GameDefinitions.h"
 #include "Helpers/Helpers.h"
 #include "Helpers/Saving/ArchiveHelpers.h"
 

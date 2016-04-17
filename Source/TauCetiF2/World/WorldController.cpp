@@ -8,12 +8,12 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 
-	auto minCube = UHelpers::BorderToWorld(FVector(0, 0, 0));
-	auto maxCube = UHelpers::BorderToWorld(UHelpers::WorldBorders);
+	auto minCube = WorldHelpers::BorderToWorld(FVector(0, 0, 0));
+	auto maxCube = WorldHelpers::BorderToWorld(GameDefinitions::WorldBorders);
 
 
-	FVector min((minCube - 0.5 * FVector(1, 1, 1))* UHelpers::CubeMinSize);
-	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* UHelpers::CubeMinSize);
+	FVector min((minCube - 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
+	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
 
 	RootBox = CreateDefaultSubobject<UKDTree>(TEXT("RootBox"));
 	RootBox->Init(min, max, 0);
@@ -54,7 +54,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 		return nullptr;
 	}
 
-	auto classBP = GetClassByShape(*definition);
+	auto classBP = BlockHelpers::GetClassByShape(*definition);
 
 	ensure(classBP != nullptr);
 

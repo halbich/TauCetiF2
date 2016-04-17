@@ -39,7 +39,7 @@ public:
 
 	static FORCEINLINE void GetBoundingBox(const FTransform& transform, FVector& min, FVector& max) {
 		auto location = transform.GetLocation();
-		auto scale = transform.GetRotation().RotateVector(transform.GetScale3D() * UHelpers::CubeMinSize * 0.5);
+		auto scale = transform.GetRotation().RotateVector(transform.GetScale3D() * GameDefinitions::CubeMinSize * 0.5);
 
 		auto tmin = location - scale;
 		auto tmax = location + scale;

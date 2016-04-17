@@ -82,7 +82,7 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 
 
 
-	int32 cubeSize = UHelpers::CubeMinSize;
+	int32 cubeSize = GameDefinitions::CubeMinSize;
 
 	ImpactPoint = result.ImpactPoint;
 	ImpactNormal = result.ImpactNormal;
