@@ -76,9 +76,5 @@ void AWorldObject::BeginPlay() {
 
 }
 
-void AWorldObject::GetBoundingBox(FVector& min, FVector& max) {
-
-	GetBoundingBox(GetTransform(), min, max);
-}
 
 

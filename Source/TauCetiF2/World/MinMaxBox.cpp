@@ -17,12 +17,10 @@ UMinMaxBox* UMinMaxBox::InitBox(FVector min, FVector max)
 	return this;
 }
 
-UMinMaxBox* UMinMaxBox::InitBox(const FTransform& transform)
+UMinMaxBox* UMinMaxBox::InitBoxChecked(FVector min, FVector max)
 {
-	AWorldObject::GetBoundingBox(transform, Min, Max);
-
-	ensure(Min.X <= Max.X);
-	ensure(Min.Y <= Max.Y);
-	ensure(Min.Z <= Max.Z);
-	return this;
+	min = FVector(FMath::Min(min.X, max.X), FMath::Min(min.Y, max.Y), FMath::Min(min.Z, max.Z));
+	max = FVector(FMath::Max(min.X, max.X), FMath::Max(min.Y, max.Y), FMath::Max(min.Z, max.Z));
+	return InitBox(min, max);
 }
+

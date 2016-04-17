@@ -35,12 +35,3 @@ void  ATerminalObject::OnConstruction(const FTransform& Transform) {
 
 }
 
-void ATerminalObject::GetBoundingBox(FVector& min, FVector& max) {
-	
-	FTransform trans;
-	trans.SetLocation(GetActorLocation());
-	trans.SetScale3D(FVector(1, 8, 5));
-	trans.SetRotation(FQuat(GetActorRotation()));
-	AWorldObject::GetBoundingBox(trans, min, max);
-
-}

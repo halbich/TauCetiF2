@@ -35,19 +35,6 @@ public:
 
 	virtual void BeginPlay() override;
 
-	virtual void GetBoundingBox(FVector& min, FVector& max);
-
-	static FORCEINLINE void GetBoundingBox(const FTransform& transform, FVector& min, FVector& max) {
-		auto location = transform.GetLocation();
-		auto scale = transform.GetRotation().RotateVector(transform.GetScale3D() * GameDefinitions::CubeMinSize * 0.5);
-
-		auto tmin = location - scale;
-		auto tmax = location + scale;
-		min = FVector(FMath::Min(tmin.X, tmax.X), FMath::Min(tmin.Y, tmax.Y), FMath::Min(tmin.Z, tmax.Z));
-		max = FVector(FMath::Max(tmin.X, tmax.X), FMath::Max(tmin.Y, tmax.Y), FMath::Max(tmin.Z, tmax.Z));
-	}
-
-
 
 protected:
 

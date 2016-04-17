@@ -63,7 +63,7 @@ public:
 
 		auto baseLocation = selector->ImpactPointWithSnap / GameDefinitions::CubeMinSize;
 		auto rotatedScale = currentBlockRotation.RotateVector(currentBlockInfo->Scale);
-		auto offset = selector->ImpactNormal * UHelpers::GetSpawnOffset(currentBlockRotation, currentBlockInfo->Scale);
+		auto offset = selector->ImpactNormal;// *UHelpers::GetSpawnOffset(currentBlockRotation, currentBlockInfo->Scale);
 		auto normalAdd = selector->ImpactNormal * rotatedScale * 0.5 - offset;
 		auto normA = FVector(FMath::FloorToInt(normalAdd.X), FMath::FloorToInt(normalAdd.Y), FMath::FloorToInt(normalAdd.Z));
 		auto result = baseLocation + normA;

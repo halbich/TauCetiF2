@@ -18,7 +18,7 @@ class TAUCETIF2_API UMinMaxBox : public UObject
 public:
 
 	UMinMaxBox* InitBox(FVector min, FVector max);
-	UMinMaxBox* InitBox(const FTransform& transform);
+	UMinMaxBox* InitBoxChecked(FVector min, FVector max);
 
 	UPROPERTY()
 		FVector Min;

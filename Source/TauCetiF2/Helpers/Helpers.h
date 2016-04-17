@@ -100,32 +100,6 @@ public:
 
 	
 
-public:
-	static FORCEINLINE FVector GetWorldCoordinate(const FVector& vect)
-	{
-		return FVector(vect) * GameDefinitions::CubeMinSize;
-	}
 
-	static FORCEINLINE FVector GetSpawnOffset(const FRotator& rotator, const FVector& size)
-	{
-		auto transMove = FVector((int32)(size.X + 1) % 2, (int32)(size.Y + 1) % 2, (int32)(size.Z + 1) % 2) * 0.5;
-		auto rotatedVect = rotator.RotateVector(transMove);
-		return rotatedVect;
-	}
-
-	static FORCEINLINE FVector GetSpawnCoords(const FVector& localPosition, const FVector& size, const FRotator& rotator)
-	{
-		return GetWorldCoordinate(localPosition + GetSpawnOffset(rotator, size));
-	}
-
-public:
-	static FORCEINLINE FTransform GetSpawnTransform(const FBlockDefinition* definition, const FVector& localPosition, const FVector& size, const FRotator& rotator)
-	{
-		FTransform trans;
-		trans.SetScale3D(definition->HasCustomScaling ? definition->MeshScale : size);
-		trans.SetLocation(GetSpawnCoords(localPosition, definition->HasCustomScaling ? definition->WorldObjectScale : size, rotator));
-		trans.SetRotation(FQuat(rotator));
-		return trans;
-	}
 
 };

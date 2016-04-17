@@ -21,10 +21,12 @@ public:
 	bool AllowRoll;
 	bool AllowYaw;
 
+private:
 	bool HasCustomScaling;
 	FVector MeshScale;
 	FVector WorldObjectScale;
 
+public:
 	FVector MinBlockScale;
 	FVector MaxBlockScale;
 
@@ -38,6 +40,16 @@ public:
 		HasCustomScaling = true;
 		MeshScale = meshScale;
 		WorldObjectScale = worldObjectScale;
+	}
+
+	FORCEINLINE FVector GetMeshScale(const FVector& inScale) const
+	{
+		return FVector(HasCustomScaling ? MeshScale : inScale);
+	}
+
+	FVector GetObjectScale(const FVector& inScale) const
+	{
+		return FVector(HasCustomScaling ? WorldObjectScale : inScale);
 	}
 };
 

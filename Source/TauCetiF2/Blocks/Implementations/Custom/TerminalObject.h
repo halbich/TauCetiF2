@@ -16,5 +16,4 @@ class TAUCETIF2_API ATerminalObject : public AWorldObject
 public:
 	virtual void OnConstruction(const FTransform& Transform) override;
 
-	virtual void GetBoundingBox(FVector& min, FVector& max) override;
 };

@@ -19,7 +19,7 @@ class TAUCETIF2_API UKDTree : public UMinMaxBox
 public:
 
 	UKDTree* Init(FVector min, FVector max, int8 dividingIndex);
-	UKDTree* Init(FTransform& transform);
+	UKDTree* Init(UMinMaxBox* box);
 
 
 	UPROPERTY()

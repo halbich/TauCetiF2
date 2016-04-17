@@ -35,9 +35,8 @@ public:
 
 	AWorldObject* SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot);
 
-	FORCEINLINE bool IsValidSpawnPoint(const FTransform& transform)
+	FORCEINLINE bool IsValidSpawnPoint(const UMinMaxBox* box)
 	{
-		UMinMaxBox* box = NewObject<UMinMaxBox>(this)->InitBox(transform);
 		return RootBox->IsPlaceEmpty(box);
 	}
 

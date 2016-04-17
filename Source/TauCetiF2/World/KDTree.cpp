@@ -16,11 +16,10 @@ UKDTree* UKDTree::Init(FVector min, FVector max, int8 dividingIndex)
 	return this;
 }
 
-UKDTree* UKDTree::Init(FTransform& transform)
+UKDTree* UKDTree::Init(UMinMaxBox* box)
 {
-	InitBox(transform);
-	recomputeDividingCoordValue();
-	return this;
+	ensure(box != nullptr);
+	return Init(box->Min, box->Max, 0);
 }
 
 
@@ -112,7 +111,11 @@ void UKDTree::DEBUGDrawContainingBox(UWorld* world)
 
 
 	if (containingObject)
-		DrawDebugBox(world, center, Max - center, FColor::White, true);
+	{
+		auto bcenter = (Max + Min) * 0.5;
+		auto bextend = (Max - bcenter);
+		DrawDebugBox(world, bcenter, bextend, FColor::White, true);
+	}
 
 	if (SingleChild)
 	{

@@ -54,19 +54,29 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 		return nullptr;
 	}
 
-	auto classBP = BlockHelpers::GetClassByShape(*definition);
-
-	ensure(classBP != nullptr);
-
-
-	auto trans = UHelpers::GetSpawnTransform(definition, block->Location, block->Scale, block->Rotation);
-	if (!IsValidSpawnPoint(trans))
+	FString invalidReason;
+	bool isValid = BlockHelpers::CheckBlockValidity(definition, block, invalidReason);
+	if (!isValid)
 	{
-		UE_LOG(LogTemp, Error, TEXT("Objekt nelze korektnì pøidat do stromu. Vynechávám."));
-		IsValidSpawnPoint(trans);
+		UE_LOG(LogTemp, Error, TEXT("Blok není validní. Dùvod: %s. nechávám"), *invalidReason);
 		return nullptr;
 	}
 
+	
+
+	UMinMaxBox* box = BlockHelpers::GetSpawnBox(definition, block);
+	ensure(box != nullptr);
+	if (!IsValidSpawnPoint(box))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Objekt nelze korektnì pøidat do stromu. Vynechávám."));
+		return nullptr;
+	}
+
+	auto classBP = BlockHelpers::GetClassByShape(definition);
+
+	ensure(classBP != nullptr);
+
+	auto trans = BlockHelpers::GetSpawnTransform(definition, block);
 	auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans);
 
 	if (!actor)
@@ -80,7 +90,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 
 	if (addToRoot) {
 
-		auto MinMax = NewObject<UKDTree>()->Init(trans);
+		auto MinMax = NewObject<UKDTree>()->Init(box);
 		MinMax->containingObject = actor;
 		MinMax->DEBUGDrawContainingBox(GetWorld());
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
