@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "Helpers/Helpers.h"
 
 class TAUCETIF2_API FBlockMaterialDefinition
 {
@@ -72,10 +71,20 @@ public:
 	bool AllowRoll;
 	bool AllowYaw;
 
+	bool HasCustomScaling;
+	FVector MeshScale;
+	FVector WorldObjectScale;
+
 	TArray<FBlockMaterialDefinition> UsedMaterials;
 
 
 	void AddMaterials(int8 n, ...);
 
+	FORCEINLINE void SetCustomScale(FVector meshScale, FVector worldObjectScale)
+	{
+		HasCustomScaling = true;
+		MeshScale = meshScale;
+		WorldObjectScale = worldObjectScale;
+	}
 };
 

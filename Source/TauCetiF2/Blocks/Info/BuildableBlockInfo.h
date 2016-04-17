@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Object.h"
-#include "Blocks/BlockBaseInfo.h"
+#include "Blocks/Info/BlockBaseInfo.h"
 #include "BuildableBlockInfo.generated.h"
 
 /**

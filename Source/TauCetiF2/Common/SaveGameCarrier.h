@@ -5,12 +5,12 @@
 #include "Object.h"
 #include "Helpers/Saving/ArchiveHelpers.h"
 #include "Helpers/Saving/BlockSaveInfo.h"
-#include "Blocks/BlockInfo.h"
-#include "Game/Inventory/BuildableBlockInfo.h"
+#include "Blocks/Info/BlockInfo.h"
+#include "Blocks/Info/BuildableBlockInfo.h"
 #include "SaveGameCarrier.generated.h"
 
 /**
- *
+ * Carrier for saving / loading game
  */
 UCLASS(BlueprintType, Transient)
 class TAUCETIF2_API USaveGameCarrier : public UObject

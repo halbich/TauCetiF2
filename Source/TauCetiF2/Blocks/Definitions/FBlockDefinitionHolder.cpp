@@ -95,7 +95,7 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	triangle z x
 	y z
 	x y
-	0 0
+	0 0wl
 
 	*/
 
@@ -105,6 +105,7 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	terminal.AddMaterials(2,
 		FBlockMaterialDefinition(EMaterialInstance::TerminalBase, EAxis::Type::X, EAxis::Type::X),
 		FBlockMaterialDefinition(EMaterialInstance::TerminalScreen, EAxis::Type::X, EAxis::Type::X, true));
+	terminal.SetCustomScale(FVector(1, 1, 1), FVector(1, 8, 5));
 
 	definitions.Add(terminal.ID, terminal);
 

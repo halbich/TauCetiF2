@@ -59,7 +59,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 	ensure(classBP != nullptr);
 
 
-	auto trans = UHelpers::GetSpawnTransform(block->Location, block->Scale, block->Rotation);
+	auto trans = UHelpers::GetSpawnTransform(definition, block->Location, block->Scale, block->Rotation);
 	if (!IsValidSpawnPoint(trans))
 	{
 		UE_LOG(LogTemp, Error, TEXT("Objekt nelze korektnì pøidat do stromu. Vynechávám."));
@@ -80,11 +80,11 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 
 	if (addToRoot) {
 
-		auto MinMax = UKDTree::FromWorldObject(actor);
+		auto MinMax = NewObject<UKDTree>()->Init(trans);
+		MinMax->containingObject = actor;
 		MinMax->DEBUGDrawContainingBox(GetWorld());
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 		RootBox->AddToTree(MinMax);
-		//UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 	}
 
 	UGameplayStatics::FinishSpawningActor(actor, trans);

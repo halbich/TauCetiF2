@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Blocks/FBlockDefinition.h"
+#include "Blocks/Definitions/FBlockDefinition.h"
 
 /**
  *

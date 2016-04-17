@@ -4,17 +4,26 @@
 
 
 // Help class to save / load data as saveGame
+
+/*
+ Base info for blocks, used to load / save to save game
+*/
 struct TAUCETIF2_API FBlockBaseInfo {
 
 	uint32 ID;
 	FVector Scale;
 	FString Name;
 
+	/*
+		Default constructor with 0 ID, Zero scale and empty name
+	*/
 	FBlockBaseInfo() : ID(0), Scale(FVector::ZeroVector), Name(TEXT("")) {};
 
 };
 
-// Help class to save / load data as saveGame
+/*
+	Info for blocks with block location and rotation, used to load / save to save game
+*/
 struct TAUCETIF2_API FBlockInfo : FBlockBaseInfo
 {
 
@@ -22,10 +31,12 @@ struct TAUCETIF2_API FBlockInfo : FBlockBaseInfo
 	FRotator Rotation;
 
 	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator) {};
-
 	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator) {};
 };
 
+/*
+	Info about blocks which can be built by player
+*/
 struct TAUCETIF2_API FInventoryBuildableBlockInfo : FBlockBaseInfo
 {
 

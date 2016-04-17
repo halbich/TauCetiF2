@@ -30,7 +30,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!currentSpawnedObject || !selector || !selector->IsValidLowLevelFast())
+	/*if (!currentSpawnedObject || !selector || !selector->IsValidLowLevelFast())
 		return;
 
 	if (!selector->SelectedActor)
@@ -54,13 +54,13 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	if (newSpawnPoint == currentValidSpawnPoint)
 		return;
 
-	auto trans = UHelpers::GetSpawnTransform(GetSpawnPoint(), currentBlockInfo->Scale, currentBlockRotation);
+	auto trans = UHelpers::GetSpawnTransform(FBlockDefinitionHolder::Instance().GetDefinition(currentBlockInfo->ID), GetSpawnPoint(), currentBlockInfo->Scale, currentBlockRotation);
 	if (!worldController->IsValidSpawnPoint(trans))
 		return;
 
 	currentValidSpawnPoint = newSpawnPoint;
 
-	currentSpawnedObject->SetActorLocation(UHelpers::GetSpawnCoords(currentValidSpawnPoint, currentBlockInfo->Scale, currentBlockRotation));
+	currentSpawnedObject->SetActorTransform(trans);*/
 }
 
 
@@ -70,57 +70,57 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!blockInfo || !blockInfo->IsValidLowLevel())
 		return;
 
-	if (!selector || !selector->IsValidLowLevel() || !worldController || !worldController->IsValidLowLevel())
-		return;
+	//if (!selector || !selector->IsValidLowLevel() || !worldController || !worldController->IsValidLowLevel())
+	//	return;
 
-	if (currentSpawnedObject)
-	{
-		currentSpawnedObject->SetActorHiddenInGame(true);
-		currentSpawnedObject->SetActorTickEnabled(false);
-		selector->traceIgnoreActor = nullptr;
-		currentSpawnedObject = nullptr;
+	//if (currentSpawnedObject)
+	//{
+	//	currentSpawnedObject->SetActorHiddenInGame(true);
+	//	currentSpawnedObject->SetActorTickEnabled(false);
+	//	selector->traceIgnoreActor = nullptr;
+	//	currentSpawnedObject = nullptr;
 
-	}
-	currentBlockInfo = blockInfo;
-
-
-	if (currentBlockInfo->IsEmptyHand)
-		return;
-
-	print(TEXT("doing something"));
-
-	auto used = usedObjects.FindRef(currentBlockInfo);
-	if (!used)
-	{
-		print(TEXT("Item not used"));
-		UBlockInfo* info = NewObject<UBlockInfo>(this);
-
-		auto cont = currentBlockInfo->ToBaseContainer();
-		info->FromBaseContainer(cont);
-		info->Location = GetSpawnPoint();					//TODO
-		info->Rotation = currentBlockRotation;
-		info->UnderConstruction = true;
-
-		auto spawnActor = worldController->SpawnWorldObject(World, info, false);
-		if (!spawnActor)
-			return;
+	//}
+	//currentBlockInfo = blockInfo;
 
 
-		spawnActor->SetActorEnableCollision(false);
-		currentValidSpawnPoint = info->Location;
-		usedObjects.Add(currentBlockInfo, spawnActor);
-		currentSpawnedObject = spawnActor;
-		selector->traceIgnoreActor = currentSpawnedObject;
-		return;
-	}
+	//if (currentBlockInfo->IsEmptyHand)
+	//	return;
 
-	used->SetActorHiddenInGame(false);
-	used->SetActorTickEnabled(true);
+	//print(TEXT("doing something"));
 
-	used->SetActorLocationAndRotation(UHelpers::GetSpawnCoords(GetSpawnPoint(), currentBlockInfo->Scale, currentBlockRotation), FQuat(currentBlockRotation));
+	//auto used = usedObjects.FindRef(currentBlockInfo);
+	//if (!used)
+	//{
+	//	print(TEXT("Item not used"));
+	//	UBlockInfo* info = NewObject<UBlockInfo>(this);
 
-	currentSpawnedObject = used;
-	selector->traceIgnoreActor = currentSpawnedObject;
+	//	auto cont = currentBlockInfo->ToBaseContainer();
+	//	info->FromBaseContainer(cont);
+	//	info->Location = GetSpawnPoint();					//TODO
+	//	info->Rotation = currentBlockRotation;
+	//	info->UnderConstruction = true;
+
+	//	auto spawnActor = worldController->SpawnWorldObject(World, info, false);
+	//	if (!spawnActor)
+	//		return;
+
+
+	//	spawnActor->SetActorEnableCollision(false);
+	//	currentValidSpawnPoint = info->Location;
+	//	usedObjects.Add(currentBlockInfo, spawnActor);
+	//	currentSpawnedObject = spawnActor;
+	//	selector->traceIgnoreActor = currentSpawnedObject;
+	//	return;
+	//}
+
+	//used->SetActorHiddenInGame(false);
+	//used->SetActorTickEnabled(true);
+
+	//used->SetActorLocationAndRotation(UHelpers::GetSpawnCoords(GetSpawnPoint(), currentBlockInfo->Scale, currentBlockRotation), FQuat(currentBlockRotation));
+
+	//currentSpawnedObject = used;
+	//selector->traceIgnoreActor = currentSpawnedObject;
 
 
 }

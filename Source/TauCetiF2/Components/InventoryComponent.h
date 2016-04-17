@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "Game/Inventory/BuildableBlockInfo.h"
+#include "Blocks/Info/BuildableBlockInfo.h"
 #include "InventoryComponent.generated.h"
 
 

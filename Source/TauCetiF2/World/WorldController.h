@@ -3,15 +3,15 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Common/WorldObject.h"
-#include "Blocks/CubeObject.h"
-#include "Blocks/CubeSideObject.h"
-#include "Blocks/CubeBodyObject.h"
-#include "Blocks/TerminalObject.h"
+#include "Blocks/WorldObject.h"
+#include "Blocks/Implementations/BaseShapes/CubeObject.h"
+#include "Blocks/Implementations/BaseShapes/CubeSideObject.h"
+#include "Blocks/Implementations/BaseShapes/CubeBodyObject.h"
+#include "Blocks/Implementations/Custom/TerminalObject.h"
 #include "MinMaxBox.h"
 #include "KDTree.h"
-#include "Blocks/FBlockDefinition.h"
-#include "Blocks/FBlockDefinitionHolder.h"
+#include "Blocks/Definitions/FBlockDefinition.h"
+#include "Blocks/Definitions/FBlockDefinitionHolder.h"
 
 #include "WorldController.generated.h"
 

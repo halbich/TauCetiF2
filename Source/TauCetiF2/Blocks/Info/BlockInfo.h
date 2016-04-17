@@ -3,14 +3,14 @@
 #pragma once
 
 #include "Helpers/Saving/BlockSaveInfo.h"
-#include "Blocks/BlockBaseInfo.h"
+#include "Blocks/Info/BlockBaseInfo.h"
 #include "BlockInfo.generated.h"
 
 
 
 
-/**
- *
+/*
+ *	Block info with Location and Scale, used in game. For saving see FBlockInfo
  */
 UCLASS(BlueprintType)
 class TAUCETIF2_API UBlockInfo : public UBlockBaseInfo
@@ -37,7 +37,7 @@ public:
 		return result;
 	}
 
-	FORCEINLINE void FromContainer(FBlockInfo& block) {
+	FORCEINLINE void FromContainer(const FBlockInfo& block) {
 
 		FromBaseContainer(block);
 		Location = block.Location;

@@ -2,7 +2,7 @@
 #pragma once
 
 #include "Common/Enums.h"
-#include "Common/WorldObject.h"
+#include "Blocks/WorldObject.h"
 #include "CubeObject.generated.h"
 
 /**

@@ -2,8 +2,8 @@
 
 #include "TauCetiF2.h"
 #include "WorldObject.h"
-#include "Blocks/FBlockDefinition.h"
-#include "Blocks/FBlockDefinitionHolder.h"
+#include "Blocks/Definitions/FBlockDefinition.h"
+#include "Blocks/Definitions/FBlockDefinitionHolder.h"
 
 
 AWorldObject::AWorldObject(const FObjectInitializer& ObjectInitializer)
@@ -24,10 +24,7 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 
 	SelectTargetComponent->RegisterTargetPrimitiveComponent(GetStaticMeshComponent());
 
-	if (WorldObjectComponent == nullptr || WorldObjectComponent->BlockInfo == nullptr)
-		return;
-
-	//TODO assert
+	check(WorldObjectComponent != nullptr && WorldObjectComponent->BlockInfo != nullptr);
 
 
 	auto definition = FBlockDefinitionHolder::Instance().GetDefinition(WorldObjectComponent->BlockInfo->ID);

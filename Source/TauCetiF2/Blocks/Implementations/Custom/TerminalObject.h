@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Common/WorldObject.h"
+#include "Blocks/WorldObject.h"
 #include "TerminalObject.generated.h"
 
 /**

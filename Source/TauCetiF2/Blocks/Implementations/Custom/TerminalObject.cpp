@@ -2,8 +2,8 @@
 
 #include "TauCetiF2.h"
 #include "TerminalObject.h"
-#include "Blocks/FBlockDefinition.h"
-#include "Blocks/FBlockDefinitionHolder.h"
+#include "Blocks/Definitions/FBlockDefinition.h"
+#include "Blocks/Definitions/FBlockDefinitionHolder.h"
 
 
 ATerminalObject::ATerminalObject(const FObjectInitializer& ObjectInitializer)

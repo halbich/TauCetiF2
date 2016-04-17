@@ -4,7 +4,7 @@
 
 #include "Object.h"
 #include "Helpers/Helpers.h"
-#include "Common/WorldObject.h"
+#include "Blocks/WorldObject.h"
 #include "MinMaxBox.generated.h"
 
 /**

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "Blocks/BlockInfo.h"
+#include "Blocks/Info/BlockInfo.h"
 #include "WorldObjectComponent.generated.h"
 
 

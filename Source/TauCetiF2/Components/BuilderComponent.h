@@ -4,9 +4,10 @@
 
 #include "Components/ActorComponent.h"
 #include "Components/SelectorComponent.h"
-#include "Game/Inventory/BuildableBlockInfo.h"
+#include "Blocks/Info/BuildableBlockInfo.h"
 #include "World/WorldController.h"
-#include "Common/WorldObject.h"
+#include "Blocks/WorldObject.h"
+#include "Blocks/Definitions/FBlockDefinitionHolder.h"
 #include "BuilderComponent.generated.h"
 
 
@@ -38,6 +39,7 @@ public:
 	UPROPERTY()
 		AWorldObject* currentSpawnedObject;
 
+
 	UPROPERTY()
 		TMap<UBuildableBlockInfo*, AWorldObject*> usedObjects;
 
@@ -66,13 +68,6 @@ public:
 		auto normA = FVector(FMath::FloorToInt(normalAdd.X), FMath::FloorToInt(normalAdd.Y), FMath::FloorToInt(normalAdd.Z));
 		auto result = baseLocation + normA;
 
-		/*print(*result.ToString());
-		print(*normA.ToString());
-		print(*normalAdd.ToString());
-		print(*offset.ToString());
-		print(*rotatedScale.ToString());
-		print(*baseLocation.ToString());*/
-
 		return result;
 
 	}
@@ -83,7 +78,7 @@ public:
 		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel() || !currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
 			return;
 
-		if (currentBlockInfo->IsEmptyHand)
+		/*if (currentBlockInfo->IsEmptyHand)
 		{
 
 			return;
@@ -101,7 +96,7 @@ public:
 		spawnBlock->Rotation = currentBlockRotation;
 		spawnBlock->UnderConstruction = false;
 
-		worldController->SpawnWorldObject(World, spawnBlock, true);
+		worldController->SpawnWorldObject(World, spawnBlock, true);*/
 
 	}
 

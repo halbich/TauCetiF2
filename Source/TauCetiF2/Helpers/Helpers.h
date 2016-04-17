@@ -8,6 +8,7 @@
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 #include "Runtime/UMG/Public/Components/Widget.h"
 #include "Runtime/UMG/Public/Components/Image.h"
+#include "Blocks/Definitions/FBlockDefinition.h"
 
 #include "Helpers.generated.h"
 
@@ -99,42 +100,36 @@ public:
 		return name.Len() > 0 ? GetMaterialByName(*name) : nullptr;
 	}
 
-	static  FVector GetWorldCoordinate(const FVector& vect)
-	{
-		return FVector(vect) * CubeMinSize;
-	}
-
-
 	static FORCEINLINE FVector BorderToWorld(const FVector& border)
 	{
 		return border - WorldCenterMapping;
 
 	}
 
-	static  FVector GetSpawnOffset(const FRotator& rotator, const FVector& size)
+public:
+	static FORCEINLINE FVector GetWorldCoordinate(const FVector& vect)
 	{
-		//auto rotatedVect = rotator.RotateVector(size);
-		//auto transMove = FVector((int32)(rotatedVect.X + 1) % 2, (int32)(rotatedVect.Y + 1) % 2, (int32)(rotatedVect.Z + 1) % 2) * 0.5;
-		//return transMove;
+		return FVector(vect) * CubeMinSize;
+	}
 
+	static FORCEINLINE FVector GetSpawnOffset(const FRotator& rotator, const FVector& size)
+	{
 		auto transMove = FVector((int32)(size.X + 1) % 2, (int32)(size.Y + 1) % 2, (int32)(size.Z + 1) % 2) * 0.5;
 		auto rotatedVect = rotator.RotateVector(transMove);
 		return rotatedVect;
 	}
 
-
-	static  FVector GetSpawnCoords(const FVector& localPosition, const FVector& size, const FRotator& rotator)
+	static FORCEINLINE FVector GetSpawnCoords(const FVector& localPosition, const FVector& size, const FRotator& rotator)
 	{
-		
 		return GetWorldCoordinate(localPosition + GetSpawnOffset(rotator, size));
 	}
 
-
-	static  FTransform GetSpawnTransform(const FVector& localPosition, const FVector& size, const FRotator& rotator)
+public:
+	static FORCEINLINE FTransform GetSpawnTransform(const FBlockDefinition* definition, const FVector& localPosition, const FVector& size, const FRotator& rotator)
 	{
 		FTransform trans;
-		trans.SetScale3D(size);
-		trans.SetLocation(GetSpawnCoords(localPosition, size, rotator));
+		trans.SetScale3D(definition->HasCustomScaling ? definition->MeshScale : size);
+		trans.SetLocation(GetSpawnCoords(localPosition, definition->HasCustomScaling ? definition->WorldObjectScale : size, rotator));
 		trans.SetRotation(FQuat(rotator));
 		return trans;
 	}

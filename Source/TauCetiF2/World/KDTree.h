@@ -4,7 +4,7 @@
 
 #include "Object.h"
 #include "MinMaxBox.h"
-#include "Common/WorldObject.h"
+#include "Blocks/WorldObject.h"
 #include "Helpers/Helpers.h"
 #include "KDTree.generated.h"
 
@@ -47,18 +47,6 @@ public:
 
 	void AddToTree(UKDTree* box, bool forceInsert = false);
 	bool IsPlaceEmpty(const UMinMaxBox* box);
-
-
-	static UKDTree* FromWorldObject(AWorldObject* object) {
-		
-		FVector min;
-		FVector max;
-		object->GetBoundingBox(min, max);
-
-		auto ret = NewObject<UKDTree>()->Init(min, max, 0);
-		ret->containingObject = object;
-		return ret;
-	}
 
 private:
 

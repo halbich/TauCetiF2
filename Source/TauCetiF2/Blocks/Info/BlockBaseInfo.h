@@ -6,8 +6,8 @@
 #include "Helpers/Saving/BlockSaveInfo.h"
 #include "BlockBaseInfo.generated.h"
 
-/**
- *
+/*
+ *	Base info about block, used in game. (Not used for saving, see FBlockBaseInfo)
  */
 UCLASS(BlueprintType)
 class TAUCETIF2_API UBlockBaseInfo : public UObject
@@ -33,10 +33,11 @@ public:
 	}
 
 
-	FORCEINLINE void FromBaseContainer(FBlockBaseInfo& block) {
+	FORCEINLINE void FromBaseContainer(const FBlockBaseInfo& block) {
 		ID = block.ID;
 		Scale = block.Scale;
 		Name = block.Name;
 	}
+
 
 };
