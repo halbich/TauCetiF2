@@ -49,10 +49,11 @@ void  ATerminalObject::OnConstruction(const FTransform& Transform) {
 }
 
 void ATerminalObject::GetBoundingBox(FVector& min, FVector& max) {
-	auto location = GetActorLocation();
-	auto scale = GetActorRotation().RotateVector(FVector(2,16,10) * 5);
-
-	min = location - scale;
-	max = location + scale;
+	
+	FTransform trans;
+	trans.SetLocation(GetActorLocation());
+	trans.SetScale3D(FVector(1, 8, 5));
+	trans.SetRotation(FQuat(GetActorRotation()));
+	AWorldObject::GetBoundingBox(trans, min, max);
 
 }

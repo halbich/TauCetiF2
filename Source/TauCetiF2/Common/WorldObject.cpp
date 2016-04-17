@@ -81,14 +81,9 @@ void AWorldObject::BeginPlay() {
 
 }
 
-
 void AWorldObject::GetBoundingBox(FVector& min, FVector& max) {
-	auto location = GetActorLocation();
-	auto scale = GetActorRotation().RotateVector(GetActorScale3D() * UHelpers::CubeMinSize * 0.5);
 
-	min = location - scale;
-	max = location + scale;
-
+	GetBoundingBox(GetTransform(), min, max);
 }
 
 

@@ -45,6 +45,9 @@ public:
 
 	UPROPERTY()
 		UKDTree* RootBox;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 private:
 
 	UPROPERTY()

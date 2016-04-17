@@ -77,16 +77,18 @@ void UKDTree::addToTreeByCoord(UKDTree* box) {
 
 	// object is in between. We need to split and then add object to both branches
 
-	UKDTree* newB1 = NewObject<UKDTree>(this);
-	newB1->Init(box->Min, box->Max, box->DividingIndex);
-	newB1->containingObject = box->containingObject;
 
-	box->Max = (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue);
-	box->recomputeDividingCoordValue();
-	newB1->Min = (FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue);
+	UKDTree* newB1 = NewObject<UKDTree>(this);
+	newB1->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
 	newB1->recomputeDividingCoordValue();
-	addToTreeByCoord(box);
+	newB1->containingObject = box->containingObject;
+	UKDTree* newB2 = NewObject<UKDTree>(this);
+	newB2->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
+	newB2->recomputeDividingCoordValue();
+	newB2->containingObject = box->containingObject;
+
 	addToTreeByCoord(newB1);
+	addToTreeByCoord(newB2);
 
 
 }

@@ -41,11 +41,15 @@ public:
 		auto location = transform.GetLocation();
 		auto scale = transform.GetRotation().RotateVector(transform.GetScale3D() * UHelpers::CubeMinSize * 0.5);
 
-		min = location - scale;
-		max = location + scale;
-
+		auto tmin = location - scale;
+		auto tmax = location + scale;
+		min = FVector(FMath::Min(tmin.X, tmax.X), FMath::Min(tmin.Y, tmax.Y), FMath::Min(tmin.Z, tmax.Z));
+		max = FVector(FMath::Max(tmin.X, tmax.X), FMath::Max(tmin.Y, tmax.Y), FMath::Max(tmin.Z, tmax.Z));
 	}
 
+
+
+	
 
 
 	FORCEINLINE void setMaterial(UMaterial* material, int32 index, float scaleX, float scaleY) {

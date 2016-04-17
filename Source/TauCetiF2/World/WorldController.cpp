@@ -128,3 +128,27 @@ void AWorldController::DEBUGHideMinMaxBoxes() {
 	else
 		print(TEXT("NO Root!"));
 }
+
+void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if (RootBox && RootBox->IsValidLowLevel())
+	{
+		if (RootBox->SingleChild)
+		{
+			RootBox->SingleChild->ConditionalBeginDestroy();
+			RootBox->SingleChild = nullptr;
+		}
+
+		if (RootBox->B1)
+		{
+			RootBox->B1->ConditionalBeginDestroy();
+			RootBox->B1 = nullptr;
+		}
+
+		if (RootBox->B2)
+		{
+			RootBox->B2->ConditionalBeginDestroy();
+			RootBox->B2 = nullptr;
+		}
+	}
+}
