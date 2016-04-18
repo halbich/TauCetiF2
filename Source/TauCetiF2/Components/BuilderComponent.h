@@ -56,7 +56,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
 		void SetWorldController(AWorldController* controller);
 
-
+	UPROPERTY()
+		bool ForceRecomputePosition;
 
 	void DoAction() {
 
@@ -82,5 +83,9 @@ public:
 
 	}
 
+
+	void RotatePitch(float Value);
+	void RotateRoll(float Value);
+	void RotateYaw(float Value);
 
 };

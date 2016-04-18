@@ -45,6 +45,10 @@ ATauCetiF2Character::ATauCetiF2Character()
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
 	Builder = CreateDefaultSubobject<UBuilderComponent>(TEXT("Builder"));
 	Builder->selector = Selector;
+
+	lastPitchWasZero = false;
+	lastRollWasZero = false;
+	lastYawWasZero = false;
 }
 
 
@@ -74,6 +78,10 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* Input
 	InputComponent->BindTouch(IE_Released, this, &ATauCetiF2Character::TouchStopped);
 
 	InputComponent->BindAction("LmbClick", IE_Pressed, this, &ATauCetiF2Character::BuilderDoAction);
+
+	InputComponent->BindAxis("RotPitch", this, &ATauCetiF2Character::BuilderRotatePitch);
+	InputComponent->BindAxis("RotRoll", this, &ATauCetiF2Character::BuilderRotateRoll);
+	InputComponent->BindAxis("RotYaw", this, &ATauCetiF2Character::BuilderRotateYaw);
 }
 
 
@@ -138,4 +146,26 @@ void ATauCetiF2Character::MoveRight(float Value)
 void ATauCetiF2Character::BuilderDoAction()
 {
 	Builder->DoAction();
+}
+
+void ATauCetiF2Character::BuilderRotatePitch(float Value)
+{
+	if (Value != 0.0f && lastPitchWasZero)
+		Builder->RotatePitch(Value);
+
+	lastPitchWasZero = Value == 0.0f;
+}
+void ATauCetiF2Character::BuilderRotateRoll(float Value)
+{
+	if (Value != 0.0f && lastRollWasZero)
+		Builder->RotateRoll(Value);
+
+	lastRollWasZero = Value == 0.0f;
+}
+void ATauCetiF2Character::BuilderRotateYaw(float Value)
+{
+	if (Value != 0.0f && lastYawWasZero)
+		Builder->RotateYaw(Value);
+
+	lastYawWasZero = Value == 0.0f;
 }

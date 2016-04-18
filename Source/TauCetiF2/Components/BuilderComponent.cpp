@@ -65,19 +65,19 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	auto newLocation = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);
 
-	
 
-	if (currentBlockInfo->Location == newLocation)
+
+	if (!ForceRecomputePosition && currentBlockInfo->Location == newLocation)
 		return;
 
 	auto oldLocation = currentBlockInfo->Location;
 	currentBlockInfo->Location = newLocation;
-	if (!worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo)))
+	if (false && !worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo)))
 	{
 		currentBlockInfo->Location = oldLocation;
 		return;
 	}
-
+	ForceRecomputePosition = false;
 	currentSpawnedObject->SetActorTransform(BlockHelpers::GetSpawnTransform(currentDefinitionForBlock, currentBlockInfo));
 }
 
@@ -147,3 +147,38 @@ void UBuilderComponent::SetWorldController(AWorldController* controller)
 
 }
 
+void UBuilderComponent::RotatePitch(float Value)
+{
+	if (!currentDefinitionForBlock)
+		return;
+
+	if (!currentDefinitionForBlock->AllowPitch)
+		return;
+
+	currentBlockInfo->Rotation.Add(Value * 90, 0, 0);
+	ForceRecomputePosition = true;
+	print(TEXT("pitch"));
+}
+void UBuilderComponent::RotateRoll(float Value)
+{
+	if (!currentDefinitionForBlock)
+		return;
+
+	if (!currentDefinitionForBlock->AllowRoll)
+		return;
+	currentBlockInfo->Rotation.Add(0, 0, Value * 90);
+	ForceRecomputePosition = true;
+	print(TEXT("roll"));
+}
+void UBuilderComponent::RotateYaw(float Value)
+{
+	if (!currentDefinitionForBlock || !currentBlockInfo)
+		return;
+
+	if (!currentDefinitionForBlock->AllowYaw)
+		return;
+
+	currentBlockInfo->Rotation.Add(0, Value * 90, 0);
+	ForceRecomputePosition = true;
+	print(TEXT("yaw"));
+}

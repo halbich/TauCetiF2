@@ -67,6 +67,14 @@ protected:
 
 	void BuilderDoAction();
 
+	void BuilderRotatePitch(float Value);
+	void BuilderRotateRoll(float Value);
+	void BuilderRotateYaw(float Value);
+
+	bool lastPitchWasZero;
+	bool lastRollWasZero;
+	bool lastYawWasZero;
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;

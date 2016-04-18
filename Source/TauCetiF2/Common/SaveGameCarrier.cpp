@@ -189,7 +189,9 @@ void USaveGameCarrier::GetSaveForNewGame()
 	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));*/
 
 
+	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-70, 0, 10), RoofSize, FRotator(0, 0, 0)));
 
+	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-70, 0, 4), FVector(20,10,1), FRotator(90, 0, 0)));
 
 
 
