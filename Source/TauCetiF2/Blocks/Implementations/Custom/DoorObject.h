@@ -27,6 +27,9 @@ class TAUCETIF2_API ADoorObject : public AWorldObject
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldObject)
 		UStaticMeshComponent* DoorMesh;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldObject)
+		UStaticMeshComponent* DoorFrameMesh;
+
 public:
 	virtual void OnConstruction(const FTransform& Transform) override;
 

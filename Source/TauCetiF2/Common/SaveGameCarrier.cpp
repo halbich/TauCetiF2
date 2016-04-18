@@ -120,7 +120,7 @@ void USaveGameCarrier::GetSaveForNewGame()
 	door1->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Left);
 	UsedBlocks.Add(door1);
 
-	auto door2 = make(EBlockName::Door, FVector(0, -20, 5), FVector(1, 1, 1), FRotator(0, 180, 0));
+	auto door2 = make(EBlockName::Door, FVector(-20, 10, 5), FVector(1, 1, 1), FRotator(0, 180, 0));
 	door2->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Right);
 
 	UsedBlocks.Add(door2);
