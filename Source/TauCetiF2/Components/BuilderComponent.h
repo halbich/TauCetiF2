@@ -100,10 +100,14 @@ public:
 		if (!character)
 			return;
 
-		auto rotator = character->GetControlRotation().GridSnap(GameDefinitions::WorldGrid);
-		auto desiredRotation = rotator.UnrotateVector(FVector(Pitch,Yaw, Roll));
-		currentBlockInfo->Rotation.Add(desiredRotation.X, desiredRotation.Z, desiredRotation.Y);
-
+		auto grid = GameDefinitions::WorldGrid;
+		auto gr=grid.Add(90, 0, 0);
+		auto rotator = character->GetControlRotation().GridSnap(gr);
+		
+		print(*rotator.ToString());
+		auto desiredRotation = rotator.UnrotateVector(FVector(Pitch, Roll, Yaw));
+		
+		currentBlockInfo->Rotation = (FQuat(FRotator(desiredRotation.X, desiredRotation.Z, desiredRotation.Y)) *  FQuat(currentBlockInfo->Rotation)).Rotator();
 		currentBlockInfo->Rotation = currentBlockInfo->Rotation.GridSnap(GameDefinitions::WorldGrid);
 		ForceRecomputePosition = true;
 	}

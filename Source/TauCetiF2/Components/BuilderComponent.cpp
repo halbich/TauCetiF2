@@ -63,7 +63,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	auto oldLocation = currentBlockInfo->Location;
 	currentBlockInfo->Location = newLocation;
 	auto spawnBlock = BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
-	if (false && !worldController->IsValidSpawnPoint(spawnBlock))
+	if (!worldController->IsValidSpawnPoint(spawnBlock))
 	{
 		currentBlockInfo->Location = oldLocation;
 		return;
@@ -71,7 +71,6 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	ForceRecomputePosition = false;
 	currentSpawnedObject->SetActorTransform(BlockHelpers::GetSpawnTransform(currentDefinitionForBlock, currentBlockInfo));
 
-	UE_LOG(LogTemp, Log, TEXT("Min: %s, Max: %s"), *spawnBlock->Min.ToString(), *spawnBlock->Max.ToString());
 }
 
 
@@ -149,7 +148,7 @@ void UBuilderComponent::RotatePitch(float Value)
 		return;
 
 	AddRotation(Value * 90, 0, 0);
-
+	print(TEXT("Pitch"));
 }
 void UBuilderComponent::RotateRoll(float Value)
 {
@@ -159,7 +158,8 @@ void UBuilderComponent::RotateRoll(float Value)
 	if (!currentDefinitionForBlock->AllowRoll)
 		return;
 
-	AddRotation(0, Value * 90, 0);
+	print(TEXT("Roll"));
+	AddRotation(0, 0, Value * 90);
 }
 void UBuilderComponent::RotateYaw(float Value)
 {
@@ -169,6 +169,6 @@ void UBuilderComponent::RotateYaw(float Value)
 	if (!currentDefinitionForBlock->AllowYaw)
 		return;
 
-
-	AddRotation(0,0 , Value * 90);
+	print(TEXT("Yaw"));
+	AddRotation(0,Value * 90, 0);
 }
