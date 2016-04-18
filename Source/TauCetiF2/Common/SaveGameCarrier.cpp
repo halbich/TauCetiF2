@@ -3,7 +3,7 @@
 #include "Helpers/Saving/ArchiveHelpers.h"
 #include "Helpers/Helpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 8;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 9;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -115,6 +115,17 @@ void USaveGameCarrier::GetSaveForNewGame()
 	BuildableBlocks.Add(makeBuildable(EBlockName::WindowCube, FVector(4, 4, 1)));
 	//BuildableBlocks.Add(makeBuildable(EBlockName::Terminal, FVector(1, 1, 1)));
 	BuildableBlocks.Add(makeBuildable(EBlockName::ConstructCubeBody, FVector(10, 10, 10)));
+
+	auto door1 = make(EBlockName::Door, FVector(-20, -20, 5), FVector(1, 1, 1), FRotator(0, 0, 0));
+	door1->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Left);
+	UsedBlocks.Add(door1);
+
+	auto door2 = make(EBlockName::Door, FVector(0, -20, 5), FVector(1, 1, 1), FRotator(0, 180, 0));
+	door2->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Right);
+
+	UsedBlocks.Add(door2);
+
+	UsedBlocks.Add(make(EBlockName::Terminal, FVector(-20, -30, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
 	
 	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 3, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
 	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 6, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));

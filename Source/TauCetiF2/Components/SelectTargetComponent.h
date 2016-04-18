@@ -6,6 +6,8 @@
 #include "SelectTargetComponent.generated.h"
 
 
+DECLARE_DELEGATE_OneParam(FUseDelegate, AActor*);
+DECLARE_EVENT_OneParam(USelectTargetComponent, FUseEvent, AActor*);
 
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
@@ -53,5 +55,11 @@ public:
 	{
 		return selectingActor && IsUsable && (MaxDistance < 0 || FVector::Dist(owner->GetActorLocation(), selectingActor->GetActorLocation()) <= MaxDistance);
 	}
+
+public:
+	FDelegateHandle AddEventListener(FUseDelegate& UseDelegate);
+	void RemoveEventListener(FDelegateHandle DelegateHandle);
+private:
+	FUseEvent MyUseEvent;
 
 };

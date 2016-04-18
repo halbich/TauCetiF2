@@ -22,6 +22,11 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 
 	SelectTargetComponent->RegisterTargetPrimitiveComponent(GetStaticMeshComponent());
 
+
+	//TODO
+	if (WorldObjectComponent == nullptr || WorldObjectComponent->BlockInfo == nullptr)
+		return;
+
 	check(WorldObjectComponent != nullptr && WorldObjectComponent->BlockInfo != nullptr);
 
 
@@ -61,8 +66,8 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 	{
 		setTranslucentMaterials(definition->UsedMaterials.Num());
 
-		TranslucentSelectMesh->SetWorldScale3D(Transform.GetScale3D());
-		TranslucentSelectMesh->SetWorldLocationAndRotation(Transform.GetLocation(), Transform.GetRotation());
+		/*TranslucentSelectMesh->SetWorldScale3D(Transform.GetScale3D());
+		TranslucentSelectMesh->SetWorldLocationAndRotation(Transform.GetLocation(), Transform.GetRotation());*/
 		TranslucentSelectMesh->Activate();
 		SelectTargetComponent->RegisterTargetPrimitiveComponent(TranslucentSelectMesh);
 	}
@@ -74,6 +79,11 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 void AWorldObject::BeginPlay() {
 	AStaticMeshActor::BeginPlay();
 
+}
+
+void AWorldObject::SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition)
+{
+	WorldObjectComponent->BlockInfo = info;
 }
 
 

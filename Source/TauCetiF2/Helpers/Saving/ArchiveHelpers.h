@@ -11,6 +11,7 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockBaseInfo& block)
 	Ar << block.ID;
 	Ar << block.Scale;
 	Ar << block.Name;
+	Ar << block.AdditionalFlags;
 
 	return Ar;
 }

@@ -66,6 +66,7 @@ enum class EBlockName : uint8
 	BaseRamp 					UMETA(DisplayName = "BaseRamp"),
 	ConstructCubeBody 			UMETA(DisplayName = "ConstructCubeBody"),
 	Terminal		 			UMETA(DisplayName = "Terminal"),
+	Door						UMETA(DisplayName = "Door"),
 };
 
 
@@ -76,4 +77,12 @@ static FString GetEBlockNameAsString(int32 EnumValue)
 
 	return *EnumPtr->GetDisplayNameText(EnumValue).ToString();
 }
+
+
+enum class EDoorOpening : uint8
+{
+	Left,
+	Right
+
+};
 

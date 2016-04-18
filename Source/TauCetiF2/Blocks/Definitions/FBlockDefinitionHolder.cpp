@@ -90,4 +90,15 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 
 	definitions.Add(terminal.ID, terminal);
 
+
+	FBlockDefinition doorLeft(EBlockName::Door, EShapeType::Custom);
+	/*door.AddMaterials(2,
+		FBlockMaterialDefinition(EMaterialInstance::TerminalBase, EAxis::Type::X, EAxis::Type::X),
+		FBlockMaterialDefinition(EMaterialInstance::TerminalScreen, EAxis::Type::X, EAxis::Type::X, true));*/
+	doorLeft.SetCustomScale(FVector(1, 1, 1), FVector(7, 7, 11));
+	doorLeft.AllowPitch = false;
+	doorLeft.AllowRoll = false;
+
+	definitions.Add(doorLeft.ID, doorLeft);
+
 }

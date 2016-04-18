@@ -7,7 +7,7 @@
 
 
 ATerminalObject::ATerminalObject(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer)
+	: Super(ObjectInitializer), ListeningHandle()
 {
 	//auto dc = GetDestructibleComponent();
 	//if (!dc)
@@ -23,6 +23,7 @@ ATerminalObject::ATerminalObject(const FObjectInitializer& ObjectInitializer)
 	checkf(mesh.Succeeded(), TEXT("Failed to find mesh"));
 
 	constructorSetMeshes(mesh.Object);
+	
 
 }
 
@@ -33,5 +34,22 @@ void  ATerminalObject::OnConstruction(const FTransform& Transform) {
 
 	SelectTargetComponent->EnableUse(200);
 
+	FUseDelegate Subscriber;
+	Subscriber.BindUObject(this, &ATerminalObject::ListeningOnUse);
+	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
+
+}
+
+void ATerminalObject::ListeningOnUse(AActor* actor)
+{
+	print(TEXT("using terminal!"));
+}
+
+void ATerminalObject::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if (ListeningHandle.IsValid() && SelectTargetComponent)
+		SelectTargetComponent->RemoveEventListener(ListeningHandle);
+
+	AWorldObject::EndPlay(EndPlayReason);
 }
 

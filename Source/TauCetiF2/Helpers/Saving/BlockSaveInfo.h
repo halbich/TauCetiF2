@@ -13,11 +13,12 @@ struct TAUCETIF2_API FBlockBaseInfo {
 	uint32 ID;
 	FVector Scale;
 	FString Name;
+	TMap<FString,int32> AdditionalFlags;
 
 	/*
 		Default constructor with 0 ID, Zero scale and empty name
 	*/
-	FBlockBaseInfo() : ID(0), Scale(FVector::ZeroVector), Name(TEXT("")) {};
+	FBlockBaseInfo() : ID(0), Scale(FVector::ZeroVector), Name(TEXT("")), AdditionalFlags() {};
 
 };
 

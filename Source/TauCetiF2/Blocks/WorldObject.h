@@ -36,6 +36,8 @@ public:
 	virtual void BeginPlay() override;
 
 
+	virtual void SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition);
+
 protected:
 
 
@@ -106,5 +108,6 @@ protected:
 		TranslucentSelectMesh->SetStaticMesh(mesh);
 		TranslucentSelectMesh->SetRenderInMainPass(false);
 		TranslucentSelectMesh->Deactivate();
+		TranslucentSelectMesh->AttachTo(mc);
 	}
 };

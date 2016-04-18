@@ -62,7 +62,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 		return nullptr;
 	}
 
-	
+
 
 	UMinMaxBox* box = BlockHelpers::GetSpawnBox(definition, block);
 	ensure(box != nullptr);
@@ -86,7 +86,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 		return nullptr;
 	}
 
-	actor->WorldObjectComponent->BlockInfo = block;
+	actor->SetBlockInfo(block, definition);
 
 	if (addToRoot) {
 

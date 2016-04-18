@@ -50,11 +50,19 @@ void USelectTargetComponent::RegisterTargetPrimitiveComponent(UPrimitiveComponen
 
 void USelectTargetComponent::OnUse(AActor* selectingActor) {
 
-
-
 	if (!IsInUsableArea(selectingActor))
 		return;
 
-	print(TEXT("Using!"));
+	MyUseEvent.Broadcast(selectingActor);
 
+}
+
+FDelegateHandle USelectTargetComponent::AddEventListener(FUseDelegate& UseDelegate)
+{
+	return MyUseEvent.Add(UseDelegate);
+}
+
+void USelectTargetComponent::RemoveEventListener(FDelegateHandle DelegateHandle)
+{
+	MyUseEvent.Remove(DelegateHandle);
 }

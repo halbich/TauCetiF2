@@ -24,11 +24,15 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
 		FString Name;
 
+	UPROPERTY()
+		TMap<FString, int32> AdditionalFlags;
+
 	FORCEINLINE FBlockBaseInfo ToBaseContainer() {
 		FBlockBaseInfo result;
 		result.ID = ID;
 		result.Scale = Scale;
 		result.Name = Name;
+		result.AdditionalFlags = AdditionalFlags;
 		return result;
 	}
 
@@ -37,6 +41,7 @@ public:
 		ID = block.ID;
 		Scale = block.Scale;
 		Name = block.Name;
+		AdditionalFlags = block.AdditionalFlags;
 	}
 
 
