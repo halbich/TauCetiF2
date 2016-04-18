@@ -33,23 +33,6 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	if (!selector || !selector->IsValidLowLevelFast() || !currentBuildableBlockInfo || !currentBuildableBlockInfo->IsValidLowLevelFast())
 		return;
 
-	/*if (!selector->SelectedActor)
-	{
-		if (currentSpawnedObject->IsActorTickEnabled())
-		{
-			currentSpawnedObject->SetActorHiddenInGame(true);
-			currentSpawnedObject->SetActorTickEnabled(false);
-		}
-	}
-	else
-	{
-		if (!currentSpawnedObject->IsActorTickEnabled())
-		{
-			currentSpawnedObject->SetActorHiddenInGame(false);
-			currentSpawnedObject->SetActorTickEnabled(true);
-		}
-	}*/
-
 	check(currentBuildableBlockInfo);
 
 	if (currentBuildableBlockInfo->IsEmptyHand)
@@ -72,7 +55,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	auto oldLocation = currentBlockInfo->Location;
 	currentBlockInfo->Location = newLocation;
-	if (false && !worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo)))
+	if (!worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo)))
 	{
 		currentBlockInfo->Location = oldLocation;
 		return;
@@ -157,7 +140,7 @@ void UBuilderComponent::RotatePitch(float Value)
 
 	currentBlockInfo->Rotation.Add(Value * 90, 0, 0);
 	ForceRecomputePosition = true;
-	print(TEXT("pitch"));
+
 }
 void UBuilderComponent::RotateRoll(float Value)
 {
@@ -168,7 +151,6 @@ void UBuilderComponent::RotateRoll(float Value)
 		return;
 	currentBlockInfo->Rotation.Add(0, 0, Value * 90);
 	ForceRecomputePosition = true;
-	print(TEXT("roll"));
 }
 void UBuilderComponent::RotateYaw(float Value)
 {
@@ -180,5 +162,4 @@ void UBuilderComponent::RotateYaw(float Value)
 
 	currentBlockInfo->Rotation.Add(0, Value * 90, 0);
 	ForceRecomputePosition = true;
-	print(TEXT("yaw"));
 }

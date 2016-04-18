@@ -1,3 +1,4 @@
+#pragma optimize("", off)
 
 #pragma once
 #include "Blocks/Implementations/BaseShapes/CubeObject.h"
@@ -84,13 +85,13 @@ public:
 		return NewObject<UMinMaxBox>()->InitBoxChecked(spawnCoord - scaleHalf, spawnCoord + scaleHalf);
 	}
 
-	static FORCEINLINE FVector GetSpawnPoint(const FVector& ImpactPointWithSnap, const FVector& ImpactNormal, const FBlockDefinition* definition, const UBlockInfo* blockInfo) {
+	static  FVector GetSpawnPoint(const FVector& ImpactPointWithSnap, const FVector& ImpactNormal, const FBlockDefinition* definition, const UBlockInfo* blockInfo) {
 
 		auto baseLocation = ImpactPointWithSnap / GameDefinitions::CubeMinSize;
 		auto blockScale = definition->GetObjectScale(blockInfo->Scale);
 		auto rotatedScale = blockInfo->Rotation.RotateVector(blockScale);
 		auto offset = ImpactNormal *GetSpawnOffset(blockInfo->Rotation, blockScale);
-		auto normalAdd = ImpactNormal * rotatedScale * 0.5 - offset;
+		auto normalAdd = ImpactNormal * rotatedScale.GetAbs() * 0.5 - offset;
 		auto normA = FVector(FMath::FloorToInt(normalAdd.X), FMath::FloorToInt(normalAdd.Y), FMath::FloorToInt(normalAdd.Z));
 		auto result = baseLocation + normA;
 		return result;
@@ -98,4 +99,7 @@ public:
 	}
 
 };
+
+
+#pragma optimize("", on)
 

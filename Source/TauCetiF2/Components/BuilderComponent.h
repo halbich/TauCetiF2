@@ -80,6 +80,8 @@ public:
 			print(TEXT("doing something"));
 			worldController->SpawnWorldObject(World, spawnBlock, true);
 		}
+		else
+			print(TEXT("Invalid location"));
 
 	}
 
