@@ -92,6 +92,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 
 		auto MinMax = NewObject<UKDTree>()->Init(box);
 		MinMax->containingObject = actor;
+		actor->WorldObjectComponent->TreeElement = MinMax;
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 		RootBox->AddToTree(MinMax);
 		MinMax->DEBUGDrawContainingBox(GetWorld());
