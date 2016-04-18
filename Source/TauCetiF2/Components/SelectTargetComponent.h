@@ -36,6 +36,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
 		float MaxDistance;
 
+	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
+		FString CustomUsingMessage;
+
 	virtual void Select();
 
 	virtual void Deselect();

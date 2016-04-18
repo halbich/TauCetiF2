@@ -67,12 +67,12 @@ void  ADoorObject::OnConstruction(const FTransform& Transform) {
 			doorOpening = (EDoorOpening)(*valueptr);
 	}
 
+
+	SelectTargetComponent->CustomUsingMessage = TEXT("Open door");
 }
 
 void ADoorObject::ListeningOnUse(AActor* actor)
 {
-	print(TEXT("using door!"));
-
 	if (doorState == EDoorState::Closed)
 	{
 		doorState = EDoorState::Opening;
@@ -131,12 +131,15 @@ void ADoorObject::Tick(float DeltaSeconds)
 	{
 	case EDoorState::Closed: 
 		currentTrans.SetLocation(FVector::ZeroVector);
+		SelectTargetComponent->CustomUsingMessage = TEXT("Open door");
 		break;
 	case EDoorState::Opening:
 		currentTrans.SetLocation(FMath::InterpSinIn(FVector::ZeroVector, FVector(-60 * openingConstant , 60, 0), FMath::Abs(currentTrans.Rotator().Yaw / 90.0f)));
 		break;
-	case EDoorState::Opened: break;
+	case EDoorState::Opened: 
 		currentTrans.SetLocation(FVector(-60 * openingConstant, 60, 0));
+		SelectTargetComponent->CustomUsingMessage = TEXT("Close door");
+		break;
 	case EDoorState::Closing:
 		currentTrans.SetLocation(FMath::InterpSinIn( FVector::ZeroVector,FVector(60* openingConstant, 60, 0), FMath::Abs( currentTrans.Rotator().Yaw / 90.0f)));
 		break;
