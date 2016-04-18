@@ -94,8 +94,8 @@ public:
 		auto normalAdd = ImpactNormal * rotatedScale.GetAbs() * 0.5 - offset;
 		auto normA = FVector(FMath::FloorToInt(normalAdd.X), FMath::FloorToInt(normalAdd.Y), FMath::FloorToInt(normalAdd.Z));
 		auto result = baseLocation + normA;
+		auto snap = result.GridSnap(GameDefinitions::CubeMinSize);
 		return result;
-
 	}
 
 };

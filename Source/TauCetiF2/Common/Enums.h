@@ -58,6 +58,7 @@ enum class EMaterialInstance : uint8
 UENUM(BlueprintType)
 enum class EBlockName : uint8
 {
+	Empty						UMETA(DisplayName = "Empty"),
 	ConstructCube 				UMETA(DisplayName = "ConstructCube"),
 	BaseCube 					UMETA(DisplayName = "BaseCube"),
 	WindowCube 					UMETA(DisplayName = "WindowCube"),
@@ -67,4 +68,12 @@ enum class EBlockName : uint8
 	Terminal		 			UMETA(DisplayName = "Terminal"),
 };
 
+
+static FString GetEBlockNameAsString(int32 EnumValue)
+{
+	const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EBlockName"), true);
+	if (!EnumPtr) return TEXT("Invalid");
+
+	return *EnumPtr->GetDisplayNameText(EnumValue).ToString();
+}
 

@@ -23,6 +23,13 @@ void UBuilderComponent::BeginPlay()
 
 	currentBlockInfo = NewObject<UBlockInfo>();
 	currentBlockInfo->UnderConstruction = true;
+
+	auto owner = GetOwner();
+	ensure(owner);
+
+	character = Cast<ACharacter>(owner);
+	ensure(character);
+
 }
 
 // Called every frame
@@ -55,13 +62,16 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	auto oldLocation = currentBlockInfo->Location;
 	currentBlockInfo->Location = newLocation;
-	if (!worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo)))
+	auto spawnBlock = BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+	if (false && !worldController->IsValidSpawnPoint(spawnBlock))
 	{
 		currentBlockInfo->Location = oldLocation;
 		return;
 	}
 	ForceRecomputePosition = false;
 	currentSpawnedObject->SetActorTransform(BlockHelpers::GetSpawnTransform(currentDefinitionForBlock, currentBlockInfo));
+
+	UE_LOG(LogTemp, Log, TEXT("Min: %s, Max: %s"), *spawnBlock->Min.ToString(), *spawnBlock->Max.ToString());
 }
 
 
@@ -138,8 +148,7 @@ void UBuilderComponent::RotatePitch(float Value)
 	if (!currentDefinitionForBlock->AllowPitch)
 		return;
 
-	currentBlockInfo->Rotation.Add(Value * 90, 0, 0);
-	ForceRecomputePosition = true;
+	AddRotation(Value * 90, 0, 0);
 
 }
 void UBuilderComponent::RotateRoll(float Value)
@@ -149,8 +158,8 @@ void UBuilderComponent::RotateRoll(float Value)
 
 	if (!currentDefinitionForBlock->AllowRoll)
 		return;
-	currentBlockInfo->Rotation.Add(0, 0, Value * 90);
-	ForceRecomputePosition = true;
+
+	AddRotation(0, Value * 90, 0);
 }
 void UBuilderComponent::RotateYaw(float Value)
 {
@@ -160,6 +169,6 @@ void UBuilderComponent::RotateYaw(float Value)
 	if (!currentDefinitionForBlock->AllowYaw)
 		return;
 
-	currentBlockInfo->Rotation.Add(0, Value * 90, 0);
-	ForceRecomputePosition = true;
+
+	AddRotation(0,0 , Value * 90);
 }

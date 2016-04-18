@@ -109,84 +109,35 @@ void USaveGameCarrier::GetSaveForNewGame()
 
 	BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
 	BuildableBlocks[0]->IsEmptyHand = true;
-	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(4, 4, 4)));
-	BuildableBlocks.Add(makeBuildable(EBlockName::Terminal, FVector(1, 1, 1)));
+	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(1, 1, 1)));
 
-
-	//UsedBlocks.Add(make(EBlockName::BaseCube, FVector(1, 0, 5), FVector(1, 8, 5), FRotator::ZeroRotator));
-	//UsedBlocks.Add(make(EBlockName::Terminal, FVector(0, 0, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
-
-
-	//return;
-
-	FRotator baseRotation(0, 0, 0);
-	FVector BaseSize(20, 20, 4);
-
-
-	UsedBlocks.Add(make(EBlockName::BaseRamp, FVector(-25, 0, 1), FVector(8, 12, 4), FRotator(0, 90, 0)));
-
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, -10, 1), BaseSize, FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(10, -10, 1), BaseSize, FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 10, 1), BaseSize, FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(10, 10, 1), BaseSize, FRotator(0, 0, 0)));
-
-
-
-	FVector RoofSize(20, 20, 1);
-
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-10, -10, 20), RoofSize, FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(10, -10, 20), RoofSize, FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-10, 10, 20), RoofSize, FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(10, 10, 20), RoofSize, FRotator(0, 0, 0)));
-
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-9, -19, 5), FVector(19, 1, 4), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(10, -19, 5), FVector(19, 1, 4), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(0, -19, 13), FVector(8, 1, 12), FRotator(0, 0, 0)));
-
-
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-9, +20, 5), FVector(19, 1, 4), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(10, +20, 5), FVector(19, 1, 4), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(0, 20, 13), FVector(8, 1, 12), FRotator(0, 0, 0)));
-
-	// sloup
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(0, 0, 11), FVector(2, 2, 16), FRotator(0, 0, 0)));
-
-	// vstup
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-19, -12, 11), FVector(1, 16, 16), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(20, -12, 11), FVector(1, 16, 16), FRotator(0, 0, 0)));
-
-
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-19, 12, 11), FVector(1, 16, 16), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(20, 12, 11), FVector(1, 16, 16), FRotator(0, 0, 0)));
-
-
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(20, 0, 11), FVector(1, 8, 16), FRotator(0, 0, 0)));
-
-
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, -19, 13), FVector(15, 1, 12), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 20, 13), FVector(15, 1, 12), FRotator(0, 0, 0)));
-
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(12, -19, 13), FVector(15, 1, 12), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(12, 20, 13), FVector(15, 1, 12), FRotator(0, 0, 0)));
-
-	UsedBlocks.Add(make(EBlockName::ConstructCubeBody, FVector(-30, -30, 13), FVector(10, 5, 2), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::ConstructCubeSide, FVector(-30, -50, 13), FVector(10, 5, 2), FRotator(0, 0, 0)));
-
-
-	/*FVector loc;
-	FVector blockScale(1, 1, 1);
-
-	UsedBlocks.Add(make(loc, blockScale + FVector(4, 4, 1), blockRotation, EShapeType::Cube, EBlockType::Base, EMaterialType::Steel));
-
-
-	loc += FVector(2, 6, 0);
-	loc += FVector(2, 0, 0);
-
-	UsedBlocks.Add(make(loc, blockScale + FVector(1, 0, 1), blockRotation, EShapeType::CubeBody, EBlockType::Empty, EMaterialType::Polycarbon));
-
-	loc = FVector(0, -5, 0);
-	UsedBlocks.Add(make(loc, blockScale, blockRotation, EShapeType::Cube, EBlockType::Building, EMaterialType::Polycarbon));*/
-
+	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(1, 1, 4)));
+	BuildableBlocks.Add(makeBuildable(EBlockName::WindowCube, FVector(4, 4, 1)));
+	//BuildableBlocks.Add(makeBuildable(EBlockName::Terminal, FVector(1, 1, 1)));
+	BuildableBlocks.Add(makeBuildable(EBlockName::ConstructCubeBody, FVector(10, 10, 10)));
+	
+	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 3, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 6, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 1, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 4, 0), FVector(1, 1, 4), FRotator(90, 90, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 4, 0), FVector(1, 1, 4), FRotator(90, 90, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 1, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 1, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 6, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 1, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 1, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-10, 1, 2), FVector(4, 4, 1), FRotator(180, 0, 90)));
+	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-13, 4, 2), FVector(4, 4, 1), FRotator(180, 90, 90)));
+	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 6, 2), FVector(4, 4, 1), FRotator(180, 180, 90)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 6, 5), FVector(1, 1, 4), FRotator(90, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 4, 5), FVector(1, 1, 4), FRotator(90, 90, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 6, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 3, 5), FVector(4, 4, 1), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 3, 5), FVector(1, 1, 4), FRotator(0, 180, 270)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 1, 5), FVector(1, 1, 4), FRotator(0, 270, 270)));
+	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-8, 3, 3), FVector(4, 4, 1), FRotator(0, 90, 90)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
 
 
 }

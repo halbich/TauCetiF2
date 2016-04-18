@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "GameFramework/Character.h"
 #include "Components/ActorComponent.h"
 #include "Components/SelectorComponent.h"
 #include "Blocks/Info/BuildableBlockInfo.h"
@@ -59,6 +60,9 @@ public:
 	UPROPERTY()
 		bool ForceRecomputePosition;
 
+	UPROPERTY()
+		ACharacter* character;
+
 	void DoAction() {
 
 		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel() || !currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
@@ -90,4 +94,17 @@ public:
 	void RotateRoll(float Value);
 	void RotateYaw(float Value);
 
+	FORCEINLINE void AddRotation(float Pitch, float Yaw, float Roll)
+	{
+
+		if (!character)
+			return;
+
+		auto rotator = character->GetControlRotation().GridSnap(GameDefinitions::WorldGrid);
+		auto desiredRotation = rotator.UnrotateVector(FVector(Pitch,Yaw, Roll));
+		currentBlockInfo->Rotation.Add(desiredRotation.X, desiredRotation.Z, desiredRotation.Y);
+
+		currentBlockInfo->Rotation = currentBlockInfo->Rotation.GridSnap(GameDefinitions::WorldGrid);
+		ForceRecomputePosition = true;
+	}
 };

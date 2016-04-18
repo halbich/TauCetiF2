@@ -120,6 +120,25 @@ public:
 
 private:
 
+	void DEBUGPrintSave() {
+
+		UE_LOG(LogTemp, Log, TEXT("~~~~~~~~~~~~~~~~~~  Save ~~~~~~~~~~~~~~~~~~~~~~~~"));
+
+		for (auto info : usedBlocks)
+		{
+
+			UE_LOG(LogTemp, Log, TEXT("UsedBlocks.Add(make(EBlockName::%s, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d)));"), 
+				*GetEBlockNameAsString( info.ID),
+				FMath::Round(info.Location.X), FMath::Round(info.Location.Y), FMath::Round(info.Location.Z),
+				FMath::Round(info.Scale.X), FMath::Round(info.Scale.Y), FMath::Round(info.Scale.Z),
+				FMath::Round(info.Rotation.Pitch), FMath::Round(info.Rotation.Yaw), FMath::Round(info.Rotation.Roll));
+		}
+
+		UE_LOG(LogTemp, Log, TEXT("~~~~~~~~~~~~~~~~~~  Save  ends ~~~~~~~~~~~~~~~~~~~~~~~~"));
+	}
+
+
+
 	FORCEINLINE void updateBeforeSave() {
 
 		usedBlocks.Empty();
@@ -136,6 +155,8 @@ private:
 			if (buildableBlock && buildableBlock->IsValidLowLevel() && !buildableBlock->IsEmptyHand)
 				buildableBlocks.Add(buildableBlock->ToContainer());
 		}
+
+		DEBUGPrintSave();
 	}
 
 	FORCEINLINE void updateAfterLoad() {
@@ -185,6 +206,7 @@ private:
 		ret->Scale = blockScale;
 		return ret;
 	}
+
 
 
 };
