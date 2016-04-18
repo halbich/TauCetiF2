@@ -1,3 +1,4 @@
+#pragma optimize("", off)
 
 
 #include "TauCetiF2.h"
@@ -36,11 +37,22 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 
 	if (WorldObjectComponent->BlockInfo->UnderConstruction)
 	{
+		UPrimitiveComponent* currentMesh = nullptr;
+		int32 currentIndexOffset(0);
 		for (size_t i = 0; i < definition->UsedMaterials.Num(); i++)
 		{
 			auto mat = definition->UsedMaterials[i];
+			auto setToComponent = GetPrimitiveComponentByName(mat.MeshName);
+			check(setToComponent && "Failed to find StaticMeshComponent!");
 
-			setMaterial(mat.MaterialInstance, i, mat.GetParams(scale));
+			if (i > 0)
+			{
+				if (currentMesh != setToComponent)
+					currentIndexOffset = i;
+			}
+			currentMesh = setToComponent;
+
+			setConstructionMaterial(currentMesh, mat.MaterialInstance, i - currentIndexOffset, mat.GetParams(scale));
 		}
 
 		if (TranslucentSelectMesh)
@@ -50,12 +62,24 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 	}
 
 
+	UPrimitiveComponent* currentMesh = nullptr;
+	int32 currentIndexOffset(0);
 	bool hasTranslucent = false;
 	for (size_t i = 0; i < definition->UsedMaterials.Num(); i++)
 	{
 		auto mat = definition->UsedMaterials[i];
 
-		setConstructionMaterial(mat.MaterialInstance, i, mat.GetParams(scale));
+		auto setToComponent = GetPrimitiveComponentByName(mat.MeshName);
+		check(setToComponent && "Failed to find StaticMeshComponent!");
+
+		if (i > 0)
+		{
+			if (currentMesh != setToComponent)
+				currentIndexOffset = i;
+		}
+		currentMesh = setToComponent;
+
+		setMaterial(currentMesh, mat.MaterialInstance, i - currentIndexOffset, mat.GetParams(scale));
 		hasTranslucent = hasTranslucent || mat.IsTranslucent;
 	}
 
@@ -87,4 +111,10 @@ void AWorldObject::SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition)
 }
 
 
+UStaticMeshComponent* AWorldObject::GetPrimitiveComponentByName(const FName& name)
+{
+	return name == NAME_None ? GetStaticMeshComponent() : nullptr;
+}
 
+
+#pragma optimize("", on)

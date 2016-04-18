@@ -15,12 +15,15 @@ struct TAUCETIF2_API FBlockMaterialDefinition
 
 	bool IsTranslucent;
 
+	FName MeshName;
 
-	FBlockMaterialDefinition(const EMaterialInstance instance, EAxis::Type kX, EAxis::Type kY, bool isTranslucent = false) :
+
+	FBlockMaterialDefinition(const EMaterialInstance instance, EAxis::Type kX, EAxis::Type kY, FName meshName = NAME_None, bool isTranslucent = false) :
 		MaterialInstance(instance),
 		KX(kX),
 		KY(kY),
-		IsTranslucent(isTranslucent)
+		IsTranslucent(isTranslucent),
+		MeshName(meshName)
 	{
 	};
 

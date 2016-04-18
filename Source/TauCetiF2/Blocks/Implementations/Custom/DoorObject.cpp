@@ -1,4 +1,3 @@
-#pragma optimize("", off)
 
 #include "TauCetiF2.h"
 #include "DoorObject.h"
@@ -155,4 +154,13 @@ void ADoorObject::SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition)
 
 }
 
-#pragma optimize("", on)
+UStaticMeshComponent* ADoorObject::GetPrimitiveComponentByName(const FName& name)
+{
+	if (name == TEXT("doorFrame"))
+		return DoorFrameMesh;
+	else
+		if (name == TEXT("door"))
+			return DoorMesh;
+
+	return AWorldObject::GetPrimitiveComponentByName(name);
+}

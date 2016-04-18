@@ -1,4 +1,4 @@
-#pragma optimize("", off)
+
 
 #pragma once
 #include "Blocks/Implementations/BaseShapes/CubeObject.h"
@@ -104,5 +104,4 @@ public:
 };
 
 
-#pragma optimize("", on)
 

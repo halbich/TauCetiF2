@@ -40,11 +40,9 @@ public:
 
 protected:
 
+	virtual UStaticMeshComponent* GetPrimitiveComponentByName(const FName& name);
 
-	FORCEINLINE void setMaterial(UMaterial* material, int32 index, float scaleX, float scaleY) {
-		auto sm = GetStaticMeshComponent();
-		if (!sm)
-			return;
+	FORCEINLINE void setMaterial(UPrimitiveComponent* mesh, UMaterial* material, int32 index, float scaleX, float scaleY) {
 
 		UMaterialInstanceDynamic* mi = nullptr;
 		if (material) {
@@ -55,7 +53,7 @@ protected:
 				mi->SetScalarParameterValue(TEXT("Ky"), scaleY);
 			}
 		}
-		sm->SetMaterial(index, mi);
+		mesh->SetMaterial(index, mi);
 	}
 
 
@@ -82,20 +80,20 @@ protected:
 		}
 	}
 
-	FORCEINLINE void setMaterial(EMaterialInstance& instance, int32 index, FVector2D scale) {
+	 void setMaterial(UPrimitiveComponent* mesh,EMaterialInstance& instance, int32 index, FVector2D scale) {
 		UMaterial* material = UHelpers::GetMaterialByInstance(instance);
 
 		check(material && "Failed to find given material");
 
-		setMaterial(material, index, scale.X, scale.Y);
+		setMaterial(mesh, material, index, scale.X, scale.Y);
 	}
 
-	FORCEINLINE void setConstructionMaterial(EMaterialInstance& instance, int32 index, FVector2D scale) {
+	FORCEINLINE void setConstructionMaterial(UPrimitiveComponent* mesh, EMaterialInstance& instance, int32 index, FVector2D scale) {
 		UMaterial* material = UHelpers::GetMaterialByInstance(instance, true);
 
 		check(material && "Failed to find given material");
 
-		setMaterial(material, index, scale.X, scale.Y);
+		setMaterial(mesh,material, index, scale.X, scale.Y);
 	}
 
 	FORCEINLINE void constructorSetMeshes(UStaticMesh* mesh)

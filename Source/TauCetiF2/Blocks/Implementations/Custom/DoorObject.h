@@ -41,6 +41,10 @@ public:
 
 	virtual void SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition) override;
 
+protected:
+
+	virtual UStaticMeshComponent* GetPrimitiveComponentByName(const FName& name) override;
+
 private:
 	EDoorState doorState;
 	EDoorOpening doorOpening;

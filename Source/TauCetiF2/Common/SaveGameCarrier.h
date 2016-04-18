@@ -129,9 +129,9 @@ private:
 
 			UE_LOG(LogTemp, Log, TEXT("UsedBlocks.Add(make(EBlockName::%s, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d)));"), 
 				*GetEBlockNameAsString( info.ID),
-				FMath::Round(info.Location.X), FMath::Round(info.Location.Y), FMath::Round(info.Location.Z),
-				FMath::Round(info.Scale.X), FMath::Round(info.Scale.Y), FMath::Round(info.Scale.Z),
-				FMath::Round(info.Rotation.Pitch), FMath::Round(info.Rotation.Yaw), FMath::Round(info.Rotation.Roll));
+				FMath::RoundToInt(info.Location.X), FMath::RoundToInt(info.Location.Y), FMath::RoundToInt(info.Location.Z),
+				FMath::RoundToInt(info.Scale.X), FMath::RoundToInt(info.Scale.Y), FMath::RoundToInt(info.Scale.Z),
+				FMath::RoundToInt(info.Rotation.Pitch), FMath::RoundToInt(info.Rotation.Yaw), FMath::RoundToInt(info.Rotation.Roll));
 		}
 
 		UE_LOG(LogTemp, Log, TEXT("~~~~~~~~~~~~~~~~~~  Save  ends ~~~~~~~~~~~~~~~~~~~~~~~~"));

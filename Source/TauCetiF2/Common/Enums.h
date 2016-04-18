@@ -52,6 +52,9 @@ enum class EMaterialInstance : uint8
 	ConstructTriangle		UMETA(DisplayName = "ConstructTriangle"),
 	TerminalScreen			UMETA(DisplayName = "TerminalScreen"),
 	TerminalBase			UMETA(DisplayName = "TerminalBase"),
+	DoorFrame				UMETA(DisplayName = "DoorFrame"),
+	DoorCircle				UMETA(DisplayName = "DoorCircle"),
+	DoorBody				UMETA(DisplayName = "DoorBody"),
 };
 
 

@@ -38,9 +38,9 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 
 	FBlockDefinition cubeWindow(EBlockName::WindowCube, EShapeType::Cube);
 	cubeWindow.AddMaterials(3,
-		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Y, true),
-		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Z, true),
-		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::Y, EAxis::Type::Z, true));
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Y,NAME_None, true),
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Z,NAME_None, true),
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::Y, EAxis::Type::Z,NAME_None, true));
 
 	definitions.Add(cubeWindow.ID, cubeWindow);
 
@@ -83,7 +83,7 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	FBlockDefinition terminal(EBlockName::Terminal, EShapeType::Custom);
 	terminal.AddMaterials(2,
 		FBlockMaterialDefinition(EMaterialInstance::TerminalBase, EAxis::Type::X, EAxis::Type::X),
-		FBlockMaterialDefinition(EMaterialInstance::TerminalScreen, EAxis::Type::X, EAxis::Type::X, true));
+		FBlockMaterialDefinition(EMaterialInstance::TerminalScreen, EAxis::Type::X, EAxis::Type::X, NAME_None, true));
 	terminal.SetCustomScale(FVector(1, 1, 1), FVector(1, 8, 5));
 	terminal.AllowPitch = false;
 	terminal.AllowRoll = false;
@@ -91,14 +91,19 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	definitions.Add(terminal.ID, terminal);
 
 
-	FBlockDefinition doorLeft(EBlockName::Door, EShapeType::Custom);
-	/*door.AddMaterials(2,
-		FBlockMaterialDefinition(EMaterialInstance::TerminalBase, EAxis::Type::X, EAxis::Type::X),
-		FBlockMaterialDefinition(EMaterialInstance::TerminalScreen, EAxis::Type::X, EAxis::Type::X, true));*/
-	doorLeft.SetCustomScale(FVector(1, 1, 1), FVector(7, 7, 11));
-	doorLeft.AllowPitch = false;
-	doorLeft.AllowRoll = false;
+	FBlockDefinition door(EBlockName::Door, EShapeType::Custom);
+	door.AddMaterials(4,
+		FBlockMaterialDefinition(EMaterialInstance::DoorFrame, EAxis::Type::X, EAxis::Type::Y, FName(TEXT("doorFrame"))),
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::X,FName(TEXT("door")),true),
+		FBlockMaterialDefinition(EMaterialInstance::DoorCircle, EAxis::Type::X, EAxis::Type::Y, FName(TEXT("door"))),
+		FBlockMaterialDefinition(EMaterialInstance::DoorBody, EAxis::Type::X, EAxis::Type::Y, FName(TEXT("door")))
+		);
 
-	definitions.Add(doorLeft.ID, doorLeft);
+
+	door.SetCustomScale(FVector(1, 1, 1), FVector(7, 7, 11));
+	door.AllowPitch = false;
+	door.AllowRoll = false;
+
+	definitions.Add(door.ID, door);
 
 }

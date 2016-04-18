@@ -73,7 +73,7 @@ public:
 
 
 	static FORCEINLINE FString GetMaterialName(const EMaterialInstance& instance, bool isConstruct = false) {
-		const FString baseFolder = isConstruct ? TEXT("Material'/Game/Materials/BuildingObjects/%s") : TEXT("Material'/Game/Materials/BuildingObjects/Construction/%s");
+		const FString baseFolder = isConstruct ? TEXT("Material'/Game/Materials/BuildingObjects/Construction/%s") : TEXT("Material'/Game/Materials/BuildingObjects/%s");
 
 		switch (instance)
 		{
@@ -87,6 +87,9 @@ public:
 		case EMaterialInstance::ConstructTriangle: return FString::Printf(*baseFolder, TEXT("MaterialTriangle.MaterialTriangle'"));
 		case EMaterialInstance::TerminalScreen: return FString::Printf(*baseFolder, TEXT("TerminalScreen.TerminalScreen'"));
 		case EMaterialInstance::TerminalBase: return FString::Printf(*baseFolder, TEXT("TerminalBase.TerminalBase'"));
+		case EMaterialInstance::DoorFrame: return FString::Printf(*baseFolder, TEXT("DoorFrame.DoorFrame'"));
+		case EMaterialInstance::DoorBody: return FString::Printf(*baseFolder, TEXT("DoorBody.DoorBody'"));
+		case EMaterialInstance::DoorCircle: return FString::Printf(*baseFolder, TEXT("DoorCircle.DoorCircle'"));
 		default:
 			return TEXT("");
 		}
