@@ -19,6 +19,9 @@ public:
 	UPROPERTY()
 		TArray<FString> Tags;
 
+	UPROPERTY()
+		FRotator DefaultBuildingRotation;
+
 	UPROPERTY(BlueprintReadOnly, Category= BuildableBlockInfo)
 		bool IsEmptyHand;
 
@@ -29,12 +32,14 @@ public:
 	FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
 		FInventoryBuildableBlockInfo result = ToBaseContainer();
 		result.Tags = Tags;
+		result.DefaultBuildingRotation = DefaultBuildingRotation;
 		return result;
 	}
 
 	FORCEINLINE void FromContainer(FInventoryBuildableBlockInfo& info) {
 		FromBaseContainer(info);
 		Tags = info.Tags;
+		DefaultBuildingRotation = info.DefaultBuildingRotation;
 	}
 
 

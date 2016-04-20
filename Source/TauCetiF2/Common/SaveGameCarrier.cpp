@@ -118,17 +118,19 @@ void USaveGameCarrier::GetSaveForNewGame()
 
 	auto build1 = makeBuildable(EBlockName::Door, FVector(1, 1, 1));
 	build1->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Left);
+	build1->DefaultBuildingRotation = FRotator(0, 180, 0);
 	BuildableBlocks.Add(build1);
 
 	auto build2 = makeBuildable(EBlockName::Door, FVector(1, 1, 1));
 	build2->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Right);
+	build2->DefaultBuildingRotation = FRotator(0, 180, 0);
 	BuildableBlocks.Add(build2);
 
 	auto door1 = make(EBlockName::Door, FVector(-20, -20, 5), FVector(1, 1, 1), FRotator(0, 0, 0));
 	door1->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Left);
 	UsedBlocks.Add(door1);
 
-	auto door2 = make(EBlockName::Door, FVector(-20, 10, 5), FVector(1, 1, 1), FRotator(0, 180, 0));
+	auto door2 = make(EBlockName::Door, FVector(-20, 30, 5), FVector(1, 1, 1), FRotator(0, 180, 0));
 	door2->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Right);
 
 	UsedBlocks.Add(door2);

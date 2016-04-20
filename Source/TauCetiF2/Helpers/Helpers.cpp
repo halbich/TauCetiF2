@@ -92,11 +92,25 @@ UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
 
 	case EBlockName::ConstructCube: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BuildingBox.BuildingBox'")));
 	case EBlockName::BaseCube: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BaseBox.BaseBox'")));
-		//case EBlockName::WindowCube:		return					GetImageByName(*FString::Printf(*baseFolder, TEXT("MaterialBaseFloor.MaterialBaseFloor'")));
+	case EBlockName::WindowCube: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BaseWindow.BaseWindow'")));
 	case EBlockName::ConstructCubeSide: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BuildingBoxSide.BuildingBoxSide'")));
 	case EBlockName::BaseRamp: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BaseBoxSide.BaseBoxSide'")));
 	case EBlockName::ConstructCubeBody: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BuildingBoxBody.BuildingBoxBody'")));
 	case EBlockName::Terminal: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("Terminal.Terminal'")));
+	case EBlockName::Door: {
+		auto doorOpening = blockInfo->AdditionalFlags.Find(TEXT("doorOpening"));
+		if (doorOpening)
+		{
+			auto value = (EDoorOpening)(*doorOpening);
+			if(value == EDoorOpening::Left)
+				return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("DoorLeft.DoorLeft'")));
+			else if(value == EDoorOpening::Right)
+				return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("DoorRight.DoorRight'")));
+		}
+		return nullptr;
+		break;
+	}
+						   
 	default:
 		return nullptr;
 	}

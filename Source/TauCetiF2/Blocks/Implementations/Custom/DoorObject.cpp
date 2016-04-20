@@ -6,7 +6,7 @@
 
 
 ADoorObject::ADoorObject(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer), ListeningHandle(), doorState(EDoorState::Closed), doorOpening(EDoorOpening::Left)
+	: Super(ObjectInitializer), ListeningHandle(), doorState(EDoorState::Opened), doorOpening(EDoorOpening::Left)
 {
 	//auto dc = GetDestructibleComponent();
 	//if (!dc)
@@ -59,16 +59,7 @@ void  ADoorObject::OnConstruction(const FTransform& Transform) {
 	Subscriber.BindUObject(this, &ADoorObject::ListeningOnUse);
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 
-	if (WorldObjectComponent && WorldObjectComponent->BlockInfo)
-	{
-		auto key = TEXT("doorOpening");
-		auto valueptr = WorldObjectComponent->BlockInfo->AdditionalFlags.Find(key);
-		if (valueptr)
-			doorOpening = (EDoorOpening)(*valueptr);
-	}
-
-
-	SelectTargetComponent->CustomUsingMessage = TEXT("Open door");
+	
 }
 
 void ADoorObject::ListeningOnUse(AActor* actor)
@@ -127,33 +118,29 @@ void ADoorObject::Tick(float DeltaSeconds)
 	currentTrans.SetRotation(currentTrans.Rotator().Add(0, rotAdd, 0).Quaternion());
 
 
-	switch (doorState)
-	{
-	case EDoorState::Closed: 
-		currentTrans.SetLocation(FVector::ZeroVector);
-		SelectTargetComponent->CustomUsingMessage = TEXT("Open door");
-		break;
-	case EDoorState::Opening:
-		currentTrans.SetLocation(FMath::InterpSinIn(FVector::ZeroVector, FVector(-60 * openingConstant , 60, 0), FMath::Abs(currentTrans.Rotator().Yaw / 90.0f)));
-		break;
-	case EDoorState::Opened: 
-		currentTrans.SetLocation(FVector(-60 * openingConstant, 60, 0));
-		SelectTargetComponent->CustomUsingMessage = TEXT("Close door");
-		break;
-	case EDoorState::Closing:
-		currentTrans.SetLocation(FMath::InterpSinIn( FVector::ZeroVector,FVector(60* openingConstant, 60, 0), FMath::Abs( currentTrans.Rotator().Yaw / 90.0f)));
-		break;
+	
 
-	}
-
-	DoorMesh->SetRelativeTransform(currentTrans);
-	//print(TEXT("door tick"));
+	updateDoorState(currentTrans, openingConstant);
 }
 
 void ADoorObject::SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition)
 {
 	AWorldObject::SetBlockInfo(info, definition);
 
+
+	if (WorldObjectComponent && WorldObjectComponent->BlockInfo)
+	{
+		auto key = TEXT("doorOpening");
+		auto valueptr = WorldObjectComponent->BlockInfo->AdditionalFlags.Find(key);
+		if (valueptr)
+			doorOpening = (EDoorOpening)(*valueptr);
+	}
+
+
+	auto openingConstant = doorOpening == EDoorOpening::Left ? 1 : -1;
+	auto transf = DoorMesh->GetRelativeTransform();
+	transf.SetRotation(transf.Rotator().Add(0, 90 * openingConstant, 0).Quaternion());
+	updateDoorState(transf, openingConstant);
 
 }
 

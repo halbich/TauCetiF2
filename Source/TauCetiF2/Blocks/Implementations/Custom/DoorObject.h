@@ -51,4 +51,28 @@ private:
 
 	void ListeningOnUse(AActor* actor);
 
+
+	void updateDoorState(FTransform& currentTrans, int32 openingConstant)
+	{
+		switch (doorState)
+		{
+		case EDoorState::Closed:
+			currentTrans.SetLocation(FVector::ZeroVector);
+			SelectTargetComponent->CustomUsingMessage = TEXT("Open door");
+			break;
+		case EDoorState::Opening:
+			currentTrans.SetLocation(FMath::InterpSinIn(FVector::ZeroVector, FVector(-60 * openingConstant, 60, 0), FMath::Abs(currentTrans.Rotator().Yaw / 90.0f)));
+			break;
+		case EDoorState::Opened:
+			currentTrans.SetLocation(FVector(-60 * openingConstant, 60, 0));
+			SelectTargetComponent->CustomUsingMessage = TEXT("Close door");
+			break;
+		case EDoorState::Closing:
+			currentTrans.SetLocation(FMath::InterpSinIn(FVector::ZeroVector, FVector(60 * openingConstant, 60, 0), FMath::Abs(currentTrans.Rotator().Yaw / 90.0f)));
+			break;
+
+		}
+
+		DoorMesh->SetRelativeTransform(currentTrans);
+	}
 };

@@ -29,6 +29,7 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FInventoryBuildableBlockInfo& blo
 {
 	Ar << (FBlockBaseInfo&)block;
 	Ar << block.Tags;
+	Ar << block.DefaultBuildingRotation;
 
 	return Ar;
 }

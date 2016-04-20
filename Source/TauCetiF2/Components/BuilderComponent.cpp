@@ -100,7 +100,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!currentDefinitionForBlock || currentDefinitionForBlock->ID != currentBlockInfo->ID)
 		currentDefinitionForBlock = FBlockDefinitionHolder::Instance().GetDefinition(currentBuildableBlockInfo->ID);
 
-	currentBlockInfo->Rotation = FRotator::ZeroRotator;
+	currentBlockInfo->Rotation = currentBuildableBlockInfo->DefaultBuildingRotation;
 	currentBlockInfo->Scale = currentBuildableBlockInfo->Scale;
 	currentBlockInfo->Location = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);
 	currentBlockInfo->AdditionalFlags = currentBuildableBlockInfo->AdditionalFlags;
