@@ -73,6 +73,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
 		FRotator PlayerCameraRotation;
 
+	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+		bool PlayerUseFPSCamera;
+
 
 	// blocks 
 	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)

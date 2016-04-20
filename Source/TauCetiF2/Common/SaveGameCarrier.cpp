@@ -3,7 +3,7 @@
 #include "Helpers/Saving/ArchiveHelpers.h"
 #include "Helpers/Helpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 9;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 10;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -229,6 +229,7 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, boo
 	Ar << carrier.PlayerPosition;
 	Ar << carrier.PlayerRotation;
 	Ar << carrier.PlayerCameraRotation;
+	Ar << carrier.PlayerUseFPSCamera;
 
 	Ar << carrier.usedBlocks;
 	Ar << carrier.buildableBlocks;
