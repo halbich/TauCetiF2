@@ -72,7 +72,7 @@ enum class EBlockName : uint8
 	Door						UMETA(DisplayName = "Door"),
 };
 
-
+#if WITH_EDITOR
 static FString GetEBlockNameAsString(int32 EnumValue)
 {
 	const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EBlockName"), true);
@@ -80,7 +80,7 @@ static FString GetEBlockNameAsString(int32 EnumValue)
 
 	return *EnumPtr->GetDisplayNameText(EnumValue).ToString();
 }
-
+#endif
 
 enum class EDoorOpening : uint8
 {

@@ -122,6 +122,7 @@ private:
 
 	void DEBUGPrintSave() {
 
+#if WITH_EDITOR
 		UE_LOG(LogTemp, Log, TEXT("~~~~~~~~~~~~~~~~~~  Save ~~~~~~~~~~~~~~~~~~~~~~~~"));
 
 		for (auto info : usedBlocks)
@@ -135,6 +136,8 @@ private:
 		}
 
 		UE_LOG(LogTemp, Log, TEXT("~~~~~~~~~~~~~~~~~~  Save  ends ~~~~~~~~~~~~~~~~~~~~~~~~"));
+
+#endif
 	}
 
 
