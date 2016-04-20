@@ -21,7 +21,7 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 
 	Super::OnConstruction(Transform);
 
-	SelectTargetComponent->RegisterTargetPrimitiveComponent(GetStaticMeshComponent());
+	SelectTargetComponent->RegisterTargetObjectPrimitiveComponent(GetStaticMeshComponent());
 
 
 	//TODO
@@ -93,7 +93,7 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 		/*TranslucentSelectMesh->SetWorldScale3D(Transform.GetScale3D());
 		TranslucentSelectMesh->SetWorldLocationAndRotation(Transform.GetLocation(), Transform.GetRotation());*/
 		TranslucentSelectMesh->Activate();
-		SelectTargetComponent->RegisterTargetPrimitiveComponent(TranslucentSelectMesh);
+		SelectTargetComponent->RegisterTargetObjectPrimitiveComponent(TranslucentSelectMesh);
 	}
 	else
 		TranslucentSelectMesh->DestroyComponent();

@@ -161,9 +161,9 @@ void USelectorComponent::SetOutlining(bool enableOutlining)
 		return;
 
 	if (enableOutlining)
-		showOutline();
+		showObjectOutline();
 	else
-		hideOutline();
+		hideObjectOutline();
 
 	outliningEnabled = enableOutlining;
 }

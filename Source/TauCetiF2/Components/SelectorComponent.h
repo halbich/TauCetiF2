@@ -88,15 +88,15 @@ private:
 		if (oldVal != usableObjectTargeted)
 		{
 			if (usableObjectTargeted)
-				showOutline();
+				showUsableObjectOutline();
 			else
-				hideOutline();
+				hideUsableObjectOutline();
 
 			OnUsableObjectTargetedChanged.Broadcast(usableObjectTargeted);
 		}
 	}
 
-	FORCEINLINE void showOutline()
+	FORCEINLINE void showObjectOutline()
 	{
 		if (!SelectedActor)
 			return;
@@ -105,7 +105,26 @@ private:
 		{
 			if (SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
 			{
-				SelectedTarget->SelectTargetComponent->Select();
+				SelectedTarget->SelectTargetComponent->SelectObject();
+			}
+			else {
+				SelectedActor = nullptr;
+				SelectedTarget = nullptr;
+			}
+
+		}
+	}
+
+	FORCEINLINE void showUsableObjectOutline()
+	{
+		if (!SelectedActor)
+			return;
+
+		if (SelectedTarget && SelectedTarget->IsValidLowLevelFast())
+		{
+			if (SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
+			{
+				SelectedTarget->SelectTargetComponent->SelectUsableObject();
 			}
 			else {
 				SelectedActor = nullptr;
@@ -131,28 +150,41 @@ private:
 		SelectedTarget = worldObj;
 
 
-		if (outliningEnabled || usableObjectTargeted)
-			showOutline();
+		if (outliningEnabled )
+			showObjectOutline();
 
 		updateUsableObjectTarget();
 	}
 
 
-	FORCEINLINE void hideOutline()
+	FORCEINLINE void hideObjectOutline()
 	{
 		if (!SelectedActor)
 			return;
 
 		if (SelectedTarget && SelectedTarget->IsValidLowLevelFast() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
 		{
-			SelectedTarget->SelectTargetComponent->Deselect();
+			SelectedTarget->SelectTargetComponent->DeselectObject();
+		}
+
+	}
+
+	FORCEINLINE void hideUsableObjectOutline()
+	{
+		if (!SelectedActor)
+			return;
+
+		if (SelectedTarget && SelectedTarget->IsValidLowLevelFast() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
+		{
+			SelectedTarget->SelectTargetComponent->DeselectUsableObject();
 		}
 
 	}
 
 	FORCEINLINE void deselectComponent()
 	{
-		hideOutline();
+		hideObjectOutline();
+		hideUsableObjectOutline();
 
 		SelectedTarget = nullptr;
 		SelectedActor = nullptr;

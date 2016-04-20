@@ -14,8 +14,8 @@
 /* Stencil index mapping to PP_OutlineColored  http://www.tomlooman.com/multi-color-outline-post-process-in-unreal-engine-4/ */
 #define STENCIL_FRIENDLY_OUTLINE 252;
 #define STENCIL_NEUTRAL_OUTLINE 253;
-#define STENCIL_ENEMY_OUTLINE 254;
-#define STENCIL_ITEMHIGHLIGHT 255;
+#define STENCIL_USE_HIGHLIGHT 254;
+#define STENCIL_ITEM_HIGHLIGHT 255;
 
 #define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1,10, FColor::White,text)
 #define printL(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1,60, FColor::White,text)

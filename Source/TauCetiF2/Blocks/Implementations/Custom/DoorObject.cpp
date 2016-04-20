@@ -53,8 +53,8 @@ void  ADoorObject::OnConstruction(const FTransform& Transform) {
 
 	Super::OnConstruction(Transform);
 
-	SelectTargetComponent->RegisterTargetPrimitiveComponent(DoorMesh);
-	SelectTargetComponent->EnableUse(200);
+	SelectTargetComponent->RegisterTargetObjectPrimitiveComponent(DoorFrameMesh);
+	SelectTargetComponent->EnableUse(200, DoorMesh);
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ADoorObject::ListeningOnUse);
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);

@@ -15,8 +15,13 @@ class TAUCETIF2_API USelectTargetComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-		UPROPERTY()
-		UPrimitiveComponent* primitive;
+private:
+
+	UPROPERTY()
+		UPrimitiveComponent* objectOutlinePrimitive;
+
+	UPROPERTY()
+		UPrimitiveComponent* usableObjectOutlinePrimitive;
 
 	UPROPERTY()
 		AActor* owner;
@@ -28,7 +33,10 @@ public:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
-		bool HasOutline;
+		bool HasObjectOutline;
+
+	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
+		bool HasUsableObjectOutline;
 
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
 		bool IsUsable;
@@ -39,16 +47,27 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
 		FString CustomUsingMessage;
 
-	virtual void Select();
+	virtual void SelectObject();
 
-	virtual void Deselect();
+	virtual void DeselectObject();
 
-	void RegisterTargetPrimitiveComponent(UPrimitiveComponent* comp);
+	virtual void SelectUsableObject();
 
-	FORCEINLINE void EnableUse(float maxDistance = -1.0f)
+	virtual void DeselectUsableObject();
+
+	void RegisterTargetObjectPrimitiveComponent(UPrimitiveComponent* comp);
+
+
+	FORCEINLINE void EnableUse(float maxDistance = -1.0f, UPrimitiveComponent* comp = nullptr)
 	{
 		IsUsable = true;
 		MaxDistance = maxDistance;
+
+		usableObjectOutlinePrimitive = comp == nullptr ? objectOutlinePrimitive : comp;
+
+		if (usableObjectOutlinePrimitive != nullptr && usableObjectOutlinePrimitive->IsValidLowLevel()) {
+			HasUsableObjectOutline = true;
+		}
 	}
 
 	void OnUse(AActor* selectingActor);
