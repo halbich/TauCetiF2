@@ -30,6 +30,7 @@ void USelectTargetComponent::Select()
 	if (HasOutline && primitive)
 	{
 		primitive->SetRenderCustomDepth(true);
+		primitive->CustomDepthStencilValue = STENCIL_ITEMHIGHLIGHT;
 		return;
 	}
 }
