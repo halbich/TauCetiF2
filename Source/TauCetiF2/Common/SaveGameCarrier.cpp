@@ -114,7 +114,9 @@ void USaveGameCarrier::GetSaveForNewGame()
 	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(1, 1, 4)));
 	BuildableBlocks.Add(makeBuildable(EBlockName::WindowCube, FVector(4, 4, 1)));
 	//BuildableBlocks.Add(makeBuildable(EBlockName::Terminal, FVector(1, 1, 1)));
-	BuildableBlocks.Add(makeBuildable(EBlockName::ConstructCubeBody, FVector(10, 10, 10)));
+	BuildableBlocks.Add(makeBuildable(EBlockName::ConstructCube, FVector(1, 1, 1)));
+	BuildableBlocks.Add(makeBuildable(EBlockName::ConstructCubeSide, FVector(2, 2, 2)));
+	BuildableBlocks.Add(makeBuildable(EBlockName::ConstructCubeBody, FVector(5, 5, 5)));
 
 	auto build1 = makeBuildable(EBlockName::Door, FVector(1, 1, 1));
 	build1->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Left);
