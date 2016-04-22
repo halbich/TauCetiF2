@@ -34,41 +34,68 @@ void UWorldObjectComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	// ...
 }
 
-void UWorldObjectComponent::UpdateTree(UMinMaxBox* definingBox, TArray<UKDTree*>& usedBoxes)
+void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 {
 	DefiningBox = definingBox;
 	ensure(DefiningBox != nullptr);
 
-	ensure(usedBoxes.Num() > 0);
+	//ensure(usedBoxes.Num() > 0);
 
-	UKDTree* highestElem = nullptr;
-	TreeElements = TArray<UKDTree*>(usedBoxes);
-	for (auto elem : TreeElements)
+	//UKDTree* highestElem = nullptr;
+	//TreeElements = TArray<UKDTree*>(usedBoxes);
+	//for (auto elem : TreeElements)
+	//{
+	//	auto currentItem = Cast<UKDTree>(elem->ParentNode);
+	//	if (!highestElem)
+	//	{
+	//		highestElem = currentItem;
+	//		continue;
+	//	}
+
+	//	if (highestElem->DividingIndex > currentItem->DividingIndex)
+	//		highestElem = currentItem;
+	//}
+
+
+
+	//RootBox = highestElem->GetParentNode<UKDTree>(true);
+	//ensure(RootBox != nullptr);
+
+	//auto surroundings = NewObject<UKDTree>()->Init(DefiningBox, RootBox);
+	////surroundings->DEBUGDrawSurrondings(GetWorld());
+
+	//TArray<AWorldObject*> items;
+	//highestElem->GetContainingObjectsFromBottom(surroundings, items);
+	//print(TEXT("surroundings:"));
+	//for (auto object : items)
+	//{
+	//	if (!object || !object->IsValidLowLevelFast() || object == DefiningBox->ContainingObject)
+	//		continue;
+
+
+	//	//print(*object->GetName());
+	//}
+}
+
+void UWorldObjectComponent::OnTreeElementsChanged()
+{
+
+}
+
+void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	for (auto object : TreeElements)
 	{
-		auto currentItem = Cast<UKDTree>(elem->ParentNode);
-		if (!highestElem)
-		{
-			highestElem = currentItem;
+		if (!object || !object->IsValidLowLevelFast() || object->IsPendingKill())
 			continue;
-		}
 
-		if (highestElem->DividingIndex > currentItem->DividingIndex)
-			highestElem = currentItem;
+		auto par = Cast<UKDTree>(object->ParentNode);
+		object->MarkPendingKill();
+
+		if (par && par->IsValidLowLevelFast())
+			par->UpdateAfterChildDestroyed();
 	}
 
 
 
-	RootBox = highestElem->GetParentNode<UKDTree>(true);
-	ensure(RootBox != nullptr);
-
-	auto surroundings = NewObject<UKDTree>()->Init(DefiningBox, RootBox);
-	surroundings->DEBUGDrawSurrondings(GetWorld());
-
-	TArray<AWorldObject*> items;
-	highestElem->GetContainingObjectsFromBottom(surroundings, items);
-	for (auto object : items)
-	{
-		if (object)
-			print(*object->GetName());
-	}
 }

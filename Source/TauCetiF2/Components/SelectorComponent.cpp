@@ -155,15 +155,16 @@ void USelectorComponent::TrySelect() {
 }
 
 
-void USelectorComponent::SetOutlining(bool enableOutlining)
+void USelectorComponent::SetOutlining(bool enableOutlining, int32 stencilValue)
 {
-	if (outliningEnabled == enableOutlining)
-		return;
-
-	if (enableOutlining)
-		showObjectOutline();
-	else
-		hideObjectOutline();
-
+	StencilValue = stencilValue;
 	outliningEnabled = enableOutlining;
+	
+	
+	hideObjectOutline();
+	showObjectOutline();
+
+	hideUsableObjectOutline();
+	showUsableObjectOutline();
+
 }

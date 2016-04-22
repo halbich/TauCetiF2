@@ -32,7 +32,7 @@ public:
 		UKDTree* B2;
 
 	UPROPERTY()
-		AWorldObject* containingObject;
+		AWorldObject* ContainingObject;
 
 	UPROPERTY()
 		int32 DividingIndex;
@@ -49,16 +49,20 @@ public:
 	void DEBUGDrawContainingBox(UWorld* world);
 	void DEBUGDrawSurrondings(UWorld* world);
 
-	void AddToTree(UKDTree* box, TArray<UKDTree*>& usedBoxes, bool forceInsert = false);
+	void AddToTree(UKDTree* box, bool forceInsert = false);
 	bool IsPlaceEmpty(const UMinMaxBox* box);
 	void GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray);
 	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray);
 
+	void UpdateAfterChildDestroyed();
+
 private:
 
-	void addToTreeByCoord(UKDTree* box, TArray<UKDTree*>& usedBoxes);
+	void addToTreeByCoord(UKDTree* box);
 
 	bool isPlaceEmptySingleChild(const UMinMaxBox* box);
+
+	void updateAfterChildDestroyedInner();
 
 	FORCEINLINE void recomputeDividingCoordValue()
 	{
@@ -85,6 +89,11 @@ private:
 	FORCEINLINE float sum(const FVector& v)
 	{
 		return v.X + v.Y + v.Z;
+	}
+
+	FORCEINLINE bool canBeDeleted() {
+		return ParentNode != nullptr;
+
 	}
 
 };

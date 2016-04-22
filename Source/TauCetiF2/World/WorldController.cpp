@@ -18,6 +18,12 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	RootBox = CreateDefaultSubobject<UKDTree>(TEXT("RootBox"));
 	RootBox->Init(min, max, 0);
 
+
+	auto patternHolder = UPatternDefinitionsHolder::Instance();
+	for (auto pattern : patternHolder->UsedDefinitions)
+	{
+		print(TEXT("register pattern"));
+	}
 }
 
 
@@ -37,6 +43,24 @@ void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
 
 }
 
+bool AWorldController::DestroyWorldObject(AWorldObject* object)
+{
+	if (!object || !object->IsValidLowLevel() || object->IsPendingKill())
+		return false;
+
+	auto count = UsedBlocks.Remove(object->WorldObjectComponent->BlockInfo);
+	check(count == 1 && "Failed to remove block info.");
+	object->Destroy();
+	
+	if (debugBoxesShown) {
+		DEBUGHideMinMaxBoxes();
+		DEBUGShowMinMaxBoxes();
+	}
+
+	check(RootBox && RootBox->IsValidLowLevel() && !RootBox->IsPendingKill());
+	
+	return true;
+}
 
 // TODO inline!
 AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot)
@@ -91,25 +115,20 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 	if (addToRoot) {
 
 		auto MinMax = NewObject<UKDTree>()->Init(box);
-		MinMax->containingObject = actor;
+		MinMax->ContainingObject = actor;
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 
-		TArray<UKDTree*> usedBoxes;
 
-		RootBox->AddToTree(MinMax, usedBoxes);
-		for (auto usedBox : usedBoxes)
+		actor->WorldObjectComponent->UpdateDefiningBox(MinMax);
+		RootBox->AddToTree(MinMax);
+		for (auto usedBox : actor->WorldObjectComponent->TreeElements)
 		{
-			if (usedBox->GetParentNode<UKDTree>() != RootBox)
-			{
-				print(TEXT("aaaaa"));
-			}
+			check(usedBox->GetParentNode<UKDTree>() == RootBox && TEXT("Used box don't have RootBox as ROOT !"));
+			check(usedBox->ContainingObject == actor && TEXT("Used box has another ContainingObject than it should have!"));
 		}
 
-		MinMax->DEBUGDrawContainingBox(GetWorld());
+		//MinMax->DEBUGDrawContainingBox(GetWorld());
 
-		actor->WorldObjectComponent->UpdateTree(box, usedBoxes);
-
-		
 
 	}
 
@@ -161,19 +180,19 @@ void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	{
 		if (RootBox->SingleChild)
 		{
-			RootBox->SingleChild->ConditionalBeginDestroy();
+			RootBox->SingleChild->MarkPendingKill();
 			RootBox->SingleChild = nullptr;
 		}
 
 		if (RootBox->B1)
 		{
-			RootBox->B1->ConditionalBeginDestroy();
+			RootBox->B1->MarkPendingKill();
 			RootBox->B1 = nullptr;
 		}
 
 		if (RootBox->B2)
 		{
-			RootBox->B2->ConditionalBeginDestroy();
+			RootBox->B2->MarkPendingKill();
 			RootBox->B2 = nullptr;
 		}
 	}

@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "TauCetiF2.h"
+#include "Game/GameDefinitions.h"
 #include "Object.h"
 #include "Helpers/Saving/ArchiveHelpers.h"
 #include "Helpers/Saving/BlockSaveInfo.h"
@@ -158,12 +160,28 @@ private:
 		buildableBlocks.Empty();
 		for (auto buildableBlock : BuildableBlocks)
 		{
-			if (buildableBlock && buildableBlock->IsValidLowLevel() && !buildableBlock->IsEmptyHand)
+			if (buildableBlock && buildableBlock->IsValidLowLevel() && !buildableBlock->IsSystemAction)
 				buildableBlocks.Add(buildableBlock->ToContainer());
 		}
 
 		DEBUGPrintSave();
 	}
+
+	FORCEINLINE void addSystemBuildableActions()
+	{
+		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
+		BuildableBlocks[0]->IsEmptyHand = true;
+		BuildableBlocks[0]->IsSystemAction = true;
+		BuildableBlocks[0]->Action = EBuildableObjectAction::None;
+		BuildableBlocks[0]->AllowOutlineOnSelected = false;
+
+		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
+		BuildableBlocks[1]->IsEmptyHand = true;
+		BuildableBlocks[1]->IsSystemAction = true;
+		BuildableBlocks[1]->Action = EBuildableObjectAction::DeleteObject;
+		BuildableBlocks[1]->StencilOverride = STENCIL_DELETE_OUTLINE;
+	}
+
 
 	FORCEINLINE void updateAfterLoad() {
 
@@ -177,8 +195,7 @@ private:
 
 
 		BuildableBlocks.Empty();
-		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
-		BuildableBlocks[0]->IsEmptyHand = true;
+		addSystemBuildableActions();
 
 		for (auto buildableBlock : buildableBlocks)
 		{

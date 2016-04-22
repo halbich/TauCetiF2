@@ -89,3 +89,11 @@ enum class EDoorOpening : uint8
 
 };
 
+UENUM(BlueprintType)
+enum class EBuildableObjectAction : uint8
+{
+	None						UMETA(DisplayName = "None"),
+	ConstructObject				UMETA(DisplayName = "ConstructObject"),
+	DeleteObject				UMETA(DisplayName = "DeleteObject"),
+};
+

@@ -80,7 +80,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!blockInfo || !blockInfo->IsValidLowLevel())
 		return;
 
-	if (!selector || !selector->IsValidLowLevel() || !worldController || !worldController->IsValidLowLevel())
+	if (!selector || !selector->IsValidLowLevel() )
 		return;
 
 	if (currentSpawnedObject)
@@ -92,6 +92,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 
 	}
 	currentBuildableBlockInfo = blockInfo;
+	selector->SetOutlining(currentBuildableBlockInfo->AllowOutlineOnSelected, currentBuildableBlockInfo->StencilOverride);
 
 	if (currentBuildableBlockInfo->IsEmptyHand)
 		return;
@@ -104,6 +105,9 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	currentBlockInfo->Scale = currentBuildableBlockInfo->Scale;
 	currentBlockInfo->Location = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);
 	currentBlockInfo->AdditionalFlags = currentBuildableBlockInfo->AdditionalFlags;
+
+	if (!worldController || !worldController->IsValidLowLevel())
+		return;
 
 	if (!worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo)))
 		return;

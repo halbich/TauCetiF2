@@ -23,6 +23,7 @@ public:
 		UBlockInfo* BlockInfo;
 
 
+	// Elements taken in WorldTree. This collection could be changes as WorldTree Changes
 	UPROPERTY()
 		TArray<UKDTree*> TreeElements;
 
@@ -30,15 +31,18 @@ public:
 		UKDTree* RootBox;
 
 	UPROPERTY()
-		UMinMaxBox* DefiningBox;
+		UKDTree* DefiningBox;
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 	
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
-	void UpdateTree(UMinMaxBox* DefiningBox, TArray<UKDTree*>& usedBoxes);
+	void UpdateDefiningBox(UKDTree* definingBox);
 		
+	void OnTreeElementsChanged();
 	
 };

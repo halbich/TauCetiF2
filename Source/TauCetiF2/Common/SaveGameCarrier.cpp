@@ -105,10 +105,12 @@ void USaveGameCarrier::GetSaveForNewGame()
 	IsSystemSave = true;
 	PlayerPosition = FVector(-600, 0, 90);
 	PartOfDay = 0.5f;
+	PlayerUseFPSCamera = true;
 
 
-	BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
-	BuildableBlocks[0]->IsEmptyHand = true;
+	BuildableBlocks.Empty();
+	addSystemBuildableActions();
+
 	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(1, 1, 1)));
 
 	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(1, 1, 4)));

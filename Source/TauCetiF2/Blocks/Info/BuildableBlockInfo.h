@@ -14,7 +14,7 @@ class TAUCETIF2_API UBuildableBlockInfo : public UBlockBaseInfo
 {
 	GENERATED_BODY()
 public:
-
+	UBuildableBlockInfo();
 
 	UPROPERTY()
 		TArray<FString> Tags;
@@ -26,7 +26,16 @@ public:
 		bool IsEmptyHand;
 
 	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
+		EBuildableObjectAction Action;
+
+	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
+		bool IsSystemAction;
+
+	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
 		bool AllowOutlineOnSelected;
+
+	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
+		int32 StencilOverride;
 
 
 	FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {

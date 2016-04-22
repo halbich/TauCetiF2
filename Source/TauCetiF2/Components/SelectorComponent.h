@@ -66,10 +66,13 @@ public:
 		bool outliningEnabled;
 
 	UFUNCTION(BlueprintCallable, Category = TargetSelector)
-		void SetOutlining(bool enableOutlining);
+		void SetOutlining(bool enableOutlining, int32 stencilValue);
 
 	UPROPERTY(BlueprintReadOnly)
 		bool usableObjectTargeted;
+
+	UPROPERTY(BlueprintReadOnly)
+		int32 StencilValue;
 
 private:
 
@@ -105,7 +108,7 @@ private:
 		{
 			if (SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
 			{
-				SelectedTarget->SelectTargetComponent->SelectObject();
+				SelectedTarget->SelectTargetComponent->SelectObject(StencilValue);
 			}
 			else {
 				SelectedActor = nullptr;

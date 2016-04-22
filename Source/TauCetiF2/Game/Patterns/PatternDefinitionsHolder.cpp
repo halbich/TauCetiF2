@@ -15,7 +15,14 @@ UPatternDefinitionsHolder::UPatternDefinitionsHolder(const FObjectInitializer& O
 UPatternDefinitionsHolder* UPatternDefinitionsHolder::Instance()
 {
 
-	static UPatternDefinitionsHolder* instance = NewObject<UPatternDefinitionsHolder>();
+	static UPatternDefinitionsHolder* instance = nullptr;
+
+	if (instance == nullptr || !instance->IsValidLowLevel())
+	{
+		UClass *definitionsClass = UPatternDefinitionsHolder::StaticClass();
+		instance = NewObject<UPatternDefinitionsHolder>();
+		//instance = Cast<UPatternDefinitionsHolder>(ConstructObject<UObject>(definitionsClass));
+	}
 
 	return instance;
 

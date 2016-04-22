@@ -47,7 +47,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
 		FString CustomUsingMessage;
 
-	virtual void SelectObject();
+	virtual void SelectObject(int32 stencilValue);
 
 	virtual void DeselectObject();
 

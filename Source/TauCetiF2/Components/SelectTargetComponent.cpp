@@ -1,6 +1,7 @@
 
 
 #include "TauCetiF2.h"
+#include "Game/GameDefinitions.h"
 #include "SelectTargetComponent.h"
 
 
@@ -24,12 +25,12 @@ void USelectTargetComponent::BeginPlay()
 		print(TEXT("No Owner! "));
 }
 
-void USelectTargetComponent::SelectObject()
+void USelectTargetComponent::SelectObject(int32 stencilValue)
 {
 	if (HasObjectOutline && objectOutlinePrimitive && objectOutlinePrimitive->IsValidLowLevel())
 	{
 		objectOutlinePrimitive->SetRenderCustomDepth(true);
-		objectOutlinePrimitive->CustomDepthStencilValue = STENCIL_ITEM_HIGHLIGHT;
+		objectOutlinePrimitive->CustomDepthStencilValue = stencilValue > STENCIL_MINIMUM_USABLE_EXCLUDING ? stencilValue : STENCIL_ITEM_HIGHLIGHT;
 	}
 }
 

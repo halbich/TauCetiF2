@@ -10,6 +10,8 @@
 #include "KDTree.h"
 #include "Blocks/Definitions/FBlockDefinition.h"
 #include "Blocks/Definitions/FBlockDefinitionHolder.h"
+#include "Game/Patterns/PatternDefinition.h"
+#include "Game/Patterns/PatternDefinitionsHolder.h"
 
 #include "WorldController.generated.h"
 
@@ -34,6 +36,8 @@ public:
 		void DEBUGHideMinMaxBoxes();
 
 	AWorldObject* SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot);
+
+	bool DestroyWorldObject(AWorldObject* object);
 
 	FORCEINLINE bool IsValidSpawnPoint(const UMinMaxBox* box)
 	{

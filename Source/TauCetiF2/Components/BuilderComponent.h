@@ -65,28 +65,37 @@ public:
 
 	void DoAction() {
 
-		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel() || !currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
+		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel() || !currentBuildableBlockInfo || !currentBuildableBlockInfo->IsValidLowLevel())
 			return;
 
-		if (currentBuildableBlockInfo->IsEmptyHand)
+		switch (currentBuildableBlockInfo->Action)
 		{
+		case EBuildableObjectAction::None:			return;
+		case EBuildableObjectAction::DeleteObject:
+
+			if (!selector->SelectedTarget)
+				return;
+
+			if (worldController->DestroyWorldObject(selector->SelectedTarget))
+				print(TEXT("deletion seccessfull"));
+
+			return;
+		case EBuildableObjectAction::ConstructObject:
+
+			if (!currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
+				return;
+
+			auto spawnBlock = NewObject<UBlockInfo>((UObject*)GetTransientPackage(), NAME_None, RF_NoFlags, currentBlockInfo);
+
+			spawnBlock->UnderConstruction = false;
+
+			if (worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
+				worldController->SpawnWorldObject(World, spawnBlock, true);
+			else
+				print(TEXT("Invalid location"));
 
 			return;
 		}
-
-
-		auto spawnBlock = NewObject<UBlockInfo>((UObject*)GetTransientPackage(), NAME_None, RF_NoFlags, currentBlockInfo);
-
-		spawnBlock->UnderConstruction = false;
-
-		if (worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
-		{
-			print(TEXT("doing something"));
-			worldController->SpawnWorldObject(World, spawnBlock, true);
-		}
-		else
-			print(TEXT("Invalid location"));
-
 	}
 
 
@@ -101,12 +110,12 @@ public:
 			return;
 
 		auto grid = GameDefinitions::WorldGrid;
-		auto gr=grid.Add(90, 0, 0);
+		auto gr = grid.Add(90, 0, 0);
 		auto rotator = character->GetControlRotation().GridSnap(gr);
-		
+
 		print(*rotator.ToString());
 		auto desiredRotation = rotator.UnrotateVector(FVector(Pitch, Roll, Yaw));
-		
+
 		currentBlockInfo->Rotation = (FQuat(FRotator(desiredRotation.X, desiredRotation.Z, desiredRotation.Y)) *  FQuat(currentBlockInfo->Rotation)).Rotator();
 		currentBlockInfo->Rotation = currentBlockInfo->Rotation.GridSnap(GameDefinitions::WorldGrid);
 		ForceRecomputePosition = true;
