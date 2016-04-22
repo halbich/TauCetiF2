@@ -34,6 +34,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
 		static UTexture2D* GetTexture2DForBlock(UBuildableBlockInfo* blockInfo);
 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Change Localization"), Category = "Locale")
+		static void ChangeLocalization(FString target);
+
 
 	static FORCEINLINE FString UHelpers::GetCleanSaveFileName(const FString& worldName, const FDateTime& saveTime) {
 		auto name = worldName.Replace(TEXT(" "), TEXT("_"));

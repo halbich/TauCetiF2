@@ -118,4 +118,9 @@ UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
 }
 
 
+void UHelpers::ChangeLocalization(FString target)
+{
+	FInternationalization::Get().SetCurrentCulture(target);
+}
+
 
