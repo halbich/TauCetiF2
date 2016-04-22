@@ -121,23 +121,23 @@ void USaveGameCarrier::GetSaveForNewGame()
 	auto build1 = makeBuildable(EBlockName::Door, FVector(1, 1, 1));
 	build1->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Left);
 	build1->DefaultBuildingRotation = FRotator(0, 180, 0);
-	BuildableBlocks.Add(build1);
+	//BuildableBlocks.Add(build1);
 
 	auto build2 = makeBuildable(EBlockName::Door, FVector(1, 1, 1));
 	build2->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Right);
 	build2->DefaultBuildingRotation = FRotator(0, 180, 0);
-	BuildableBlocks.Add(build2);
+	//BuildableBlocks.Add(build2);
 
 	auto door1 = make(EBlockName::Door, FVector(-20, -20, 5), FVector(1, 1, 1), FRotator(0, 0, 0));
 	door1->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Left);
-	UsedBlocks.Add(door1);
+	//UsedBlocks.Add(door1);
 
 	auto door2 = make(EBlockName::Door, FVector(-20, 30, 5), FVector(1, 1, 1), FRotator(0, 180, 0));
 	door2->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Right);
 
-	UsedBlocks.Add(door2);
+	//UsedBlocks.Add(door2);
 
-	UsedBlocks.Add(make(EBlockName::Terminal, FVector(-20, -30, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	//UsedBlocks.Add(make(EBlockName::Terminal, FVector(-20, -30, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
 	
 	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 3, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
 	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 6, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));

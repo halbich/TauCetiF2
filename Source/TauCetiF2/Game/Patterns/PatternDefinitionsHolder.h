@@ -20,7 +20,7 @@ public:
 	static UPatternDefinitionsHolder* Instance();
 
 	UPROPERTY()
-	TArray<UPatternDefinition*> UsedDefinitions;
+		TArray<UPatternDefinition*> UsedDefinitions;
 private:
 
 
