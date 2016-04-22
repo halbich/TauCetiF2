@@ -22,8 +22,17 @@ UKDTree* UKDTree::Init(UMinMaxBox* box)
 	return Init(box->Min, box->Max, 0);
 }
 
+UKDTree* UKDTree::Init(UMinMaxBox* box, UMinMaxBox* constrainingBox)
+{
+	ensure(box != nullptr);
+	ensure(constrainingBox != nullptr);
+	FVector min(FMath::Max(box->Min.X - GameDefinitions::CubeMinSize, constrainingBox->Min.X), FMath::Max(box->Min.Y - GameDefinitions::CubeMinSize, constrainingBox->Min.Y), FMath::Max(box->Min.Z - GameDefinitions::CubeMinSize, constrainingBox->Min.Z));
+	FVector max(FMath::Min(box->Max.X + GameDefinitions::CubeMinSize, constrainingBox->Max.X), FMath::Min(box->Max.Y + GameDefinitions::CubeMinSize, constrainingBox->Max.Y), FMath::Min(box->Max.Z + GameDefinitions::CubeMinSize, constrainingBox->Max.Z));
+	return Init(min, max, 0);
+}
 
-void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
+
+void UKDTree::AddToTree(UKDTree* box, TArray<UKDTree*>& usedBoxes, bool forceInsert)
 {
 	ensure(box != nullptr);
 
@@ -32,23 +41,28 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 	if (!B1 && !B2 && !SingleChild && GtMin(box->Min) && LtMax(box->Max))
 	{
 		SingleChild = box;
+		box->ParentNode = this;
+		usedBoxes.Add(box);
 		return;
 	}
 
 
 	if (SingleChild && !forceInsert)
 	{
-		AddToTree(SingleChild, true); // forcing to insert
+		SingleChild->ParentNode = nullptr;
+		usedBoxes.Remove(SingleChild);			// this box could be split
+		AddToTree(SingleChild,usedBoxes, true); // forcing to insert
+
 		SingleChild = nullptr;
 	}
 
-	addToTreeByCoord(box);
+	addToTreeByCoord(box, usedBoxes);
 }
 
 
 
 
-void UKDTree::addToTreeByCoord(UKDTree* box) {
+void UKDTree::addToTreeByCoord(UKDTree* box, TArray<UKDTree*>& usedBoxes) {
 
 
 	if (sum(box->Max * DividingCoord) <= DividingCoordValue)		// whole object is in left plane
@@ -56,9 +70,10 @@ void UKDTree::addToTreeByCoord(UKDTree* box) {
 		if (!B1)
 		{
 			B1 = NewObject<UKDTree>(this);
+			B1->ParentNode = this;
 			B1->Init(Min, (FVector(1, 1, 1) - DividingCoord) *  Max + (DividingCoord * DividingCoordValue), DividingIndex + 1);
 		}
-		B1->AddToTree(box);
+		B1->AddToTree(box, usedBoxes);
 		return;
 	}
 
@@ -67,10 +82,11 @@ void UKDTree::addToTreeByCoord(UKDTree* box) {
 		if (!B2)
 		{
 			B2 = NewObject<UKDTree>(this);
+			B2->ParentNode = this;
 			B2->Init((FVector(1, 1, 1) - DividingCoord) *  Min + (DividingCoord * DividingCoordValue), Max, DividingIndex + 1);
 		}
 
-		B2->AddToTree(box);
+		B2->AddToTree(box, usedBoxes);
 		return;
 	}
 
@@ -86,9 +102,8 @@ void UKDTree::addToTreeByCoord(UKDTree* box) {
 	newB2->recomputeDividingCoordValue();
 	newB2->containingObject = box->containingObject;
 
-	addToTreeByCoord(newB1);
-	addToTreeByCoord(newB2);
-
+	addToTreeByCoord(newB1, usedBoxes);
+	addToTreeByCoord(newB2, usedBoxes);
 
 }
 
@@ -131,6 +146,18 @@ void UKDTree::DEBUGDrawContainingBox(UWorld* world)
 
 }
 
+void UKDTree::DEBUGDrawSurrondings(UWorld* world)
+{
+	if (!world)
+		return;
+
+
+	auto bcenter = (Max + Min) * 0.5;
+	auto bextend = (Max - bcenter);
+	DrawDebugBox(world, bcenter, bextend, FColor::Magenta, true);
+
+}
+
 
 bool UKDTree::IsPlaceEmpty(const UMinMaxBox* box) {
 
@@ -166,4 +193,58 @@ bool UKDTree::isPlaceEmptySingleChild(const UMinMaxBox* box)
 	auto z = box->Max.Z <= Min.Z || box->Min.Z >= Max.Z;		// false if there is netrivial intersection
 
 	return x || y || z;
+}
+
+
+void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray)
+{
+	if (!(GtMin(box->Min) && LtMax(box->Max)))
+		return;
+
+	if (SingleChild)
+	{
+		outArray.Add(SingleChild->containingObject);
+		return;
+	}
+
+	if (sum(box->Max * DividingCoord) <= DividingCoordValue)		// whole object is in left plane
+	{
+		if (!B1)
+			return;
+		B1->GetContainingObjects(box, outArray);
+		return;
+	}
+
+	if (sum(box->Min *DividingCoord) >= DividingCoordValue)		// whole object is in right plane
+	{
+		if (!B2)
+			return;
+		B2->GetContainingObjects(box, outArray);
+		return;
+	}
+
+	// object is in between. We need to split and then add object to both branches
+
+	UMinMaxBox* newB1 = NewObject<UMinMaxBox>(this)->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
+	UMinMaxBox* newB2 = NewObject<UMinMaxBox>(this)->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
+
+
+	GetContainingObjects(newB1, outArray);
+	GetContainingObjects(newB2, outArray);
+
+
+}
+
+void UKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray)
+{
+	if (!(GtMin(box->Min) && LtMax(box->Max)))
+	{
+		ensure(ParentNode != nullptr);
+		//ParentNode->GetContainingObjectsFromBottom(box, outArray);
+		return;
+	}
+
+	GetContainingObjects(box, outArray);
+
+
 }

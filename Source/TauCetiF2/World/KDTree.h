@@ -21,6 +21,8 @@ public:
 
 	UKDTree* Init(FVector min, FVector max, int8 dividingIndex);
 	UKDTree* Init(UMinMaxBox* box);
+	UKDTree* Init(UMinMaxBox* box, UMinMaxBox* constrainingBox);
+
 
 
 	UPROPERTY()
@@ -45,13 +47,16 @@ public:
 		float DividingCoordValue;
 
 	void DEBUGDrawContainingBox(UWorld* world);
+	void DEBUGDrawSurrondings(UWorld* world);
 
-	void AddToTree(UKDTree* box, bool forceInsert = false);
+	void AddToTree(UKDTree* box, TArray<UKDTree*>& usedBoxes, bool forceInsert = false);
 	bool IsPlaceEmpty(const UMinMaxBox* box);
+	void GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray);
+	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray);
 
 private:
 
-	void addToTreeByCoord(UKDTree* box);
+	void addToTreeByCoord(UKDTree* box, TArray<UKDTree*>& usedBoxes);
 
 	bool isPlaceEmptySingleChild(const UMinMaxBox* box);
 

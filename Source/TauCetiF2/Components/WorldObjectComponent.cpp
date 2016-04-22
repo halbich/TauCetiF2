@@ -22,15 +22,53 @@ void UWorldObjectComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
+
 }
 
 
 // Called every frame
-void UWorldObjectComponent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
+void UWorldObjectComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
 }
 
+void UWorldObjectComponent::UpdateTree(UMinMaxBox* definingBox, TArray<UKDTree*>& usedBoxes)
+{
+	DefiningBox = definingBox;
+	ensure(DefiningBox != nullptr);
+
+	ensure(usedBoxes.Num() > 0);
+
+	UKDTree* highestElem = nullptr;
+	TreeElements = TArray<UKDTree*>(usedBoxes);
+	for (auto elem : TreeElements)
+	{
+		auto currentItem = Cast<UKDTree>(elem->ParentNode);
+		if (!highestElem)
+		{
+			highestElem = currentItem;
+			continue;
+		}
+
+		if (highestElem->DividingIndex > currentItem->DividingIndex)
+			highestElem = currentItem;
+	}
+
+
+
+	RootBox = highestElem->GetParentNode<UKDTree>(true);
+	ensure(RootBox != nullptr);
+
+	auto surroundings = NewObject<UKDTree>()->Init(DefiningBox, RootBox);
+	surroundings->DEBUGDrawSurrondings(GetWorld());
+
+	TArray<AWorldObject*> items;
+	highestElem->GetContainingObjectsFromBottom(surroundings, items);
+	for (auto object : items)
+	{
+		if (object)
+			print(*object->GetName());
+	}
+}
