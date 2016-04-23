@@ -23,3 +23,7 @@ UMinMaxBox* UMinMaxBox::InitBoxChecked(FVector min, FVector max)
 	return InitBox(tmin, tmax);
 }
 
+void UMinMaxBox::RemoveElement()
+{
+
+}

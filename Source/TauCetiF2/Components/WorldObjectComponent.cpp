@@ -28,7 +28,44 @@ void UWorldObjectComponent::BeginPlay()
 
 	ensure(BuildingTree);
 
-	BuildingTree->DEBUGDrawBorder(GetWorld());
+
+
+
+	ensure(DefiningBox);
+	ensure(TreeElements.Num() > 0);
+
+	RootBox = TreeElements[0]->GetRootNode<UKDTree>(true);
+	ensure(RootBox != nullptr);
+
+	auto surroundings = NewObject<UKDTree>()->Init(DefiningBox, RootBox);
+
+	TArray<AWorldObject*> items;
+	TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items);
+	print(TEXT("surroundings:"));
+
+	TArray<UMinMaxTree*> usedTrees;
+
+	for (auto object : items)
+	{
+		if (!object || !object->IsValidLowLevelFast() || object == DefiningBox->ContainingObject)
+			continue;
+
+		auto woc = object->WorldObjectComponent;
+		if (!woc || !woc->IsValidLowLevel() || woc->BlockInfo->ID != BlockInfo->ID)
+			continue;
+
+		ensure(woc->BuildingTree);
+		usedTrees.AddUnique(woc->BuildingTree->GetRoot());
+	}
+
+	for (auto rootObj : usedTrees)
+	{
+		print(TEXT("rootOBje"));
+		rootObj->Insert(BuildingTree);
+	}
+
+
+	BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
 }
 
 
@@ -69,20 +106,7 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 	//RootBox = highestElem->GetParentNode<UKDTree>(true);
 	//ensure(RootBox != nullptr);
 
-	//auto surroundings = NewObject<UKDTree>()->Init(DefiningBox, RootBox);
-	////surroundings->DEBUGDrawSurrondings(GetWorld());
 
-	//TArray<AWorldObject*> items;
-	//highestElem->GetContainingObjectsFromBottom(surroundings, items);
-	//print(TEXT("surroundings:"));
-	//for (auto object : items)
-	//{
-	//	if (!object || !object->IsValidLowLevelFast() || object == DefiningBox->ContainingObject)
-	//		continue;
-
-
-	//	//print(*object->GetName());
-	//}
 }
 
 void UWorldObjectComponent::OnTreeElementsChanged()
@@ -92,6 +116,9 @@ void UWorldObjectComponent::OnTreeElementsChanged()
 
 void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+	if (EndPlayReason == EEndPlayReason::Type::Quit)
+		return;
+
 	for (auto object : TreeElements)
 	{
 		if (!object || !object->IsValidLowLevelFast() || object->IsPendingKill())

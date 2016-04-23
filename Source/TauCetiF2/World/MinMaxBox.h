@@ -57,11 +57,24 @@ public:
 
 	}
 
+	void RemoveElement();
+
 protected:
 	template <typename T>
-	T* GetParentNodeTemplate()
+	FORCEINLINE T* GetParentNodeTemplate()
 	{
 		return ParentNode != nullptr ? Cast<T>(ParentNode) : nullptr;
+	}
+
+
+	FORCEINLINE bool GtMin(const FVector& min)
+	{
+		return Min.X <= min.X && Min.Y <= min.Y && Min.Z <= min.Z;
+	}
+
+	FORCEINLINE bool LtMax(const FVector& max)
+	{
+		return Max.X >= max.X && Max.Y >= max.Y && Max.Z >= max.Z;
 	}
 
 };

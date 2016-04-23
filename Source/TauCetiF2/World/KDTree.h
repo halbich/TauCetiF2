@@ -81,15 +81,7 @@ private:
 		}
 	}
 
-	FORCEINLINE bool GtMin(const FVector& min)
-	{
-		return Min.X <= min.X && Min.Y <= min.Y && Min.Z <= min.Z;
-	}
-
-	FORCEINLINE bool LtMax(const FVector& max)
-	{
-		return Max.X >= max.X && Max.Y >= max.Y && Max.Z >= max.Z;
-	}
+	
 
 	FORCEINLINE float sum(const FVector& v)
 	{
