@@ -21,8 +21,14 @@ void UWorldObjectComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	ensure(BlockInfo);
 
+	if (BlockInfo->UnderConstruction)
+		return;
+
+	ensure(BuildingTree);
+
+	BuildingTree->DEBUGDrawBorder(GetWorld());
 }
 
 
@@ -38,6 +44,8 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 {
 	DefiningBox = definingBox;
 	ensure(DefiningBox != nullptr);
+
+	BuildingTree = NewObject<UMinMaxTree>()->Init(DefiningBox);
 
 	//ensure(usedBoxes.Num() > 0);
 

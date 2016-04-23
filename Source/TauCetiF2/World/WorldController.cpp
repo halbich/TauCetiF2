@@ -123,7 +123,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 		RootBox->AddToTree(MinMax);
 		for (auto usedBox : actor->WorldObjectComponent->TreeElements)
 		{
-			check(usedBox->GetParentNode<UKDTree>() == RootBox && TEXT("Used box don't have RootBox as ROOT !"));
+			check(usedBox->GetRootNode<UKDTree>() == RootBox && TEXT("Used box don't have RootBox as ROOT !"));
 			check(usedBox->ContainingObject == actor && TEXT("Used box has another ContainingObject than it should have!"));
 		}
 

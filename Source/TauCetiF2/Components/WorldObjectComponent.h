@@ -6,6 +6,7 @@
 #include "Blocks/Info/BlockInfo.h"
 #include "World/MinMaxBox.h"
 #include "World/KDTree.h"
+#include "World/MinMaxTree.h"
 #include "WorldObjectComponent.generated.h"
 
 
@@ -32,6 +33,9 @@ public:
 
 	UPROPERTY()
 		UKDTree* DefiningBox;
+
+	UPROPERTY()
+		UMinMaxTree* BuildingTree;
 
 	// Called when the game starts
 	virtual void BeginPlay() override;

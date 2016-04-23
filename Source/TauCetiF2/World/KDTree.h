@@ -64,6 +64,11 @@ private:
 
 	void updateAfterChildDestroyedInner();
 
+	FORCEINLINE UKDTree* GetParent()
+	{
+		return GetParentNodeTemplate<UKDTree>();
+	}
+
 	FORCEINLINE void recomputeDividingCoordValue()
 	{
 

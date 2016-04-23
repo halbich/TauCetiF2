@@ -29,7 +29,7 @@ public:
 		FVector Max;
 
 	template <typename T>
-		T* GetParentNode( bool allowSelf = false)
+	T* GetRootNode(bool allowSelf = false)
 	{
 		auto returnValue = ParentNode;
 		if (returnValue == nullptr)
@@ -43,6 +43,25 @@ public:
 		}
 
 		return Cast<T>(returnValue);
+	}
+
+	FORCEINLINE	void DEBUGDrawBorder(UWorld* world, FColor color = FColor::Magenta)
+	{
+		if (!world || IsPendingKill())
+			return;
+
+
+		auto bcenter = (Max + Min) * 0.5;
+		auto bextend = (Max - bcenter);
+		DrawDebugBox(world, bcenter, bextend, color, true);
+
+	}
+
+protected:
+	template <typename T>
+	T* GetParentNodeTemplate()
+	{
+		return ParentNode != nullptr ? Cast<T>(ParentNode) : nullptr;
 	}
 
 };

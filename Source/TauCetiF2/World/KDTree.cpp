@@ -241,8 +241,9 @@ void UKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorl
 {
 	if (!(GtMin(box->Min) && LtMax(box->Max)))
 	{
-		ensure(ParentNode != nullptr);
-		Cast<UKDTree>(ParentNode)->GetContainingObjectsFromBottom(box, outArray);
+		auto parent = GetParent();
+		ensure(parent != nullptr);
+		parent->GetContainingObjectsFromBottom(box, outArray);
 		return;
 	}
 
@@ -255,7 +256,7 @@ void UKDTree::UpdateAfterChildDestroyed()
 {
 	check(SingleChild && !B1 && !B2);
 
-	auto parent = Cast<UKDTree>(ParentNode);
+	auto parent = GetParent();
 	MarkPendingKill();
 	if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
 		parent->updateAfterChildDestroyedInner();
@@ -277,7 +278,7 @@ void UKDTree::updateAfterChildDestroyedInner()
 	if (hasSingle || hasB1 || hasB2)
 		return;
 
-	auto parent = Cast<UKDTree>(ParentNode);
+	auto parent = GetParent();
 	MarkPendingKill();
 	if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
 		parent->updateAfterChildDestroyedInner();
