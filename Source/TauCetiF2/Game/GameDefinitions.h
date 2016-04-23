@@ -11,6 +11,7 @@ public:
 	static const FVector WorldCenterMapping;
 	static const FVector WorldBorders;
 	static const int32 CubeMinSize;
+	static const int32 CubeMinSizeHalf;
 	static const FRotator WorldGrid;
 };
 

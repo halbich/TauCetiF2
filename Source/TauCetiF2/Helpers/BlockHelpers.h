@@ -1,4 +1,4 @@
-
+#pragma optimize("", off)
 
 #pragma once
 #include "Blocks/Implementations/BaseShapes/CubeObject.h"
@@ -53,11 +53,6 @@ private:
 		return FVector(vect) * GameDefinitions::CubeMinSize;
 	}
 
-	static FORCEINLINE FVector GetCleaned(const FVector& vector)
-	{
-		return FVector((int32)vector.X, (int32)vector.Y, (int32)vector.Z);
-	}
-
 	static FORCEINLINE FVector GetSpawnOffset(const FRotator& rotator, const FVector& size)
 	{
 		auto transMove = FVector((int32)(size.X + 1) % 2, (int32)(size.Y + 1) % 2, (int32)(size.Z + 1) % 2) * 0.5;
@@ -80,28 +75,38 @@ public:
 		return trans;
 	}
 
-	static FORCEINLINE UMinMaxBox* GetSpawnBox(const FBlockDefinition* definition, const UBlockInfo* blockInfo)
+	static UMinMaxBox* GetSpawnBox(const FBlockDefinition* definition, const UBlockInfo* blockInfo)
 	{
-		auto objectScale = GetCleaned(definition->GetObjectScale(blockInfo->Scale));
+		auto objectScale = definition->GetObjectScale(blockInfo->Scale).GridSnap(1);
 		auto spawnCoord = GetSpawnCoords(blockInfo->Location, objectScale, blockInfo->Rotation);
 		auto scaleHalf = blockInfo->Rotation.RotateVector(objectScale) * GameDefinitions::CubeMinSize* 0.5;
-		return NewObject<UMinMaxBox>()->InitBoxChecked(spawnCoord - scaleHalf, spawnCoord + scaleHalf);
+		return NewObject<UMinMaxBox>()->InitBoxChecked((spawnCoord - scaleHalf).GridSnap(GameDefinitions::CubeMinSizeHalf), (spawnCoord + scaleHalf).GridSnap(GameDefinitions::CubeMinSizeHalf));
 	}
 
 	static  FVector GetSpawnPoint(const FVector& ImpactPointWithSnap, const FVector& ImpactNormal, const FBlockDefinition* definition, const UBlockInfo* blockInfo) {
 
 		auto baseLocation = ImpactPointWithSnap / GameDefinitions::CubeMinSize;
 		auto blockScale = definition->GetObjectScale(blockInfo->Scale);
-		auto rotatedScale = blockInfo->Rotation.RotateVector(blockScale);
-		auto offset = ImpactNormal *GetSpawnOffset(blockInfo->Rotation, blockScale);
-		auto normalAdd = ImpactNormal * rotatedScale.GetAbs() * 0.5 - offset;
-		auto normA = FVector(FMath::FloorToInt(normalAdd.X), FMath::FloorToInt(normalAdd.Y), FMath::FloorToInt(normalAdd.Z));
-		auto result = baseLocation + normA;
-		auto snap = result.GridSnap(GameDefinitions::CubeMinSize);
-		return result;
+
+		auto rotationScale = (blockInfo->Rotation.RotateVector(blockScale)* 0.5).GridSnap(0.5f).GetAbs();
+		auto offsetInNormal = rotationScale * ImpactNormal.GetAbs();
+		/*if (FMath::Frac(offsetInNormal.GetMax()) == 0.5)
+			return baseLocation + ImpactNormal * FVector(FMath::RoundToInt(offsetInNormal.X), FMath::RoundToInt(offsetInNormal.Y), FMath::RoundToInt(offsetInNormal.Z));
+*/
+		
+
+		auto rotationOffset = GetSpawnOffset(blockInfo->Rotation, blockScale).GridSnap(0.5f);
+
+		auto resCenAbs = ((rotationScale - ImpactNormal* rotationOffset) * ImpactNormal).GetAbs();
+
+		//if (ImpactNormal.GetMax() > 0)
+			return baseLocation + ImpactNormal * FVector(FMath::FloorToInt(resCenAbs.X), FMath::FloorToInt(resCenAbs.Y), FMath::FloorToInt(resCenAbs.Z));
+		//else    // we are heading to negative direction
+			//return baseLocation + ImpactNormal * FVector(FMath::RoundToInt(resCenAbs.X), FMath::RoundToInt(resCenAbs.Y), FMath::RoundToInt(resCenAbs.Z));
 	}
 
 };
 
 
 
+#pragma optimize("", on)

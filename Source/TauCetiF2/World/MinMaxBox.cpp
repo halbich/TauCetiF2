@@ -18,6 +18,8 @@ UMinMaxBox* UMinMaxBox::InitBox(FVector min, FVector max)
 
 UMinMaxBox* UMinMaxBox::InitBoxChecked(FVector min, FVector max)
 {
+	
+
 	auto tmin = FVector(FMath::Min(min.X, max.X), FMath::Min(min.Y, max.Y), FMath::Min(min.Z, max.Z));
 	auto tmax = FVector(FMath::Max(min.X, max.X), FMath::Max(min.Y, max.Y), FMath::Max(min.Z, max.Z));
 	return InitBox(tmin, tmax);

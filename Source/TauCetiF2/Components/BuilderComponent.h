@@ -85,6 +85,10 @@ public:
 			if (!currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
 				return;
 
+			auto spawnBox = BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+			if (!worldController->IsValidSpawnPoint(spawnBox))
+				return;
+
 			auto spawnBlock = NewObject<UBlockInfo>((UObject*)GetTransientPackage(), NAME_None, RF_NoFlags, currentBlockInfo);
 
 			spawnBlock->UnderConstruction = false;
@@ -119,5 +123,12 @@ public:
 		currentBlockInfo->Rotation = (FQuat(FRotator(desiredRotation.X, desiredRotation.Z, desiredRotation.Y)) *  FQuat(currentBlockInfo->Rotation)).Rotator();
 		currentBlockInfo->Rotation = currentBlockInfo->Rotation.GridSnap(GameDefinitions::WorldGrid);
 		ForceRecomputePosition = true;
+	}
+
+	FORCEINLINE void toggleHiddenCurrentSpawned(bool newHidden = true)
+	{
+		currentSpawnedObject->SetActorHiddenInGame(newHidden);
+		currentSpawnedObject->SetActorTickEnabled(!newHidden);
+		
 	}
 };

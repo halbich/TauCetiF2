@@ -60,14 +60,14 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	if (!ForceRecomputePosition && currentBlockInfo->Location == newLocation)
 		return;
 
-	auto oldLocation = currentBlockInfo->Location;
 	currentBlockInfo->Location = newLocation;
 	auto spawnBlock = BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 	if (!worldController->IsValidSpawnPoint(spawnBlock))
 	{
-		currentBlockInfo->Location = oldLocation;
+		toggleHiddenCurrentSpawned();
 		return;
 	}
+	toggleHiddenCurrentSpawned(false);
 	ForceRecomputePosition = false;
 	currentSpawnedObject->SetActorTransform(BlockHelpers::GetSpawnTransform(currentDefinitionForBlock, currentBlockInfo));
 
@@ -80,16 +80,14 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!blockInfo || !blockInfo->IsValidLowLevel())
 		return;
 
-	if (!selector || !selector->IsValidLowLevel() )
+	if (!selector || !selector->IsValidLowLevel())
 		return;
 
 	if (currentSpawnedObject)
 	{
-		currentSpawnedObject->SetActorHiddenInGame(true);
-		currentSpawnedObject->SetActorTickEnabled(false);
+		toggleHiddenCurrentSpawned();
 		selector->traceIgnoreActor = nullptr;
 		currentSpawnedObject = nullptr;
-
 	}
 	currentBuildableBlockInfo = blockInfo;
 	selector->SetOutlining(currentBuildableBlockInfo->AllowOutlineOnSelected, currentBuildableBlockInfo->StencilOverride);
@@ -175,5 +173,5 @@ void UBuilderComponent::RotateYaw(float Value)
 		return;
 
 	print(TEXT("Yaw"));
-	AddRotation(0,Value * 90, 0);
+	AddRotation(0, Value * 90, 0);
 }

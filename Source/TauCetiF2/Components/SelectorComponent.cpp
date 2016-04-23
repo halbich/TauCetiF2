@@ -85,10 +85,13 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	int32 cubeSize = GameDefinitions::CubeMinSize;
 
 	ImpactPoint = result.ImpactPoint;
-	ImpactNormal = result.ImpactNormal;
-	ImpactPointWithSnap = FVector(FMath::RoundToInt(ImpactPoint.X / cubeSize) * cubeSize,
-		FMath::RoundToInt(ImpactPoint.Y / cubeSize) * cubeSize,
-		FMath::RoundToInt(ImpactPoint.Z / cubeSize) * cubeSize);
+	ImpactNormal = result.ImpactNormal.GridSnap(1);
+	ImpactPointWithSnap = FVector(
+		FMath::RoundToInt((ImpactPoint.X + ImpactNormal.X) / cubeSize) * cubeSize,
+		FMath::RoundToInt((ImpactPoint.Y + ImpactNormal.Y) / cubeSize) * cubeSize,
+		FMath::RoundToInt((ImpactPoint.Z + ImpactNormal.Z) / cubeSize) * cubeSize);
+
+	DrawDebugDirectionalArrow(World, ImpactPointWithSnap, ImpactPointWithSnap + ImpactNormal * GameDefinitions::CubeMinSize, 1, FColor::Red, false, 5);
 
 	selectComponent(act, worldAct);
 
@@ -159,8 +162,8 @@ void USelectorComponent::SetOutlining(bool enableOutlining, int32 stencilValue)
 {
 	StencilValue = stencilValue;
 	outliningEnabled = enableOutlining;
-	
-	
+
+
 	hideObjectOutline();
 	showObjectOutline();
 
