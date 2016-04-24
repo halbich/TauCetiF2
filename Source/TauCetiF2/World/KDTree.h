@@ -57,6 +57,11 @@ public:
 
 	void UpdateAfterChildDestroyed();
 
+	FORCEINLINE UKDTree* GetParent()
+	{
+		return GetParentNodeTemplate<UKDTree>();
+	}
+
 private:
 
 	void addToTreeByCoord(UKDTree* box);
@@ -66,10 +71,7 @@ private:
 
 	void updateAfterChildDestroyedInner();
 
-	FORCEINLINE UKDTree* GetParent()
-	{
-		return GetParentNodeTemplate<UKDTree>();
-	}
+	
 
 	FORCEINLINE void recomputeDividingCoordValue()
 	{
@@ -91,7 +93,7 @@ private:
 	}
 
 	FORCEINLINE bool canBeDeleted() {
-		return ParentNode != nullptr;
+		return GetParent() != nullptr;
 
 	}
 

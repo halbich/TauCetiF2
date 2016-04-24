@@ -28,10 +28,20 @@ public:
 
 	void Insert(UMinMaxTree* other);
 
+	FORCEINLINE UMinMaxTree* GetParent()
+	{
+		return GetParentNodeTemplate<UMinMaxTree>();
+	}
+
+	void ChildrenDeleted();
+
+private:
+
+
 	FORCEINLINE void AppendChildren(UMinMaxTree* child)
 	{
 		ensure(child);
-		child->ParentNode = this;
+		child->SetParent(this);
 		Children.Add(child);
 	}
 

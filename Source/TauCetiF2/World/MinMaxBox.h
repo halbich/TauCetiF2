@@ -6,6 +6,8 @@
 #include "Helpers/Helpers.h"
 #include "MinMaxBox.generated.h"
 
+
+#pragma optimize("", off)
 /**
  *
  */
@@ -14,13 +16,16 @@ class TAUCETIF2_API UMinMaxBox : public UObject
 {
 	GENERATED_BODY()
 
+private:
+	UPROPERTY()
+		UMinMaxBox* ParentNode;
+
 public:
 
 	UMinMaxBox* InitBox(FVector min, FVector max);
 	UMinMaxBox* InitBoxChecked(FVector min, FVector max);
 
-	UPROPERTY()
-		UMinMaxBox* ParentNode;
+	
 
 	UPROPERTY()
 		FVector Min;
@@ -66,6 +71,11 @@ protected:
 		return ParentNode != nullptr ? Cast<T>(ParentNode) : nullptr;
 	}
 
+	FORCEINLINE void SetParent(UMinMaxBox* node)
+	{
+		ParentNode = node;
+	}
+
 
 	FORCEINLINE bool GtMin(const FVector& min)
 	{
@@ -78,3 +88,6 @@ protected:
 	}
 
 };
+
+
+#pragma optimize("", on)

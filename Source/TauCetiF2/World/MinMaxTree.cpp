@@ -3,6 +3,7 @@
 #include "TauCetiF2.h"
 #include "MinMaxTree.h"
 
+#pragma optimize("", off)
 
 UMinMaxTree* UMinMaxTree::Init(FVector min, FVector max)
 {
@@ -18,9 +19,9 @@ UMinMaxTree* UMinMaxTree::Init(UMinMaxBox* box)
 
 void UMinMaxTree::Insert(UMinMaxTree* other)
 {
-	check(ParentNode == nullptr);
+	check(GetParent() == nullptr);
 
-	if (other->ParentNode != nullptr)
+	if (other->GetParent() != nullptr)
 	{
 		Insert(other->GetRoot());
 		return;
@@ -43,3 +44,57 @@ void UMinMaxTree::Insert(UMinMaxTree* other)
 	newParent->AppendChildren(this);
 	newParent->AppendChildren(other);
 }
+
+void UMinMaxTree::ChildrenDeleted()
+{
+
+	FVector currentMin = FVector::ZeroVector;
+	FVector currentMax = FVector::ZeroVector;
+
+
+	TArray<UMinMaxTree*> newChildren;
+	for (auto child : Children)
+	{
+		if (child && child->IsValidLowLevel() && !child->IsPendingKill())
+		{
+			newChildren.Add(child);
+			print(TEXT("Child"));
+			if (currentMin == currentMax && currentMin == FVector::ZeroVector)
+			{
+				currentMin = child->Min;
+				currentMax = child->Max;
+				continue;
+			}
+
+			currentMin = FVector(FMath::Min(currentMin.X, child->Min.X), FMath::Min(currentMin.Y, child->Min.Y), FMath::Min(currentMin.Z, child->Min.Z));
+			currentMax = FVector(FMath::Max(currentMax.X, child->Max.X), FMath::Max(currentMax.Y, child->Max.Y), FMath::Max(currentMax.Z, child->Max.Z));
+		}
+	}
+
+	Children = newChildren;
+
+
+	if (Children.Num() == 0)
+	{
+		auto parent = GetParent();
+		MarkPendingKill();
+		if (parent)
+			parent->ChildrenDeleted();
+		return;
+	}
+
+	if (currentMin == Min && currentMax == Max)
+		return;
+
+	Min = currentMin;
+	Max = currentMax;
+
+	auto parent = GetParent();
+	if (parent)
+		parent->ChildrenDeleted();
+
+
+
+}
+
+#pragma optimize("", on)

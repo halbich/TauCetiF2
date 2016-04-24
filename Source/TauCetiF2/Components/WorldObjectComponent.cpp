@@ -57,7 +57,7 @@ void UWorldObjectComponent::BeginPlay()
 			continue;
 
 		auto woc = object->WorldObjectComponent;
-		if (!woc || !woc->IsValidLowLevel() )
+		if (!woc || !woc->IsValidLowLevel())
 			continue;
 
 		ensure(woc->BuildingTree);
@@ -91,29 +91,6 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 
 	BuildingTree = NewObject<UMinMaxTree>()->Init(DefiningBox);
 
-	//ensure(usedBoxes.Num() > 0);
-
-	//UKDTree* highestElem = nullptr;
-	//TreeElements = TArray<UKDTree*>(usedBoxes);
-	//for (auto elem : TreeElements)
-	//{
-	//	auto currentItem = Cast<UKDTree>(elem->ParentNode);
-	//	if (!highestElem)
-	//	{
-	//		highestElem = currentItem;
-	//		continue;
-	//	}
-
-	//	if (highestElem->DividingIndex > currentItem->DividingIndex)
-	//		highestElem = currentItem;
-	//}
-
-
-
-	//RootBox = highestElem->GetParentNode<UKDTree>(true);
-	//ensure(RootBox != nullptr);
-
-
 }
 
 void UWorldObjectComponent::OnTreeElementsChanged()
@@ -131,13 +108,24 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 		if (!object || !object->IsValidLowLevelFast() || object->IsPendingKill())
 			continue;
 
-		auto par = Cast<UKDTree>(object->ParentNode);
+		auto par = object->GetParent();
 		object->MarkPendingKill();
 
 		if (par && par->IsValidLowLevelFast())
 			par->UpdateAfterChildDestroyed();
 	}
 
+	if (BuildingTree && BuildingTree->IsValidLowLevel() && !BuildingTree->IsPendingKill())
+	{
+		auto parent = BuildingTree->GetParent();
+		BuildingTree->MarkPendingKill();
+		if (parent)
+		{
+			parent->ChildrenDeleted();
+			FlushPersistentDebugLines(GetWorld());
+			parent->GetRoot()->DEBUGDrawBorder(GetWorld());
+		}
+	}
 
 
 }

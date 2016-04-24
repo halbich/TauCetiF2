@@ -41,7 +41,7 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 	if (!B1 && !B2 && !SingleChild && GtMin(box->Min) && LtMax(box->Max))
 	{
 		SingleChild = box;
-		box->ParentNode = this;
+		box->SetParent(this);
 		SingleChild->ContainingObject->WorldObjectComponent->TreeElements.Add(box);
 		SingleChild->ContainingObject->WorldObjectComponent->OnTreeElementsChanged();
 		return;
@@ -50,7 +50,7 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 
 	if (SingleChild && !forceInsert)
 	{
-		SingleChild->ParentNode = nullptr;
+		SingleChild->SetParent(nullptr);
 		SingleChild->ContainingObject->WorldObjectComponent->TreeElements.Remove(SingleChild);// this box could be split
 		SingleChild->ContainingObject->WorldObjectComponent->OnTreeElementsChanged();
 		AddToTree(SingleChild, true); // forcing to insert
@@ -72,7 +72,7 @@ void UKDTree::addToTreeByCoord(UKDTree* box) {
 		if (!B1 || !B1->IsValidLowLevel() || B1->IsPendingKill())
 		{
 			B1 = NewObject<UKDTree>(this);
-			B1->ParentNode = this;
+			B1->SetParent(this);
 			B1->Init(Min, (FVector(1, 1, 1) - DividingCoord) *  Max + (DividingCoord * DividingCoordValue), DividingIndex + 1);
 		}
 		B1->AddToTree(box);
@@ -84,7 +84,7 @@ void UKDTree::addToTreeByCoord(UKDTree* box) {
 		if (!B2 || !B2->IsValidLowLevel() || B2->IsPendingKill())
 		{
 			B2 = NewObject<UKDTree>(this);
-			B2->ParentNode = this;
+			B2->SetParent(this);
 			B2->Init((FVector(1, 1, 1) - DividingCoord) *  Min + (DividingCoord * DividingCoordValue), Max, DividingIndex + 1);
 		}
 
