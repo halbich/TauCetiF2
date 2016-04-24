@@ -28,12 +28,20 @@ public:
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks);
 
+	UFUNCTION(BlueprintCallable, Category = WorldController)
+		void PreLoadInit();
 
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void DEBUGShowMinMaxBoxes();
 
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void DEBUGHideMinMaxBoxes();
+
+	UFUNCTION(BlueprintCallable, Category = WorldController)
+		void DEBUGSpawnPatterns(const FVector & startingPoint);
+
+	UFUNCTION(BlueprintCallable, Category = WorldController)
+		void DEBUGUsedPatternElements(const FVector & startingPoint);
 
 	AWorldObject* SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot);
 
@@ -48,12 +56,13 @@ public:
 		UKDTree* RootBox;
 
 
+
 private:
 
 	UPROPERTY()
 		bool debugBoxesShown;
 
 
-	
 
+	void preLoadInit(bool ctor = false);
 };

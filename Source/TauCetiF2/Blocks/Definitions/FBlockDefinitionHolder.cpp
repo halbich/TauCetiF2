@@ -54,6 +54,7 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 		FBlockMaterialDefinition(EMaterialInstance::ConstructTriangle, EAxis::Type::Z, EAxis::Type::Y),
 		FBlockMaterialDefinition(EMaterialInstance::ConstructTriangle, EAxis::Type::Y, EAxis::Type::Z));
 
+
 	definitions.Add(constructCubeSide.ID, constructCubeSide);
 
 	FBlockDefinition baseRamp(EBlockName::BaseRamp, EShapeType::CubeSide);

@@ -27,6 +27,26 @@ public:
 	}
 
 
+	FORCEINLINE bool ShapeCanBeSubdivided(const EShapeType type)
+	{
+		return type == EShapeType::CubeSide;
+	}
+
+	FORCEINLINE FVector GetSubdivisionCoords(const EShapeType type)
+	{
+		ensure(ShapeCanBeSubdivided(type));
+		switch (type)
+		{
+		case EShapeType::CubeSide:
+			return FVector(0, 1, 1);
+		default:
+			checkNoEntry();
+			return FVector::ZeroVector;
+			break;
+		}
+	}
+
+
 private:
 
 	FBlockDefinitionHolder();

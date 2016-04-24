@@ -141,6 +141,8 @@ void USaveGameCarrier::GetSaveForNewGame()
 
 	//UsedBlocks.Add(make(EBlockName::Terminal, FVector(-20, -30, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
 	
+	UsedBlocks.Add(make(EBlockName::ConstructCubeSide, FVector(0, 0, 5), FVector(1, 4, 2), FRotator(0, 0, 0)));
+
 	return;
 
 	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 3, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));

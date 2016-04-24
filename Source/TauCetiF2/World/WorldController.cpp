@@ -7,6 +7,28 @@
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	auto minCube = WorldHelpers::BorderToWorld(FVector(0, 0, 0));
+	auto maxCube = WorldHelpers::BorderToWorld(GameDefinitions::WorldBorders);
+
+
+	FVector min((minCube - 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
+	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
+
+	RootBox = ObjectInitializer.CreateDefaultSubobject<UKDTree>(this,TEXT("RootBox")) ;
+	RootBox->Init(min, max, 0);
+
+	auto patternHolder = UPatternDefinitionsHolder::Instance();
+	for (auto pattern : patternHolder->UsedDefinitions)
+	{
+		print(TEXT("register pattern"));
+	}
+
+}
+
+void AWorldController::preLoadInit(bool ctor)
+{
+	if (RootBox && RootBox->IsValidLowLevel())
+		return;
 
 	auto minCube = WorldHelpers::BorderToWorld(FVector(0, 0, 0));
 	auto maxCube = WorldHelpers::BorderToWorld(GameDefinitions::WorldBorders);
@@ -15,20 +37,16 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	FVector min((minCube - 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
 	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
 
-	RootBox = CreateDefaultSubobject<UKDTree>(TEXT("RootBox"));
+	RootBox = ctor ? CreateDefaultSubobject<UKDTree>(TEXT("RootBox")) : NewObject<UKDTree>();;
 	RootBox->Init(min, max, 0);
-
-
-	auto patternHolder = UPatternDefinitionsHolder::Instance();
-	for (auto pattern : patternHolder->UsedDefinitions)
-	{
-		print(TEXT("register pattern"));
-	}
 }
 
+void AWorldController::PreLoadInit()
+{
+	preLoadInit(false);
+}
 
-
-void AWorldController::LoadBlocksArray(TArray<UBlockInfo*>& blocks) {
+void AWorldController::LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks) {
 
 	auto world = GetWorld();
 	if (!world)
@@ -174,3 +192,23 @@ void AWorldController::DEBUGHideMinMaxBoxes() {
 		print(TEXT("NO Root!"));
 }
 
+
+void AWorldController::DEBUGSpawnPatterns(const FVector & startingPoint)
+{
+	auto blocks = UPatternDefinitionsHolder::Instance()->DEBUGSpawnPatterns(startingPoint);
+	for (auto block : blocks)
+	{
+		SpawnWorldObject(GetWorld(), block, true);
+	}
+
+}
+
+void AWorldController::DEBUGUsedPatternElements(const FVector & startingPoint)
+{
+	auto blocks = UPatternDefinitionsHolder::Instance()->DEBUGUsedPatternElements(startingPoint);
+	for (auto block : blocks)
+	{
+		SpawnWorldObject(GetWorld(), block, true);
+	}
+
+}
