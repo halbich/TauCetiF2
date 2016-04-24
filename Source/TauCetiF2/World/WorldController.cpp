@@ -195,6 +195,9 @@ void AWorldController::DEBUGHideMinMaxBoxes() {
 
 void AWorldController::DEBUGSpawnPatterns(const FVector & startingPoint)
 {
+
+	print(TEXT("DEBUGSpawnPatterns"));
+
 	auto blocks = UPatternDefinitionsHolder::Instance()->DEBUGSpawnPatterns(startingPoint);
 	for (auto block : blocks)
 	{
@@ -205,6 +208,8 @@ void AWorldController::DEBUGSpawnPatterns(const FVector & startingPoint)
 
 void AWorldController::DEBUGUsedPatternElements(const FVector & startingPoint)
 {
+	print(TEXT("DEBUGUsedPatternElements"));
+
 	auto blocks = UPatternDefinitionsHolder::Instance()->DEBUGUsedPatternElements(startingPoint);
 	for (auto block : blocks)
 	{
