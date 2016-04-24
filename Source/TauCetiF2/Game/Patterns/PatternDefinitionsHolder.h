@@ -7,6 +7,8 @@
 #include "Blocks/Definitions/FBlockDefinition.h"
 #include "Blocks/Definitions/FBlockDefinitionHolder.h"
 #include "Game/Patterns/PatternDefinition.h"
+#include "Game/Patterns/PatternElement.h"
+#include "Game/Patterns/PatternGroup.h"
 #include "PatternDefinitionsHolder.generated.h"
 
 /**
@@ -24,6 +26,9 @@ public:
 
 	UPROPERTY()
 		TArray<UPatternDefinition*> UsedDefinitions;
+
+	UPROPERTY()
+		TMap<int32,UPatternGroup*> SearchPatterns;
 
 	TArray<UBlockInfo*> DEBUGSpawnPatterns(const FVector& startingPoint);
 
@@ -51,11 +56,39 @@ private:
 		return make((uint32)id, location, blockScale, blockRotation);
 	}
 
+	FORCEINLINE UPatternGroup* getGroup(int32 id)
+	{
+		UPatternGroup* group = nullptr;
+		auto gf = SearchPatterns.Find(id);
+		if (gf)
+		{
+			group = *gf;
+			check(group && group->IsValidLowLevel());
+		}
+
+		if (!group)
+		{
+			group = SearchPatterns.Add(id, NewObject<UPatternGroup>()->Init(id));
+		}
+
+		return group;
+	}
+
 	FORCEINLINE void checkAllInit()
 	{
 		for (auto block : UsedDefinitions)
 		{
 			ensure(block->InitDone);
+		}
+
+		for (auto definition : UsedDefinitions)
+		{
+			for (auto blockElem : definition->UsedBlocks)
+			{
+				auto group = getGroup(blockElem->ID);
+
+				group->Insert(blockElem);
+			}
 		}
 	}
 };
