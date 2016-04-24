@@ -8,12 +8,43 @@
 
 TArray<UBlockInfo*> UPatternDefinitionsHolder::DEBUGSpawnPatterns(const FVector & startingPoint)
 {
-	return TArray<UBlockInfo*>();
+	 TArray<UBlockInfo*> result;
+
+	 auto startDim = BlockHelpers::GetLocalCoordinate(startingPoint);
+
+	 for (auto definition : UsedDefinitions)
+	 {
+		 auto spawnBlock = definition->objectDimensions;
+
+		 auto currentStartDim = startDim - spawnBlock->MinWorldCoord;
+		 definition->DEBUGSpawnPattern(currentStartDim, result);
+
+		 startDim += FVector(0, FMath::Abs(spawnBlock->MinWorldCoord.Y) + FMath::Abs(spawnBlock->MaxWorldCoord.Y) +5, 0);
+
+	 }
+
+	 return result;
 }
 
 TArray<UBlockInfo*> UPatternDefinitionsHolder::DEBUGUsedPatternElements(const FVector & startingPoint)
 {
-	return TArray<UBlockInfo*>();
+
+	TArray<UBlockInfo*> result;
+
+	auto startDim = BlockHelpers::GetLocalCoordinate(startingPoint);
+
+	for (auto definition : UsedDefinitions)
+	{
+		auto spawnBlock = definition->objectDimensions;
+
+		auto currentStartDim = startDim - spawnBlock->MinWorldCoord;
+		definition->DEBUGSpawnPattern(currentStartDim, result);
+
+		startDim += FVector(0, FMath::Abs(spawnBlock->MinWorldCoord.Y) + FMath::Abs(spawnBlock->MaxWorldCoord.Y) + 5, 0);
+
+	}
+
+	return result;
 }
 
 UPatternDefinitionsHolder::UPatternDefinitionsHolder(const FObjectInitializer& ObjectInitializer) :
@@ -29,8 +60,40 @@ void UPatternDefinitionsHolder::Init()
 	auto test1 = NewObject<UPatternDefinition>(this);
 
 	test1->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(0, 0, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
+	test1->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(0, 0, -2), FVector(4, 4, 1), FRotator(0, 0, 0)));
 
+	test1->InitData();
 	UsedDefinitions.Add(test1);
+
+
+	auto test2 = NewObject<UPatternDefinition>(this);
+
+	test2->UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 3, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-10, 6, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-10, 1, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-13, 4, 0), FVector(1, 1, 4), FRotator(90, 90, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-8, 4, 0), FVector(1, 1, 4), FRotator(90, 90, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 1, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 1, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 6, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 1, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 1, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-10, 1, 2), FVector(4, 4, 1), FRotator(180, 0, 90)));
+	test2->UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-13, 4, 2), FVector(4, 4, 1), FRotator(180, 90, 90)));
+	test2->UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 6, 2), FVector(4, 4, 1), FRotator(180, 180, 90)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 6, 5), FVector(1, 1, 4), FRotator(90, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 4, 5), FVector(1, 1, 4), FRotator(90, 90, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 6, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 3, 5), FVector(4, 4, 1), FRotator(0, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 3, 5), FVector(1, 1, 4), FRotator(0, 180, 270)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 1, 5), FVector(1, 1, 4), FRotator(0, 270, 270)));
+	test2->UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-8, 3, 3), FVector(4, 4, 1), FRotator(0, 90, 90)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
+
+	test2->InitData();
+	UsedDefinitions.Add(test2);
+	UsedDefinitions.Add(test2);
 }
 
 UPatternDefinitionsHolder* UPatternDefinitionsHolder::Instance()
@@ -43,6 +106,7 @@ UPatternDefinitionsHolder* UPatternDefinitionsHolder::Instance()
 		UClass *definitionsClass = UPatternDefinitionsHolder::StaticClass();
 		instance = NewObject<UPatternDefinitionsHolder>();
 		instance->Init();
+		instance->checkAllInit();
 	}
 
 	return instance;

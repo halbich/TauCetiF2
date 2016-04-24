@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Object.h"
+#include "Helpers/BlockHelpers.h"
 #include "Blocks/Definitions/FBlockDefinition.h"
 #include "Blocks/Definitions/FBlockDefinitionHolder.h"
 #include "Game/Patterns/PatternDefinition.h"
@@ -50,4 +51,11 @@ private:
 		return make((uint32)id, location, blockScale, blockRotation);
 	}
 
+	FORCEINLINE void checkAllInit()
+	{
+		for (auto block : UsedDefinitions)
+		{
+			ensure(block->InitDone);
+		}
+	}
 };

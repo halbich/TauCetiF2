@@ -33,6 +33,12 @@ public:
 	UPROPERTY()
 		FVector Max;
 
+	UPROPERTY()
+		FVector MinWorldCoord;
+
+	UPROPERTY()
+		FVector MaxWorldCoord;
+
 	template <typename T>
 	T* GetRootNode(bool allowSelf = false)
 	{

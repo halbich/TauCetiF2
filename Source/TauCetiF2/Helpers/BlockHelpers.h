@@ -47,6 +47,11 @@ struct TAUCETIF2_API BlockHelpers
 	}
 
 
+	static FORCEINLINE FVector GetLocalCoordinate(const FVector& vect)
+	{
+		return (vect / GameDefinitions::CubeMinSize).GridSnap(1);
+	}
+
 private:
 	static FORCEINLINE FVector GetWorldCoordinate(const FVector& vect)
 	{

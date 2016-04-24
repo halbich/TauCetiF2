@@ -13,6 +13,11 @@ UMinMaxBox* UMinMaxBox::InitBox(FVector min, FVector max)
 	ensure(Min.X <= Max.X);
 	ensure(Min.Y <= Max.Y);
 	ensure(Min.Z <= Max.Z);
+
+
+	MinWorldCoord = ((Min + FVector(1, 1, 1) * GameDefinitions::CubeMinSizeHalf) / GameDefinitions::CubeMinSize).GridSnap(1);
+	MaxWorldCoord = ((Max - FVector(1, 1, 1) * GameDefinitions::CubeMinSizeHalf) / GameDefinitions::CubeMinSize).GridSnap(1);
+
 	return this;
 }
 
