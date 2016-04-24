@@ -15,6 +15,7 @@ UWorldObjectComponent::UWorldObjectComponent()
 	// ...
 }
 
+#pragma optimize("",off)
 
 // Called when the game starts
 void UWorldObjectComponent::BeginPlay()
@@ -28,6 +29,8 @@ void UWorldObjectComponent::BeginPlay()
 
 	ensure(BuildingTree);
 
+
+	FlushPersistentDebugLines(GetWorld());
 
 
 
@@ -67,10 +70,11 @@ void UWorldObjectComponent::BeginPlay()
 		rootObj->Insert(BuildingTree);
 	}
 
-
-	//BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
+	BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
 }
 
+
+#pragma optimize("",on)
 
 // Called every frame
 void UWorldObjectComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

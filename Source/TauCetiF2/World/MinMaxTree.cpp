@@ -20,6 +20,12 @@ void UMinMaxTree::Insert(UMinMaxTree* other)
 {
 	check(ParentNode == nullptr);
 
+	if (other->ParentNode != nullptr)
+	{
+		Insert(other->GetRoot());
+		return;
+	}
+
 	if (GtMin(other->Min) && LtMax(other->Max))
 	{
 		// other is fully in my box
