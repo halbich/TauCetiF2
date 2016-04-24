@@ -148,7 +148,7 @@ void UKDTree::DEBUGDrawContainingBox(UWorld* world)
 
 }
 
-void UKDTree::DEBUGDrawSurrondings(UWorld* world)
+void UKDTree::DEBUGDrawSurrondings(UWorld* world, FColor usedColor)
 {
 	if (!world || IsPendingKill())
 		return;
@@ -156,7 +156,7 @@ void UKDTree::DEBUGDrawSurrondings(UWorld* world)
 
 	auto bcenter = (Max + Min) * 0.5;
 	auto bextend = (Max - bcenter);
-	DrawDebugBox(world, bcenter, bextend, FColor::Magenta, true);
+	DrawDebugBox(world, bcenter, bextend, usedColor, true);
 
 }
 
@@ -198,14 +198,55 @@ bool UKDTree::isPlaceEmptySingleChild(const UMinMaxBox* box)
 }
 
 
-void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray)
+#pragma optimize("", off)
+bool UKDTree::checkBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2)
+{
+	auto x = box2->Min.X == box1->Max.X || box2->Max.X == box1->Min.X;			// false if there is not connection
+	auto y = box2->Min.Y == box1->Max.Y || box2->Max.Y == box1->Min.Y;			// false if there is not connection
+	auto z = box2->Min.Z == box1->Max.Z || box2->Max.Z == box1->Min.Z;			// false if there is not connection
+
+	auto sum = (x ? 1 : 0) + (y ? 1 : 0) + (z ? 1 : 0);
+	if (sum != 1)
+		return false;   // wee need to have touch exactly in one dimension
+
+	print(TEXT("check"));
+
+	auto inRangeX = box2->Min.X < box1->Max.X && box2->Max.X > box1->Min.X;
+	auto inRangeY = box2->Min.Y < box1->Max.Y && box2->Max.Y > box1->Min.Y;
+	auto inRangeZ = box2->Min.Z < box1->Max.Z && box2->Max.Z > box1->Min.Z;
+
+	auto sX = x && inRangeY && inRangeZ;
+	auto sY = y && inRangeX && inRangeZ;
+	auto sZ = z && inRangeX && inRangeY;
+
+	return sX || sY || sZ;
+
+
+}
+#pragma optimize("", on)
+
+void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement)
 {
 	if (!(GtMin(box->Min) && LtMax(box->Max)))
 		return;
 
 	if (SingleChild)
 	{
-		outArray.AddUnique(SingleChild->ContainingObject);
+		if (!ignoreElement || !ignoreElement->IsValidLowLevel())
+			return;
+
+		if (SingleChild->ContainingObject == ignoreElement->DefiningBox->ContainingObject ||
+			SingleChild->ContainingObject->WorldObjectComponent->BlockInfo->ID != ignoreElement->BlockInfo->ID)
+			return;
+
+		if (outArray.Contains(SingleChild->ContainingObject))
+			return;
+
+		if (!checkBoundaries(SingleChild->ContainingObject->WorldObjectComponent->DefiningBox, ignoreElement->DefiningBox))
+			return;
+
+		outArray.Add(SingleChild->ContainingObject);
+		SingleChild->ContainingObject->WorldObjectComponent->DefiningBox->DEBUGDrawSurrondings(SingleChild->ContainingObject->GetWorld(), FColor::Red);
 		return;
 	}
 
@@ -213,7 +254,7 @@ void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>&
 	{
 		if (!B1)
 			return;
-		B1->GetContainingObjects(box, outArray);
+		B1->GetContainingObjects(box, outArray, ignoreElement);
 		return;
 	}
 
@@ -221,7 +262,7 @@ void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>&
 	{
 		if (!B2)
 			return;
-		B2->GetContainingObjects(box, outArray);
+		B2->GetContainingObjects(box, outArray, ignoreElement);
 		return;
 	}
 
@@ -231,23 +272,23 @@ void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>&
 	UMinMaxBox* newB2 = NewObject<UMinMaxBox>(this)->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
 
 
-	GetContainingObjects(newB1, outArray);
-	GetContainingObjects(newB2, outArray);
+	GetContainingObjects(newB1, outArray, ignoreElement);
+	GetContainingObjects(newB2, outArray, ignoreElement);
 
 
 }
 
-void UKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray)
+void UKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement)
 {
 	if (!(GtMin(box->Min) && LtMax(box->Max)))
 	{
 		auto parent = GetParent();
 		ensure(parent != nullptr);
-		parent->GetContainingObjectsFromBottom(box, outArray);
+		parent->GetContainingObjectsFromBottom(box, outArray, ignoreElement);
 		return;
 	}
 
-	GetContainingObjects(box, outArray);
+	GetContainingObjects(box, outArray, ignoreElement);
 
 
 }

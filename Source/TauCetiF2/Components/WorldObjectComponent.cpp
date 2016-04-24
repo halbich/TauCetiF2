@@ -39,33 +39,36 @@ void UWorldObjectComponent::BeginPlay()
 
 	auto surroundings = NewObject<UKDTree>()->Init(DefiningBox, RootBox);
 
+	//surroundings->DEBUGDrawSurrondings(GetWorld());
+
 	TArray<AWorldObject*> items;
-	TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items);
+	//TreeElements[0]->DEBUGDrawSurrondings(GetWorld(), FColor::Black);
+	TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items, this);
 	print(TEXT("surroundings:"));
 
 	TArray<UMinMaxTree*> usedTrees;
 
 	for (auto object : items)
 	{
-		if (!object || !object->IsValidLowLevelFast() || object == DefiningBox->ContainingObject)
+		if (!object || !object->IsValidLowLevelFast())
 			continue;
 
 		auto woc = object->WorldObjectComponent;
-		if (!woc || !woc->IsValidLowLevel() || woc->BlockInfo->ID != BlockInfo->ID)
+		if (!woc || !woc->IsValidLowLevel() )
 			continue;
 
 		ensure(woc->BuildingTree);
 		usedTrees.AddUnique(woc->BuildingTree->GetRoot());
+		print(*woc->DefiningBox->ContainingObject->GetName());
 	}
 
 	for (auto rootObj : usedTrees)
 	{
-		print(TEXT("rootOBje"));
 		rootObj->Insert(BuildingTree);
 	}
 
 
-	BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
+	//BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
 }
 
 

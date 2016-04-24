@@ -91,7 +91,7 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 		FMath::RoundToInt((ImpactPoint.Y + ImpactNormal.Y) / cubeSize) * cubeSize,
 		FMath::RoundToInt((ImpactPoint.Z + ImpactNormal.Z) / cubeSize) * cubeSize);
 
-	DrawDebugDirectionalArrow(World, ImpactPointWithSnap, ImpactPointWithSnap + ImpactNormal * GameDefinitions::CubeMinSize, 1, FColor::Red, false, 5);
+	//DrawDebugDirectionalArrow(World, ImpactPointWithSnap, ImpactPointWithSnap + ImpactNormal * GameDefinitions::CubeMinSize, 1, FColor::Red, false, 5);
 
 	selectComponent(act, worldAct);
 

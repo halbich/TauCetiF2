@@ -8,6 +8,7 @@
 #include "KDTree.generated.h"
 
 class AWorldObject;
+class UWorldObjectComponent;
 
 /**
  *
@@ -47,12 +48,12 @@ public:
 		float DividingCoordValue;
 
 	void DEBUGDrawContainingBox(UWorld* world);
-	void DEBUGDrawSurrondings(UWorld* world);
+	void DEBUGDrawSurrondings(UWorld* world, FColor usedColor = FColor::Magenta);
 
 	void AddToTree(UKDTree* box, bool forceInsert = false);
 	bool IsPlaceEmpty(const UMinMaxBox* box);
-	void GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray);
-	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray);
+	void GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement = nullptr);
+	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement);
 
 	void UpdateAfterChildDestroyed();
 
@@ -61,6 +62,7 @@ private:
 	void addToTreeByCoord(UKDTree* box);
 
 	bool isPlaceEmptySingleChild(const UMinMaxBox* box);
+	bool checkBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2);
 
 	void updateAfterChildDestroyedInner();
 
