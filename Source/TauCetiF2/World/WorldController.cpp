@@ -14,14 +14,8 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	FVector min((minCube - 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
 	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
 
-	RootBox = ObjectInitializer.CreateDefaultSubobject<UKDTree>(this,TEXT("RootBox")) ;
+	RootBox = ObjectInitializer.CreateDefaultSubobject<UKDTree>(this, TEXT("RootBox"));
 	RootBox->Init(min, max, 0);
-
-	auto patternHolder = UPatternDefinitionsHolder::Instance();
-	for (auto pattern : patternHolder->UsedDefinitions)
-	{
-		print(TEXT("register pattern"));
-	}
 
 }
 
@@ -44,6 +38,8 @@ void AWorldController::preLoadInit(bool ctor)
 void AWorldController::PreLoadInit()
 {
 	preLoadInit(false);
+
+	UPatternDefinitionsHolder::Instance();
 }
 
 void AWorldController::LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks) {
@@ -69,14 +65,14 @@ bool AWorldController::DestroyWorldObject(AWorldObject* object)
 	auto count = UsedBlocks.Remove(object->WorldObjectComponent->BlockInfo);
 	check(count == 1 && "Failed to remove block info.");
 	object->Destroy();
-	
+
 	if (debugBoxesShown) {
 		DEBUGHideMinMaxBoxes();
 		DEBUGShowMinMaxBoxes();
 	}
 
 	check(RootBox && RootBox->IsValidLowLevel() && !RootBox->IsPendingKill());
-	
+
 	return true;
 }
 

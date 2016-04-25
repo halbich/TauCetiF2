@@ -75,7 +75,7 @@ void UPatternDefinitionsHolder::Init()
 	auto test1 = NewObject<UPatternDefinition>(this);
 
 	test1->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(0, 0, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
-	test1->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(0, 0, -2), FVector(4, 4, 1), FRotator(0, 0, 0)));
+	test1->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(1, 0, -1), FVector(4, 4, 1), FRotator(0, 0, 0)));
 
 	test1->InitData();
 	UsedDefinitions.Add(test1);

@@ -70,6 +70,9 @@ public:
 
 	void RemoveElement();
 
+
+	static bool HasCommonBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2);
+
 protected:
 	template <typename T>
 	FORCEINLINE T* GetParentNodeTemplate()

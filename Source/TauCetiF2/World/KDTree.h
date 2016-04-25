@@ -67,7 +67,7 @@ private:
 	void addToTreeByCoord(UKDTree* box);
 
 	bool isPlaceEmptySingleChild(const UMinMaxBox* box);
-	bool checkBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2);
+	
 
 	void updateAfterChildDestroyedInner();
 

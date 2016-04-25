@@ -28,7 +28,7 @@ public:
 		TArray<UPatternDefinition*> UsedDefinitions;
 
 	UPROPERTY()
-		TMap<int32,UPatternGroup*> SearchPatterns;
+		TMap<int32, UPatternGroup*> SearchPatterns;
 
 	TArray<UBlockInfo*> DEBUGSpawnPatterns(const FVector& startingPoint);
 
@@ -85,9 +85,16 @@ private:
 		{
 			for (auto blockElem : definition->UsedBlocks)
 			{
-				auto group = getGroup(blockElem->ID);
 
-				group->Insert(blockElem);
+				auto group = getGroup(blockElem->ID);
+				if (FBlockDefinitionHolder::Instance().ShapeCanBeSubdivided(group->Definition->ShapeType))
+				{
+					UE_LOG(LogTemp, Warning, TEXT("INIT"));
+				}
+				else
+				{
+					group->Insert(blockElem);
+				}
 			}
 		}
 	}

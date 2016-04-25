@@ -198,32 +198,7 @@ bool UKDTree::isPlaceEmptySingleChild(const UMinMaxBox* box)
 }
 
 
-#pragma optimize("", off)
-bool UKDTree::checkBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2)
-{
-	auto x = box2->Min.X == box1->Max.X || box2->Max.X == box1->Min.X;			// false if there is not connection
-	auto y = box2->Min.Y == box1->Max.Y || box2->Max.Y == box1->Min.Y;			// false if there is not connection
-	auto z = box2->Min.Z == box1->Max.Z || box2->Max.Z == box1->Min.Z;			// false if there is not connection
 
-	auto sum = (x ? 1 : 0) + (y ? 1 : 0) + (z ? 1 : 0);
-	if (sum != 1)
-		return false;   // wee need to have touch exactly in one dimension
-
-	print(TEXT("check"));
-
-	auto inRangeX = box2->Min.X < box1->Max.X && box2->Max.X > box1->Min.X;
-	auto inRangeY = box2->Min.Y < box1->Max.Y && box2->Max.Y > box1->Min.Y;
-	auto inRangeZ = box2->Min.Z < box1->Max.Z && box2->Max.Z > box1->Min.Z;
-
-	auto sX = x && inRangeY && inRangeZ;
-	auto sY = y && inRangeX && inRangeZ;
-	auto sZ = z && inRangeX && inRangeY;
-
-	return sX || sY || sZ;
-
-
-}
-#pragma optimize("", on)
 
 void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement)
 {
@@ -242,7 +217,7 @@ void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>&
 		if (outArray.Contains(SingleChild->ContainingObject))
 			return;
 
-		if (!checkBoundaries(SingleChild->ContainingObject->WorldObjectComponent->DefiningBox, ignoreElement->DefiningBox))
+		if (!HasCommonBoundaries(SingleChild->ContainingObject->WorldObjectComponent->DefiningBox, ignoreElement->DefiningBox))
 			return;
 
 		outArray.Add(SingleChild->ContainingObject);

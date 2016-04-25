@@ -13,6 +13,7 @@ public:
 	static const int32 CubeMinSize;
 	static const int32 CubeMinSizeHalf;
 	static const FRotator WorldGrid;
+	static const int32 CubeMaxSizeMultiplier;
 };
 
 

@@ -8,3 +8,4 @@ const FVector GameDefinitions::WorldCenterMapping(GameDefinitions::WorldBorders.
 const int32 GameDefinitions::CubeMinSize(20);
 const int32 GameDefinitions::CubeMinSizeHalf(GameDefinitions::CubeMinSize / 2);
 const FRotator GameDefinitions::WorldGrid(90, 90, 90);
+const int32 GameDefinitions::CubeMaxSizeMultiplier(20);
