@@ -24,7 +24,8 @@ public:
 	UPROPERTY()
 		TArray<UBlockInfo*> UsedBlocks;
 
-	
+	UPROPERTY()
+		TArray<FRotator> AviableRotations;
 
 	UPROPERTY()
 		TMap<int32, UPatternGroup*> Patterns;
@@ -38,6 +39,50 @@ public:
 		UMinMaxBox* objectDimensions;   //TODO used for debug purposes
 
 	void DEBUGSpawnPattern(const FVector& worldOffset, TArray<UBlockInfo*>& outArray);
+
+	FORCEINLINE void SetRotationsFullYaw()
+	{
+		AviableRotations.Empty(4);
+		AviableRotations.AddDefaulted(4);
+		AviableRotations[1] = FRotator(0, 90, 0);
+		AviableRotations[1] = FRotator(0, 180, 0);
+		AviableRotations[1] = FRotator(0, 270, 0);
+	}
+	FORCEINLINE void SetRotationsFull()
+	{
+		AviableRotations.Empty(24);
+
+		AviableRotations.AddDefaulted(24);
+
+		AviableRotations[1] = FRotator(0, 0, 90);
+		AviableRotations[2] = FRotator(0, 0, 180);
+		AviableRotations[3] = FRotator(0, 0, 270);
+
+		AviableRotations[4] = FRotator(0, 90, 0);
+		AviableRotations[5] = FRotator(0, 90, 90);
+		AviableRotations[6] = FRotator(0, 90, 180);
+		AviableRotations[7] = FRotator(0, 90, 270);
+
+		AviableRotations[8] = FRotator(0, 180, 0);
+		AviableRotations[9] = FRotator(0, 180, 90);
+		AviableRotations[10] = FRotator(0, 180, 180);
+		AviableRotations[11] = FRotator(0, 180, 270);
+
+		AviableRotations[12] = FRotator(0, 270, 0);
+		AviableRotations[13] = FRotator(0, 270, 90);
+		AviableRotations[14] = FRotator(0, 270, 180);
+		AviableRotations[15] = FRotator(0, 270, 270);
+
+		AviableRotations[16] = FRotator(90, 0, 0);
+		AviableRotations[17] = FRotator(90, 0, 90);
+		AviableRotations[18] = FRotator(90, 0, 180);
+		AviableRotations[19] = FRotator(90, 0, 270);
+
+		AviableRotations[20] = FRotator(270, 0, 0);
+		AviableRotations[21] = FRotator(270, 0, 90);
+		AviableRotations[22] = FRotator(270, 0, 180);
+		AviableRotations[23] = FRotator(270, 0, 270);
+	}
 
 private:
 

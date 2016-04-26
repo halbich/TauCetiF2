@@ -38,8 +38,10 @@ void UPatternDefinition::InitData()
 	{
 		auto block = UsedBlocks[i];
 		auto box = MinMaxBoxes[i];
-		auto minMaxTree = NewObject<UMinMaxTree>()->Init(box);
 	}
+
+
+	ensure(AviableRotations.Num() > 0);
 
 	InitDone = true;
 }

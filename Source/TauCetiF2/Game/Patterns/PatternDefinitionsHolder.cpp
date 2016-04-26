@@ -76,7 +76,7 @@ void UPatternDefinitionsHolder::Init()
 
 	test1->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(0, 0, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
 	test1->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(1, 0, -1), FVector(4, 4, 1), FRotator(0, 0, 0)));
-
+	test1->SetRotationsFull();
 	test1->InitData();
 	UsedDefinitions.Add(test1);
 
@@ -84,7 +84,7 @@ void UPatternDefinitionsHolder::Init()
 	auto test2 = NewObject<UPatternDefinition>(this);
 
 	test2->UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 3, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
-	test2->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-10, 6, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));
+	test2->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-11, 6, 0), FVector(4, 1, 1), FRotator(0, 0, 0)));
 	test2->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-10, 1, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));
 	test2->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-13, 4, 0), FVector(1, 1, 4), FRotator(90, 90, 0)));
 	test2->UsedBlocks.Add(make(EBlockName::ConstructCube, FVector(-8, 4, 0), FVector(1, 1, 4), FRotator(90, 90, 0)));
@@ -106,12 +106,16 @@ void UPatternDefinitionsHolder::Init()
 	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
 	test2->UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
 
+	test2->SetRotationsFullYaw();
+
 	test2->InitData();
 	UsedDefinitions.Add(test2);
 
 	auto testSide = NewObject<UPatternDefinition>(this);
 
 	testSide->UsedBlocks.Add(make(EBlockName::ConstructCubeSide, FVector(0, 0, 0), FVector(4, 4, 4), FRotator(0, 0, 0)));
+
+	testSide->SetRotationsFullYaw();
 
 	testSide->InitData();
 	UsedDefinitions.Add(testSide);
