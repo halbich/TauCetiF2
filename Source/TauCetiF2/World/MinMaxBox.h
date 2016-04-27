@@ -70,7 +70,7 @@ public:
 
 	void RemoveElement();
 
-
+	// Return true if both given boxes has common surface
 	static bool HasCommonBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2);
 
 protected:

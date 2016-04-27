@@ -9,13 +9,16 @@ void UPatternDefinition::InitData()
 	FVector currentMin = FVector::ZeroVector;
 	FVector currentMax = FVector::ZeroVector;
 
-	TArray<UMinMaxBox*> MinMaxBoxes;
+	TArray<UMinMaxBox*> MinMaxSpawnBoxes;
+	TArray<UMinMaxTree*> MinMaxTrees;
 
 	for (auto block : UsedBlocks)
 	{
 		auto definition = FBlockDefinitionHolder::Instance().GetDefinition(block->ID);
 		auto spawnBox = BlockHelpers::GetSpawnBox(definition, block);
-		MinMaxBoxes.Add(spawnBox);
+		MinMaxSpawnBoxes.Add(spawnBox);
+		MinMaxTrees.Add(NewObject<UMinMaxTree>()->Init(spawnBox));
+
 		if (currentMin == currentMax && currentMin == FVector::ZeroVector)
 		{
 			currentMin = spawnBox->Min;
@@ -26,6 +29,7 @@ void UPatternDefinition::InitData()
 		currentMin = FVector(FMath::Min(currentMin.X, spawnBox->Min.X), FMath::Min(currentMin.Y, spawnBox->Min.Y), FMath::Min(currentMin.Z, spawnBox->Min.Z));
 		currentMax = FVector(FMath::Max(currentMax.X, spawnBox->Max.X), FMath::Max(currentMax.Y, spawnBox->Max.Y), FMath::Max(currentMax.Z, spawnBox->Max.Z));
 
+		
 
 	}
 
@@ -37,9 +41,30 @@ void UPatternDefinition::InitData()
 	for (int32 i = 0; i < UsedBlocks.Num(); i++)
 	{
 		auto block = UsedBlocks[i];
-		auto box = MinMaxBoxes[i];
+		auto box = MinMaxSpawnBoxes[i];
+		auto minMaxTree = MinMaxTrees[i];
+
+		for (size_t blockIndex = 0; blockIndex < i; blockIndex++)
+		{
+			auto otherBlockInfo = UsedBlocks[blockIndex];
+			if (otherBlockInfo->ID != block->ID)
+				continue;
+
+			auto otherBox = MinMaxSpawnBoxes[blockIndex];
+
+			if (!UMinMaxBox::HasCommonBoundaries(box, otherBox))
+				continue;
+
+			auto otherBlock = MinMaxTrees[blockIndex];
+			
+			otherBlock->Insert(minMaxTree);
+		}
 	}
 
+	for (auto mmt : MinMaxTrees)
+	{
+		ResultObjectTrees.AddUnique(mmt->GetRoot());
+	}
 
 	ensure(AviableRotations.Num() > 0);
 

@@ -74,7 +74,7 @@ private:
 		return group;
 	}
 
-	FORCEINLINE void checkAllInit()
+	void checkAllInit()
 	{
 		for (auto block : UsedDefinitions)
 		{

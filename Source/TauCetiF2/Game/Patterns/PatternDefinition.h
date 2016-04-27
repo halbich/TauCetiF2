@@ -38,6 +38,9 @@ public:
 	UPROPERTY()
 		UMinMaxBox* objectDimensions;   //TODO used for debug purposes
 
+	UPROPERTY()
+		TArray<UMinMaxTree*> ResultObjectTrees;
+
 	void DEBUGSpawnPattern(const FVector& worldOffset, TArray<UBlockInfo*>& outArray);
 
 	FORCEINLINE void SetRotationsFullYaw()
