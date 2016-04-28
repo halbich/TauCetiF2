@@ -38,12 +38,19 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
 		UObjectWidget* BaseControl;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+		TSubclassOf<class UObjectWidget> wMainMenu;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
+		UObjectWidget* MainMenu;
+
 	// Override BeginPlay()
 	virtual void BeginPlay() override;
 
-	void OnEnterKey();
+	UFUNCTION(BlueprintCallable, Category = "Widgets")
+		void OnEnterKey();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = "Widgets")
 		void OnEscapeKey();
 
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
@@ -60,7 +67,7 @@ private:
 		{
 			FInputModeGameAndUI mode;
 			mode.SetLockMouseToViewport(true);
-			mode.SetHideCursorDuringCapture(true);
+
 			if (focus)
 				mode.SetWidgetToFocus(focus->TakeWidget());
 

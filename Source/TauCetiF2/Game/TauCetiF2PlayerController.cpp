@@ -13,6 +13,12 @@ void ATauCetiF2PlayerController::BeginPlay()
 
 	if (wInGameMenu)
 	{
+		MainMenu = CreateWidget<UObjectWidget>(this, wMainMenu);
+		MainMenu->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
+	}
+
+	if (wInGameMenu)
+	{
 		InGameMenu = CreateWidget<UObjectWidget>(this, wInGameMenu);
 		InGameMenu->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
 	}
@@ -53,6 +59,9 @@ void ATauCetiF2PlayerController::OnEscapeKey()
 			updateState();
 		}
 		break;
+	case EShownWidget::MainMenu:
+		MainMenu->OnEscapeKey();
+		break;
 	default:
 		checkNoEntry();
 	}
@@ -73,6 +82,9 @@ void ATauCetiF2PlayerController::OnEnterKey()
 	case EShownWidget::BaseControl:
 		BaseControl->OnEnterKey();
 		break;
+	case EShownWidget::MainMenu:
+		MainMenu->OnEnterKey();
+		break;
 	default:
 		checkNoEntry();
 	}
@@ -92,6 +104,9 @@ void ATauCetiF2PlayerController::ShowWidget(const EShownWidget widget)
 		break;
 	case EShownWidget::BaseControl:
 		focus = BaseControl;
+		break;
+	case EShownWidget::MainMenu:
+		focus = MainMenu;
 		break;
 	default:
 		checkNoEntry();

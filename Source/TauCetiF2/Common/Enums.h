@@ -102,7 +102,8 @@ enum class EShownWidget : uint8
 {
 	None,
 	InGameMenu,
-	BaseControl
+	BaseControl,
+	MainMenu
 
 };
 
