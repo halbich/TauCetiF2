@@ -49,8 +49,6 @@ bool UMinMaxBox::HasCommonBoundaries(const UMinMaxBox* box1, const UMinMaxBox* b
 	if (sum != 1)
 		return false;   // wee need to have touch exactly in one dimension
 
-	print(TEXT("check"));
-
 	auto inRangeX = box2->Min.X < box1->Max.X && box2->Max.X > box1->Min.X;
 	auto inRangeY = box2->Min.Y < box1->Max.Y && box2->Max.Y > box1->Min.Y;
 	auto inRangeZ = box2->Min.Z < box1->Max.Z && box2->Max.Z > box1->Min.Z;

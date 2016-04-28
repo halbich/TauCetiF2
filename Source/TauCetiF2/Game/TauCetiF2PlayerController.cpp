@@ -15,7 +15,11 @@ void ATauCetiF2PlayerController::BeginPlay()
 		InGameMenu = CreateWidget<UObjectWidget>(this, wInGameMenu);
 
 	if (wBaseControl)
+	{
 		BaseControl = CreateWidget<UObjectWidget>(this, wBaseControl);
+
+		BaseControl->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
+	}
 
 }
 

@@ -42,10 +42,12 @@ public:
 	virtual void BeginPlay() override;
 
 	void OnEnterKey();
-	void OnEscapeKey();
+
+	UFUNCTION()
+		void OnEscapeKey();
 
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
-	void ShowWidget(const EShownWidget widget);
+		void ShowWidget(const EShownWidget widget);
 
 private:
 
