@@ -32,13 +32,17 @@ USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier()
 		auto carrier = NewObject<USaveGameCarrier>();
 		if (carrier->LoadGameDataFromFile(save, false)) {
 
-			if (carrier->IsQuickSave && hasQuickSave)
+			if (!carrier->IsQuickSave)
+				continue;
+
+			if ( hasQuickSave)
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Found another quick save. Deleting %s."), *save);
 				FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*save);
 			}
 			else {
 				hasQuickSave |= carrier->IsQuickSave;
+				
 				result = carrier;
 			}
 
@@ -80,6 +84,15 @@ bool USaveGameCarrier::SaveGameDataToFile(const FString& FullFilePath)
 
 	ToBinary.FlushCache();
 	ToBinary.Empty();
+
+	return false;
+}
+
+bool USaveGameCarrier::DeleteSaveFile()
+{
+	if(FPlatformFileManager::Get().GetPlatformFile().FileExists(*FullFilePath))
+
+	return FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*FullFilePath);
 
 	return false;
 }

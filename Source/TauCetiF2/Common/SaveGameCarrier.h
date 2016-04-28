@@ -105,7 +105,9 @@ public:
 		static USaveGameCarrier* GetQuickSaveCarrier();
 
 
-	
+
+	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
+		bool DeleteSaveFile();
 
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
