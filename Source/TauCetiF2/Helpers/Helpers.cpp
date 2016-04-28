@@ -123,4 +123,9 @@ void UHelpers::ChangeLocalization(FString target)
 	FInternationalization::Get().SetCurrentCulture(target);
 }
 
+void UHelpers::FatalError(const FName text)
+{
+	UE_LOG(LogTemp, Fatal, TEXT("%s"), *text.ToString());
+}
+
 

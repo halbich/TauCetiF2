@@ -29,13 +29,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UObjectWidget> wInGameMenu;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
 		UObjectWidget* InGameMenu;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UObjectWidget> wBaseControl;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
 		UObjectWidget* BaseControl;
 
 	// Override BeginPlay()

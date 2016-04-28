@@ -38,6 +38,9 @@ public:
 		static void ChangeLocalization(FString target);
 
 
+	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
+		static void FatalError(const FName text);
+
 	static FORCEINLINE FString UHelpers::GetCleanSaveFileName(const FString& worldName, const FDateTime& saveTime) {
 		auto name = worldName.Replace(TEXT(" "), TEXT("_"));
 		name.ToLowerInline();

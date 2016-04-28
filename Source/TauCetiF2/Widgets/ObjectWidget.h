@@ -11,7 +11,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWidgetShown);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWidgetRemoved, UObjectWidget*, RemovedWidget);
 
 /**
- * 
+ *
  */
 UCLASS(Blueprintable, ClassGroup = (Custom))
 class TAUCETIF2_API UObjectWidget : public UUserWidget
@@ -22,7 +22,7 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "CustomWidgets|ObjectWidget")
 		FWidgetCloseRequest OnWidgetCloseRequest;
-	
+
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
 		void RequestClose();
 
@@ -31,9 +31,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "CustomWidgets|ObjectWidget")
 		FWidgetRemoved OnWidgetRemoved;
-	
+
 	virtual void OnEnterKey();
-	
+
 	// Returns if caller should be hidden from screen
 	virtual bool OnEscapeKey();
 
@@ -55,11 +55,16 @@ public:
 		void RemoveTopWidgetFromStack();
 
 private:
-	
+
 
 	FORCEINLINE void notifyWidgetRemoved(UObjectWidget* widget)
 	{
 		OnWidgetRemoved.Broadcast(widget);
+	}
+
+	FORCEINLINE void popAll() {
+		while (ItemsStack.Num() > 0)
+			pop();
 	}
 
 	FORCEINLINE void pop()
@@ -67,7 +72,9 @@ private:
 		auto widget = ItemsStack.Pop();
 		print(TEXT("pop: "));
 		print(*widget->GetName());
+		widget->popAll();
 		notifyWidgetRemoved(widget);
 		widget->notifyWidgetRemoved(widget);
 	}
+
 };

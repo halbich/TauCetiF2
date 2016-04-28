@@ -101,12 +101,11 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
 		static USaveGameCarrier* GetEmptyCarrier();
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
+		static USaveGameCarrier* GetQuickSaveCarrier();
 
-	void SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, bool bFullObject = true);
-	bool SaveGameDataToFile(const FString& FullFilePath);
-	bool LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject = true);
 
-	bool IsSaveCompatible(const USaveGameCarrier& carrier);
+	
 
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
@@ -127,6 +126,12 @@ public:
 
 
 private:
+
+	void SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, bool bFullObject = true);
+	bool SaveGameDataToFile(const FString& FullFilePath);
+	bool LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject = true);
+
+	bool IsSaveCompatible(const USaveGameCarrier& carrier);
 
 	void DEBUGPrintSave() {
 
