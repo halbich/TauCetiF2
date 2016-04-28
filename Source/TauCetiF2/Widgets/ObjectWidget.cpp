@@ -43,6 +43,8 @@ void UObjectWidget::AddToStack(UObjectWidget* widget)
 
 	ItemsStack.Push(widget);
 	widget->WidgetShown();
+	print(TEXT("Add to stack: "));
+	print(*widget->GetName());
 }
 
 void UObjectWidget::SwapWithTop(UObjectWidget* widget)
@@ -57,6 +59,8 @@ void UObjectWidget::AddToStackAndScreen(UObjectWidget* widget, int32 ZOrder)
 {
 	ensure(widget);
 
+	print(TEXT("Add to stack and screen: "));
+	print(*widget->GetName());
 	ItemsStack.Push(widget);
 	widget->WidgetShown();
 	widget->AddToViewport(ZOrder);

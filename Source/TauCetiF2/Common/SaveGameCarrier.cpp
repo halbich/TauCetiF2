@@ -10,8 +10,6 @@ USaveGameCarrier::USaveGameCarrier() {
 	ContainsFullSaveData = false;
 	SaveLoaded = false;
 
-	SaveName = TEXT("Prázdná pozice");
-
 }
 
 
@@ -246,3 +244,8 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, boo
 
 }
 
+bool USaveGameCarrier::IsSaveNameValid()
+{
+	return SaveName.Len() > 0;
+
+}

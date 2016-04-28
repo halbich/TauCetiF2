@@ -65,6 +65,9 @@ private:
 	FORCEINLINE void pop()
 	{
 		auto widget = ItemsStack.Pop();
+		print(TEXT("pop: "));
+		print(*widget->GetName());
 		notifyWidgetRemoved(widget);
+		widget->notifyWidgetRemoved(widget);
 	}
 };

@@ -122,6 +122,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		void GetSaveForNewGame();
 
+	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
+		bool IsSaveNameValid();
+
 
 private:
 
