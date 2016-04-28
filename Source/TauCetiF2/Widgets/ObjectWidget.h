@@ -13,7 +13,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWidgetRemoved, UObjectWidget*, Remo
 /**
  * 
  */
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, ClassGroup = (Custom))
 class TAUCETIF2_API UObjectWidget : public UUserWidget
 {
 	GENERATED_BODY()
@@ -32,10 +32,10 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "CustomWidgets|ObjectWidget")
 		FWidgetRemoved OnWidgetRemoved;
 	
-	void OnEnterKey();
+	virtual void OnEnterKey();
 	
 	// Returns if caller should be hidden from screen
-	bool OnEscapeKey();
+	virtual bool OnEscapeKey();
 
 	void WidgetShown();
 
@@ -49,7 +49,10 @@ public:
 		void SwapWithTop(UObjectWidget* widget);
 
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
-		void AddToScreen(UObjectWidget* widget, int32 ZOrder = 0);
+		void AddToStackAndScreen(UObjectWidget* widget, int32 ZOrder = 0);
+
+	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
+		void RemoveTopWidgetFromStack();
 
 private:
 	

@@ -8,15 +8,15 @@
 
 void UObjectWidget::RequestClose()
 {
-	print(TEXT("request close"));
 	OnWidgetCloseRequest.Broadcast();
 }
 
 void UObjectWidget::OnEnterKey()
 {
-	auto top = ItemsStack.Top();
-	if (top)
-		top->OnEnterKey();
+	if (ItemsStack.Num() == 0)
+		return;
+
+	ItemsStack.Top()->OnEnterKey();
 }
 
 bool UObjectWidget::OnEscapeKey()
@@ -53,11 +53,18 @@ void UObjectWidget::SwapWithTop(UObjectWidget* widget)
 	AddToStack(widget);
 }
 
-void UObjectWidget::AddToScreen(UObjectWidget* widget, int32 ZOrder)
+void UObjectWidget::AddToStackAndScreen(UObjectWidget* widget, int32 ZOrder)
 {
 	ensure(widget);
 
 	ItemsStack.Push(widget);
 	widget->WidgetShown();
 	widget->AddToViewport(ZOrder);
+	widget->SetUserFocus(GetOwningPlayer());
+}
+
+void UObjectWidget::RemoveTopWidgetFromStack()
+{
+	if (ItemsStack.Num() != 0)
+		pop();
 }

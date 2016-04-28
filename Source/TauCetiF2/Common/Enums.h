@@ -105,3 +105,15 @@ enum class EShownWidget : uint8
 	BaseControl
 
 };
+
+
+UENUM(BlueprintType)
+enum class EModalDialogResult : uint8
+{
+	None,
+	Yes,
+	No,
+	OK,
+	Cancel
+
+};

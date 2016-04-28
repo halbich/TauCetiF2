@@ -28,10 +28,10 @@ void ATauCetiF2PlayerController::OnEscapeKey()
 {
 
 	print(TEXT("Escape pressed"));
-		
+
 	switch (CurrentShownWidget)
 	{
-	case EShownWidget::None: 
+	case EShownWidget::None:
 		ShowWidget(EShownWidget::InGameMenu);
 		return;
 	case EShownWidget::InGameMenu:
@@ -59,11 +59,17 @@ void ATauCetiF2PlayerController::OnEscapeKey()
 
 void ATauCetiF2PlayerController::OnEnterKey()
 {
+	print(TEXT("Enter pressed"));
+
 	switch (CurrentShownWidget)
 	{
 	case EShownWidget::None: break;
-	case EShownWidget::InGameMenu: break;
-	case EShownWidget::BaseControl: break;
+	case EShownWidget::InGameMenu:
+		InGameMenu->OnEnterKey();
+		break;
+	case EShownWidget::BaseControl:
+		BaseControl->OnEnterKey();
+		break;
 	default:
 		checkNoEntry();
 	}
@@ -81,13 +87,13 @@ void ATauCetiF2PlayerController::ShowWidget(const EShownWidget widget)
 	case EShownWidget::InGameMenu:
 		focus = InGameMenu;
 		break;
-	case EShownWidget::BaseControl: 
+	case EShownWidget::BaseControl:
 		focus = BaseControl;
 		break;
 	default:
 		checkNoEntry();
 	}
-	
+
 	check(focus);
 	focus->AddToViewport();
 	CurrentShownWidget = widget;

@@ -7,7 +7,7 @@
 #include "BaseControlComponent.generated.h"
 
 
-UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TAUCETIF2_API UBaseControlComponent : public UActorComponent
 {
 	GENERATED_UCLASS_BODY()

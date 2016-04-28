@@ -56,7 +56,7 @@ public:
 	UPROPERTY()
 		UKDTree* RootBox;
 
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldController, meta = (AllowPrivateAccess = "true"))
 		UBaseControlComponent* BaseControl;
 
 private:
