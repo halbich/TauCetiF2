@@ -97,3 +97,11 @@ enum class EBuildableObjectAction : uint8
 	DeleteObject				UMETA(DisplayName = "DeleteObject"),
 };
 
+UENUM(BlueprintType)
+enum class EShownWidget : uint8
+{
+	None,
+	InGameMenu,
+	BaseControl
+
+};

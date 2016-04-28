@@ -4,15 +4,16 @@
 #include "Components/SelectorComponent.h"
 #include "Components/InventoryComponent.h"
 #include "Components/BuilderComponent.h"
+#include "Game/TauCetiF2PlayerController.h"
 #include "TauCetiF2Character.generated.h"
 
-UCLASS(config=Game)
+UCLASS(config = Game)
 class ATauCetiF2Character : public ACharacter
 {
 	GENERATED_BODY()
 
-	/** Camera boom positioning the camera behind the character */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		/** Camera boom positioning the camera behind the character */
+		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
 
 	/** Follow camera */
@@ -32,12 +33,12 @@ public:
 	ATauCetiF2Character();
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-	float BaseTurnRate;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		float BaseTurnRate;
 
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-	float BaseLookUpRate;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		float BaseLookUpRate;
 
 protected:
 
@@ -47,14 +48,14 @@ protected:
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
-	/** 
-	 * Called via input to turn at a given rate. 
+	/**
+	 * Called via input to turn at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	 */
 	void TurnAtRate(float Rate);
 
 	/**
-	 * Called via input to turn look up/down at a given rate. 
+	 * Called via input to turn look up/down at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	 */
 	void LookUpAtRate(float Rate);
@@ -74,6 +75,14 @@ protected:
 	bool lastPitchWasZero;
 	bool lastRollWasZero;
 	bool lastYawWasZero;
+
+	void OnEscapeKey();
+	void OnEnterKey();
+
+	UPROPERTY()
+		ATauCetiF2PlayerController* PC;   // todo pøesunout?
+
+	void OnUse();
 
 protected:
 	// APawn interface

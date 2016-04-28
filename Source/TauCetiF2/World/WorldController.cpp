@@ -17,6 +17,9 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	RootBox = ObjectInitializer.CreateDefaultSubobject<UKDTree>(this, TEXT("RootBox"));
 	RootBox->Init(min, max, 0);
 
+
+	BaseControl = ObjectInitializer.CreateDefaultSubobject<UBaseControlComponent>(this, TEXT("Base Control"));
+
 }
 
 void AWorldController::preLoadInit(bool ctor)

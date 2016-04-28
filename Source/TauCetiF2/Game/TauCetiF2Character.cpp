@@ -82,6 +82,19 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* Input
 	InputComponent->BindAxis("RotPitch", this, &ATauCetiF2Character::BuilderRotatePitch);
 	InputComponent->BindAxis("RotRoll", this, &ATauCetiF2Character::BuilderRotateRoll);
 	InputComponent->BindAxis("RotYaw", this, &ATauCetiF2Character::BuilderRotateYaw);
+
+
+	auto world = GetWorld();
+	if (world)
+	{
+		auto pc = UGameplayStatics::GetPlayerController(world, 0);
+		PC = Cast<ATauCetiF2PlayerController>(pc);
+
+	}
+	InputComponent->BindAction("OnEscape", IE_Pressed, this, &ATauCetiF2Character::OnEscapeKey);
+	InputComponent->BindAction("OnEnter", IE_Pressed, this, &ATauCetiF2Character::OnEnterKey);
+
+	InputComponent->BindAction("OnUse", IE_Pressed, this, &ATauCetiF2Character::OnUse);
 }
 
 
@@ -168,4 +181,22 @@ void ATauCetiF2Character::BuilderRotateYaw(float Value)
 		Builder->RotateYaw(Value);
 
 	lastYawWasZero = Value == 0.0f;
+}
+
+void ATauCetiF2Character::OnEscapeKey()
+{
+	ensure(PC);
+	PC->OnEscapeKey();
+}
+
+void ATauCetiF2Character::OnEnterKey()
+{
+	ensure(PC);
+	PC->OnEnterKey();
+}
+
+void ATauCetiF2Character::OnUse()
+{
+	if (!IsMoveInputIgnored())
+		Selector->TrySelect();
 }

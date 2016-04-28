@@ -12,6 +12,7 @@
 #include "Blocks/Definitions/FBlockDefinitionHolder.h"
 #include "Game/Patterns/PatternDefinition.h"
 #include "Game/Patterns/PatternDefinitionsHolder.h"
+#include "Components/BaseControlComponent.h"
 
 #include "WorldController.generated.h"
 
@@ -55,7 +56,8 @@ public:
 	UPROPERTY()
 		UKDTree* RootBox;
 
-
+	UPROPERTY()
+		UBaseControlComponent* BaseControl;
 
 private:
 
