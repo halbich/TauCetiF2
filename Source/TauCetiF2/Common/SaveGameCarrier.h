@@ -5,6 +5,7 @@
 #include "TauCetiF2.h"
 #include "Game/GameDefinitions.h"
 #include "Object.h"
+#include "Common/Enums.h"
 #include "Helpers/Saving/ArchiveHelpers.h"
 #include "Helpers/Saving/BlockSaveInfo.h"
 #include "Blocks/Info/BlockInfo.h"
@@ -23,10 +24,18 @@ public:
 	USaveGameCarrier();
 
 	static const uint8 CURRENT_VERSION;
-	UPROPERTY()
+
+	// This pragma has only visual effect (collapsing code in Visual Studio)
+	// According to http://stackoverflow.com/questions/9000479/equivalent-of-region-for-c this definition of C# region equivalent is working only in Visual Studio
+	// if you have any problems with compilation, please remove lines with #pragma region and #pragma endregion
+
+#pragma region Properties
+
+	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
 		bool IsSystemSave;
 
-
+	UPROPERTY()
+		ENamedHardcodedLevel HardcodedLevelName;
 
 	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
 		FString FullFilePath;
@@ -94,7 +103,7 @@ public:
 	// Serializable array
 	TArray<FInventoryBuildableBlockInfo> buildableBlocks;
 
-
+#pragma endregion
 
 	// functions
 
@@ -211,32 +220,6 @@ private:
 		}
 	}
 
-public:
-
-	FORCEINLINE UBlockInfo* make(uint32 id, FVector location, FVector blockScale, FRotator blockRotation)
-	{
-		auto ret = NewObject<UBlockInfo>(this);
-		ret->ID = id;
-		ret->Location = location;
-		ret->Scale = blockScale;
-		ret->Rotation = blockRotation;
-		return ret;
-
-	}
-
-	FORCEINLINE UBlockInfo* make(EBlockName id, FVector location, FVector blockScale, FRotator blockRotation)
-	{
-		return make((uint32)id, location, blockScale, blockRotation);
-	}
-
-
-	FORCEINLINE UBuildableBlockInfo* makeBuildable(EBlockName id, FVector blockScale)
-	{
-		auto ret = NewObject<UBuildableBlockInfo>(this);
-		ret->ID = (int32)id;
-		ret->Scale = blockScale;
-		return ret;
-	}
 
 
 

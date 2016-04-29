@@ -128,7 +128,6 @@ UPatternDefinitionsHolder* UPatternDefinitionsHolder::Instance()
 
 	if (instance == nullptr || !instance->IsValidLowLevel())
 	{
-		UClass *definitionsClass = UPatternDefinitionsHolder::StaticClass();
 		instance = NewObject<UPatternDefinitionsHolder>();
 		instance->Init();
 		instance->checkAllInit();

@@ -118,3 +118,13 @@ enum class EModalDialogResult : uint8
 	Cancel
 
 };
+
+UENUM(BlueprintType)
+enum class ENamedHardcodedLevel : uint8
+{
+	MainMenu,
+	DefaultLevel,
+	EmptyLevel,
+	HardcodedLevelsMax
+
+};

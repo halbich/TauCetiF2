@@ -3,8 +3,12 @@
 #pragma once
 
 #include "Object.h"
+#include "Common/Enums.h"
 #include "Common/SaveGameCarrier.h"
 #include "NewGameSaveHolder.generated.h"
+
+
+
 
 /**
  *
@@ -26,6 +30,49 @@ public:
 
 private:
 
-	static USaveGameCarrier* getDefaultGameSave();
-	static USaveGameCarrier* getEmptyGameSave();
+	static UNewGameSaveHolder* Instance();
+
+	void init();
+
+	//The Function Pointer Variable Type
+	//Functions take in 0 parameters and return void
+	typedef USaveGameCarrier* (UNewGameSaveHolder::*FunctionPtrType)(void);
+
+	//A static array of to Function Pointers
+	FunctionPtrType fillingFunctions[(uint8)ENamedHardcodedLevel::HardcodedLevelsMax];
+
+	UPROPERTY()
+		TArray<USaveGameCarrier*> newGameSaves;
+
+	UPROPERTY()
+		USaveGameCarrier* mainMenuSave;
+
+	USaveGameCarrier* getDefaultGameSave();
+	USaveGameCarrier* getEmptyGameSave();
+	USaveGameCarrier* getMainMenuSave();
+
+
+	FORCEINLINE UBlockInfo* make(uint32 id, FVector location, FVector blockScale, FRotator blockRotation)
+	{
+		auto ret = NewObject<UBlockInfo>(this);
+		ret->ID = id;
+		ret->Location = location;
+		ret->Scale = blockScale;
+		ret->Rotation = blockRotation;
+		return ret;
+
+	}
+
+	FORCEINLINE UBlockInfo* make(EBlockName id, FVector location, FVector blockScale, FRotator blockRotation)
+	{
+		return make((uint32)id, location, blockScale, blockRotation);
+	}
+
+	FORCEINLINE UBuildableBlockInfo* makeBuildable(EBlockName id, FVector blockScale)
+	{
+		auto ret = NewObject<UBuildableBlockInfo>(this);
+		ret->ID = (int32)id;
+		ret->Scale = blockScale;
+		return ret;
+	}
 };

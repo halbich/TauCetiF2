@@ -10,6 +10,8 @@ USaveGameCarrier::USaveGameCarrier() {
 	ContainsFullSaveData = false;
 	SaveLoaded = false;
 
+	HardcodedLevelName = ENamedHardcodedLevel::HardcodedLevelsMax;
+		
 }
 
 
