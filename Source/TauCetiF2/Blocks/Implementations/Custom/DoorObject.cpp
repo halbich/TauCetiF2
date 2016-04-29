@@ -8,14 +8,6 @@
 ADoorObject::ADoorObject(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer), ListeningHandle(), doorState(EDoorState::Opened), doorOpening(EDoorOpening::Left)
 {
-	//auto dc = GetDestructibleComponent();
-	//if (!dc)
-	//	return;
-
-	//ConstructorHelpers::FObjectFinder<UDestructibleMesh> destructible(TEXT("DestructibleMesh'/Game/BuildingObjects/DestructibleMeshes/box_DM.box_DM'"));
-
-	//if (destructible.Succeeded())
-	//	dc->SetDestructibleMesh(destructible.Object);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> mesh(TEXT("StaticMesh'/Game/BuildingObjects/Meshes/doorFrame.doorFrame'"));
 
@@ -25,14 +17,8 @@ ADoorObject::ADoorObject(const FObjectInitializer& ObjectInitializer)
 	DoorFrameMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DoorFrameMesh"));
 	DoorFrameMesh->SetStaticMesh(mesh.Object);
 	DoorFrameMesh->AttachTo(GetStaticMeshComponent());
-	DoorFrameMesh->AddLocalOffset(FVector(0, -3 * 20, 0));
+	DoorFrameMesh->AddLocalOffset(FVector(0, -3 * GameDefinitions::CubeMinSize, 0));
 
-
-	//TranslucentSelectMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TranslucentMeshSelector"));
-	//TranslucentSelectMesh->SetStaticMesh(mesh);
-	//TranslucentSelectMesh->SetRenderInMainPass(false);
-	//TranslucentSelectMesh->Deactivate();
-	//TranslucentSelectMesh->AttachTo(mc);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> doorMesh(TEXT("StaticMesh'/Game/BuildingObjects/Meshes/door.door'"));
 

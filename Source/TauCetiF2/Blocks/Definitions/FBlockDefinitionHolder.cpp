@@ -107,4 +107,16 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 
 	definitions.Add(door.ID, door);
 
+
+	FBlockDefinition windowPowered(EBlockName::WindowPowered, EShapeType::Custom);
+	windowPowered.AddMaterials(4,
+		FBlockMaterialDefinition(EMaterialInstance::DoorFrame, EAxis::Type::X, EAxis::Type::Y, FName(TEXT("doorFrame"))),
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::X, FName(TEXT("door")), true),
+		FBlockMaterialDefinition(EMaterialInstance::DoorCircle, EAxis::Type::X, EAxis::Type::Y, FName(TEXT("door"))),
+		FBlockMaterialDefinition(EMaterialInstance::DoorBody, EAxis::Type::X, EAxis::Type::Y, FName(TEXT("door")))
+		);
+
+
+	definitions.Add(windowPowered.ID, windowPowered);
+
 }

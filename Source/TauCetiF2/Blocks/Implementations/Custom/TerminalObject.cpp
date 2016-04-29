@@ -9,14 +9,6 @@
 ATerminalObject::ATerminalObject(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer), ListeningHandle()
 {
-	//auto dc = GetDestructibleComponent();
-	//if (!dc)
-	//	return;
-
-	//ConstructorHelpers::FObjectFinder<UDestructibleMesh> destructible(TEXT("DestructibleMesh'/Game/BuildingObjects/DestructibleMeshes/box_DM.box_DM'"));
-
-	//if (destructible.Succeeded())
-	//	dc->SetDestructibleMesh(destructible.Object);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> mesh(TEXT("StaticMesh'/Game/BuildingObjects/Meshes/terminal.terminal'"));
 

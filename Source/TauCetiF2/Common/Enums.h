@@ -70,6 +70,7 @@ enum class EBlockName : uint8
 	ConstructCubeBody 			UMETA(DisplayName = "ConstructCubeBody"),
 	Terminal		 			UMETA(DisplayName = "Terminal"),
 	Door						UMETA(DisplayName = "Door"),
+	WindowPowered				UMETA(DisplayName = "WindowPowered"),
 };
 
 #if WITH_EDITOR
