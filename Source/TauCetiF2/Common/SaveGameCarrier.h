@@ -121,9 +121,6 @@ public:
 		static TArray<USaveGameCarrier*> GetSaveGameInfoList();
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
-		void GetSaveForNewGame();
-
-	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		bool IsSaveNameValid();
 
 
@@ -143,8 +140,8 @@ private:
 		for (auto info : usedBlocks)
 		{
 
-			UE_LOG(LogTemp, Log, TEXT("UsedBlocks.Add(make(EBlockName::%s, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d)));"), 
-				*GetEBlockNameAsString( info.ID),
+			UE_LOG(LogTemp, Log, TEXT("UsedBlocks.Add(make(EBlockName::%s, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d)));"),
+				*GetEBlockNameAsString(info.ID),
 				FMath::RoundToInt(info.Location.X), FMath::RoundToInt(info.Location.Y), FMath::RoundToInt(info.Location.Z),
 				FMath::RoundToInt(info.Scale.X), FMath::RoundToInt(info.Scale.Y), FMath::RoundToInt(info.Scale.Z),
 				FMath::RoundToInt(info.Rotation.Pitch), FMath::RoundToInt(info.Rotation.Yaw), FMath::RoundToInt(info.Rotation.Roll));
@@ -155,8 +152,23 @@ private:
 #endif
 	}
 
+public:
+	FORCEINLINE void addSystemBuildableActions()
+	{
+		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
+		BuildableBlocks[0]->IsEmptyHand = true;
+		BuildableBlocks[0]->IsSystemAction = true;
+		BuildableBlocks[0]->Action = EBuildableObjectAction::None;
+		BuildableBlocks[0]->AllowOutlineOnSelected = false;
 
+		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
+		BuildableBlocks[1]->IsEmptyHand = true;
+		BuildableBlocks[1]->IsSystemAction = true;
+		BuildableBlocks[1]->Action = EBuildableObjectAction::DeleteObject;
+		BuildableBlocks[1]->StencilOverride = STENCIL_DELETE_OUTLINE;
+	}
 
+private:
 	FORCEINLINE void updateBeforeSave() {
 
 		usedBlocks.Empty();
@@ -176,22 +188,6 @@ private:
 
 		DEBUGPrintSave();
 	}
-
-	FORCEINLINE void addSystemBuildableActions()
-	{
-		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
-		BuildableBlocks[0]->IsEmptyHand = true;
-		BuildableBlocks[0]->IsSystemAction = true;
-		BuildableBlocks[0]->Action = EBuildableObjectAction::None;
-		BuildableBlocks[0]->AllowOutlineOnSelected = false;
-
-		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
-		BuildableBlocks[1]->IsEmptyHand = true;
-		BuildableBlocks[1]->IsSystemAction = true;
-		BuildableBlocks[1]->Action = EBuildableObjectAction::DeleteObject;
-		BuildableBlocks[1]->StencilOverride = STENCIL_DELETE_OUTLINE;
-	}
-
 
 	FORCEINLINE void updateAfterLoad() {
 
@@ -214,6 +210,8 @@ private:
 			BuildableBlocks.Add(buildableBlockInfoBlock);
 		}
 	}
+
+public:
 
 	FORCEINLINE UBlockInfo* make(uint32 id, FVector location, FVector blockScale, FRotator blockRotation)
 	{

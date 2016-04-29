@@ -150,76 +150,7 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 	return result;
 }
 
-void USaveGameCarrier::GetSaveForNewGame()
-{
-	IsSystemSave = true;
-	PlayerPosition = FVector(-600, 0, 90);
-	PartOfDay = 0.5f;
-	PlayerUseFPSCamera = true;
 
-
-	BuildableBlocks.Empty();
-	addSystemBuildableActions();
-
-	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(1, 1, 1)));
-
-	BuildableBlocks.Add(makeBuildable(EBlockName::BaseCube, FVector(1, 1, 4)));
-	BuildableBlocks.Add(makeBuildable(EBlockName::WindowCube, FVector(4, 4, 1)));
-	//BuildableBlocks.Add(makeBuildable(EBlockName::Terminal, FVector(1, 1, 1)));
-	BuildableBlocks.Add(makeBuildable(EBlockName::ConstructCube, FVector(1, 1, 1)));
-	BuildableBlocks.Add(makeBuildable(EBlockName::ConstructCubeSide, FVector(2, 2, 2)));
-	BuildableBlocks.Add(makeBuildable(EBlockName::ConstructCubeBody, FVector(5, 5, 5)));
-
-	auto build1 = makeBuildable(EBlockName::Door, FVector(1, 1, 1));
-	build1->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Left);
-	build1->DefaultBuildingRotation = FRotator(0, 180, 0);
-	//BuildableBlocks.Add(build1);
-
-	auto build2 = makeBuildable(EBlockName::Door, FVector(1, 1, 1));
-	build2->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Right);
-	build2->DefaultBuildingRotation = FRotator(0, 180, 0);
-	//BuildableBlocks.Add(build2);
-
-	auto door1 = make(EBlockName::Door, FVector(-20, -20, 5), FVector(1, 1, 1), FRotator(0, 0, 0));
-	door1->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Left);
-	//UsedBlocks.Add(door1);
-
-	auto door2 = make(EBlockName::Door, FVector(-20, 30, 5), FVector(1, 1, 1), FRotator(0, 180, 0));
-	door2->AdditionalFlags.Add(TEXT("doorOpening"), (int32)EDoorOpening::Right);
-
-	//UsedBlocks.Add(door2);
-
-	//UsedBlocks.Add(make(EBlockName::Terminal, FVector(-20, -30, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
-	
-	UsedBlocks.Add(make(EBlockName::ConstructCubeSide, FVector(0, 0, 5), FVector(1, 4, 2), FRotator(0, 0, 0)));
-
-	return;
-
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 3, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 6, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 1, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 4, 0), FVector(1, 1, 4), FRotator(90, 90, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 4, 0), FVector(1, 1, 4), FRotator(90, 90, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 1, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 1, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 6, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 1, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 1, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-10, 1, 2), FVector(4, 4, 1), FRotator(180, 0, 90)));
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-13, 4, 2), FVector(4, 4, 1), FRotator(180, 90, 90)));
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 6, 2), FVector(4, 4, 1), FRotator(180, 180, 90)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 6, 5), FVector(1, 1, 4), FRotator(90, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 4, 5), FVector(1, 1, 4), FRotator(90, 90, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 6, 2), FVector(1, 1, 4), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-11, 3, 5), FVector(4, 4, 1), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 3, 5), FVector(1, 1, 4), FRotator(0, 180, 270)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-10, 1, 5), FVector(1, 1, 4), FRotator(0, 270, 270)));
-	UsedBlocks.Add(make(EBlockName::WindowCube, FVector(-8, 3, 3), FVector(4, 4, 1), FRotator(0, 90, 90)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-13, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
-	UsedBlocks.Add(make(EBlockName::BaseCube, FVector(-8, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
-
-
-}
 
 bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject) {
 
