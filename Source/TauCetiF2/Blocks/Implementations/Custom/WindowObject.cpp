@@ -75,6 +75,8 @@ void  AWindowObject::OnConstruction(const FTransform& Transform) {
 	Top->ResetRelativeTransform();
 	Left->ResetRelativeTransform();
 
+	Center->ResetRelativeTransform();
+
 	auto rbc = RightBottomCorner->GetRelativeTransform();
 	auto lbc = LeftBottomCorner->GetRelativeTransform();
 	auto rtc = RightTopCorner->GetRelativeTransform();
@@ -85,16 +87,17 @@ void  AWindowObject::OnConstruction(const FTransform& Transform) {
 	auto t = Top->GetRelativeTransform();
 	auto l = Left->GetRelativeTransform();
 
+	auto c = Center->GetRelativeTransform();
 
-	rbc.SetLocation(FVector(1 * GameDefinitions::CubeMinSizeHalf, 0, -1 * GameDefinitions::CubeMinSizeHalf));
-	lbc.SetLocation(FVector(-1 * GameDefinitions::CubeMinSizeHalf, 0, -1 * GameDefinitions::CubeMinSizeHalf));
-	rtc.SetLocation(FVector(1 * GameDefinitions::CubeMinSizeHalf, 0, 1 * GameDefinitions::CubeMinSizeHalf));
-	ltc.SetLocation(FVector(-1 * GameDefinitions::CubeMinSizeHalf, 0, 1 * GameDefinitions::CubeMinSizeHalf));
+	rbc.SetLocation(FVector(GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0, -GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
+	lbc.SetLocation(FVector(-GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0, -GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
+	rtc.SetLocation(FVector(GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0, GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
+	ltc.SetLocation(FVector(-GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0, GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
 
-	b.SetLocation(FVector(0, 0, -1 / s.Z * GameDefinitions::CubeMinSize));
-	r.SetLocation(FVector(0.5f * GameDefinitions::CubeMinSize, 0, 0));
-	t.SetLocation(FVector(0, 0, 0.5f * GameDefinitions::CubeMinSize));
-	l.SetLocation(FVector(-0.5f * GameDefinitions::CubeMinSize, 0, 0));
+	b.SetLocation(FVector(0, 0, -GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.Z)));
+	r.SetLocation(FVector(GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.X), 0, 0));
+	t.SetLocation(FVector(0, 0, GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.Z)));
+	l.SetLocation(FVector(-GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.X), 0, 0));
 
 
 	rbc.SetRotation(FQuat(FRotator(0, 0, 0)));
@@ -112,13 +115,13 @@ void  AWindowObject::OnConstruction(const FTransform& Transform) {
 	rtc.SetScale3D(FVector(1 / s.X, 1, 1 / s.Z));
 	ltc.SetScale3D(FVector(1 / s.X, 1, 1 / s.Z));
 
-	b.SetScale3D(FVector(1 / s.X, 1, 1 / s.Z));
-	r.SetScale3D(FVector(1 / s.X, 1, 1 / s.Z));
-	t.SetScale3D(FVector(1 / s.X, 1, 1 / s.Z));
-	l.SetScale3D(FVector(1 / s.X, 1, 1 / s.Z));
+	b.SetScale3D(FVector(1 - 2 / s.X, 1, 1 / s.Z));
+	r.SetScale3D(FVector((s.Z -2) /s.X , 1, 1 / s.Z));
+	t.SetScale3D(FVector(1 - 2 / s.X, 1, 1 / s.Z));
+	l.SetScale3D(FVector((s.Z - 2) / s.X, 1, 1 / s.Z));
 
+	c.SetScale3D(FVector((1 - (0.5 / s.X)) / 0.75, 1, (1 - (0.5 / s.Z)) / 0.75));
 
-	
 
 	RightBottomCorner->SetRelativeTransform(rbc);
 	LeftBottomCorner->SetRelativeTransform(lbc);
@@ -130,6 +133,7 @@ void  AWindowObject::OnConstruction(const FTransform& Transform) {
 	Top->SetRelativeTransform(t);
 	Left->SetRelativeTransform(l);
 
+	Center->SetRelativeTransform(c);
 }
 
 

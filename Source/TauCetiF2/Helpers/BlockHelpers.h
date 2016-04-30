@@ -6,6 +6,7 @@
 #include "Blocks/Implementations/BaseShapes/CubeBodyObject.h"
 #include "Blocks/Implementations/Custom/TerminalObject.h"
 #include "Blocks/Implementations/Custom/DoorObject.h"
+#include "Blocks/Implementations/Custom/WindowObject.h"
 #include "World/MinMaxBox.h"
 
 /**
@@ -27,7 +28,8 @@ struct TAUCETIF2_API BlockHelpers
 				return ATerminalObject::StaticClass();
 			else if (definition->ID == (uint32)EBlockName::Door)
 				return ADoorObject::StaticClass();
-
+			else if (definition->ID == (uint32)EBlockName::WindowPowered)
+				return AWindowObject::StaticClass();
 			break;
 		}
 
