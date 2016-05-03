@@ -12,7 +12,10 @@ UCLASS()
 class TAUCETIF2_API UTerminalBaseWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	
+public:
+
+	UPROPERTY(EditAnywhere, Category = TerminalBaseWidget)
+		FString DisplayName;
 	
 	
 	

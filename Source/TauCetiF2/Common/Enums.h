@@ -90,6 +90,8 @@ enum class EDoorOpening : uint8
 
 };
 
+
+
 UENUM(BlueprintType)
 enum class EBuildableObjectAction : uint8
 {
@@ -104,7 +106,8 @@ enum class EShownWidget : uint8
 	None,
 	InGameMenu,
 	BaseControl,
-	MainMenu
+	MainMenu,
+	Inventory
 
 };
 
@@ -129,3 +132,22 @@ enum class ENamedHardcodedLevel : uint8
 	HardcodedLevelsMax
 
 };
+
+
+UENUM(BlueprintType)
+enum class ENamedTag : uint8
+{
+	DoorOpening
+};
+
+static FString GetNameForTag(ENamedTag tag)
+{
+	switch (tag)
+	{
+	case ENamedTag::DoorOpening: return TEXT("doorOpening");
+	default:
+		checkNoEntry();
+		return TEXT("");
+	}
+}
+

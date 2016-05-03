@@ -44,6 +44,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
 		UObjectWidget* MainMenu;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+		TSubclassOf<class UObjectWidget> wInventory;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
+		UObjectWidget* Inventory;
+
 	// Override BeginPlay()
 	virtual void BeginPlay() override;
 
@@ -55,6 +61,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
 		void ShowWidget(const EShownWidget widget);
+
+	void ToggleInventory();
 
 private:
 

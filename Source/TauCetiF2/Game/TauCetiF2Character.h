@@ -79,6 +79,8 @@ protected:
 	void OnEscapeKey();
 	void OnEnterKey();
 
+	void OnInventory();
+
 	UPROPERTY()
 		ATauCetiF2PlayerController* PC;   // todo pøesunout?
 

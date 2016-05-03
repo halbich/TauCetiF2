@@ -28,6 +28,7 @@ public:
 	}
 
 
+
 	FORCEINLINE bool ShapeCanBeSubdivided(const EShapeType type)
 	{
 		return type == EShapeType::CubeSide;

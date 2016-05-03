@@ -98,7 +98,7 @@ UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
 	case EBlockName::ConstructCubeBody: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("BuildingBoxBody.BuildingBoxBody'")));
 	case EBlockName::Terminal: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("Terminal.Terminal'")));
 	case EBlockName::Door: {
-		auto doorOpening = blockInfo->AdditionalFlags.Find(TEXT("doorOpening"));
+		auto doorOpening = blockInfo->AdditionalFlags.Find(GetNameForTag(ENamedTag::DoorOpening));
 		if (doorOpening)
 		{
 			auto value = (EDoorOpening)(*doorOpening);

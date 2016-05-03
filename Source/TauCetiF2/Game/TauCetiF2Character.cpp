@@ -95,6 +95,8 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* Input
 	InputComponent->BindAction("OnEnter", IE_Pressed, this, &ATauCetiF2Character::OnEnterKey);
 
 	InputComponent->BindAction("OnUse", IE_Pressed, this, &ATauCetiF2Character::OnUse);
+
+	InputComponent->BindAction("OnInventory", IE_Pressed, this, &ATauCetiF2Character::OnInventory);
 }
 
 
@@ -193,6 +195,12 @@ void ATauCetiF2Character::OnEnterKey()
 {
 	ensure(PC);
 	PC->OnEnterKey();
+}
+
+void ATauCetiF2Character::OnInventory()
+{
+	ensure(PC);
+	PC->ToggleInventory();
 }
 
 void ATauCetiF2Character::OnUse()

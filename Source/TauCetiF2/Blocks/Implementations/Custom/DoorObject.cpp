@@ -116,7 +116,7 @@ void ADoorObject::SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition)
 
 	if (WorldObjectComponent && WorldObjectComponent->BlockInfo)
 	{
-		auto key = TEXT("doorOpening");
+		auto key = GetNameForTag(ENamedTag::DoorOpening);
 		auto valueptr = WorldObjectComponent->BlockInfo->AdditionalFlags.Find(key);
 		if (valueptr)
 			doorOpening = (EDoorOpening)(*valueptr);

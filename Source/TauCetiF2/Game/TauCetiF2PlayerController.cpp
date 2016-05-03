@@ -26,8 +26,13 @@ void ATauCetiF2PlayerController::BeginPlay()
 	if (wBaseControl)
 	{
 		BaseControl = CreateWidget<UObjectWidget>(this, wBaseControl);
-
 		BaseControl->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
+	}
+
+	if (wInventory)
+	{
+		Inventory = CreateWidget<UObjectWidget>(this, wInventory);
+		Inventory->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
 	}
 
 }
@@ -62,6 +67,14 @@ void ATauCetiF2PlayerController::OnEscapeKey()
 	case EShownWidget::MainMenu:
 		MainMenu->OnEscapeKey();
 		break;
+	case EShownWidget::Inventory:
+		if (Inventory->OnEscapeKey())
+		{
+			Inventory->RemoveFromViewport();
+			CurrentShownWidget = EShownWidget::None;
+			updateState();
+		}
+		break;
 	default:
 		checkNoEntry();
 	}
@@ -83,6 +96,9 @@ void ATauCetiF2PlayerController::OnEnterKey()
 		BaseControl->OnEnterKey();
 		break;
 	case EShownWidget::MainMenu:
+		MainMenu->OnEnterKey();
+		break;
+	case EShownWidget::Inventory:
 		MainMenu->OnEnterKey();
 		break;
 	default:
@@ -108,6 +124,9 @@ void ATauCetiF2PlayerController::ShowWidget(const EShownWidget widget)
 	case EShownWidget::MainMenu:
 		focus = MainMenu;
 		break;
+	case EShownWidget::Inventory:
+		focus = Inventory;
+		break;
 	default:
 		checkNoEntry();
 	}
@@ -117,4 +136,20 @@ void ATauCetiF2PlayerController::ShowWidget(const EShownWidget widget)
 	CurrentShownWidget = widget;
 	updateState();
 	focus->WidgetShown();
+}
+
+void ATauCetiF2PlayerController::ToggleInventory()
+{
+	if (CurrentShownWidget != EShownWidget::None && CurrentShownWidget != EShownWidget::Inventory)
+		return;
+
+	if (CurrentShownWidget == EShownWidget::None)
+		ShowWidget(EShownWidget::Inventory);
+	else
+	{
+		while (CurrentShownWidget != EShownWidget::None)
+		{
+			OnEscapeKey();
+		}
+	}
 }
