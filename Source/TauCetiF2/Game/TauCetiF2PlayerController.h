@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Blueprint/UserWidget.h"
 #include "Widgets/ObjectWidget.h"
+#include "Widgets/MainMenuWidget.h"
 #include "Helpers/Helpers.h"
 #include "TauCetiF2PlayerController.generated.h"
 
@@ -39,10 +40,10 @@ public:
 		UObjectWidget* BaseControl;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
-		TSubclassOf<class UObjectWidget> wMainMenu;
+		TSubclassOf<class UMainMenuWidget> wMainMenu;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
-		UObjectWidget* MainMenu;
+		UMainMenuWidget* MainMenu;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UObjectWidget> wInventory;

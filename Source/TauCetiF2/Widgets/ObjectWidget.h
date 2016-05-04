@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Blueprint/UserWidget.h"
+#include "Widgets/SynchronizeWidget.h"
 #include "ObjectWidget.generated.h"
 
 
@@ -14,7 +15,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWidgetRemoved, UObjectWidget*, Remo
  *
  */
 UCLASS(Blueprintable, ClassGroup = (Custom))
-class TAUCETIF2_API UObjectWidget : public UUserWidget
+class TAUCETIF2_API UObjectWidget : public USynchronizeWidget
 {
 	GENERATED_BODY()
 
@@ -54,6 +55,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
 		void RemoveTopWidgetFromStack();
 
+
+
+
 private:
 
 
@@ -67,7 +71,7 @@ private:
 			pop();
 	}
 
-	FORCEINLINE void pop()
+	void pop()
 	{
 		auto widget = ItemsStack.Pop();
 		widget->popAll();

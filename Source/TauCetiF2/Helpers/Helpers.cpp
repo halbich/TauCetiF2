@@ -118,9 +118,9 @@ UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
 }
 
 
-void UHelpers::ChangeLocalization(FString target)
+bool UHelpers::ChangeLocalization(FString target)
 {
-	FInternationalization::Get().SetCurrentCulture(target);
+	return FInternationalization::Get().SetCurrentCulture(target);
 }
 
 void UHelpers::FatalError(const FName text)

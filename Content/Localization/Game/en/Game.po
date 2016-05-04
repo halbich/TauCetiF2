@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game\n"
-"POT-Creation-Date: 2016-04-22 21:14\n"
-"PO-Revision-Date: 2016-04-22 21:14\n"
+"POT-Creation-Date: 2016-05-04 01:37\n"
+"PO-Revision-Date: 2016-05-04 01:37\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -14,13 +14,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Key:	0169614E47D2FABB427919BB30F5E3F1
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.TextBlock_71.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_324.TextBlock_71.Text
 #. Key:	651D9607463525E13545579C03337EE1
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.TextBlock_71.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_324.TextBlock_71.Text
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
 msgid "Nahrát"
 msgstr "Load"
+
+#. Key:	0191D779498F541288D407B5B71A8A01
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
+#. Key:	B63BD91F4CA4791A589148A158DD276E
+#. SourceLocation:	/Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:WidgetTree.InventoryParamsEdit_15.WidgetTree.TextBlock_20.Text
+#. Key:	BA7FBC6245A44546CC581E9B383C2C83
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
+#. Key:	E08972D94433CAD8B6D8C3BC02599EB3
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree_236.TextBlock_20.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree_236.TextBlock_20.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
+#: /Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:WidgetTree.InventoryParamsEdit_15.WidgetTree.TextBlock_20.Text
+msgid "OK"
+msgstr "OK"
 
 #. Key:	06586F124E042CF58DAA7C94970DD74C
 #. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnQuitText.Text
@@ -40,21 +55,39 @@ msgstr "About"
 msgid "Hit point Snap"
 msgstr "Hit point Snap"
 
+#. Key:	1817B15247E2362FAA7DB8A3D3F513A9
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TxtBoxAddTag.HintText
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TxtBoxAddTag.HintText
+msgid "Nové tagy"
+msgstr "New tags"
+
 #. Key:	18657E614A99CDA179F3ECA4105A7E07
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
 #. Key:	3957A5584F4FE94CEF3E5F9F1D310B89
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_463.Text
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_463.Text
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_463.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_463.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
 msgid "Y"
 msgstr "Y"
 
+#. Key:	1DF5A7724B7BB2EA6DE60EB1AF94FB8D
+#. SourceLocation:	/Game/Blueprints/Common/ELoadLevelMethod.ELoadLevelMethod.DisplayNames(0).DisplayNames
+#: /Game/Blueprints/Common/ELoadLevelMethod.ELoadLevelMethod.DisplayNames(0).DisplayNames
+msgid "None"
+msgstr "None"
+
+#. Key:	2AB61E004487634D1E96E785AE4955F5
+#. SourceLocation:	/Game/Blueprints/Common/ELoadLevelMethod.ELoadLevelMethod.DisplayNames(1).DisplayNames
+#: /Game/Blueprints/Common/ELoadLevelMethod.ELoadLevelMethod.DisplayNames(1).DisplayNames
+msgid "Main Menu"
+msgstr "MainMenu"
+
 #. Key:	2B4F6875488922F1D49F0F8C0D0F45D9
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_464.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_464.Text
 #. Key:	859A5ECB4FBD60FC2300899EF4671FA0
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoZ.Text
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_464.Text
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoZ.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoZ.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_464.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoZ.Text
 msgid "Z"
 msgstr "Z"
 
@@ -64,32 +97,83 @@ msgstr "Z"
 msgid "Nic Nedělám"
 msgstr "Do nothing"
 
+#. Key:	33FC49634D74B9AB451734BAC54D175D
+#. SourceLocation:	/Game/UMG/Widgets/AboutWidget.AboutWidget_C:WidgetTree.TextBlock_113.Text
+#. Key:	AC78F1F74BA5EF60464290B6A763A2D8
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.AboutWidget.WidgetTree.TextBlock_113.Text
+#. Key:	BD48F1EF490D56557BCD1E986D70EB7B
+#. SourceLocation:	/Game/UMG/Widgets/AboutWidget.AboutWidget_C:WidgetTree_728.TextBlock_113.Text
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.AboutWidget.WidgetTree.TextBlock_113.Text
+#: /Game/UMG/Widgets/AboutWidget.AboutWidget_C:WidgetTree.TextBlock_113.Text
+#: /Game/UMG/Widgets/AboutWidget.AboutWidget_C:WidgetTree_728.TextBlock_113.Text
+msgid "Tato hra vznikla v rámci baklářské práce v roce 2015/2016\r\nAutorem této práce je Pavel Halbich\r\n\r\nRád bych poděkoval svému vedoucímu Pavlu Ježkovi."
+msgstr "This game was created as Bacheleor thesis by Pavel Halbich"
+
 #. Key:	36680F6740BC33E962586BA228587BA1
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.Smazat.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.Smazat.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_324.Smazat.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_324.Smazat.Text
 msgid "Smazat"
 msgstr "Delete"
 
 #. Key:	377BBE57491AD0C22C767EB273EDB5D7
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveEditItem.LoadSaveEditItem_C:OnSubmit [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveEditItem.LoadSaveEditItem_C:OnSubmit [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:OnSubmit [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:OnSubmit [Script Bytecode]
 msgid "Název musí být neprázdný"
 msgstr "Name must be non empty"
 
-#. Key:	3DCF38454AE2D35E38501987AFF78BF3
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_260.Text
-#. Key:	AF594D564B41956FB6F8D885DF795669
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_664.TextBlock_260.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_260.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_664.TextBlock_260.Text
-msgid "Nastav automaticky"
-msgstr "Set automatically"
+#. Key:	3A0D31194F53988CA985D2A2FECBA4B6
+#. SourceLocation:	/Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TagListFilter_96.WidgetTree_218.TbxAddTag.HintText
+#: /Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TagListFilter_96.WidgetTree_218.TbxAddTag.HintText
+msgid "Nová skupina"
+msgstr "New group"
+
+#. Key:	3A6E935E40266D40B1E235970865BA07
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
+msgid "Začít"
+msgstr "Begin"
+
+#. Key:	3D028CC84A762FD22EC872ABEF8FA551
+#. SourceLocation:	/Game/Blueprints/Common/ELoadLevelMethod.ELoadLevelMethod.DisplayNames(3).DisplayNames
+#: /Game/Blueprints/Common/ELoadLevelMethod.ELoadLevelMethod.DisplayNames(3).DisplayNames
+msgid "Existing Game"
+msgstr "Existing Game"
+
+#. Key:	4024BDC1480FFD836214ECB828509E12
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
+msgid "Opravdu chceš ukončit hru? Veškerý neuložený postup bude ztracen"
+msgstr "Quit and lot?"
+
+#. Key:	42E1D6344DD23589765353A8E476D06A
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.GroupName.HintText
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.GroupName.HintText
+msgid "Název skupiny"
+msgstr "Group name"
 
 #. Key:	46BE8FC849A4DBBE1FD892887E44F348
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalYesNo.ModalYesNo_C:WidgetTree.TextBlock_667.Text
-#: /Game/UMG/UMGBasic/ModalYesNo.ModalYesNo_C:WidgetTree.TextBlock_667.Text
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
 msgid "Ano"
 msgstr "Yes"
+
+#. Key:	4B6547F64E590AE716F4EA9D8D5148BF
+#. SourceLocation:	/Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(1).DisplayNames
+#: /Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(1).DisplayNames
+msgid "Save Game"
+msgstr "Save Game"
+
+#. Key:	4D0D5E3545EFFD888989A4B300C6A13A
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
+msgid "Čeština"
+msgstr "Czech"
+
+#. Key:	4D55D90F4E5D294E5B70C3ABA70532C4
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
+msgid "Začít novou hru"
+msgstr "Begin new game"
 
 #. Key:	4E6A3D4749B41DD8A65C5C8D292C68C8
 #. SourceLocation:	/Game/UMG/Hud/MainGameHud.MainGameHud_C:WidgetTree.TextBlock_63.Text
@@ -98,40 +182,31 @@ msgid "Info"
 msgstr "Info"
 
 #. Key:	4FBC8EAF43560AB49A9205A2E27999F3
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_484.Text
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_484.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_484.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_484.Text
 msgid "Vlastnosti"
 msgstr "Properties"
 
 #. Key:	51C777F6481E4CC36061EE8661CA0F27
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_462.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_462.Text
 #. Key:	5FE5D1E448FB018ED2094A919481C6F0
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoX.Text
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_462.Text
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoX.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoX.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_462.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoX.Text
 msgid "X"
 msgstr "X"
-
-#. Key:	558BF3B341FBB25FF0132D8B63DA61FE
-#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.TextBlock_87.Text
-#. Key:	7EA2EAC44F871F10D8EE1794D24AFBD6
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnConfigText.Text
-#. Key:	7ED7916F41AEEC8BDEF164BD256EB8E9
-#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree_308.TextBlock_87.Text
-#. Key:	DD0B4DB8473309DDEE75A08C2F3C5DD0
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree_198.BtnConfigText.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnConfigText.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree_198.BtnConfigText.Text
-#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.TextBlock_87.Text
-#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree_308.TextBlock_87.Text
-msgid "Nastavení"
-msgstr "Settings"
 
 #. Key:	55C1CBD347D1B3B7E77EB48ECE004111
 #. SourceLocation:	/Game/Maps/MainMap.MainMap_C:ExecuteUbergraph_MainMap [Script Bytecode]
 #: /Game/Maps/MainMap.MainMap_C:ExecuteUbergraph_MainMap [Script Bytecode]
 msgid "Hotovo"
 msgstr "Done"
+
+#. Key:	5611E0144A1DCE61780055BD564DE175
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:WidgetTree.TextBlock_511.Text
+#: /Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:WidgetTree.TextBlock_511.Text
+msgid "Název nového savu:"
+msgstr "New save name"
 
 #. Key:	5A2B1CAB49C6ED96DA6D959DDF07EEA5
 #. SourceLocation:	/Game/UMG/Loading/LoadingScreen.LoadingScreen_C:WidgetTree.InfoText.Text
@@ -151,38 +226,44 @@ msgstr "Impact Point: {0}"
 msgid "Hlavní menu"
 msgstr "Main menu"
 
+#. Key:	6785EE41483E1228ADEA5AA19A085E34
+#. SourceLocation:	/Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(2).DisplayNames
+#. Key:	7906370443A6227C34B8508F4C376AAB
+#. SourceLocation:	/Game/Blueprints/Common/ELoadLevelMethod.ELoadLevelMethod.DisplayNames(2).DisplayNames
+#: /Game/Blueprints/Common/ELoadLevelMethod.ELoadLevelMethod.DisplayNames(2).DisplayNames
+#: /Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(2).DisplayNames
+msgid "New Game"
+msgstr "NewGame"
+
+#. Key:	68B2D3EA4E9515F9D2409DAC623A7BE8
+#. SourceLocation:	/Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_119.Text
+#: /Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_119.Text
+msgid "Close"
+msgstr "Close"
+
 #. Key:	6D1FFD654BF608BA36EED09411BF7A24
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveEditItem.LoadSaveEditItem_C:GetText_0 [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveEditItem.LoadSaveEditItem_C:GetText_0 [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
 msgid "Prázdná pozice"
 msgstr "Empty position"
 
-#. Key:	6E27EB3045DEC59FD15C5FB9442A2C0F
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:Show Confirm Question [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:Show Confirm Question [Script Bytecode]
-msgid "Opravdu chceš {0}?"
-msgstr "Do you really want to {0}?"
+#. Key:	6DDE23744228C9AFB26BB89A69C94027
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+msgid "Opravdu chceš přepsat uloženou hru?"
+msgstr "Overwrite?"
+
+#. Key:	701300154BC3783D3038208CD6CEC894
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+msgid "Opravdu chceš smazat tuto hru?"
+msgstr "Delete?"
 
 #. Key:	73A3771A4D0EF877E1DA1B8C8A9F6420
 #. SourceLocation:	/Game/UMG/Hud/MainGameHud.MainGameHud_C:WidgetTree.TextBlock_46.Text
 #: /Game/UMG/Hud/MainGameHud.MainGameHud_C:WidgetTree.TextBlock_46.Text
 msgid "Use Item"
 msgstr "Use Item"
-
-#. Key:	75E6BC7E48E2313EFEE3BA9815AD5A55
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalOkCancel.ModalOkCancel_C:WidgetTree.TextBlock_666.Text
-#: /Game/UMG/UMGBasic/ModalOkCancel.ModalOkCancel_C:WidgetTree.TextBlock_666.Text
-msgid "Question"
-msgstr "Question"
-
-#. Key:	7E8A1759409397073653E5BA188D90AC
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalOkCancel.ModalOkCancel_C:WidgetTree.TextBlock_667.Text
-#. Key:	899A56C64E7EFF3072C16CB678942BB9
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
-#: /Game/UMG/UMGBasic/ModalOkCancel.ModalOkCancel_C:WidgetTree.TextBlock_667.Text
-msgid "OK"
-msgstr "OK"
 
 #. Key:	7FDE4156435D519C2CA94C9BC9D06925
 #. SourceLocation:	/Game/UMG/Hud/MainGameHud.MainGameHud_C:Info SelectedItem [Script Bytecode]
@@ -196,35 +277,17 @@ msgstr "Location: {0}\r\nScale: {1}"
 msgid "Nová hra"
 msgstr "New game"
 
-#. Key:	813B605643BA731E0F431CA5279200EE
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveEditItem.LoadSaveEditItem_C:WidgetTree.EditableTextBox_130.HintText
-#: /Game/UMG/Saving/LoadSaveEditItem.LoadSaveEditItem_C:WidgetTree.EditableTextBox_130.HintText
-msgid "Nová pozice"
-msgstr "New save"
-
 #. Key:	840C7596442D91755CE6DEA82CD32E44
 #. SourceLocation:	/Game/UMG/Hud/MainGameHud.MainGameHud_C:GetUsingMesage [Script Bytecode]
 #: /Game/UMG/Hud/MainGameHud.MainGameHud_C:GetUsingMesage [Script Bytecode]
 msgid "Use item"
 msgstr "Use item"
 
-#. Key:	8910063E4ED96896D49F4AA1E9529496
-#. SourceLocation:	/Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(0).DisplayNames
-#: /Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(0).DisplayNames
-msgid "Load Game"
-msgstr "Load Game"
-
-#. Key:	8910063E4ED96896D49F4AA1E9529496
-#. SourceLocation:	/Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(0).DisplayNames
-#. Key:	459089BE4ADCBE9EAD5F9E9136C65CB0
-#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnLoadText.Text
-#. Key:	84FB85284C24998EBB7BF6BE11F98158
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnLoadText.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnLoadText.Text
-#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnLoadText.Text
-#: /Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(0).DisplayNames
-msgid "Nahrát hru"
-msgstr "Load game"
+#. Key:	88BF6A0E439914CA35C24F8216CFFA45
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
+msgid "English"
+msgstr "English"
 
 #. Key:	8EA6D74F41E7E877DA0F8FBFA783D620
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
@@ -234,15 +297,33 @@ msgstr "Save"
 
 #. Key:	909CA02944D2CAC7BF3A28B6168CDD21
 #. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnSaveText.Text
+#. Key:	A9BA064741612104593D1CBC75CA8CD7
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
 #: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnSaveText.Text
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
 msgid "Uložit hru"
 msgstr "SaveGame"
 
-#. Key:	9236F6154B86EDE5350044BC341B75DC
-#. SourceLocation:	/Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(1).DisplayNames
-#: /Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(1).DisplayNames
-msgid "Save Game"
-msgstr "Save Game"
+#. Key:	9647709F40BECC0F8AA5CA849D4F5823
+#. SourceLocation:	/Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(0).DisplayNames
+#: /Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(0).DisplayNames
+msgid "Load Game"
+msgstr "Load Game"
+
+#. Key:	9647709F40BECC0F8AA5CA849D4F5823
+#. SourceLocation:	/Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(0).DisplayNames
+#. Key:	459089BE4ADCBE9EAD5F9E9136C65CB0
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnLoadText.Text
+#. Key:	84FB85284C24998EBB7BF6BE11F98158
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnLoadText.Text
+#. Key:	8B1A03BC4E6DB6F6DB54DD9DE3714A04
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnLoadText.Text
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnLoadText.Text
+#: /Game/UMG/Saving/EnumLoadSaveVariant.EnumLoadSaveVariant.DisplayNames(0).DisplayNames
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
+msgid "Nahrát hru"
+msgstr "Load game"
 
 #. Key:	96FE3B154786EABA5FCAF190FD3C6DA9
 #. SourceLocation:	/Game/Maps/MainMap.MainMap_C:ExecuteUbergraph_MainMap [Script Bytecode]
@@ -250,39 +331,69 @@ msgstr "Save Game"
 msgid "Připravuji svět"
 msgstr "Preparing world"
 
-#. Key:	9750CB57424310F762B48EA4EC91B163
-#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.TextBlock_113.Text
-#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.TextBlock_113.Text
-msgid "Tato hra vznikla v rámci baklářské práce v roce 2015/2016\r\nAutorem této práce je Pavel Halbich\r\n\r\nRád bych poděkoval svému vedoucímu Pavlu Ježkovi."
-msgstr "This game was created as Bacheleor thesis by Pavel Halbich"
-
 #. Key:	9BEE1248449DA8122C605E82295D6144
 #. SourceLocation:	/Game/Maps/MainMap.MainMap_C:Load Game [Script Bytecode]
-#. Key:	C814B5C44FCF789122808DB5B4D9A623
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:StartLevel [Script Bytecode]
 #. Key:	DC1F8206481BA9C4082A16A7D9B457B3
-#. SourceLocation:	/Game/Blueprints/Common/TauCetiF2GameInstance.TauCetiF2GameInstance_C:Load Level [Script Bytecode]
-#: /Game/Blueprints/Common/TauCetiF2GameInstance.TauCetiF2GameInstance_C:Load Level [Script Bytecode]
+#. SourceLocation:	/Game/Blueprints/Common/TauCetiF2GameInstance.TauCetiF2GameInstance_C:Load Game [Script Bytecode]
+#: /Game/Blueprints/Common/TauCetiF2GameInstance.TauCetiF2GameInstance_C:Load Game [Script Bytecode]
 #: /Game/Maps/MainMap.MainMap_C:Load Game [Script Bytecode]
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:StartLevel [Script Bytecode]
 msgid "Nahrávám hru"
 msgstr "Loading game"
 
 #. Key:	9E943652404881EB1FA73D96A038D11D
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalYesNo.ModalYesNo_C:WidgetTree.TextBlock_668.Text
-#: /Game/UMG/UMGBasic/ModalYesNo.ModalYesNo_C:WidgetTree.TextBlock_668.Text
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
 msgid "Ne"
 msgstr "No"
 
+#. Key:	A54CAEFA49797F7C7DE1B68889A72C7D
+#. SourceLocation:	/Game/UMG/Widgets/TerminalWidget.TerminalWidget_C:WidgetTree.TextBlock_64.Text
+#: /Game/UMG/Widgets/TerminalWidget.TerminalWidget_C:WidgetTree.TextBlock_64.Text
+msgid "Terminál"
+msgstr "Terminal"
+
+#. Key:	A73217DB430454EC70573DA24537BBC2
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_56.Text
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_56.Text
+msgid "Smazat skupinu"
+msgstr "Delete group"
+
+#. Key:	AA46F1F8410F8A20913AF796558FEAF7
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_328.Text
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_328.Text
+msgid "Ponechat rozbalené"
+msgstr "LEt open"
+
 #. Key:	AB2968074EC1B5BE07E1A8B2CDC68499
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_485.Text
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_485.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_485.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_485.Text
 msgid "Tagy"
 msgstr "Tags"
 
+#. Key:	ABFDD714427A7B5A3714619B9E610BBB
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+msgid "Opravdu chceš opustit stávající hru? Veškeré neuložené změny budou ztraceny"
+msgstr "UY rly quit?"
+
+#. Key:	AC0970EB4D8CE67CD976E4A96DF60762
+#. SourceLocation:	/Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree_266.TextBlock_64.Text
+#. Key:	C6E3BB9843A4881209EC5FBB5DE6060C
+#. SourceLocation:	/Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_0.Text
+#: /Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_0.Text
+#: /Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree_266.TextBlock_64.Text
+msgid "Text Block"
+msgstr "TextBlock"
+
+#. Key:	AC8CFE254C18F9DBB54492B1E299218E
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
+msgid "Opravdu chceš odejít do hlavního menu? Veškerý neuložený postup bude ztracen."
+msgstr "UYrly quit?"
+
 #. Key:	B3D302694E6A7C7042CEB4B5181C2DB8
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree.TbxAddTag.HintText
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree.TbxAddTag.HintText
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree_142.TbxAddTag.HintText
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree_142.TbxAddTag.HintText
 msgid "Nový tag"
 msgstr "New tag"
 
@@ -292,23 +403,41 @@ msgstr "New tag"
 msgid "{Count}%       {Message}"
 msgstr "{Count}%       {Message}"
 
-#. Key:	BCAF92564E0486F592C1B4840A065244
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
-msgid "přepsat uloženou hru"
-msgstr "Overwrite saved game"
-
-#. Key:	C4386FA54E99F1A945ADF7A5A1498595
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.TextBlock_70.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.TextBlock_70.Text
-msgid "Zpět"
-msgstr "Back"
-
-#. Key:	D5255D4143A640D2A9EB8E8583B684E2
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalOkCancel.ModalOkCancel_C:WidgetTree.TextBlock_668.Text
-#: /Game/UMG/UMGBasic/ModalOkCancel.ModalOkCancel_C:WidgetTree.TextBlock_668.Text
+#. Key:	BF97F1BD432D200CEF888382B031C853
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_1.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_1.Text
 msgid "Storno"
 msgstr "Storno"
+
+#. Key:	C4FB2A0744FEBB1F3B81278494AB09D1
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:ExecuteUbergraph_MainMenu [Script Bytecode]
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:ExecuteUbergraph_MainMenu [Script Bytecode]
+msgid "Opravdu chceš ukončit hru?"
+msgstr "Quit?"
+
+#. Key:	C597256D4BFD1DC178D179A028E8B3E7
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.TextBlock_87.Text
+#. Key:	DD0B4DB8473309DDEE75A08C2F3C5DD0
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnConfigText.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnConfigText.Text
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.TextBlock_87.Text
+msgid "Nastavení"
+msgstr "Settings"
+
+#. Key:	D08B2D4B4AF3016B326665A9B7E53DC5
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:WidgetTree.SaveGameName.HintText
+#: /Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:WidgetTree.SaveGameName.HintText
+msgid "NewSaveGameName"
+msgstr "NewSaveGameName"
+
+#. Key:	D4AA66864D7165BD5DA829B3E97AEEDE
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_97.Text
+#. Key:	E9A96E7E43431A8585C41BA5B1F5334F
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtName.HintText
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtName.HintText
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_97.Text
+msgid "Název"
+msgstr "Name"
 
 #. Key:	DD46AC4E430EA3B52AD2778171771383
 #. SourceLocation:	/Game/UMG/Hud/MainGameHud.MainGameHud_C:WidgetTree.TextBlock_0.Text
@@ -316,21 +445,15 @@ msgstr "Storno"
 msgid "Hit point"
 msgstr "Hit point"
 
-#. Key:	E9A96E7E43431A8585C41BA5B1F5334F
-#. SourceLocation:	/Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtName.HintText
-#: /Game/MyContent/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtName.HintText
-msgid "Název"
-msgstr "Name"
+#. Key:	ED1A04164991B106C38C16A34A292B4B
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
+msgid "Nastav automaticky"
+msgstr "Set automatically"
 
 #. Key:	EE886C974FA92335BCC0AEA58B88F25C
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveEditItem.LoadSaveEditItem_C:GetText_0 [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveEditItem.LoadSaveEditItem_C:GetText_0 [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
 msgid "Hra: {name}\r\nOdehráno: {played}\r\nUloženo: {saved}"
 msgstr "Game: {name}\r\nOdehráno: {played}\r\nUloženo: {saved}"
-
-#. Key:	FB1C3C75484B64B9AB85D880B3465370
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
-msgid "opustit stávající hru"
-msgstr "Leave current game"
 

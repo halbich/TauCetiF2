@@ -13,7 +13,7 @@ void ATauCetiF2PlayerController::BeginPlay()
 
 	if (wInGameMenu)
 	{
-		MainMenu = CreateWidget<UObjectWidget>(this, wMainMenu);
+		MainMenu = CreateWidget<UMainMenuWidget>(this, wMainMenu);
 		MainMenu->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
 	}
 
@@ -65,7 +65,10 @@ void ATauCetiF2PlayerController::OnEscapeKey()
 		}
 		break;
 	case EShownWidget::MainMenu:
-		MainMenu->OnEscapeKey();
+		if (MainMenu->OnEscapeKey())
+		{
+			MainMenu->OnMainMenuCloseRequest.Broadcast();
+		}
 		break;
 	case EShownWidget::Inventory:
 		if (Inventory->OnEscapeKey())

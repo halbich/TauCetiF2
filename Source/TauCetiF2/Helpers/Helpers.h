@@ -35,7 +35,7 @@ public:
 		static UTexture2D* GetTexture2DForBlock(UBuildableBlockInfo* blockInfo);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Change Localization"), Category = "Locale")
-		static void ChangeLocalization(FString target);
+		static bool ChangeLocalization(FString target);
 
 
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)

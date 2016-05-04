@@ -68,3 +68,5 @@ void UObjectWidget::RemoveTopWidgetFromStack()
 	if (ItemsStack.Num() != 0)
 		pop();
 }
+
+
