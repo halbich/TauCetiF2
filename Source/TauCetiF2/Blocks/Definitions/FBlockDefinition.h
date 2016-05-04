@@ -36,6 +36,8 @@ public:
 
 	void AddMaterials(int8 n, ...);
 
+	int32 BuilderSortIndex;
+
 	FORCEINLINE void SetCustomScale(FVector meshScale, FVector worldObjectScale)
 	{
 		HasCustomScaling = true;

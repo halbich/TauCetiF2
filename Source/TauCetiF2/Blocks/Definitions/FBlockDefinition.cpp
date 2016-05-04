@@ -16,7 +16,8 @@ FBlockDefinition::FBlockDefinition(uint32 id, EShapeType shapeType) :
 	MaxBlockScale(FVector(GameDefinitions::CubeMaxSizeMultiplier, GameDefinitions::CubeMaxSizeMultiplier, GameDefinitions::CubeMaxSizeMultiplier)),
 	HasCustomScaling(false),
 	MeshScale(FVector(1, 1, 1)),
-	WorldObjectScale(FVector(1, 1, 1))
+	WorldObjectScale(FVector(1, 1, 1)),
+	BuilderSortIndex(1024)
 {
 
 }

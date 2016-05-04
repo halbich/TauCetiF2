@@ -50,6 +50,8 @@ public:
 
 	// TODO splitter bloku
 
+	void GetAllDefinitions(TArray<uint32>& outArray);
+
 private:
 
 	FBlockDefinitionHolder();

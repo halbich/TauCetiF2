@@ -4,5 +4,11 @@
 #include "BlockConstructor.h"
 
 
+UBlockConstructor::UBlockConstructor() {
+
+	//FDefinitionHolder::Instance().GetAllDefinitions(AllAviableBlocks);
+
+}
+
 
 

@@ -106,8 +106,10 @@ UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
 				return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("DoorLeft.DoorLeft'")));
 			else if(value == EDoorOpening::Right)
 				return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("DoorRight.DoorRight'")));
+
 		}
-		return nullptr;
+
+		return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("Door.Door'")));
 		break;
 	}
 						   

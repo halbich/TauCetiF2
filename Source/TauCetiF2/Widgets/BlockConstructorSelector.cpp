@@ -7,18 +7,19 @@
 
 UBlockConstructorSelector::UBlockConstructorSelector()
 {
-	if (BlockName == EBlockName::Empty)
-	{
-		print(TEXT("s"));
-	}
+	
 }
 
 
 void UBlockConstructorSelector::SynchronizeProperties()
 {
-	if (BlockName == EBlockName::Empty)
+	if (BlockName != EBlockName::Empty)
 	{
-		print(TEXT("s"));
+		Definition = FBlockDefinitionHolder::Instance().GetDefinition((int32)BlockName);
+
+		UBuildableBlockInfo* info = NewObject<UBuildableBlockInfo>();
+		info->ID = Definition->ID;
+		BlockTexture = UHelpers::GetTexture2DForBlock(info);
 	}
 
 	Super::SynchronizeProperties();

@@ -120,3 +120,9 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	definitions.Add(windowPowered.ID, windowPowered);
 
 }
+
+
+void FBlockDefinitionHolder::GetAllDefinitions(TArray<uint32>& outArray)
+{
+
+}
