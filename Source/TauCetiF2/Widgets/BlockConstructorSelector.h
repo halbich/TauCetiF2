@@ -20,8 +20,8 @@ public:
 
 	UBlockConstructorSelector();
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = BlockConstructorSelector)
-		EBlockName BlockName;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = BlockConstructorSelector, meta = (DisplayName = "Block ID", ExposeOnSpawn = true))
+		int32 BlockID;
 
 	UPROPERTY(BlueprintReadOnly, Category = BlockConstructorSelector)
 		UTexture2D* BlockTexture;

@@ -16,7 +16,7 @@ class TAUCETIF2_API UBlockBaseInfo : public UObject
 
 public:
 	UPROPERTY()
-		uint32 ID;
+		int32 ID;
 
 	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
 		FVector Scale;

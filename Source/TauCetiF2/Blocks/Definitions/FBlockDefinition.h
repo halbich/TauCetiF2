@@ -11,10 +11,10 @@ class TAUCETIF2_API FBlockDefinition
 {
 
 public:
-	FBlockDefinition(uint32 id, EShapeType shapeType);
+	FBlockDefinition(int32 id, EShapeType shapeType);
 	FBlockDefinition(EBlockName name, EShapeType shapeType);
 
-	uint32 ID;
+	int32 ID;
 
 	EShapeType ShapeType;
 

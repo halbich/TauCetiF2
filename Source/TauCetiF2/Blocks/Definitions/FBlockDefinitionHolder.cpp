@@ -122,7 +122,13 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 }
 
 
-void FBlockDefinitionHolder::GetAllDefinitions(TArray<uint32>& outArray)
+void FBlockDefinitionHolder::GetAllDefinitions(TArray<int32>& outArray)
 {
-
+	definitions.KeySort([](int32 A, int32 B) {
+		return A < B; // sort keys in reverse
+	});
+	for (auto& Elem : definitions)
+	{
+		outArray.Add(Elem.Key);
+	}
 }

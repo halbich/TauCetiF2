@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class TAUCETIF2_API UBlockConstructor : public UTerminalBaseWidget
 {
 	GENERATED_BODY()

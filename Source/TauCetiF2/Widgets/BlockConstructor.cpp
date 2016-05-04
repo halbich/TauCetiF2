@@ -6,7 +6,7 @@
 
 UBlockConstructor::UBlockConstructor() {
 
-	//FDefinitionHolder::Instance().GetAllDefinitions(AllAviableBlocks);
+	FBlockDefinitionHolder::Instance().GetAllDefinitions(AllAviableBlocks);
 
 }
 

@@ -6,7 +6,7 @@
 
 
 
-FBlockDefinition::FBlockDefinition(uint32 id, EShapeType shapeType) :
+FBlockDefinition::FBlockDefinition(int32 id, EShapeType shapeType) :
 	ID(id),
 	ShapeType(shapeType),
 	AllowPitch(true),
@@ -22,7 +22,7 @@ FBlockDefinition::FBlockDefinition(uint32 id, EShapeType shapeType) :
 
 }
 
-FBlockDefinition::FBlockDefinition(EBlockName name, EShapeType shapeType) : FBlockDefinition((uint32)name, shapeType)
+FBlockDefinition::FBlockDefinition(EBlockName name, EShapeType shapeType) : FBlockDefinition((int32)name, shapeType)
 {
 
 }

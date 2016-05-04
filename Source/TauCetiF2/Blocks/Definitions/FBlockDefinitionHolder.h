@@ -16,7 +16,7 @@ public:
 
 	static FBlockDefinitionHolder& Instance();
 
-	FORCEINLINE FBlockDefinition* GetDefinition(uint32 id, bool ensure = true) {
+	FORCEINLINE FBlockDefinition* GetDefinition(int32 id, bool ensure = true) {
 		auto definition = definitions.Find(id);
 
 		if (!ensure)
@@ -50,7 +50,7 @@ public:
 
 	// TODO splitter bloku
 
-	void GetAllDefinitions(TArray<uint32>& outArray);
+	void GetAllDefinitions(TArray<int32>& outArray);
 
 private:
 
@@ -59,5 +59,5 @@ private:
 	FBlockDefinitionHolder(const FBlockDefinitionHolder&) = delete;
 	FBlockDefinitionHolder& operator= (const FBlockDefinitionHolder&) = delete;
 
-	TMap<uint32, FBlockDefinition> definitions;
+	TMap<int32, FBlockDefinition> definitions;
 };

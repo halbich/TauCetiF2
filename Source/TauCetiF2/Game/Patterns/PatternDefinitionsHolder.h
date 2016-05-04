@@ -40,7 +40,7 @@ private:
 
 	void Init();
 
-	FORCEINLINE UBlockInfo* make(uint32 id, FVector location, FVector blockScale, FRotator blockRotation)
+	FORCEINLINE UBlockInfo* make(int32 id, FVector location, FVector blockScale, FRotator blockRotation)
 	{
 		auto ret = NewObject<UBlockInfo>(this);
 		ret->ID = id;
@@ -53,7 +53,7 @@ private:
 
 	FORCEINLINE UBlockInfo* make(EBlockName id, FVector location, FVector blockScale, FRotator blockRotation)
 	{
-		return make((uint32)id, location, blockScale, blockRotation);
+		return make((int32)id, location, blockScale, blockRotation);
 	}
 
 	FORCEINLINE UPatternGroup* getGroup(int32 id)

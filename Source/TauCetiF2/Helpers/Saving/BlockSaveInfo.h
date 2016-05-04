@@ -10,7 +10,7 @@
 */
 struct TAUCETIF2_API FBlockBaseInfo {
 
-	uint32 ID;
+	int32 ID;
 	FVector Scale;
 	FString Name;
 	TMap<FString,int32> AdditionalFlags;

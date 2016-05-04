@@ -24,11 +24,11 @@ struct TAUCETIF2_API BlockHelpers
 		case EShapeType::CubeBody: return ACubeBodyObject::StaticClass();
 		case EShapeType::Custom: {
 
-			if (definition->ID == (uint32)EBlockName::Terminal)
+			if (definition->ID == (int32)EBlockName::Terminal)
 				return ATerminalObject::StaticClass();
-			else if (definition->ID == (uint32)EBlockName::Door)
+			else if (definition->ID == (int32)EBlockName::Door)
 				return ADoorObject::StaticClass();
-			else if (definition->ID == (uint32)EBlockName::WindowPowered)
+			else if (definition->ID == (int32)EBlockName::WindowPowered)
 				return AWindowObject::StaticClass();
 			break;
 		}

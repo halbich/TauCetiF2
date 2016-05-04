@@ -70,7 +70,7 @@ UPatternDefinitionsHolder::UPatternDefinitionsHolder(const FObjectInitializer& O
 
 void UPatternDefinitionsHolder::Init()
 {
-	auto blockDefinitions = FBlockDefinitionHolder::Instance().GetDefinition((uint32)EBlockName::ConstructCubeSide);
+	auto blockDefinitions = FBlockDefinitionHolder::Instance().GetDefinition((int32)EBlockName::ConstructCubeSide);
 
 	auto test1 = NewObject<UPatternDefinition>(this);
 
