@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game\n"
-"POT-Creation-Date: 2016-05-04 12:14\n"
-"PO-Revision-Date: 2016-05-04 12:14\n"
+"POT-Creation-Date: 2016-05-04 13:22\n"
+"PO-Revision-Date: 2016-05-04 13:22\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,12 @@ msgstr "Delete group"
 #: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
 msgid "Y"
 msgstr "Y"
+
+#. Key:	1A9B664E4ABF257DEBEAF49018E55E37
+#. SourceLocation:	/Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree.TextBlock_19.Text
+#: /Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree.TextBlock_19.Text
+msgid "LC.NoSavedSavesFound"
+msgstr "No saves found!"
 
 #. Key:	1E24A010454501BFCB99F8B86759A8CF
 #. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_485.Text
@@ -67,18 +73,6 @@ msgstr "Settings"
 msgid "LC.SetAutomaticQuality"
 msgstr "Set quality automatically"
 
-#. Key:	237F183D462A202206DA5EA8CE6BD5B6
-#. SourceLocation:	/Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree_153.TextBlock_119.Text
-#. Key:	8696A1424AC40C27314C8CB568614CC7
-#. SourceLocation:	/Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TextBlock_119.Text
-#. Key:	952F4264425945969AB1CBAE06C4EDCD
-#. SourceLocation:	/Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_119.Text
-#: /Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_119.Text
-#: /Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree_153.TextBlock_119.Text
-#: /Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TextBlock_119.Text
-msgid "LC.CloseBtn"
-msgstr "Close"
-
 #. Key:	238315F941C588F895B1EF90DB627FF8
 #. SourceLocation:	/Game/UMG/Widgets/AboutWidget.AboutWidget_C:WidgetTree_97.TextBlock_113.Text
 #. Key:	718D31B4439FCBC0C2CE54B8C5CB5ACF
@@ -106,20 +100,26 @@ msgstr "New game"
 msgid "Z"
 msgstr "Z"
 
+#. Key:	2B571D7A407BF515C417328FCC68BD99
+#. SourceLocation:	/Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_119.Text
+#. Key:	8696A1424AC40C27314C8CB568614CC7
+#. SourceLocation:	/Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TextBlock_119.Text
+#: /Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_119.Text
+#: /Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TextBlock_119.Text
+msgid "LC.CloseBtn"
+msgstr "Close"
+
 #. Key:	2E49F07F4D69EA56857771818F042674
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:OnSubmit [Script Bytecode]
 #: /Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:OnSubmit [Script Bytecode]
 msgid "LC.SaveNameMustBeNonEmpty"
 msgstr "Name must not be empty!"
 
-#. Key:	321967024E2A9E59D54ACC9DF7F316EF
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
-#. Key:	82F6C22A4DEAE58AA2417085FDE3E6EC
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_667.Text
-#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
-#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_667.Text
-msgid "LC.BtnYes"
-msgstr "Yes"
+#. Key:	301881A547E42B44726CE8B35B4241D3
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_1.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_1.Text
+msgid "LC.BtnCancel"
+msgstr "Cancel"
 
 #. Key:	336DE05448163CC62E3A33974DB2D0F5
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
@@ -210,25 +210,22 @@ msgstr "New save name"
 
 #. Key:	5A9B033445D050748122279079BDF020
 #. SourceLocation:	/Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:WidgetTree.InventoryParamsEdit_15.WidgetTree.TextBlock_20.Text
-#. Key:	6CF14DC94A49F552F63E18B0618EBC28
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_0.Text
+#. Key:	5BEA5BB34AC16BBC9FBEAC8EAC688359
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
 #. Key:	8B3771514D2481F5082DE69FDB78C4DA
 #. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree_425.TextBlock_20.Text
-#. Key:	C96A9A21465840E9CF249ABAA54197B2
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
 #. Key:	F0D6E43B4E3BAF7ABD381A981D575DFC
 #. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
 #: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
 #: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree_425.TextBlock_20.Text
 #: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
-#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_0.Text
 #: /Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:WidgetTree.InventoryParamsEdit_15.WidgetTree.TextBlock_20.Text
 msgid "LC.BtnOK"
 msgstr "OK"
 
 #. Key:	5F518865447A9B96DF6E96BA02F733C8
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_95.Smazat.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_95.Smazat.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.Smazat.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.Smazat.Text
 msgid "LC.Delete"
 msgstr "Delete"
 
@@ -237,15 +234,6 @@ msgstr "Delete"
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
 msgid "LC.ReallyQuitCurrentGameWithUnsavedItemsLost"
 msgstr "Do you really want to quit game? All unsaved progress will be lost!"
-
-#. Key:	60B158874B4A4AED6A80D68031CC6F3A
-#. SourceLocation:	/Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree.TextBlock_19.Text
-#. Key:	B2517221487258BA4F73DF893643677B
-#. SourceLocation:	/Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree_363.TextBlock_19.Text
-#: /Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree.TextBlock_19.Text
-#: /Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree_363.TextBlock_19.Text
-msgid "LC.NoSavedSavesFound"
-msgstr "No saves found!"
 
 #. Key:	61D85B524E16F38E5D0379A808D4AB29
 #. SourceLocation:	/Game/Maps/MainMap.MainMap_C:ExecuteUbergraph_MainMap [Script Bytecode]
@@ -264,6 +252,12 @@ msgstr "Loading done"
 #: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_1.Text
 msgid "LC.EnglishLanguage"
 msgstr "English"
+
+#. Key:	6653E86F463DA3162068D8987B791BDB
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
+msgid "LC.BtnYes"
+msgstr "Yes"
 
 #. Key:	671763AC42558AD1D4AAAF8E47D96566
 #. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
@@ -301,15 +295,6 @@ msgstr "New group name"
 msgid "LC.ReallyOverwriteSavedGame"
 msgstr "Do you really want to overwrite this game?"
 
-#. Key:	7CF932DA47CDFFCB6B37B5B698BE48AD
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_668.Text
-#. Key:	D906885C4EEAC760F34677A9774FD014
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
-#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
-#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_668.Text
-msgid "LC.BtnNo"
-msgstr "No"
-
 #. Key:	8029022449D1AE7BC261B4AF43A5095E
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
@@ -322,14 +307,11 @@ msgstr "Load"
 msgid "LC.BlockNameHint"
 msgstr "Block name"
 
-#. Key:	9B91D6A5402C60609F33F1829D4FD78B
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_1.Text
-#. Key:	CCA68BF74070E6CF8A7B038C8BAD8E59
-#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_1.Text
-#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_1.Text
-#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_1.Text
-msgid "LC.BtnCancel"
-msgstr "Cancel"
+#. Key:	995F3FA34E8F80E20F813A91DA07E70A
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
+msgid "LC.BtnNo"
+msgstr "No"
 
 #. Key:	A3AC82D0487C75FB5FB739951C2A1AB6
 #. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnLoadText.Text
@@ -392,8 +374,8 @@ msgid "LC.BeginPlayBtn"
 msgstr "Begin play"
 
 #. Key:	C1D46A8E4F43F6EE0237058E7CE7642A
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_95.TextBlock_71.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_95.TextBlock_71.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.TextBlock_71.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.TextBlock_71.Text
 msgid "LC.Load"
 msgstr "Load"
 
