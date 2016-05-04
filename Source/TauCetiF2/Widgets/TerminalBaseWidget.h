@@ -16,7 +16,7 @@ class TAUCETIF2_API UTerminalBaseWidget : public USynchronizeWidget
 public:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = TerminalBaseWidget)
-		FString BaseControlDisplayName;
+		FText BaseControlDisplayName;
 	
 	
 
