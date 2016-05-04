@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game\n"
-"POT-Creation-Date: 2016-05-04 13:22\n"
-"PO-Revision-Date: 2016-05-04 13:22\n"
+"POT-Creation-Date: 2016-05-04 13:44\n"
+"PO-Revision-Date: 2016-05-04 13:44\n"
 "Language-Team: \n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -406,6 +406,18 @@ msgstr "LC.BtnOK"
 msgid "OK"
 msgstr "OK"
 
+#. Key:	5D244CEB4BDE5DA588E613A46CEE72FF
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_13.Text
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_13.Text
+msgid "LC.SaveSavedDate"
+msgstr ""
+
+#. Key:	5D244CEB4BDE5DA588E613A46CEE72FF
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_13.Text
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_13.Text
+msgid "Saved date:"
+msgstr "Uloženo:"
+
 #. Key:	5F518865447A9B96DF6E96BA02F733C8
 #. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.Smazat.Text
 #: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.Smazat.Text
@@ -535,6 +547,18 @@ msgstr "LC.NewGroupHint"
 msgid "New group name"
 msgstr "Název nové skupiny"
 
+#. Key:	7831F8464FA79C50B70A8A91F1FAECFC
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_12.Text
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_12.Text
+msgid "LC.SavePlayedTime"
+msgstr ""
+
+#. Key:	7831F8464FA79C50B70A8A91F1FAECFC
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_12.Text
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_12.Text
+msgid "Played time:"
+msgstr "Odehráno:"
+
 #. Key:	78AA971340090520D6768097AA14FAC3
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
@@ -552,6 +576,18 @@ msgstr "LC.ReallyOverwriteSavedGame"
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
 msgid "LC.LoadBtn"
 msgstr "LC.LoadBtn"
+
+#. Key:	8775E8CD4D9CE6DCA9D005A4B311CBD7
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_11.Text
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_11.Text
+msgid "LC.SaveName"
+msgstr ""
+
+#. Key:	8775E8CD4D9CE6DCA9D005A4B311CBD7
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_11.Text
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_11.Text
+msgid "Save name:"
+msgstr "Název savu:"
 
 #. Key:	9388B7EF4F7D600711B41290A31F9987
 #. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtName.HintText
@@ -614,14 +650,14 @@ msgid "Save name"
 msgstr "Název savu"
 
 #. Key:	B504DA104C0882299ECE4F878396D558
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
 msgid "Game:{name} Played{played}_Saved{saved}"
 msgstr ""
 
 #. Key:	B504DA104C0882299ECE4F878396D558
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
 msgid "LC.LoadSaveItem_Game{name}_Played{played}_Saved{saved}"
 msgstr "LC.LoadSaveItem_Game{name}_Played{played}_Saved{saved}"
 
@@ -638,14 +674,14 @@ msgid "Save"
 msgstr "Uložit"
 
 #. Key:	B60CA211425B8B38C6ACE29156ABE044
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
 msgid "Empty save"
 msgstr "Prázný save"
 
 #. Key:	B60CA211425B8B38C6ACE29156ABE044
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
 msgid "LC.EmptySavePosition"
 msgstr "LC.EmptySavePosition"
 

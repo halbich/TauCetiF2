@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game\n"
-"POT-Creation-Date: 2016-05-04 13:22\n"
-"PO-Revision-Date: 2016-05-04 13:22\n"
+"POT-Creation-Date: 2016-05-04 13:44\n"
+"PO-Revision-Date: 2016-05-04 13:44\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -223,6 +223,12 @@ msgstr "New save name"
 msgid "LC.BtnOK"
 msgstr "OK"
 
+#. Key:	5D244CEB4BDE5DA588E613A46CEE72FF
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_13.Text
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_13.Text
+msgid "LC.SaveSavedDate"
+msgstr "Saved date:"
+
 #. Key:	5F518865447A9B96DF6E96BA02F733C8
 #. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.Smazat.Text
 #: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree.Smazat.Text
@@ -289,6 +295,12 @@ msgstr "Do you really want to quit game? All unsaved progress will be lost!"
 msgid "LC.NewGroupHint"
 msgstr "New group name"
 
+#. Key:	7831F8464FA79C50B70A8A91F1FAECFC
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_12.Text
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_12.Text
+msgid "LC.SavePlayedTime"
+msgstr "Played time:"
+
 #. Key:	78AA971340090520D6768097AA14FAC3
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
@@ -300,6 +312,12 @@ msgstr "Do you really want to overwrite this game?"
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
 msgid "LC.LoadBtn"
 msgstr "Load"
+
+#. Key:	8775E8CD4D9CE6DCA9D005A4B311CBD7
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_11.Text
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_11.Text
+msgid "LC.SaveName"
+msgstr "Save name:"
 
 #. Key:	9388B7EF4F7D600711B41290A31F9987
 #. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtName.HintText
@@ -332,8 +350,8 @@ msgid "LC.NewSaveNameHint"
 msgstr "Save name"
 
 #. Key:	B504DA104C0882299ECE4F878396D558
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
 msgid "LC.LoadSaveItem_Game{name}_Played{played}_Saved{saved}"
 msgstr "Game:{name} Played{played}_Saved{saved}"
 
@@ -344,8 +362,8 @@ msgid "LC.SaveBtn"
 msgstr "Save"
 
 #. Key:	B60CA211425B8B38C6ACE29156ABE044
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
 msgid "LC.EmptySavePosition"
 msgstr "Empty save"
 

@@ -60,6 +60,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 
 	c->SaveName = TEXT("Bìžná hra");
 	c->IsSystemSave = true;
+	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
 
 
@@ -140,6 +141,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 
 	c->SaveName = TEXT("Prázdná hra");
 	c->IsSystemSave = true;
+	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
 
 	c->PlayerPosition = FVector(0, 0, 90);
@@ -159,6 +161,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave()
 
 	c->SaveName = TEXT("Main Menu Save");
 	c->IsSystemSave = true;
+	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::MainMenu;
 
 
