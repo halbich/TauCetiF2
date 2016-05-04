@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game\n"
-"POT-Creation-Date: 2016-05-04 13:44\n"
-"PO-Revision-Date: 2016-05-04 13:44\n"
+"POT-Creation-Date: 2016-05-04 14:23\n"
+"PO-Revision-Date: 2016-05-04 14:23\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -349,23 +349,11 @@ msgstr "Load game"
 msgid "LC.NewSaveNameHint"
 msgstr "Save name"
 
-#. Key:	B504DA104C0882299ECE4F878396D558
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-msgid "LC.LoadSaveItem_Game{name}_Played{played}_Saved{saved}"
-msgstr "Game:{name} Played{played}_Saved{saved}"
-
 #. Key:	B573CBAF4E286E41E8B5F79F228CA9E7
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
 msgid "LC.SaveBtn"
 msgstr "Save"
-
-#. Key:	B60CA211425B8B38C6ACE29156ABE044
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-msgid "LC.EmptySavePosition"
-msgstr "Empty save"
 
 #. Key:	B6E1C2F740DB99D1D4C7049B20DA2777
 #. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_0.Text
@@ -432,4 +420,18 @@ msgstr "Preparing world"
 #: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_484.Text
 msgid "LC.Properties"
 msgstr "Properties"
+
+#. Key:	LC.SaveSystemDefault
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:5
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:5
+msgctxt "TauCetiF2LocSpace"
+msgid "LC.SaveSystemDefault"
+msgstr "Default game"
+
+#. Key:	LC.SaveSystemEmpty
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:6
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:6
+msgctxt "TauCetiF2LocSpace"
+msgid "LC.SaveSystemEmpty"
+msgstr "Empty game"
 

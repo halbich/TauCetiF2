@@ -59,6 +59,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
 	c->SaveName = TEXT("Bìžná hra");
+	c->SystemSaveName = LC_SystemSave_Default;
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
@@ -140,6 +141,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
 	c->SaveName = TEXT("Prázdná hra");
+	c->SystemSaveName = LC_SystemSave_Empty;
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;

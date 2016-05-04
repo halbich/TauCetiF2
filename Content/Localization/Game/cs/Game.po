@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game\n"
-"POT-Creation-Date: 2016-05-04 13:44\n"
-"PO-Revision-Date: 2016-05-04 13:44\n"
+"POT-Creation-Date: 2016-05-04 14:23\n"
+"PO-Revision-Date: 2016-05-04 14:23\n"
 "Language-Team: \n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -649,18 +649,6 @@ msgstr "LC.NewSaveNameHint"
 msgid "Save name"
 msgstr "Název savu"
 
-#. Key:	B504DA104C0882299ECE4F878396D558
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-msgid "Game:{name} Played{played}_Saved{saved}"
-msgstr ""
-
-#. Key:	B504DA104C0882299ECE4F878396D558
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-msgid "LC.LoadSaveItem_Game{name}_Played{played}_Saved{saved}"
-msgstr "LC.LoadSaveItem_Game{name}_Played{played}_Saved{saved}"
-
 #. Key:	B573CBAF4E286E41E8B5F79F228CA9E7
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
@@ -672,18 +660,6 @@ msgstr "LC.SaveBtn"
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
 msgid "Save"
 msgstr "Uložit"
-
-#. Key:	B60CA211425B8B38C6ACE29156ABE044
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-msgid "Empty save"
-msgstr "Prázný save"
-
-#. Key:	B60CA211425B8B38C6ACE29156ABE044
-#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetSystemSaveName [Script Bytecode]
-msgid "LC.EmptySavePosition"
-msgstr "LC.EmptySavePosition"
 
 #. Key:	B6E1C2F740DB99D1D4C7049B20DA2777
 #. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_0.Text
@@ -813,4 +789,32 @@ msgstr "LC.Properties"
 #: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_484.Text
 msgid "Properties"
 msgstr "Vlastnosti"
+
+#. Key:	LC.SaveSystemDefault
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:5
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:5
+msgctxt "TauCetiF2LocSpace"
+msgid "Default game"
+msgstr "Výchozí hra"
+
+#. Key:	LC.SaveSystemDefault
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:5
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:5
+msgctxt "TauCetiF2LocSpace"
+msgid "LC.SaveSystemDefault"
+msgstr ""
+
+#. Key:	LC.SaveSystemEmpty
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:6
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:6
+msgctxt "TauCetiF2LocSpace"
+msgid "Empty game"
+msgstr "Prázdná hra"
+
+#. Key:	LC.SaveSystemEmpty
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:6
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:6
+msgctxt "TauCetiF2LocSpace"
+msgid "LC.SaveSystemEmpty"
+msgstr ""
 
