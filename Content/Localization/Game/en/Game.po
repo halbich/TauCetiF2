@@ -1,0 +1,435 @@
+﻿# Game English translation.
+# Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Game\n"
+"POT-Creation-Date: 2016-05-04 11:16\n"
+"PO-Revision-Date: 2016-05-04 11:16\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Key:	093E2E2B4BF4839CFDDF19A4D49E5047
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.TextBlock_56.Text
+#. Key:	7519889347FA45A8A1FE908D34F66E4B
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_56.Text
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_56.Text
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.TextBlock_56.Text
+msgid "LC.DeleteGroup"
+msgstr "LC.DeleteGroup"
+
+#. Key:	18657E614A99CDA179F3ECA4105A7E07
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
+#. Key:	3957A5584F4FE94CEF3E5F9F1D310B89
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_463.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_463.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
+msgid "Y"
+msgstr "Y"
+
+#. Key:	1E24A010454501BFCB99F8B86759A8CF
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_485.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_485.Text
+msgid "LC.Tags"
+msgstr "LC.Tags"
+
+#. Key:	1EA8A0FE45C602CF4CBF298894048A8A
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnQuitText.Text
+#. Key:	8D2FB4764FF0BAFCA0516BA23A43D019
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnExitText.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnQuitText.Text
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnExitText.Text
+msgid "LC.Quit"
+msgstr "LC.Quit"
+
+#. Key:	2018B7684CCE9C6EFF586981BF0E02E6
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.TextBlock_87.Text
+#. Key:	90AAFB6D466B631A0B502CB8AACB0949
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnConfigText.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnConfigText.Text
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.TextBlock_87.Text
+msgid "LC.Settings"
+msgstr "LC.Settings"
+
+#. Key:	21177E2F49F8E503FE0DAB8AA5AA6FFE
+#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_260.Text
+#. Key:	B038C9D14E95BDDC5C1821AFE0ECCBC3
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
+#. Key:	C4FEB8414BA6B6D52DEC40A237F2E88A
+#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_260.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
+#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_260.Text
+#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_260.Text
+msgid "LC.SetAutomaticQuality"
+msgstr "LC.SetAutomaticQuality"
+
+#. Key:	237F183D462A202206DA5EA8CE6BD5B6
+#. SourceLocation:	/Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree_153.TextBlock_119.Text
+#. Key:	8696A1424AC40C27314C8CB568614CC7
+#. SourceLocation:	/Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TextBlock_119.Text
+#. Key:	952F4264425945969AB1CBAE06C4EDCD
+#. SourceLocation:	/Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_119.Text
+#: /Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_119.Text
+#: /Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree_153.TextBlock_119.Text
+#: /Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TextBlock_119.Text
+msgid "LC.CloseBtn"
+msgstr "LC.CloseBtn"
+
+#. Key:	238315F941C588F895B1EF90DB627FF8
+#. SourceLocation:	/Game/UMG/Widgets/AboutWidget.AboutWidget_C:WidgetTree_97.TextBlock_113.Text
+#. Key:	718D31B4439FCBC0C2CE54B8C5CB5ACF
+#. SourceLocation:	/Game/UMG/Widgets/AboutWidget.AboutWidget_C:WidgetTree.TextBlock_113.Text
+#. Key:	E0EC7A424D8DCCA15C3B5A8282DF4A46
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.AboutWidget.WidgetTree.TextBlock_113.Text
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.AboutWidget.WidgetTree.TextBlock_113.Text
+#: /Game/UMG/Widgets/AboutWidget.AboutWidget_C:WidgetTree.TextBlock_113.Text
+#: /Game/UMG/Widgets/AboutWidget.AboutWidget_C:WidgetTree_97.TextBlock_113.Text
+msgid "LC.AboutText"
+msgstr "LC.AboutText"
+
+#. Key:	252D3A82477471C3B1C6F59B7061F9C2
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnNewText.Text
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnNewText.Text
+msgid "LC.NewGame"
+msgstr "LC.NewGame"
+
+#. Key:	2B4F6875488922F1D49F0F8C0D0F45D9
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_464.Text
+#. Key:	859A5ECB4FBD60FC2300899EF4671FA0
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoZ.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_464.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoZ.Text
+msgid "Z"
+msgstr "Z"
+
+#. Key:	2E49F07F4D69EA56857771818F042674
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:OnSubmit [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:OnSubmit [Script Bytecode]
+msgid "LC.SaveNameMustBeNonEmpty"
+msgstr "LC.SaveNameMustBeNonEmpty"
+
+#. Key:	321967024E2A9E59D54ACC9DF7F316EF
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
+#. Key:	82F6C22A4DEAE58AA2417085FDE3E6EC
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_667.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_667.Text
+msgid "LC.BtnYes"
+msgstr "LC.BtnYes"
+
+#. Key:	336DE05448163CC62E3A33974DB2D0F5
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+msgid "LC.ReallyDeleteSavedGame"
+msgstr "LC.ReallyDeleteSavedGame"
+
+#. Key:	365D4A3B402DF66A2530C994AF9DFCFA
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_97.Text
+#. Key:	5920543642404126129EADA484BF0242
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.TextBlock_97.Text
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_97.Text
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.TextBlock_97.Text
+msgid "LC.NameShort"
+msgstr "LC.NameShort"
+
+#. Key:	385492154BCBB9E883BA24BBB44797D7
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnSaveText.Text
+#. Key:	714A54774F1615A76BEDB0B073B769D4
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnSaveText.Text
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
+msgid "LC.SaveGame"
+msgstr "LC.SaveGame"
+
+#. Key:	3935243A447B8644499A2BB16718D335
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_328.Text
+#. Key:	E101F81F4B664594964E9B8D0772C708
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.TextBlock_328.Text
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TextBlock_328.Text
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.TextBlock_328.Text
+msgid "LC.DontCollapseGroup"
+msgstr "LC.DontCollapseGroup"
+
+#. Key:	4717B12549CF3C2059C6BEAE6AD6CD40
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnInfoText.Text
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnInfoText.Text
+msgid "LC.About"
+msgstr "LC.About"
+
+#. Key:	4BA9DD5E4DE4B03909DAEBA5FBEDE987
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:ExecuteUbergraph_MainMenu [Script Bytecode]
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:ExecuteUbergraph_MainMenu [Script Bytecode]
+msgid "LC.ReallyQuitGame"
+msgstr "LC.ReallyQuitGame"
+
+#. Key:	4D9CA49C43C0D777E038AEBB0344593E
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnEndGameText.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnEndGameText.Text
+msgid "LC.MainMenu"
+msgstr "LC.MainMenu"
+
+#. Key:	4F11995245861C627377D7AAD689C06D
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.GroupName.HintText
+#. Key:	72F8E8544AEAA1AB546526934A857278
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.GroupName.HintText
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.GroupName.HintText
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.GroupName.HintText
+msgid "LC.GroupNameHint"
+msgstr "LC.GroupNameHint"
+
+#. Key:	51C777F6481E4CC36061EE8661CA0F27
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_462.Text
+#. Key:	5FE5D1E448FB018ED2094A919481C6F0
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoX.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_462.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoX.Text
+msgid "X"
+msgstr "X"
+
+#. Key:	593DEFCE4947320CF59A958EDB7137E8
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree.TbxAddTag.HintText
+#. Key:	6288C1834FB8657159BB1BAC961F362B
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree_371.TbxAddTag.HintText
+#. Key:	C12D49664B12AD8D072DFF8C86140518
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree_397.TbxAddTag.HintText
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree_397.TbxAddTag.HintText
+#: /Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree.TbxAddTag.HintText
+#: /Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree_371.TbxAddTag.HintText
+msgid "LC.NewTagHint"
+msgstr "LC.NewTagHint"
+
+#. Key:	5941BEB74D98B3A871297BBD5921AB4E
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:WidgetTree.TextBlock_511.Text
+#: /Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:WidgetTree.TextBlock_511.Text
+msgid "LC.NewSaveName"
+msgstr "LC.NewSaveName"
+
+#. Key:	5A9B033445D050748122279079BDF020
+#. SourceLocation:	/Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:WidgetTree.InventoryParamsEdit_15.WidgetTree.TextBlock_20.Text
+#. Key:	6CF14DC94A49F552F63E18B0618EBC28
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_0.Text
+#. Key:	8B3771514D2481F5082DE69FDB78C4DA
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree_425.TextBlock_20.Text
+#. Key:	C96A9A21465840E9CF249ABAA54197B2
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
+#. Key:	F0D6E43B4E3BAF7ABD381A981D575DFC
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree_425.TextBlock_20.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_0.Text
+#: /Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:WidgetTree.InventoryParamsEdit_15.WidgetTree.TextBlock_20.Text
+msgid "LC.BtnOK"
+msgstr "LC.BtnOK"
+
+#. Key:	5F518865447A9B96DF6E96BA02F733C8
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_95.Smazat.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_95.Smazat.Text
+msgid "LC.Delete"
+msgstr "LC.Delete"
+
+#. Key:	6038364848CD9F7F8B6E5B885EE181AB
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+msgid "LC.ReallyQuitCurrentGameWithUnsavedItemsLost"
+msgstr "LC.ReallyQuitCurrentGameWithUnsavedItemsLost"
+
+#. Key:	60B158874B4A4AED6A80D68031CC6F3A
+#. SourceLocation:	/Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree.TextBlock_19.Text
+#. Key:	B2517221487258BA4F73DF893643677B
+#. SourceLocation:	/Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree_363.TextBlock_19.Text
+#: /Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree.TextBlock_19.Text
+#: /Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree_363.TextBlock_19.Text
+msgid "LC.NoSavedSavesFound"
+msgstr "LC.NoSavedSavesFound"
+
+#. Key:	61D85B524E16F38E5D0379A808D4AB29
+#. SourceLocation:	/Game/Maps/MainMap.MainMap_C:ExecuteUbergraph_MainMap [Script Bytecode]
+#: /Game/Maps/MainMap.MainMap_C:ExecuteUbergraph_MainMap [Script Bytecode]
+msgid "LC.LoadingDone"
+msgstr "LC.LoadingDone"
+
+#. Key:	65691D3D4F0AEA83EE6C25AB030D9550
+#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_1.Text
+#. Key:	699F6CEF492339323A722786071FA532
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
+#. Key:	D6199EAC49515187E6B59B843072D5A5
+#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_1.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
+#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_1.Text
+#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_1.Text
+msgid "LC.EnglishLanguage"
+msgstr "LC.EnglishLanguage"
+
+#. Key:	671763AC42558AD1D4AAAF8E47D96566
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
+msgid "LC.ReallyGotoMainMenuWithUnsavedItemsLost"
+msgstr "LC.ReallyGotoMainMenuWithUnsavedItemsLost"
+
+#. Key:	70C52B5840CE9EDB737FC9A8C55BDD72
+#. SourceLocation:	/Game/UMG/Hud/MainGameHud.MainGameHud_C:WidgetTree.TextBlock_46.Text
+#. Key:	C76844E9453B55851CFE9E9D3D4DF9D0
+#. SourceLocation:	/Game/UMG/Hud/MainGameHud.MainGameHud_C:GetUsingMesage [Script Bytecode]
+#: /Game/UMG/Hud/MainGameHud.MainGameHud_C:GetUsingMesage [Script Bytecode]
+#: /Game/UMG/Hud/MainGameHud.MainGameHud_C:WidgetTree.TextBlock_46.Text
+msgid "LC.UseItem"
+msgstr "LC.UseItem"
+
+#. Key:	71AF4C2A40DDE9F161BFB99CBEEB0AA5
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
+msgid "LC.ReallyQuitGameWithUnsavedItemsLost"
+msgstr "LC.ReallyQuitGameWithUnsavedItemsLost"
+
+#. Key:	759D489643C686E9EB2F5580BE6FE64F
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilter.TagListFilter_C:WidgetTree.TbxAddTag.HintText
+#. Key:	C5F427ED49D5D8F667A235AB6AF048AB
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilter.TagListFilter_C:WidgetTree_378.TbxAddTag.HintText
+#: /Game/UMG/UMGBasic/Tags/TagListFilter.TagListFilter_C:WidgetTree.TbxAddTag.HintText
+#: /Game/UMG/UMGBasic/Tags/TagListFilter.TagListFilter_C:WidgetTree_378.TbxAddTag.HintText
+msgid "LC.NewGroupHint"
+msgstr "LC.NewGroupHint"
+
+#. Key:	78AA971340090520D6768097AA14FAC3
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:ExecuteUbergraph_LoadSaveGame [Script Bytecode]
+msgid "LC.ReallyOverwriteSavedGame"
+msgstr "LC.ReallyOverwriteSavedGame"
+
+#. Key:	7CF932DA47CDFFCB6B37B5B698BE48AD
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_668.Text
+#. Key:	D906885C4EEAC760F34677A9774FD014
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_668.Text
+msgid "LC.BtnNo"
+msgstr "LC.BtnNo"
+
+#. Key:	8029022449D1AE7BC261B4AF43A5095E
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
+msgid "LC.LoadBtn"
+msgstr "LC.LoadBtn"
+
+#. Key:	9388B7EF4F7D600711B41290A31F9987
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtName.HintText
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtName.HintText
+msgid "LC.BlockNameHint"
+msgstr "LC.BlockNameHint"
+
+#. Key:	9B91D6A5402C60609F33F1829D4FD78B
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_1.Text
+#. Key:	CCA68BF74070E6CF8A7B038C8BAD8E59
+#. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_1.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_1.Text
+#: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree_413.TextBlock_1.Text
+msgid "LC.BtnCancel"
+msgstr "LC.BtnCancel"
+
+#. Key:	A3AC82D0487C75FB5FB739951C2A1AB6
+#. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnLoadText.Text
+#. Key:	C6B86ED744E0ADFF4B3367B24464BE7F
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnLoadText.Text
+#. Key:	D8B0C37D4988E7811A0EB89A4E22499A
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.BtnLoadText.Text
+#: /Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnLoadText.Text
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
+msgid "LC.LoadGame"
+msgstr "LC.LoadGame"
+
+#. Key:	AC91262A43307401F11437A2CD0CCA2C
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:WidgetTree.SaveGameName.HintText
+#: /Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:WidgetTree.SaveGameName.HintText
+msgid "LC.NewSaveNameHint"
+msgstr "LC.NewSaveNameHint"
+
+#. Key:	B504DA104C0882299ECE4F878396D558
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+msgid "LC.LoadSaveItem_Game{name}_Played{played}_Saved{saved}"
+msgstr "LC.LoadSaveItem_Game{name}_Played{played}_Saved{saved}"
+
+#. Key:	B573CBAF4E286E41E8B5F79F228CA9E7
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
+msgid "LC.SaveBtn"
+msgstr "LC.SaveBtn"
+
+#. Key:	B60CA211425B8B38C6ACE29156ABE044
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:GetText_0 [Script Bytecode]
+msgid "LC.EmptySavePosition"
+msgstr "LC.EmptySavePosition"
+
+#. Key:	B6E1C2F740DB99D1D4C7049B20DA2777
+#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_0.Text
+#. Key:	BE0E4BC94F94342CCEC60398F8AB214D
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
+#. Key:	F013B96F439C609870A4D9A5DF44BAC4
+#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_0.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
+#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_0.Text
+#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_0.Text
+msgid "LC.CzechLanguage"
+msgstr "LC.CzechLanguage"
+
+#. Key:	B8710FD54F76AC038DB589A62B2519B2
+#. SourceLocation:	/Game/UMG/Loading/LoadingScreen.LoadingScreen_C:GetText_0 [Script Bytecode]
+#: /Game/UMG/Loading/LoadingScreen.LoadingScreen_C:GetText_0 [Script Bytecode]
+msgid "{Count}%       {Message}"
+msgstr "{Count}%       {Message}"
+
+#. Key:	C1D082F94DFF0605C856F4999E8BE061
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
+msgid "LC.BeginPlayBtn"
+msgstr "LC.BeginPlayBtn"
+
+#. Key:	C1D46A8E4F43F6EE0237058E7CE7642A
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_95.TextBlock_71.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SaveGame.WidgetTree_95.TextBlock_71.Text
+msgid "LC.Load"
+msgstr "LC.Load"
+
+#. Key:	CED37C8B4CE5CAAE4B8BF8ABDAD67B9B
+#. SourceLocation:	/Game/Maps/MainMap.MainMap_C:Load Game [Script Bytecode]
+#. Key:	DE0AFADD41EE7CEA8018CFB8A2A7BBE7
+#. SourceLocation:	/Game/Blueprints/Common/TauCetiF2GameInstance.TauCetiF2GameInstance_C:InitLoad [Script Bytecode]
+#: /Game/Blueprints/Common/TauCetiF2GameInstance.TauCetiF2GameInstance_C:InitLoad [Script Bytecode]
+#: /Game/Maps/MainMap.MainMap_C:Load Game [Script Bytecode]
+msgid "LC.LoadingGame"
+msgstr "LC.LoadingGame"
+
+#. Key:	CF2AC37144E728F07948619E2C5C24CE
+#. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
+#: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:GetText_0 [Script Bytecode]
+msgid "LC.StartNewGame"
+msgstr "LC.StartNewGame"
+
+#. Key:	D854F4BC49A5AB94A91591AB45A4F432
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.TxtBoxAddTag.HintText
+#. Key:	DFBC6E674649CC510E12589BE006D284
+#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TxtBoxAddTag.HintText
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree.TxtBoxAddTag.HintText
+#: /Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.TxtBoxAddTag.HintText
+msgid "LC.NewTagsHint"
+msgstr "LC.NewTagsHint"
+
+#. Key:	DEDD5A0843D5C437D561A59086CDBB31
+#. SourceLocation:	/Game/Maps/MainMap.MainMap_C:ExecuteUbergraph_MainMap [Script Bytecode]
+#: /Game/Maps/MainMap.MainMap_C:ExecuteUbergraph_MainMap [Script Bytecode]
+msgid "LC.LoadingPreparingWorld"
+msgstr "LC.LoadingPreparingWorld"
+
+#. Key:	E0557CFD4800E6F892B2F59F8103C6B3
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_484.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_484.Text
+msgid "LC.Properties"
+msgstr "LC.Properties"
+
