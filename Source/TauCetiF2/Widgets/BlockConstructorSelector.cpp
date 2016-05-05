@@ -15,7 +15,10 @@ void UBlockConstructorSelector::SynchronizeProperties()
 {
 	Definition = FBlockDefinitionHolder::Instance().GetDefinition(BlockID, false);
 	if (!Definition)
+	{
+		Super::SynchronizeProperties();
 		return;
+	}
 
 	UBuildableBlockInfo* info = NewObject<UBuildableBlockInfo>();
 	info->ID = Definition->ID;

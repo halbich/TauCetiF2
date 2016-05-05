@@ -47,7 +47,7 @@ void UWorldObjectComponent::BeginPlay()
 	TArray<AWorldObject*> items;
 	//TreeElements[0]->DEBUGDrawSurrondings(GetWorld(), FColor::Black);
 	TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items, this);
-	print(TEXT("surroundings:"));
+	//print(TEXT("surroundings:"));
 
 	TArray<UMinMaxTree*> usedTrees;
 

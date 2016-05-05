@@ -4,14 +4,56 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game\n"
-"POT-Creation-Date: 2016-05-04 14:39\n"
-"PO-Revision-Date: 2016-05-04 14:39\n"
+"POT-Creation-Date: 2016-05-05 00:45\n"
+"PO-Revision-Date: 2016-05-05 00:45\n"
 "Language-Team: \n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. Key:	02E05F34442F42341A6F8FB4F5229859
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(3).DisplayValues
+#. Key:	22CB9C6C484AA27E113736BAA5935E1B
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(3).DisplayValues
+#. Key:	46FC34634B14CBA14D2972BAC1D60B22
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(3).DisplayValues
+#. Key:	825F170E4582596F843E66ACB5D2C172
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(3).DisplayValues
+#. Key:	C7EC79154C86664B791B21B885A8B2A6
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(3).DisplayValues
+#. Key:	F8EE653449FAA6C84D5AD289F43CE6CB
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(3).DisplayValues
+msgid "Epic"
+msgstr "Epic"
+
+#. Key:	02E05F34442F42341A6F8FB4F5229859
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(3).DisplayValues
+#. Key:	22CB9C6C484AA27E113736BAA5935E1B
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(3).DisplayValues
+#. Key:	46FC34634B14CBA14D2972BAC1D60B22
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(3).DisplayValues
+#. Key:	825F170E4582596F843E66ACB5D2C172
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(3).DisplayValues
+#. Key:	C7EC79154C86664B791B21B885A8B2A6
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(3).DisplayValues
+#. Key:	F8EE653449FAA6C84D5AD289F43CE6CB
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(3).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(3).DisplayValues
+msgid "LC.SettingsEpic"
+msgstr ""
 
 #. Key:	093E2E2B4BF4839CFDDF19A4D49E5047
 #. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilterItem.TagListFilterItem_C:WidgetTree_386.TextBlock_56.Text
@@ -31,6 +73,78 @@ msgstr "Smazat skupinu"
 msgid "LC.DeleteGroup"
 msgstr "LC.DeleteGroup"
 
+#. Key:	0F0283A1433338F63870E985FC9A6B4B
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(2).DisplayValues
+#. Key:	14C37D464197725E8BDCB18D664E1279
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(2).DisplayValues
+#. Key:	A4F36DA94E728D990D566A97E18CF2ED
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(2).DisplayValues
+#. Key:	BA0A6CBA49577E42546DEAA9BC9F8C29
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(2).DisplayValues
+#. Key:	EF34241F48FDCD0700E4B4A3A22E9385
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(2).DisplayValues
+msgid "High"
+msgstr "Vys"
+
+#. Key:	0F0283A1433338F63870E985FC9A6B4B
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(2).DisplayValues
+#. Key:	14C37D464197725E8BDCB18D664E1279
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(2).DisplayValues
+#. Key:	A4F36DA94E728D990D566A97E18CF2ED
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(2).DisplayValues
+#. Key:	BA0A6CBA49577E42546DEAA9BC9F8C29
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(2).DisplayValues
+#. Key:	EF34241F48FDCD0700E4B4A3A22E9385
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(2).DisplayValues
+msgid "LC.SettingsHigh"
+msgstr ""
+
+#. Key:	167EFE494728AB637B8B46BEDB87A12E
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(0).DisplayValues
+#. Key:	1C33EE7A426569E6250E8C9442CDB5CD
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(0).DisplayValues
+#. Key:	24219D0843A44169C11802A6F914A814
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(0).DisplayValues
+#. Key:	BEDE5C7C40DB644843BB9B9366200E67
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(0).DisplayValues
+#. Key:	CAAD76464E94198D0BB4579368B7FE31
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(0).DisplayValues
+msgid "LC.SettingsLow"
+msgstr ""
+
+#. Key:	167EFE494728AB637B8B46BEDB87A12E
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(0).DisplayValues
+#. Key:	1C33EE7A426569E6250E8C9442CDB5CD
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(0).DisplayValues
+#. Key:	24219D0843A44169C11802A6F914A814
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(0).DisplayValues
+#. Key:	BEDE5C7C40DB644843BB9B9366200E67
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(0).DisplayValues
+#. Key:	CAAD76464E94198D0BB4579368B7FE31
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(0).DisplayValues
+msgid "Low"
+msgstr "Níz"
+
 #. Key:	18657E614A99CDA179F3ECA4105A7E07
 #. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
 #. Key:	3957A5584F4FE94CEF3E5F9F1D310B89
@@ -39,6 +153,24 @@ msgstr "LC.DeleteGroup"
 #: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
 msgid "Y"
 msgstr "Y"
+
+#. Key:	190680964D427CBE71E6CEB0B70CBA62
+#. SourceLocation:	/Game/UMG/UMGBasic/SliderWithValue.SliderWithValue_C:TryGetStringValue [Script Bytecode]
+#: /Game/UMG/UMGBasic/SliderWithValue.SliderWithValue_C:TryGetStringValue [Script Bytecode]
+msgid "NDF"
+msgstr "NDF"
+
+#. Key:	1991EE36467DB413DF509AB0C78D04F1
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(2).DisplayValues
+msgid "Far"
+msgstr ""
+
+#. Key:	1991EE36467DB413DF509AB0C78D04F1
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(2).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(2).DisplayValues
+msgid "LC.SettingsFar"
+msgstr ""
 
 #. Key:	1A9B664E4ABF257DEBEAF49018E55E37
 #. SourceLocation:	/Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree.TextBlock_19.Text
@@ -51,6 +183,30 @@ msgstr "LC.NoSavedSavesFound"
 #: /Game/UMG/Saving/NoSaveItems.NoSaveItems_C:WidgetTree.TextBlock_19.Text
 msgid "No saves found!"
 msgstr "Nebyly nalezeny žádné savy!"
+
+#. Key:	1BF4C6664C3F8E9EA1F24EA110BC0387
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree_430.TextBlock_194.Text
+#. Key:	45DC45FB410FFDC9F9D61085F374053E
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_194.Text
+#. Key:	B038C9D14E95BDDC5C1821AFE0ECCBC3
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_194.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree_430.TextBlock_194.Text
+msgid "LC.SetAutomaticQuality"
+msgstr "LC.SetAutomaticQuality"
+
+#. Key:	1BF4C6664C3F8E9EA1F24EA110BC0387
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree_430.TextBlock_194.Text
+#. Key:	45DC45FB410FFDC9F9D61085F374053E
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_194.Text
+#. Key:	B038C9D14E95BDDC5C1821AFE0ECCBC3
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_194.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree_430.TextBlock_194.Text
+msgid "Set quality automatically"
+msgstr "Nastav kvalitu hry automaticky"
 
 #. Key:	1E24A010454501BFCB99F8B86759A8CF
 #. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_485.Text
@@ -100,30 +256,6 @@ msgstr "LC.Settings"
 msgid "Settings"
 msgstr "Nastavení"
 
-#. Key:	21177E2F49F8E503FE0DAB8AA5AA6FFE
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_260.Text
-#. Key:	B038C9D14E95BDDC5C1821AFE0ECCBC3
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
-#. Key:	C4FEB8414BA6B6D52DEC40A237F2E88A
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_260.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_260.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_260.Text
-msgid "LC.SetAutomaticQuality"
-msgstr "LC.SetAutomaticQuality"
-
-#. Key:	21177E2F49F8E503FE0DAB8AA5AA6FFE
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_260.Text
-#. Key:	B038C9D14E95BDDC5C1821AFE0ECCBC3
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
-#. Key:	C4FEB8414BA6B6D52DEC40A237F2E88A
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_260.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_260.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_260.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_260.Text
-msgid "Set quality automatically"
-msgstr "Nastav kvalitu hry automaticky"
-
 #. Key:	238315F941C588F895B1EF90DB627FF8
 #. SourceLocation:	/Game/UMG/Widgets/AboutWidget.AboutWidget_C:WidgetTree_97.TextBlock_113.Text
 #. Key:	718D31B4439FCBC0C2CE54B8C5CB5ACF
@@ -160,6 +292,45 @@ msgstr "LC.NewGame"
 msgid "New game"
 msgstr "Nová hra"
 
+#. Key:	25F818714F2D19D0C7173AA356F0BCBA
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(1).DisplayValues
+msgid "LC.SettingsMed"
+msgstr ""
+
+#. Key:	25F818714F2D19D0C7173AA356F0BCBA
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(1).DisplayValues
+#. Key:	2C748C3A4E5724C82B0A9FB43274D3D4
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(1).DisplayValues
+#. Key:	7F828A8847937CCE0AE068B79F2D4EFA
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(1).DisplayValues
+#. Key:	A0421CF54C2759549EB7E3BF5823A3C2
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(1).DisplayValues
+#. Key:	BA74ABB44DB8F0E70608F9914E685D3B
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(1).DisplayValues
+#. Key:	E0AA8DB54625CC611F1664A789C04EEB
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(1).DisplayValues
+msgid "Med"
+msgstr "Stř"
+
+#. Key:	2761F8F94DD7DC644B38628B714ADF15
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_75.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_75.Text
+msgid "LC.Textures"
+msgstr ""
+
+#. Key:	2761F8F94DD7DC644B38628B714ADF15
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_75.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_75.Text
+msgid "Textures"
+msgstr ""
+
 #. Key:	2B4F6875488922F1D49F0F8C0D0F45D9
 #. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_464.Text
 #. Key:	859A5ECB4FBD60FC2300899EF4671FA0
@@ -187,6 +358,24 @@ msgstr "Zavřít"
 msgid "LC.CloseBtn"
 msgstr "LC.CloseBtn"
 
+#. Key:	2C748C3A4E5724C82B0A9FB43274D3D4
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(1).DisplayValues
+#. Key:	7F828A8847937CCE0AE068B79F2D4EFA
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(1).DisplayValues
+#. Key:	A0421CF54C2759549EB7E3BF5823A3C2
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(1).DisplayValues
+#. Key:	BA74ABB44DB8F0E70608F9914E685D3B
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(1).DisplayValues
+#. Key:	E0AA8DB54625CC611F1664A789C04EEB
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_28.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_29.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_31.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_32.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_33.DisplayValues(1).DisplayValues
+msgid "LC.SettingsMedium"
+msgstr ""
+
 #. Key:	2E49F07F4D69EA56857771818F042674
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:OnSubmit [Script Bytecode]
 #: /Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:OnSubmit [Script Bytecode]
@@ -198,6 +387,24 @@ msgstr "LC.SaveNameMustBeNonEmpty"
 #: /Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:OnSubmit [Script Bytecode]
 msgid "Name must not be empty!"
 msgstr "Název hry musí být neprázdný!"
+
+#. Key:	2EDD7CB142F4CA8A60E0EFA6099E339F
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_35.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_35.Text
+msgid "LC.ResolutionScale"
+msgstr ""
+
+#. Key:	2EDD7CB142F4CA8A60E0EFA6099E339F
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_35.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_35.Text
+msgid "Resolution Scale"
+msgstr ""
+
+#. Key:	2EFD34294E010E069413E794FD8D789F
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_72.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_72.Text
+msgid "LC.AntiAliasing"
+msgstr "Anti-Aliasing"
 
 #. Key:	301881A547E42B44726CE8B35B4241D3
 #. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_1.Text
@@ -289,6 +496,18 @@ msgstr "O hře"
 msgid "LC.About"
 msgstr "LC.About"
 
+#. Key:	48EC79E3487DCCFDCF1320846C61DF55
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_74.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_74.Text
+msgid "LC.Shadows"
+msgstr ""
+
+#. Key:	48EC79E3487DCCFDCF1320846C61DF55
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_74.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_74.Text
+msgid "Shadows"
+msgstr ""
+
 #. Key:	4BA9DD5E4DE4B03909DAEBA5FBEDE987
 #. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:ExecuteUbergraph_MainMenu [Script Bytecode]
 #: /Game/UMG/Menus/MainMenu.MainMenu_C:ExecuteUbergraph_MainMenu [Script Bytecode]
@@ -345,8 +564,8 @@ msgstr "X"
 #. Key:	6288C1834FB8657159BB1BAC961F362B
 #. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree_371.TbxAddTag.HintText
 #. Key:	C12D49664B12AD8D072DFF8C86140518
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree_397.TbxAddTag.HintText
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree_397.TbxAddTag.HintText
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree.TbxAddTag.HintText
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree.TbxAddTag.HintText
 #: /Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree.TbxAddTag.HintText
 #: /Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree_371.TbxAddTag.HintText
 msgid "LC.NewTagHint"
@@ -357,8 +576,8 @@ msgstr "LC.NewTagHint"
 #. Key:	6288C1834FB8657159BB1BAC961F362B
 #. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree_371.TbxAddTag.HintText
 #. Key:	C12D49664B12AD8D072DFF8C86140518
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree_397.TbxAddTag.HintText
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree_397.TbxAddTag.HintText
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree.TbxAddTag.HintText
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree.TbxAddTag.HintText
 #: /Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree.TbxAddTag.HintText
 #: /Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree_371.TbxAddTag.HintText
 msgid "New tag"
@@ -377,32 +596,20 @@ msgid "New save name"
 msgstr "Název nového savu"
 
 #. Key:	5A9B033445D050748122279079BDF020
-#. SourceLocation:	/Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:WidgetTree.InventoryParamsEdit_15.WidgetTree.TextBlock_20.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
 #. Key:	5BEA5BB34AC16BBC9FBEAC8EAC688359
 #. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
-#. Key:	8B3771514D2481F5082DE69FDB78C4DA
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree_425.TextBlock_20.Text
-#. Key:	F0D6E43B4E3BAF7ABD381A981D575DFC
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
 #: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree_425.TextBlock_20.Text
 #: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
-#: /Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:WidgetTree.InventoryParamsEdit_15.WidgetTree.TextBlock_20.Text
 msgid "LC.BtnOK"
 msgstr "LC.BtnOK"
 
 #. Key:	5A9B033445D050748122279079BDF020
-#. SourceLocation:	/Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:WidgetTree.InventoryParamsEdit_15.WidgetTree.TextBlock_20.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
 #. Key:	5BEA5BB34AC16BBC9FBEAC8EAC688359
 #. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
-#. Key:	8B3771514D2481F5082DE69FDB78C4DA
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree_425.TextBlock_20.Text
-#. Key:	F0D6E43B4E3BAF7ABD381A981D575DFC
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
 #: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_20.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree_425.TextBlock_20.Text
 #: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
-#: /Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:WidgetTree.InventoryParamsEdit_15.WidgetTree.TextBlock_20.Text
 msgid "OK"
 msgstr "OK"
 
@@ -457,38 +664,32 @@ msgstr "LC.LoadingDone"
 msgid "Loading done"
 msgstr "Nahrávání dokončeno"
 
-#. Key:	65691D3D4F0AEA83EE6C25AB030D9550
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_1.Text
-#. Key:	699F6CEF492339323A722786071FA532
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
-#. Key:	D6199EAC49515187E6B59B843072D5A5
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_1.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_1.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_1.Text
-msgid "English"
-msgstr "English"
+#. Key:	65E66BC3474AA28C0B627787D0CB5FC7
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_76.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_76.Text
+msgid "Effects"
+msgstr ""
 
-#. Key:	65691D3D4F0AEA83EE6C25AB030D9550
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_1.Text
-#. Key:	699F6CEF492339323A722786071FA532
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
-#. Key:	D6199EAC49515187E6B59B843072D5A5
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_1.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_1.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_1.Text
-msgid "LC.EnglishLanguage"
-msgstr "LC.EnglishLanguage"
+#. Key:	65E66BC3474AA28C0B627787D0CB5FC7
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_76.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_76.Text
+msgid "LC.Efects"
+msgstr ""
 
 #. Key:	6653E86F463DA3162068D8987B791BDB
 #. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
+#. Key:	712C292A4F9DB9BE83D57B83E62CBB8B
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue.DisplayValues(1).DisplayValues
 #: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
 msgid "LC.BtnYes"
 msgstr "LC.BtnYes"
 
 #. Key:	6653E86F463DA3162068D8987B791BDB
 #. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
+#. Key:	712C292A4F9DB9BE83D57B83E62CBB8B
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue.DisplayValues(1).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue.DisplayValues(1).DisplayValues
 #: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
 msgid "Yes"
 msgstr "Ano"
@@ -504,6 +705,24 @@ msgstr "Opravdu chceš odejít do hlavního menu? Veškerý neuložený postup b
 #: /Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
 msgid "LC.ReallyGotoMainMenuWithUnsavedItemsLost"
 msgstr "LC.ReallyGotoMainMenuWithUnsavedItemsLost"
+
+#. Key:	699F6CEF492339323A722786071FA532
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
+msgid "English"
+msgstr "English"
+
+#. Key:	699F6CEF492339323A722786071FA532
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_1.Text
+msgid "LC.EnglishLanguage"
+msgstr "LC.EnglishLanguage"
+
+#. Key:	6C5DAB6C431F695327E35D9EF3B5EE6B
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_71.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_71.Text
+msgid "LC.ViewDistance"
+msgstr "Dohledová vzdálenost"
 
 #. Key:	70C52B5840CE9EDB737FC9A8C55BDD72
 #. SourceLocation:	/Game/UMG/Hud/MainGameHud.MainGameHud_C:WidgetTree.TextBlock_46.Text
@@ -571,6 +790,18 @@ msgstr "Opravdu chceš přepsat tuto hru?"
 msgid "LC.ReallyOverwriteSavedGame"
 msgstr "LC.ReallyOverwriteSavedGame"
 
+#. Key:	7904B960407876F9801ABE88EEAA2B90
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_23.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_23.Text
+msgid "Language"
+msgstr ""
+
+#. Key:	7904B960407876F9801ABE88EEAA2B90
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_23.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_23.Text
+msgid "LC.LanguageName"
+msgstr ""
+
 #. Key:	8029022449D1AE7BC261B4AF43A5095E
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
@@ -603,15 +834,45 @@ msgstr "LC.BlockNameHint"
 
 #. Key:	995F3FA34E8F80E20F813A91DA07E70A
 #. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
+#. Key:	D217BE5D4A00A203325EB3A905725F48
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue.DisplayValues(0).DisplayValues
 #: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
 msgid "LC.BtnNo"
 msgstr "LC.BtnNo"
 
 #. Key:	995F3FA34E8F80E20F813A91DA07E70A
 #. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
+#. Key:	D217BE5D4A00A203325EB3A905725F48
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue.DisplayValues(0).DisplayValues
 #: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
 msgid "No"
 msgstr "Ne"
+
+#. Key:	9A5E5CCA432DFE61968C66B3AA33AB18
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_24.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_24.Text
+msgid "Fullscreen"
+msgstr ""
+
+#. Key:	9A5E5CCA432DFE61968C66B3AA33AB18
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_24.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_24.Text
+msgid "LC.FullScreen"
+msgstr ""
+
+#. Key:	9CA60390442085CA0E7BFCA15B8AEC3A
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_73.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_73.Text
+msgid "LC.PostProcess"
+msgstr ""
+
+#. Key:	9CA60390442085CA0E7BFCA15B8AEC3A
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_73.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_73.Text
+msgid "Post Processing"
+msgstr ""
 
 #. Key:	A3AC82D0487C75FB5FB739951C2A1AB6
 #. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnLoadText.Text
@@ -661,35 +922,35 @@ msgstr "LC.SaveBtn"
 msgid "Save"
 msgstr "Uložit"
 
-#. Key:	B6E1C2F740DB99D1D4C7049B20DA2777
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_0.Text
-#. Key:	BE0E4BC94F94342CCEC60398F8AB214D
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
-#. Key:	F013B96F439C609870A4D9A5DF44BAC4
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_0.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_0.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_0.Text
-msgid "LC.CzechLanguage"
-msgstr "LC.CzechLanguage"
-
-#. Key:	B6E1C2F740DB99D1D4C7049B20DA2777
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_0.Text
-#. Key:	BE0E4BC94F94342CCEC60398F8AB214D
-#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
-#. Key:	F013B96F439C609870A4D9A5DF44BAC4
-#. SourceLocation:	/Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_0.Text
-#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree.TextBlock_0.Text
-#: /Game/UMG/Widgets/SettingsWidget.SettingsWidget_C:WidgetTree_121.TextBlock_0.Text
-msgid "Čeština"
-msgstr "Čeština"
-
 #. Key:	B8710FD54F76AC038DB589A62B2519B2
 #. SourceLocation:	/Game/UMG/Loading/LoadingScreen.LoadingScreen_C:GetText_0 [Script Bytecode]
 #: /Game/UMG/Loading/LoadingScreen.LoadingScreen_C:GetText_0 [Script Bytecode]
 msgid "{Count}%       {Message}"
 msgstr "{Count}%       {Message}"
+
+#. Key:	BDC975824066A64C200F63A6818426CC
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_70.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_70.Text
+msgid "LC.ScreenResolution"
+msgstr ""
+
+#. Key:	BDC975824066A64C200F63A6818426CC
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_70.Text
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_70.Text
+msgid "Screen Resolution"
+msgstr ""
+
+#. Key:	BE0E4BC94F94342CCEC60398F8AB214D
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
+msgid "LC.CzechLanguage"
+msgstr "LC.CzechLanguage"
+
+#. Key:	BE0E4BC94F94342CCEC60398F8AB214D
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.TextBlock_0.Text
+msgid "Čeština"
+msgstr "Čeština"
 
 #. Key:	C1D082F94DFF0605C856F4999E8BE061
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
@@ -766,6 +1027,12 @@ msgstr "LC.NewTagsHint"
 msgid "New tags"
 msgstr "Nové tagy"
 
+#. Key:	DA8036E04D620437B15E6CB9FA32B7EA
+#. SourceLocation:	/Game/UMG/UMGBasic/SliderWithValue.SliderWithValue_C:DisplayValue [Script Bytecode]
+#: /Game/UMG/UMGBasic/SliderWithValue.SliderWithValue_C:DisplayValue [Script Bytecode]
+msgid "{0}%"
+msgstr "{0}%"
+
 #. Key:	DEDD5A0843D5C437D561A59086CDBB31
 #. SourceLocation:	/Game/Maps/MainMap.MainMap_C:ExecuteUbergraph_MainMap [Script Bytecode]
 #: /Game/Maps/MainMap.MainMap_C:ExecuteUbergraph_MainMap [Script Bytecode]
@@ -812,6 +1079,18 @@ msgstr "Konstruktér"
 #. SourceLocation:	/Game/UMG/Widgets/BlockConstructorWidget.Default__BlockConstructorWidget_C.BaseControlDisplayName
 #: /Game/UMG/Widgets/BlockConstructorWidget.Default__BlockConstructorWidget_C.BaseControlDisplayName
 msgid "LC.BlockConstructor"
+msgstr ""
+
+#. Key:	F726A79E4B9300EA70C39CB0C0E90430
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(0).DisplayValues
+msgid "LC.SettingsNear"
+msgstr ""
+
+#. Key:	F726A79E4B9300EA70C39CB0C0E90430
+#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(0).DisplayValues
+#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SliderWithValue_C_30.DisplayValues(0).DisplayValues
+msgid "New"
 msgstr ""
 
 #. Key:	LC.SaveSystemDefault
