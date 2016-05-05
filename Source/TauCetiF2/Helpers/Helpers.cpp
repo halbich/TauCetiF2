@@ -102,9 +102,9 @@ UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
 		if (doorOpening)
 		{
 			auto value = (EDoorOpening)(*doorOpening);
-			if(value == EDoorOpening::Left)
+			if (value == EDoorOpening::Left)
 				return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("DoorLeft.DoorLeft'")));
-			else if(value == EDoorOpening::Right)
+			else if (value == EDoorOpening::Right)
 				return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("DoorRight.DoorRight'")));
 
 		}
@@ -112,7 +112,7 @@ UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
 		return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("Door.Door'")));
 		break;
 	}
-						   
+
 	default:
 		return nullptr;
 	}
@@ -124,6 +124,29 @@ bool UHelpers::ChangeLocalization(FString target)
 {
 	return FInternationalization::Get().SetCurrentCulture(target);
 }
+
+#pragma optimize("", off)
+void UHelpers::GetCurrentLocalizations(UPARAM(ref)TArray<FString>& DisplayNames, UPARAM(ref)TArray<FString>& IsoNames)
+{
+	TArray<FCultureRef> LocalizedCulturesForGame;
+
+	FInternationalization::Get().GetCulturesWithAvailableLocalization(FPaths::GetGameLocalizationPaths(), LocalizedCulturesForGame, false);
+
+	for (auto c : LocalizedCulturesForGame)
+	{
+		DisplayNames.Add(c->GetNativeName());
+		IsoNames.Add(c->GetTwoLetterISOLanguageName());
+	}
+
+
+}
+
+FString UHelpers::GetCurrentCultureIsoName()
+{
+	return  FInternationalization::Get().GetCurrentCulture()->GetTwoLetterISOLanguageName();
+}
+
+#pragma optimize("", on)
 
 void UHelpers::FatalError(const FName text)
 {

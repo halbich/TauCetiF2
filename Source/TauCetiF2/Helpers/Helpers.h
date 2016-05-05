@@ -22,7 +22,7 @@ class TAUCETIF2_API UHelpers : public UObject
 
 public:
 
-	
+
 
 
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
@@ -37,6 +37,11 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Change Localization"), Category = "Locale")
 		static bool ChangeLocalization(FString target);
 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Get Current Localizations"), Category = "Locale")
+		static void GetCurrentLocalizations(UPARAM(ref)TArray<FString>& DisplayNames, UPARAM(ref)TArray<FString>& IsoNames);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Get Current Culture"), Category = "Locale")
+		static FString GetCurrentCultureIsoName();
 
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
 		static void FatalError(const FName text);
@@ -107,7 +112,7 @@ public:
 		return name.Len() > 0 ? GetMaterialByName(*name) : nullptr;
 	}
 
-	
+
 
 
 
