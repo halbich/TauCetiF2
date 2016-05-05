@@ -44,7 +44,17 @@ TArray<USaveGameCarrier*> UNewGameSaveHolder::GetNewSaveGamesList()
 
 USaveGameCarrier * UNewGameSaveHolder::DEBUG_GetTestSave()
 {
-	return Instance()->newGameSaves[0];
+	auto i = Instance();
+	if (i && i->IsValidLowLevel())
+	{
+		if (i->newGameSaves.Num() > 0)
+		{
+			auto sav = i->newGameSaves[0];
+			if (sav && sav->IsValidLowLevel())
+				return sav;
+		}
+	}
+	return nullptr;
 }
 
 USaveGameCarrier* UNewGameSaveHolder::GetSaveForMainMenu()

@@ -112,6 +112,7 @@ UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
 		return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("Door.Door'")));
 		break;
 	}
+	case EBlockName::WindowPowered: return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("WindowPowered.WindowPowered'")));
 
 	default:
 		return nullptr;
