@@ -137,8 +137,7 @@ void UHelpers::GetCurrentLocalizations(UPARAM(ref)TArray<FString>& DisplayNames,
 		DisplayNames.Add(c->GetNativeName());
 		IsoNames.Add(c->GetTwoLetterISOLanguageName());
 	}
-
-
+	
 }
 
 FString UHelpers::GetCurrentCultureIsoName()
