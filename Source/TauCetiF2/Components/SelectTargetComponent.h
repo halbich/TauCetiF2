@@ -45,7 +45,7 @@ public:
 		float MaxDistance;
 
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
-		FString CustomUsingMessage;
+		FText CustomUsingMessage;
 
 	virtual void SelectObject(int32 stencilValue);
 

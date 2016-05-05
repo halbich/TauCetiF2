@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game\n"
-"POT-Creation-Date: 2016-05-05 17:47\n"
-"PO-Revision-Date: 2016-05-05 17:47\n"
+"POT-Creation-Date: 2016-05-05 19:09\n"
+"PO-Revision-Date: 2016-05-05 19:09\n"
 "Language-Team: \n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -935,7 +935,7 @@ msgstr ""
 #. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldFullScreen.DisplayValues(1).DisplayValues
 #: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldFullScreen.DisplayValues(1).DisplayValues
 msgid "Window"
-msgstr ""
+msgstr "Okno"
 
 #. Key:	A3AC82D0487C75FB5FB739951C2A1AB6
 #. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:WidgetTree.BtnLoadText.Text
@@ -1155,6 +1155,34 @@ msgstr "Konstruktér"
 #: /Game/UMG/Widgets/BlockConstructorWidget.Default__BlockConstructorWidget_C.BaseControlDisplayName
 msgid "LC.BlockConstructor"
 msgstr ""
+
+#. Key:	LC.DoorClose
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:9
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:9
+msgctxt "TauCetiF2LocSpace"
+msgid "Close door"
+msgstr "Zavřít dveře"
+
+#. Key:	LC.DoorClose
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:9
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:9
+msgctxt "TauCetiF2LocSpace"
+msgid "LC.DoorClose"
+msgstr ""
+
+#. Key:	LC.DoorOpen
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:8
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:8
+msgctxt "TauCetiF2LocSpace"
+msgid "LC.DoorOpen"
+msgstr ""
+
+#. Key:	LC.DoorOpen
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:8
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:8
+msgctxt "TauCetiF2LocSpace"
+msgid "Open door"
+msgstr "Otevřít dveře"
 
 #. Key:	LC.SaveSystemDefault
 #. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:5
