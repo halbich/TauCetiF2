@@ -43,6 +43,7 @@ public:
 		HasCustomScaling = true;
 		MeshScale = meshScale;
 		WorldObjectScale = worldObjectScale;
+		MinBlockScale = MaxBlockScale = worldObjectScale;
 	}
 
 	FORCEINLINE FVector GetMeshScale(const FVector& inScale) const

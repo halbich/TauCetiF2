@@ -28,5 +28,11 @@ public:
 
 	FBlockDefinition* Definition;
 
+	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
+		bool IsValid();
+
+	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
+		void GetMinMax(UPARAM(ref)FVector& minSize, UPARAM(ref)FVector& maxSize);
+
 	virtual void SynchronizeProperties() override;
 };
