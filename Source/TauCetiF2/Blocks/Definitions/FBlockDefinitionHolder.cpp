@@ -1,6 +1,7 @@
 
 
 #include "TauCetiF2.h"
+#include "Game/Localization/LocalizationHelpers.h"
 #include "FBlockDefinitionHolder.h"
 
 
@@ -111,6 +112,14 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	door.AllowPitch = false;
 	door.AllowRoll = false;
 	door.BuilderSortIndex = 800;
+
+	FBlockAdditionalFlagsDefinition doorAddFlags(ENamedTag::DoorOpening, LC_DoorOpening );
+	doorAddFlags.SetValues(2,
+		FBlockFlagValue((int32)EDoorOpening::Left, LC_DoorOpeningLeft),
+		FBlockFlagValue((int32)EDoorOpening::Right, LC_DoorOpeningRight)
+		);
+
+	door.AdditionalFlags.Add(doorAddFlags);
 	definitions.Add(door.ID, door);
 
 

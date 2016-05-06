@@ -7,6 +7,7 @@
 #include "Blocks/Definitions/FBlockDefinition.h"
 #include "Blocks/Definitions/FBlockDefinitionHolder.h"
 #include "Blocks/Info/BuildableBlockInfo.h"
+#include "Widgets/Common/InventoryFlagItem.h"
 #include "BlockConstructorSelector.generated.h"
 
 /**
@@ -33,6 +34,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
 		void GetMinMax(UPARAM(ref)FVector& minSize, UPARAM(ref)FVector& maxSize);
+
+	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
+		TArray<UInventoryFlagItem*> GetAdditionalParams();
 
 	virtual void SynchronizeProperties() override;
 };

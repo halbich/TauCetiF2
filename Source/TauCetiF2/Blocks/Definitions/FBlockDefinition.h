@@ -3,6 +3,7 @@
 #pragma once
 #include "Game/GameDefinitions.h"
 #include "Blocks/Definitions/FBlockMaterialDefinition.h"
+#include "Blocks/Definitions/FBlockAdditionalFlagsDefinition.h"
 
 /**
  *
@@ -37,6 +38,8 @@ public:
 	void AddMaterials(int8 n, ...);
 
 	int32 BuilderSortIndex;
+
+	TArray<FBlockAdditionalFlagsDefinition> AdditionalFlags;
 
 	FORCEINLINE void SetCustomScale(FVector meshScale, FVector worldObjectScale)
 	{

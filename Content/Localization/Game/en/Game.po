@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game\n"
-"POT-Creation-Date: 2016-05-05 19:09\n"
-"PO-Revision-Date: 2016-05-05 19:09\n"
+"POT-Creation-Date: 2016-05-06 20:08\n"
+"PO-Revision-Date: 2016-05-06 20:08\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -100,15 +100,6 @@ msgstr "Set quality automatically"
 msgid "LC.SettingsLow"
 msgstr "Low"
 
-#. Key:	18657E614A99CDA179F3ECA4105A7E07
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
-#. Key:	3957A5584F4FE94CEF3E5F9F1D310B89
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_463.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_463.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoY.Text
-msgid "Y"
-msgstr "Y"
-
 #. Key:	190680964D427CBE71E6CEB0B70CBA62
 #. SourceLocation:	/Game/UMG/UMGBasic/SliderWithValue.SliderWithValue_C:TryGetStringValue [Script Bytecode]
 #: /Game/UMG/UMGBasic/SliderWithValue.SliderWithValue_C:TryGetStringValue [Script Bytecode]
@@ -180,15 +171,6 @@ msgstr "New game"
 #: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_75.Text
 msgid "LC.Textures"
 msgstr "Textures"
-
-#. Key:	2B4F6875488922F1D49F0F8C0D0F45D9
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_464.Text
-#. Key:	859A5ECB4FBD60FC2300899EF4671FA0
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoZ.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_464.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoZ.Text
-msgid "Z"
-msgstr "Z"
 
 #. Key:	2B571D7A407BF515C417328FCC68BD99
 #. SourceLocation:	/Game/UMG/BaseControl/BaseControl.BaseControl_C:WidgetTree.TextBlock_119.Text
@@ -313,22 +295,10 @@ msgstr "Main menu"
 msgid "LC.GroupNameHint"
 msgstr "Group name"
 
-#. Key:	51C777F6481E4CC36061EE8661CA0F27
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_462.Text
-#. Key:	5FE5D1E448FB018ED2094A919481C6F0
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoX.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_462.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtInfoX.Text
-msgid "X"
-msgstr "X"
-
 #. Key:	593DEFCE4947320CF59A958EDB7137E8
 #. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree.TbxAddTag.HintText
 #. Key:	6288C1834FB8657159BB1BAC961F362B
 #. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree_371.TbxAddTag.HintText
-#. Key:	C12D49664B12AD8D072DFF8C86140518
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree.TbxAddTag.HintText
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TagList.WidgetTree.TbxAddTag.HintText
 #: /Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree.TbxAddTag.HintText
 #: /Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree_371.TbxAddTag.HintText
 msgid "LC.NewTagHint"
@@ -348,6 +318,12 @@ msgstr "New save name"
 #: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_0.Text
 msgid "LC.BtnOK"
 msgstr "OK"
+
+#. Key:	5B07840340FE2E7A15934DBCA2AEC6BA
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:Get_TagsShort_Text_0 [Script Bytecode]
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:Get_TagsShort_Text_0 [Script Bytecode]
+msgid "{x} - {y} - {z}"
+msgstr "{x} - {y} - {z}"
 
 #. Key:	5D244CEB4BDE5DA588E613A46CEE72FF
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_13.Text
@@ -400,6 +376,12 @@ msgstr "Do you really want to go to main menu? All unsaved progress will be lost
 msgid "LC.ViewDistance"
 msgstr "View distance"
 
+#. Key:	708E7EF84256171A9361C6BC4123FCC2
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:GetAddParamsHeader [Script Bytecode]
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:GetAddParamsHeader [Script Bytecode]
+msgid "LC.AddParams"
+msgstr "Parameters"
+
 #. Key:	70C52B5840CE9EDB737FC9A8C55BDD72
 #. SourceLocation:	/Game/UMG/Hud/MainGameHud.MainGameHud_C:WidgetTree.TextBlock_46.Text
 #. Key:	C76844E9453B55851CFE9E9D3D4DF9D0
@@ -441,6 +423,12 @@ msgstr "Do you really want to overwrite this game?"
 #: /Game/UMG/Settings/GameSettingsWidget.GameSettingsWidget_C:WidgetTree.TextBlock_23.Text
 msgid "LC.LanguageName"
 msgstr "Language"
+
+#. Key:	7D4308B64399A88A18F79C83BC81BC4A
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.NoTagsInfo.Text
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.NoTagsInfo.Text
+msgid "No Tags to set"
+msgstr "No Params to set"
 
 #. Key:	8029022449D1AE7BC261B4AF43A5095E
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
@@ -607,6 +595,12 @@ msgstr "Properties"
 msgid "LC.Terminal"
 msgstr "Terminal"
 
+#. Key:	E10CF18B4C7BAF7A1BAFF7A63D404578
+#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:GetAddParamsHeader [Script Bytecode]
+#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:GetAddParamsHeader [Script Bytecode]
+msgid "{0} ({1})"
+msgstr "{0} ({1})"
+
 #. Key:	F08E7C4E4463AA7173FDADA387597773
 #. SourceLocation:	/Game/UMG/Widgets/BlockConstructorWidget.Default__BlockConstructorWidget_C.BaseControlDisplayName
 #: /Game/UMG/Widgets/BlockConstructorWidget.Default__BlockConstructorWidget_C.BaseControlDisplayName
@@ -626,6 +620,27 @@ msgstr "Close door"
 msgctxt "TauCetiF2LocSpace"
 msgid "LC.DoorOpen"
 msgstr "Open door"
+
+#. Key:	LC.DoorOpening
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:11
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:11
+msgctxt "TauCetiF2LocSpace"
+msgid "LC.DoorOpening"
+msgstr "Door opening"
+
+#. Key:	LC.DoorOpeningLeft
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:12
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:12
+msgctxt "TauCetiF2LocSpace"
+msgid "LC.DoorOpeningLeft"
+msgstr "Left"
+
+#. Key:	LC.DoorOpeningRight
+#. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:13
+#: Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:13
+msgctxt "TauCetiF2LocSpace"
+msgid "LC.DoorOpeningRight"
+msgstr "Right"
 
 #. Key:	LC.SaveSystemDefault
 #. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:5

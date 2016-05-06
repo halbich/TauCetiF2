@@ -17,7 +17,9 @@ FBlockDefinition::FBlockDefinition(int32 id, EShapeType shapeType) :
 	HasCustomScaling(false),
 	MeshScale(FVector(1, 1, 1)),
 	WorldObjectScale(FVector(1, 1, 1)),
-	BuilderSortIndex(1024)
+	BuilderSortIndex(1024),
+	AdditionalFlags(),
+	UsedMaterials()
 {
 
 }
