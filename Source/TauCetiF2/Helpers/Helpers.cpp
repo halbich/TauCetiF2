@@ -23,8 +23,6 @@ TArray<FString> UHelpers::GetAllSaveGameSlots()
 		// From SaveGameSystem.h in the Unreal source code base.
 		FString saveGamePath = FString::Printf(TEXT("%s/SaveGames/"), *FPaths::GameSavedDir());
 
-		UE_LOG(LogTemp, Log, TEXT("Search path %s"), *saveGamePath);
-
 		// Array of fstrings to pass back
 		TArray<FString> filePaths;
 

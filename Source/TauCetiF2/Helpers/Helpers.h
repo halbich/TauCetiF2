@@ -58,8 +58,8 @@ public:
 	template <typename ObjClass>
 	static FORCEINLINE ObjClass* LoadObjFromPath(const FName& Path)
 	{
-		if (Path == NAME_None) return NULL;
-		//~
+		if (Path == NAME_None) 
+			return nullptr;
 
 		return Cast<ObjClass>(StaticLoadObject(ObjClass::StaticClass(), NULL, *Path.ToString()));
 	}
@@ -67,17 +67,14 @@ public:
 
 
 	static FORCEINLINE UMaterial* GetMaterialByName(const FName& name) {
-
 		return LoadObjFromPath<UMaterial>(name);
 	}
 
 	static FORCEINLINE UImage* GetImageByName(const FName& name) {
-		UE_LOG(LogTemp, Log, TEXT("%s"), *(name.ToString()));
 		return LoadObjFromPath<UImage>(name);
 	}
 
 	static FORCEINLINE UTexture2D* GetTexture2DByName(const FName& name) {
-		UE_LOG(LogTemp, Log, TEXT("%s"), *(name.ToString()));
 		return LoadObjFromPath<UTexture2D>(name);
 	}
 
