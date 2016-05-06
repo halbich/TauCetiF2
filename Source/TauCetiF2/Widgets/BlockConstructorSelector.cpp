@@ -16,7 +16,7 @@ bool UBlockConstructorSelector::IsValid()
 	return Definition != nullptr;
 }
 
-void UBlockConstructorSelector::GetMinMax(UPARAM(ref)FVector& minSize, UPARAM(ref)FVector& maxSize)
+void UBlockConstructorSelector::GetMinMax(FVector& minSize, FVector& maxSize)
 {
 	check(IsValid());
 	minSize = Definition->MinBlockScale;
@@ -64,6 +64,14 @@ TArray<UInventoryFlagItem*> UBlockConstructorSelector::GetAdditionalParams()
 	}
 
 
+	return result;
+}
+
+
+TArray<FString> UBlockConstructorSelector::GetImplicitTags()
+{
+	TArray<FString> result;
+	check(IsValid());
 	return result;
 }
 

@@ -32,11 +32,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
 		bool IsValid();
 
-	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
-		void GetMinMax(UPARAM(ref)FVector& minSize, UPARAM(ref)FVector& maxSize);
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+		void GetMinMax(FVector& minSize, FVector& maxSize);
 
-	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
 		TArray<UInventoryFlagItem*> GetAdditionalParams();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+		TArray<FString> GetImplicitTags();
 
 	virtual void SynchronizeProperties() override;
 };
