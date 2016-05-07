@@ -23,6 +23,7 @@ public:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 
 	UPROPERTY(BlueprintReadWrite, Category = InventoryComponent)
@@ -37,7 +38,18 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
 		UInventoryTags* InventoryTags;
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryComponent)
+		TArray<UBuildableBlockInfo*> GetItemsForCurrentBank();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryComponent)
+		FString GetCurrentBankName();
+	
+	FDelegateHandle ListeningHandle;
+
 	void LoadFromCarrier(USaveGameCarrier* carrier);
 
 	void SaveToCarrier(USaveGameCarrier* carrier);
+
+	void SelectNextBank();
+	void SelectPrevBank();
 };

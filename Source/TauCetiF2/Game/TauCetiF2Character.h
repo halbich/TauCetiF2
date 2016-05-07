@@ -83,6 +83,9 @@ protected:
 
 	void OnInventory();
 
+	void OnNextInventoryBank();
+	void OnPrevInventoryBank();
+
 	UPROPERTY()
 		ATauCetiF2PlayerController* PC;   // todo pøesunout?
 

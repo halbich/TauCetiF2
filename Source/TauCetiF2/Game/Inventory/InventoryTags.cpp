@@ -14,11 +14,24 @@ UInventoryTags* UInventoryTags::GetDefault()
 		auto itm = NewObject<UInventoryTagGroup>();
 		itm->Index = i;
 		if (i == 0)
+		{
 			itm->IsEnabled = true;
+			res->CurrentActiveIndex = 0;
+		}
 
-		itm->Name = TEXT("Lorem ipsum dolor sit ame");
+		itm->Name = FString::Printf(TEXT("Group %d"), i + 1);
 		res->InventoryGroupList.Add(itm);
 	}
 
 	return res;
+}
+
+FDelegateHandle UInventoryTags::AddEventListener(FSelectionChanged& UseDelegate)
+{
+	return OnSelectionChanged.Add(UseDelegate);
+}
+
+void UInventoryTags::RemoveEventListener(FDelegateHandle DelegateHandle)
+{
+	OnSelectionChanged.Remove(DelegateHandle);
 }

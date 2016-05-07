@@ -90,6 +90,9 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* Input
 	InputComponent->BindAction("OnUse", IE_Pressed, this, &ATauCetiF2Character::OnUse);
 
 	InputComponent->BindAction("OnInventory", IE_Pressed, this, &ATauCetiF2Character::OnInventory);
+
+	InputComponent->BindAction("SelectNextInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnNextInventoryBank);
+	InputComponent->BindAction("SelectPrevInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnPrevInventoryBank);
 }
 
 
@@ -223,4 +226,14 @@ void ATauCetiF2Character::BecomeViewTarget(APlayerController* PC)
 	this->PC = Cast<ATauCetiF2PlayerController>(PC);
 
 	ensure(this->PC);
+}
+
+void ATauCetiF2Character::OnNextInventoryBank()
+{
+	Inventory->SelectNextBank();
+}
+
+void ATauCetiF2Character::OnPrevInventoryBank()
+{
+	Inventory->SelectPrevBank();
 }
