@@ -14,7 +14,7 @@ UInventoryComponent::UInventoryComponent()
 
 	// ...
 
-	InventoryTags = UInventoryTags::GetDefault();
+	
 }
 
 
@@ -32,3 +32,15 @@ void UInventoryComponent::ForceItemsChanged()
 	OnHudBuildableItemsChanged.Broadcast();
 }
 
+void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
+{
+	InventoryTags = UInventoryTags::GetDefault();
+	BuildableItems = TArray<UBuildableBlockInfo*>(carrier->BuildableBlocks);
+
+	ForceItemsChanged();
+}
+
+void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
+{
+	carrier->BuildableBlocks = TArray<UBuildableBlockInfo*>(BuildableItems);
+}

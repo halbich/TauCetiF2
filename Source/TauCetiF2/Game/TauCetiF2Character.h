@@ -86,6 +86,12 @@ protected:
 
 	void OnUse();
 
+	UFUNCTION(BlueprintCallable, Category = Character)
+	void LoadFromCarrier(USaveGameCarrier* carrier);
+
+	UFUNCTION(BlueprintCallable, Category = Character)
+		void SaveToCarrier(USaveGameCarrier* carrier);
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
