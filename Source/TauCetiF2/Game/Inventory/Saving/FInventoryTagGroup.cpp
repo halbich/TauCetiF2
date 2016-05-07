@@ -1,0 +1,9 @@
+
+
+#include "TauCetiF2.h"
+#include "FInventoryTagGroup.h"
+
+FInventoryTagGroup::FInventoryTagGroup() : Name(), IsEnabled(false), GroupList()
+{
+}
+

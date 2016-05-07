@@ -36,7 +36,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
 
-	InventoryTags = UInventoryTags::GetDefault();
+	InventoryTags = carrier->InventoryTags;
 
 	FSelectionChanged Subscriber;
 	Subscriber.BindUObject(this, &UInventoryComponent::ForceItemsChanged);
@@ -51,6 +51,8 @@ void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
 
+
+	carrier->InventoryTags = InventoryTags;
 	carrier->BuildableBlocks = TArray<UBuildableBlockInfo*>(BuildableItems);
 }
 

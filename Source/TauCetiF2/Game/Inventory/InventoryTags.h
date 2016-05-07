@@ -4,6 +4,7 @@
 
 #include "Object.h"
 #include "Game/Inventory/InventoryTagGroup.h"
+#include "Game/Inventory/Saving/FInventoryTags.h"
 #include "InventoryTags.generated.h"
 
 
@@ -67,7 +68,7 @@ public:
 	void PrevBank()
 	{
 		auto length = InventoryGroupList.Num();
-		auto start =  CurrentActiveIndex - 1 + length;
+		auto start = CurrentActiveIndex - 1 + length;
 		auto end = CurrentActiveIndex;
 
 		for (int32 i = start; i > end; i--)
@@ -108,6 +109,36 @@ public:
 			return;
 
 		NextBank();
+	}
+
+
+
+	FORCEINLINE FInventoryTags ToContainer() {
+		FInventoryTags result;
+		result.CurrentActiveIndex = CurrentActiveIndex;
+
+		for (auto invTagGroup : InventoryGroupList)
+		{
+			if (invTagGroup && invTagGroup->IsValidLowLevel())
+				result.InventoryGroupList.Add(invTagGroup->ToContainer());
+		}
+
+
+		return result;
+	}
+
+	FORCEINLINE void FromContainer(const FInventoryTags& invTags) {
+
+
+		CurrentActiveIndex = invTags.CurrentActiveIndex;
+
+		for (auto invTagGroup : invTags.InventoryGroupList)
+		{
+			auto igl = NewObject<UInventoryTagGroup>();
+			igl->FromContainer(invTagGroup);
+			InventoryGroupList.Add(igl);
+		}
+
 	}
 
 

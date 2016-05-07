@@ -94,6 +94,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	c->PartOfDay = 0.5f;
 	c->PlayerUseFPSCamera = true;
 
+	c->InventoryTags = UInventoryTags::GetDefault();
 
 	c->addSystemBuildableActions();
 
@@ -175,6 +176,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 	c->PartOfDay = 0.5f;
 	c->PlayerUseFPSCamera = false;
 
+	c->InventoryTags = UInventoryTags::GetDefault();
 
 	c->addSystemBuildableActions();
 

@@ -10,6 +10,7 @@
 #include "Helpers/Saving/BlockSaveInfo.h"
 #include "Blocks/Info/BlockInfo.h"
 #include "Blocks/Info/BuildableBlockInfo.h"
+#include "Game/Inventory/InventoryTags.h"
 #include "SaveGameCarrier.generated.h"
 
 /**
@@ -98,6 +99,11 @@ public:
 	// Serializable array
 	TArray<FBlockInfo> usedBlocks;
 
+	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+		UInventoryTags* InventoryTags;
+
+	//serializable Item
+	FInventoryTags inventoryTags;
 
 	// blocks 
 	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
@@ -198,6 +204,9 @@ private:
 				buildableBlocks.Add(buildableBlock->ToContainer());
 		}
 
+		check(InventoryTags && InventoryTags->IsValidLowLevel());
+		inventoryTags = InventoryTags->ToContainer();
+
 		DEBUGPrintSave();
 	}
 
@@ -221,6 +230,9 @@ private:
 			buildableBlockInfoBlock->FromContainer(buildableBlock);
 			BuildableBlocks.Add(buildableBlockInfoBlock);
 		}
+
+		InventoryTags = NewObject<UInventoryTags>();
+		InventoryTags->FromContainer(inventoryTags);
 	}
 
 

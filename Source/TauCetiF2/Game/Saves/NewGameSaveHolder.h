@@ -6,6 +6,7 @@
 #include "Common/Enums.h"
 #include "Game/Localization/LocalizationHelpers.h"
 #include "Common/SaveGameCarrier.h"
+#include "Game/Inventory/InventoryTags.h"
 #include "NewGameSaveHolder.generated.h"
 
 

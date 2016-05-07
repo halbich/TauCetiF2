@@ -12,7 +12,6 @@ UInventoryTags* UInventoryTags::GetDefault()
 	for (int32 i = 0; i < DefaultCount; i++)
 	{
 		auto itm = NewObject<UInventoryTagGroup>();
-		itm->Index = i;
 		if (i == 0)
 		{
 			itm->IsEnabled = true;
