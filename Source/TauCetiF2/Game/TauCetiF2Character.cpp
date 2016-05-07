@@ -219,3 +219,10 @@ void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
 {
 	Inventory->SaveToCarrier(carrier);
 }
+
+
+void ATauCetiF2Character::BecomeViewTarget(APlayerController* PC)
+{
+	Super::BecomeViewTarget(PC);
+	Selector->OwnerBecomeViewTarget();
+}

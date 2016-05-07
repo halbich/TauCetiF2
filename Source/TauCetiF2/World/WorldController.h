@@ -23,14 +23,14 @@ class TAUCETIF2_API AWorldController : public AActor
 
 public:
 
-	UPROPERTY(BlueprintReadWrite, Category = WorldController)
+
+	virtual void BeginPlay() override;
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = WorldController)
 		TArray<UBlockInfo*> UsedBlocks;
 
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks);
-
-	UFUNCTION(BlueprintCallable, Category = WorldController)
-		void PreLoadInit();
 
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void DEBUGShowMinMaxBoxes();
@@ -53,7 +53,7 @@ public:
 		return RootBox->IsPlaceEmpty(box);
 	}
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UKDTree* RootBox;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldController, meta = (AllowPrivateAccess = "true"))
@@ -66,5 +66,4 @@ private:
 
 
 
-	void preLoadInit(bool ctor = false);
 };

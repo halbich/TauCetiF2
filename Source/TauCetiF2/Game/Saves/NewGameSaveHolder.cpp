@@ -9,10 +9,25 @@ UNewGameSaveHolder* UNewGameSaveHolder::Instance()
 
 	static UNewGameSaveHolder* instance = nullptr;
 
-	if (instance == nullptr || !instance->IsValidLowLevel())
+	if (instance == nullptr || !instance->IsValidLowLevel() || instance->newGameSaves.Num() == 0 || !instance->mainMenuSave || !instance->mainMenuSave->IsValidLowLevel())
 	{
 		instance = NewObject<UNewGameSaveHolder>();
 		instance->init();
+	}
+	else
+	{
+		auto err = false;
+		for (auto s : instance->newGameSaves)
+		{
+			if (!s || !s->IsValidLowLevel())
+			{
+				err = true;
+				break;
+			}
+		}
+
+		if (err)
+			instance->init();
 	}
 
 	return instance;

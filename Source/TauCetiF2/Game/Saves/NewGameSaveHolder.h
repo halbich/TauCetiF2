@@ -42,10 +42,10 @@ private:
 	//A static array of to Function Pointers
 	FunctionPtrType fillingFunctions[(uint8)ENamedHardcodedLevel::HardcodedLevelsMax];
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TArray<USaveGameCarrier*> newGameSaves;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		USaveGameCarrier* mainMenuSave;
 
 	USaveGameCarrier* getDefaultGameSave();

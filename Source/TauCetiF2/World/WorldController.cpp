@@ -7,43 +7,11 @@
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	auto minCube = WorldHelpers::BorderToWorld(FVector(0, 0, 0));
-	auto maxCube = WorldHelpers::BorderToWorld(GameDefinitions::WorldBorders);
-
-
-	FVector min((minCube - 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
-	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
-
-	RootBox = ObjectInitializer.CreateDefaultSubobject<UKDTree>(this, TEXT("RootBox"));
-	RootBox->Init(min, max, 0);
-
 
 	BaseControl = ObjectInitializer.CreateDefaultSubobject<UBaseControlComponent>(this, TEXT("Base Control"));
 
 }
 
-void AWorldController::preLoadInit(bool ctor)
-{
-	if (RootBox && RootBox->IsValidLowLevel())
-		return;
-
-	auto minCube = WorldHelpers::BorderToWorld(FVector(0, 0, 0));
-	auto maxCube = WorldHelpers::BorderToWorld(GameDefinitions::WorldBorders);
-
-
-	FVector min((minCube - 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
-	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
-
-	RootBox = ctor ? CreateDefaultSubobject<UKDTree>(TEXT("RootBox")) : NewObject<UKDTree>();;
-	RootBox->Init(min, max, 0);
-}
-
-void AWorldController::PreLoadInit()
-{
-	preLoadInit(false);
-
-	UPatternDefinitionsHolder::Instance();
-}
 
 void AWorldController::LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks) {
 
@@ -215,4 +183,24 @@ void AWorldController::DEBUGUsedPatternElements(const FVector & startingPoint)
 		SpawnWorldObject(GetWorld(), block, true);
 	}
 
+}
+
+void AWorldController::BeginPlay() {
+	print(TEXT("Cpp WC BP"));
+
+	RootBox = NewObject<UKDTree>(GetTransientPackage(), TEXT("RootBox"));
+
+
+	auto minCube = WorldHelpers::BorderToWorld(FVector(0, 0, 0));
+	auto maxCube = WorldHelpers::BorderToWorld(GameDefinitions::WorldBorders);
+
+
+	FVector min((minCube - 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
+	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
+
+	RootBox->Init(min, max, 0);
+
+	UPatternDefinitionsHolder::Instance();
+
+	Super::BeginPlay();
 }

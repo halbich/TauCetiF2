@@ -34,6 +34,8 @@ void UInventoryComponent::ForceItemsChanged()
 
 void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 {
+	check(carrier != nullptr);
+
 	InventoryTags = UInventoryTags::GetDefault();
 	BuildableItems = TArray<UBuildableBlockInfo*>(carrier->BuildableBlocks);
 
@@ -42,5 +44,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 
 void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 {
+	check(carrier != nullptr);
+
 	carrier->BuildableBlocks = TArray<UBuildableBlockInfo*>(BuildableItems);
 }

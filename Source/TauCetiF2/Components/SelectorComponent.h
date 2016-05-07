@@ -25,8 +25,6 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	virtual void BeginPlay() override;
-
 
 	UPROPERTY(BlueprintAssignable, Category = TargetSelector)
 		FUsableObjectTargetedChanged OnUsableObjectTargetedChanged;
@@ -74,6 +72,8 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 		int32 StencilValue;
 
+
+	void OwnerBecomeViewTarget();
 private:
 
 

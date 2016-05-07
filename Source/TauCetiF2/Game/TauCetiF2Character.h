@@ -40,6 +40,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float BaseLookUpRate;
 
+	virtual void BecomeViewTarget(APlayerController* PC) override;
+
 protected:
 
 	/** Called for forwards/backward input */
