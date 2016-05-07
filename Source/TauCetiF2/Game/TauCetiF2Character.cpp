@@ -84,13 +84,6 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* Input
 	InputComponent->BindAxis("RotYaw", this, &ATauCetiF2Character::BuilderRotateYaw);
 
 
-	auto world = GetWorld();
-	if (world)
-	{
-		auto pc = UGameplayStatics::GetPlayerController(world, 0);
-		PC = Cast<ATauCetiF2PlayerController>(pc);
-
-	}
 	InputComponent->BindAction("OnEscape", IE_Pressed, this, &ATauCetiF2Character::OnEscapeKey);
 	InputComponent->BindAction("OnEnter", IE_Pressed, this, &ATauCetiF2Character::OnEnterKey);
 
@@ -213,6 +206,8 @@ void ATauCetiF2Character::OnUse()
 void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier)
 {
 	Inventory->LoadFromCarrier(carrier);
+
+	PC->Inventory->InventoryTags = Inventory->InventoryTags;
 }
 
 void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
@@ -225,4 +220,7 @@ void ATauCetiF2Character::BecomeViewTarget(APlayerController* PC)
 {
 	Super::BecomeViewTarget(PC);
 	Selector->OwnerBecomeViewTarget();
+	this->PC = Cast<ATauCetiF2PlayerController>(PC);
+
+	ensure(this->PC);
 }
