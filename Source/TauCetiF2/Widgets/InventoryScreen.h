@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Widgets/ObjectWidget.h"
+#include "Components/InventoryComponent.h"
 #include "Game/Inventory/InventoryTags.h"
 #include "InventoryScreen.generated.h"
 
@@ -16,7 +17,7 @@ class TAUCETIF2_API UInventoryScreen : public UObjectWidget
 public:
 
 	UPROPERTY(BlueprintReadOnly, Category = InventoryScreen)
-		UInventoryTags* InventoryTags;
+		UInventoryComponent* InventoryComponent;
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "InventoryScreen")
 		bool CanUncheck();

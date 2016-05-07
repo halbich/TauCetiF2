@@ -8,10 +8,12 @@
 
 bool UInventoryScreen::CanUncheck()
 {
-	return InventoryTags->GetEnabledGroupsCount() > 1;
+	check(InventoryComponent && InventoryComponent->IsValidLowLevel());
+	return InventoryComponent->InventoryTags->GetEnabledGroupsCount() > 1;
 }
 
 void UInventoryScreen::CheckCurrentSelection()
 {
-	InventoryTags->CheckCurrentSelection();
+	check(InventoryComponent && InventoryComponent->IsValidLowLevel());
+	InventoryComponent->InventoryTags->CheckCurrentSelection();
 }

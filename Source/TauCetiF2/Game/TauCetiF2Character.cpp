@@ -210,7 +210,7 @@ void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier)
 {
 	Inventory->LoadFromCarrier(carrier);
 
-	PC->Inventory->InventoryTags = Inventory->InventoryTags;
+	PC->Inventory->InventoryComponent = Inventory;
 }
 
 void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
