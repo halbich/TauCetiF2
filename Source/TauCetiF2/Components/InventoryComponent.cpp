@@ -13,6 +13,8 @@ UInventoryComponent::UInventoryComponent()
 	PrimaryComponentTick.bCanEverTick = false;
 
 	// ...
+
+	InventoryTags = UInventoryTags::GetDefault();
 }
 
 

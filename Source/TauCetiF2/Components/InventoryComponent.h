@@ -4,6 +4,7 @@
 
 #include "Components/ActorComponent.h"
 #include "Blocks/Info/BuildableBlockInfo.h"
+#include "Game/Inventory/InventoryTags.h"
 #include "InventoryComponent.generated.h"
 
 
@@ -31,4 +32,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = InventoryComponent)
 		void ForceItemsChanged();
+
+	UPROPERTY(BlueprintReadWrite, Category = InventoryComponent)
+		UInventoryTags* InventoryTags;
 };

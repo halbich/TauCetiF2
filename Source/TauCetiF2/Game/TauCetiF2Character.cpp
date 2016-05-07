@@ -200,6 +200,9 @@ void ATauCetiF2Character::OnEnterKey()
 void ATauCetiF2Character::OnInventory()
 {
 	ensure(PC);
+	if (!PC->Inventory->InventoryTags)
+		PC->Inventory->InventoryTags = Inventory->InventoryTags;
+
 	PC->ToggleInventory();
 }
 

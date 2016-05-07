@@ -31,7 +31,7 @@ void ATauCetiF2PlayerController::BeginPlay()
 
 	if (wInventory)
 	{
-		Inventory = CreateWidget<UObjectWidget>(this, wInventory);
+		Inventory = CreateWidget<UInventoryScreen>(this, wInventory);
 		Inventory->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
 	}
 

@@ -7,6 +7,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Widgets/ObjectWidget.h"
 #include "Widgets/MainMenuWidget.h"
+#include "Widgets/InventoryScreen.h"
 #include "Helpers/Helpers.h"
 #include "TauCetiF2PlayerController.generated.h"
 
@@ -46,10 +47,10 @@ public:
 		UMainMenuWidget* MainMenu;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
-		TSubclassOf<class UObjectWidget> wInventory;
+		TSubclassOf<class UInventoryScreen> wInventory;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
-		UObjectWidget* Inventory;
+		UInventoryScreen* Inventory;
 
 	// Override BeginPlay()
 	virtual void BeginPlay() override;
