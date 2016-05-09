@@ -7,30 +7,16 @@
 // Sets default values for this component's properties
 UInventoryComponent::UInventoryComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	bWantsBeginPlay = true;
+	bWantsBeginPlay = false;
 	PrimaryComponentTick.bCanEverTick = false;
-
-	// ...
-
-	
 }
 
-
-// Called when the game starts
-void UInventoryComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-	
-}
 
 void UInventoryComponent::ForceItemsChanged()
 {
 	OnHudBuildableItemsChanged.Broadcast();
 }
+
 
 void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 {
@@ -72,6 +58,9 @@ TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForCurrentBank()
 
 	for (auto b : BuildableItems)
 	{
+		/*if (b->IsSystemAction)
+			continue;*/
+
 		result.Add(b);
 	}
 	return result;

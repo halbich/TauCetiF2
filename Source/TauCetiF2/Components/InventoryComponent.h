@@ -20,8 +20,6 @@ public:
 	// Sets default values for this component's properties
 	UInventoryComponent();
 
-	// Called when the game starts
-	virtual void BeginPlay() override;
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
