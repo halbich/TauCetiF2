@@ -80,3 +80,8 @@ void UInventoryComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 	UActorComponent::EndPlay(EndPlayReason);
 }
+
+void UInventoryComponent::AddItem(UBuildableBlockInfo* block)
+{
+	BuildableItems.Add(block);
+}

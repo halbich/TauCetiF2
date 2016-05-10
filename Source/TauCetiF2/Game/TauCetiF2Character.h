@@ -12,6 +12,7 @@ class ATauCetiF2Character : public ACharacter
 {
 	GENERATED_BODY()
 
+
 		/** Camera boom positioning the camera behind the character */
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
@@ -107,5 +108,7 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	FORCEINLINE class UInventoryComponent* GetInventory() const { return Inventory; }
 };
 

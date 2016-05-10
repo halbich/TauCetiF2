@@ -50,4 +50,6 @@ public:
 
 	void SelectNextBank();
 	void SelectPrevBank();
+
+	void AddItem(UBuildableBlockInfo* block);
 };

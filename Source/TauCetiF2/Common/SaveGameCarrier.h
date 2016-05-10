@@ -170,22 +170,6 @@ private:
 #endif
 	}
 
-public:
-	FORCEINLINE void addSystemBuildableActions()
-	{
-		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
-		BuildableBlocks[0]->IsEmptyHand = true;
-		BuildableBlocks[0]->IsSystemAction = true;
-		BuildableBlocks[0]->Action = EBuildableObjectAction::None;
-		BuildableBlocks[0]->AllowOutlineOnSelected = false;
-
-		BuildableBlocks.Add(NewObject<UBuildableBlockInfo>(this));
-		BuildableBlocks[1]->IsEmptyHand = true;
-		BuildableBlocks[1]->IsSystemAction = true;
-		BuildableBlocks[1]->Action = EBuildableObjectAction::DeleteObject;
-		BuildableBlocks[1]->StencilOverride = STENCIL_DELETE_OUTLINE;
-	}
-
 private:
 	FORCEINLINE void updateBeforeSave() {
 
@@ -221,8 +205,7 @@ private:
 		}
 
 
-		BuildableBlocks.Empty();
-		addSystemBuildableActions();
+		BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
 
 		for (auto buildableBlock : buildableBlocks)
 		{

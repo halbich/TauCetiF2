@@ -96,34 +96,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 
 	c->InventoryTags = UInventoryTags::GetDefault();
 
-	c->addSystemBuildableActions();
-
-	auto BuildableBlocks = &c->BuildableBlocks;
-
-	BuildableBlocks->Add(makeBuildable(EBlockName::BaseCube, FVector(1, 1, 1)));
-	BuildableBlocks->Add(makeBuildable(EBlockName::BaseCube, FVector(1, 1, 4)));
-	BuildableBlocks->Add(makeBuildable(EBlockName::WindowCube, FVector(4, 4, 1)));
-	BuildableBlocks->Add(makeBuildable(EBlockName::Terminal, FVector(1, 1, 1)));
-	BuildableBlocks->Add(makeBuildable(EBlockName::ConstructCube, FVector(1, 1, 1)));
-	BuildableBlocks->Add(makeBuildable(EBlockName::ConstructCubeSide, FVector(2, 2, 2)));
-	BuildableBlocks->Add(makeBuildable(EBlockName::ConstructCubeBody, FVector(5, 5, 5)));
-
-	auto build1 = makeBuildable(EBlockName::Door, FVector(1, 1, 1));
-	build1->AdditionalFlags.Add(GetNameForTag(ENamedTag::DoorOpening), (int32)EDoorOpening::Left);
-	build1->DefaultBuildingRotation = FRotator(0, 180, 0);
-	BuildableBlocks->Add(build1);
-
-	auto build2 = makeBuildable(EBlockName::Door, FVector(1, 1, 1));
-	build2->AdditionalFlags.Add(GetNameForTag(ENamedTag::DoorOpening), (int32)EDoorOpening::Right);
-	build2->DefaultBuildingRotation = FRotator(0, 180, 0);
-	BuildableBlocks->Add(build2);
-
-	auto door1 = make(EBlockName::Door, FVector(-20, -20, 5), FVector(1, 1, 1), FRotator(0, 0, 0));
-	door1->AdditionalFlags.Add(GetNameForTag(ENamedTag::DoorOpening), (int32)EDoorOpening::Left);
-	//UsedBlocks.Add(door1);
-
-	auto door2 = make(EBlockName::Door, FVector(-20, 30, 5), FVector(1, 1, 1), FRotator(0, 180, 0));
-	door2->AdditionalFlags.Add(GetNameForTag(ENamedTag::DoorOpening), (int32)EDoorOpening::Right);
+	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();;
 
 	//UsedBlocks.Add(door2);
 
@@ -178,8 +151,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 
 	c->InventoryTags = UInventoryTags::GetDefault();
 
-	c->addSystemBuildableActions();
-
+	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();;
 	return c;
 
 }

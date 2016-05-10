@@ -54,9 +54,39 @@ public:
 		return FVector(HasCustomScaling ? MeshScale : inScale);
 	}
 
-	FVector GetObjectScale(const FVector& inScale) const
+	FORCEINLINE FVector GetObjectScale(const FVector& inScale) const
 	{
 		return FVector(HasCustomScaling ? WorldObjectScale : inScale);
+	}
+
+	FORCEINLINE bool IsInLimits(FVector dimensions)
+	{
+		auto scale = HasCustomScaling ? MeshScale : dimensions;
+
+		auto min = MinBlockScale.X <= scale.X && MinBlockScale.Y <= scale.Y && MinBlockScale.Z <= scale.Z;
+		auto max = MaxBlockScale.X >= scale.X && MaxBlockScale.Y >= scale.Y && MaxBlockScale.Z >= scale.Z;
+		return min && max;
+	}
+
+	FORCEINLINE bool ValidateFlags(TArray<FString> flagNames, TArray<int32> flagValues)
+	{
+		for (auto definedFlag : AdditionalFlags)
+		{
+			auto index = flagNames.IndexOfByKey(definedFlag.TagID);
+			if (index == INDEX_NONE)
+				return false;
+
+			if (!flagValues.IsValidIndex(index))
+				return false;
+
+			auto value = flagValues[index];
+
+			if (definedFlag.PossibleValues.IndexOfByPredicate([value](const FBlockFlagValue& v) { return v.Value == value; }) == INDEX_NONE)
+				return false;
+
+		}
+
+		return true;
 	}
 };
 

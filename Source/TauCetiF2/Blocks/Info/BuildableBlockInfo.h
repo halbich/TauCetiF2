@@ -22,7 +22,7 @@ public:
 	UPROPERTY()
 		FRotator DefaultBuildingRotation;
 
-	UPROPERTY(BlueprintReadOnly, Category= BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
 		bool IsEmptyHand;
 
 	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
@@ -51,6 +51,30 @@ public:
 		DefaultBuildingRotation = info.DefaultBuildingRotation;
 	}
 
+	static FORCEINLINE TArray<UBuildableBlockInfo*> GetSystemActions()
+	{
+		TArray<UBuildableBlockInfo*> result;
+		result.AddDefaulted(2);
+		
+		result[0]->IsEmptyHand = true;
+		result[0]->IsSystemAction = true;
+		result[0]->Action = EBuildableObjectAction::None;
+		result[0]->AllowOutlineOnSelected = false;
 
+		result[1]->IsEmptyHand = true;
+		result[1]->IsSystemAction = true;
+		result[1]->Action = EBuildableObjectAction::DeleteObject;
+		result[1]->StencilOverride = STENCIL_DELETE_OUTLINE;
+
+		return result;
+	}
+
+
+	static FORCEINLINE UBuildableBlockInfo* GetDefaultBuildableForID(int32 id)
+	{
+		auto res = NewObject<UBuildableBlockInfo>();
+		//TODO
+		return res;
+	}
 
 };
