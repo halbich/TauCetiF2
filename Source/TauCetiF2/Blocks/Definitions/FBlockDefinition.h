@@ -61,28 +61,37 @@ public:
 
 	FORCEINLINE bool IsInLimits(FVector dimensions)
 	{
-		auto scale = HasCustomScaling ? MeshScale : dimensions;
+		auto scale = HasCustomScaling ? WorldObjectScale : dimensions;
 
 		auto min = MinBlockScale.X <= scale.X && MinBlockScale.Y <= scale.Y && MinBlockScale.Z <= scale.Z;
 		auto max = MaxBlockScale.X >= scale.X && MaxBlockScale.Y >= scale.Y && MaxBlockScale.Z >= scale.Z;
 		return min && max;
 	}
 
-	FORCEINLINE bool ValidateFlags(TArray<FString> flagNames, TArray<int32> flagValues)
+	FORCEINLINE bool ValidateFlags(TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString>& validationErrors)
 	{
 		for (auto definedFlag : AdditionalFlags)
 		{
 			auto index = flagNames.IndexOfByKey(definedFlag.TagID);
 			if (index == INDEX_NONE)
+			{
+				validationErrors.Add(TEXT("nenalezen index flagu"));
 				return false;
+			}
 
 			if (!flagValues.IsValidIndex(index))
+			{
+				validationErrors.Add(TEXT(" nenalezena hodnota flagu"));
 				return false;
+			}
 
 			auto value = flagValues[index];
 
 			if (definedFlag.PossibleValues.IndexOfByPredicate([value](const FBlockFlagValue& v) { return v.Value == value; }) == INDEX_NONE)
+			{
+				validationErrors.Add(TEXT(""));
 				return false;
+			}
 
 		}
 

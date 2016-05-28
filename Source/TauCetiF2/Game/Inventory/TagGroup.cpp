@@ -21,8 +21,11 @@ UTagGroup* UTagGroup::GetFromTags(const TArray<FString>& tagList)
 	auto obj = NewObject<UTagGroup>();
 
 	obj->Tags.Reserve(tagList.Num());
-	for (auto t : tagList)
-		obj->Tags.Add(t);
+	for (auto t : tagList) {
+		auto trimmed = t.Trim();
+		if (!obj->Tags.Contains<FString>(trimmed))
+			obj->Tags.Add(trimmed);
+	}
 
 	return obj;
 }

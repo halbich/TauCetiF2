@@ -30,10 +30,15 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryTags)
 		static UInventoryTags* GetDefault();
-
+	
+	FORCEINLINE UInventoryTagGroup* GetCurrentActiveTagGroup()
+	{
+		return InventoryGroupList[CurrentActiveIndex];
+	}
+	
 	FORCEINLINE FString GetCurrentActiveTagGroupName()
 	{
-		return InventoryGroupList[CurrentActiveIndex]->Name;
+		return GetCurrentActiveTagGroup()->Name;
 	}
 
 public:

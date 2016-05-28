@@ -96,11 +96,15 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 
 	c->InventoryTags = UInventoryTags::GetDefault();
 
-	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();;
+	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
 
-	//UsedBlocks.Add(door2);
-
-	//UsedBlocks.Add(make(EBlockName::Terminal, FVector(-20, -30, 5), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	auto buildable = &c->BuildableBlocks;
+	
+	auto door = makeBuildable(EBlockName::Door, FVector(7, 7, 11));
+	door->AdditionalFlags.Add(GetNameForTag(ENamedTag::DoorOpening), (int32)EDoorOpening::Right);
+	door->AddImplicitTags();
+	door->Name = TEXT("Dveøe");
+	buildable->Add(door);
 
 	auto UsedBlocks = &c->UsedBlocks;
 	UsedBlocks->Add(make(EBlockName::ConstructCubeSide, FVector(0, 0, 5), FVector(1, 4, 2), FRotator(0, 0, 0)));

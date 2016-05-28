@@ -58,4 +58,15 @@ public:
 
 	}
 
+
+	bool IsSatisfied(TArray<FString>& tags)
+	{
+		for (auto tagGroup : GroupList)
+		{
+			if (!tagGroup->IsSatisfied(tags))
+				return false;
+		}
+
+		return true;
+	}
 };

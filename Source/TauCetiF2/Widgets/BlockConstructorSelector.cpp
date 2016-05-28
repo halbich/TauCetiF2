@@ -60,6 +60,7 @@ TArray<UInventoryFlagItem*> UBlockConstructorSelector::GetAdditionalParams()
 			cmbIt->Text = it.DisplayText;
 			invItem->AviableValues.Add(cmbIt);
 		}
+
 		result.Add(invItem);
 	}
 

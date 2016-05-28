@@ -11,10 +11,11 @@ UBlockConstructor::UBlockConstructor() {
 }
 
 
-bool UBlockConstructor::AddItemToInventory(int32 id, FString name, FVector dimensions, TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString> tags)
+bool UBlockConstructor::AddItemToInventory(int32 id, FString name, FVector dimensions, TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString> tags, UPARAM(ref)TArray<FString>& validationErrors)
 {
+	validationErrors.Empty();
 
-	auto bi = validate(id, dimensions, flagNames, flagValues);
+	auto bi = validate(id, dimensions, flagNames, flagValues, validationErrors);
 	if (!bi)
 		return false;
 
@@ -27,10 +28,11 @@ bool UBlockConstructor::AddItemToInventory(int32 id, FString name, FVector dimen
 		return false;
 
 	bi->Name = name;
+	bi->Tags = tags;
 
 	tcf2Char->GetInventory()->AddItem(bi);
 
-	return false;
+	return true;
 }
 
 

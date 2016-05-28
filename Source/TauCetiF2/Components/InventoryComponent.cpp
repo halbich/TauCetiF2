@@ -27,7 +27,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 	FSelectionChanged Subscriber;
 	Subscriber.BindUObject(this, &UInventoryComponent::ForceItemsChanged);
 	ListeningHandle = InventoryTags->AddEventListener(Subscriber);
-	
+
 	BuildableItems = TArray<UBuildableBlockInfo*>(carrier->BuildableBlocks);
 
 	ForceItemsChanged();
@@ -54,17 +54,25 @@ void UInventoryComponent::SelectPrevBank()
 
 TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForCurrentBank()
 {
+	auto currentFilter = InventoryTags->GetCurrentActiveTagGroup();
+	return GetItemsForBank(currentFilter);
+}
+
+TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForBank(UInventoryTagGroup* filterGroup)
+{
 	TArray<UBuildableBlockInfo*> result;
 
+	if (!filterGroup)
+		return result;
+	
 	for (auto b : BuildableItems)
 	{
-		/*if (b->IsSystemAction)
-			continue;*/
-
-		result.Add(b);
+		if (filterGroup->IsSatisfied(b->Tags))
+			result.Add(b);
 	}
 	return result;
 }
+
 
 FString UInventoryComponent::GetCurrentBankName()
 {

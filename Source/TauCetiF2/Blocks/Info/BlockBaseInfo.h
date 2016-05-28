@@ -4,6 +4,8 @@
 
 #include "Object.h"
 #include "Helpers/Saving/BlockSaveInfo.h"
+#include "Widgets/Common/InventoryFlagItem.h"
+#include "Blocks/Definitions/FBlockDefinitionHolder.h"
 #include "BlockBaseInfo.generated.h"
 
 /*
@@ -44,5 +46,8 @@ public:
 		AdditionalFlags = block.AdditionalFlags;
 	}
 
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+		TArray<UInventoryFlagItem*> GetBlockFlags();
 
 };

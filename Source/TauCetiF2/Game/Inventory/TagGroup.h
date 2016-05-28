@@ -40,4 +40,19 @@ public:
 		GroupName = group.GroupName;
 		Tags = TArray<FString>(group.Tags);
 	}
+
+
+	bool IsSatisfied(TArray<FString>& tags)
+	{
+		for (auto groupTag : Tags)
+		{
+			for (auto tag : tags)
+			{
+				if (groupTag == tag)
+					return true;
+			}
+		}
+
+		return false;
+	}
 };

@@ -26,5 +26,11 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
 		TArray<UCmbItem*> AviableValues;
 
+	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
+		int32 TagValue;
+
+	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
+		bool TagReadOnly;
+
 	
 };

@@ -37,6 +37,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
 		int32 StencilOverride;
 
+	
+
 
 	FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
 		FInventoryBuildableBlockInfo result = ToBaseContainer();
@@ -54,17 +56,20 @@ public:
 	static FORCEINLINE TArray<UBuildableBlockInfo*> GetSystemActions()
 	{
 		TArray<UBuildableBlockInfo*> result;
-		result.AddDefaulted(2);
-		
+		result.Add(NewObject<UBuildableBlockInfo>());
+		result.Add(NewObject<UBuildableBlockInfo>());
+
 		result[0]->IsEmptyHand = true;
 		result[0]->IsSystemAction = true;
 		result[0]->Action = EBuildableObjectAction::None;
 		result[0]->AllowOutlineOnSelected = false;
+		result[0]->Tags.Add(TEXT("hand"));
 
 		result[1]->IsEmptyHand = true;
 		result[1]->IsSystemAction = true;
 		result[1]->Action = EBuildableObjectAction::DeleteObject;
 		result[1]->StencilOverride = STENCIL_DELETE_OUTLINE;
+		result[1]->Tags.Add(TEXT("delete"));
 
 		return result;
 	}
@@ -74,7 +79,27 @@ public:
 	{
 		auto res = NewObject<UBuildableBlockInfo>();
 		//TODO
+		res->ID = id;
+
+		switch (id)
+		{
+		case (int32)EBlockName::Door:
+			res->DefaultBuildingRotation = FRotator(0, 90, 0);
+			break;
+		default:
+			break;
+		}
+
 		return res;
 	}
 
+
+	FORCEINLINE void AddImplicitTags()
+	{
+		Tags.Add(FString::Printf(TEXT("kX_%d"), (int32)Scale.X));
+		Tags.Add(FString::Printf(TEXT("kY_%d"), (int32)Scale.Y));
+		Tags.Add(FString::Printf(TEXT("kZ_%d"), (int32)Scale.Z));
+	}
+
+	
 };

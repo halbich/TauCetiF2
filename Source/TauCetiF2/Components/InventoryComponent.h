@@ -40,6 +40,9 @@ public:
 		TArray<UBuildableBlockInfo*> GetItemsForCurrentBank();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryComponent)
+		TArray<UBuildableBlockInfo*> GetItemsForBank(UInventoryTagGroup* filterGroup);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryComponent)
 		FString GetCurrentBankName();
 	
 	FDelegateHandle ListeningHandle;
