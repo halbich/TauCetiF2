@@ -122,7 +122,7 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	door.AdditionalFlags.Add(doorAddFlags);
 	definitions.Add(door.ID, door);
 
-
+	// TODO
 	FBlockDefinition windowPowered(EBlockName::WindowPowered, EShapeType::Custom);
 	/*windowPowered.AddMaterials(4,
 		FBlockMaterialDefinition(EMaterialInstance::DoorFrame, EAxis::Type::X, EAxis::Type::Y, FName(TEXT("doorFrame"))),
