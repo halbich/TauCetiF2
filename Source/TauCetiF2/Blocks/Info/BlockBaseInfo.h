@@ -23,7 +23,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
 		FVector Scale;
 
-	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
+	UPROPERTY(BlueprintReadWrite, Category = BlockInfo)
 		FString Name;
 
 	UPROPERTY()

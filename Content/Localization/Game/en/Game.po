@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game\n"
-"POT-Creation-Date: 2016-05-06 20:08\n"
-"PO-Revision-Date: 2016-05-06 20:08\n"
+"POT-Creation-Date: 2016-06-03 08:59\n"
+"PO-Revision-Date: 2016-06-03 08:59\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -14,26 +14,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Key:	02E05F34442F42341A6F8FB4F5229859
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldTextures.DisplayValues(3).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldTextures.DisplayValues(3).DisplayValues
 #. Key:	22CB9C6C484AA27E113736BAA5935E1B
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldShadows.DisplayValues(3).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldShadows.DisplayValues(3).DisplayValues
 #. Key:	579263FB4598C9653BC605B2C358BBFF
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldOveralSettings.DisplayValues(4).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldOveralSettings.DisplayValues(4).DisplayValues
 #. Key:	825F170E4582596F843E66ACB5D2C172
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldPostProcess.DisplayValues(3).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldPostProcess.DisplayValues(3).DisplayValues
 #. Key:	8E4A189D4F85D2B44A6C1B9C188D23C0
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldViewDistance.DisplayValues(3).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldViewDistance.DisplayValues(3).DisplayValues
 #. Key:	C7EC79154C86664B791B21B885A8B2A6
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldAntiAliasing.DisplayValues(3).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldAntiAliasing.DisplayValues(3).DisplayValues
 #. Key:	F8EE653449FAA6C84D5AD289F43CE6CB
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldEffects.DisplayValues(3).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldAntiAliasing.DisplayValues(3).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldEffects.DisplayValues(3).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldOveralSettings.DisplayValues(4).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldPostProcess.DisplayValues(3).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldShadows.DisplayValues(3).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldTextures.DisplayValues(3).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldViewDistance.DisplayValues(3).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldEffects.DisplayValues(3).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldAntiAliasing.DisplayValues(3).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldEffects.DisplayValues(3).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldOveralSettings.DisplayValues(4).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldPostProcess.DisplayValues(3).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldShadows.DisplayValues(3).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldTextures.DisplayValues(3).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldViewDistance.DisplayValues(3).DisplayValues
 msgid "LC.SettingsEpic"
 msgstr "Epic"
 
@@ -47,58 +47,64 @@ msgid "LC.DeleteGroup"
 msgstr "Delete group"
 
 #. Key:	0C3BCD354C31BCC9EE1445AABDCDD7C8
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_1898.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_1898.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_1898.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_1898.Text
 msgid "LC.VSync"
 msgstr "V-Sync"
 
 #. Key:	0F0283A1433338F63870E985FC9A6B4B
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldTextures.DisplayValues(2).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldTextures.DisplayValues(2).DisplayValues
 #. Key:	14C37D464197725E8BDCB18D664E1279
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldShadows.DisplayValues(2).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldShadows.DisplayValues(2).DisplayValues
 #. Key:	2BBFEA2F49BB0B554217B5AE9C0B6B8A
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldOveralSettings.DisplayValues(3).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldOveralSettings.DisplayValues(3).DisplayValues
 #. Key:	A4F36DA94E728D990D566A97E18CF2ED
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldEffects.DisplayValues(2).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldEffects.DisplayValues(2).DisplayValues
 #. Key:	BA0A6CBA49577E42546DEAA9BC9F8C29
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldAntiAliasing.DisplayValues(2).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldAntiAliasing.DisplayValues(2).DisplayValues
 #. Key:	EF34241F48FDCD0700E4B4A3A22E9385
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldPostProcess.DisplayValues(2).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldAntiAliasing.DisplayValues(2).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldEffects.DisplayValues(2).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldOveralSettings.DisplayValues(3).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldPostProcess.DisplayValues(2).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldShadows.DisplayValues(2).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldTextures.DisplayValues(2).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldPostProcess.DisplayValues(2).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldAntiAliasing.DisplayValues(2).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldEffects.DisplayValues(2).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldOveralSettings.DisplayValues(3).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldPostProcess.DisplayValues(2).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldShadows.DisplayValues(2).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldTextures.DisplayValues(2).DisplayValues
 msgid "LC.SettingsHigh"
 msgstr "High"
 
 #. Key:	1279AC3247995B028ABB959A8EC5A229
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_194.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_194.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_194.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_194.Text
 msgid "LC.SetAutomaticQuality"
 msgstr "Set quality automatically"
 
 #. Key:	167EFE494728AB637B8B46BEDB87A12E
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldAntiAliasing.DisplayValues(0).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldAntiAliasing.DisplayValues(0).DisplayValues
 #. Key:	1C33EE7A426569E6250E8C9442CDB5CD
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldShadows.DisplayValues(0).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldShadows.DisplayValues(0).DisplayValues
 #. Key:	24219D0843A44169C11802A6F914A814
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldEffects.DisplayValues(0).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldEffects.DisplayValues(0).DisplayValues
 #. Key:	BEDE5C7C40DB644843BB9B9366200E67
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldTextures.DisplayValues(0).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldTextures.DisplayValues(0).DisplayValues
 #. Key:	CAAD76464E94198D0BB4579368B7FE31
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldPostProcess.DisplayValues(0).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldPostProcess.DisplayValues(0).DisplayValues
 #. Key:	FB24719843DA9A747916A1B09001BC92
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldOveralSettings.DisplayValues(1).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldAntiAliasing.DisplayValues(0).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldEffects.DisplayValues(0).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldOveralSettings.DisplayValues(1).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldPostProcess.DisplayValues(0).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldShadows.DisplayValues(0).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldTextures.DisplayValues(0).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldOveralSettings.DisplayValues(1).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldAntiAliasing.DisplayValues(0).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldEffects.DisplayValues(0).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldOveralSettings.DisplayValues(1).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldPostProcess.DisplayValues(0).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldShadows.DisplayValues(0).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldTextures.DisplayValues(0).DisplayValues
 msgid "LC.SettingsLow"
 msgstr "Low"
+
+#. Key:	18900D704B7D92A9100587B8A3528DD7
+#. SourceLocation:	/Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TbGroupName.HintText
+#: /Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TbGroupName.HintText
+msgid "LC.InventoryGroupName"
+msgstr "LC.InventoryGroupName"
 
 #. Key:	190680964D427CBE71E6CEB0B70CBA62
 #. SourceLocation:	/Game/UMG/UMGBasic/SliderWithValue.SliderWithValue_C:TryGetStringValue [Script Bytecode]
@@ -113,8 +119,8 @@ msgid "LC.NoSavedSavesFound"
 msgstr "No saves found!"
 
 #. Key:	1E24A010454501BFCB99F8B86759A8CF
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_485.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_485.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:WidgetTree.TextBlock_485.Text
+#: /Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:WidgetTree.TextBlock_485.Text
 msgid "LC.Tags"
 msgstr "Tags"
 
@@ -128,8 +134,8 @@ msgid "LC.Quit"
 msgstr "Quit"
 
 #. Key:	1F249DC2426BEAED68C03CB4A3043B57
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldViewDistance.DisplayValues(2).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldViewDistance.DisplayValues(2).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldViewDistance.DisplayValues(2).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldViewDistance.DisplayValues(2).DisplayValues
 msgid "LC.SettingsFar"
 msgstr "Far"
 
@@ -155,8 +161,8 @@ msgid "LC.AboutText"
 msgstr "TODO Text"
 
 #. Key:	24EC9ED947E24864847D21A7D0F4D8B4
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldFullScreen.DisplayValues(0).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldFullScreen.DisplayValues(0).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldFullScreen.DisplayValues(0).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldFullScreen.DisplayValues(0).DisplayValues
 msgid "LC.SettingsFS0"
 msgstr "Yes"
 
@@ -167,8 +173,8 @@ msgid "LC.NewGame"
 msgstr "New game"
 
 #. Key:	2761F8F94DD7DC644B38628B714ADF15
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_75.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_75.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_75.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_75.Text
 msgid "LC.Textures"
 msgstr "Textures"
 
@@ -182,26 +188,26 @@ msgid "LC.CloseBtn"
 msgstr "Close"
 
 #. Key:	2C748C3A4E5724C82B0A9FB43274D3D4
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldEffects.DisplayValues(1).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldEffects.DisplayValues(1).DisplayValues
 #. Key:	7F828A8847937CCE0AE068B79F2D4EFA
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldPostProcess.DisplayValues(1).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldPostProcess.DisplayValues(1).DisplayValues
 #. Key:	865D117247ADF53CFCB17DB78C3752F9
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldOveralSettings.DisplayValues(2).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldOveralSettings.DisplayValues(2).DisplayValues
 #. Key:	A0421CF54C2759549EB7E3BF5823A3C2
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldShadows.DisplayValues(1).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldShadows.DisplayValues(1).DisplayValues
 #. Key:	BA74ABB44DB8F0E70608F9914E685D3B
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldTextures.DisplayValues(1).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldTextures.DisplayValues(1).DisplayValues
 #. Key:	E0AA8DB54625CC611F1664A789C04EEB
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldAntiAliasing.DisplayValues(1).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldAntiAliasing.DisplayValues(1).DisplayValues
 #. Key:	F09B2C1644419B06F885E3A4805CA867
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldViewDistance.DisplayValues(1).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldAntiAliasing.DisplayValues(1).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldEffects.DisplayValues(1).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldOveralSettings.DisplayValues(2).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldPostProcess.DisplayValues(1).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldShadows.DisplayValues(1).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldTextures.DisplayValues(1).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldViewDistance.DisplayValues(1).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldViewDistance.DisplayValues(1).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldAntiAliasing.DisplayValues(1).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldEffects.DisplayValues(1).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldOveralSettings.DisplayValues(2).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldPostProcess.DisplayValues(1).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldShadows.DisplayValues(1).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldTextures.DisplayValues(1).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldViewDistance.DisplayValues(1).DisplayValues
 msgid "LC.SettingsMedium"
 msgstr "Med"
 
@@ -212,14 +218,14 @@ msgid "LC.SaveNameMustBeNonEmpty"
 msgstr "Name must not be empty!"
 
 #. Key:	2EDD7CB142F4CA8A60E0EFA6099E339F
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_35.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_35.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_35.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_35.Text
 msgid "LC.ResolutionScale"
 msgstr "Resolution Scale"
 
 #. Key:	2EFD34294E010E069413E794FD8D789F
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_72.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_72.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_72.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_72.Text
 msgid "LC.AntiAliasing"
 msgstr "Anti-Aliasing"
 
@@ -269,10 +275,16 @@ msgid "LC.About"
 msgstr "About"
 
 #. Key:	48EC79E3487DCCFDCF1320846C61DF55
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_74.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_74.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_74.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_74.Text
 msgid "LC.Shadows"
 msgstr "Shadows"
+
+#. Key:	4A0A63D24FCAB636A9BC55BD67000B19
+#. SourceLocation:	/Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:WidgetTree.TbxAddTag.HintText
+#: /Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:WidgetTree.TbxAddTag.HintText
+msgid "LC.NewTagHint"
+msgstr "New tag"
 
 #. Key:	4BA9DD5E4DE4B03909DAEBA5FBEDE987
 #. SourceLocation:	/Game/UMG/Menus/MainMenu.MainMenu_C:ExecuteUbergraph_MainMenu [Script Bytecode]
@@ -295,15 +307,6 @@ msgstr "Main menu"
 msgid "LC.GroupNameHint"
 msgstr "Group name"
 
-#. Key:	593DEFCE4947320CF59A958EDB7137E8
-#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree.TbxAddTag.HintText
-#. Key:	6288C1834FB8657159BB1BAC961F362B
-#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree_371.TbxAddTag.HintText
-#: /Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree.TbxAddTag.HintText
-#: /Game/UMG/UMGBasic/Tags/TagList.TagList_C:WidgetTree_371.TbxAddTag.HintText
-msgid "LC.NewTagHint"
-msgstr "New tag"
-
 #. Key:	5941BEB74D98B3A871297BBD5921AB4E
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:WidgetTree.TextBlock_511.Text
 #: /Game/UMG/Saving/LoadSaveItemEditable.LoadSaveItemEditable_C:WidgetTree.TextBlock_511.Text
@@ -320,8 +323,8 @@ msgid "LC.BtnOK"
 msgstr "OK"
 
 #. Key:	5B07840340FE2E7A15934DBCA2AEC6BA
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:Get_TagsShort_Text_0 [Script Bytecode]
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:Get_TagsShort_Text_0 [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:Get_TagsShort_Text_0 [Script Bytecode]
+#: /Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:Get_TagsShort_Text_0 [Script Bytecode]
 msgid "{x} - {y} - {z}"
 msgstr "{x} - {y} - {z}"
 
@@ -350,16 +353,16 @@ msgid "LC.LoadingDone"
 msgstr "Loading done"
 
 #. Key:	65E66BC3474AA28C0B627787D0CB5FC7
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_76.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_76.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_76.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_76.Text
 msgid "LC.Efects"
 msgstr "Effects"
 
 #. Key:	6653E86F463DA3162068D8987B791BDB
 #. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
 #. Key:	CB28FBDB49E97CAE2CDF3789BBCAABBF
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldVSync.DisplayValues(1).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldVSync.DisplayValues(1).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldVSync.DisplayValues(1).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldVSync.DisplayValues(1).DisplayValues
 #: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_667.Text
 msgid "LC.BtnYes"
 msgstr "Yes"
@@ -371,14 +374,20 @@ msgid "LC.ReallyGotoMainMenuWithUnsavedItemsLost"
 msgstr "Do you really want to go to main menu? All unsaved progress will be lost!"
 
 #. Key:	6C5DAB6C431F695327E35D9EF3B5EE6B
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_71.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_71.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_71.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_71.Text
 msgid "LC.ViewDistance"
 msgstr "View distance"
 
+#. Key:	6CA5EF174C0C2FD637612787CE6638DB
+#. SourceLocation:	/Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TextBlock_618.Text
+#: /Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TextBlock_618.Text
+msgid "LC.InventoryGroupEnabled"
+msgstr "LC.InventoryGroupEnabled"
+
 #. Key:	708E7EF84256171A9361C6BC4123FCC2
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:GetAddParamsHeader [Script Bytecode]
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:GetAddParamsHeader [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:GetAddParamsHeader [Script Bytecode]
+#: /Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:GetAddParamsHeader [Script Bytecode]
 msgid "LC.AddParams"
 msgstr "Parameters"
 
@@ -391,20 +400,17 @@ msgstr "Parameters"
 msgid "LC.UseItem"
 msgstr "Use item"
 
+#. Key:	7157F0A24E2BECB5803E29B16F1A6BC9
+#. SourceLocation:	/Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:ExecuteUbergraph_BlockConstructorWidget [Script Bytecode]
+#: /Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:ExecuteUbergraph_BlockConstructorWidget [Script Bytecode]
+msgid "Nepovedlo se přidat"
+msgstr "Nepovedlo se přidat"
+
 #. Key:	71AF4C2A40DDE9F161BFB99CBEEB0AA5
 #. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
 #: /Game/UMG/Menus/InGameMenu.InGameMenu_C:ExecuteUbergraph_InGameMenu [Script Bytecode]
 msgid "LC.ReallyQuitGameWithUnsavedItemsLost"
 msgstr "Do you really want to quit game? All unsaved progress will be lost!"
-
-#. Key:	759D489643C686E9EB2F5580BE6FE64F
-#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilter.TagListFilter_C:WidgetTree.TbxAddTag.HintText
-#. Key:	C5F427ED49D5D8F667A235AB6AF048AB
-#. SourceLocation:	/Game/UMG/UMGBasic/Tags/TagListFilter.TagListFilter_C:WidgetTree_378.TbxAddTag.HintText
-#: /Game/UMG/UMGBasic/Tags/TagListFilter.TagListFilter_C:WidgetTree.TbxAddTag.HintText
-#: /Game/UMG/UMGBasic/Tags/TagListFilter.TagListFilter_C:WidgetTree_378.TbxAddTag.HintText
-msgid "LC.NewGroupHint"
-msgstr "New group name"
 
 #. Key:	7831F8464FA79C50B70A8A91F1FAECFC
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveItem.LoadSaveItem_C:WidgetTree.TextBlock_12.Text
@@ -419,16 +425,28 @@ msgid "LC.ReallyOverwriteSavedGame"
 msgstr "Do you really want to overwrite this game?"
 
 #. Key:	7904B960407876F9801ABE88EEAA2B90
-#. SourceLocation:	/Game/UMG/Settings/GameSettingsWidget.GameSettingsWidget_C:WidgetTree.TextBlock_23.Text
-#: /Game/UMG/Settings/GameSettingsWidget.GameSettingsWidget_C:WidgetTree.TextBlock_23.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GameSettingsWidget.WidgetTree.TextBlock_23.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GameSettingsWidget.WidgetTree.TextBlock_23.Text
 msgid "LC.LanguageName"
 msgstr "Language"
 
+#. Key:	7D3FDB7E4905A4473BF7E18BBC8403F7
+#. SourceLocation:	/Game/UMG/UMGBasic/CustomComboBox.CustomComboBox_C:GetHeaderText [Script Bytecode]
+#: /Game/UMG/UMGBasic/CustomComboBox.CustomComboBox_C:GetHeaderText [Script Bytecode]
+msgid "LC.SelectItem"
+msgstr "LC.SelectItem"
+
 #. Key:	7D4308B64399A88A18F79C83BC81BC4A
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.NoTagsInfo.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.NoTagsInfo.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:WidgetTree.NoTagsInfo.Text
+#: /Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:WidgetTree.NoTagsInfo.Text
 msgid "No Tags to set"
 msgstr "No Params to set"
+
+#. Key:	7FB109254788E750414AD1A8BBE5334E
+#. SourceLocation:	/Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TagListFilter.WidgetTree.TbxAddTag.HintText
+#: /Game/UMG/Inventory/InventoryScreen.InventoryScreen_C:WidgetTree.TagListFilter.WidgetTree.TbxAddTag.HintText
+msgid "LC.NewGroupHint"
+msgstr "New group name"
 
 #. Key:	8029022449D1AE7BC261B4AF43A5095E
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
@@ -437,8 +455,8 @@ msgid "LC.LoadBtn"
 msgstr "Load"
 
 #. Key:	86EBA94F436786DC26DEE5A16D2811E8
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldFullScreen.DisplayValues(2).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldFullScreen.DisplayValues(2).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldFullScreen.DisplayValues(2).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldFullScreen.DisplayValues(2).DisplayValues
 msgid "LC.SettingsFS2"
 msgstr "No"
 
@@ -449,41 +467,41 @@ msgid "LC.SaveName"
 msgstr "Save name:"
 
 #. Key:	9388B7EF4F7D600711B41290A31F9987
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtName.HintText
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TxtName.HintText
+#. SourceLocation:	/Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:WidgetTree.TxtName.HintText
+#: /Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:WidgetTree.TxtName.HintText
 msgid "LC.BlockNameHint"
 msgstr "Block name"
 
 #. Key:	97C80B3545CFDC0054E18F8756632839
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldViewDistance.DisplayValues(0).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldViewDistance.DisplayValues(0).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldViewDistance.DisplayValues(0).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldViewDistance.DisplayValues(0).DisplayValues
 msgid "LC.SettingsNear"
 msgstr "Near"
 
 #. Key:	995F3FA34E8F80E20F813A91DA07E70A
 #. SourceLocation:	/Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
 #. Key:	EBBDB52D45CF2722ACD9818826674E79
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldVSync.DisplayValues(0).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldVSync.DisplayValues(0).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldVSync.DisplayValues(0).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldVSync.DisplayValues(0).DisplayValues
 #: /Game/UMG/UMGBasic/ModalDialog.ModalDialog_C:WidgetTree.TextBlock_668.Text
 msgid "LC.BtnNo"
 msgstr "No"
 
 #. Key:	9A5E5CCA432DFE61968C66B3AA33AB18
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_24.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_24.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_24.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_24.Text
 msgid "LC.FullScreen"
 msgstr "Fullscreen"
 
 #. Key:	9CA60390442085CA0E7BFCA15B8AEC3A
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_73.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_73.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_73.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_73.Text
 msgid "LC.PostProcess"
 msgstr "Post Processing"
 
 #. Key:	A0BA220146D21FBF77F4E484A0651C39
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldFullScreen.DisplayValues(1).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldFullScreen.DisplayValues(1).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldFullScreen.DisplayValues(1).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldFullScreen.DisplayValues(1).DisplayValues
 msgid "LC.SettingsFS1"
 msgstr "Window"
 
@@ -505,6 +523,12 @@ msgstr "Load game"
 msgid "LC.NewSaveNameHint"
 msgstr "Save name"
 
+#. Key:	B4E737144A7B60C1F396D789FF620DCE
+#. SourceLocation:	/Game/Maps/MainMap.MainMap_C:Perform Save Actions [Script Bytecode]
+#: /Game/Maps/MainMap.MainMap_C:Perform Save Actions [Script Bytecode]
+msgid "Save OK"
+msgstr "Save OK"
+
 #. Key:	B573CBAF4E286E41E8B5F79F228CA9E7
 #. SourceLocation:	/Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
 #: /Game/UMG/Saving/LoadSaveGame.LoadSaveGame_C:SaveLoadButtonText [Script Bytecode]
@@ -518,14 +542,14 @@ msgid "{Count}%       {Message}"
 msgstr "{Count}%       {Message}"
 
 #. Key:	BDC975824066A64C200F63A6818426CC
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_70.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_70.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_70.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_70.Text
 msgid "LC.ScreenResolution"
 msgstr "Screen Resolution"
 
 #. Key:	C09B2EC94BCEF87CC72273A9C99C8DFD
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_3015.Text
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.TextBlock_3015.Text
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_3015.Text
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.TextBlock_3015.Text
 msgid "LC.OveralSettings"
 msgstr "Overal settings"
 
@@ -566,8 +590,8 @@ msgid "LC.NewTagsHint"
 msgstr "New tags"
 
 #. Key:	D8D476AD42E5F50C4F4A61A686C997F6
-#. SourceLocation:	/Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldOveralSettings.DisplayValues(0).DisplayValues
-#: /Game/UMG/Settings/GraphiscSettingsWidget.GraphiscSettingsWidget_C:WidgetTree.SldOveralSettings.DisplayValues(0).DisplayValues
+#. SourceLocation:	/Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldOveralSettings.DisplayValues(0).DisplayValues
+#: /Game/UMG/Menus/InGameMenu.InGameMenu_C:WidgetTree.SettingsWidget.WidgetTree.GraphiscSettingsWidget_140.WidgetTree.SldOveralSettings.DisplayValues(0).DisplayValues
 msgid "LC.SettingsCustom"
 msgstr "Custom"
 
@@ -584,8 +608,8 @@ msgid "LC.LoadingPreparingWorld"
 msgstr "Preparing world"
 
 #. Key:	E0557CFD4800E6F892B2F59F8103C6B3
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_484.Text
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:WidgetTree.TextBlock_484.Text
+#. SourceLocation:	/Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:WidgetTree.TextBlock_484.Text
+#: /Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:WidgetTree.TextBlock_484.Text
 msgid "LC.Properties"
 msgstr "Properties"
 
@@ -596,8 +620,8 @@ msgid "LC.Terminal"
 msgstr "Terminal"
 
 #. Key:	E10CF18B4C7BAF7A1BAFF7A63D404578
-#. SourceLocation:	/Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:GetAddParamsHeader [Script Bytecode]
-#: /Game/UMG/Inventory/InventoryParamsEdit.InventoryParamsEdit_C:GetAddParamsHeader [Script Bytecode]
+#. SourceLocation:	/Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:GetAddParamsHeader [Script Bytecode]
+#: /Game/UMG/Inventory/InventoryItemEdit.InventoryItemEdit_C:GetAddParamsHeader [Script Bytecode]
 msgid "{0} ({1})"
 msgstr "{0} ({1})"
 
@@ -606,6 +630,18 @@ msgstr "{0} ({1})"
 #: /Game/UMG/Widgets/BlockConstructorWidget.Default__BlockConstructorWidget_C.BaseControlDisplayName
 msgid "LC.BlockConstructor"
 msgstr "Block constructor"
+
+#. Key:	F753557B4AAA51D985F455A9F7EB5F99
+#. SourceLocation:	/Game/Maps/MainMap.MainMap_C:Perform Save Actions [Script Bytecode]
+#: /Game/Maps/MainMap.MainMap_C:Perform Save Actions [Script Bytecode]
+msgid "Save fail"
+msgstr "Save fail"
+
+#. Key:	FE573A014F3F0AA56B772DAE305204A0
+#. SourceLocation:	/Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:ExecuteUbergraph_BlockConstructorWidget [Script Bytecode]
+#: /Game/UMG/Widgets/BlockConstructorWidget.BlockConstructorWidget_C:ExecuteUbergraph_BlockConstructorWidget [Script Bytecode]
+msgid "Přidáno"
+msgstr "Přidáno"
 
 #. Key:	LC.DoorClose
 #. SourceLocation:	Source/TauCetiF2/Game/Localization/LocalizationHelpers.h:9

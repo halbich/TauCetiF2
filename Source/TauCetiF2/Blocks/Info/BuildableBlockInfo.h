@@ -16,7 +16,7 @@ class TAUCETIF2_API UBuildableBlockInfo : public UBlockBaseInfo
 public:
 	UBuildableBlockInfo();
 
-	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadWrite, Category = BuildableBlockInfo)
 		TArray<FString> Tags;
 
 	UPROPERTY()
