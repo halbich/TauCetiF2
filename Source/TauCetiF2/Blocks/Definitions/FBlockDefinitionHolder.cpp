@@ -36,6 +36,9 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 		FBlockMaterialDefinition(EMaterialInstance::BaseSide, EAxis::Type::X, EAxis::Type::Z),
 		FBlockMaterialDefinition(EMaterialInstance::BaseSide, EAxis::Type::Y, EAxis::Type::Z));
 	cubeBase.BuilderSortIndex = 600;
+	cubeBase.MinBlockScale.Z = cubeBase.MaxBlockScale.Z = 4;
+	cubeBase.AllowPitch = false;
+	cubeBase.AllowRoll = false;
 	definitions.Add(cubeBase.ID, cubeBase);
 
 
@@ -43,9 +46,9 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 
 	FBlockDefinition cubeWindow(EBlockName::WindowCube, EShapeType::Cube);
 	cubeWindow.AddMaterials(3,
-		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Y,NAME_None, true),
-		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Z,NAME_None, true),
-		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::Y, EAxis::Type::Z,NAME_None, true));
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Y, NAME_None, true),
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::Z, NAME_None, true),
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::Y, EAxis::Type::Z, NAME_None, true));
 	cubeWindow.BuilderSortIndex = 700;
 	definitions.Add(cubeWindow.ID, cubeWindow);
 
@@ -74,6 +77,9 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 		FBlockMaterialDefinition(EMaterialInstance::BaseSide, EAxis::Type::Z, EAxis::Type::Y),
 		FBlockMaterialDefinition(EMaterialInstance::BaseSide, EAxis::Type::Y, EAxis::Type::Z));
 	baseRamp.BuilderSortIndex = 610;
+	baseRamp.MinBlockScale.Z = baseRamp.MaxBlockScale.Z = 4;
+	baseRamp.AllowPitch = false;
+	baseRamp.AllowRoll = false;
 	definitions.Add(baseRamp.ID, baseRamp);
 
 
@@ -104,7 +110,7 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	FBlockDefinition door(EBlockName::Door, EShapeType::Custom);
 	door.AddMaterials(4,
 		FBlockMaterialDefinition(EMaterialInstance::DoorFrame, EAxis::Type::X, EAxis::Type::Y, FName(TEXT("doorFrame"))),
-		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::X,FName(TEXT("door")),true),
+		FBlockMaterialDefinition(EMaterialInstance::Polycarbonate, EAxis::Type::X, EAxis::Type::X, FName(TEXT("door")), true),
 		FBlockMaterialDefinition(EMaterialInstance::DoorCircle, EAxis::Type::X, EAxis::Type::Y, FName(TEXT("door"))),
 		FBlockMaterialDefinition(EMaterialInstance::DoorBody, EAxis::Type::X, EAxis::Type::Y, FName(TEXT("door")))
 		);
@@ -113,7 +119,7 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 	door.AllowRoll = false;
 	door.BuilderSortIndex = 800;
 
-	FBlockAdditionalFlagsDefinition doorAddFlags(ENamedTag::DoorOpening, LC_DoorOpening );
+	FBlockAdditionalFlagsDefinition doorAddFlags(ENamedTag::DoorOpening, LC_DoorOpening);
 	doorAddFlags.SetValues(2,
 		FBlockFlagValue((int32)EDoorOpening::Left, LC_DoorOpeningLeft),
 		FBlockFlagValue((int32)EDoorOpening::Right, LC_DoorOpeningRight)
@@ -141,7 +147,7 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 void FBlockDefinitionHolder::GetAllDefinitions(TArray<int32>& outArray)
 {
 	definitions.ValueSort([](const FBlockDefinition& A, const FBlockDefinition& B) {
-		return A.BuilderSortIndex < B.BuilderSortIndex; 
+		return A.BuilderSortIndex < B.BuilderSortIndex;
 	});
 	for (auto& Elem : definitions)
 	{

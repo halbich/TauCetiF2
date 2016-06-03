@@ -63,21 +63,20 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 		return nullptr;
 	}
 
-	FString invalidReason;
-	bool isValid = BlockHelpers::CheckBlockValidity(definition, block, invalidReason);
-	if (!isValid)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Blok není validní. Dùvod: %s. nechávám"), *invalidReason);
-		return nullptr;
-	}
-
-
-
+	
 	UMinMaxBox* box = BlockHelpers::GetSpawnBox(definition, block);
 	ensure(box != nullptr);
 	if (!IsValidSpawnPoint(box))
 	{
 		UE_LOG(LogTemp, Error, TEXT("Objekt nelze korektnì pøidat do stromu. Vynechávám."));
+		return nullptr;
+	}
+
+	FString invalidReason;
+	bool isValid = BlockHelpers::CheckBlockValidity(definition, block, invalidReason);
+	if (!isValid)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Blok není validní. Dùvod: %s. nechávám"), *invalidReason);
 		return nullptr;
 	}
 

@@ -67,11 +67,11 @@ private:
 	void addToTreeByCoord(UKDTree* box);
 
 	bool isPlaceEmptySingleChild(const UMinMaxBox* box);
-	
+
 
 	void updateAfterChildDestroyedInner();
 
-	
+
 
 	FORCEINLINE void recomputeDividingCoordValue()
 	{
@@ -85,7 +85,7 @@ private:
 		}
 	}
 
-	
+
 
 	FORCEINLINE float sum(const FVector& v)
 	{
@@ -95,6 +95,19 @@ private:
 	FORCEINLINE bool canBeDeleted() {
 		return GetParent() != nullptr;
 
+	}
+
+	bool checkElem(UKDTree*& elem)
+	{
+		auto hasElem = false;
+		if (elem && elem->IsValidLowLevel())
+		{
+			if (!elem->IsPendingKill())
+				hasElem = true;
+			else
+				elem = nullptr;
+		}
+		return hasElem;
 	}
 
 };

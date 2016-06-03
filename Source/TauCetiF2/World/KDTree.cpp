@@ -181,8 +181,8 @@ bool UKDTree::IsPlaceEmpty(const UMinMaxBox* box) {
 
 	// object is in between. We need to split and then add object to both branches
 
-	UMinMaxBox* newB1 = NewObject<UMinMaxBox>(this)->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
-	UMinMaxBox* newB2 = NewObject<UMinMaxBox>(this)->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
+	UMinMaxBox* newB1 = NewObject<UMinMaxBox>()->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
+	UMinMaxBox* newB2 = NewObject<UMinMaxBox>()->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
 
 	return IsPlaceEmpty(newB1) && IsPlaceEmpty(newB2);
 }
@@ -243,8 +243,8 @@ void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>&
 
 	// object is in between. We need to split and then add object to both branches
 
-	UMinMaxBox* newB1 = NewObject<UMinMaxBox>(this)->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
-	UMinMaxBox* newB2 = NewObject<UMinMaxBox>(this)->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
+	UMinMaxBox* newB1 = NewObject<UMinMaxBox>()->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
+	UMinMaxBox* newB2 = NewObject<UMinMaxBox>()->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
 
 
 	GetContainingObjects(newB1, outArray, ignoreElement);
@@ -285,11 +285,10 @@ void UKDTree::updateAfterChildDestroyedInner()
 
 	check(SingleChild || B1 || B2);
 
-	auto hasSingle = SingleChild && SingleChild->IsValidLowLevel() && !SingleChild->IsPendingKill();
 
-	auto hasB1 = B1 && B1->IsValidLowLevel() && !B1->IsPendingKill();
-
-	auto hasB2 = B2 && B2->IsValidLowLevel() && !B2->IsPendingKill();
+	auto hasSingle = checkElem(SingleChild);
+	auto hasB1 = checkElem(B1);
+	auto hasB2 = checkElem(B2);
 
 	if (hasSingle || hasB1 || hasB2)
 		return;
