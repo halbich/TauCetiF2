@@ -85,7 +85,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 	ensure(classBP != nullptr);
 
 	auto trans = BlockHelpers::GetSpawnTransform(definition, block);
-	auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans);
+	auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
 
 	if (!actor)
 	{

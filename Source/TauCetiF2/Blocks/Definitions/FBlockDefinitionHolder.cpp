@@ -36,7 +36,7 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 		FBlockMaterialDefinition(EMaterialInstance::BaseSide, EAxis::Type::X, EAxis::Type::Z),
 		FBlockMaterialDefinition(EMaterialInstance::BaseSide, EAxis::Type::Y, EAxis::Type::Z));
 	cubeBase.BuilderSortIndex = 600;
-	cubeBase.MinBlockScale.Z = cubeBase.MaxBlockScale.Z = 4;
+	cubeBase.MaxBlockScale.Z = 4;
 	cubeBase.AllowPitch = false;
 	cubeBase.AllowRoll = false;
 	definitions.Add(cubeBase.ID, cubeBase);
@@ -77,7 +77,7 @@ FBlockDefinitionHolder::FBlockDefinitionHolder()
 		FBlockMaterialDefinition(EMaterialInstance::BaseSide, EAxis::Type::Z, EAxis::Type::Y),
 		FBlockMaterialDefinition(EMaterialInstance::BaseSide, EAxis::Type::Y, EAxis::Type::Z));
 	baseRamp.BuilderSortIndex = 610;
-	baseRamp.MinBlockScale.Z = baseRamp.MaxBlockScale.Z = 4;
+	baseRamp.MaxBlockScale.Z = 4;
 	baseRamp.AllowPitch = false;
 	baseRamp.AllowRoll = false;
 	definitions.Add(baseRamp.ID, baseRamp);

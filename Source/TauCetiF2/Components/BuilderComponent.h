@@ -89,6 +89,19 @@ public:
 			if (!worldController->IsValidSpawnPoint(spawnBox))
 				return;
 
+			auto box = spawnBox->GetBox();
+
+			FVector origin;
+			FVector extent;
+			character->GetActorBounds(true, origin, extent);
+			auto charBox = FBox::BuildAABB(origin, extent);
+
+			if (!(box.Overlap(charBox) == 0))
+			{
+				print(TEXT("overlap"));
+				return;
+			}
+
 			auto spawnBlock = NewObject<UBlockInfo>((UObject*)GetTransientPackage(), NAME_None, RF_NoFlags, currentBlockInfo);
 
 			spawnBlock->UnderConstruction = false;
@@ -129,6 +142,6 @@ public:
 	{
 		currentSpawnedObject->SetActorHiddenInGame(newHidden);
 		currentSpawnedObject->SetActorTickEnabled(!newHidden);
-		
+
 	}
 };

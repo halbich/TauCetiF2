@@ -75,6 +75,7 @@ private:
 		auto ret = NewObject<UBuildableBlockInfo>(this);
 		ret->ID = (int32)id;
 		ret->Scale = blockScale;
+		ret->AddImplicitTags();
 		return ret;
 	}
 };

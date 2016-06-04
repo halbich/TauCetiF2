@@ -73,6 +73,12 @@ public:
 	// Return true if both given boxes has common surface
 	static bool HasCommonBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2);
 
+	FBox GetBox()
+	{
+		FBox ret(Min, Max);
+		return ret;
+	}
+
 protected:
 	template <typename T>
 	FORCEINLINE T* GetParentNodeTemplate()

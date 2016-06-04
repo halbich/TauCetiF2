@@ -44,7 +44,6 @@ struct TAUCETIF2_API BlockHelpers
 
 	static  bool CheckBlockValidity(const FBlockDefinition* definition, const UBlockInfo* blockInfo, FString& reason)
 	{
-		print(TEXT("check validity"));
 
 		// TODO
 		return true;

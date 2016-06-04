@@ -156,7 +156,9 @@ void ATauCetiF2Character::MoveRight(float Value)
 
 void ATauCetiF2Character::BuilderDoAction()
 {
-	Builder->DoAction();
+	ensure(PC);
+	if (PC->NothingShown())
+		Builder->DoAction();
 }
 
 void ATauCetiF2Character::BuilderRotatePitch(float Value)

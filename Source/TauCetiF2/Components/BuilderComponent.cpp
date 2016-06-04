@@ -67,6 +67,20 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		toggleHiddenCurrentSpawned();
 		return;
 	}
+
+	auto box = spawnBlock->GetBox();
+
+	FVector origin;
+	FVector extent;
+	character->GetActorBounds(true, origin, extent);
+	auto charBox = FBox::BuildAABB(origin, extent);
+
+	if (!(box.Overlap(charBox) == 0))
+	{
+		toggleHiddenCurrentSpawned();
+		return;
+	}
+
 	toggleHiddenCurrentSpawned(false);
 	ForceRecomputePosition = false;
 	currentSpawnedObject->SetActorTransform(BlockHelpers::GetSpawnTransform(currentDefinitionForBlock, currentBlockInfo));
@@ -116,7 +130,6 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 		used = worldController->SpawnWorldObject(World, currentBlockInfo, false);
 		if (!used)
 			return;
-
 
 		used->SetActorEnableCollision(false);
 		usedObjects.Add(currentBuildableBlockInfo, used);

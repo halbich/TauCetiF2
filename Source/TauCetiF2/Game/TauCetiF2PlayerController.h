@@ -67,6 +67,11 @@ public:
 
 	void ToggleInventory();
 
+	FORCEINLINE bool NothingShown()
+	{
+		return CurrentShownWidget == EShownWidget::None;
+	}
+
 private:
 
 
