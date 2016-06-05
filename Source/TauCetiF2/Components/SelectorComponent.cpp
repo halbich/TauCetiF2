@@ -69,7 +69,9 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	auto worldAct = Cast<AWorldObject>(act);
 	if (!worldAct)
 	{
-		if (!act->ActorHasTag(TEXT("Selectable")))
+		auto slComp = act->GetComponentByClass(USelectTargetComponent::StaticClass());
+
+		if (!act->ActorHasTag(TEXT("Selectable")) && !slComp )
 		{
 			deselectComponent();
 			return;
@@ -111,18 +113,13 @@ void USelectorComponent::ShowPlane()
 		return;
 	}
 
-
-
-	print(TEXT("showing"));
-
-
+	
 	DrawDebugDirectionalArrow(GetWorld(), ImpactPointWithSnap, ImpactPointWithSnap + (ImpactNormal * 100), 300, FColor::Red, false, 10);
 
 	auto rotator = ImpactNormal.Rotation() + FRotator(-90, 0, 0);
 
 	FQuat rot(rotator);
 
-	float angle(0);
 	spawnedPlane->SetActorLocationAndRotation(ImpactPointWithSnap + ImpactNormal, rot);
 	spawnedPlane->SetActorHiddenInGame(false);
 	spawnedPlane->SetActorEnableCollision(true);
