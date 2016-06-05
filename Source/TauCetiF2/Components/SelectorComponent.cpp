@@ -115,20 +115,18 @@ void USelectorComponent::ShowPlane()
 
 	print(TEXT("showing"));
 
-	if (false) {
 
-		DrawDebugDirectionalArrow(GetWorld(), ImpactPoint, ImpactPoint + (ImpactNormal * 100), 300, FColor::Red, false, 10);
+	DrawDebugDirectionalArrow(GetWorld(), ImpactPointWithSnap, ImpactPointWithSnap + (ImpactNormal * 100), 300, FColor::Red, false, 10);
 
-		auto rotator = ImpactNormal.Rotation() + FRotator(-90, 0, 0);
+	auto rotator = ImpactNormal.Rotation() + FRotator(-90, 0, 0);
 
-		FQuat rot(rotator);
+	FQuat rot(rotator);
 
-		float angle(0);
-		spawnedPlane->SetActorLocationAndRotation(ImpactPoint + ImpactNormal, rot); // UKismetMathLibrary::FindLookAtRotation(UGameplayStatics::GetPlayerPawn(GetWorld(), 0)->GetActorLocation(), ImpactPoint));
-		spawnedPlane->SetActorHiddenInGame(false);
-		spawnedPlane->SetActorEnableCollision(true);
+	float angle(0);
+	spawnedPlane->SetActorLocationAndRotation(ImpactPointWithSnap + ImpactNormal, rot);
+	spawnedPlane->SetActorHiddenInGame(false);
+	spawnedPlane->SetActorEnableCollision(true);
 
-	}
 }
 
 void USelectorComponent::HidePlane()
