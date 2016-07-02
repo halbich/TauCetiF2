@@ -9,7 +9,7 @@
 #include "InventoryComponent.generated.h"
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHudBuildableItemsChanged);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHudBuildableItemsChanged, bool, ShowGroupName);
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TAUCETIF2_API UInventoryComponent : public UActorComponent
@@ -31,7 +31,9 @@ public:
 		FHudBuildableItemsChanged OnHudBuildableItemsChanged;
 
 	UFUNCTION(BlueprintCallable, Category = InventoryComponent)
-		void ForceItemsChanged();
+		void ForceItemsChanged(bool showGroupName);
+
+	void InventoryTagsSelectionChanged();
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
 		UInventoryTags* InventoryTags;

@@ -12,11 +12,15 @@ UInventoryComponent::UInventoryComponent()
 }
 
 
-void UInventoryComponent::ForceItemsChanged()
+void UInventoryComponent::ForceItemsChanged(bool showGroupName)
 {
-	OnHudBuildableItemsChanged.Broadcast();
+	OnHudBuildableItemsChanged.Broadcast(showGroupName);
 }
 
+void UInventoryComponent::InventoryTagsSelectionChanged()
+{
+	ForceItemsChanged(false);
+}
 
 void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 {
@@ -25,12 +29,12 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 	InventoryTags = carrier->InventoryTags;
 
 	FSelectionChanged Subscriber;
-	Subscriber.BindUObject(this, &UInventoryComponent::ForceItemsChanged);
+	Subscriber.BindUObject(this, &UInventoryComponent::InventoryTagsSelectionChanged);
 	ListeningHandle = InventoryTags->AddEventListener(Subscriber);
 
 	BuildableItems = TArray<UBuildableBlockInfo*>(carrier->BuildableBlocks);
 
-	ForceItemsChanged();
+	ForceItemsChanged(false);
 }
 
 void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
@@ -92,4 +96,5 @@ void UInventoryComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 void UInventoryComponent::AddItem(UBuildableBlockInfo* block)
 {
 	BuildableItems.Add(block);
+	ForceItemsChanged(false);
 }
