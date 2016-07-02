@@ -11,14 +11,14 @@ UBlockConstructorSelector::UBlockConstructorSelector()
 }
 
 
-bool UBlockConstructorSelector::IsValid()
+bool UBlockConstructorSelector::IsDefinitionValid()
 {
 	return Definition != nullptr;
 }
 
 void UBlockConstructorSelector::GetMinMax(FVector& minSize, FVector& maxSize)
 {
-	check(IsValid());
+	check(IsDefinitionValid());
 	minSize = Definition->MinBlockScale;
 	maxSize = Definition->MaxBlockScale;
 
@@ -45,7 +45,7 @@ void UBlockConstructorSelector::SynchronizeProperties()
 TArray<UInventoryFlagItem*> UBlockConstructorSelector::GetAdditionalParams()
 {
 	TArray<UInventoryFlagItem*> result;
-	check(IsValid());
+	check(IsDefinitionValid());
 
 	for (auto fl : Definition->AdditionalFlags)
 	{
@@ -72,7 +72,7 @@ TArray<UInventoryFlagItem*> UBlockConstructorSelector::GetAdditionalParams()
 TArray<FString> UBlockConstructorSelector::GetImplicitTags()
 {
 	TArray<FString> result;
-	check(IsValid());
+	check(IsDefinitionValid());
 	return result;
 }
 
