@@ -17,9 +17,9 @@ void USelectorComponent::OwnerBecomeViewTarget()
 {
 	owner = GetOwner();
 
-
-	cameraManager = UGameplayStatics::GetPlayerCameraManager(World, 0);
-	playerPawn = UGameplayStatics::GetPlayerPawn(World, 0);
+	auto world = GetWorld();
+	cameraManager = UGameplayStatics::GetPlayerCameraManager(world, 0);
+	playerPawn = UGameplayStatics::GetPlayerPawn(world, 0);
 }
 
 
@@ -39,7 +39,7 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 
 	const FName TraceTag("MyTraceTag");
 
-	World->DebugDrawTraceTag = TraceTag;
+	GetWorld()->DebugDrawTraceTag = TraceTag;
 
 	FHitResult result;
 	FCollisionObjectQueryParams params;
@@ -51,7 +51,7 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	//CollisionParams.TraceTag = TraceTag;
 	CollisionParams.AddIgnoredActor(traceIgnoreActor);
 
-	if (!World->LineTraceSingleByObjectType(result, cameraLoc, hitEnd, params, CollisionParams))
+	if (!GetWorld()->LineTraceSingleByObjectType(result, cameraLoc, hitEnd, params, CollisionParams))
 	{
 		deselectComponent();
 		return;

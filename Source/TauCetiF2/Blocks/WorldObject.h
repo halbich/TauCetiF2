@@ -106,6 +106,6 @@ protected:
 		TranslucentSelectMesh->SetStaticMesh(mesh);
 		TranslucentSelectMesh->SetRenderInMainPass(false);
 		TranslucentSelectMesh->Deactivate();
-		TranslucentSelectMesh->AttachTo(mc);
+		TranslucentSelectMesh->SetupAttachment(mc);
 	}
 };

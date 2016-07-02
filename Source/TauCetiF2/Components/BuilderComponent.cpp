@@ -127,7 +127,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	auto used = usedObjects.FindRef(currentBuildableBlockInfo);
 	if (!used)
 	{
-		used = worldController->SpawnWorldObject(World, currentBlockInfo, false);
+		used = worldController->SpawnWorldObject(GetWorld(), currentBlockInfo, false);
 		if (!used)
 			return;
 

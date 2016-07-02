@@ -18,40 +18,40 @@ AWindowObject::AWindowObject(const FObjectInitializer& ObjectInitializer)
 
 	LeftBottomCorner = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LeftBottomCorner"));
 	LeftBottomCorner->SetStaticMesh(corner.Object);
-	LeftBottomCorner->AttachTo(GetStaticMeshComponent());
+	LeftBottomCorner->SetupAttachment(GetStaticMeshComponent());
 
 	RightBottomCorner = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RightBottomCorner"));
 	RightBottomCorner->SetStaticMesh(corner.Object);
-	RightBottomCorner->AttachTo(GetStaticMeshComponent());
+	RightBottomCorner->SetupAttachment(GetStaticMeshComponent());
 
 	LeftTopCorner = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LeftTopCorner"));
 	LeftTopCorner->SetStaticMesh(corner.Object);
-	LeftTopCorner->AttachTo(GetStaticMeshComponent());
+	LeftTopCorner->SetupAttachment(GetStaticMeshComponent());
 
 	RightTopCorner = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RightTopCorner"));
 	RightTopCorner->SetStaticMesh(corner.Object);
-	RightTopCorner->AttachTo(GetStaticMeshComponent());
+	RightTopCorner->SetupAttachment(GetStaticMeshComponent());
 
 	Bottom = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bottom"));
 	Bottom->SetStaticMesh(frame.Object);
-	Bottom->AttachTo(GetStaticMeshComponent());
+	Bottom->SetupAttachment(GetStaticMeshComponent());
 
 	Left = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Left"));
 	Left->SetStaticMesh(frame.Object);
-	Left->AttachTo(GetStaticMeshComponent());
+	Left->SetupAttachment(GetStaticMeshComponent());
 
 	Top = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Top"));
 	Top->SetStaticMesh(frame.Object);
-	Top->AttachTo(GetStaticMeshComponent());
+	Top->SetupAttachment(GetStaticMeshComponent());
 
 	Right = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Right"));
 	Right->SetStaticMesh(frame.Object);
-	Right->AttachTo(GetStaticMeshComponent());
+	Right->SetupAttachment(GetStaticMeshComponent());
 
 
 	Center = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Center"));
 	Center->SetStaticMesh(windowPolycarbon.Object);
-	Center->AttachTo(GetStaticMeshComponent());
+	Center->SetupAttachment(GetStaticMeshComponent());
 
 }
 

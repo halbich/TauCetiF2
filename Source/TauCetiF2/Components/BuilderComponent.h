@@ -107,7 +107,7 @@ public:
 			spawnBlock->UnderConstruction = false;
 
 			if (worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
-				worldController->SpawnWorldObject(World, spawnBlock, true);
+				worldController->SpawnWorldObject(GetWorld(), spawnBlock, true);
 			else
 				print(TEXT("Invalid location"));
 

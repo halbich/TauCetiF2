@@ -16,7 +16,7 @@ ADoorObject::ADoorObject(const FObjectInitializer& ObjectInitializer)
 	//constructorSetMeshes(mesh.Object);
 	DoorFrameMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DoorFrameMesh"));
 	DoorFrameMesh->SetStaticMesh(mesh.Object);
-	DoorFrameMesh->AttachTo(GetStaticMeshComponent());
+	DoorFrameMesh->SetupAttachment(GetStaticMeshComponent());
 	DoorFrameMesh->AddLocalOffset(FVector(0, -3 * GameDefinitions::CubeMinSize, 0));
 
 
@@ -28,7 +28,7 @@ ADoorObject::ADoorObject(const FObjectInitializer& ObjectInitializer)
 
 	DoorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DoorMesh"));
 	DoorMesh->SetStaticMesh(doorMesh.Object);
-	DoorMesh->AttachTo(DoorFrameMesh);
+	DoorMesh->SetupAttachment(DoorFrameMesh);
 
 	PrimaryActorTick.bCanEverTick = true;
 
