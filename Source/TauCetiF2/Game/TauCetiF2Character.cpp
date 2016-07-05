@@ -205,6 +205,18 @@ void ATauCetiF2Character::OnUse()
 {
 	if (!IsMoveInputIgnored())
 		Selector->TrySelect();
+
+	if (!Controller)
+	{
+		print(TEXT("controller is null"));
+		return;
+	}
+
+	if (!Controller->IsLocalController())
+	{
+		print(TEXT("controller is not local"));
+		return;
+	}
 }
 
 
