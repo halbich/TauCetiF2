@@ -15,8 +15,6 @@ class TAUCETIF2_API UBaseControlWidget : public UObjectWidget
 {
 	GENERATED_UCLASS_BODY()
 public:
-	UBaseControlWidget();
-
 	
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = BaseControlWidget)

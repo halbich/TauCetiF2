@@ -30,7 +30,7 @@ public:
 	FBlockDefinition* Definition;
 
 	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
-		bool IsValid();
+		bool IsDefinitionValid();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
 		void GetMinMax(FVector& minSize, FVector& maxSize);
