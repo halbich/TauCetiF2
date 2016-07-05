@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "Common/Enums.h"
+
 /*
 	Definition class for block material
 */
