@@ -7,30 +7,22 @@
 UNewGameSaveHolder* UNewGameSaveHolder::Instance()
 {
 
-	static UNewGameSaveHolder* instance = nullptr;
+	UClass *saveClass = UNewGameSaveHolder::StaticClass();
+	auto instance = (UNewGameSaveHolder*)ConstructObject<UObject>(saveClass);
+	instance->init();
+	return instance;
 
-	if (instance == nullptr || !instance->IsValidLowLevel() || instance->newGameSaves.Num() == 0 || !instance->mainMenuSave || !instance->mainMenuSave->IsValidLowLevel())
+	/*static UNewGameSaveHolder* instance = nullptr;
+
+	if (instance == nullptr || !instance->IsValidLowLevel())
 	{
-		instance = NewObject<UNewGameSaveHolder>();
+		UClass *saveClass = UNewGameSaveHolder::StaticClass();
+		instance = (UNewGameSaveHolder*)ConstructObject<UObject>(saveClass);
+
 		instance->init();
 	}
-	else
-	{
-		auto err = false;
-		for (auto s : instance->newGameSaves)
-		{
-			if (!s || !s->IsValidLowLevel())
-			{
-				err = true;
-				break;
-			}
-		}
 
-		if (err)
-			instance->init();
-	}
-
-	return instance;
+	return instance;*/
 
 }
 
@@ -99,7 +91,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
 
 	auto buildable = &c->BuildableBlocks;
-	
+
 	auto door = makeBuildable(EBlockName::Door, FVector(7, 7, 11));
 	door->AdditionalFlags.Add(GetNameForTag(ENamedTag::DoorOpening), (int32)EDoorOpening::Right);
 	door->Name = TEXT("Dveøe");

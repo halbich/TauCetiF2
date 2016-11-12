@@ -30,9 +30,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		static USaveGameCarrier* GetSaveForMainMenu();
 
-private:
 
-	static UNewGameSaveHolder* Instance();
+private:
+	UFUNCTION()
+		static UNewGameSaveHolder* Instance();
+
+	//UPROPERTY(Transient)
+	//	static UNewGameSaveHolder* instance;
 
 	void init();
 
