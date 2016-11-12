@@ -5,21 +5,22 @@ using System.Collections.Generic;
 
 public class TauCetiF2Target : TargetRules
 {
-	public TauCetiF2Target(TargetInfo Target)
-	{
-		Type = TargetType.Game;
-	}
+    public TauCetiF2Target(TargetInfo Target)
+    {
+        Type = TargetType.Game;
+    }
 
-	//
-	// TargetRules interface.
-	//
+    //
+    // TargetRules interface.
+    //
 
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.Add("TauCetiF2");
-	}
+    public override void SetupBinaries(
+        TargetInfo Target,
+        ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
+        ref List<string> OutExtraModuleNames
+        )
+    {
+        OutExtraModuleNames.Add("TauCetiF2");
+        OutExtraModuleNames.Add("Blocks");
+    }
 }

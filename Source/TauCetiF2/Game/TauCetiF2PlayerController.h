@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Common/Enums.h"
+#include "Commons/Public/Enums.h"
 #include "GameFramework/PlayerController.h"
 #include "Blueprint/UserWidget.h"
 #include "Widgets/ObjectWidget.h"
@@ -82,7 +82,7 @@ private:
 		if (anythingShown)
 		{
 			FInputModeGameAndUI mode;
-			mode.SetLockMouseToViewport(true);
+			mode.SetLockMouseToViewportBehavior(EMouseLockMode::LockOnCapture);
 
 			if (focus)
 				mode.SetWidgetToFocus(focus->TakeWidget());

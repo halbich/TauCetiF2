@@ -67,7 +67,7 @@ USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier()
 }
 
 
-bool USaveGameCarrier::SaveGameDataToFile(const FString& FullFilePath)
+bool USaveGameCarrier::SaveGameDataToFile(const FString& saveFilePath)
 {
 	updateBeforeSave();
 	FBufferArchive ToBinary;
@@ -76,7 +76,7 @@ bool USaveGameCarrier::SaveGameDataToFile(const FString& FullFilePath)
 	if (ToBinary.Num() <= 0)
 		return false;
 
-	if (FFileHelper::SaveArrayToFile(ToBinary, *FullFilePath))
+	if (FFileHelper::SaveArrayToFile(ToBinary, *saveFilePath))
 	{
 		ToBinary.FlushCache();
 		ToBinary.Empty();
@@ -154,11 +154,11 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 
 
 
-bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject) {
+bool USaveGameCarrier::LoadGameDataFromFile(const FString& saveGameFile, bool bFullObject) {
 
 
 	TArray<uint8> TheBinaryArray;
-	if (!FFileHelper::LoadFileToArray(TheBinaryArray, *FullFilePath))
+	if (!FFileHelper::LoadFileToArray(TheBinaryArray, *saveGameFile))
 	{
 		print("FFILEHELPER:>> Invalid File");
 		return false;
@@ -186,7 +186,7 @@ bool USaveGameCarrier::LoadGameDataFromFile(const FString& FullFilePath, bool bF
 	TheBinaryArray.Empty();
 	FromBinary.Close();
 
-	this->FullFilePath = FString(FullFilePath);
+	this->FullFilePath = FString(saveGameFile);
 
 	updateAfterLoad();
 

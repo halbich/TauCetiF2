@@ -4,15 +4,35 @@
 	"Category": "",
 	"Description": "",
 	"Modules": [
-		{
-			"Name": "TauCetiF2",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine",
-				"CoreUObject",
-				"UMG"
-			]
-		}
+    {
+      "Name": "TauCetiF2",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "Engine",
+        "CoreUObject",
+        "UMG"
+      ]
+    },
+    {
+      "Name": "Blocks",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "Engine",
+        "PakFile"
+
+
+      ]
+    },
+     {
+      "Name": "Commons",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "Engine",
+
+      ]
+    }
 	]
 }

@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Common/Enums.h"
+#include "Commons/Public/Enums.h"
 
 /*
 	Definition class for block material

@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Common/Enums.h"
+#include "Commons/Public/Enums.h"
 #include "Widgets/ObjectWidget.h"
 #include "ModalWidget.generated.h"
 

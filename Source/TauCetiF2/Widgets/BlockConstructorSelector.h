@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Common/Enums.h"
+#include "Commons/Public/Enums.h"
 #include "Widgets/SynchronizeWidget.h"
 #include "Blocks/Definitions/FBlockDefinition.h"
 #include "Blocks/Definitions/FBlockDefinitionHolder.h"

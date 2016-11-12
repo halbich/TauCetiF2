@@ -201,5 +201,18 @@ void AWorldController::BeginPlay() {
 
 	UPatternDefinitionsHolder::Instance();
 
+
+
+	TArray<UObject*> MeshAssets;
+	EngineUtils::FindOrLoadAssetsByPath(TEXT("/Game/BuildingObjects/Meshes/"), MeshAssets, EngineUtils::ATL_Class);
+	for (auto asset : MeshAssets) {
+		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, *asset->GetFullName());
+		UStaticMesh* mesh = Cast<UStaticMesh>(asset);
+		if (mesh != nullptr) {
+			// do something with the mesh, create a component with it, etc.
+		}
+	}
+
+
 	Super::BeginPlay();
 }

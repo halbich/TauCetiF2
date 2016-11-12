@@ -5,21 +5,22 @@ using System.Collections.Generic;
 
 public class TauCetiF2EditorTarget : TargetRules
 {
-	public TauCetiF2EditorTarget(TargetInfo Target)
-	{
-		Type = TargetType.Editor;
-	}
+    public TauCetiF2EditorTarget(TargetInfo Target)
+    {
+        Type = TargetType.Editor;
+    }
 
-	//
-	// TargetRules interface.
-	//
+    //
+    // TargetRules interface.
+    //
 
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.Add("TauCetiF2");
-	}
+    public override void SetupBinaries(
+        TargetInfo Target,
+        ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
+        ref List<string> OutExtraModuleNames
+        )
+    {
+        OutExtraModuleNames.Add("TauCetiF2");
+        OutExtraModuleNames.Add("Blocks");
+    }
 }

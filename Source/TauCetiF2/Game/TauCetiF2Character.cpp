@@ -55,44 +55,44 @@ ATauCetiF2Character::ATauCetiF2Character()
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* inputComponent)
 {
 	// Set up gameplay key bindings
-	check(InputComponent);
-	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	check(inputComponent);
+	inputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	inputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	InputComponent->BindAxis("MoveForward", this, &ATauCetiF2Character::MoveForward);
-	InputComponent->BindAxis("MoveRight", this, &ATauCetiF2Character::MoveRight);
+	inputComponent->BindAxis("MoveForward", this, &ATauCetiF2Character::MoveForward);
+	inputComponent->BindAxis("MoveRight", this, &ATauCetiF2Character::MoveRight);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
-	InputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	InputComponent->BindAxis("TurnRate", this, &ATauCetiF2Character::TurnAtRate);
-	InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	InputComponent->BindAxis("LookUpRate", this, &ATauCetiF2Character::LookUpAtRate);
+	inputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+	inputComponent->BindAxis("TurnRate", this, &ATauCetiF2Character::TurnAtRate);
+	inputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	inputComponent->BindAxis("LookUpRate", this, &ATauCetiF2Character::LookUpAtRate);
 
 	// handle touch devices
-	InputComponent->BindTouch(IE_Pressed, this, &ATauCetiF2Character::TouchStarted);
-	InputComponent->BindTouch(IE_Released, this, &ATauCetiF2Character::TouchStopped);
+	inputComponent->BindTouch(IE_Pressed, this, &ATauCetiF2Character::TouchStarted);
+	inputComponent->BindTouch(IE_Released, this, &ATauCetiF2Character::TouchStopped);
 
-	InputComponent->BindAction("LmbClick", IE_Pressed, this, &ATauCetiF2Character::BuilderDoAction);
+	inputComponent->BindAction("LmbClick", IE_Pressed, this, &ATauCetiF2Character::BuilderDoAction);
 
-	InputComponent->BindAxis("RotPitch", this, &ATauCetiF2Character::BuilderRotatePitch);
-	InputComponent->BindAxis("RotRoll", this, &ATauCetiF2Character::BuilderRotateRoll);
-	InputComponent->BindAxis("RotYaw", this, &ATauCetiF2Character::BuilderRotateYaw);
+	inputComponent->BindAxis("RotPitch", this, &ATauCetiF2Character::BuilderRotatePitch);
+	inputComponent->BindAxis("RotRoll", this, &ATauCetiF2Character::BuilderRotateRoll);
+	inputComponent->BindAxis("RotYaw", this, &ATauCetiF2Character::BuilderRotateYaw);
 
 
-	InputComponent->BindAction("OnEscape", IE_Pressed, this, &ATauCetiF2Character::OnEscapeKey);
-	InputComponent->BindAction("OnEnter", IE_Pressed, this, &ATauCetiF2Character::OnEnterKey);
+	inputComponent->BindAction("OnEscape", IE_Pressed, this, &ATauCetiF2Character::OnEscapeKey);
+	inputComponent->BindAction("OnEnter", IE_Pressed, this, &ATauCetiF2Character::OnEnterKey);
 
-	InputComponent->BindAction("OnUse", IE_Pressed, this, &ATauCetiF2Character::OnUse);
+	inputComponent->BindAction("OnUse", IE_Pressed, this, &ATauCetiF2Character::OnUse);
 
-	InputComponent->BindAction("OnInventory", IE_Pressed, this, &ATauCetiF2Character::OnInventory);
+	inputComponent->BindAction("OnInventory", IE_Pressed, this, &ATauCetiF2Character::OnInventory);
 
-	InputComponent->BindAction("SelectNextInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnNextInventoryBank);
-	InputComponent->BindAction("SelectPrevInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnPrevInventoryBank);
+	inputComponent->BindAction("SelectNextInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnNextInventoryBank);
+	inputComponent->BindAction("SelectPrevInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnPrevInventoryBank);
 }
 
 
@@ -221,13 +221,13 @@ void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
 }
 
 
-void ATauCetiF2Character::BecomeViewTarget(APlayerController* PC)
+void ATauCetiF2Character::BecomeViewTarget(APlayerController* pc)
 {
-	Super::BecomeViewTarget(PC);
+	Super::BecomeViewTarget(pc);
 	Selector->OwnerBecomeViewTarget();
-	this->PC = Cast<ATauCetiF2PlayerController>(PC);
+	PC = Cast<ATauCetiF2PlayerController>(pc);
 
-	ensure(this->PC);
+	ensure(PC);
 }
 
 void ATauCetiF2Character::OnNextInventoryBank()
