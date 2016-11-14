@@ -151,3 +151,12 @@ static FString GetNameForTag(ENamedTag tag)
 	}
 }
 
+
+UENUM(BlueprintType)
+enum class EApplyScaleToMaterialParam : uint8
+{
+	None	 	UMETA(DisplayName = "None"),
+	X			UMETA(DisplayName = "X"),
+	Y			UMETA(DisplayName = "Y"),
+	Z			UMETA(DisplayName = "Z")
+};

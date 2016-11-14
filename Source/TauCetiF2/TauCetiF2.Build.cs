@@ -6,7 +6,10 @@ public class TauCetiF2 : ModuleRules
 {
 	public TauCetiF2(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" ,"UMG", "Slate", "SlateCore", "ProceduralMeshComponent", "Commons" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "Slate", "SlateCore", "ProceduralMeshComponent",
+            "Commons", "GameWorld", "Blocks", "GameSave" });
+
+
 
     }
 }
