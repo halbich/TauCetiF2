@@ -16,7 +16,7 @@ class BLOCKS_API ACubeBlock : public ABlock
 public:
 	ACubeBlock();
 
-	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | Block | Cube")
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | CubeBlock")
 		UStaticMeshComponent* CubeMesh;
 	
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;

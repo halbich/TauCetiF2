@@ -26,6 +26,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 	auto genBlock = Cast<IGenericBlock>(this);
 	auto def = Definition->GetDefaultObject<UBlockDefinition>();
 
+	auto currentScale = GetBlockScale();
 
 	int32 index = 0;
 
@@ -36,6 +37,11 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 
 		auto meshComp = genBlock->Execute_GetMeshStructureComponent(this, index++);
 
+
+		// TODO
+		if (!meshComp)
+			continue;
+
 		check(meshComp && "Function GetMeshStructureComponent returned NULL!");
 		meshComp->SetStaticMesh(structureDef.Mesh);
 
@@ -43,7 +49,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 		{
 			auto matDef = structureDef.Materials[i];
 
-			setMaterial(meshComp, matDef.DefaultMat, i, matDef.GetParams(FVector(1,1,1)));
+			setMaterial(meshComp, matDef.DefaultMat, i, matDef.GetParams(currentScale));
 		}
 
 	}
@@ -54,14 +60,14 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 void ABlock::BeginPlay() {
 
 
-	IGenericBlock* genBlock = Cast<IGenericBlock>(this);
-	if (genBlock)
-	{
-		//Don't call your functions directly, use the 'Execute_' prefix
-		//the Execute_ReactToHighNoon and Execute_ReactToMidnight are generated on compile
-		//you may need to compile before these functions will appear
-		genBlock->Execute_GetMeshStructureComponent(this, 0);
-	}
+	//IGenericBlock* genBlock = Cast<IGenericBlock>(this);
+	//if (genBlock)
+	//{
+	//	//Don't call your functions directly, use the 'Execute_' prefix
+	//	//the Execute_ReactToHighNoon and Execute_ReactToMidnight are generated on compile
+	//	//you may need to compile before these functions will appear
+	//	genBlock->Execute_GetMeshStructureComponent(this, 0);
+	//}
 
 
 	Super::BeginPlay();
@@ -81,5 +87,10 @@ UStaticMeshComponent* ABlock::GetMeshStructureComponent_Implementation(int32 Blo
 
 }
 
+
+FVector ABlock::GetBlockScale()
+{
+	return GetActorScale3D();
+}
 
 #pragma optimize("",on)

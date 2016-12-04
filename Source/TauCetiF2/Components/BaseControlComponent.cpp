@@ -7,7 +7,6 @@
 UBaseControlComponent::UBaseControlComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = false;
 
 

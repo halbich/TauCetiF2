@@ -7,7 +7,6 @@
 // Sets default values for this component's properties
 USelectorComponent::USelectorComponent()
 {
-	bWantsBeginPlay = false;
 	PrimaryComponentTick.bCanEverTick = true;
 }
 

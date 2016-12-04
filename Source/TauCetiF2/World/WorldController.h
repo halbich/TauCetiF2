@@ -26,6 +26,8 @@ public:
 
 	virtual void BeginPlay() override;
 
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReasonType) override;
+
 	UPROPERTY(BlueprintReadWrite, Transient, Category = WorldController)
 		TArray<UBlockInfo*> UsedBlocks;
 

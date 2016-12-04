@@ -19,11 +19,11 @@ class GAMESAVE_API IGameSaveInterface
 public:
 	
 	//classes using this interface must implement ReactToHighNoon
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TauCetiF2 | Game Save")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | Game Save")
 		bool SaveGame();
 
 	//classes using this interface may implement ReactToMidnight
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "TauCetiF2 | Game Save")
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "TCF2 | Game Save")
 		bool LoadGame();
 
 };

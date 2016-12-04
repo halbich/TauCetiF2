@@ -7,8 +7,7 @@
 UNewGameSaveHolder* UNewGameSaveHolder::Instance()
 {
 
-	UClass *saveClass = UNewGameSaveHolder::StaticClass();
-	auto instance = (UNewGameSaveHolder*)ConstructObject<UObject>(saveClass);
+	auto instance = NewObject<UNewGameSaveHolder>();
 	instance->init();
 	return instance;
 
@@ -122,7 +121,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 
 	c->InventoryTags = UInventoryTags::GetDefault();
 
-	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();;
+	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
 	return c;
 
 }

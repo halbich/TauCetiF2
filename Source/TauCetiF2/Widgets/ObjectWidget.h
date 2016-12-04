@@ -47,7 +47,7 @@ public:
 		void AddToStack(UObjectWidget* widget);
 
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
-		void SwapWithTop(UObjectWidget* widget);
+		virtual void SwapWithTop(UObjectWidget* widget);
 
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
 		void AddToStackAndScreen(UObjectWidget* widget, int32 ZOrder = 0);

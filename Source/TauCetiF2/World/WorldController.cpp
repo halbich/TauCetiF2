@@ -216,3 +216,14 @@ void AWorldController::BeginPlay() {
 
 	Super::BeginPlay();
 }
+
+
+void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReasonType)
+{
+	for (auto block : UsedBlocks)
+	{
+		
+	}
+
+	Super::EndPlay(EndPlayReasonType);
+ }
