@@ -32,7 +32,7 @@ public:
 	FVector MinBlockScale;
 	FVector MaxBlockScale;
 
-	TArray<FBlockMaterialDefinition> UsedMaterials;
+	//TArray<FBlockMaterialDefinition> UsedMaterials;
 
 
 	void AddMaterials(int8 n, ...);

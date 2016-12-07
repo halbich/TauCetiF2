@@ -39,7 +39,7 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 	{
 		UPrimitiveComponent* currentMesh = nullptr;
 		int32 currentIndexOffset(0);
-		for (size_t i = 0; i < definition->UsedMaterials.Num(); i++)
+		/*for (size_t i = 0; i < definition->UsedMaterials.Num(); i++)
 		{
 			auto mat = definition->UsedMaterials[i];
 			auto setToComponent = GetPrimitiveComponentByName(mat.MeshName);
@@ -53,7 +53,7 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 			currentMesh = setToComponent;
 
 			setConstructionMaterial(currentMesh, mat.MaterialInstance, i - currentIndexOffset, mat.GetParams(scale));
-		}
+		}*/
 
 		if (TranslucentSelectMesh)
 			TranslucentSelectMesh->DestroyComponent();
@@ -65,7 +65,7 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 	UPrimitiveComponent* currentMesh = nullptr;
 	int32 currentIndexOffset(0);
 	bool hasTranslucent = false;
-	for (size_t i = 0; i < definition->UsedMaterials.Num(); i++)
+	/*for (size_t i = 0; i < definition->UsedMaterials.Num(); i++)
 	{
 		auto mat = definition->UsedMaterials[i];
 
@@ -81,14 +81,14 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 
 		setMaterial(currentMesh, mat.MaterialInstance, i - currentIndexOffset, mat.GetParams(scale));
 		hasTranslucent = hasTranslucent || mat.IsTranslucent;
-	}
+	}*/
 
 	if (!TranslucentSelectMesh)
 		return;
 
 	if (hasTranslucent)
 	{
-		setTranslucentMaterials(definition->UsedMaterials.Num());
+		//setTranslucentMaterials(definition->UsedMaterials.Num());
 
 		/*TranslucentSelectMesh->SetWorldScale3D(Transform.GetScale3D());
 		TranslucentSelectMesh->SetWorldLocationAndRotation(Transform.GetLocation(), Transform.GetRotation());*/

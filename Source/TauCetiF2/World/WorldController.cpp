@@ -1,14 +1,21 @@
 
 
 #include "TauCetiF2.h"
+#include "EngineUtils.h"
+#include "Blocks/Public/Block.h"
+#include "AssetRegistryModule.h"
 #include "WorldController.h"
 
+
+#pragma optimize("", off)
 
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 
 	BaseControl = ObjectInitializer.CreateDefaultSubobject<UBaseControlComponent>(this, TEXT("Base Control"));
+
+
 
 }
 
@@ -18,6 +25,38 @@ void AWorldController::LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks) {
 	auto world = GetWorld();
 	if (!world)
 		return;
+
+
+	auto children = ABlock::StaticClass()->Children;
+
+
+	FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>(AssetRegistryConstants::ModuleName);
+	TArray<FAssetData> AssetData;
+	FARFilter Filter;
+	//Filter.ClassNames.Add(ABlock::StaticClass()->GetFName());
+	Filter.PackagePaths.Add("/Game/Blocks/");
+	Filter.bRecursiveClasses = true;
+	Filter.bRecursivePaths = true;
+	AssetRegistryModule.Get().GetAssets(Filter, AssetData);
+
+	for (auto a : AssetData)
+	{
+		print(TEXT("Found block"));
+		print(*a.ObjectPath.ToString());
+	}
+
+	for (TObjectIterator<ABlock> Itr; Itr; ++Itr)
+	{
+		auto o = Itr;
+
+		auto _world = o->GetWorld();
+
+		if (_world == world)
+		{
+			print(TEXT("Found block"));
+			print(*Itr->GetName());
+		}
+	}
 
 	UsedBlocks.Empty();
 	UsedBlocks.Reserve(blocks.Num());
@@ -63,7 +102,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 		return nullptr;
 	}
 
-	
+
 	UMinMaxBox* box = BlockHelpers::GetSpawnBox(definition, block);
 	ensure(box != nullptr);
 	if (!IsValidSpawnPoint(box))
@@ -222,8 +261,10 @@ void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReasonType)
 {
 	for (auto block : UsedBlocks)
 	{
-		
+
 	}
 
 	Super::EndPlay(EndPlayReasonType);
- }
+}
+
+#pragma optimize("", on)

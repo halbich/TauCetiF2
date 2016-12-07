@@ -18,8 +18,8 @@ FBlockDefinition::FBlockDefinition(int32 id, EShapeType shapeType) :
 	MeshScale(FVector(1, 1, 1)),
 	WorldObjectScale(FVector(1, 1, 1)),
 	BuilderSortIndex(1024),
-	AdditionalFlags(),
-	UsedMaterials()
+	AdditionalFlags()/*,*/
+	//UsedMaterials()
 {
 
 }
@@ -33,7 +33,7 @@ FBlockDefinition::FBlockDefinition(EBlockName name, EShapeType shapeType) : FBlo
 void FBlockDefinition::AddMaterials(int8 n, ...)
 {
 
-	UsedMaterials.Reserve(n);
+	/*UsedMaterials.Reserve(n);
 	va_list arguments;
 
 	va_start(arguments, n);
@@ -43,7 +43,7 @@ void FBlockDefinition::AddMaterials(int8 n, ...)
 		UsedMaterials.Add(mat);
 	}
 
-	va_end(arguments);
+	va_end(arguments);*/
 }
 
 
