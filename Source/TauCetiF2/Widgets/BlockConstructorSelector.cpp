@@ -13,31 +13,29 @@ UBlockConstructorSelector::UBlockConstructorSelector()
 
 bool UBlockConstructorSelector::IsDefinitionValid()
 {
-	return Definition != nullptr;
+	if (BlockDefinition && BlockDefinition->IsValidLowLevel())
+		return true;
+
+	if (BlockHolder)
+	{
+		BlockDefinition = BlockHolder->GetDefinitionFor(BlockID);
+	}
+
+	return BlockDefinition && BlockDefinition->IsValidLowLevel();
 }
 
 void UBlockConstructorSelector::GetMinMax(FVector& minSize, FVector& maxSize)
 {
 	check(IsDefinitionValid());
-	minSize = Definition->MinBlockScale;
-	maxSize = Definition->MaxBlockScale;
+	minSize = BlockDefinition->MinBlockScale;
+	maxSize = BlockDefinition->MaxBlockScale;
 
 	return;
 }
 
 void UBlockConstructorSelector::SynchronizeProperties()
 {
-	Definition = FBlockDefinitionHolder::Instance().GetDefinition(BlockID, false);
-	if (!Definition)
-	{
-		Super::SynchronizeProperties();
-		return;
-	}
-
-	UBuildableBlockInfo* info = NewObject<UBuildableBlockInfo>();
-	info->ID = Definition->ID;
-	BlockTexture = UHelpers::GetTexture2DForBlock(info);
-
+	IsDefinitionValid();
 	Super::SynchronizeProperties();
 }
 
@@ -47,7 +45,7 @@ TArray<UInventoryFlagItem*> UBlockConstructorSelector::GetAdditionalParams()
 	TArray<UInventoryFlagItem*> result;
 	check(IsDefinitionValid());
 
-	for (auto fl : Definition->AdditionalFlags)
+	for (auto fl : BlockDefinition->AdditionalFlags)
 	{
 		auto invItem = NewObject<UInventoryFlagItem>();
 		invItem->TagName = fl.TagID;
@@ -74,6 +72,15 @@ TArray<FString> UBlockConstructorSelector::GetImplicitTags()
 	TArray<FString> result;
 	check(IsDefinitionValid());
 	return result;
+}
+
+UTexture2D* UBlockConstructorSelector::GetBlockTexture()
+{
+	UTexture2D* result = NULL;
+	check(IsDefinitionValid());
+
+
+	return BlockDefinition->BlockImage;
 }
 
 #pragma optimize("", on)

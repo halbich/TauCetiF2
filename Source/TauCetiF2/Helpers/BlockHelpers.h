@@ -14,35 +14,15 @@
  */
 struct TAUCETIF2_API BlockHelpers
 {
+	// TODO
+	static bool CheckBlockValidity(const FBlockDefinition* definition, const UBlockInfo* blockInfo, FString& reason)
+	{
 
-	static FORCEINLINE UClass* GetClassByShape(const FBlockDefinition* definition) {
-
-		switch (definition->ShapeType)
-		{
-		case EShapeType::Cube: return ACubeObject::StaticClass();
-		case EShapeType::CubeSide: return ACubeSideObject::StaticClass();
-		case EShapeType::CubeBody: return ACubeBodyObject::StaticClass();
-		case EShapeType::Custom: {
-
-			if (definition->ID == (int32)EBlockName::Terminal)
-				return ATerminalObject::StaticClass();
-			else if (definition->ID == (int32)EBlockName::Door)
-				return ADoorObject::StaticClass();
-			else if (definition->ID == (int32)EBlockName::WindowPowered)
-				return AWindowObject::StaticClass();
-			break;
-		}
-
-		default:
-
-			return nullptr;
-			break;
-		}
-
-		return nullptr;
+		// TODO
+		return true;
 	}
 
-	static  bool CheckBlockValidity(const FBlockDefinition* definition, const UBlockInfo* blockInfo, FString& reason)
+	static bool CheckBlockValidity(const UBlockDefinition* definition, const UBlockInfo* blockInfo, FString& reason)
 	{
 
 		// TODO
@@ -74,6 +54,8 @@ private:
 	}
 
 public:
+
+	//TODO delete
 	static FORCEINLINE FTransform GetSpawnTransform(const FBlockDefinition* definition, const UBlockInfo* blockInfo)
 	{
 		FTransform trans;
@@ -83,6 +65,16 @@ public:
 		return trans;
 	}
 
+	static FORCEINLINE FTransform GetSpawnTransform(const UBlockDefinition* definition, const UBlockInfo* blockInfo)
+	{
+		FTransform trans;
+		trans.SetScale3D(definition->GetMeshScale(blockInfo->Scale));
+		trans.SetLocation(GetSpawnCoords(blockInfo->Location, definition->GetObjectScale(blockInfo->Scale), blockInfo->Rotation));
+		trans.SetRotation(FQuat(blockInfo->Rotation));
+		return trans;
+	}
+
+	//TODO delete this fn
 	static UMinMaxBox* GetSpawnBox(const FBlockDefinition* definition, const UBlockInfo* blockInfo)
 	{
 		auto objectScale = definition->GetObjectScale(blockInfo->Scale).GridSnap(1);
@@ -91,6 +83,15 @@ public:
 		return NewObject<UMinMaxBox>()->InitBoxChecked((spawnCoord - scaleHalf).GridSnap(GameDefinitions::CubeMinSizeHalf), (spawnCoord + scaleHalf).GridSnap(GameDefinitions::CubeMinSizeHalf));
 	}
 
+	static UMinMaxBox* GetSpawnBox(const UBlockDefinition* definition, const UBlockInfo* blockInfo)
+	{
+		auto objectScale = definition->GetObjectScale(blockInfo->Scale).GridSnap(1);
+		auto spawnCoord = GetSpawnCoords(blockInfo->Location, objectScale, blockInfo->Rotation);
+		auto scaleHalf = blockInfo->Rotation.RotateVector(objectScale) * GameDefinitions::CubeMinSize* 0.5;
+		return NewObject<UMinMaxBox>()->InitBoxChecked((spawnCoord - scaleHalf).GridSnap(GameDefinitions::CubeMinSizeHalf), (spawnCoord + scaleHalf).GridSnap(GameDefinitions::CubeMinSizeHalf));
+	}
+
+	// TODo delete
 	static  FVector GetSpawnPoint(const FVector& ImpactPointWithSnap, const FVector& ImpactNormal, const FBlockDefinition* definition, const UBlockInfo* blockInfo) {
 
 		auto baseLocation = ImpactPointWithSnap / GameDefinitions::CubeMinSize;
@@ -98,21 +99,30 @@ public:
 
 		auto rotationScale = (blockInfo->Rotation.RotateVector(blockScale)* 0.5).GridSnap(0.5f).GetAbs();
 		auto offsetInNormal = rotationScale * ImpactNormal.GetAbs();
-		/*if (FMath::Frac(offsetInNormal.GetMax()) == 0.5)
-			return baseLocation + ImpactNormal * FVector(FMath::RoundToInt(offsetInNormal.X), FMath::RoundToInt(offsetInNormal.Y), FMath::RoundToInt(offsetInNormal.Z));
-*/
-		
 
 		auto rotationOffset = GetSpawnOffset(blockInfo->Rotation, blockScale).GridSnap(0.5f);
 
 		auto resCenAbs = ((rotationScale - ImpactNormal* rotationOffset) * ImpactNormal).GetAbs();
 
-		//if (ImpactNormal.GetMax() > 0)
-			return baseLocation + ImpactNormal * FVector(FMath::FloorToInt(resCenAbs.X), FMath::FloorToInt(resCenAbs.Y), FMath::FloorToInt(resCenAbs.Z));
-		//else    // we are heading to negative direction
-			//return baseLocation + ImpactNormal * FVector(FMath::RoundToInt(resCenAbs.X), FMath::RoundToInt(resCenAbs.Y), FMath::RoundToInt(resCenAbs.Z));
+		return baseLocation + ImpactNormal * FVector(FMath::FloorToInt(resCenAbs.X), FMath::FloorToInt(resCenAbs.Y), FMath::FloorToInt(resCenAbs.Z));
+
 	}
 
+	static  FVector GetSpawnPoint(const FVector& ImpactPointWithSnap, const FVector& ImpactNormal, const UBlockDefinition* definition, const UBlockInfo* blockInfo) {
+
+		auto baseLocation = ImpactPointWithSnap / GameDefinitions::CubeMinSize;
+		auto blockScale = definition->GetObjectScale(blockInfo->Scale);
+
+		auto rotationScale = (blockInfo->Rotation.RotateVector(blockScale)* 0.5).GridSnap(0.5f).GetAbs();
+		auto offsetInNormal = rotationScale * ImpactNormal.GetAbs();
+
+		auto rotationOffset = GetSpawnOffset(blockInfo->Rotation, blockScale).GridSnap(0.5f);
+
+		auto resCenAbs = ((rotationScale - ImpactNormal* rotationOffset) * ImpactNormal).GetAbs();
+
+		return baseLocation + ImpactNormal * FVector(FMath::FloorToInt(resCenAbs.X), FMath::FloorToInt(resCenAbs.Y), FMath::FloorToInt(resCenAbs.Z));
+
+	}
 };
 
 

@@ -2,11 +2,7 @@
 
 #pragma once
 
-#include "Commons/Public/Enums.h"
 #include "Widgets/SynchronizeWidget.h"
-#include "Blocks/Definitions/FBlockDefinition.h"
-#include "Blocks/Definitions/FBlockDefinitionHolder.h"
-#include "Blocks/Info/BuildableBlockInfo.h"
 #include "Widgets/Common/InventoryFlagItem.h"
 #include "BlockConstructorSelector.generated.h"
 
@@ -24,10 +20,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = BlockConstructorSelector, meta = (DisplayName = "Block ID", ExposeOnSpawn = true))
 		int32 BlockID;
 
-	UPROPERTY(BlueprintReadOnly, Category = BlockConstructorSelector)
-		UTexture2D* BlockTexture;
+	UPROPERTY(BlueprintReadOnly, Category = BlockConstructorSelector, meta = (DisplayName = "Block Holder", ExposeOnSpawn = true))
+		UBlockHolderComponent* BlockHolder;
 
-	FBlockDefinition* Definition;
+
+	UPROPERTY(BlueprintReadOnly, Category = BlockConstructorSelector)
+		UBlockDefinition* BlockDefinition;
 
 	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
 		bool IsDefinitionValid();
@@ -40,6 +38,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
 		TArray<FString> GetImplicitTags();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+		UTexture2D* GetBlockTexture();
 
 	virtual void SynchronizeProperties() override;
 };

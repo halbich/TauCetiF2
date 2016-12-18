@@ -9,11 +9,13 @@
 TArray<UInventoryFlagItem*> UBlockBaseInfo::GetBlockFlags()
 {
 	TArray<UInventoryFlagItem*> result;
+
+
 	if (ID == 0)
 		return result;
 
 
-	auto def = FBlockDefinitionHolder::Instance().GetDefinition(ID);
+	auto def = UBlockHolderComponent::GetInstance()->GetDefinitionFor(ID);
 	ensure(def);
 
 	for (auto fl : def->AdditionalFlags)

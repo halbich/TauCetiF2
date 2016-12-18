@@ -45,7 +45,7 @@ public:
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 
-	virtual void SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition) override;
+	virtual void SetBlockInfo(UBlockInfo* info, UBlockDefinition* definition) override;
 
 protected:
 

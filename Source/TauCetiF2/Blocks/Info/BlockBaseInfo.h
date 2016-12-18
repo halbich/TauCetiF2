@@ -5,7 +5,7 @@
 #include "Object.h"
 #include "Helpers/Saving/BlockSaveInfo.h"
 #include "Widgets/Common/InventoryFlagItem.h"
-#include "Blocks/Definitions/FBlockDefinitionHolder.h"
+#include "Blocks/Public/Components/BlockHolderComponent.h"
 #include "BlockBaseInfo.generated.h"
 
 /*

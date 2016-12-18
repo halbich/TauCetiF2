@@ -3,7 +3,7 @@
 #include "TauCetiF2.h"
 #include "EngineUtils.h"
 #include "Blocks/Public/Block.h"
-#include "AssetRegistryModule.h"
+
 #include "WorldController.h"
 
 
@@ -12,6 +12,9 @@
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+
+	BlockHolder = ObjectInitializer.CreateDefaultSubobject<UBlockHolderComponent>(this, TEXT("Block Holder"));
+
 
 	BaseControl = ObjectInitializer.CreateDefaultSubobject<UBaseControlComponent>(this, TEXT("Base Control"));
 
@@ -26,37 +29,13 @@ void AWorldController::LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks) {
 	if (!world)
 		return;
 
+	BlockHolder->instance = BlockHolder;
 
-	auto children = ABlock::StaticClass()->Children;
+	BlockHolder->ReinitializeAviableBlocks();
 
+	print(TEXT("Foud items: "));
+	print(*FString::FromInt(BlockHolder->AviableBlocks.Num()));
 
-	FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>(AssetRegistryConstants::ModuleName);
-	TArray<FAssetData> AssetData;
-	FARFilter Filter;
-	//Filter.ClassNames.Add(ABlock::StaticClass()->GetFName());
-	Filter.PackagePaths.Add("/Game/Blocks/");
-	Filter.bRecursiveClasses = true;
-	Filter.bRecursivePaths = true;
-	AssetRegistryModule.Get().GetAssets(Filter, AssetData);
-
-	for (auto a : AssetData)
-	{
-		print(TEXT("Found block"));
-		print(*a.ObjectPath.ToString());
-	}
-
-	for (TObjectIterator<ABlock> Itr; Itr; ++Itr)
-	{
-		auto o = Itr;
-
-		auto _world = o->GetWorld();
-
-		if (_world == world)
-		{
-			print(TEXT("Found block"));
-			print(*Itr->GetName());
-		}
-	}
 
 	UsedBlocks.Empty();
 	UsedBlocks.Reserve(blocks.Num());
@@ -94,7 +73,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 
 	check(RootBox != nullptr);
 
-	auto definition = FBlockDefinitionHolder::Instance().GetDefinition(block->ID, false);
+	auto definition = UBlockHolderComponent::GetInstance()->GetDefinitionFor(block->ID);
 
 	if (!definition)
 	{
@@ -119,7 +98,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 		return nullptr;
 	}
 
-	auto classBP = BlockHelpers::GetClassByShape(definition);
+	auto classBP = UBlockHolderComponent::GetInstance()->AviableBlocks[block->ID];
 
 	ensure(classBP != nullptr);
 
@@ -224,7 +203,6 @@ void AWorldController::DEBUGUsedPatternElements(const FVector & startingPoint)
 }
 
 void AWorldController::BeginPlay() {
-	print(TEXT("Cpp WC BP"));
 
 	RootBox = NewObject<UKDTree>(GetTransientPackage(), TEXT("RootBox"));
 

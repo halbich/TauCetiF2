@@ -3,33 +3,38 @@
 #pragma once
 
 #include "Widgets/TerminalBaseWidget.h"
-#include "Blocks/Definitions/FBlockDefinitionHolder.h"
 #include "Game/TauCetiF2Character.h"
 #include "BlockConstructor.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS(Blueprintable)
 class TAUCETIF2_API UBlockConstructor : public UTerminalBaseWidget
 {
 	GENERATED_BODY()
-	
+
 public:
 
 	UBlockConstructor();
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = BlockConstructorSelector)
-		TArray<int32> AllAviableBlocks;
-	
+
 	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
 		bool AddItemToInventory(int32 id, FString name, FVector dimensions, TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString> tags, UPARAM(ref)TArray<FString>& validationErrors);
-	
+
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+		TArray<int32> GetAllAviableBlocks();
+
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockConstructorSelector)
+		UBlockHolderComponent* blockHolder;
+
 private:
 	//TODO localizace
-	UBuildableBlockInfo* validate(int32 id, FVector dimensions, TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString>& validationErrors )
+	UBuildableBlockInfo* validate(int32 id, FVector dimensions, TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString>& validationErrors)
 	{
-		auto definition = FBlockDefinitionHolder::Instance().GetDefinition(id);
+		auto definition = blockHolder->GetDefinitionFor(id);
 
 		if (!definition)
 		{

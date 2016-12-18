@@ -109,8 +109,11 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 		return;
 
 	currentBlockInfo->ID = currentBuildableBlockInfo->ID;
-	if (!currentDefinitionForBlock || currentDefinitionForBlock->ID != currentBlockInfo->ID)
-		currentDefinitionForBlock = FBlockDefinitionHolder::Instance().GetDefinition(currentBuildableBlockInfo->ID);
+	if (!currentDefinitionForBlock || currentDefinitionForBlock->BlockID != currentBlockInfo->ID)
+		currentDefinitionForBlock = UBlockHolderComponent::GetInstance()->GetDefinitionFor(currentBuildableBlockInfo->ID);
+
+	if (!currentDefinitionForBlock)
+		return;
 
 	currentBlockInfo->Rotation = currentBuildableBlockInfo->DefaultBuildingRotation;
 	currentBlockInfo->Scale = currentBuildableBlockInfo->Scale;

@@ -31,7 +31,7 @@ void  AWorldObject::OnConstruction(const FTransform& Transform) {
 	check(WorldObjectComponent != nullptr && WorldObjectComponent->BlockInfo != nullptr);
 
 
-	auto definition = FBlockDefinitionHolder::Instance().GetDefinition(WorldObjectComponent->BlockInfo->ID);
+	auto definition = UBlockHolderComponent::GetInstance()->GetDefinitionFor(WorldObjectComponent->BlockInfo->ID);
 
 	auto scale = GetActorScale3D();
 
@@ -105,11 +105,11 @@ void AWorldObject::BeginPlay() {
 
 }
 
-void AWorldObject::SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition)
+
+void AWorldObject::SetBlockInfo(UBlockInfo* info, UBlockDefinition* definition)
 {
 	WorldObjectComponent->BlockInfo = info;
 }
-
 
 UStaticMeshComponent* AWorldObject::GetPrimitiveComponentByName(const FName& name)
 {

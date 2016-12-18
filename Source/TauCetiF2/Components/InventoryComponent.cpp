@@ -31,6 +31,11 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 	Subscriber.BindUObject(this, &UInventoryComponent::InventoryTagsSelectionChanged);
 	ListeningHandle = InventoryTags->AddEventListener(Subscriber);
 
+
+	auto blockRef = UBlockHolderComponent::GetInstance();
+
+	check (blockRef)
+
 	BuildableItems = TArray<UBuildableBlockInfo*>(carrier->BuildableBlocks);
 
 	ForceItemsChanged(false);

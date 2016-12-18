@@ -40,7 +40,7 @@ public:
 
 	FDelegateHandle ListeningHandle;
 
-	virtual void SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition) override;
+	virtual void SetBlockInfo(UBlockInfo* info, UBlockDefinition* definition) override;
 
 protected:
 

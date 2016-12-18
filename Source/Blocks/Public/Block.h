@@ -3,6 +3,7 @@
 #include "GameFramework/Actor.h"
 #include "GenericBlock.h"
 #include "BlockDefinition.h"
+#include "BlockAdditionalFlags.h"
 #include "Block.generated.h"
 
 UCLASS()
@@ -15,6 +16,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		TSubclassOf<UBlockDefinition> Definition;
+
+	/*UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
+		TSubclassOf<UBuildDefinition> BuildDefinition;*/
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 

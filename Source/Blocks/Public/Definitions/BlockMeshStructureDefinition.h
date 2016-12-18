@@ -11,10 +11,10 @@
 USTRUCT(BlueprintType)
 struct FBlockMeshStructureDefinition
 {
-	GENERATED_BODY()
+	GENERATED_BODY();
 
 
-		UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		UStaticMesh* Mesh;
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block", meta = (ShowOnlyInnerProperties))

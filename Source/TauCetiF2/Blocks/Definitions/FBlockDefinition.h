@@ -39,7 +39,7 @@ public:
 
 	int32 BuilderSortIndex;
 
-	TArray<FBlockAdditionalFlagsDefinition> AdditionalFlags;
+	//TArray<FBlockAdditionalFlagsDefinition> AdditionalFlags;
 
 	FORCEINLINE void SetCustomScale(FVector meshScale, FVector worldObjectScale)
 	{
@@ -68,34 +68,34 @@ public:
 		return min && max;
 	}
 
-	FORCEINLINE bool ValidateFlags(TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString>& validationErrors)
-	{
-		for (auto definedFlag : AdditionalFlags)
-		{
-			auto index = flagNames.IndexOfByKey(definedFlag.TagID);
-			if (index == INDEX_NONE)
-			{
-				validationErrors.Add(TEXT("nenalezen index flagu"));
-				return false;
-			}
+	//FORCEINLINE bool ValidateFlags(TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString>& validationErrors)
+	//{
+	//	for (auto definedFlag : AdditionalFlags)
+	//	{
+	//		auto index = flagNames.IndexOfByKey(definedFlag.TagID);
+	//		if (index == INDEX_NONE)
+	//		{
+	//			validationErrors.Add(TEXT("nenalezen index flagu"));
+	//			return false;
+	//		}
 
-			if (!flagValues.IsValidIndex(index))
-			{
-				validationErrors.Add(TEXT(" nenalezena hodnota flagu"));
-				return false;
-			}
+	//		if (!flagValues.IsValidIndex(index))
+	//		{
+	//			validationErrors.Add(TEXT(" nenalezena hodnota flagu"));
+	//			return false;
+	//		}
 
-			auto value = flagValues[index];
+	//		auto value = flagValues[index];
 
-			if (definedFlag.PossibleValues.IndexOfByPredicate([value](const FBlockFlagValue& v) { return v.Value == value; }) == INDEX_NONE)
-			{
-				validationErrors.Add(TEXT(""));
-				return false;
-			}
+	//		if (definedFlag.PossibleValues.IndexOfByPredicate([value](const FBlockFlagValue& v) { return v.Value == value; }) == INDEX_NONE)
+	//		{
+	//			validationErrors.Add(TEXT(""));
+	//			return false;
+	//		}
 
-		}
+	//	}
 
-		return true;
-	}
+	//	return true;
+	//}
 };
 

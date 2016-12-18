@@ -138,7 +138,7 @@ void  AWindowObject::OnConstruction(const FTransform& Transform) {
 
 
 
-void AWindowObject::SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition)
+void AWindowObject::SetBlockInfo(UBlockInfo* info, UBlockDefinition* definition)
 {
 	AWorldObject::SetBlockInfo(info, definition);
 

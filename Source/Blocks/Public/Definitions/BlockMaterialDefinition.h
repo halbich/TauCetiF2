@@ -11,10 +11,10 @@
 USTRUCT(BlueprintType)
 struct  FBlockMaterialDefinition
 {
-	GENERATED_BODY()
+	GENERATED_BODY();
 
 
-		UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		UMaterial* DefaultMat;
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
@@ -23,7 +23,7 @@ struct  FBlockMaterialDefinition
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		EApplyScaleToMaterialParam KX;
 
-	UPROPERTY(EditDefaultsOnly,  Category = "TCF2 | Block")
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		EApplyScaleToMaterialParam KY;
 
 

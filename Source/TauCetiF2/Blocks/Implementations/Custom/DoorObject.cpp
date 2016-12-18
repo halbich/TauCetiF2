@@ -109,7 +109,7 @@ void ADoorObject::Tick(float DeltaSeconds)
 	updateDoorState(currentTrans, openingConstant);
 }
 
-void ADoorObject::SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition)
+void ADoorObject::SetBlockInfo(UBlockInfo* info, UBlockDefinition* definition)
 {
 	AWorldObject::SetBlockInfo(info, definition);
 

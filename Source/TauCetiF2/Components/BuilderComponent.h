@@ -8,7 +8,7 @@
 #include "Blocks/Info/BuildableBlockInfo.h"
 #include "World/WorldController.h"
 #include "Blocks/WorldObject.h"
-#include "Blocks/Definitions/FBlockDefinitionHolder.h"
+#include "Blocks/Public/Components/BlockHolderComponent.h"
 #include "Helpers/BlockHelpers.h"
 #include "BuilderComponent.generated.h"
 
@@ -28,26 +28,26 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		USelectorComponent* selector;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		AWorldController* worldController;
 
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UBuildableBlockInfo* currentBuildableBlockInfo;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UBlockInfo* currentBlockInfo;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		AWorldObject* currentSpawnedObject;
 
-	FBlockDefinition* currentDefinitionForBlock;
+	UPROPERTY(Transient)
+		UBlockDefinition* currentDefinitionForBlock;
 
-
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TMap<UBuildableBlockInfo*, AWorldObject*> usedObjects;
 
 
@@ -57,10 +57,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
 		void SetWorldController(AWorldController* controller);
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		bool ForceRecomputePosition;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		ACharacter* character;
 
 	void DoAction() {

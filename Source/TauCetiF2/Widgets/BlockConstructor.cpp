@@ -6,8 +6,6 @@
 
 UBlockConstructor::UBlockConstructor() {
 
-	FBlockDefinitionHolder::Instance().GetAllDefinitions(AllAviableBlocks);
-
 }
 
 
@@ -36,4 +34,22 @@ bool UBlockConstructor::AddItemToInventory(int32 id, FString name, FVector dimen
 }
 
 
+TArray<int32> UBlockConstructor::GetAllAviableBlocks()
+{
+
+	if (blockHolder && blockHolder->IsValidLowLevel())
+	{
+		return blockHolder->GetAviableItems();
+	}
+
+
+	TArray<int32> result;
+
+	blockHolder = UBlockHolderComponent::GetInstance();
+
+	if (!blockHolder)
+		return result;
+
+	return blockHolder->GetAviableItems();
+}
 

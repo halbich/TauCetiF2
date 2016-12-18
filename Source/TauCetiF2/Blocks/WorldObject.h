@@ -36,7 +36,7 @@ public:
 	virtual void BeginPlay() override;
 
 
-	virtual void SetBlockInfo(UBlockInfo* info, FBlockDefinition* definition);
+	virtual void SetBlockInfo(UBlockInfo* info, UBlockDefinition* definition);
 
 protected:
 
