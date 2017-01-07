@@ -42,13 +42,13 @@ public:
 		UBlockInfo* currentBlockInfo;
 
 	UPROPERTY(Transient)
-		AWorldObject* currentSpawnedObject;
+		ABlock* currentSpawnedObject;
 
 	UPROPERTY(Transient)
 		UBlockDefinition* currentDefinitionForBlock;
 
 	UPROPERTY(Transient)
-		TMap<UBuildableBlockInfo*, AWorldObject*> usedObjects;
+		TMap<UBuildableBlockInfo*, ABlock*> usedObjects;
 
 
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)

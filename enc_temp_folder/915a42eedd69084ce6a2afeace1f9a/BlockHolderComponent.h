@@ -22,17 +22,14 @@ public:
 
 	void ReinitializeAviableBlocks();
 
-	// Holder for aviable building block. Key is block's UID
 	UPROPERTY(BlueprintReadonly, VisibleAnywhere, Transient, Category = "Blocks")
 		TMap<int32, TSubclassOf<ABlock>> AviableBlocks;
 
-	// Cache for obtaining block behavior
 	UPROPERTY(BlueprintReadonly, VisibleAnywhere, Transient, Category = "Blocks")
 		TMap<int32, UBlockDefinition*> AviableBlocksDefinitionCache;
 
 	UBlockDefinition* GetDefinitionFor(int32 ID);
 
-	// Returns all aviable UIDs of aviable blocks
 	TArray<int32> GetAviableItems();
 
 	static UBlockHolderComponent* instance;

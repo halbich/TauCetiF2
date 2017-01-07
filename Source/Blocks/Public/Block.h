@@ -17,8 +17,8 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		TSubclassOf<UBlockDefinition> Definition;
 
-	/*UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
-		TSubclassOf<UBuildDefinition> BuildDefinition;*/
+	/*UPROPERTY(EditInstanceOnly, Transient, Category = "TCF2 | Block")
+		UBlockInfo* BlockInfo;*/
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
@@ -32,6 +32,8 @@ public:
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual FVector GetBlockScale();
+
+	//virtual void SetBlockInfo(UBlockInfo* info);
 
 private:
 

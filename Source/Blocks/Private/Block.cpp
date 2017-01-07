@@ -93,4 +93,10 @@ FVector ABlock::GetBlockScale()
 	return GetActorScale3D();
 }
 
+//void ABlock::SetBlockInfo(UBlockInfo* info)
+//{
+//	//TODO
+//	//BlockInfo = info;
+//}
+
 #pragma optimize("",on)

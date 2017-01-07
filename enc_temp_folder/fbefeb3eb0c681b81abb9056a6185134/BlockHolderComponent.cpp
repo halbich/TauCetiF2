@@ -102,7 +102,7 @@ void UBlockHolderComponent::tryAddBlockToAviables(UClass* blockClass)
 	else
 	{
 		// TODO better approach
-		print(TEXT("Key already existed! Skipping block"));
+		print(TEXT("Kay already existed! Skipping"));
 	}
 
 }

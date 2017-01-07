@@ -66,7 +66,7 @@ bool AWorldController::DestroyWorldObject(AWorldObject* object)
 }
 
 // TODO inline!
-AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot)
+ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot)
 {
 	if (!block)
 		return nullptr;
@@ -103,7 +103,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 	ensure(classBP != nullptr);
 
 	auto trans = BlockHelpers::GetSpawnTransform(definition, block);
-	auto actor = world->SpawnActorDeferred<AWorldObject>(classBP, trans, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+	auto actor = world->SpawnActorDeferred<ABlock>(classBP, trans, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
 
 	if (!actor)
 	{
@@ -112,11 +112,11 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 		return nullptr;
 	}
 
-	actor->SetBlockInfo(block, definition);
+	//actor->SetBlockInfo(block, definition);
 
 	if (addToRoot) {
 
-		auto MinMax = NewObject<UKDTree>()->Init(box);
+		/*auto MinMax = NewObject<UKDTree>()->Init(box);
 		MinMax->ContainingObject = actor;
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 
@@ -127,7 +127,7 @@ AWorldObject* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* bloc
 		{
 			check(usedBox->GetRootNode<UKDTree>() == RootBox && TEXT("Used box don't have RootBox as ROOT !"));
 			check(usedBox->ContainingObject == actor && TEXT("Used box has another ContainingObject than it should have!"));
-		}
+		}*/
 
 		//MinMax->DEBUGDrawContainingBox(GetWorld());
 

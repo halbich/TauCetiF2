@@ -17,7 +17,7 @@ namespace BuildDefinition {
 
 
 /**
- * Class for definition of how block behave in game
+ *
  */
 UCLASS(Blueprintable)
 class BLOCKS_API UBlockDefinition : public UObject
