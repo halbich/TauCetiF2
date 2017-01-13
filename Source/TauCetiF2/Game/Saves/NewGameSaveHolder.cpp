@@ -91,13 +91,14 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 
 	auto buildable = &c->BuildableBlocks;
 
-	auto door = makeBuildable(EBlockName::Door, FVector(7, 7, 11));
+	//TODO
+	/*auto door = makeBuildable(EBlockName::Door, FVector(7, 7, 11));
 	door->AdditionalFlags.Add(GetNameForTag(ENamedTag::DoorOpening), (int32)EDoorOpening::Right);
 	door->Name = TEXT("Dveøe");
-	buildable->Add(door);
+	buildable->Add(door);*/
 
-	buildable->Add(makeBuildable(EBlockName::BaseCube, FVector(20, 20, 4)));
-	buildable->Add(makeBuildable(EBlockName::BaseRamp, FVector(7, 7, 4)));
+	/*buildable->Add(makeBuildable(EBlockName::BaseCube, FVector(20, 20, 4)));
+	buildable->Add(makeBuildable(EBlockName::BaseRamp, FVector(7, 7, 4)));*/
 
 	auto UsedBlocks = &c->UsedBlocks;
 
@@ -145,7 +146,8 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave()
 
 	auto UsedBlocks = &c->UsedBlocks;
 
-	UsedBlocks->Add(make(EBlockName::WindowCube, FVector(-11, 3, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
+	// TODO
+	/*UsedBlocks->Add(make(EBlockName::WindowCube, FVector(-11, 3, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));
 	UsedBlocks->Add(make(EBlockName::BaseCube, FVector(-10, 6, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));
 	UsedBlocks->Add(make(EBlockName::BaseCube, FVector(-10, 1, 0), FVector(1, 1, 4), FRotator(90, 0, 0)));
 	UsedBlocks->Add(make(EBlockName::BaseCube, FVector(-13, 4, 0), FVector(1, 1, 4), FRotator(90, 90, 0)));
@@ -166,7 +168,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave()
 	UsedBlocks->Add(make(EBlockName::BaseCube, FVector(-10, 1, 5), FVector(1, 1, 4), FRotator(0, 270, 270)));
 	UsedBlocks->Add(make(EBlockName::WindowCube, FVector(-8, 3, 3), FVector(4, 4, 1), FRotator(0, 90, 90)));
 	UsedBlocks->Add(make(EBlockName::BaseCube, FVector(-13, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(EBlockName::BaseCube, FVector(-8, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	UsedBlocks->Add(make(EBlockName::BaseCube, FVector(-8, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));*/
 
 	return c;
 }

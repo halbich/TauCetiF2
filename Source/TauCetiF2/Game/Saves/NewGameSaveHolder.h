@@ -69,17 +69,18 @@ private:
 
 	}
 
-	FORCEINLINE UBlockInfo* make(EBlockName id, FVector location, FVector blockScale, FRotator blockRotation)
+	// TODO
+	/*FORCEINLINE UBlockInfo* make(EBlockName id, FVector location, FVector blockScale, FRotator blockRotation)
 	{
 		return make((int32)id, location, blockScale, blockRotation);
-	}
+	}*/
 
-	FORCEINLINE UBuildableBlockInfo* makeBuildable(EBlockName id, FVector blockScale)
+	/*FORCEINLINE UBuildableBlockInfo* makeBuildable(EBlockName id, FVector blockScale)
 	{
 		auto ret = NewObject<UBuildableBlockInfo>(this);
 		ret->ID = (int32)id;
 		ret->Scale = blockScale;
 		ret->AddImplicitTags();
 		return ret;
-	}
+	}*/
 };

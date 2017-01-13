@@ -51,10 +51,10 @@ private:
 
 	}
 
-	FORCEINLINE UBlockInfo* make(EBlockName id, FVector location, FVector blockScale, FRotator blockRotation)
+	/*FORCEINLINE UBlockInfo* make(EBlockName id, FVector location, FVector blockScale, FRotator blockRotation)
 	{
 		return make((int32)id, location, blockScale, blockRotation);
-	}
+	}*/
 
 	FORCEINLINE UPatternGroup* getGroup(int32 id)
 	{
@@ -85,8 +85,8 @@ private:
 		{
 			for (auto blockElem : definition->UsedBlocks)
 			{
-
-				auto group = getGroup(blockElem->ID);
+				// TODO 
+				/*auto group = getGroup(blockElem->ID);
 				if (FBlockDefinitionHolder::Instance().ShapeCanBeSubdivided(group->Definition->ShapeType))
 				{
 					UE_LOG(LogTemp, Warning, TEXT("INIT"));
@@ -94,7 +94,7 @@ private:
 				else
 				{
 					group->Insert(blockElem);
-				}
+				}*/
 			}
 		}
 	}

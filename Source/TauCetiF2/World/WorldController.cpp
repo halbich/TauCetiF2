@@ -46,14 +46,16 @@ void AWorldController::LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks) {
 
 }
 
-bool AWorldController::DestroyWorldObject(AWorldObject* object)
+bool AWorldController::DestroyWorldObject(/*AWorldObject*/UObject* object)
 {
 	if (!object || !object->IsValidLowLevel() || object->IsPendingKill())
 		return false;
 
-	auto count = UsedBlocks.Remove(object->WorldObjectComponent->BlockInfo);
-	check(count == 1 && "Failed to remove block info.");
-	object->Destroy();
+	// TODO
+
+	/*auto count = UsedBlocks.Remove(object->WorldObjectComponent->BlockInfo);
+	check(count == 1 && "Failed to remove block info.");*/
+	//object->Destroy();
 
 	if (debugBoxesShown) {
 		DEBUGHideMinMaxBoxes();
@@ -91,12 +93,13 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	}
 
 	FString invalidReason;
-	bool isValid = BlockHelpers::CheckBlockValidity(definition, block, invalidReason);
-	if (!isValid)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Blok není validní. Dùvod: %s. nechávám"), *invalidReason);
-		return nullptr;
-	}
+	// TODO
+	//bool isValid = BlockHelpers::CheckBlockValidity(definition, block, invalidReason);
+	//if (!isValid)
+	//{
+	//	UE_LOG(LogTemp, Error, TEXT("Blok není validní. Dùvod: %s. nechávám"), *invalidReason);
+	//	return nullptr;
+	//}
 
 	auto classBP = UBlockHolderComponent::GetInstance()->AviableBlocks[block->ID];
 

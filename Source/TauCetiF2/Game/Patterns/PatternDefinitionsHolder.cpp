@@ -45,7 +45,8 @@ TArray<UBlockInfo*> UPatternDefinitionsHolder::DEBUGUsedPatternElements(const FV
 			auto NewBlock = NewObject<UBlockInfo>(this, NAME_None, RF_NoFlags, elem->BlockInfo);
 			NewBlock->Location = FVector::ZeroVector;
 
-			auto box = BlockHelpers::GetSpawnBox(gr->Definition, NewBlock);
+			// TODO
+			/*auto box = BlockHelpers::GetSpawnBox(gr->Definition, NewBlock);
 
 			auto localStartDim = currentStartDim - box->MinWorldCoord ;
 
@@ -53,7 +54,7 @@ TArray<UBlockInfo*> UPatternDefinitionsHolder::DEBUGUsedPatternElements(const FV
 			result.Add(NewBlock);
 
 			currentStartDim +=  FVector(0, FMath::Abs(box->MaxWorldCoord.Y - box->MinWorldCoord.Y) +5, 0);
-			currentXMax = FMath::Max(currentXMax, FMath::Abs(box->MaxWorldCoord.X - box->MinWorldCoord.X));
+			currentXMax = FMath::Max(currentXMax, FMath::Abs(box->MaxWorldCoord.X - box->MinWorldCoord.X));*/
 		}
 
 		startDim += FVector(currentXMax + 5, 0, 0);
@@ -70,7 +71,8 @@ UPatternDefinitionsHolder::UPatternDefinitionsHolder(const FObjectInitializer& O
 
 void UPatternDefinitionsHolder::Init()
 {
-	auto blockDefinitions = FBlockDefinitionHolder::Instance().GetDefinition((int32)EBlockName::ConstructCubeSide);
+	//TODO
+	/*auto blockDefinitions = FBlockDefinitionHolder::Instance().GetDefinition((int32)EBlockName::ConstructCubeSide);
 
 	auto test1 = NewObject<UPatternDefinition>(this);
 
@@ -118,7 +120,7 @@ void UPatternDefinitionsHolder::Init()
 	testSide->SetRotationsFullYaw();
 
 	testSide->InitData();
-	UsedDefinitions.Add(testSide);
+	UsedDefinitions.Add(testSide);*/
 }
 
 UPatternDefinitionsHolder* UPatternDefinitionsHolder::Instance()

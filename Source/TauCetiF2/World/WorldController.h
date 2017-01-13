@@ -49,7 +49,7 @@ public:
 
 	ABlock* SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot);
 
-	bool DestroyWorldObject(AWorldObject* object);
+	bool DestroyWorldObject(/*AWorldObject*/UObject* object);
 
 	FORCEINLINE bool IsValidSpawnPoint(const UMinMaxBox* box)
 	{

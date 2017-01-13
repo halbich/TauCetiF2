@@ -75,23 +75,23 @@ public:
 	}
 
 
-	static FORCEINLINE UBuildableBlockInfo* GetDefaultBuildableForID(int32 id)
-	{
-		auto res = NewObject<UBuildableBlockInfo>();
-		//TODO
-		res->ID = id;
+	//static FORCEINLINE UBuildableBlockInfo* GetDefaultBuildableForID(int32 id)
+	//{
+	//	auto res = NewObject<UBuildableBlockInfo>();
+	//	//TODO
+	//	res->ID = id;
 
-		switch (id)
-		{
-		case (int32)EBlockName::Door:
-			res->DefaultBuildingRotation = FRotator(0, 90, 0);
-			break;
-		default:
-			break;
-		}
+	//	switch (id)
+	//	{
+	//	case (int32)EBlockName::Door:
+	//		res->DefaultBuildingRotation = FRotator(0, 90, 0);
+	//		break;
+	//	default:
+	//		break;
+	//	}
 
-		return res;
-	}
+	//	return res;
+	//}
 
 
 	FORCEINLINE void AddImplicitTags()

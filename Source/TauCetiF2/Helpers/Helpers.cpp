@@ -81,9 +81,9 @@ UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
 		return GetTexture2DByName(*FString::Printf(*baseFolder, TEXT("EmptyHand.EmptyHand'")));
 
 
+	// TODO
 
-
-	auto id = (EBlockName)blockInfo->ID;
+	/*auto id = (EBlockName)blockInfo->ID;
 
 	switch (id)
 	{
@@ -114,8 +114,8 @@ UTexture2D* UHelpers::GetTexture2DForBlock(UBuildableBlockInfo* blockInfo)
 
 	default:
 		return nullptr;
-	}
-
+	}*/
+	return nullptr;
 }
 
 

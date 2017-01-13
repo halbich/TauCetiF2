@@ -76,8 +76,9 @@ public:
 			if (!selector->SelectedTarget)
 				return;
 
-			if (worldController->DestroyWorldObject(selector->SelectedTarget))
-				print(TEXT("deletion seccessfull"));
+			// TODO
+			//if (worldController->DestroyWorldObject(selector->SelectedTarget))
+				print(TEXT("TODO! deletion seccessfull"));
 
 			return;
 		case EBuildableObjectAction::ConstructObject:

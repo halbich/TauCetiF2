@@ -7,8 +7,8 @@
 #include "Helpers/Helpers.h"
 #include "KDTree.generated.h"
 
-class AWorldObject;
-class UWorldObjectComponent;
+//class AWorldObject;
+//class UWorldObjectComponent;
 
 /**
  *
@@ -33,7 +33,7 @@ public:
 		UKDTree* B2;
 
 	UPROPERTY()
-		AWorldObject* ContainingObject;
+		ABlock* ContainingObject;
 
 	UPROPERTY()
 		int32 DividingIndex;
@@ -52,8 +52,8 @@ public:
 
 	void AddToTree(UKDTree* box, bool forceInsert = false);
 	bool IsPlaceEmpty(const UMinMaxBox* box);
-	void GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement = nullptr);
-	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement);
+	/*void GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement = nullptr);
+	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement);*/
 
 	void UpdateAfterChildDestroyed();
 

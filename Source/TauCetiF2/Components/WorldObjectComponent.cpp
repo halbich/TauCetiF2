@@ -43,33 +43,35 @@ void UWorldObjectComponent::BeginPlay()
 
 	//surroundings->DEBUGDrawSurrondings(GetWorld());
 
-	TArray<AWorldObject*> items;
-	//TreeElements[0]->DEBUGDrawSurrondings(GetWorld(), FColor::Black);
-	TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items, this);
-	//print(TEXT("surroundings:"));
+	// TODO
 
-	TArray<UMinMaxTree*> usedTrees;
+	//TArray<AWorldObject*> items;
+	////TreeElements[0]->DEBUGDrawSurrondings(GetWorld(), FColor::Black);
+	//TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items, this);
+	////print(TEXT("surroundings:"));
 
-	for (auto object : items)
-	{
-		if (!object || !object->IsValidLowLevelFast())
-			continue;
+	//TArray<UMinMaxTree*> usedTrees;
 
-		auto woc = object->WorldObjectComponent;
-		if (!woc || !woc->IsValidLowLevel())
-			continue;
+	//for (auto object : items)
+	//{
+	//	if (!object || !object->IsValidLowLevelFast())
+	//		continue;
 
-		ensure(woc->BuildingTree);
-		usedTrees.AddUnique(woc->BuildingTree->GetRoot());
-		print(*woc->DefiningBox->ContainingObject->GetName());
-	}
+	//	auto woc = object->WorldObjectComponent;
+	//	if (!woc || !woc->IsValidLowLevel())
+	//		continue;
 
-	for (auto rootObj : usedTrees)
-	{
-		rootObj->Insert(BuildingTree);
-	}
+	//	ensure(woc->BuildingTree);
+	//	usedTrees.AddUnique(woc->BuildingTree->GetRoot());
+	//	print(*woc->DefiningBox->ContainingObject->GetName());
+	//}
 
-	BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
+	//for (auto rootObj : usedTrees)
+	//{
+	//	rootObj->Insert(BuildingTree);
+	//}
+
+	//BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
 }
 
 

@@ -3,17 +3,17 @@
 #pragma once
 
 #include "Blocks/WorldObject.h"
-#include "CubeBodyObject.generated.h"
+//#include "CubeBodyObject.generated.h"
 
 /**
  *
  */
-UCLASS()
-class TAUCETIF2_API ACubeBodyObject : public AWorldObject
-{
-	GENERATED_UCLASS_BODY()
-
-public:
-
-
-};
+//UCLASS()
+//class TAUCETIF2_API ACubeBodyObject : public AWorldObject
+//{
+//	GENERATED_UCLASS_BODY()
+//
+//public:
+//
+//
+//};

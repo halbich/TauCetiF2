@@ -42,8 +42,9 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 	{
 		SingleChild = box;
 		box->SetParent(this);
-		SingleChild->ContainingObject->WorldObjectComponent->TreeElements.Add(box);
-		SingleChild->ContainingObject->WorldObjectComponent->OnTreeElementsChanged();
+		//TODO
+		//SingleChild->ContainingObject->WorldObjectComponent->TreeElements.Add(box);
+		//SingleChild->ContainingObject->WorldObjectComponent->OnTreeElementsChanged();
 		return;
 	}
 
@@ -51,8 +52,9 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 	if (SingleChild && !forceInsert)
 	{
 		SingleChild->SetParent(nullptr);
-		SingleChild->ContainingObject->WorldObjectComponent->TreeElements.Remove(SingleChild);// this box could be split
-		SingleChild->ContainingObject->WorldObjectComponent->OnTreeElementsChanged();
+		// TODO
+		//SingleChild->ContainingObject->WorldObjectComponent->TreeElements.Remove(SingleChild);// this box could be split
+		//SingleChild->ContainingObject->WorldObjectComponent->OnTreeElementsChanged();
 		AddToTree(SingleChild, true); // forcing to insert
 
 		SingleChild = nullptr;
@@ -200,73 +202,74 @@ bool UKDTree::isPlaceEmptySingleChild(const UMinMaxBox* box)
 
 
 
-void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement)
-{
-	if (!(GtMin(box->Min) && LtMax(box->Max)))
-		return;
-
-	if (SingleChild)
-	{
-		if (!ignoreElement || !ignoreElement->IsValidLowLevel())
-			return;
-
-		if (SingleChild->ContainingObject == ignoreElement->DefiningBox->ContainingObject ||
-			SingleChild->ContainingObject->WorldObjectComponent->BlockInfo->ID != ignoreElement->BlockInfo->ID)
-			return;
-
-		if (outArray.Contains(SingleChild->ContainingObject))
-			return;
-
-		if (!HasCommonBoundaries(SingleChild->ContainingObject->WorldObjectComponent->DefiningBox, ignoreElement->DefiningBox))
-			return;
-
-		outArray.Add(SingleChild->ContainingObject);
-		SingleChild->ContainingObject->WorldObjectComponent->DefiningBox->DEBUGDrawSurrondings(SingleChild->ContainingObject->GetWorld(), FColor::Red);
-		return;
-	}
-
-	if (sum(box->Max * DividingCoord) <= DividingCoordValue)		// whole object is in left plane
-	{
-		if (!B1)
-			return;
-		B1->GetContainingObjects(box, outArray, ignoreElement);
-		return;
-	}
-
-	if (sum(box->Min *DividingCoord) >= DividingCoordValue)		// whole object is in right plane
-	{
-		if (!B2)
-			return;
-		B2->GetContainingObjects(box, outArray, ignoreElement);
-		return;
-	}
-
-	// object is in between. We need to split and then add object to both branches
-
-	UMinMaxBox* newB1 = NewObject<UMinMaxBox>()->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
-	UMinMaxBox* newB2 = NewObject<UMinMaxBox>()->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
-
-
-	GetContainingObjects(newB1, outArray, ignoreElement);
-	GetContainingObjects(newB2, outArray, ignoreElement);
-
-
-}
-
-void UKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement)
-{
-	if (!(GtMin(box->Min) && LtMax(box->Max)))
-	{
-		auto parent = GetParent();
-		ensure(parent != nullptr);
-		parent->GetContainingObjectsFromBottom(box, outArray, ignoreElement);
-		return;
-	}
-
-	GetContainingObjects(box, outArray, ignoreElement);
-
-
-}
+//void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement)
+//{
+//	if (!(GtMin(box->Min) && LtMax(box->Max)))
+//		return;
+//
+//	if (SingleChild)
+//	{
+//		// TODO
+//		/*if (!ignoreElement || !ignoreElement->IsValidLowLevel())
+//			return;
+//
+//		if (SingleChild->ContainingObject == ignoreElement->DefiningBox->ContainingObject ||
+//			SingleChild->ContainingObject->WorldObjectComponent->BlockInfo->ID != ignoreElement->BlockInfo->ID)
+//			return;
+//
+//		if (outArray.Contains(SingleChild->ContainingObject))
+//			return;
+//
+//		if (!HasCommonBoundaries(SingleChild->ContainingObject->WorldObjectComponent->DefiningBox, ignoreElement->DefiningBox))
+//			return;
+//
+//		outArray.Add(SingleChild->ContainingObject);
+//		SingleChild->ContainingObject->WorldObjectComponent->DefiningBox->DEBUGDrawSurrondings(SingleChild->ContainingObject->GetWorld(), FColor::Red);*/
+//		return;
+//	}
+//
+//	if (sum(box->Max * DividingCoord) <= DividingCoordValue)		// whole object is in left plane
+//	{
+//		if (!B1)
+//			return;
+//		B1->GetContainingObjects(box, outArray, ignoreElement);
+//		return;
+//	}
+//
+//	if (sum(box->Min *DividingCoord) >= DividingCoordValue)		// whole object is in right plane
+//	{
+//		if (!B2)
+//			return;
+//		B2->GetContainingObjects(box, outArray, ignoreElement);
+//		return;
+//	}
+//
+//	// object is in between. We need to split and then add object to both branches
+//
+//	UMinMaxBox* newB1 = NewObject<UMinMaxBox>()->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
+//	UMinMaxBox* newB2 = NewObject<UMinMaxBox>()->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
+//
+//
+//	GetContainingObjects(newB1, outArray, ignoreElement);
+//	GetContainingObjects(newB2, outArray, ignoreElement);
+//
+//
+//}
+//
+//void UKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement)
+//{
+//	if (!(GtMin(box->Min) && LtMax(box->Max)))
+//	{
+//		auto parent = GetParent();
+//		ensure(parent != nullptr);
+//		parent->GetContainingObjectsFromBottom(box, outArray, ignoreElement);
+//		return;
+//	}
+//
+//	GetContainingObjects(box, outArray, ignoreElement);
+//
+//
+//}
 
 void UKDTree::UpdateAfterChildDestroyed()
 {

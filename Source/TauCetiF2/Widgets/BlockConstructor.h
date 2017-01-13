@@ -51,7 +51,9 @@ private:
 		if (!definition->ValidateFlags(flagNames, flagValues, validationErrors))
 			return nullptr;
 
-		auto res = UBuildableBlockInfo::GetDefaultBuildableForID(id);
+
+		// TODO 
+		/*auto res = UBuildableBlockInfo::GetDefaultBuildableForID(id);
 
 		res->Scale = dimensions;
 
@@ -60,7 +62,7 @@ private:
 			res->AdditionalFlags.Add(flagNames[i], flagValues[i]);
 		}
 
-		return res;
-
+		return res;*/
+		return nullptr;
 	}
 };

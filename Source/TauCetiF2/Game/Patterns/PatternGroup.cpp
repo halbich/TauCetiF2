@@ -4,7 +4,7 @@
 #include "PatternGroup.h"
 
 
-UPatternGroup::UPatternGroup() : UObject(), Definition(nullptr)
+UPatternGroup::UPatternGroup() : UObject()
 {
 
 }
