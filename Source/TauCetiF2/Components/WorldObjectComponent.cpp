@@ -23,8 +23,9 @@ void UWorldObjectComponent::BeginPlay()
 
 	ensure(BlockInfo);
 
-	if (BlockInfo->UnderConstruction)
-		return;
+	// TODO?
+	//if (BlockInfo->UnderConstruction)
+		//return;
 
 	ensure(BuildingTree);
 
@@ -39,7 +40,7 @@ void UWorldObjectComponent::BeginPlay()
 	RootBox = TreeElements[0]->GetRootNode<UKDTree>(true);
 	ensure(RootBox != nullptr);
 
-	auto surroundings = NewObject<UKDTree>()->Init(DefiningBox, RootBox);
+	auto surroundings = NewObject<UKDTree>(this)->Init(DefiningBox, RootBox);
 
 	//surroundings->DEBUGDrawSurrondings(GetWorld());
 
@@ -90,7 +91,7 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 	DefiningBox = definingBox;
 	ensure(DefiningBox != nullptr);
 
-	BuildingTree = NewObject<UMinMaxTree>()->Init(DefiningBox);
+	BuildingTree = NewObject<UMinMaxTree>(this)->Init(DefiningBox);
 
 }
 

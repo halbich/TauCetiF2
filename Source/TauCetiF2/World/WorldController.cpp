@@ -33,6 +33,7 @@ void AWorldController::LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks) {
 
 	BlockHolder->ReinitializeAviableBlocks();
 
+
 	print(TEXT("Foud items: "));
 	print(*FString::FromInt(BlockHolder->AviableBlocks.Num()));
 

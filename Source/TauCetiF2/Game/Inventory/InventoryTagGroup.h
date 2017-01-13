@@ -51,7 +51,7 @@ public:
 
 		for (auto groupList : invTagGroup.GroupList)
 		{
-			auto gl = NewObject<UTagGroup>();
+			auto gl = NewObject<UTagGroup>(this);
 			gl->FromContainer(groupList);
 			GroupList.Add(gl);
 		}

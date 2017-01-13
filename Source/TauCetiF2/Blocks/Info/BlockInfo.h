@@ -27,8 +27,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
 		FRotator Rotation;
 
-	UPROPERTY()
-		bool UnderConstruction;
 
 	FORCEINLINE FBlockInfo ToContainer() {
 		FBlockInfo result = ToBaseContainer();

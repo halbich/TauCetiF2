@@ -103,9 +103,10 @@ public:
 				return;
 			}
 
-			auto spawnBlock = NewObject<UBlockInfo>((UObject*)GetTransientPackage(), NAME_None, RF_NoFlags, currentBlockInfo);
+			auto spawnBlock = NewObject<UBlockInfo>(this, NAME_None, RF_NoFlags, currentBlockInfo);
 
-			spawnBlock->UnderConstruction = false;
+			// TODO ?
+			//spawnBlock->UnderConstruction = false;
 
 			if (worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
 				worldController->SpawnWorldObject(GetWorld(), spawnBlock, true);

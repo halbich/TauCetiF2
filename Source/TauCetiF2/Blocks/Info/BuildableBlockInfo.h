@@ -4,6 +4,7 @@
 
 #include "Object.h"
 #include "Blocks/Info/BlockBaseInfo.h"
+#include "Blocks/Public/Definitions/BlockDefinition.h"
 #include "BuildableBlockInfo.generated.h"
 
 /**
@@ -37,7 +38,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
 		int32 StencilOverride;
 
-	
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+		UBlockDefinition* BlockDefinition;
 
 
 	FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
@@ -73,25 +75,6 @@ public:
 
 		return result;
 	}
-
-
-	//static FORCEINLINE UBuildableBlockInfo* GetDefaultBuildableForID(int32 id)
-	//{
-	//	auto res = NewObject<UBuildableBlockInfo>();
-	//	//TODO
-	//	res->ID = id;
-
-	//	switch (id)
-	//	{
-	//	case (int32)EBlockName::Door:
-	//		res->DefaultBuildingRotation = FRotator(0, 90, 0);
-	//		break;
-	//	default:
-	//		break;
-	//	}
-
-	//	return res;
-	//}
 
 
 	FORCEINLINE void AddImplicitTags()

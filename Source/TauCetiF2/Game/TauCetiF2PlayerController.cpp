@@ -156,3 +156,10 @@ void ATauCetiF2PlayerController::ToggleInventory()
 		}
 	}
 }
+
+void ATauCetiF2PlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+
+	Super::EndPlay(EndPlayReason);
+
+}

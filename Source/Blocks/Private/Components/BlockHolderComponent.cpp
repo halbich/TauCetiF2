@@ -82,7 +82,7 @@ void UBlockHolderComponent::ReinitializeAviableBlocks()
 
 void UBlockHolderComponent::tryAddBlockToAviables(UClass* blockClass)
 {
-	auto b = NewObject<ABlock>(GetTransientPackage(), blockClass);
+	auto b = NewObject<ABlock>(this, blockClass);
 	check(b);
 
 	if (!b->Definition)

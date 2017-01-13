@@ -97,8 +97,10 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	door->Name = TEXT("Dveøe");
 	buildable->Add(door);*/
 
-	/*buildable->Add(makeBuildable(EBlockName::BaseCube, FVector(20, 20, 4)));
-	buildable->Add(makeBuildable(EBlockName::BaseRamp, FVector(7, 7, 4)));*/
+	buildable->Add(makeBuildable(CubeBaseID, FVector(20, 20, 4)));
+	buildable->Add(makeBuildable(CubeBuildingID, FVector(7, 7, 4)));
+
+	buildable->Add(makeBuildable(3, FVector(7, 7, 4)));
 
 	auto UsedBlocks = &c->UsedBlocks;
 

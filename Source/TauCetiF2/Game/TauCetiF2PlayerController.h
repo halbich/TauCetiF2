@@ -32,25 +32,25 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UObjectWidget> wInGameMenu;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UObjectWidget* InGameMenu;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UObjectWidget> wBaseControl;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UObjectWidget* BaseControl;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UMainMenuWidget> wMainMenu;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UMainMenuWidget* MainMenu;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UInventoryScreen> wInventory;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UInventoryScreen* Inventory;
 
 	// Override BeginPlay()
@@ -71,6 +71,8 @@ public:
 	{
 		return CurrentShownWidget == EShownWidget::None;
 	}
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
 

@@ -10,6 +10,8 @@
 #include "NewGameSaveHolder.generated.h"
 
 
+#define CubeBaseID 0
+#define CubeBuildingID 1
 
 
 /**
@@ -35,8 +37,6 @@ private:
 	UFUNCTION()
 		static UNewGameSaveHolder* Instance();
 
-	//UPROPERTY(Transient)
-	//	static UNewGameSaveHolder* instance;
 
 	void init();
 
@@ -44,6 +44,7 @@ private:
 	//Functions take in 0 parameters and return void
 	typedef USaveGameCarrier* (UNewGameSaveHolder::*FunctionPtrType)(void);
 
+	
 	//A static array of to Function Pointers
 	FunctionPtrType fillingFunctions[(uint8)ENamedHardcodedLevel::HardcodedLevelsMax];
 
@@ -75,12 +76,12 @@ private:
 		return make((int32)id, location, blockScale, blockRotation);
 	}*/
 
-	/*FORCEINLINE UBuildableBlockInfo* makeBuildable(EBlockName id, FVector blockScale)
+	FORCEINLINE UBuildableBlockInfo* makeBuildable(int32 blockID, FVector blockScale)
 	{
 		auto ret = NewObject<UBuildableBlockInfo>(this);
-		ret->ID = (int32)id;
+		ret->ID = blockID;
 		ret->Scale = blockScale;
 		ret->AddImplicitTags();
 		return ret;
-	}*/
+	}
 };

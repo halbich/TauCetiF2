@@ -41,7 +41,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
 		int32 BlockID;
 
-	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		UTexture2D* BlockImage;
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")

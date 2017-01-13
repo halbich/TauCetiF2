@@ -34,9 +34,31 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 
 	auto blockRef = UBlockHolderComponent::GetInstance();
 
-	check (blockRef)
+	check(blockRef);
 
-	BuildableItems = TArray<UBuildableBlockInfo*>(carrier->BuildableBlocks);
+	auto aviable = blockRef->GetAviableItems();
+
+	for (auto buildable : carrier->BuildableBlocks)
+	{
+		if (buildable->IsSystemAction)
+		{
+			BuildableItems.Add(buildable);
+			continue;
+		}
+
+		if (aviable.Contains(buildable->ID))
+		{
+			buildable->BlockDefinition = blockRef->GetDefinitionFor(buildable->ID);
+			BuildableItems.Add(buildable);
+			continue;
+		}
+		else
+		{
+			// TODO better handling?
+			print(TEXT("Failed to load builadble block"));
+		}
+
+	}
 
 	ForceItemsChanged(false);
 }
@@ -72,7 +94,7 @@ TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForBank(UInventoryTagG
 
 	if (!filterGroup)
 		return result;
-	
+
 	for (auto b : BuildableItems)
 	{
 		if (filterGroup->IsSatisfied(b->Tags))

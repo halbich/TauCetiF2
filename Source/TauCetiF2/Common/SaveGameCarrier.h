@@ -214,7 +214,7 @@ private:
 			BuildableBlocks.Add(buildableBlockInfoBlock);
 		}
 
-		InventoryTags = NewObject<UInventoryTags>();
+		InventoryTags = NewObject<UInventoryTags>(this);
 		InventoryTags->FromContainer(inventoryTags);
 	}
 
