@@ -19,7 +19,7 @@ class TAUCETIF2_API UMainMenuWidget : public UMenuWidget
 	
 public:
 
-	UPROPERTY(BlueprintAssignable, Category = "CustomWidgets|ObjectWidget")
+	UPROPERTY(BlueprintAssignable, Transient, Category = "CustomWidgets|ObjectWidget")
 		FMainMenuCloseRequest OnMainMenuCloseRequest;
 	
 };

@@ -21,26 +21,16 @@ class TAUCETIF2_API UObjectWidget : public USynchronizeWidget
 
 public:
 
-	UPROPERTY(BlueprintAssignable, Category = "CustomWidgets|ObjectWidget")
+	UPROPERTY(BlueprintAssignable, Transient, Category = "CustomWidgets|ObjectWidget")
 		FWidgetCloseRequest OnWidgetCloseRequest;
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
-		void RequestClose();
-
-	UPROPERTY(BlueprintAssignable, Category = "CustomWidgets|ObjectWidget")
+	UPROPERTY(BlueprintAssignable, Transient, Category = "CustomWidgets|ObjectWidget")
 		FWidgetShown OnWidgetShown;
 
-	UPROPERTY(BlueprintAssignable, Category = "CustomWidgets|ObjectWidget")
+	UPROPERTY(BlueprintAssignable, Transient, Category = "CustomWidgets|ObjectWidget")
 		FWidgetRemoved OnWidgetRemoved;
 
-	virtual void OnEnterKey();
-
-	// Returns if caller should be hidden from screen
-	virtual bool OnEscapeKey();
-
-	void WidgetShown();
-
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TArray<UObjectWidget*> ItemsStack;
 
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
@@ -54,6 +44,17 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
 		void RemoveTopWidgetFromStack();
+
+	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
+		void RequestClose();
+
+	virtual void OnEnterKey();
+
+	// Returns if caller should be hidden from screen
+	virtual bool OnEscapeKey();
+
+	void WidgetShown();
+
 
 
 
@@ -71,7 +72,7 @@ private:
 			pop();
 	}
 
-	void pop()
+	FORCEINLINE void pop()
 	{
 		auto widget = ItemsStack.Pop();
 		widget->popAll();

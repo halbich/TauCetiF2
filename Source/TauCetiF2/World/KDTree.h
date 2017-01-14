@@ -26,25 +26,25 @@ public:
 
 
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UKDTree* B1;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UKDTree* B2;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		ABlock* ContainingObject;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		int32 DividingIndex;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UKDTree* SingleChild;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		FVector DividingCoord;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		float DividingCoordValue;
 
 	void DEBUGDrawContainingBox(UWorld* world);
@@ -97,6 +97,7 @@ private:
 
 	}
 
+	// TODO FORCEINLINE
 	bool checkElem(UKDTree*& elem)
 	{
 		auto hasElem = false;

@@ -17,18 +17,18 @@ class TAUCETIF2_API UBuildableBlockInfo : public UBlockBaseInfo
 public:
 	UBuildableBlockInfo();
 
-	UPROPERTY(BlueprintReadWrite, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = BuildableBlockInfo)
 		TArray<FString> Tags;
 
 
-	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
 		EBuildableObjectAction Action;
 
 
-	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
 		bool AllowOutlineOnSelected;
 
-	UPROPERTY(BlueprintReadOnly, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
 		int32 StencilOverride;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)

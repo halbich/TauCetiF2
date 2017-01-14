@@ -16,7 +16,7 @@ class TAUCETIF2_API UMenuWidget : public UObjectWidget
 	
 public:
 
-	UPROPERTY(BlueprintReadWrite, Category = "CustomWidgets|ObjectWidget")
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "CustomWidgets|ObjectWidget")
 		UWidgetSwitcher* switcher;
 
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")

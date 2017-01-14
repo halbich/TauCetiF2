@@ -18,10 +18,10 @@ public:
 
 	UPatternGroup();
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		int32 GroupID;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TArray<UPatternElement*> Patterns;
 
 	void Insert(UBlockInfo* info);

@@ -19,24 +19,20 @@ class TAUCETIF2_API UInventoryComponent : public UActorComponent
 public:
 	// Sets default values for this component's properties
 	UInventoryComponent();
+	
 
-
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
-
-
-	UPROPERTY(BlueprintReadWrite, Category = InventoryComponent)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
 		TArray<UBuildableBlockInfo*> BuildableItems;
 
-	UPROPERTY(BlueprintAssignable, Category = InventoryComponent)
+	UPROPERTY(BlueprintAssignable, Transient, Category = InventoryComponent)
 		FHudBuildableItemsChanged OnHudBuildableItemsChanged;
+	
+	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
+		UInventoryTags* InventoryTags;
+
 
 	UFUNCTION(BlueprintCallable, Category = InventoryComponent)
 		void ForceItemsChanged(bool showGroupName);
-
-	void InventoryTagsSelectionChanged();
-
-	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
-		UInventoryTags* InventoryTags;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryComponent)
 		TArray<UBuildableBlockInfo*> GetItemsForCurrentBank();
@@ -48,6 +44,10 @@ public:
 		FString GetCurrentBankName();
 	
 	FDelegateHandle ListeningHandle;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	
+	void InventoryTagsSelectionChanged();
 
 	void LoadFromCarrier(USaveGameCarrier* carrier);
 

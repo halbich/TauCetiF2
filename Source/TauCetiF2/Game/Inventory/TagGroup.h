@@ -16,10 +16,10 @@ class TAUCETIF2_API UTagGroup : public UObject
 public:
 	UTagGroup();
 
-	UPROPERTY(BlueprintReadWrite, Category = Tags)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = Tags)
 		TArray<FString> Tags;
 
-	UPROPERTY(BlueprintReadWrite, Category = Tags)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = Tags)
 		FString GroupName;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = Tags)

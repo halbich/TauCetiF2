@@ -20,21 +20,21 @@ public:
 	UWorldObjectComponent();
 
 
-	UPROPERTY(BlueprintReadOnly, Category = WorldObjectComponent)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = WorldObjectComponent)
 		UBlockInfo* BlockInfo;
 
 
 	// Elements taken in WorldTree. This collection could be changes as WorldTree Changes
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TArray<UKDTree*> TreeElements;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UKDTree* RootBox;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UKDTree* DefiningBox;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UMinMaxTree* BuildingTree;
 
 	// Called when the game starts

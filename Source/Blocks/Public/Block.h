@@ -17,17 +17,15 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		TSubclassOf<UBlockDefinition> Definition;
 
-	/*UPROPERTY(EditInstanceOnly, Transient, Category = "TCF2 | Block")
-		UBlockInfo* BlockInfo;*/
-
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
+	UStaticMeshComponent* GetMeshStructureComponent(int32 BlockMeshStructureDefIndex);
+	
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual void BeginPlay() override;
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReasonType) override;
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
-	UStaticMeshComponent* GetMeshStructureComponent(int32 BlockMeshStructureDefIndex);
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 

@@ -18,13 +18,13 @@ class TAUCETIF2_API UInventoryTagGroup : public UObject
 public:
 
 
-	UPROPERTY(BlueprintReadWrite, Category = InventoryTagGroup)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
 		TArray<UTagGroup*> GroupList;
 
-	UPROPERTY(BlueprintReadWrite, Category = InventoryTagGroup)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
 		FString Name;
 
-	UPROPERTY(BlueprintReadWrite, Category = InventoryTagGroup)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
 		bool IsEnabled;
 	
 

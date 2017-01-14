@@ -21,13 +21,13 @@ class TAUCETIF2_API UPatternDefinitionsHolder : public UObject
 
 public:
 
-
+	// TODO change singleton to gameinstance
 	static UPatternDefinitionsHolder* Instance();
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TArray<UPatternDefinition*> UsedDefinitions;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TMap<int32, UPatternGroup*> SearchPatterns;
 
 	TArray<UBlockInfo*> DEBUGSpawnPatterns(const FVector& startingPoint);
@@ -74,6 +74,7 @@ private:
 		return group;
 	}
 
+	// TODO FORCEINLINE
 	void checkAllInit()
 	{
 		for (auto block : UsedDefinitions)

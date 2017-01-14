@@ -15,22 +15,21 @@ class TAUCETIF2_API USelectTargetComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-private:
-
-	UPROPERTY()
-		UPrimitiveComponent* objectOutlinePrimitive;
-
-	UPROPERTY()
-		UPrimitiveComponent* usableObjectOutlinePrimitive;
-
-	UPROPERTY()
-		AActor* owner;
-
 public:
+
 	// Sets default values for this component's properties
 	USelectTargetComponent();
 
-	virtual void BeginPlay() override;
+	UPROPERTY(Transient)
+		UPrimitiveComponent* objectOutlinePrimitive;
+
+	UPROPERTY(Transient)
+		UPrimitiveComponent* usableObjectOutlinePrimitive;
+
+	UPROPERTY(Transient)
+		AActor* owner;
+
+
 
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
 		bool HasObjectOutline;
@@ -47,6 +46,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
 		FText CustomUsingMessage;
 
+
+	virtual void BeginPlay() override;
+
 	virtual void SelectObject(int32 stencilValue);
 
 	virtual void DeselectObject();
@@ -56,6 +58,8 @@ public:
 	virtual void DeselectUsableObject();
 
 	void RegisterTargetObjectPrimitiveComponent(UPrimitiveComponent* comp);
+
+	void OnUse(AActor* selectingActor);
 
 
 	FORCEINLINE void EnableUse(float maxDistance = -1.0f, UPrimitiveComponent* comp = nullptr)
@@ -70,7 +74,6 @@ public:
 		}
 	}
 
-	void OnUse(AActor* selectingActor);
 
 
 	FORCEINLINE bool IsInUsableArea(AActor* selectingActor)

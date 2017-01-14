@@ -16,28 +16,32 @@ class TAUCETIF2_API UMinMaxBox : public UObject
 {
 	GENERATED_BODY()
 
-private:
-	UPROPERTY()
-		UMinMaxBox* ParentNode;
-
 public:
 
 	UMinMaxBox* InitBox(FVector min, FVector max);
 	UMinMaxBox* InitBoxChecked(FVector min, FVector max);
 
-	
 
-	UPROPERTY()
+	UPROPERTY(Transient)
+		UMinMaxBox* ParentNode;
+
+	UPROPERTY(Transient)
 		FVector Min;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		FVector Max;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		FVector MinWorldCoord;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		FVector MaxWorldCoord;
+
+	void RemoveElement();
+
+	// Return true if both given boxes has common surface
+	static bool HasCommonBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2);
+
 
 	template <typename T>
 	T* GetRootNode(bool allowSelf = false)
@@ -68,12 +72,8 @@ public:
 
 	}
 
-	void RemoveElement();
 
-	// Return true if both given boxes has common surface
-	static bool HasCommonBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2);
-
-	FBox GetBox()
+	FORCEINLINE FBox GetBox()
 	{
 		FBox ret(Min, Max);
 		return ret;

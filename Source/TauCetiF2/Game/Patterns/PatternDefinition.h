@@ -21,25 +21,26 @@ class TAUCETIF2_API UPatternDefinition : public UObject
 
 public:
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TArray<UBlockInfo*> UsedBlocks;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TArray<FRotator> AviableRotations;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TMap<int32, UPatternGroup*> Patterns;
-
-	void InitData();
-
-	UPROPERTY()
+	
+	UPROPERTY(Transient)
 		bool InitDone;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UMinMaxBox* objectDimensions;   //TODO used for debug purposes
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TArray<UMinMaxTree*> ResultObjectTrees;
+
+
+	void InitData();
 
 	void DEBUGSpawnPattern(const FVector& worldOffset, TArray<UBlockInfo*>& outArray);
 

@@ -13,43 +13,60 @@ class TAUCETIF2_API USelectorComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-
-		UPROPERTY()
-		AActor* owner;
-
 public:
+
 	// Sets default values for this component's properties
 	USelectorComponent();
 
 
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	UPROPERTY(Transient)
+		AActor* owner;
 
-
-	UPROPERTY(BlueprintAssignable, Category = TargetSelector)
+	UPROPERTY(BlueprintAssignable, Transient, Category = TargetSelector)
 		FUsableObjectTargetedChanged OnUsableObjectTargetedChanged;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Transient)
 		ABlock* SelectedTarget;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Transient)
 		AActor* SelectedActor;
-
-
-	UPROPERTY(BlueprintReadOnly)
+	
+	UPROPERTY(BlueprintReadOnly, Transient)
 		FVector ImpactPoint;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Transient)
 		FVector ImpactPointWithSnap;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Transient)
 		FVector ImpactNormal;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Transient)
 		AActor* traceIgnoreActor;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, Transient, EditAnywhere)
 		UBlueprint* LockingPlane;
+	
+	UPROPERTY(BlueprintReadOnly, Transient)
+		bool outliningEnabled;
+	
+	UPROPERTY(BlueprintReadOnly, Transient)
+		bool usableObjectTargeted;
+
+	UPROPERTY(BlueprintReadOnly, Transient)
+		int32 StencilValue;
+
+	UPROPERTY(Transient)
+		AActor* spawnedPlane;
+
+	UPROPERTY(Transient)
+		APlayerCameraManager* cameraManager;
+
+	UPROPERTY(Transient)
+		APawn* playerPawn;
+
+
+	UFUNCTION(BlueprintCallable, Category = TargetSelector)
+		void SetOutlining(bool enableOutlining, int32 outlineStencilValue);
 
 	UFUNCTION(BlueprintCallable, Category = TargetSelector)
 		void ShowPlane();
@@ -60,18 +77,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TargetSelector)
 		void TrySelect();
 
-	UPROPERTY(BlueprintReadOnly)
-		bool outliningEnabled;
-
-	UFUNCTION(BlueprintCallable, Category = TargetSelector)
-		void SetOutlining(bool enableOutlining, int32 stencilValue);
-
-	UPROPERTY(BlueprintReadOnly)
-		bool usableObjectTargeted;
-
-	UPROPERTY(BlueprintReadOnly)
-		int32 StencilValue;
-
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void OwnerBecomeViewTarget();
 private:
@@ -87,7 +94,7 @@ private:
 			SelectedTarget->SelectTargetComponent &&
 			SelectedTarget->SelectTargetComponent->IsValidLowLevel() &&
 			SelectedTarget->SelectTargetComponent->IsInUsableArea(owner)*/;
-		// TODO
+			// TODO
 
 		if (oldVal != usableObjectTargeted)
 		{
@@ -182,10 +189,10 @@ private:
 		if (!SelectedActor)
 			return;
 
-	/*	if (SelectedTarget && SelectedTarget->IsValidLowLevelFast() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
-		{
-			SelectedTarget->SelectTargetComponent->DeselectUsableObject();
-		}*/
+		/*	if (SelectedTarget && SelectedTarget->IsValidLowLevelFast() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
+			{
+				SelectedTarget->SelectTargetComponent->DeselectUsableObject();
+			}*/
 
 	}
 
@@ -200,15 +207,6 @@ private:
 
 	}
 
-	UPROPERTY()
-		AActor* spawnedPlane;
-
-
-	UPROPERTY()
-		APlayerCameraManager* cameraManager;
-
-	UPROPERTY()
-		APawn* playerPawn;
 
 
 };

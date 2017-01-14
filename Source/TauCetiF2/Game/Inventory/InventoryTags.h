@@ -19,14 +19,14 @@ class TAUCETIF2_API UInventoryTags : public UObject
 {
 	GENERATED_BODY()
 public:
+	static const int32 DefaultCount;
 
-	UPROPERTY(BlueprintReadOnly, Category = InventoryTags)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = InventoryTags)
 		TArray<UInventoryTagGroup*> InventoryGroupList;
 
-	UPROPERTY(BlueprintReadOnly, Category = InventoryTags)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = InventoryTags)
 		int32 CurrentActiveIndex;
 
-	static const int32 DefaultCount;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryTags)
 		static UInventoryTags* GetDefault();
@@ -70,6 +70,8 @@ public:
 	}
 
 #pragma optimize("", off)
+
+	// TODO FORCEINLINE
 	void PrevBank()
 	{
 		auto length = InventoryGroupList.Num();

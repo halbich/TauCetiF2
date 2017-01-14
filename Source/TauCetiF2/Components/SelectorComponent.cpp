@@ -152,9 +152,9 @@ void USelectorComponent::TrySelect() {
 }
 
 
-void USelectorComponent::SetOutlining(bool enableOutlining, int32 stencilValue)
+void USelectorComponent::SetOutlining(bool enableOutlining, int32 outlineStencilValue)
 {
-	StencilValue = stencilValue;
+	StencilValue = outlineStencilValue;
 	outliningEnabled = enableOutlining;
 
 

@@ -16,7 +16,7 @@ class TAUCETIF2_API UPatternElement : public UObject
 	GENERATED_BODY()
 public:
 	
-	UPROPERTY()
+	UPROPERTY(Transient)
 		UBlockInfo* BlockInfo;
 };
 

@@ -23,6 +23,14 @@ class TAUCETIF2_API UNewGameSaveHolder : public UObject
 	GENERATED_BODY()
 
 public:
+	
+	UPROPERTY(Transient)
+		TArray<USaveGameCarrier*> newGameSaves;
+
+	UPROPERTY(Transient)
+		USaveGameCarrier* mainMenuSave;
+
+
 	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
 		TArray<USaveGameCarrier*> GetNewSaveGamesList();
 
@@ -35,11 +43,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SaveGame)
 		static UNewGameSaveHolder* Instance();
 
-	UPROPERTY(Transient)
-		TArray<USaveGameCarrier*> newGameSaves;
-
-	UPROPERTY(Transient)
-		USaveGameCarrier* mainMenuSave;
 private:
 
 

@@ -17,15 +17,15 @@ public:
 
 	UBlockConstructorSelector();
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = BlockConstructorSelector, meta = (DisplayName = "Block ID", ExposeOnSpawn = true))
+	UPROPERTY(BlueprintReadOnly, Transient, EditAnywhere, Category = BlockConstructorSelector, meta = (DisplayName = "Block ID", ExposeOnSpawn = true))
 		int32 BlockID;
 
-	UPROPERTY(BlueprintReadOnly, Category = BlockConstructorSelector, meta = (DisplayName = "Block Holder", ExposeOnSpawn = true))
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockConstructorSelector, meta = (DisplayName = "Block Holder", ExposeOnSpawn = true))
 		UBlockHolderComponent* BlockHolder;
-
-
-	UPROPERTY(BlueprintReadOnly, Category = BlockConstructorSelector)
+	
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockConstructorSelector)
 		UBlockDefinition* BlockDefinition;
+
 
 	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
 		bool IsDefinitionValid();

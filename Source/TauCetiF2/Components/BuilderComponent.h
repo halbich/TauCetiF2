@@ -22,19 +22,12 @@ public:
 	// Sets default values for this component's properties
 	UBuilderComponent();
 
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-
 	UPROPERTY(Transient)
 		USelectorComponent* selector;
 
 	UPROPERTY(Transient)
 		AWorldController* worldController;
-
-
+	
 	UPROPERTY(Transient)
 		UBuildableBlockInfo* currentBuildableBlockInfo;
 
@@ -50,6 +43,12 @@ public:
 	UPROPERTY(Transient)
 		TMap<UBuildableBlockInfo*, ABlock*> usedObjects;
 
+	UPROPERTY(Transient)
+		bool ForceRecomputePosition;
+
+	UPROPERTY(Transient)
+		ACharacter* character;
+
 
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
 		void SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo);
@@ -57,12 +56,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
 		void SetWorldController(AWorldController* controller);
 
-	UPROPERTY(Transient)
-		bool ForceRecomputePosition;
+	// Called when the game starts
+	virtual void BeginPlay() override;
 
-	UPROPERTY(Transient)
-		ACharacter* character;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void RotatePitch(float Value);
+	void RotateRoll(float Value);
+	void RotateYaw(float Value);
+
+	// TODO FORCEINLINE
 	void DoAction() {
 
 		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel() || !currentBuildableBlockInfo || !currentBuildableBlockInfo->IsValidLowLevel())
@@ -118,9 +121,6 @@ public:
 	}
 
 
-	void RotatePitch(float Value);
-	void RotateRoll(float Value);
-	void RotateYaw(float Value);
 
 	FORCEINLINE void AddRotation(float Pitch, float Yaw, float Roll)
 	{

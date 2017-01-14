@@ -20,11 +20,11 @@ public:
 
 
 
-	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
 		FVector Location;
 
 
-	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
 		FRotator Rotation;
 
 

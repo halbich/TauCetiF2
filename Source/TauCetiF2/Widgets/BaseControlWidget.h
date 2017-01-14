@@ -17,20 +17,20 @@ class TAUCETIF2_API UBaseControlWidget : public UObjectWidget
 public:
 	
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = BaseControlWidget)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, Category = BaseControlWidget)
 		TArray<UTerminalBaseWidget*> ContainingTerminalWidgets;
 	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UTerminalBaseWidget> wTerminalBase;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UTerminalBaseWidget* TerminalBase;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UBlockConstructor> wBlockConstructor;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Widgets")
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UBlockConstructor* BlockConstructor;
 
 };

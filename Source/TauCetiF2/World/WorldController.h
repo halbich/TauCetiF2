@@ -24,14 +24,22 @@ class TAUCETIF2_API AWorldController : public AActor
 
 public:
 
-
-	virtual void BeginPlay() override;
-
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReasonType) override;
-
 	UPROPERTY(BlueprintReadWrite, Transient, Category = WorldController)
 		TArray<UBlockInfo*> UsedBlocks;
 
+	UPROPERTY(Transient)
+		UKDTree* RootBox;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,  Category = WorldController, meta = (AllowPrivateAccess = "true"))
+		UBlockHolderComponent* BlockHolder;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldController, meta = (AllowPrivateAccess = "true"))
+		UBaseControlComponent* BaseControl;
+	
+	UPROPERTY(Transient)
+		bool debugBoxesShown;
+	
+	
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks);
 
@@ -47,6 +55,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void DEBUGUsedPatternElements(const FVector & startingPoint);
 
+	virtual void BeginPlay() override;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReasonType) override;
+
 	ABlock* SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot);
 
 	bool DestroyWorldObject(/*AWorldObject*/UObject* object);
@@ -56,19 +68,9 @@ public:
 		return RootBox->IsPlaceEmpty(box);
 	}
 
-	UPROPERTY(Transient)
-		UKDTree* RootBox;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldController, meta = (AllowPrivateAccess = "true"))
-		UBlockHolderComponent* BlockHolder;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldController, meta = (AllowPrivateAccess = "true"))
-		UBaseControlComponent* BaseControl;
 
 private:
 
-	UPROPERTY()
-		bool debugBoxesShown;
 
 	//TEMPLATE Load Obj From Path
 	template <typename ObjClass>

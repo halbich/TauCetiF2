@@ -18,27 +18,26 @@ public:
 	UMinMaxTree* Init(FVector min, FVector max);
 	UMinMaxTree* Init(UMinMaxBox* box);
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TArray<UMinMaxTree*> Children;
+
+
+	void Insert(UMinMaxTree* other);
+
+	void ChildrenDeleted();
+
 
 	FORCEINLINE UMinMaxTree* GetRoot() {
 		return GetRootNode<UMinMaxTree>(true);
 	}
 
-
-	void Insert(UMinMaxTree* other);
-
 	FORCEINLINE UMinMaxTree* GetParent()
 	{
 		return GetParentNodeTemplate<UMinMaxTree>();
 	}
-
-	void ChildrenDeleted();
-
 	
 
 private:
-
 
 	FORCEINLINE void AppendChildren(UMinMaxTree* child)
 	{

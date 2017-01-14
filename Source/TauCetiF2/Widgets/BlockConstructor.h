@@ -18,17 +18,17 @@ public:
 
 	UBlockConstructor();
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockConstructorSelector)
+		UBlockHolderComponent* blockHolder;
 
+	
 	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
 		bool AddItemToInventory(int32 id, FString name, FVector dimensions, TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString> tags, UPARAM(ref)TArray<FString>& validationErrors);
-
-
+	
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
 		TArray<int32> GetAllAviableBlocks();
 
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockConstructorSelector)
-		UBlockHolderComponent* blockHolder;
 
 private:
 	//TODO localizace

@@ -17,17 +17,21 @@ class TAUCETIF2_API UBlockBaseInfo : public UObject
 	GENERATED_BODY()
 
 public:
-	UPROPERTY()
+	UPROPERTY(Transient)
 		int32 ID;
 
-	UPROPERTY(BlueprintReadOnly, Category = BlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
 		FVector Scale;
 
-	UPROPERTY(BlueprintReadWrite, Category = BlockInfo)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = BlockInfo)
 		FString Name;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TMap<FString, int32> AdditionalFlags;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+		TArray<UInventoryFlagItem*> GetBlockFlags();
+
 
 	FORCEINLINE FBlockBaseInfo ToBaseContainer() {
 		FBlockBaseInfo result;
@@ -47,7 +51,5 @@ public:
 	}
 
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
-		TArray<UInventoryFlagItem*> GetBlockFlags();
 
 };

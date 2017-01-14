@@ -17,11 +17,6 @@ public:
 	// Sets default values for this component's properties
 	UBlockHolderComponent();
 
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-	void ReinitializeAviableBlocks();
-
 	// Holder for aviable building block. Key is block's UID
 	UPROPERTY(BlueprintReadonly, VisibleAnywhere, Transient, Category = "Blocks")
 		TMap<int32, TSubclassOf<ABlock>> AviableBlocks;
@@ -29,6 +24,13 @@ public:
 	// Cache for obtaining block behavior
 	UPROPERTY(BlueprintReadonly, VisibleAnywhere, Transient, Category = "Blocks")
 		TMap<int32, UBlockDefinition*> AviableBlocksDefinitionCache;
+
+
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
+
+	void ReinitializeAviableBlocks();
 
 	UBlockDefinition* GetDefinitionFor(int32 ID);
 

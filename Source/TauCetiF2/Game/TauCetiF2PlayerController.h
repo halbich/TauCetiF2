@@ -26,7 +26,7 @@ class TAUCETIF2_API ATauCetiF2PlayerController : public APlayerController
 
 public:
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		EShownWidget CurrentShownWidget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
@@ -53,8 +53,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UInventoryScreen* Inventory;
 
-	// Override BeginPlay()
-	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
 		void OnEnterKey();
@@ -65,6 +63,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
 		void ShowWidget(const EShownWidget widget);
 
+	// Override BeginPlay()
+	virtual void BeginPlay() override;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 	void ToggleInventory();
 
 	FORCEINLINE bool NothingShown()
@@ -72,7 +75,6 @@ public:
 		return CurrentShownWidget == EShownWidget::None;
 	}
 
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
 

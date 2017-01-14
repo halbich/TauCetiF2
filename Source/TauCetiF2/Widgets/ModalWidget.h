@@ -18,16 +18,16 @@ class TAUCETIF2_API UModalWidget : public UObjectWidget
 	
 public:
 
-	UPROPERTY(BlueprintAssignable, Category = "CustomWidgets|ModalWidget")
+	UPROPERTY(BlueprintAssignable, Transient, Category = "CustomWidgets|ModalWidget")
 		FModalDialogResult OnDecisionMade;
 	
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ModalWidget")
-		bool IsButtonEnabled(const EModalDialogResult buttonWithResult);
-
-	UPROPERTY()
+	UPROPERTY(Transient)
 		TArray<EModalDialogResult> EnabledButtons;
 
 
+	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ModalWidget")
+		bool IsButtonEnabled(const EModalDialogResult buttonWithResult);
+	
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ModalWidget")
 		void SetDecisionMade(const EModalDialogResult decision);
 
