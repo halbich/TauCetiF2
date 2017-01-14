@@ -7,7 +7,7 @@
 #include "Components/SelectorComponent.h"
 #include "Blocks/Info/BuildableBlockInfo.h"
 #include "World/WorldController.h"
-#include "Blocks/WorldObject.h"
+#include "WorldObject.h"
 #include "Blocks/Public/Components/BlockHolderComponent.h"
 #include "Helpers/BlockHelpers.h"
 #include "BuilderComponent.generated.h"

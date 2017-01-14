@@ -8,7 +8,6 @@
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 #include "Runtime/UMG/Public/Components/Widget.h"
 #include "Runtime/UMG/Public/Components/Image.h"
-#include "Blocks/Definitions/FBlockDefinition.h"
 
 #include "Helpers.generated.h"
 

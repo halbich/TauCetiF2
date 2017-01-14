@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "Blocks/WorldObject.h"
+#include "WorldObject.h"
 //#include "CubeObject.generated.h"
 
 /**

@@ -4,10 +4,11 @@
 #include "GenericBlock.h"
 #include "BlockDefinition.h"
 #include "BlockAdditionalFlags.h"
+#include "SelectTargetComponent.h"
 #include "Block.generated.h"
 
 UCLASS()
-class BLOCKS_API ABlock : public AActor , public IGenericBlock
+class BLOCKS_API ABlock : public AActor, public IGenericBlock
 {
 	GENERATED_BODY()
 
@@ -17,9 +18,15 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		TSubclassOf<UBlockDefinition> Definition;
 
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | Block", meta = (AllowPrivateAccess = "true"))
+		USelectTargetComponent* SelectTargetComponent;
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
-	UStaticMeshComponent* GetMeshStructureComponent(int32 BlockMeshStructureDefIndex);
-	
+		UStaticMeshComponent* GetMeshStructureComponent(int32 BlockMeshStructureDefIndex);
+
+
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual void BeginPlay() override;
@@ -31,7 +38,10 @@ public:
 
 	virtual FVector GetBlockScale();
 
-	//virtual void SetBlockInfo(UBlockInfo* info);
+	FORCEINLINE bool IsInUsableArea(AActor* owner)
+	{
+		return SelectTargetComponent && SelectTargetComponent->IsValidLowLevel() && SelectTargetComponent->IsInUsableArea(owner);
+	}
 
 private:
 

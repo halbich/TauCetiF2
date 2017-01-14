@@ -11,7 +11,7 @@ DECLARE_EVENT_OneParam(USelectTargetComponent, FUseEvent, AActor*);
 
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class TAUCETIF2_API USelectTargetComponent : public UActorComponent
+class BLOCKS_API USelectTargetComponent : public UActorComponent
 {
 	GENERATED_BODY()
 

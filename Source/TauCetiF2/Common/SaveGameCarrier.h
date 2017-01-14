@@ -3,9 +3,9 @@
 #pragma once
 
 #include "TauCetiF2.h"
-#include "Game/GameDefinitions.h"
 #include "Object.h"
 #include "Commons/Public/Enums.h"
+#include "Commons/Public/GameDefinitions.h"
 #include "Helpers/Saving/ArchiveHelpers.h"
 #include "Helpers/Saving/BlockSaveInfo.h"
 #include "Blocks/Info/BlockInfo.h"

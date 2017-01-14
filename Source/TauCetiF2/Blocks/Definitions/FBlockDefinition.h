@@ -1,9 +1,6 @@
 
 
 #pragma once
-#include "Game/GameDefinitions.h"
-#include "Blocks/Definitions/FBlockMaterialDefinition.h"
-#include "Blocks/Definitions/FBlockAdditionalFlagsDefinition.h"
 
 /**
  *

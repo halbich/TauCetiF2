@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Blocks/WorldObject.h"
+#include "WorldObject.h"
 //#include "WindowObject.generated.h"
 
 /**

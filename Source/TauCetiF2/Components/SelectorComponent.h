@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "Blocks/WorldObject.h"
+#include "WorldObject.h"
 #include "SelectorComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUsableObjectTargetedChanged, bool, IsUsableObjectTargeted);
@@ -30,7 +30,7 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient)
 		AActor* SelectedActor;
-	
+
 	UPROPERTY(BlueprintReadOnly, Transient)
 		FVector ImpactPoint;
 
@@ -45,10 +45,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Transient, EditAnywhere)
 		UBlueprint* LockingPlane;
-	
+
 	UPROPERTY(BlueprintReadOnly, Transient)
 		bool outliningEnabled;
-	
+
 	UPROPERTY(BlueprintReadOnly, Transient)
 		bool usableObjectTargeted;
 
@@ -90,11 +90,8 @@ private:
 		auto oldVal = usableObjectTargeted;
 		usableObjectTargeted = SelectedActor &&
 			SelectedTarget &&
-			SelectedTarget->IsValidLowLevel() /*&&
-			SelectedTarget->SelectTargetComponent &&
-			SelectedTarget->SelectTargetComponent->IsValidLowLevel() &&
-			SelectedTarget->SelectTargetComponent->IsInUsableArea(owner)*/;
-			// TODO
+			SelectedTarget->IsValidLowLevel() &&
+			SelectedTarget->IsInUsableArea(owner);
 
 		if (oldVal != usableObjectTargeted)
 		{
@@ -114,15 +111,14 @@ private:
 
 		if (SelectedTarget && SelectedTarget->IsValidLowLevelFast())
 		{
-			// TODO
-			/*if (SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
+			if (SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
 			{
 				SelectedTarget->SelectTargetComponent->SelectObject(StencilValue);
 			}
 			else {
 				SelectedActor = nullptr;
 				SelectedTarget = nullptr;
-			}*/
+			}
 
 		}
 	}
@@ -134,41 +130,39 @@ private:
 
 		if (SelectedTarget && SelectedTarget->IsValidLowLevelFast())
 		{
-			// TODO
-			/*if (SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
+			if (SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
 			{
 				SelectedTarget->SelectTargetComponent->SelectUsableObject();
 			}
 			else {
 				SelectedActor = nullptr;
 				SelectedTarget = nullptr;
-			}*/
+			}
 
 		}
 	}
 
 
-	// TODO
-	//FORCEINLINE void selectComponent(AActor* actor, AWorldObject* worldObj)
-	//{
+	FORCEINLINE void selectComponent(AActor* actor, ABlock* worldObj)
+	{
 
-	//	if (actor && actor == SelectedActor)
-	//	{
-	//		updateUsableObjectTarget();
-	//		return;
-	//	}
+		if (actor && actor == SelectedActor)
+		{
+			updateUsableObjectTarget();
+			return;
+		}
 
-	//	deselectComponent();
+		deselectComponent();
 
-	//	SelectedActor = actor;
-	//	//SelectedTarget = worldObj;
+		SelectedActor = actor;
+		SelectedTarget = worldObj;
 
 
-	//	if (outliningEnabled )
-	//		showObjectOutline();
+		if (outliningEnabled)
+			showObjectOutline();
 
-	//	updateUsableObjectTarget();
-	//}
+		updateUsableObjectTarget();
+	}
 
 
 	FORCEINLINE void hideObjectOutline()
@@ -176,11 +170,10 @@ private:
 		if (!SelectedActor)
 			return;
 
-		// TODO 
-		/*if (SelectedTarget && SelectedTarget->IsValidLowLevelFast() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
+		if (SelectedTarget && SelectedTarget->IsValidLowLevelFast() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
 		{
 			SelectedTarget->SelectTargetComponent->DeselectObject();
-		}*/
+		}
 
 	}
 
@@ -189,10 +182,10 @@ private:
 		if (!SelectedActor)
 			return;
 
-		/*	if (SelectedTarget && SelectedTarget->IsValidLowLevelFast() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
-			{
-				SelectedTarget->SelectTargetComponent->DeselectUsableObject();
-			}*/
+		if (SelectedTarget && SelectedTarget->IsValidLowLevelFast() && SelectedTarget->SelectTargetComponent && SelectedTarget->SelectTargetComponent->IsValidLowLevelFast())
+		{
+			SelectedTarget->SelectTargetComponent->DeselectUsableObject();
+		}
 
 	}
 

@@ -4,8 +4,6 @@
 
 #include "Object.h"
 #include "Helpers/BlockHelpers.h"
-#include "Blocks/Definitions/FBlockDefinition.h"
-#include "Blocks/Definitions/FBlockDefinitionHolder.h"
 #include "Game/Patterns/PatternDefinition.h"
 #include "Game/Patterns/PatternElement.h"
 #include "Game/Patterns/PatternGroup.h"

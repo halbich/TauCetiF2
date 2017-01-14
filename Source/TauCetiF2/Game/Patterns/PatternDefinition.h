@@ -4,8 +4,6 @@
 
 #include "Object.h"
 #include "Blocks/Info/BlockInfo.h"
-#include "Blocks/Definitions/FBlockDefinition.h"
-#include "Blocks/Definitions/FBlockDefinitionHolder.h"
 #include "World/MinMaxTree.h"
 #include "Game/Patterns/PatternElement.h"
 #include "Game/Patterns/PatternGroup.h"

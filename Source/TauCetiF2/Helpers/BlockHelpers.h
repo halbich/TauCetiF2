@@ -1,12 +1,6 @@
 #pragma optimize("", off)
 
 #pragma once
-#include "Blocks/Implementations/BaseShapes/CubeObject.h"
-#include "Blocks/Implementations/BaseShapes/CubeSideObject.h"
-#include "Blocks/Implementations/BaseShapes/CubeBodyObject.h"
-#include "Blocks/Implementations/Custom/TerminalObject.h"
-#include "Blocks/Implementations/Custom/DoorObject.h"
-#include "Blocks/Implementations/Custom/WindowObject.h"
 #include "World/MinMaxBox.h"
 
 /**

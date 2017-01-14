@@ -64,8 +64,7 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	}
 
 
-	// TODO
-	auto worldAct = NULL; // Cast<AWorldObject>(act);
+	auto worldAct = Cast<ABlock>(act);
 	if (!worldAct)
 	{
 		auto slComp = act->GetComponentByClass(USelectTargetComponent::StaticClass());
@@ -90,8 +89,7 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 
 	//DrawDebugDirectionalArrow(World, ImpactPointWithSnap, ImpactPointWithSnap + ImpactNormal * GameDefinitions::CubeMinSize, 1, FColor::Red, false, 5);
 
-	// TODO
-	//selectComponent(act, worldAct);
+	selectComponent(act, worldAct);
 
 
 
@@ -144,10 +142,7 @@ void USelectorComponent::TrySelect() {
 	if (!usableObjectTargeted)
 		return;
 
-	//TODO
-	print(TEXT("TODO"));
-
-	//SelectedTarget->SelectTargetComponent->OnUse(owner);
+	SelectedTarget->SelectTargetComponent->OnUse(owner);
 
 }
 

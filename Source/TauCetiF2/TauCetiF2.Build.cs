@@ -10,6 +10,9 @@ public class TauCetiF2 : ModuleRules
             "Commons", "GameWorld", "Blocks", "GameSave" });
 
 
+        PublicIncludePaths.AddRange(new string[] { "TauCetiF2/Blocks" });
+
+        PrivateIncludePaths.AddRange(new string[] { "TauCetiF2/Blocks" });
 
     }
 }

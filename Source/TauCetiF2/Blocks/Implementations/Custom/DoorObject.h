@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Game/Localization/LocalizationHelpers.h"
-#include "Blocks/WorldObject.h"
+#include "WorldObject.h"
 //#include "DoorObject.generated.h"
 
 //enum class EDoorState : uint8

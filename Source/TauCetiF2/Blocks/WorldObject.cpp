@@ -3,8 +3,6 @@
 
 #include "TauCetiF2.h"
 #include "WorldObject.h"
-#include "Blocks/Definitions/FBlockDefinition.h"
-#include "Blocks/Definitions/FBlockDefinitionHolder.h"
 
 //
 //AWorldObject::AWorldObject(const FObjectInitializer& ObjectInitializer)

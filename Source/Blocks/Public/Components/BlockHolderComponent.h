@@ -2,9 +2,8 @@
 
 #pragma once
 
-#include "Components/ActorComponent.h"
 #include "Block.h"
-
+#include "Components/ActorComponent.h"
 #include "BlockHolderComponent.generated.h"
 
 

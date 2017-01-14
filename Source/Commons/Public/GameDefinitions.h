@@ -5,7 +5,7 @@
 /**
  * 
  */
-class TAUCETIF2_API GameDefinitions
+class COMMONS_API GameDefinitions
 {
 public:
 	static const FVector WorldCenterMapping;

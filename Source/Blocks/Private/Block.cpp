@@ -10,6 +10,8 @@ ABlock::ABlock()
 
 	auto root = CreateDefaultSubobject<USceneComponent>(TEXT("DefaultRootComponent"));
 	SetRootComponent(root);
+
+	SelectTargetComponent = CreateDefaultSubobject<USelectTargetComponent>(TEXT("SelectTarget"));
 }
 
 #pragma optimize("", off)

@@ -3,14 +3,12 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Blocks/WorldObject.h"
 #include "Blocks/Public/Components/BlockHolderComponent.h"
+#include "WorldObject.h"
 #include "Helpers/BlockHelpers.h"
 #include "Helpers/WorldHelpers.h"
 #include "MinMaxBox.h"
 #include "KDTree.h"
-#include "Blocks/Definitions/FBlockDefinition.h"
-#include "Blocks/Definitions/FBlockDefinitionHolder.h"
 #include "Game/Patterns/PatternDefinition.h"
 #include "Game/Patterns/PatternDefinitionsHolder.h"
 #include "Components/BaseControlComponent.h"

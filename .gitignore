@@ -58,3 +58,6 @@ Intermediate/*
 DerivedDataCache/*
 *.opendb
 TauCetiF2.VC.db
+
+# Some temp items
+enc_temp_folder/*
