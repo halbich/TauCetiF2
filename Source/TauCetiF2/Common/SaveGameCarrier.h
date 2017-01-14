@@ -32,81 +32,81 @@ public:
 
 #pragma region Properties
 
-	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		bool IsSystemSave;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 		ENamedHardcodedLevel HardcodedLevelName;
 
-	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		FString FullFilePath;
 
 
-	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		bool ContainsFullSaveData;
 
-	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		bool SaveLoaded;
 
 
-	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		uint8 SaveFileVersion;
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		FString SaveName;
 
-	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		FText SystemSaveName;
 
-	UPROPERTY(BlueprintReadOnly, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		FDateTime SavedDate;
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		FTimespan PlayedTime;
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		bool IsQuickSave;
 
 	// game - related stuff
 
 
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		float PartOfDay;	// interval [0,1]
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		uint8 MinBoxSize;
 
 
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		FVector PlayerPosition;
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		FRotator PlayerRotation;
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		FRotator PlayerCameraRotation;
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		bool PlayerUseFPSCamera;
 
 
 	// blocks 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		TArray<UBlockInfo*> UsedBlocks;
 
 	// Serializable array
 	TArray<FBlockInfo> usedBlocks;
 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		UInventoryTags* InventoryTags;
 
 	//serializable Item
 	FInventoryTags inventoryTags;
 
 	// blocks 
-	UPROPERTY(BlueprintReadWrite, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		TArray<UBuildableBlockInfo*> BuildableBlocks;
 
 	// Serializable array
@@ -184,7 +184,7 @@ private:
 		buildableBlocks.Empty();
 		for (auto buildableBlock : BuildableBlocks)
 		{
-			if (buildableBlock && buildableBlock->IsValidLowLevel() && !buildableBlock->IsSystemAction)
+			if (buildableBlock && buildableBlock->IsValidLowLevel() && !buildableBlock->IsSystemAction())
 				buildableBlocks.Add(buildableBlock->ToContainer());
 		}
 

@@ -10,6 +10,8 @@ TArray<UInventoryFlagItem*> UBlockBaseInfo::GetBlockFlags()
 {
 	TArray<UInventoryFlagItem*> result;
 
+	if (ID <= 0)
+		return result; // system actions
 
 	auto def = UBlockHolderComponent::GetInstance()->GetDefinitionFor(ID);
 	ensure(def);
@@ -28,10 +30,14 @@ TArray<UInventoryFlagItem*> UBlockBaseInfo::GetBlockFlags()
 			invItem->AviableValues.Add(cmbIt);
 		}
 
-		invItem->TagValue = AdditionalFlags[fl.TagID];
-		invItem->TagReadOnly = true;
+		if (AdditionalFlags.Contains(fl.TagID))
+		{
+			invItem->TagValue = AdditionalFlags[fl.TagID];
+			invItem->TagReadOnly = true;
+			result.Add(invItem);
+		}
 
-		result.Add(invItem);
+
 	}
 
 

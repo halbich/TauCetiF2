@@ -42,8 +42,9 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		return;
 
 	check(currentBuildableBlockInfo);
+	check(currentBuildableBlockInfo->BlockDefinition);
 
-	if (currentBuildableBlockInfo->IsEmptyHand)
+	if (currentBuildableBlockInfo->BlockDefinition->IsEmptyHand)
 		return;
 
 	if (!currentSpawnedObject)
@@ -107,7 +108,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	currentBuildableBlockInfo = blockInfo;
 	selector->SetOutlining(currentBuildableBlockInfo->AllowOutlineOnSelected, currentBuildableBlockInfo->StencilOverride);
 
-	if (currentBuildableBlockInfo->IsEmptyHand)
+	if (currentBuildableBlockInfo->BlockDefinition->IsEmptyHand)
 		return;
 
 	currentBlockInfo->ID = currentBuildableBlockInfo->ID;
@@ -117,7 +118,8 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!currentDefinitionForBlock)
 		return;
 
-	currentBlockInfo->Rotation = currentBuildableBlockInfo->DefaultBuildingRotation;
+	// TODO
+	//currentBlockInfo->Rotation = currentBuildableBlockInfo->DefaultBuildingRotation;
 	currentBlockInfo->Scale = currentBuildableBlockInfo->Scale;
 	currentBlockInfo->Location = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);
 	currentBlockInfo->AdditionalFlags = currentBuildableBlockInfo->AdditionalFlags;

@@ -42,7 +42,7 @@ struct TAUCETIF2_API FInventoryBuildableBlockInfo : FBlockBaseInfo
 {
 
 	TArray<FString> Tags;
-	FRotator DefaultBuildingRotation;
+	//FRotator DefaultBuildingRotation;
 	FInventoryBuildableBlockInfo() : FBlockBaseInfo(), Tags() {};
 	FInventoryBuildableBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Tags() {};
 };

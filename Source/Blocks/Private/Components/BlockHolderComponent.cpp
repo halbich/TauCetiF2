@@ -77,6 +77,10 @@ void UBlockHolderComponent::ReinitializeAviableBlocks()
 		}
 	}
 
+
+	AviableBlocks.KeySort([](int32 A, int32 B) {
+		return A < B; // sort keys in reverse
+	});
 }
 
 

@@ -17,25 +17,30 @@
 /**
  *
  */
-UCLASS()
+UCLASS(BlueprintType)
 class TAUCETIF2_API UNewGameSaveHolder : public UObject
 {
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
-		static TArray<USaveGameCarrier*> GetNewSaveGamesList();
+	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
+		TArray<USaveGameCarrier*> GetNewSaveGamesList();
 
-	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
-		static USaveGameCarrier* DEBUG_GetTestSave();
+	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
+		USaveGameCarrier* DEBUG_GetTestSave();
 
-	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
-		static USaveGameCarrier* GetSaveForMainMenu();
+	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
+		USaveGameCarrier* GetSaveForMainMenu();
 
-
-private:
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SaveGame)
 		static UNewGameSaveHolder* Instance();
+
+	UPROPERTY(Transient)
+		TArray<USaveGameCarrier*> newGameSaves;
+
+	UPROPERTY(Transient)
+		USaveGameCarrier* mainMenuSave;
+private:
 
 
 	void init();
@@ -44,15 +49,10 @@ private:
 	//Functions take in 0 parameters and return void
 	typedef USaveGameCarrier* (UNewGameSaveHolder::*FunctionPtrType)(void);
 
-	
+
 	//A static array of to Function Pointers
 	FunctionPtrType fillingFunctions[(uint8)ENamedHardcodedLevel::HardcodedLevelsMax];
 
-	UPROPERTY(Transient)
-		TArray<USaveGameCarrier*> newGameSaves;
-
-	UPROPERTY(Transient)
-		USaveGameCarrier* mainMenuSave;
 
 	USaveGameCarrier* getDefaultGameSave();
 	USaveGameCarrier* getEmptyGameSave();
@@ -69,12 +69,6 @@ private:
 		return ret;
 
 	}
-
-	// TODO
-	/*FORCEINLINE UBlockInfo* make(EBlockName id, FVector location, FVector blockScale, FRotator blockRotation)
-	{
-		return make((int32)id, location, blockScale, blockRotation);
-	}*/
 
 	FORCEINLINE UBuildableBlockInfo* makeBuildable(int32 blockID, FVector blockScale)
 	{

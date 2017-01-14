@@ -44,6 +44,14 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		UTexture2D* BlockImage;
 
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
+		bool IsEmptyHand;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
+		bool IsSystemAction;
+
+
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		EShapeType ShapeType;
 

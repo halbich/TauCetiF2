@@ -17,7 +17,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UObjectWidget> BaseControl;
 
-	UPROPERTY(BlueprintReadOnly, Category = BaseControlComponent)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BaseControlComponent)
 		UObjectWidget* BaseControlWidget;
 		
 };

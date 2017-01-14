@@ -40,11 +40,11 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 
 	for (auto buildable : carrier->BuildableBlocks)
 	{
-		if (buildable->IsSystemAction)
+		/*if (buildable->IsSystemAction)
 		{
 			BuildableItems.Add(buildable);
 			continue;
-		}
+		}*/
 
 		if (aviable.Contains(buildable->ID))
 		{

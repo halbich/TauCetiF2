@@ -28,11 +28,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
 		static TArray<FString> GetAllSaveGameSlots();
 
-	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
-		static UImage* GetImageForBlock(UBuildableBlockInfo* blockInfo);
-
-	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
-		static UTexture2D* GetTexture2DForBlock(UBuildableBlockInfo* blockInfo);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Change Localization"), Category = "Locale")
 		static bool ChangeLocalization(FString target);

@@ -11,18 +11,6 @@ UNewGameSaveHolder* UNewGameSaveHolder::Instance()
 	instance->init();
 	return instance;
 
-	/*static UNewGameSaveHolder* instance = nullptr;
-
-	if (instance == nullptr || !instance->IsValidLowLevel())
-	{
-		UClass *saveClass = UNewGameSaveHolder::StaticClass();
-		instance = (UNewGameSaveHolder*)ConstructObject<UObject>(saveClass);
-
-		instance->init();
-	}
-
-	return instance;*/
-
 }
 
 void UNewGameSaveHolder::init()
