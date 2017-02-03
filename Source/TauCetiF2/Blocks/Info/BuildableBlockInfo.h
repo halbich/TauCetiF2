@@ -44,7 +44,6 @@ public:
 	FORCEINLINE void FromContainer(FInventoryBuildableBlockInfo& info) {
 		FromBaseContainer(info);
 		Tags = info.Tags;
-		//DefaultBuildingRotation = info.DefaultBuildingRotation;
 	}
 
 	static FORCEINLINE TArray<UBuildableBlockInfo*> GetSystemActions()
