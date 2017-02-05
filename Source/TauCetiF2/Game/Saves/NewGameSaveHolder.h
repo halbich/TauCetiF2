@@ -12,6 +12,10 @@
 
 #define CubeBaseID 0
 #define CubeBuildingID 1
+#define CubeSideBaseID 100
+#define CubeSideBuildingID 101
+#define CubeBodyBaseID 200
+#define CubeBodyBuildingID 201
 
 
 /**
