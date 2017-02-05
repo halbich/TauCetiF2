@@ -89,9 +89,10 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	buildable->Add(makeBuildable(CubeBuildingID, FVector(7, 7, 4)));
 	buildable->Add(makeBuildable(CubeSideBaseID, FVector(20, 20, 4)));
 	buildable->Add(makeBuildable(CubeSideBuildingID, FVector(7, 7, 4)));
-	buildable->Add(makeBuildable(CubeBodyBaseID, FVector(20, 20, 4)));
+	
 	buildable->Add(makeBuildable(CubeBodyBuildingID, FVector(7, 7, 4)));
 
+	buildable->Add(makeBuildable(TerminalID, FVector(1, 1, 1)));
 
 	auto UsedBlocks = &c->UsedBlocks;
 

@@ -44,10 +44,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		UTexture2D* BlockImage;
 
-	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		bool IsEmptyHand;
-	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		bool IsSystemAction;
 
@@ -84,13 +84,13 @@ public:
 
 
 
-	FORCEINLINE FVector GetMeshScale(const FVector& inScale) const
+	FVector GetMeshScale(const FVector& inScale) const
 	{
 		// TODO opravit custom scaling
-		return FVector(HasCustomScaling ? CustomBlockScale : inScale);
+		return FVector(HasCustomScaling ? FVector(1, 1, 1) : inScale);
 	}
 
-	FORCEINLINE FVector GetObjectScale(const FVector& inScale) const
+	FVector GetObjectScale(const FVector& inScale) const
 	{
 		// TODO opravit custom scaling
 		return FVector(HasCustomScaling ? CustomBlockScale : inScale);
