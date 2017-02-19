@@ -104,10 +104,7 @@
 //}
 //
 //
-//void AWorldObject::SetBlockInfo(UBlockInfo* info, UBlockDefinition* definition)
-//{
-//	WorldObjectComponent->BlockInfo = info;
-//}
+
 //
 //UStaticMeshComponent* AWorldObject::GetPrimitiveComponentByName(const FName& name)
 //{

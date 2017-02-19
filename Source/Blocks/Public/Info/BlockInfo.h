@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "Helpers/Saving/BlockSaveInfo.h"
-#include "Blocks/Info/BlockBaseInfo.h"
+//#include "Helpers/Saving/BlockSaveInfo.h"
+#include "BlockBaseInfo.h"
 #include "BlockInfo.generated.h"
 
 
@@ -13,7 +13,7 @@
  *	Block info with Location and Scale, used in game. For saving see FBlockInfo
  */
 UCLASS(BlueprintType)
-class TAUCETIF2_API UBlockInfo : public UBlockBaseInfo
+class BLOCKS_API UBlockInfo : public UBlockBaseInfo
 {
 	GENERATED_BODY()
 public:
@@ -28,7 +28,7 @@ public:
 		FRotator Rotation;
 
 
-	FORCEINLINE FBlockInfo ToContainer() {
+	/*FORCEINLINE FBlockInfo ToContainer() {
 		FBlockInfo result = ToBaseContainer();
 		result.Location = Location;
 		result.Rotation = Rotation;
@@ -40,7 +40,7 @@ public:
 		FromBaseContainer(block);
 		Location = block.Location;
 		Rotation = block.Rotation;
-	}
+	}*/
 
 };
 

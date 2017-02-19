@@ -3,16 +3,14 @@
 #pragma once
 
 #include "Object.h"
-#include "Helpers/Saving/BlockSaveInfo.h"
-#include "Widgets/Common/InventoryFlagItem.h"
-#include "Blocks/Public/Components/BlockHolderComponent.h"
+//#include "Helpers/Saving/BlockSaveInfo.h"
 #include "BlockBaseInfo.generated.h"
 
 /*
  *	Base info about block, used in game. (Not used for saving, see FBlockBaseInfo)
  */
 UCLASS(BlueprintType)
-class TAUCETIF2_API UBlockBaseInfo : public UObject
+class BLOCKS_API UBlockBaseInfo : public UObject
 {
 	GENERATED_BODY()
 
@@ -30,7 +28,7 @@ public:
 		TMap<FString, int32> AdditionalFlags;
 
 
-	FORCEINLINE FBlockBaseInfo ToBaseContainer() {
+	/*FORCEINLINE FBlockBaseInfo ToBaseContainer() {
 		FBlockBaseInfo result;
 		result.ID = ID;
 		result.Scale = Scale;
@@ -45,7 +43,7 @@ public:
 		Scale = block.Scale;
 		Name = block.Name;
 		AdditionalFlags = block.AdditionalFlags;
-	}
+	}*/
 
 
 

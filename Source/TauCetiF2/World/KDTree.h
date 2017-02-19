@@ -5,6 +5,7 @@
 #include "Object.h"
 #include "MinMaxBox.h"
 #include "Helpers/Helpers.h"
+#include "Blocks/Public/Block.h"
 #include "KDTree.generated.h"
 
 //class AWorldObject;

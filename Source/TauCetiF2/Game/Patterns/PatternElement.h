@@ -2,7 +2,7 @@
 
 #pragma once
 #include "Object.h"
-#include "Blocks/Info/BlockInfo.h"
+#include "Blocks/Public/Info/BlockInfo.h"
 #include "PatternElement.generated.h"
 
 /**

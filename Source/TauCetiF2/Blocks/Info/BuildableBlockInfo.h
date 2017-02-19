@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Object.h"
-#include "Blocks/Info/BlockBaseInfo.h"
+#include "Blocks/Public/Info/BlockBaseInfo.h"
 #include "Blocks/Public/Definitions/BlockDefinition.h"
 #include "BuildableBlockInfo.generated.h"
 
@@ -36,13 +36,14 @@ public:
 
 
 	FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
-		FInventoryBuildableBlockInfo result = ToBaseContainer();
+		FInventoryBuildableBlockInfo result; // = ToBaseContainer();
+		//TODO
 		result.Tags = Tags;
 		return result;
 	}
 
 	FORCEINLINE void FromContainer(FInventoryBuildableBlockInfo& info) {
-		FromBaseContainer(info);
+		//FromBaseContainer(info);
 		Tags = info.Tags;
 	}
 

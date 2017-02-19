@@ -5,6 +5,7 @@
 #include "BlockDefinition.h"
 #include "BlockAdditionalFlags.h"
 #include "SelectTargetComponent.h"
+#include "BlockInfo.h"
 #include "Block.generated.h"
 
 UCLASS()
@@ -18,6 +19,8 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		TSubclassOf<UBlockDefinition> Definition;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Block")
+		UBlockInfo* BlockInfo;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | Block", meta = (AllowPrivateAccess = "true"))
 		USelectTargetComponent* SelectTargetComponent;
@@ -37,6 +40,8 @@ public:
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual FVector GetBlockScale();
+
+	virtual void SetBlockInfo(UBlockInfo* info);
 
 	FORCEINLINE bool IsInUsableArea(AActor* owner)
 	{

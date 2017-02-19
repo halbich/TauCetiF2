@@ -8,7 +8,7 @@
 #include "Commons/Public/GameDefinitions.h"
 #include "Helpers/Saving/ArchiveHelpers.h"
 #include "Helpers/Saving/BlockSaveInfo.h"
-#include "Blocks/Info/BlockInfo.h"
+#include "Blocks/Public/Info/BlockInfo.h"
 #include "Blocks/Info/BuildableBlockInfo.h"
 #include "Game/Inventory/InventoryTags.h"
 #include "SaveGameCarrier.generated.h"
@@ -176,8 +176,9 @@ private:
 		usedBlocks.Empty();
 		for (auto usedBlock : UsedBlocks)
 		{
-			if (usedBlock)
-				usedBlocks.Add(usedBlock->ToContainer());
+			// TODO
+			/*if (usedBlock)
+				usedBlocks.Add(usedBlock->ToContainer());*/
 		}
 
 
@@ -200,7 +201,9 @@ private:
 		for (auto usedBlock : usedBlocks)
 		{
 			auto newBlock = NewObject<UBlockInfo>(this);
-			newBlock->FromContainer(usedBlock);
+			//newBlock->FromContainer(usedBlock);
+			
+			// TODO
 			UsedBlocks.Add(newBlock);
 		}
 

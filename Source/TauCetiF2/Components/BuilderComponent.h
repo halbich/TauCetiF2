@@ -80,7 +80,7 @@ public:
 				return;
 
 			// TODO
-			//if (worldController->DestroyWorldObject(selector->SelectedTarget))
+			if (worldController->DestroyWorldObject(selector->SelectedTarget))
 				print(TEXT("TODO! deletion seccessfull"));
 
 			return;

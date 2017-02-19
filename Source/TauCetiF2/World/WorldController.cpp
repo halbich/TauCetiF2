@@ -47,16 +47,14 @@ void AWorldController::LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks) {
 
 }
 
-bool AWorldController::DestroyWorldObject(/*AWorldObject*/UObject* object)
+bool AWorldController::DestroyWorldObject(ABlock* object)
 {
 	if (!object || !object->IsValidLowLevel() || object->IsPendingKill())
 		return false;
 
-	// TODO
-
-	/*auto count = UsedBlocks.Remove(object->WorldObjectComponent->BlockInfo);
-	check(count == 1 && "Failed to remove block info.");*/
-	//object->Destroy();
+	auto count = UsedBlocks.Remove(object->BlockInfo);
+	check(count == 1 && "Failed to remove block info.");
+	object->Destroy();
 
 	if (debugBoxesShown) {
 		DEBUGHideMinMaxBoxes();
@@ -115,24 +113,24 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 		return nullptr;
 	}
 
-	//actor->SetBlockInfo(block, definition);
+	actor->SetBlockInfo(block);
 
 	if (addToRoot) {
 
-		/*auto MinMax = NewObject<UKDTree>()->Init(box);
+		auto MinMax = NewObject<UKDTree>()->Init(box);
 		MinMax->ContainingObject = actor;
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 
 
-		actor->WorldObjectComponent->UpdateDefiningBox(MinMax);
+		//actor->WorldObjectComponent->UpdateDefiningBox(MinMax);
 		RootBox->AddToTree(MinMax);
-		for (auto usedBox : actor->WorldObjectComponent->TreeElements)
+		/*for (auto usedBox : actor->WorldObjectComponent->TreeElements)
 		{
 			check(usedBox->GetRootNode<UKDTree>() == RootBox && TEXT("Used box don't have RootBox as ROOT !"));
 			check(usedBox->ContainingObject == actor && TEXT("Used box has another ContainingObject than it should have!"));
 		}*/
 
-		//MinMax->DEBUGDrawContainingBox(GetWorld());
+		MinMax->DEBUGDrawContainingBox(GetWorld());
 
 
 	}

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "Blocks/Info/BlockInfo.h"
+#include "Blocks/Public/Info/BlockInfo.h"
 #include "World/MinMaxBox.h"
 #include "World/KDTree.h"
 #include "World/MinMaxTree.h"

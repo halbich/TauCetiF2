@@ -8,6 +8,7 @@
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 #include "Runtime/UMG/Public/Components/Widget.h"
 #include "Runtime/UMG/Public/Components/Image.h"
+#include "Widgets/Common/InventoryFlagItem.h"
 #include "Helpers.generated.h"
 
 /**

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Object.h"
-#include "Blocks/Info/BlockInfo.h"
+#include "Blocks/Public/Info/BlockInfo.h"
 #include "World/MinMaxTree.h"
 #include "Game/Patterns/PatternElement.h"
 #include "Game/Patterns/PatternGroup.h"
