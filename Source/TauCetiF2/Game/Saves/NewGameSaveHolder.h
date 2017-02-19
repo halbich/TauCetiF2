@@ -17,6 +17,7 @@
 #define CubeBodyBuildingID 201
 
 #define TerminalID 500
+#define WindowID 600
 
 /**
  *

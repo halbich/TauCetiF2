@@ -29,9 +29,6 @@ public:
 	UPROPERTY(Transient)
 		TMap<FString, int32> AdditionalFlags;
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
-		TArray<UInventoryFlagItem*> GetBlockFlags();
-
 
 	FORCEINLINE FBlockBaseInfo ToBaseContainer() {
 		FBlockBaseInfo result;

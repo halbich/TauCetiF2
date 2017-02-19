@@ -89,38 +89,46 @@
 //
 //	auto c = Center->GetRelativeTransform();
 //
-//	rbc.SetLocation(FVector(GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0, -GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
-//	lbc.SetLocation(FVector(-GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0, -GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
-//	rtc.SetLocation(FVector(GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0, GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
-//	ltc.SetLocation(FVector(-GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0, GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
-//
-//	b.SetLocation(FVector(0, 0, -GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.Z)));
-//	r.SetLocation(FVector(GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.X), 0, 0));
-//	t.SetLocation(FVector(0, 0, GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.Z)));
-//	l.SetLocation(FVector(-GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.X), 0, 0));
-//
-//
+
+//	rbc.SetLocation(FVector( GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0, -GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
 //	rbc.SetRotation(FQuat(FRotator(0, 0, 0)));
-//	lbc.SetRotation(FQuat(FRotator(-90, 0, 0)));
-//	rtc.SetRotation(FQuat(FRotator(90, 0, 0)));
-//	ltc.SetRotation(FQuat(FRotator(180, 0, 0)));
-//
-//	b.SetRotation(FQuat(FRotator(0, 0, 0)));
-//	r.SetRotation(FQuat(FRotator(90, 0, 0)));
-//	t.SetRotation(FQuat(FRotator(180, 0, 0)));
-//	l.SetRotation(FQuat(FRotator(-90, 0, 0)));
-//
 //	rbc.SetScale3D(FVector(1 / s.X, 1, 1 / s.Z));
+
+//	lbc.SetLocation(FVector(-GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0, -GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
+//	lbc.SetRotation(FQuat(FRotator(-90, 0, 0)));
 //	lbc.SetScale3D(FVector(1 / s.X, 1, 1 / s.Z));
+
+//	rtc.SetLocation(FVector( GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0,  GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
+//	rtc.SetRotation(FQuat(FRotator(90, 0, 0)));
 //	rtc.SetScale3D(FVector(1 / s.X, 1, 1 / s.Z));
+
+//	ltc.SetLocation(FVector(-GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.X), 0,  GameDefinitions::CubeMinSizeHalf * (1 - 1 / s.Z)));
+//	ltc.SetRotation(FQuat(FRotator(180, 0, 0)));
 //	ltc.SetScale3D(FVector(1 / s.X, 1, 1 / s.Z));
 //
+
+//
+//	b.SetLocation(FVector(0, 0, -GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.Z)));
+//	b.SetRotation(FQuat(FRotator(0, 0, 0)));
 //	b.SetScale3D(FVector(1 - 2 / s.X, 1, 1 / s.Z));
+
+//	r.SetLocation(FVector(GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.X), 0, 0));
+//	r.SetRotation(FQuat(FRotator(90, 0, 0)));
 //	r.SetScale3D(FVector((s.Z -2) /s.X , 1, 1 / s.Z));
+
+//	t.SetLocation(FVector(0, 0, GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.Z)));
+//	t.SetRotation(FQuat(FRotator(180, 0, 0)));
 //	t.SetScale3D(FVector(1 - 2 / s.X, 1, 1 / s.Z));
+
+//	l.SetLocation(FVector(-GameDefinitions::CubeMinSizeHalf * (1 - 0.5 / s.X), 0, 0));
+//	l.SetRotation(FQuat(FRotator(-90, 0, 0)));
 //	l.SetScale3D(FVector((s.Z - 2) / s.X, 1, 1 / s.Z));
 //
+//
 //	c.SetScale3D(FVector((1 - (0.5 / s.X)) / 0.75, 1, (1 - (0.5 / s.Z)) / 0.75));
+//
+//
+//
 //
 //
 //	RightBottomCorner->SetRelativeTransform(rbc);

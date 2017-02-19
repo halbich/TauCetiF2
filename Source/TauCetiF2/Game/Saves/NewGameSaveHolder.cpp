@@ -94,6 +94,8 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 
 	buildable->Add(makeBuildable(TerminalID, FVector(1, 1, 1)));
 
+	buildable->Add(makeBuildable(WindowID, FVector(5, 1, 4)));
+
 	auto UsedBlocks = &c->UsedBlocks;
 
 	return c;

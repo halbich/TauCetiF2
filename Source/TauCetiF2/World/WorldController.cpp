@@ -94,13 +94,12 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	}
 
 	FString invalidReason;
-	// TODO
-	//bool isValid = BlockHelpers::CheckBlockValidity(definition, block, invalidReason);
-	//if (!isValid)
-	//{
-	//	UE_LOG(LogTemp, Error, TEXT("Blok není validní. Dùvod: %s. nechávám"), *invalidReason);
-	//	return nullptr;
-	//}
+	bool isValid = BlockHelpers::CheckBlockValidity(definition, block, invalidReason);
+	if (!isValid)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Blok není validní. Dùvod: %s. nechávám"), *invalidReason);
+		return nullptr;
+	}
 
 	auto classBP = UBlockHolderComponent::GetInstance()->AviableBlocks[block->ID];
 

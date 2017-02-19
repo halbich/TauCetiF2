@@ -43,6 +43,9 @@ public:
 		return SelectTargetComponent && SelectTargetComponent->IsValidLowLevel() && SelectTargetComponent->IsInUsableArea(owner);
 	}
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "TCF2 | Block")
+		void UpdateBlockOnConstruction(UBlockDefinition* BlockDef);
+
 private:
 
 	FORCEINLINE void setMaterial(UPrimitiveComponent* mesh, UMaterial* material, int32 index, float scaleX, float scaleY) {

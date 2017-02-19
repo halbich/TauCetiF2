@@ -8,7 +8,6 @@
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 #include "Runtime/UMG/Public/Components/Widget.h"
 #include "Runtime/UMG/Public/Components/Image.h"
-
 #include "Helpers.generated.h"
 
 /**
@@ -105,6 +104,15 @@ public:
 
 
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Definitions")
+		static int32 GetCubeMinSize();
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Definitions")
+		static int32 GetCubeMinSizeHalf();
 
+	UFUNCTION(BlueprintCallable,  Category = "TCF2 | Game Helpers")
+		static void ObjectApplyLocalTrans(UStaticMeshComponent* comp, FVector loc, FRotator rot, FVector scal);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+		static TArray<UInventoryFlagItem*> GetBlockFlags(UBlockBaseInfo* blockBaseInfo);
 };

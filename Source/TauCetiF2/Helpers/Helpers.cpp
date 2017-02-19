@@ -68,7 +68,7 @@ void UHelpers::GetCurrentLocalizations(UPARAM(ref)TArray<FString>& DisplayNames,
 		DisplayNames.Add(c->GetNativeName());
 		IsoNames.Add(c->GetTwoLetterISOLanguageName());
 	}
-	
+
 }
 
 FString UHelpers::GetCurrentCultureIsoName()
@@ -84,3 +84,61 @@ void UHelpers::FatalError(const FName text)
 }
 
 
+int32 UHelpers::GetCubeMinSize()
+{
+	return GameDefinitions::CubeMinSize;
+}
+
+
+int32 UHelpers::GetCubeMinSizeHalf()
+{
+	return GameDefinitions::CubeMinSizeHalf;
+}
+
+void UHelpers::ObjectApplyLocalTrans(UStaticMeshComponent* comp, FVector loc, FRotator rot, FVector scal) {
+
+	comp->ResetRelativeTransform();
+	
+	auto rc = comp->GetRelativeTransform();
+	
+	rc.SetLocation(loc);
+	rc.SetRotation(FQuat(rot));
+	rc.SetScale3D(scal);
+	
+	comp->SetRelativeTransform(rc);
+}
+
+
+TArray<UInventoryFlagItem*> UHelpers::GetBlockFlags(UBlockBaseInfo* blockBaseInfo)
+{
+	TArray<UInventoryFlagItem*> result;
+
+	if (blockBaseInfo->ID <= 0)
+		return result; // system actions
+
+	auto def = UBlockHolderComponent::GetInstance()->GetDefinitionFor(blockBaseInfo->ID);
+	ensure(def);
+
+	for (auto fl : def->AdditionalFlags)
+	{
+		auto invItem = NewObject<UInventoryFlagItem>();
+		invItem->TagName = fl.TagID;
+		invItem->DisplayText = fl.DisplayText;
+
+		for (auto it : fl.PossibleValues)
+		{
+			auto cmbIt = NewObject<UCmbItem>();
+			cmbIt->Value = it.Value;
+			cmbIt->Text = it.DisplayText;
+			invItem->AviableValues.Add(cmbIt);
+		}
+
+		if (blockBaseInfo->AdditionalFlags.Contains(fl.TagID))
+		{
+			invItem->TagValue = blockBaseInfo->AdditionalFlags[fl.TagID];
+			invItem->TagReadOnly = true;
+			result.Add(invItem);
+		}
+	}
+	return result;
+}

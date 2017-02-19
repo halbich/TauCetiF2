@@ -8,20 +8,12 @@
  */
 struct TAUCETIF2_API BlockHelpers
 {
-	//// TODO
-	//static bool CheckBlockValidity(const FBlockDefinition* definition, const UBlockInfo* blockInfo, FString& reason)
-	//{
+	static bool CheckBlockValidity(const UBlockDefinition* definition, const UBlockInfo* blockInfo, FString& reason)
+	{
 
-	//	// TODO
-	//	return true;
-	//}
-
-	//static bool CheckBlockValidity(const UBlockDefinition* definition, const UBlockInfo* blockInfo, FString& reason)
-	//{
-
-	//	// TODO
-	//	return true;
-	//}
+		// TODO
+		return true;
+	}
 
 
 	static FORCEINLINE FVector GetLocalCoordinate(const FVector& vect)
@@ -117,6 +109,10 @@ public:
 		return baseLocation + ImpactNormal * FVector(FMath::FloorToInt(resCenAbs.X), FMath::FloorToInt(resCenAbs.Y), FMath::FloorToInt(resCenAbs.Z));
 
 	}
+
+
+
+	
 };
 
 

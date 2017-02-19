@@ -56,6 +56,8 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 
 	}
 
+	this->UpdateBlockOnConstruction(def);
+
 	Super::OnConstruction(Transform);
 }
 
