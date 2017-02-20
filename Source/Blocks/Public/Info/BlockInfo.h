@@ -42,6 +42,8 @@ public:
 		Rotation = block.Rotation;
 	}*/
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+		bool UnderConstruction;
 };
 
 

@@ -22,8 +22,7 @@ void UBuilderComponent::BeginPlay()
 
 	currentBlockInfo = NewObject<UBlockInfo>(this);
 
-	// TODO?
-	//currentBlockInfo->UnderConstruction = true;
+	currentBlockInfo->UnderConstruction = true;
 
 	auto owner = GetOwner();
 	ensure(owner);

@@ -57,7 +57,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 		{
 			auto matDef = structureDef.Materials[i];
 
-			setMaterial(meshComp, matDef.DefaultMat, i, matDef.GetParams(currentScale));
+			setMaterial(meshComp, BlockInfo->UnderConstruction? matDef.TranslucentMat : matDef.DefaultMat, i, matDef.GetParams(currentScale));
 		}
 
 	}
