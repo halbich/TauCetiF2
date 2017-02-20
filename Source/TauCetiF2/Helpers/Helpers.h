@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Common/SaveGameCarrier.h"
+#include "GameSave/Public/SaveGameCarrier.h"
 #include "SlateBasics.h"
 #include "Runtime/UMG/Public/UMG.h"
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
@@ -40,13 +40,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
 		static void FatalError(const FName text);
 
-	static FORCEINLINE FString UHelpers::GetCleanSaveFileName(const FString& worldName, const FDateTime& saveTime) {
-		auto name = worldName.Replace(TEXT(" "), TEXT("_"));
-		name.ToLowerInline();
-		auto date = saveTime.ToString(TEXT("%d_%m_%Y_%H_%M_%S"));
-
-		return FString::Printf(TEXT("%s_%s"), *name, *date);
-	}
+	
 
 	// https://wiki.unrealengine.com/Dynamic_Load_Object
 	template <typename ObjClass>

@@ -40,13 +40,21 @@
 				"Engine"
 			]
 		},
-		{
-			"Name": "GameSave",
+    {
+      "Name": "GameSave",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "Engine",
+        "CoreUObject"
+      ]
+    },
+    {
+			"Name": "Inventory",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"Engine",
-				"CoreUObject"
+				"Engine"
 			]
 		}
 	]

@@ -4,7 +4,7 @@ public class GameSave : ModuleRules
 {
     public GameSave(TargetInfo Target)
     {
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "Commons", "Blocks", "Inventory" });
         PrivateDependencyModuleNames.AddRange(new string[] { "RenderCore" });
        
 

@@ -4,7 +4,7 @@
 
 #include "Widgets/ObjectWidget.h"
 #include "Components/InventoryComponent.h"
-#include "Game/Inventory/InventoryTags.h"
+#include "Inventory/Public/InventoryTags.h"
 #include "InventoryScreen.generated.h"
 
 /**

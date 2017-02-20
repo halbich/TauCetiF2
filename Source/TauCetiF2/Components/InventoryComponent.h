@@ -3,9 +3,9 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "Blocks/Info/BuildableBlockInfo.h"
-#include "Game/Inventory/InventoryTags.h"
-#include "Common/SaveGameCarrier.h"
+#include "Blocks/Public/Info/BuildableBlockInfo.h"
+#include "Inventory/Public/InventoryTags.h"
+#include "GameSave/Public/SaveGameCarrier.h"
 #include "InventoryComponent.generated.h"
 
 

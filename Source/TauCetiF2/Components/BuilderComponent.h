@@ -5,7 +5,7 @@
 #include "GameFramework/Character.h"
 #include "Components/ActorComponent.h"
 #include "Components/SelectorComponent.h"
-#include "Blocks/Info/BuildableBlockInfo.h"
+#include "Blocks/Public/Info/BuildableBlockInfo.h"
 #include "World/WorldController.h"
 #include "WorldObject.h"
 #include "Blocks/Public/Components/BlockHolderComponent.h"
