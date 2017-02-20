@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "BlockFlagValue.generated.h"
@@ -19,8 +17,5 @@ struct FBlockFlagValue
 
 	FBlockFlagValue()
 	{
-
 	};
-
-
 };

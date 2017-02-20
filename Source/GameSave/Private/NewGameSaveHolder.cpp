@@ -1,16 +1,11 @@
-
-
 #include "GameSave.h"
 #include "NewGameSaveHolder.h"
 
-
 UNewGameSaveHolder* UNewGameSaveHolder::Instance()
 {
-
 	auto instance = NewObject<UNewGameSaveHolder>();
 	instance->init();
 	return instance;
-
 }
 
 void UNewGameSaveHolder::init()
@@ -19,22 +14,18 @@ void UNewGameSaveHolder::init()
 	fillingFunctions[(uint8)ENamedHardcodedLevel::DefaultLevel] = &UNewGameSaveHolder::getDefaultGameSave;
 	fillingFunctions[(uint8)ENamedHardcodedLevel::EmptyLevel] = &UNewGameSaveHolder::getEmptyGameSave;
 
-
 	mainMenuSave = (this->* (fillingFunctions[(uint8)ENamedHardcodedLevel::MainMenu]))();
 
 	for (uint8 i = ((uint8)ENamedHardcodedLevel::MainMenu + 1); i < (uint8)ENamedHardcodedLevel::HardcodedLevelsMax; i++)
 	{
 		newGameSaves.Add((this->* (fillingFunctions[i]))());
 	}
-
 }
-
 
 TArray<USaveGameCarrier*> UNewGameSaveHolder::GetNewSaveGamesList()
 {
 	return Instance()->newGameSaves;
 }
-
 
 USaveGameCarrier * UNewGameSaveHolder::DEBUG_GetTestSave()
 {
@@ -54,9 +45,7 @@ USaveGameCarrier * UNewGameSaveHolder::DEBUG_GetTestSave()
 USaveGameCarrier* UNewGameSaveHolder::GetSaveForMainMenu()
 {
 	return Instance()->mainMenuSave;
-
 }
-
 
 USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 {
@@ -68,18 +57,15 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
 
-
 	c->PlayerPosition = FVector(-600, 0, 90);
 	c->PartOfDay = 0.5f;
 	c->PlayerUseFPSCamera = true;
-
 
 	// TODO
 	//c->InventoryTags = UInventoryTags::GetDefault();
 
 	c->buildableBlocks.Add(makeBuildable(EmptyHandID, FVector(1, 1, 1)));
 	c->buildableBlocks.Add(makeBuildable(DeleteID, FVector(1, 1, 1)));
-
 
 	////TODO
 	///*auto door = makeBuildable(EBlockName::Door, FVector(7, 7, 11));
@@ -93,15 +79,14 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	c->buildableBlocks.Add(makeBuildable(CubeSideBuildingID, FVector(7, 7, 4)));
 
 	c->buildableBlocks.Add(makeBuildable(CubeBodyBuildingID, FVector(7, 7, 4)));
-	
+
 	c->buildableBlocks.Add(makeBuildable(TerminalID, FVector(1, 1, 1)));
-	
+
 	c->buildableBlocks.Add(makeBuildable(WindowID, FVector(5, 1, 4)));
 
 	//auto UsedBlocks = &c->UsedBlocks;
 
 	return c;
-
 }
 
 USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
@@ -122,7 +107,6 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 
 	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();*/
 	return c;
-
 }
 
 USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave()
@@ -134,13 +118,9 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave()
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::MainMenu;
 
-
 	c->PlayerPosition = FVector(-600, 0, 90);
 	c->PartOfDay = 0.5f;
 	c->PlayerUseFPSCamera = true;
-
-
-
 
 	//auto UsedBlocks = &c->UsedBlocks;
 

@@ -1,14 +1,10 @@
-
-
 #pragma once
 
 #include "Components/ActorComponent.h"
 #include "SelectTargetComponent.generated.h"
 
-
 DECLARE_DELEGATE_OneParam(FUseDelegate, AActor*);
 DECLARE_EVENT_OneParam(USelectTargetComponent, FUseEvent, AActor*);
-
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API USelectTargetComponent : public UActorComponent
@@ -29,8 +25,6 @@ public:
 	UPROPERTY(Transient)
 		AActor* owner;
 
-
-
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
 		bool HasObjectOutline;
 
@@ -46,7 +40,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
 		FText CustomUsingMessage;
 
-
 	virtual void BeginPlay() override;
 
 	virtual void SelectObject(int32 stencilValue);
@@ -61,7 +54,6 @@ public:
 
 	void OnUse(AActor* selectingActor);
 
-
 	FORCEINLINE void EnableUse(float maxDistance = -1.0f, UPrimitiveComponent* comp = nullptr)
 	{
 		IsUsable = true;
@@ -74,8 +66,6 @@ public:
 		}
 	}
 
-
-
 	FORCEINLINE bool IsInUsableArea(AActor* selectingActor)
 	{
 		return selectingActor && IsUsable && (MaxDistance < 0 || FVector::Dist(owner->GetActorLocation(), selectingActor->GetActorLocation()) <= MaxDistance);
@@ -86,5 +76,4 @@ public:
 	void RemoveEventListener(FDelegateHandle DelegateHandle);
 private:
 	FUseEvent MyUseEvent;
-
 };

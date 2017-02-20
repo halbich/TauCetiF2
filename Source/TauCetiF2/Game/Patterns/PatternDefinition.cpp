@@ -1,5 +1,3 @@
-
-
 #include "TauCetiF2.h"
 #include "Helpers/BlockHelpers.h"
 #include "PatternDefinition.h"
@@ -30,14 +28,11 @@ void UPatternDefinition::InitData()
 		currentMin = FVector(FMath::Min(currentMin.X, spawnBox->Min.X), FMath::Min(currentMin.Y, spawnBox->Min.Y), FMath::Min(currentMin.Z, spawnBox->Min.Z));
 		currentMax = FVector(FMath::Max(currentMax.X, spawnBox->Max.X), FMath::Max(currentMax.Y, spawnBox->Max.Y), FMath::Max(currentMax.Z, spawnBox->Max.Z));
 */
-		
-
 	}
 
 	ensure(currentMin != currentMax && currentMin != FVector::ZeroVector);
 
 	objectDimensions = NewObject<UMinMaxBox>()->InitBox(currentMin, currentMax);
-
 
 	for (int32 i = 0; i < UsedBlocks.Num(); i++)
 	{
@@ -57,7 +52,7 @@ void UPatternDefinition::InitData()
 				continue;
 
 			auto otherBlock = MinMaxTrees[blockIndex];
-			
+
 			otherBlock->Insert(minMaxTree);
 		}
 	}
@@ -81,5 +76,3 @@ void UPatternDefinition::DEBUGSpawnPattern(const FVector& worldOffset, TArray<UB
 		outArray.Add(NewBlock);
 	}
 }
-
-

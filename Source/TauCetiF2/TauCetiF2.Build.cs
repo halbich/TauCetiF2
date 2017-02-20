@@ -4,15 +4,13 @@ using UnrealBuildTool;
 
 public class TauCetiF2 : ModuleRules
 {
-	public TauCetiF2(TargetInfo Target)
-	{
+    public TauCetiF2(TargetInfo Target)
+    {
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "Slate", "SlateCore", "ProceduralMeshComponent",
             "Commons", "GameWorld", "Blocks", "GameSave", "Inventory" });
-
 
         PublicIncludePaths.AddRange(new string[] { "TauCetiF2/Blocks" });
 
         PrivateIncludePaths.AddRange(new string[] { "TauCetiF2/Blocks" });
-
     }
 }

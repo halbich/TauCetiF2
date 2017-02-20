@@ -1,5 +1,3 @@
-
-
 #include "Blocks.h"
 #include "Block.h"
 
@@ -40,11 +38,9 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 
 	for (auto structureDef : def->MeshStructure)
 	{
-
 		check(structureDef.Mesh && "Structure element has no Mesh assigned!");
 
 		auto meshComp = genBlock->Execute_GetMeshStructureComponent(this, index++);
-
 
 		// TODO validaèní error
 		if (!meshComp)
@@ -57,9 +53,8 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 		{
 			auto matDef = structureDef.Materials[i];
 
-			setMaterial(meshComp, BlockInfo->UnderConstruction? matDef.TranslucentMat : matDef.DefaultMat, i, matDef.GetParams(currentScale));
+			setMaterial(meshComp, BlockInfo->UnderConstruction ? matDef.TranslucentMat : matDef.DefaultMat, i, matDef.GetParams(currentScale));
 		}
-
 	}
 
 	this->UpdateBlockOnConstruction(def);
@@ -68,8 +63,6 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 }
 
 void ABlock::BeginPlay() {
-
-
 	//IGenericBlock* genBlock = Cast<IGenericBlock>(this);
 	//if (genBlock)
 	//{
@@ -79,24 +72,19 @@ void ABlock::BeginPlay() {
 	//	genBlock->Execute_GetMeshStructureComponent(this, 0);
 	//}
 
-
 	Super::BeginPlay();
 }
 
 void ABlock::EndPlay(const EEndPlayReason::Type EndPlayReasonType) {
-
 	Super::EndPlay(EndPlayReasonType);
 }
-
 
 UStaticMeshComponent* ABlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {
 	print(TEXT("base impl"));
 
 	return NULL;
-
 }
-
 
 FVector ABlock::GetBlockScale()
 {

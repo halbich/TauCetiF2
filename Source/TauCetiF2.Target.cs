@@ -1,7 +1,7 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
-using UnrealBuildTool;
 using System.Collections.Generic;
+using UnrealBuildTool;
 
 public class TauCetiF2Target : TargetRules
 {

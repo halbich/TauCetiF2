@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "GameFramework/Character.h"
@@ -11,7 +9,6 @@
 #include "Blocks/Public/Components/BlockHolderComponent.h"
 #include "Helpers/BlockHelpers.h"
 #include "BuilderComponent.generated.h"
-
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TAUCETIF2_API UBuilderComponent : public UActorComponent
@@ -27,7 +24,7 @@ public:
 
 	UPROPERTY(Transient)
 		AWorldController* worldController;
-	
+
 	UPROPERTY(Transient)
 		UBuildableBlockInfo* currentBuildableBlockInfo;
 
@@ -49,7 +46,6 @@ public:
 	UPROPERTY(Transient)
 		ACharacter* character;
 
-
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
 		void SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo);
 
@@ -67,7 +63,6 @@ public:
 
 	// TODO FORCEINLINE
 	void DoAction() {
-
 		if (!selector || !selector->IsValidLowLevel() || !worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel() || !currentBuildableBlockInfo || !currentBuildableBlockInfo->IsValidLowLevel())
 			return;
 
@@ -118,11 +113,8 @@ public:
 		}
 	}
 
-
-
 	FORCEINLINE void AddRotation(float Pitch, float Yaw, float Roll)
 	{
-
 		if (!character)
 			return;
 
@@ -142,6 +134,5 @@ public:
 	{
 		currentSpawnedObject->SetActorHiddenInGame(newHidden);
 		currentSpawnedObject->SetActorTickEnabled(!newHidden);
-
 	}
 };

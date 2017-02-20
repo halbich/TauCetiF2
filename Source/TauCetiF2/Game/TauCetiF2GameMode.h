@@ -14,6 +14,3 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = GameMode)
 		TSubclassOf<APawn> PawnToSpawn;
 };
-
-
-

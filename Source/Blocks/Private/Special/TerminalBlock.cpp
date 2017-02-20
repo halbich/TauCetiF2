@@ -1,10 +1,5 @@
-
-
 #include "Blocks.h"
 #include "TerminalBlock.h"
-
-
-
 
 ATerminalBlock::ATerminalBlock()
 	: Super()
@@ -14,9 +9,7 @@ ATerminalBlock::ATerminalBlock()
 	TerminalBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TerminalBlockMesh"));
 
 	TerminalBlockMesh->SetupAttachment(GetRootComponent());
-
 }
-
 
 UStaticMeshComponent* ATerminalBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {

@@ -1,10 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "KDTree.h"
-
-
-
 
 UKDTree* UKDTree::Init(FVector min, FVector max, int8 dividingIndex)
 {
@@ -31,7 +26,6 @@ UKDTree* UKDTree::Init(UMinMaxBox* box, UMinMaxBox* constrainingBox)
 	return Init(min, max, 0);
 }
 
-
 void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 {
 	ensure(box != nullptr);
@@ -48,7 +42,6 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 		return;
 	}
 
-
 	if (SingleChild && !forceInsert)
 	{
 		SingleChild->SetParent(nullptr);
@@ -63,12 +56,7 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 	addToTreeByCoord(box);
 }
 
-
-
-
 void UKDTree::addToTreeByCoord(UKDTree* box) {
-
-
 	if (sum(box->Max * DividingCoord) <= DividingCoordValue)		// whole object is in left plane
 	{
 		if (!B1 || !B1->IsValidLowLevel() || B1->IsPendingKill())
@@ -96,7 +84,6 @@ void UKDTree::addToTreeByCoord(UKDTree* box) {
 
 	// object is in between. We need to split and then add object to both branches
 
-
 	UKDTree* newB1 = NewObject<UKDTree>(this);
 	newB1->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
 	newB1->recomputeDividingCoordValue();
@@ -108,26 +95,20 @@ void UKDTree::addToTreeByCoord(UKDTree* box) {
 
 	addToTreeByCoord(newB1);
 	addToTreeByCoord(newB2);
-
 }
-
 
 void UKDTree::DEBUGDrawContainingBox(UWorld* world)
 {
 	if (!world || IsPendingKill())
 		return;
 
-
 	auto center = (Max + Min) * 0.5 * (FVector(1, 1, 1) - DividingCoord) + DividingCoord * DividingCoordValue;
 	auto extend = (Max - center) *  (FVector(1, 1, 1) - DividingCoord);
-
-
 
 	auto di = DividingIndex % 3;
 
 	if ((B1 && B1->IsValidLowLevel() && !B1->IsPendingKill()) || (B2 && B2->IsValidLowLevel() && !B2->IsPendingKill()))
 		DrawDebugBox(world, center, extend, di == 0 ? FColor::Red : (di == 1 ? FColor::Green : FColor::Blue), true);
-
 
 	if (ContainingObject && !ContainingObject->IsPendingKill())
 	{
@@ -146,8 +127,6 @@ void UKDTree::DEBUGDrawContainingBox(UWorld* world)
 
 	if (B2 && B2->IsValidLowLevel() && !B2->IsPendingKill())
 		B2->DEBUGDrawContainingBox(world);
-
-
 }
 
 void UKDTree::DEBUGDrawSurrondings(UWorld* world, FColor usedColor)
@@ -155,16 +134,12 @@ void UKDTree::DEBUGDrawSurrondings(UWorld* world, FColor usedColor)
 	if (!world || IsPendingKill())
 		return;
 
-
 	auto bcenter = (Max + Min) * 0.5;
 	auto bextend = (Max - bcenter);
 	DrawDebugBox(world, bcenter, bextend, usedColor, true);
-
 }
 
-
 bool UKDTree::IsPlaceEmpty(const UMinMaxBox* box) {
-
 	if (!(GtMin(box->Min) && LtMax(box->Max)))
 		return false;
 
@@ -189,7 +164,6 @@ bool UKDTree::IsPlaceEmpty(const UMinMaxBox* box) {
 	return IsPlaceEmpty(newB1) && IsPlaceEmpty(newB2);
 }
 
-
 bool UKDTree::isPlaceEmptySingleChild(const UMinMaxBox* box)
 {
 	auto x = box->Max.X <= Min.X || box->Min.X >= Max.X;		// false if there is netrivial intersection
@@ -198,9 +172,6 @@ bool UKDTree::isPlaceEmptySingleChild(const UMinMaxBox* box)
 
 	return x || y || z;
 }
-
-
-
 
 //void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement)
 //{
@@ -288,7 +259,6 @@ void UKDTree::updateAfterChildDestroyedInner()
 
 	check(SingleChild || B1 || B2);
 
-
 	auto hasSingle = checkElem(SingleChild);
 	auto hasB1 = checkElem(B1);
 	auto hasB2 = checkElem(B2);
@@ -300,5 +270,4 @@ void UKDTree::updateAfterChildDestroyedInner()
 	MarkPendingKill();
 	if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
 		parent->updateAfterChildDestroyedInner();
-
 }

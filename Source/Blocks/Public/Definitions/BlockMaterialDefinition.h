@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Commons/Public/Enums.h"
@@ -13,7 +11,6 @@ struct  FBlockMaterialDefinition
 {
 	GENERATED_BODY();
 
-
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		UMaterial* DefaultMat;
 
@@ -25,7 +22,6 @@ struct  FBlockMaterialDefinition
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		EApplyScaleToMaterialParam KY;
-
 
 	FBlockMaterialDefinition()
 	{
@@ -59,6 +55,5 @@ struct  FBlockMaterialDefinition
 		}
 
 		return res;
-
 	}
 };

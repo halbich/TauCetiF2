@@ -1,9 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "MenuWidget.h"
-
-
 
 void UMenuWidget::SwapWithTop(UObjectWidget* widget)
 {
@@ -15,4 +11,3 @@ void UMenuWidget::SwapWithTop(UObjectWidget* widget)
 	if (switcher && switcher->IsValidLowLevel())
 		switcher->SetActiveWidget(widget);
 }
-

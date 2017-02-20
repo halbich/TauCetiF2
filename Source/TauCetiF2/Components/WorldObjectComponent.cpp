@@ -1,8 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "WorldObjectComponent.h"
-
 
 // Sets default values for this component's properties
 UWorldObjectComponent::UWorldObjectComponent()
@@ -28,10 +25,7 @@ void UWorldObjectComponent::BeginPlay()
 
 	ensure(BuildingTree);
 
-
 	FlushPersistentDebugLines(GetWorld());
-
-
 
 	ensure(DefiningBox);
 	ensure(TreeElements.Num() > 0);
@@ -74,7 +68,6 @@ void UWorldObjectComponent::BeginPlay()
 	//BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
 }
 
-
 #pragma optimize("",on)
 
 // Called every frame
@@ -91,12 +84,10 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 	ensure(DefiningBox != nullptr);
 
 	BuildingTree = NewObject<UMinMaxTree>(this)->Init(DefiningBox);
-
 }
 
 void UWorldObjectComponent::OnTreeElementsChanged()
 {
-
 }
 
 void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -127,6 +118,4 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 			parent->GetRoot()->DEBUGDrawBorder(GetWorld());
 		}
 	}
-
-
 }

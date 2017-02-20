@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Commons/Public/Enums.h"
@@ -12,9 +10,6 @@
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "TauCetiF2PlayerController.generated.h"
 
-
-
-
 /**
  *
  */
@@ -22,7 +17,6 @@ UCLASS()
 class TAUCETIF2_API ATauCetiF2PlayerController : public APlayerController
 {
 	GENERATED_BODY()
-
 
 public:
 
@@ -53,7 +47,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UInventoryScreen* Inventory;
 
-
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
 		void OnEnterKey();
 
@@ -75,12 +68,9 @@ public:
 		return CurrentShownWidget == EShownWidget::None;
 	}
 
-
 private:
 
-
 	FORCEINLINE void updateState(UObjectWidget* focus = nullptr) {
-
 		auto anythingShown = CurrentShownWidget != EShownWidget::None;
 
 		if (anythingShown)
@@ -102,7 +92,5 @@ private:
 		bShowMouseCursor = anythingShown;
 		SetIgnoreMoveInput(anythingShown);
 		SetIgnoreLookInput(anythingShown);
-
 	}
-
 };

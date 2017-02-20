@@ -1,14 +1,11 @@
-
-
 #pragma once
 
 /**
- * 
+ *
  */
 class COMMONS_API FFileVisitor : public IPlatformFile::FDirectoryVisitor
 {
 public:
-
 
 	TArray<FString>& Result;
 	FString WildCard;

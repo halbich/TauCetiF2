@@ -1,10 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "DeleteButton.h"
-
-
-
 
 UDeleteButton::UDeleteButton(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -16,5 +11,4 @@ UDeleteButton::UDeleteButton(const FObjectInitializer& ObjectInitializer)
 	auto btnStyle = Cast<UButtonWidgetStyle>(deleteBtnStyle.Object->CustomStyle);
 	if (btnStyle)
 		SetStyle(btnStyle->ButtonStyle);
-
 }

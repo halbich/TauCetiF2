@@ -1,5 +1,3 @@
-
-
 #include "TauCetiF2.h"
 
 #include "Engine/DestructibleMesh.h"
@@ -18,7 +16,7 @@
 //	//if (destructible.Succeeded())
 //	//	dc->SetDestructibleMesh(destructible.Object);
 //
-//	
+//
 //	static ConstructorHelpers::FObjectFinder<UStaticMesh> mesh(TEXT("StaticMesh'/Game/BuildingObjects/Meshes/box.box'"));
 //
 //	checkf(mesh.Succeeded(), TEXT("Failed to find mesh"));

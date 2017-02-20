@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Inventory/FInventoryTagGroup.h"
@@ -14,5 +12,4 @@ public:
 
 	int32 CurrentActiveIndex;
 	TArray<FInventoryTagGroup> InventoryGroupList;
-
 };

@@ -1,9 +1,6 @@
-
-
 #include "TauCetiF2.h"
 #include "CubeBodyObject.h"
-//#include "Engine/DestructibleMesh.h" 
-
+//#include "Engine/DestructibleMesh.h"
 
 //ACubeBodyObject::ACubeBodyObject(const FObjectInitializer& ObjectInitializer)
 //	: Super(ObjectInitializer)
@@ -24,6 +21,3 @@
 //	constructorSetMeshes(mesh.Object);
 //
 //}
-
-
-

@@ -1,10 +1,5 @@
-
-
 #include "Blocks.h"
 #include "DoorBlock.h"
-
-
-
 
 ADoorBlock::ADoorBlock()
 	: Super()
@@ -14,9 +9,7 @@ ADoorBlock::ADoorBlock()
 	DoorBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DoorBlockMesh"));
 
 	DoorBlockMesh->SetupAttachment(GetRootComponent());
-
 }
-
 
 UStaticMeshComponent* ADoorBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {

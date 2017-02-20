@@ -1,5 +1,3 @@
-
-
 #include "TauCetiF2.h"
 #include "MinMaxTree.h"
 
@@ -47,10 +45,8 @@ void UMinMaxTree::Insert(UMinMaxTree* other)
 
 void UMinMaxTree::ChildrenDeleted()
 {
-
 	FVector currentMin = FVector::ZeroVector;
 	FVector currentMax = FVector::ZeroVector;
-
 
 	TArray<UMinMaxTree*> newChildren;
 	for (auto child : Children)
@@ -73,7 +69,6 @@ void UMinMaxTree::ChildrenDeleted()
 
 	Children = newChildren;
 
-
 	if (Children.Num() == 0)
 	{
 		auto parent = GetParent();
@@ -92,9 +87,6 @@ void UMinMaxTree::ChildrenDeleted()
 	auto parent = GetParent();
 	if (parent)
 		parent->ChildrenDeleted();
-
-
-
 }
 
 #pragma optimize("", on)

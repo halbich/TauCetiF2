@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Object.h"
@@ -33,7 +31,6 @@ public:
 	TArray<UBlockInfo*> DEBUGUsedPatternElements(const FVector& startingPoint);
 private:
 
-
 	UPatternDefinitionsHolder(const FObjectInitializer& ObjectInitializer);
 
 	void Init();
@@ -46,7 +43,6 @@ private:
 		ret->Scale = blockScale;
 		ret->Rotation = blockRotation;
 		return ret;
-
 	}
 
 	/*FORCEINLINE UBlockInfo* make(EBlockName id, FVector location, FVector blockScale, FRotator blockRotation)
@@ -84,7 +80,7 @@ private:
 		{
 			for (auto blockElem : definition->UsedBlocks)
 			{
-				// TODO 
+				// TODO
 				/*auto group = getGroup(blockElem->ID);
 				if (FBlockDefinitionHolder::Instance().ShapeCanBeSubdivided(group->Definition->ShapeType))
 				{

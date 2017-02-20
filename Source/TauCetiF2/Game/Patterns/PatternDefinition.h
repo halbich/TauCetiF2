@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Object.h"
@@ -27,7 +25,7 @@ public:
 
 	UPROPERTY(Transient)
 		TMap<int32, UPatternGroup*> Patterns;
-	
+
 	UPROPERTY(Transient)
 		bool InitDone;
 
@@ -36,7 +34,6 @@ public:
 
 	UPROPERTY(Transient)
 		TArray<UMinMaxTree*> ResultObjectTrees;
-
 
 	void InitData();
 

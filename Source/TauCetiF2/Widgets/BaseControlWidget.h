@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Widgets/ObjectWidget.h"
@@ -8,18 +6,16 @@
 #include "BaseControlWidget.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class TAUCETIF2_API UBaseControlWidget : public UObjectWidget
 {
 	GENERATED_UCLASS_BODY()
 public:
-	
-	
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, Category = BaseControlWidget)
 		TArray<UTerminalBaseWidget*> ContainingTerminalWidgets;
-	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UTerminalBaseWidget> wTerminalBase;
@@ -32,5 +28,4 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UBlockConstructor* BlockConstructor;
-
 };

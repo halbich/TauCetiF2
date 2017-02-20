@@ -1,9 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "FBlockDefinition.h"
-
-
 
 //
 //FBlockDefinition::FBlockDefinition(int32 id, EShapeType shapeType) :

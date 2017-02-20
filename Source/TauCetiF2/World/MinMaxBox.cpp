@@ -1,9 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "MinMaxBox.h"
-
-
 
 UMinMaxBox* UMinMaxBox::InitBox(FVector min, FVector max)
 {
@@ -14,7 +10,6 @@ UMinMaxBox* UMinMaxBox::InitBox(FVector min, FVector max)
 	ensure(Min.Y <= Max.Y);
 	ensure(Min.Z <= Max.Z);
 
-
 	MinWorldCoord = ((Min + FVector(1, 1, 1) * GameDefinitions::CubeMinSizeHalf) / GameDefinitions::CubeMinSize).GridSnap(1);
 	MaxWorldCoord = ((Max - FVector(1, 1, 1) * GameDefinitions::CubeMinSizeHalf) / GameDefinitions::CubeMinSize).GridSnap(1);
 
@@ -23,8 +18,6 @@ UMinMaxBox* UMinMaxBox::InitBox(FVector min, FVector max)
 
 UMinMaxBox* UMinMaxBox::InitBoxChecked(FVector min, FVector max)
 {
-	
-
 	auto tmin = FVector(FMath::Min(min.X, max.X), FMath::Min(min.Y, max.Y), FMath::Min(min.Z, max.Z));
 	auto tmax = FVector(FMath::Max(min.X, max.X), FMath::Max(min.Y, max.Y), FMath::Max(min.Z, max.Z));
 	return InitBox(tmin, tmax);
@@ -32,7 +25,6 @@ UMinMaxBox* UMinMaxBox::InitBoxChecked(FVector min, FVector max)
 
 void UMinMaxBox::RemoveElement()
 {
-
 }
 
 #pragma optimize("", off)
@@ -58,7 +50,5 @@ bool UMinMaxBox::HasCommonBoundaries(const UMinMaxBox* box1, const UMinMaxBox* b
 	auto sZ = z && inRangeX && inRangeY;
 
 	return sX || sY || sZ;
-
-
 }
 #pragma optimize("", on)

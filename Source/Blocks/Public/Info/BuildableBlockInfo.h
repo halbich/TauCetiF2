@@ -1,7 +1,4 @@
-
-
 #pragma once
-
 
 #include "Blocks/Public/Info/BlockBaseInfo.h"
 #include "Blocks/Public/Definitions/BlockDefinition.h"
@@ -21,10 +18,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = BuildableBlockInfo)
 		TArray<FString> Tags;
 
-
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
 		EBuildableObjectAction Action;
-
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
 		bool AllowOutlineOnSelected;
@@ -34,10 +29,6 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
 		UBlockDefinition* BlockDefinition;
-
-
-
-	
 
 	FORCEINLINE void AddImplicitTags()
 	{

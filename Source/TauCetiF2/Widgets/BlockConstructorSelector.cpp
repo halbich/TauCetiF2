@@ -1,15 +1,9 @@
-
-
 #include "TauCetiF2.h"
 #include "BlockConstructorSelector.h"
 
-
-
 UBlockConstructorSelector::UBlockConstructorSelector()
 {
-
 }
-
 
 bool UBlockConstructorSelector::IsDefinitionValid()
 {
@@ -62,10 +56,8 @@ TArray<UInventoryFlagItem*> UBlockConstructorSelector::GetAdditionalParams()
 		result.Add(invItem);
 	}
 
-
 	return result;
 }
-
 
 TArray<FString> UBlockConstructorSelector::GetImplicitTags()
 {
@@ -79,9 +71,7 @@ UTexture2D* UBlockConstructorSelector::GetBlockTexture()
 	UTexture2D* result = NULL;
 	check(IsDefinitionValid());
 
-
 	return BlockDefinition->BlockImage;
 }
 
 #pragma optimize("", on)
-

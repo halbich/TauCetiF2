@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Widgets/ObjectWidget.h"
@@ -8,7 +6,7 @@
 #include "InventoryScreen.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class TAUCETIF2_API UInventoryScreen : public UObjectWidget
@@ -18,11 +16,10 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = InventoryScreen)
 		UInventoryComponent* InventoryComponent;
-	
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "InventoryScreen")
 		bool CanUncheck();
-	
+
 	UFUNCTION(BlueprintCallable, Category = "InventoryScreen")
 		void CheckCurrentSelection();
 };

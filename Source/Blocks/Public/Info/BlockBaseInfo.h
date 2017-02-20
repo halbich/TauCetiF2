@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Object.h"
@@ -25,10 +23,4 @@ public:
 
 	UPROPERTY(Transient)
 		TMap<FString, int32> AdditionalFlags;
-
-
-	
-
-
-
 };

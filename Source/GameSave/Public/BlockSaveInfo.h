@@ -1,7 +1,4 @@
-
-
 #pragma once
-
 
 // Help class to save / load data as saveGame
 
@@ -9,17 +6,15 @@
  Base info for blocks, used to load / save to save game
 */
 struct GAMESAVE_API FBlockBaseInfo {
-
 	int32 ID;
 	FVector Scale;
 	FString Name;
-	TMap<FString,int32> AdditionalFlags;
+	TMap<FString, int32> AdditionalFlags;
 
 	/*
 		Default constructor with 0 ID, Zero scale and empty name
 	*/
 	FBlockBaseInfo() : ID(0), Scale(FVector::ZeroVector), Name(TEXT("")), AdditionalFlags() {};
-
 };
 
 /*
@@ -27,7 +22,6 @@ struct GAMESAVE_API FBlockBaseInfo {
 */
 struct GAMESAVE_API FBlockInfo : FBlockBaseInfo
 {
-
 	FVector Location;
 	FRotator Rotation;
 
@@ -40,7 +34,6 @@ struct GAMESAVE_API FBlockInfo : FBlockBaseInfo
 */
 struct GAMESAVE_API FInventoryBuildableBlockInfo : FBlockBaseInfo
 {
-
 	TArray<FString> Tags;
 	FInventoryBuildableBlockInfo() : FBlockBaseInfo(), Tags() {};
 	FInventoryBuildableBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Tags() {};

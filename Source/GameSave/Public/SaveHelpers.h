@@ -26,7 +26,6 @@ public:
 
 		return FString::Printf(TEXT("%s_%s"), *name, *date);
 	}
-
 };
 
 #pragma region Loading
@@ -39,7 +38,6 @@ FORCEINLINE void FromBaseContainer(UBlockBaseInfo* info, const FBlockBaseInfo& b
 }
 
 FORCEINLINE void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
-
 	FromBaseContainer(info, block);
 	info->Location = block.Location;
 	info->Rotation = block.Rotation;
@@ -90,7 +88,6 @@ FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator >> (TArray<FInventory
 //	return result;
 //}
 
-
 //FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
 //	FInventoryBuildableBlockInfo result; // = ToBaseContainer();
 //	//TODO
@@ -98,11 +95,8 @@ FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator >> (TArray<FInventory
 //	return result;
 //}
 
-
-
 FORCEINLINE TArray<FBlockInfo>& operator<<(TArray<FBlockInfo>& blockArray, TArray<UBlockInfo*>& blockObjectArray)
 {
-
 	for (auto usedBlock : blockObjectArray)
 	{
 		/*if (usedBlock)
@@ -117,7 +111,6 @@ FORCEINLINE TArray<FBlockInfo>& operator<<(TArray<FBlockInfo>& blockArray, TArra
 
 FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator<<(TArray<FInventoryBuildableBlockInfo>& blockArray, TArray<UBuildableBlockInfo*>& blockObjectArray)
 {
-
 	for (auto usedBlock : blockObjectArray)
 	{
 		/*if (usedBlock)
@@ -136,10 +129,6 @@ FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator<<(TArray<FInventoryBu
 	return blockArray;
 }
 
-
-
-
-
 /*FORCEINLINE FInventoryTags ToContainer() {
 FInventoryTags result;
 result.CurrentActiveIndex = CurrentActiveIndex;
@@ -150,13 +139,10 @@ if (invTagGroup && invTagGroup->IsValidLowLevel())
 result.InventoryGroupList.Add(invTagGroup->ToContainer());
 }
 
-
 return result;
 }
 
 FORCEINLINE void FromContainer(const FInventoryTags& invTags) {
-
-
 CurrentActiveIndex = invTags.CurrentActiveIndex;
 
 for (auto invTagGroup : invTags.InventoryGroupList)
@@ -165,11 +151,7 @@ auto igl = NewObject<UInventoryTagGroup>();
 igl->FromContainer(invTagGroup);
 InventoryGroupList.Add(igl);
 }
-
 }*/
-
-
-
 
 //FORCEINLINE FInventoryTagGroup ToContainer() {
 //	FInventoryTagGroup result;
@@ -182,13 +164,10 @@ InventoryGroupList.Add(igl);
 //			result.GroupList.Add(tagGroup->ToContainer());
 //	}
 
-
 //	return result;
 //}
 
 //FORCEINLINE void FromContainer(const FInventoryTagGroup& invTagGroup) {
-
-
 //	Name = invTagGroup.Name;
 //	IsEnabled = invTagGroup.IsEnabled;
 

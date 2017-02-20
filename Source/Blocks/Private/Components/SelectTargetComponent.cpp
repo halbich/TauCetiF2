@@ -1,9 +1,6 @@
-
-
 #include "Blocks.h"
 #include "Commons/Public/GameDefinitions.h"
 #include "SelectTargetComponent.h"
-
 
 // Sets default values for this component's properties
 USelectTargetComponent::USelectTargetComponent()
@@ -11,9 +8,6 @@ USelectTargetComponent::USelectTargetComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-
-
-
 }
 
 void USelectTargetComponent::BeginPlay()
@@ -63,16 +57,13 @@ void USelectTargetComponent::RegisterTargetObjectPrimitiveComponent(UPrimitiveCo
 	if (comp != nullptr && comp->IsValidLowLevel()) {
 		HasObjectOutline = true;
 	}
-
 }
 
 void USelectTargetComponent::OnUse(AActor* selectingActor) {
-
 	if (!IsInUsableArea(selectingActor))
 		return;
 
 	MyUseEvent.Broadcast(selectingActor);
-
 }
 
 FDelegateHandle USelectTargetComponent::AddEventListener(FUseDelegate& UseDelegate)

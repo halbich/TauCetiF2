@@ -1,9 +1,6 @@
-
-
 #include "Blocks.h"
 #include "AssetRegistryModule.h"
 #include "BlockHolderComponent.h"
-
 
 #pragma optimize("", off)
 
@@ -19,16 +16,13 @@ UBlockHolderComponent::UBlockHolderComponent()
 	ComponentTags.Add(TEXT("UBlockHolderComponent"));
 }
 
-
 // Called when the game starts
 void UBlockHolderComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
 	// ...
-
 }
-
 
 void UBlockHolderComponent::ReinitializeAviableBlocks()
 {
@@ -77,12 +71,10 @@ void UBlockHolderComponent::ReinitializeAviableBlocks()
 		}
 	}
 
-
 	AviableBlocks.KeySort([](int32 A, int32 B) {
 		return A < B; // sort keys in reverse
 	});
 }
-
 
 void UBlockHolderComponent::tryAddBlockToAviables(UClass* blockClass)
 {
@@ -97,7 +89,6 @@ void UBlockHolderComponent::tryAddBlockToAviables(UClass* blockClass)
 	if (!def)
 		return;
 
-
 	auto contains = AviableBlocks.Find(def->BlockID);
 	if (!contains)
 	{
@@ -108,7 +99,6 @@ void UBlockHolderComponent::tryAddBlockToAviables(UClass* blockClass)
 		// TODO better approach
 		print(TEXT("Key already existed! Skipping block"));
 	}
-
 }
 
 TArray<int32> UBlockHolderComponent::GetAviableItems() {
@@ -116,7 +106,6 @@ TArray<int32> UBlockHolderComponent::GetAviableItems() {
 	AviableBlocks.GenerateKeyArray(keys);
 	return keys;
 }
-
 
 UBlockDefinition* UBlockHolderComponent::GetDefinitionFor(int32 ID)
 {
@@ -133,7 +122,6 @@ UBlockDefinition* UBlockHolderComponent::GetDefinitionFor(int32 ID)
 	auto def = Cast<ABlock>(orig->GetDefaultObject());
 	if (def && def->Definition)
 	{
-
 		auto toInsert = Cast<UBlockDefinition>(def->Definition->GetDefaultObject());
 
 		AviableBlocksDefinitionCache.Add(ID, toInsert);
@@ -142,7 +130,6 @@ UBlockDefinition* UBlockHolderComponent::GetDefinitionFor(int32 ID)
 
 	return NULL;
 }
-
 
 UBlockHolderComponent* UBlockHolderComponent::GetInstance()
 {

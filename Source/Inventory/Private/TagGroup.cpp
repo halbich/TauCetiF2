@@ -1,10 +1,5 @@
-
-
 #include "Inventory.h"
 #include "TagGroup.h"
-
-
-
 
 UTagGroup::UTagGroup()
 {

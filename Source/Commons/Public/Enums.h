@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 UENUM(BlueprintType)
@@ -20,7 +18,6 @@ enum class EBlockType : uint8
 	Building	UMETA(DisplayName = "Building"),
 	Custom		UMETA(DisplayName = "Custom"),
 };
-
 
 /*
 Enum for block definition
@@ -90,8 +87,6 @@ Enum for block definition
 //
 //};
 
-
-
 UENUM(BlueprintType)
 enum class EBuildableObjectAction : uint8
 {
@@ -108,9 +103,7 @@ enum class EShownWidget : uint8
 	BaseControl,
 	MainMenu,
 	Inventory
-
 };
-
 
 UENUM(BlueprintType)
 enum class EModalDialogResult : uint8
@@ -120,7 +113,6 @@ enum class EModalDialogResult : uint8
 	No,
 	OK,
 	Cancel
-
 };
 
 UENUM(BlueprintType)
@@ -130,9 +122,7 @@ enum class ENamedHardcodedLevel : uint8
 	DefaultLevel,
 	EmptyLevel,
 	HardcodedLevelsMax
-
 };
-
 
 //UENUM(BlueprintType)
 //enum class ENamedTag : uint8
@@ -150,7 +140,6 @@ enum class ENamedHardcodedLevel : uint8
 //		return TEXT("");
 //	}
 //}
-
 
 UENUM(BlueprintType)
 enum class EApplyScaleToMaterialParam : uint8

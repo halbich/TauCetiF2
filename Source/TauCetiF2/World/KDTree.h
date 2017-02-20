@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Object.h"
@@ -24,8 +22,6 @@ public:
 	UKDTree* Init(FVector min, FVector max, int8 dividingIndex);
 	UKDTree* Init(UMinMaxBox* box);
 	UKDTree* Init(UMinMaxBox* box, UMinMaxBox* constrainingBox);
-
-
 
 	UPROPERTY(Transient)
 		UKDTree* B1;
@@ -69,14 +65,10 @@ private:
 
 	bool isPlaceEmptySingleChild(const UMinMaxBox* box);
 
-
 	void updateAfterChildDestroyedInner();
-
-
 
 	FORCEINLINE void recomputeDividingCoordValue()
 	{
-
 		FVector dividingCoordVect = (Min + Max) * DividingCoord * 0.5;
 		DividingCoordValue = sum(dividingCoordVect);
 
@@ -86,8 +78,6 @@ private:
 		}
 	}
 
-
-
 	FORCEINLINE float sum(const FVector& v)
 	{
 		return v.X + v.Y + v.Z;
@@ -95,7 +85,6 @@ private:
 
 	FORCEINLINE bool canBeDeleted() {
 		return GetParent() != nullptr;
-
 	}
 
 	FORCEINLINE bool checkElem(UKDTree*& elem)
@@ -110,5 +99,4 @@ private:
 		}
 		return hasElem;
 	}
-
 };

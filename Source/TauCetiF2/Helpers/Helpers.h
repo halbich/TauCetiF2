@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "GameSave/Public/SaveGameCarrier.h"
@@ -21,12 +19,8 @@ class TAUCETIF2_API UHelpers : public UObject
 
 public:
 
-
-
-
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
 		static TArray<FString> GetAllSaveGameSlots();
-
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Change Localization"), Category = "Locale")
 		static bool ChangeLocalization(FString target);
@@ -40,19 +34,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
 		static void FatalError(const FName text);
 
-	
-
 	// https://wiki.unrealengine.com/Dynamic_Load_Object
 	template <typename ObjClass>
 	static FORCEINLINE ObjClass* LoadObjFromPath(const FName& Path)
 	{
-		if (Path == NAME_None) 
+		if (Path == NAME_None)
 			return nullptr;
 
 		return Cast<ObjClass>(StaticLoadObject(ObjClass::StaticClass(), NULL, *Path.ToString()));
 	}
-
-
 
 	static FORCEINLINE UMaterial* GetMaterialByName(const FName& name) {
 		return LoadObjFromPath<UMaterial>(name);
@@ -65,8 +55,6 @@ public:
 	static FORCEINLINE UTexture2D* GetTexture2DByName(const FName& name) {
 		return LoadObjFromPath<UTexture2D>(name);
 	}
-
-
 
 	/*static FORCEINLINE FString GetMaterialName(const EMaterialInstance& instance, bool isConstruct = false) {
 		const FString baseFolder = isConstruct ? TEXT("Material'/Game/Materials/BuildingObjects/Construction/%s") : TEXT("Material'/Game/Materials/BuildingObjects/%s");
@@ -91,13 +79,10 @@ public:
 		}
 	}*/
 
-
 	//static FORCEINLINE UMaterial* GetMaterialByInstance(const EMaterialInstance& instance, bool isConstruct = false) {
 	//	auto name = GetMaterialName(instance, isConstruct);
 	//	return name.Len() > 0 ? GetMaterialByName(*name) : nullptr;
 	//}
-
-
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Definitions")
 		static int32 GetCubeMinSize();
@@ -105,7 +90,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Definitions")
 		static int32 GetCubeMinSizeHalf();
 
-	UFUNCTION(BlueprintCallable,  Category = "TCF2 | Game Helpers")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers")
 		static void ObjectApplyLocalTrans(UStaticMeshComponent* comp, FVector loc, FRotator rot, FVector scal);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)

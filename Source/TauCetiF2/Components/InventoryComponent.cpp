@@ -1,15 +1,11 @@
-
-
 #include "TauCetiF2.h"
 #include "InventoryComponent.h"
-
 
 // Sets default values for this component's properties
 UInventoryComponent::UInventoryComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 }
-
 
 void UInventoryComponent::ForceItemsChanged(bool showGroupName)
 {
@@ -31,7 +27,6 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 	Subscriber.BindUObject(this, &UInventoryComponent::InventoryTagsSelectionChanged);
 	ListeningHandle = InventoryTags->AddEventListener(Subscriber);
 
-
 	auto blockRef = UBlockHolderComponent::GetInstance();
 
 	check(blockRef);
@@ -51,7 +46,6 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 			// TODO better handling?
 			print(TEXT("Failed to load builadble block"));
 		}
-
 	}
 
 	ForceItemsChanged(false);
@@ -60,7 +54,6 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
-
 
 	carrier->FillData(InventoryTags);
 	carrier->FillData(BuildableItems);
@@ -97,18 +90,15 @@ TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForBank(UInventoryTagG
 	return result;
 }
 
-
 FString UInventoryComponent::GetCurrentBankName()
 {
 	return InventoryTags->GetCurrentActiveTagGroupName();
 }
 
-
 void UInventoryComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	if (ListeningHandle.IsValid() && InventoryTags)
 		InventoryTags->RemoveEventListener(ListeningHandle);
-
 
 	UActorComponent::EndPlay(EndPlayReason);
 }

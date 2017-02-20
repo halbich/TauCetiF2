@@ -8,11 +8,8 @@ public class GameWorld : ModuleRules
         PrivateDependencyModuleNames.AddRange(new string[] { "RenderCore" });
         PrivateDependencyModuleNames.AddRange(new string[] { "PakFile", "StreamingFile" });
 
-
         PublicIncludePaths.AddRange(new string[] { "GameWorld/Public" });
 
         PrivateIncludePaths.AddRange(new string[] { "GameWorld/Private" });
-
-
     }
 }

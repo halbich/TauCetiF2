@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Object.h"
@@ -9,14 +7,13 @@
 #include "InventoryTagGroup.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS(Blueprintable)
 class INVENTORY_API UInventoryTagGroup : public UObject
 {
 	GENERATED_BODY()
 public:
-
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
 		TArray<UTagGroup*> GroupList;
@@ -26,10 +23,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
 		bool IsEnabled;
-	
-
-	
-
 
 	bool IsSatisfied(TArray<FString>& tags)
 	{

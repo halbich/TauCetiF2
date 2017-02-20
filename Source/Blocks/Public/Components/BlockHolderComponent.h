@@ -1,11 +1,8 @@
-
-
 #pragma once
 
 #include "Block.h"
 #include "Components/ActorComponent.h"
 #include "BlockHolderComponent.generated.h"
-
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API UBlockHolderComponent : public UActorComponent
@@ -24,10 +21,8 @@ public:
 	UPROPERTY(BlueprintReadonly, VisibleAnywhere, Transient, Category = "Blocks")
 		TMap<int32, UBlockDefinition*> AviableBlocksDefinitionCache;
 
-
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
 
 	void ReinitializeAviableBlocks();
 
@@ -43,6 +38,4 @@ public:
 private:
 
 	void tryAddBlockToAviables(UClass* blockClass);
-
-
 };

@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Object.h"
@@ -8,7 +6,6 @@
 #include "SaveGameCarrier.h"
 #include "Inventory/Public/InventoryTags.h"
 #include "NewGameSaveHolder.generated.h"
-
 
 #define EmptyHandID -10
 #define DeleteID -5
@@ -31,13 +28,12 @@ class GAMESAVE_API UNewGameSaveHolder : public UObject
 	GENERATED_BODY()
 
 public:
-	
+
 	UPROPERTY(Transient)
 		TArray<USaveGameCarrier*> newGameSaves;
 
 	UPROPERTY(Transient)
 		USaveGameCarrier* mainMenuSave;
-
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
 		TArray<USaveGameCarrier*> GetNewSaveGamesList();
@@ -53,22 +49,18 @@ public:
 
 private:
 
-
 	void init();
 
 	//The Function Pointer Variable Type
 	//Functions take in 0 parameters and return void
 	typedef USaveGameCarrier* (UNewGameSaveHolder::*FunctionPtrType)(void);
 
-
 	//A static array of to Function Pointers
 	FunctionPtrType fillingFunctions[(uint8)ENamedHardcodedLevel::HardcodedLevelsMax];
-
 
 	USaveGameCarrier* getDefaultGameSave();
 	USaveGameCarrier* getEmptyGameSave();
 	USaveGameCarrier* getMainMenuSave();
-
 
 	FORCEINLINE UBlockInfo* make(int32 id, FVector location, FVector blockScale, FRotator blockRotation)
 	{
@@ -78,7 +70,6 @@ private:
 		ret->Scale = blockScale;
 		ret->Rotation = blockRotation;
 		return ret;
-
 	}
 
 	FORCEINLINE FInventoryBuildableBlockInfo makeBuildable(int32 blockID, FVector blockScale)

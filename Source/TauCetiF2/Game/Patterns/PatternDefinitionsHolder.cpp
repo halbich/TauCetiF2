@@ -1,10 +1,7 @@
-
-
 #include "TauCetiF2.h"
 #include "PatternDefinitionsHolder.h"
 
 #pragma optimize("", off)
-
 
 TArray<UBlockInfo*> UPatternDefinitionsHolder::DEBUGSpawnPatterns(const FVector & startingPoint)
 {
@@ -20,7 +17,6 @@ TArray<UBlockInfo*> UPatternDefinitionsHolder::DEBUGSpawnPatterns(const FVector 
 		definition->DEBUGSpawnPattern(currentStartDim, result);
 
 		startDim += FVector(0, FMath::Abs(spawnBlock->MaxWorldCoord.Y - spawnBlock->MinWorldCoord.Y) + 5, 0);
-
 	}
 
 	return result;
@@ -28,7 +24,6 @@ TArray<UBlockInfo*> UPatternDefinitionsHolder::DEBUGSpawnPatterns(const FVector 
 
 TArray<UBlockInfo*> UPatternDefinitionsHolder::DEBUGUsedPatternElements(const FVector & startingPoint)
 {
-
 	TArray<UBlockInfo*> result;
 
 	auto startDim = BlockHelpers::GetLocalCoordinate(startingPoint);
@@ -66,7 +61,6 @@ TArray<UBlockInfo*> UPatternDefinitionsHolder::DEBUGUsedPatternElements(const FV
 UPatternDefinitionsHolder::UPatternDefinitionsHolder(const FObjectInitializer& ObjectInitializer) :
 	UObject(ObjectInitializer)
 {
-
 }
 
 void UPatternDefinitionsHolder::Init()
@@ -81,7 +75,6 @@ void UPatternDefinitionsHolder::Init()
 	test1->SetRotationsFull();
 	test1->InitData();
 	UsedDefinitions.Add(test1);
-
 
 	auto test2 = NewObject<UPatternDefinition>(this);
 
@@ -125,7 +118,6 @@ void UPatternDefinitionsHolder::Init()
 
 UPatternDefinitionsHolder* UPatternDefinitionsHolder::Instance()
 {
-
 	static UPatternDefinitionsHolder* instance = nullptr;
 
 	if (instance == nullptr || !instance->IsValidLowLevel())
@@ -136,8 +128,6 @@ UPatternDefinitionsHolder* UPatternDefinitionsHolder::Instance()
 	}
 
 	return instance;
-
 }
-
 
 #pragma optimize("", on)

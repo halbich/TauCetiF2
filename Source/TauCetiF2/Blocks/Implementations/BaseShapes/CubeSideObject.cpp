@@ -1,10 +1,7 @@
-
-
 #include "TauCetiF2.h"
 #include "CubeSideObject.h"
 
 //#include "Engine/DestructibleMesh.h"
-
 
 //ACubeSideObject::ACubeSideObject(const FObjectInitializer& ObjectInitializer)
 //	: Super(ObjectInitializer)
@@ -23,6 +20,5 @@
 //	checkf(mesh.Succeeded(), TEXT("Failed to find mesh"));
 //
 //	constructorSetMeshes(mesh.Object);
-//	
+//
 //}
-

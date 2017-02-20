@@ -8,11 +8,8 @@ public class Inventory : ModuleRules
         PrivateDependencyModuleNames.AddRange(new string[] { "RenderCore" });
         PrivateDependencyModuleNames.AddRange(new string[] { "PakFile", "StreamingFile" });
 
-
         PublicIncludePaths.AddRange(new string[] { "Inventory/Public" });
 
         PrivateIncludePaths.AddRange(new string[] { "Inventory/Private" });
-
-
     }
 }

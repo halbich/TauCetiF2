@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "GameSave.h"
@@ -44,13 +42,11 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		FString FullFilePath;
 
-
 	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		bool ContainsFullSaveData;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		bool SaveLoaded;
-
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		uint8 SaveFileVersion;
@@ -72,15 +68,11 @@ public:
 
 	// game - related stuff
 
-
-
 	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		float PartOfDay;	// interval [0,1]
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		uint8 MinBoxSize;
-
-
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		FVector PlayerPosition;
@@ -94,8 +86,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		bool PlayerUseFPSCamera;
 
-
-	// blocks 
+	// blocks
 	//UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 	//	TArray<UBlockInfo*> UsedBlocks;
 
@@ -105,14 +96,14 @@ public:
 	/*UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		UInventoryTags* InventoryTags;*/
 
-	//serializable Item
+		//serializable Item
 	FInventoryTags inventoryTags;
 
-	// blocks 
+	// blocks
 	/*UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		TArray<UBuildableBlockInfo*> BuildableBlocks;*/
 
-	// Serializable array
+		// Serializable array
 	TArray<FInventoryBuildableBlockInfo> buildableBlocks;
 
 #pragma endregion
@@ -125,11 +116,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
 		static USaveGameCarrier* GetQuickSaveCarrier();
 
-
-
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		bool DeleteSaveFile();
-
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		bool SaveBinary();
@@ -137,13 +125,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		bool LoadBinary(const FString& FilePath);
 
-
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
 		static TArray<USaveGameCarrier*> GetSaveGameInfoList();
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		bool IsSaveNameValid();
-
 
 private:
 
@@ -154,13 +140,11 @@ private:
 	bool IsSaveCompatible(const USaveGameCarrier& carrier);
 
 	void DEBUGPrintSave() {
-
 #if WITH_EDITOR
 		UE_LOG(LogTemp, Log, TEXT("~~~~~~~~~~~~~~~~~~  Save ~~~~~~~~~~~~~~~~~~~~~~~~"));
 
 		for (auto info : usedBlocks)
 		{
-
 			UE_LOG(LogTemp, Log, TEXT("UsedBlocks.Add(make(EBlockName::%s, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d)));"),
 				TEXT("TODO dodelej me"),
 				FMath::RoundToInt(info.Location.X), FMath::RoundToInt(info.Location.Y), FMath::RoundToInt(info.Location.Z),
@@ -189,9 +173,7 @@ public:
 
 	FORCEINLINE void FillData(UInventoryTags* InventoryTags)
 	{
-		
 	}
-
 
 	/*FORCEINLINE*/ TArray<UBlockInfo*> GetBlockData()
 	{
@@ -204,7 +186,7 @@ public:
 	{
 		TArray<UBuildableBlockInfo*> result;
 		buildableBlocks >> result;
-	return result;
+		return result;
 	}
 
 	FORCEINLINE UInventoryTags* GetInventoryTags()
@@ -214,25 +196,14 @@ public:
 		return result;
 	}
 
-
 	FORCEINLINE void updateBeforeSave() {
-
-		
-
-		
-		
-
 		//check(InventoryTags && InventoryTags->IsValidLowLevel());
 		//inventoryTags = InventoryTags->ToContainer();
 
 		DEBUGPrintSave();
 	}
 
-
-	
-
 	FORCEINLINE void updateAfterLoad() {
-
 		//UsedBlocks.Empty();
 		//for (auto usedBlock : usedBlocks)
 		//{
@@ -242,7 +213,6 @@ public:
 		//	// TODO
 		//	UsedBlocks.Add(newBlock);
 		//}
-
 
 		//BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
 
@@ -256,10 +226,4 @@ public:
 		//InventoryTags = NewObject<UInventoryTags>(this);
 		////InventoryTags->FromContainer(inventoryTags);
 	}
-
-
-
-
 };
-
-

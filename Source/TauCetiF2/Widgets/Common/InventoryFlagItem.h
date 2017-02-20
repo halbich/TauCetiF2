@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Object.h"
@@ -7,18 +5,17 @@
 #include "InventoryFlagItem.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS(Blueprintable)
 class TAUCETIF2_API UInventoryFlagItem : public UObject
 {
 	GENERATED_BODY()
-	
+
 public:
 
 	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
 		FString TagName;
-
 
 	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
 		FText DisplayText;
@@ -31,6 +28,4 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
 		bool TagReadOnly;
-
-	
 };

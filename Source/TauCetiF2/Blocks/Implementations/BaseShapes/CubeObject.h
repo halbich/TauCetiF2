@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "WorldObject.h"
@@ -7,11 +6,11 @@
 /**
  *
  */
-//UCLASS()
-//class TAUCETIF2_API ACubeObject : public AWorldObject
-//{
-//	GENERATED_UCLASS_BODY()
-//
-//public:
-//
-//};
+ //UCLASS()
+ //class TAUCETIF2_API ACubeObject : public AWorldObject
+ //{
+ //	GENERATED_UCLASS_BODY()
+ //
+ //public:
+ //
+ //};

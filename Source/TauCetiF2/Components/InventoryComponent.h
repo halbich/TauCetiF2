@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Components/ActorComponent.h"
@@ -7,7 +5,6 @@
 #include "Inventory/Public/InventoryTags.h"
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "InventoryComponent.generated.h"
-
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHudBuildableItemsChanged, bool, ShowGroupName);
 
@@ -19,17 +16,15 @@ class TAUCETIF2_API UInventoryComponent : public UActorComponent
 public:
 	// Sets default values for this component's properties
 	UInventoryComponent();
-	
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
 		TArray<UBuildableBlockInfo*> BuildableItems;
 
 	UPROPERTY(BlueprintAssignable, Transient, Category = InventoryComponent)
 		FHudBuildableItemsChanged OnHudBuildableItemsChanged;
-	
+
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
 		UInventoryTags* InventoryTags;
-
 
 	UFUNCTION(BlueprintCallable, Category = InventoryComponent)
 		void ForceItemsChanged(bool showGroupName);
@@ -42,11 +37,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryComponent)
 		FString GetCurrentBankName();
-	
+
 	FDelegateHandle ListeningHandle;
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
-	
+
 	void InventoryTagsSelectionChanged();
 
 	void LoadFromCarrier(USaveGameCarrier* carrier);

@@ -1,8 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "BuilderComponent.h"
-
 
 // Sets default values for this component's properties
 UBuilderComponent::UBuilderComponent() : currentDefinitionForBlock(nullptr)
@@ -13,7 +10,6 @@ UBuilderComponent::UBuilderComponent() : currentDefinitionForBlock(nullptr)
 
 	// ...
 }
-
 
 // Called when the game starts
 void UBuilderComponent::BeginPlay()
@@ -29,7 +25,6 @@ void UBuilderComponent::BeginPlay()
 
 	character = Cast<ACharacter>(owner);
 	ensure(character);
-
 }
 
 // Called every frame
@@ -55,8 +50,6 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	check(currentDefinitionForBlock);
 
 	auto newLocation = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);
-
-
 
 	if (!ForceRecomputePosition && currentBlockInfo->Location == newLocation)
 		return;
@@ -85,10 +78,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	toggleHiddenCurrentSpawned(false);
 	ForceRecomputePosition = false;
 	currentSpawnedObject->SetActorTransform(BlockHelpers::GetSpawnTransform(currentDefinitionForBlock, currentBlockInfo));
-
 }
-
-
 
 void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 {
@@ -148,8 +138,6 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 
 	currentSpawnedObject = used;
 	selector->traceIgnoreActor = currentSpawnedObject;
-
-
 }
 
 void UBuilderComponent::SetWorldController(AWorldController* controller)
@@ -157,7 +145,6 @@ void UBuilderComponent::SetWorldController(AWorldController* controller)
 	check(controller != nullptr);
 
 	worldController = controller;
-
 }
 
 void UBuilderComponent::RotatePitch(float Value)

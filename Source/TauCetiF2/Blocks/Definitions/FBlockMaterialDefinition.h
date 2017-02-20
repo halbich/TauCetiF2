@@ -9,7 +9,7 @@
 //*/
 //struct TAUCETIF2_API FBlockMaterialDefinition
 //{
-//	
+//
 //	EMaterialInstance MaterialInstance;
 //
 //	EAxis::Type KX;
@@ -38,7 +38,7 @@
 //		case EAxis::Type::Y: res.X = scale.Y;break;
 //		case EAxis::Type::Z: res.X = scale.Z;break;
 //		case EAxis::Type::None: res.X = 0; break;
-//		default: 
+//		default:
 //			checkNoEntry();
 //			break;
 //		}

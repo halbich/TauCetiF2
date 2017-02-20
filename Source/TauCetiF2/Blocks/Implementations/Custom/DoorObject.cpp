@@ -1,7 +1,5 @@
-
 #include "TauCetiF2.h"
 #include "DoorObject.h"
-
 
 //
 //
@@ -45,7 +43,7 @@
 //	Subscriber.BindUObject(this, &ADoorObject::ListeningOnUse);
 //	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 //
-//	
+//
 //}
 //
 //void ADoorObject::ListeningOnUse(AActor* actor)
@@ -104,7 +102,7 @@
 //	currentTrans.SetRotation(currentTrans.Rotator().Add(0, rotAdd, 0).Quaternion());
 //
 //
-//	
+//
 //
 //	updateDoorState(currentTrans, openingConstant);
 //}

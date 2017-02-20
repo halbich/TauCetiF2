@@ -1,11 +1,8 @@
-
-
 #pragma once
 
 #include "Blueprint/UserWidget.h"
 #include "Widgets/SynchronizeWidget.h"
 #include "ObjectWidget.generated.h"
-
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWidgetCloseRequest);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWidgetShown);
@@ -55,12 +52,7 @@ public:
 
 	void WidgetShown();
 
-
-
-
-
 private:
-
 
 	FORCEINLINE void notifyWidgetRemoved(UObjectWidget* widget)
 	{
@@ -79,5 +71,4 @@ private:
 		notifyWidgetRemoved(widget);
 		widget->notifyWidgetRemoved(widget);
 	}
-
 };

@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Object.h"
@@ -8,13 +6,9 @@
 #include "BlockAdditionalFlags.h"
 #include "BlockDefinition.generated.h"
 
-
 namespace BuildDefinition {
-
 	const FName DefaultGamePackage("TCF2Default");
 }
-
-
 
 /**
  * Class for definition of how block behave in game
@@ -44,13 +38,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		UTexture2D* BlockImage;
 
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		bool IsEmptyHand;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		bool IsSystemAction;
-
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		EShapeType ShapeType;
@@ -81,8 +73,6 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition", meta = (ShowOnlyInnerProperties))
 		TArray<FBlockAdditionalFlags> AdditionalFlags;
-
-
 
 	FVector GetMeshScale(const FVector& inScale) const
 	{
@@ -127,7 +117,6 @@ public:
 				validationErrors.Add(TEXT(""));
 				return false;
 			}
-
 		}
 
 		return true;

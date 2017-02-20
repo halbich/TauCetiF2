@@ -12,23 +12,22 @@ class ATauCetiF2Character : public ACharacter
 {
 	GENERATED_BODY()
 
-
 		/** Camera boom positioning the camera behind the character */
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* CameraBoom;
+		class USpringArmComponent* CameraBoom;
 
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* FollowCamera;
+		class UCameraComponent* FollowCamera;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Selector, meta = (AllowPrivateAccess = "true"))
-	class USelectorComponent* Selector;
+		class USelectorComponent* Selector;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
-	class UInventoryComponent* Inventory;
+		class UInventoryComponent* Inventory;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
-	class UBuilderComponent* Builder;
+		class UBuilderComponent* Builder;
 
 public:
 	ATauCetiF2Character();
@@ -93,7 +92,7 @@ protected:
 	void OnUse();
 
 	UFUNCTION(BlueprintCallable, Category = Character)
-	void LoadFromCarrier(USaveGameCarrier* carrier);
+		void LoadFromCarrier(USaveGameCarrier* carrier);
 
 	UFUNCTION(BlueprintCallable, Category = Character)
 		void SaveToCarrier(USaveGameCarrier* carrier);
@@ -111,4 +110,3 @@ public:
 
 	FORCEINLINE class UInventoryComponent* GetInventory() const { return Inventory; }
 };
-

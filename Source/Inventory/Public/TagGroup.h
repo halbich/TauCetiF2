@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Object.h"
@@ -27,9 +25,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = Tags)
 		static UTagGroup* GetFromTags(const TArray<FString>& tagList);
-
-
-
 
 	bool IsSatisfied(TArray<FString>& tags)
 	{

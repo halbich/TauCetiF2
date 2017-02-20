@@ -1,10 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "ObjectWidget.h"
-
-
-
 
 void UObjectWidget::RequestClose()
 {
@@ -29,7 +24,6 @@ bool UObjectWidget::OnEscapeKey()
 		pop();
 
 	return false;
-
 }
 
 void UObjectWidget::WidgetShown()
@@ -68,5 +62,3 @@ void UObjectWidget::RemoveTopWidgetFromStack()
 	if (ItemsStack.Num() != 0)
 		pop();
 }
-
-

@@ -1,13 +1,9 @@
-
-
 #pragma once
 
 #include "BlockSaveInfo.h"
 #include "Inventory/FTagGroup.h"
 #include "Inventory/FInventoryTagGroup.h"
 #include "Inventory/FInventoryTags.h"
-
-
 
 FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockBaseInfo& block)
 {
@@ -54,6 +50,3 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FInventoryTags& invTags)
 	Ar << invTags.InventoryGroupList;
 	return Ar;
 }
-
-
-

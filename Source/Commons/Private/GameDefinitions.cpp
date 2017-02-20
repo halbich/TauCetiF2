@@ -1,5 +1,3 @@
-
-
 #include "Commons.h"
 #include "GameDefinitions.h"
 

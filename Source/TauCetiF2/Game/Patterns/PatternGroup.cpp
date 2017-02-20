@@ -1,12 +1,8 @@
-
-
 #include "TauCetiF2.h"
 #include "PatternGroup.h"
 
-
 UPatternGroup::UPatternGroup() : UObject()
 {
-
 }
 
 void UPatternGroup::Insert(UBlockInfo* info)
@@ -18,7 +14,3 @@ void UPatternGroup::Insert(UBlockInfo* info)
 
 	Patterns.Add(pattern);
 }
-
-
-
-

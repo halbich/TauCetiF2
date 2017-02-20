@@ -1,8 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "SynchronizeWidget.h"
-
 
 void USynchronizeWidget::OnSynchronizeProperties_Implementation()
 {
@@ -12,7 +9,5 @@ void USynchronizeWidget::OnSynchronizeProperties_Implementation()
 void USynchronizeWidget::SynchronizeProperties() {
 	Super::SynchronizeProperties();
 
-
 	OnSynchronizeProperties();
 }
-

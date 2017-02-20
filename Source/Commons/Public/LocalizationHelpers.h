@@ -3,8 +3,6 @@
 // Získání hodnoty
 //FInternationalization::ForUseOnlyByLocMacroAndGraphNodeTextLiterals_CreateText(*SourceString, *Namespace, *KeyString);
 
-
-
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.SaveSystemDefault", "Default game")
 #define LC_SystemSave_Empty					NSLOCTEXT("TauCetiF2LocSpace", "LC.SaveSystemEmpty", "Empty game")
 #define LC_SystemSave_NoSaves				NSLOCTEXT("TauCetiF2LocSpace", "LC.NoSavedSavesFound", "No saves found!")
@@ -15,8 +13,6 @@
 #define LC_DoorOpening						NSLOCTEXT("TauCetiF2LocSpace", "LC.DoorOpening", "Door opening")
 #define LC_DoorOpeningLeft					NSLOCTEXT("TauCetiF2LocSpace", "LC.DoorOpeningLeft", "Left")
 #define LC_DoorOpeningRight					NSLOCTEXT("TauCetiF2LocSpace", "LC.DoorOpeningRight", "Right")
-
-
 
 #define LC_Settings							NSLOCTEXT("TauCetiF2LocSpace", "LC.Settings", "Settings")
 
@@ -43,7 +39,6 @@
 #define LC_Settings_Overal					NSLOCTEXT("TauCetiF2LocSpace", "LC.OveralSettings", "Overal settings")
 #define LC_Settings_Custom					NSLOCTEXT("TauCetiF2LocSpace", "LC.SettingsCustom", "Custom")
 
-
 #define LC_Inventory_GroupName				NSLOCTEXT("TauCetiF2LocSpace", "LC.InventoryGroupName", "Group name")
 
 //TODO
@@ -54,10 +49,7 @@
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.Quit", "Quit")
 
-
-
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.AboutText", "TODO Text")
-
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.NewGame", "New game")
 
@@ -65,11 +57,9 @@
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.CloseBtn", "Close")
 
-
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.SaveNameMustBeNonEmpty", "Name must not be empty!")
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.ResolutionScale", "Resolution Scale")
-
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.BtnCancel", "Cancel")
 
@@ -78,7 +68,6 @@
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.SaveGame", "Save game")
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.About", "About")
-
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.NewTagHint", "New tag")
 
@@ -136,16 +125,11 @@
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.LoadBtn", "Load")
 
-
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.SaveName", "Save name:")
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.BlockNameHint", "Block name")
 
-
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.BtnNo", "No")
-
-
-
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.GroupNameHint", "Group name")
 
@@ -159,8 +143,6 @@
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "{Count}%    {Message}", "{Count}%    {Message}")
 
-
-
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.BeginPlayBtn", "Begin play")
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.Load", "Load")
@@ -170,7 +152,6 @@
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.StartNewGame", "Start new game")
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "LC.DontCollapseGroup", "Don't collapse group")
-
 
 #define LC_SystemSave_Default				NSLOCTEXT("TauCetiF2LocSpace", "{0}%", "{0}%")
 

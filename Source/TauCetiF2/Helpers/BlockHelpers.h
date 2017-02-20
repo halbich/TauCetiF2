@@ -14,7 +14,6 @@ struct TAUCETIF2_API BlockHelpers
 		return true;
 	}
 
-
 	static FORCEINLINE FVector GetLocalCoordinate(const FVector& vect)
 	{
 		return (vect / GameDefinitions::CubeMinSize).GridSnap(1);
@@ -58,7 +57,6 @@ public:
 	}
 
 	static  FVector GetSpawnPoint(const FVector& ImpactPointWithSnap, const FVector& ImpactNormal, const UBlockDefinition* definition, const UBlockInfo* blockInfo) {
-
 		auto baseLocation = ImpactPointWithSnap / GameDefinitions::CubeMinSize;
 		auto blockScale = definition->GetObjectScale(blockInfo->Scale);
 
@@ -70,14 +68,7 @@ public:
 		auto resCenAbs = ((rotationScale - ImpactNormal* rotationOffset) * ImpactNormal).GetAbs();
 
 		return baseLocation + ImpactNormal * FVector(FMath::FloorToInt(resCenAbs.X), FMath::FloorToInt(resCenAbs.Y), FMath::FloorToInt(resCenAbs.Z));
-
 	}
-
-
-
-	
 };
-
-
 
 #pragma optimize("", on)

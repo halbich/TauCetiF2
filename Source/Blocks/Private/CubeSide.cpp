@@ -1,10 +1,5 @@
-
-
 #include "Blocks.h"
 #include "CubeSide.h"
-
-
-
 
 ACubeSide::ACubeSide()
 	: Super()
@@ -14,9 +9,7 @@ ACubeSide::ACubeSide()
 	CubeSideMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeSideMesh"));
 
 	CubeSideMesh->SetupAttachment(GetRootComponent());
-
 }
-
 
 UStaticMeshComponent* ACubeSide::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {

@@ -1,14 +1,8 @@
-
-
 #include "TauCetiF2.h"
 #include "ModalWidget.h"
 
-
-
-
 bool UModalWidget::IsButtonEnabled(const EModalDialogResult buttonWithResult)
 {
-
 	return EnabledButtons.Contains(buttonWithResult);
 }
 
@@ -18,7 +12,6 @@ void UModalWidget::SetDecisionMade(const EModalDialogResult decision)
 	RequestClose();
 	RemoveFromViewport();
 }
-
 
 void UModalWidget::SetDesignationYesNo()
 {
@@ -34,10 +27,8 @@ void UModalWidget::SetDesignationOkCancel()
 	EnabledButtons.Add(EModalDialogResult::Cancel);
 }
 
-
 void UModalWidget::OnEnterKey()
 {
-
 	print(TEXT("Modal enter key"));
 
 	if (IsButtonEnabled(EModalDialogResult::OK))

@@ -11,7 +11,7 @@ USaveGameCarrier::USaveGameCarrier() {
 	SaveLoaded = false;
 
 	HardcodedLevelName = ENamedHardcodedLevel::HardcodedLevelsMax;
-	
+
 	usedBlocks = TArray<FBlockInfo>();
 
 	inventoryTags = FInventoryTags();
@@ -20,15 +20,12 @@ USaveGameCarrier::USaveGameCarrier() {
 }
 
 USaveGameCarrier::~USaveGameCarrier() {
-
 	usedBlocks.Empty();
 
 	//inventoryTags = FInventoryTags();
 
 	buildableBlocks.Empty();
 }
-
-
 
 USaveGameCarrier* USaveGameCarrier::GetEmptyCarrier()
 {
@@ -45,21 +42,19 @@ USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier()
 	{
 		auto carrier = NewObject<USaveGameCarrier>();
 		if (carrier->LoadGameDataFromFile(save, false)) {
-
 			if (!carrier->IsQuickSave)
 				continue;
 
-			if ( hasQuickSave)
+			if (hasQuickSave)
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Found another quick save. Deleting %s."), *save);
 				FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*save);
 			}
 			else {
 				hasQuickSave |= carrier->IsQuickSave;
-				
+
 				result = carrier;
 			}
-
 		}
 		else {
 			UE_LOG(LogTemp, Warning, TEXT("Found save with incorrect version(%d / current: %d). Deleting %s."), carrier->SaveFileVersion, CURRENT_VERSION, *save);
@@ -74,10 +69,8 @@ USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier()
 		result->IsQuickSave = true;
 	}
 
-
 	return result;
 }
-
 
 bool USaveGameCarrier::SaveGameDataToFile(const FString& saveFilePath)
 {
@@ -104,9 +97,9 @@ bool USaveGameCarrier::SaveGameDataToFile(const FString& saveFilePath)
 
 bool USaveGameCarrier::DeleteSaveFile()
 {
-	if(FPlatformFileManager::Get().GetPlatformFile().FileExists(*FullFilePath))
+	if (FPlatformFileManager::Get().GetPlatformFile().FileExists(*FullFilePath))
 
-	return FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*FullFilePath);
+		return FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*FullFilePath);
 
 	return false;
 }
@@ -116,7 +109,6 @@ bool USaveGameCarrier::SaveBinary()
 	SavedDate = FDateTime::Now();
 
 	if (FullFilePath.Len() == 0) {
-
 		auto saveName = USaveHelpers::GetCleanSaveFileName(IsQuickSave ? TEXT("tcf2_quick") : TEXT("tcf2"), SavedDate);
 		FullFilePath = FString::Printf(TEXT("%s\\SaveGames\\%s.sav"), *FPaths::GameSavedDir(), *saveName);
 	}
@@ -139,7 +131,6 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 	{
 		auto carrier = NewObject<USaveGameCarrier>();
 		if (carrier->LoadGameDataFromFile(save, false)) {
-
 			if (carrier->IsQuickSave && hasQuickSave)
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Found another quick save. Deleting %s."), *save);
@@ -149,7 +140,6 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 				hasQuickSave |= carrier->IsQuickSave;
 				result.Add(carrier);
 			}
-
 		}
 		else {
 			UE_LOG(LogTemp, Warning, TEXT("Found save with incorrect version(%d / current: %d). Deleting %s."), carrier->SaveFileVersion, CURRENT_VERSION, *save);
@@ -164,11 +154,7 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 	return result;
 }
 
-
-
 bool USaveGameCarrier::LoadGameDataFromFile(const FString& saveGameFile, bool bFullObject) {
-
-
 	TArray<uint8> TheBinaryArray;
 	if (!FFileHelper::LoadFileToArray(TheBinaryArray, *saveGameFile))
 	{
@@ -188,13 +174,12 @@ bool USaveGameCarrier::LoadGameDataFromFile(const FString& saveGameFile, bool bF
 	FromBinary.Seek(0);
 	SaveLoadData(FromBinary, *this, bFullObject);
 
-
 	//~
-	//								Clean up 
+	//								Clean up
 	//~
 	FromBinary.FlushCache();
 
-	// Empty & Close Buffer 
+	// Empty & Close Buffer
 	TheBinaryArray.Empty();
 	FromBinary.Close();
 
@@ -245,5 +230,4 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, boo
 bool USaveGameCarrier::IsSaveNameValid()
 {
 	return SaveName.Len() > 0;
-
 }

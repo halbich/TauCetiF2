@@ -1,10 +1,5 @@
-
-
 #include "Blocks.h"
 #include "CubeBlock.h"
-
-
-
 
 ACubeBlock::ACubeBlock()
 	: Super()
@@ -14,9 +9,7 @@ ACubeBlock::ACubeBlock()
 	CubeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeMesh"));
 
 	CubeMesh->SetupAttachment(GetRootComponent());
-
 }
-
 
 UStaticMeshComponent* ACubeBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {

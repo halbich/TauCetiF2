@@ -28,14 +28,11 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
 		UStaticMeshComponent* GetMeshStructureComponent(int32 BlockMeshStructureDefIndex);
 
-
-
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual void BeginPlay() override;
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReasonType) override;
-
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
@@ -54,7 +51,6 @@ public:
 private:
 
 	FORCEINLINE void setMaterial(UPrimitiveComponent* mesh, UMaterial* material, int32 index, float scaleX, float scaleY) {
-
 		UMaterialInstanceDynamic* mi = nullptr;
 		if (material) {
 			mi = UMaterialInstanceDynamic::Create(material, this);

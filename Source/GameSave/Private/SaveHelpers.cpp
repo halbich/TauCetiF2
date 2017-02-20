@@ -1,18 +1,11 @@
-
-
 #include "GameSave.h"
 #include "PlatformFeatures.h"
 #include "GameFramework/SaveGame.h"
 #include "FFileVisitor.h"
 #include "SaveHelpers.h"
 
-
-
-
-
 TArray<FString> USaveHelpers::GetAllSaveGameSlots()
 {
-
 	TArray<FString> ret;
 
 	ISaveGameSystem* SaveSystem = IPlatformFeaturesModule::Get().GetSaveGameSystem();
@@ -37,15 +30,11 @@ TArray<FString> USaveHelpers::GetAllSaveGameSlots()
 		{
 			// Directory exists so loop through the files
 			myFileManager->Get().GetPlatformFile().IterateDirectory(*saveGamePath, FileMatch);
-
 		}
 
 		// Return the array
 		return filePaths;
-
 	}
-
 
 	return ret;
 }
-

@@ -1,9 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "BaseControlWidget.h"
-
-
 
 UBaseControlWidget::UBaseControlWidget(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -19,9 +15,4 @@ UBaseControlWidget::UBaseControlWidget(const FObjectInitializer& ObjectInitializ
 		/*BlockConstructor = CreateWidget<UBlockConstructor>(this, wBlockConstructor);
 		ContainingTerminalWidgets.Add(BlockConstructor);*/
 	}
-
 }
-
-
-
-

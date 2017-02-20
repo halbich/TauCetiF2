@@ -1,12 +1,9 @@
-
-
 #pragma once
-
 
 //class TAUCETIF2_API FBlockFlagValue
 //{
 //public:
-//	
+//
 //	FBlockFlagValue(int32 value, FText displayText) {
 //		Value = value;
 //		DisplayText = displayText;
@@ -18,7 +15,7 @@
 //
 //
 ///**
-// * 
+// *
 // */
 //class TAUCETIF2_API FBlockAdditionalFlagsDefinition
 //{

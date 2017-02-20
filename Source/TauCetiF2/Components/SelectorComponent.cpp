@@ -1,16 +1,11 @@
-
-
 #include "TauCetiF2.h"
 #include "SelectorComponent.h"
-
 
 // Sets default values for this component's properties
 USelectorComponent::USelectorComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 }
-
-
 
 void USelectorComponent::OwnerBecomeViewTarget()
 {
@@ -21,7 +16,6 @@ void USelectorComponent::OwnerBecomeViewTarget()
 	playerPawn = UGameplayStatics::GetPlayerPawn(world, 0);
 }
 
-
 // Called every frame
 void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -31,7 +25,6 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 		return;
 
 	auto cameraLoc = cameraManager->GetCameraLocation();
-
 
 	auto rot = playerPawn->GetControlRotation();
 	auto hitEnd = FRotationMatrix(rot).GetScaledAxis(EAxis::X) * 1000 + cameraLoc;
@@ -63,20 +56,17 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 		return;
 	}
 
-
 	auto worldAct = Cast<ABlock>(act);
 	if (!worldAct)
 	{
 		auto slComp = act->GetComponentByClass(USelectTargetComponent::StaticClass());
 
-		if (!act->ActorHasTag(TEXT("Selectable")) && !slComp )
+		if (!act->ActorHasTag(TEXT("Selectable")) && !slComp)
 		{
 			deselectComponent();
 			return;
 		}
 	}
-
-
 
 	int32 cubeSize = GameDefinitions::CubeMinSize;
 
@@ -90,11 +80,7 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	//DrawDebugDirectionalArrow(World, ImpactPointWithSnap, ImpactPointWithSnap + ImpactNormal * GameDefinitions::CubeMinSize, 1, FColor::Red, false, 5);
 
 	selectComponent(act, worldAct);
-
-
-
 }
-
 
 void USelectorComponent::ShowPlane()
 {
@@ -111,7 +97,6 @@ void USelectorComponent::ShowPlane()
 		return;
 	}
 
-	
 	DrawDebugDirectionalArrow(GetWorld(), ImpactPointWithSnap, ImpactPointWithSnap + (ImpactNormal * 100), 300, FColor::Red, false, 10);
 
 	auto rotator = ImpactNormal.Rotation() + FRotator(-90, 0, 0);
@@ -121,7 +106,6 @@ void USelectorComponent::ShowPlane()
 	spawnedPlane->SetActorLocationAndRotation(ImpactPointWithSnap + ImpactNormal, rot);
 	spawnedPlane->SetActorHiddenInGame(false);
 	spawnedPlane->SetActorEnableCollision(true);
-
 }
 
 void USelectorComponent::HidePlane()
@@ -133,30 +117,23 @@ void USelectorComponent::HidePlane()
 
 	spawnedPlane->SetActorHiddenInGame(true);
 	spawnedPlane->SetActorEnableCollision(false);
-
 }
 
-
 void USelectorComponent::TrySelect() {
-
 	if (!usableObjectTargeted)
 		return;
 
 	SelectedTarget->SelectTargetComponent->OnUse(owner);
-
 }
-
 
 void USelectorComponent::SetOutlining(bool enableOutlining, int32 outlineStencilValue)
 {
 	StencilValue = outlineStencilValue;
 	outliningEnabled = enableOutlining;
 
-
 	hideObjectOutline();
 	showObjectOutline();
 
 	hideUsableObjectOutline();
 	showUsableObjectOutline();
-
 }

@@ -1,30 +1,20 @@
-
-
 #include "TauCetiF2.h"
 #include "EngineUtils.h"
 #include "Blocks/Public/Block.h"
 
 #include "WorldController.h"
 
-
 #pragma optimize("", off)
 
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-
 	BlockHolder = ObjectInitializer.CreateDefaultSubobject<UBlockHolderComponent>(this, TEXT("Block Holder"));
 
-
 	BaseControl = ObjectInitializer.CreateDefaultSubobject<UBaseControlComponent>(this, TEXT("Base Control"));
-
-
-
 }
 
-
 void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
-
 	auto world = GetWorld();
 	if (!world)
 		return;
@@ -33,10 +23,8 @@ void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
 
 	BlockHolder->ReinitializeAviableBlocks();
 
-
 	print(TEXT("Foud items: "));
 	print(*FString::FromInt(BlockHolder->AviableBlocks.Num()));
-
 
 	UsedBlocks.Empty();
 	UsedBlocks.Reserve(blocks.Num());
@@ -44,7 +32,6 @@ void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
 	{
 		SpawnWorldObject(world, block, true);
 	}
-
 }
 
 bool AWorldController::DestroyWorldObject(ABlock* object)
@@ -82,7 +69,6 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 		return nullptr;
 	}
 
-
 	UMinMaxBox* box = BlockHelpers::GetSpawnBox(definition, block);
 	ensure(box != nullptr);
 	if (!IsValidSpawnPoint(box))
@@ -116,11 +102,9 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	actor->SetBlockInfo(block);
 
 	if (addToRoot) {
-
 		auto MinMax = NewObject<UKDTree>()->Init(box);
 		MinMax->ContainingObject = actor;
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
-
 
 		//actor->WorldObjectComponent->UpdateDefiningBox(MinMax);
 		RootBox->AddToTree(MinMax);
@@ -131,12 +115,9 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 		}*/
 
 		MinMax->DEBUGDrawContainingBox(GetWorld());
-
-
 	}
 
 	UGameplayStatics::FinishSpawningActor(actor, trans);
-
 
 	if (addToRoot)
 	{
@@ -148,13 +129,9 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	}
 
 	return actor;
-
-
 }
 
-
 void AWorldController::DEBUGShowMinMaxBoxes() {
-
 	if (RootBox)
 	{
 		debugBoxesShown = true;
@@ -164,9 +141,7 @@ void AWorldController::DEBUGShowMinMaxBoxes() {
 		print(TEXT("NO Root!"));
 }
 
-
 void AWorldController::DEBUGHideMinMaxBoxes() {
-
 	if (RootBox)
 	{
 		FlushPersistentDebugLines(GetWorld());
@@ -177,10 +152,8 @@ void AWorldController::DEBUGHideMinMaxBoxes() {
 		print(TEXT("NO Root!"));
 }
 
-
 void AWorldController::DEBUGSpawnPatterns(const FVector & startingPoint)
 {
-
 	print(TEXT("DEBUGSpawnPatterns"));
 
 	auto blocks = UPatternDefinitionsHolder::Instance()->DEBUGSpawnPatterns(startingPoint);
@@ -188,7 +161,6 @@ void AWorldController::DEBUGSpawnPatterns(const FVector & startingPoint)
 	{
 		SpawnWorldObject(GetWorld(), block, true);
 	}
-
 }
 
 void AWorldController::DEBUGUsedPatternElements(const FVector & startingPoint)
@@ -200,17 +172,13 @@ void AWorldController::DEBUGUsedPatternElements(const FVector & startingPoint)
 	{
 		SpawnWorldObject(GetWorld(), block, true);
 	}
-
 }
 
 void AWorldController::BeginPlay() {
-
 	RootBox = NewObject<UKDTree>(GetTransientPackage(), TEXT("RootBox"));
-
 
 	auto minCube = WorldHelpers::BorderToWorld(FVector(0, 0, 0));
 	auto maxCube = WorldHelpers::BorderToWorld(GameDefinitions::WorldBorders);
-
 
 	FVector min((minCube - 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
 	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
@@ -218,8 +186,6 @@ void AWorldController::BeginPlay() {
 	RootBox->Init(min, max, 0);
 
 	UPatternDefinitionsHolder::Instance();
-
-
 
 	TArray<UObject*> MeshAssets;
 	EngineUtils::FindOrLoadAssetsByPath(TEXT("/Game/BuildingObjects/Meshes/"), MeshAssets, EngineUtils::ATL_Class);
@@ -231,21 +197,17 @@ void AWorldController::BeginPlay() {
 		}
 	}
 
-
 	Super::BeginPlay();
 }
-
 
 void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReasonType)
 {
 	for (auto block : UsedBlocks)
 	{
-
 	}
 
 	Super::EndPlay(EndPlayReasonType);
 }
-
 
 void AWorldController::LoadDataFromCarrier(USaveGameCarrier* carrier)
 {
@@ -257,7 +219,6 @@ void AWorldController::LoadDataFromCarrier(USaveGameCarrier* carrier)
 void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
-
 
 	carrier->FillData(UsedBlocks);
 }

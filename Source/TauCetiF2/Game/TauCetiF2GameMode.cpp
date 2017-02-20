@@ -19,5 +19,4 @@ ATauCetiF2GameMode::ATauCetiF2GameMode()
 	{
 		PlayerControllerClass = PlayerControllerBPClass.Class;
 	}
-
 }

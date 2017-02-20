@@ -2,6 +2,4 @@
 
 #include "TauCetiF2.h"
 
-
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, TauCetiF2, "TauCetiF2" );
- 
+IMPLEMENT_PRIMARY_GAME_MODULE(FDefaultGameModuleImpl, TauCetiF2, "TauCetiF2");

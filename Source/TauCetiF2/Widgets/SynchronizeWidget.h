@@ -1,12 +1,10 @@
-
-
 #pragma once
 
 #include "Blueprint/UserWidget.h"
 #include "SynchronizeWidget.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class TAUCETIF2_API USynchronizeWidget : public UUserWidget
@@ -23,7 +21,4 @@ public:
 		void OnSynchronizeProperties();
 
 	virtual void SynchronizeProperties() override;
-	
-	
-	
 };

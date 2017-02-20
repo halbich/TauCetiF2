@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Widgets/SynchronizeWidget.h"
@@ -22,10 +20,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockConstructorSelector, meta = (DisplayName = "Block Holder", ExposeOnSpawn = true))
 		UBlockHolderComponent* BlockHolder;
-	
+
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockConstructorSelector)
 		UBlockDefinition* BlockDefinition;
-
 
 	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
 		bool IsDefinitionValid();

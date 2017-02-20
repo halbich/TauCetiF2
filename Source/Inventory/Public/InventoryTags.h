@@ -1,12 +1,9 @@
-
-
 #pragma once
 
 #include "Object.h"
 #include "InventoryTagGroup.h"
 //#include "GameSave/Public/Inventory/FInventoryTags.h"
 #include "InventoryTags.generated.h"
-
 
 DECLARE_DELEGATE(FSelectionChanged);
 DECLARE_EVENT(UInventoryTags, FSelectionChangedEvent);
@@ -27,7 +24,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = InventoryTags)
 		int32 CurrentActiveIndex;
 
-
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryTags)
 		static UInventoryTags* GetDefault();
 
@@ -47,7 +43,6 @@ public:
 private:
 	FSelectionChangedEvent OnSelectionChanged;
 public:
-
 
 	FORCEINLINE void NextBank()
 	{
@@ -96,7 +91,6 @@ public:
 
 #pragma optimize("", on)
 
-
 	FORCEINLINE int32 GetEnabledGroupsCount()
 	{
 		int32 res(0);
@@ -108,7 +102,6 @@ public:
 		}
 
 		return res;
-
 	}
 
 	FORCEINLINE void CheckCurrentSelection() {
@@ -117,9 +110,4 @@ public:
 
 		NextBank();
 	}
-
-
-
-
-
 };

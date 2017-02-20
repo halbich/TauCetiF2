@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Components/ActorComponent.h"
@@ -17,7 +15,6 @@ public:
 
 	// Sets default values for this component's properties
 	USelectorComponent();
-
 
 	UPROPERTY(Transient)
 		AActor* owner;
@@ -64,7 +61,6 @@ public:
 	UPROPERTY(Transient)
 		APawn* playerPawn;
 
-
 	UFUNCTION(BlueprintCallable, Category = TargetSelector)
 		void SetOutlining(bool enableOutlining, int32 outlineStencilValue);
 
@@ -83,10 +79,8 @@ public:
 	void OwnerBecomeViewTarget();
 private:
 
-
 	FORCEINLINE void updateUsableObjectTarget()
 	{
-
 		auto oldVal = usableObjectTargeted;
 		usableObjectTargeted = SelectedActor &&
 			SelectedTarget &&
@@ -119,7 +113,6 @@ private:
 				SelectedActor = nullptr;
 				SelectedTarget = nullptr;
 			}
-
 		}
 	}
 
@@ -138,14 +131,11 @@ private:
 				SelectedActor = nullptr;
 				SelectedTarget = nullptr;
 			}
-
 		}
 	}
 
-
 	FORCEINLINE void selectComponent(AActor* actor, ABlock* worldObj)
 	{
-
 		if (actor && actor == SelectedActor)
 		{
 			updateUsableObjectTarget();
@@ -157,13 +147,11 @@ private:
 		SelectedActor = actor;
 		SelectedTarget = worldObj;
 
-
 		if (outliningEnabled)
 			showObjectOutline();
 
 		updateUsableObjectTarget();
 	}
-
 
 	FORCEINLINE void hideObjectOutline()
 	{
@@ -174,7 +162,6 @@ private:
 		{
 			SelectedTarget->SelectTargetComponent->DeselectObject();
 		}
-
 	}
 
 	FORCEINLINE void hideUsableObjectOutline()
@@ -186,7 +173,6 @@ private:
 		{
 			SelectedTarget->SelectTargetComponent->DeselectUsableObject();
 		}
-
 	}
 
 	FORCEINLINE void deselectComponent()
@@ -197,11 +183,5 @@ private:
 		SelectedTarget = nullptr;
 		SelectedActor = nullptr;
 		updateUsableObjectTarget();
-
 	}
-
-
-
 };
-
-

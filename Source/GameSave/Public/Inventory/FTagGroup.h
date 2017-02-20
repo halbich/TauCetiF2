@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 /**
@@ -12,6 +10,4 @@ public:
 
 	FString GroupName;
 	TArray<FString> Tags;
-
-	
 };

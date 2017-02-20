@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "World/MinMaxBox.h"
@@ -21,11 +19,9 @@ public:
 	UPROPERTY(Transient)
 		TArray<UMinMaxTree*> Children;
 
-
 	void Insert(UMinMaxTree* other);
 
 	void ChildrenDeleted();
-
 
 	FORCEINLINE UMinMaxTree* GetRoot() {
 		return GetRootNode<UMinMaxTree>(true);
@@ -35,7 +31,6 @@ public:
 	{
 		return GetParentNodeTemplate<UMinMaxTree>();
 	}
-	
 
 private:
 
@@ -45,5 +40,4 @@ private:
 		child->SetParent(this);
 		Children.Add(child);
 	}
-
 };

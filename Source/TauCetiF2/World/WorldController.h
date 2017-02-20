@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "GameFramework/Actor.h"
@@ -37,8 +35,6 @@ public:
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
 
-
-
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void DEBUGShowMinMaxBoxes();
 
@@ -70,7 +66,6 @@ public:
 		return RootBox->IsPlaceEmpty(box);
 	}
 
-
 private:
 
 	void loadBlocksArray(TArray<UBlockInfo*>& blocks);
@@ -84,6 +79,4 @@ private:
 
 		return Cast<ObjClass>(StaticLoadObject(ObjClass::StaticClass(), NULL, *Path.ToString()));
 	}
-
-
 };

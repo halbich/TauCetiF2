@@ -1,11 +1,6 @@
-
-
 #include "TauCetiF2.h"
 
 #include "TauCetiF2PlayerController.h"
-
-
-
 
 void ATauCetiF2PlayerController::BeginPlay()
 {
@@ -34,13 +29,10 @@ void ATauCetiF2PlayerController::BeginPlay()
 		Inventory = CreateWidget<UInventoryScreen>(this, wInventory);
 		Inventory->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
 	}
-
 }
-
 
 void ATauCetiF2PlayerController::OnEscapeKey()
 {
-
 	print(TEXT("Escape pressed"));
 
 	switch (CurrentShownWidget)
@@ -81,8 +73,6 @@ void ATauCetiF2PlayerController::OnEscapeKey()
 	default:
 		checkNoEntry();
 	}
-
-
 }
 
 void ATauCetiF2PlayerController::OnEnterKey()
@@ -111,7 +101,6 @@ void ATauCetiF2PlayerController::OnEnterKey()
 
 void ATauCetiF2PlayerController::ShowWidget(const EShownWidget widget)
 {
-
 	if (CurrentShownWidget != EShownWidget::None || widget == EShownWidget::None)
 		return;
 
@@ -159,7 +148,5 @@ void ATauCetiF2PlayerController::ToggleInventory()
 
 void ATauCetiF2PlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-
 	Super::EndPlay(EndPlayReason);
-
 }

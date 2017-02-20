@@ -1,11 +1,8 @@
-
-
 #pragma once
 
 #include "Object.h"
 #include "Helpers/Helpers.h"
 #include "MinMaxBox.generated.h"
-
 
 #pragma optimize("", off)
 /**
@@ -20,7 +17,6 @@ public:
 
 	UMinMaxBox* InitBox(FVector min, FVector max);
 	UMinMaxBox* InitBoxChecked(FVector min, FVector max);
-
 
 	UPROPERTY(Transient)
 		UMinMaxBox* ParentNode;
@@ -41,7 +37,6 @@ public:
 
 	// Return true if both given boxes has common surface
 	static bool HasCommonBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2);
-
 
 	template <typename T>
 	T* GetRootNode(bool allowSelf = false)
@@ -65,13 +60,10 @@ public:
 		if (!world || IsPendingKill())
 			return;
 
-
 		auto bcenter = (Max + Min) * 0.5;
 		auto bextend = (Max - bcenter);
 		DrawDebugBox(world, bcenter, bextend, color, true);
-
 	}
-
 
 	FORCEINLINE FBox GetBox()
 	{
@@ -91,7 +83,6 @@ protected:
 		ParentNode = node;
 	}
 
-
 	FORCEINLINE bool GtMin(const FVector& min)
 	{
 		return Min.X <= min.X && Min.Y <= min.Y && Min.Z <= min.Z;
@@ -101,8 +92,6 @@ protected:
 	{
 		return Max.X >= max.X && Max.Y >= max.Y && Max.Z >= max.Z;
 	}
-
 };
-
 
 #pragma optimize("", on)

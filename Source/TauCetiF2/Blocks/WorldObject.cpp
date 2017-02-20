@@ -1,6 +1,5 @@
 #pragma optimize("", off)
 
-
 #include "TauCetiF2.h"
 #include "WorldObject.h"
 

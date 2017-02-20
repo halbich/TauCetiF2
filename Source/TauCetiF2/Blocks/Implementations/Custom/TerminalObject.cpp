@@ -1,8 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "TerminalObject.h"
-
 
 //ATerminalObject::ATerminalObject(const FObjectInitializer& ObjectInitializer)
 //	: Super(ObjectInitializer), ListeningHandle()
@@ -13,7 +10,7 @@
 //	checkf(mesh.Succeeded(), TEXT("Failed to find mesh"));
 //
 //	constructorSetMeshes(mesh.Object);
-//	
+//
 //
 //}
 //

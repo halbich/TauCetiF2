@@ -1,18 +1,11 @@
-
-
 #include "TauCetiF2.h"
 #include "PlatformFeatures.h"
 #include "GameFramework/SaveGame.h"
 #include "FFileVisitor.h"
 #include "Helpers.h"
 
-
-
-
-
 TArray<FString> UHelpers::GetAllSaveGameSlots()
 {
-
 	TArray<FString> ret;
 
 	ISaveGameSystem* SaveSystem = IPlatformFeaturesModule::Get().GetSaveGameSystem();
@@ -37,19 +30,14 @@ TArray<FString> UHelpers::GetAllSaveGameSlots()
 		{
 			// Directory exists so loop through the files
 			myFileManager->Get().GetPlatformFile().IterateDirectory(*saveGamePath, FileMatch);
-
 		}
 
 		// Return the array
 		return filePaths;
-
 	}
-
 
 	return ret;
 }
-
-
 
 bool UHelpers::ChangeLocalization(FString target)
 {
@@ -68,7 +56,6 @@ void UHelpers::GetCurrentLocalizations(UPARAM(ref)TArray<FString>& DisplayNames,
 		DisplayNames.Add(c->GetNativeName());
 		IsoNames.Add(c->GetTwoLetterISOLanguageName());
 	}
-
 }
 
 FString UHelpers::GetCurrentCultureIsoName()
@@ -83,12 +70,10 @@ void UHelpers::FatalError(const FName text)
 	UE_LOG(LogTemp, Fatal, TEXT("%s"), *text.ToString());
 }
 
-
 int32 UHelpers::GetCubeMinSize()
 {
 	return GameDefinitions::CubeMinSize;
 }
-
 
 int32 UHelpers::GetCubeMinSizeHalf()
 {
@@ -96,18 +81,16 @@ int32 UHelpers::GetCubeMinSizeHalf()
 }
 
 void UHelpers::ObjectApplyLocalTrans(UStaticMeshComponent* comp, FVector loc, FRotator rot, FVector scal) {
-
 	comp->ResetRelativeTransform();
-	
+
 	auto rc = comp->GetRelativeTransform();
-	
+
 	rc.SetLocation(loc);
 	rc.SetRotation(FQuat(rot));
 	rc.SetScale3D(scal);
-	
+
 	comp->SetRelativeTransform(rc);
 }
-
 
 TArray<UInventoryFlagItem*> UHelpers::GetBlockFlags(UBlockBaseInfo* blockBaseInfo)
 {

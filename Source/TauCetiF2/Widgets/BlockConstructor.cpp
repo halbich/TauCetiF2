@@ -1,13 +1,8 @@
-
-
 #include "TauCetiF2.h"
 #include "BlockConstructor.h"
 
-
 UBlockConstructor::UBlockConstructor() {
-
 }
-
 
 bool UBlockConstructor::AddItemToInventory(int32 id, FString name, FVector dimensions, TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString> tags, UPARAM(ref)TArray<FString>& validationErrors)
 {
@@ -33,15 +28,12 @@ bool UBlockConstructor::AddItemToInventory(int32 id, FString name, FVector dimen
 	return true;
 }
 
-
 TArray<int32> UBlockConstructor::GetAllAviableBlocks()
 {
-
 	if (blockHolder && blockHolder->IsValidLowLevel())
 	{
 		return blockHolder->GetAviableItems();
 	}
-
 
 	TArray<int32> result;
 
@@ -52,4 +44,3 @@ TArray<int32> UBlockConstructor::GetAllAviableBlocks()
 
 	return blockHolder->GetAviableItems();
 }
-
