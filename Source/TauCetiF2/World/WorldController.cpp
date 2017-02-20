@@ -23,7 +23,7 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 }
 
 
-void AWorldController::LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks) {
+void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
 
 	auto world = GetWorld();
 	if (!world)
@@ -244,6 +244,22 @@ void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReasonType)
 	}
 
 	Super::EndPlay(EndPlayReasonType);
+}
+
+
+void AWorldController::LoadDataFromCarrier(USaveGameCarrier* carrier)
+{
+	auto usedBlocks = carrier->GetBlockData();
+
+	loadBlocksArray(usedBlocks);
+}
+
+void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
+{
+	check(carrier != nullptr);
+
+
+	carrier->FillData(UsedBlocks);
 }
 
 #pragma optimize("", on)

@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Inventory/FTagGroup.h"
@@ -17,8 +15,4 @@ public:
 	bool IsEnabled;
 
 	TArray<FTagGroup> GroupList;
-
-
-
-
 };

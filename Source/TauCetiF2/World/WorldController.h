@@ -28,18 +28,16 @@ public:
 	UPROPERTY(Transient)
 		UKDTree* RootBox;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,  Category = WorldController, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldController, meta = (AllowPrivateAccess = "true"))
 		UBlockHolderComponent* BlockHolder;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldController, meta = (AllowPrivateAccess = "true"))
 		UBaseControlComponent* BaseControl;
-	
+
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
-	
-	
-	UFUNCTION(BlueprintCallable, Category = WorldController)
-		void LoadBlocksArray(UPARAM(ref)TArray<UBlockInfo*>& blocks);
+
+
 
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void DEBUGShowMinMaxBoxes();
@@ -52,6 +50,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void DEBUGUsedPatternElements(const FVector & startingPoint);
+
+	UFUNCTION(BlueprintCallable, Category = WorldController)
+		void LoadDataFromCarrier(USaveGameCarrier* carrier);
+
+	UFUNCTION(BlueprintCallable, Category = WorldController)
+		void SaveDataToCarrier(USaveGameCarrier* carrier);
 
 	virtual void BeginPlay() override;
 
@@ -69,6 +73,7 @@ public:
 
 private:
 
+	void loadBlocksArray(TArray<UBlockInfo*>& blocks);
 
 	//TEMPLATE Load Obj From Path
 	template <typename ObjClass>

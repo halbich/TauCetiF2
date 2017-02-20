@@ -36,37 +36,8 @@ public:
 		UBlockDefinition* BlockDefinition;
 
 
-	//FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
-	//	FInventoryBuildableBlockInfo result; // = ToBaseContainer();
-	//	//TODO
-	//	result.Tags = Tags;
-	//	return result;
-	//}
 
-	//FORCEINLINE void FromContainer(FInventoryBuildableBlockInfo& info) {
-	//	//FromBaseContainer(info);
-	//	Tags = info.Tags;
-	//}
-
-	static FORCEINLINE TArray<UBuildableBlockInfo*> GetSystemActions()
-	{
-		TArray<UBuildableBlockInfo*> result;
-		result.Add(NewObject<UBuildableBlockInfo>());
-		result.Add(NewObject<UBuildableBlockInfo>());
-
-		result[0]->Action = EBuildableObjectAction::None;
-		result[0]->AllowOutlineOnSelected = false;
-		result[0]->Tags.Add(TEXT("hand"));
-		result[0]->ID = -10;
-
-		result[1]->Action = EBuildableObjectAction::DeleteObject;
-		result[1]->StencilOverride = STENCIL_DELETE_OUTLINE;
-		result[1]->Tags.Add(TEXT("delete"));
-		result[1]->ID = -5;
-
-		return result;
-	}
-
+	
 
 	FORCEINLINE void AddImplicitTags()
 	{

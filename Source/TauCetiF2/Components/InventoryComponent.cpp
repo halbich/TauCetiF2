@@ -25,7 +25,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
 
-	InventoryTags = carrier->InventoryTags;
+	InventoryTags = carrier->GetInventoryTags();
 
 	FSelectionChanged Subscriber;
 	Subscriber.BindUObject(this, &UInventoryComponent::InventoryTagsSelectionChanged);
@@ -38,7 +38,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 
 	auto aviable = blockRef->GetAviableItems();
 
-	for (auto buildable : carrier->BuildableBlocks)
+	for (auto buildable : carrier->GetBuildableBlockData())
 	{
 		/*if (buildable->IsSystemAction)
 		{
@@ -68,8 +68,8 @@ void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 	check(carrier != nullptr);
 
 
-	carrier->InventoryTags = InventoryTags;
-	carrier->BuildableBlocks = TArray<UBuildableBlockInfo*>(BuildableItems);
+	carrier->FillData(InventoryTags);
+	carrier->FillData(BuildableItems);
 }
 
 void UInventoryComponent::SelectNextBank()

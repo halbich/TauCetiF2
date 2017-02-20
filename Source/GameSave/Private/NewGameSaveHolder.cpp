@@ -73,30 +73,32 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	c->PartOfDay = 0.5f;
 	c->PlayerUseFPSCamera = true;
 
-	c->InventoryTags = UInventoryTags::GetDefault();
 
-	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
+	// TODO
+	//c->InventoryTags = UInventoryTags::GetDefault();
 
-	auto buildable = &c->BuildableBlocks;
+	//c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
 
-	//TODO
-	/*auto door = makeBuildable(EBlockName::Door, FVector(7, 7, 11));
-	door->AdditionalFlags.Add(GetNameForTag(ENamedTag::DoorOpening), (int32)EDoorOpening::Right);
-	door->Name = TEXT("Dveøe");
-	buildable->Add(door);*/
+	//auto buildable = &c->BuildableBlocks;
 
-	buildable->Add(makeBuildable(CubeBaseID, FVector(20, 20, 4)));
-	buildable->Add(makeBuildable(CubeBuildingID, FVector(7, 7, 4)));
-	buildable->Add(makeBuildable(CubeSideBaseID, FVector(20, 20, 4)));
-	buildable->Add(makeBuildable(CubeSideBuildingID, FVector(7, 7, 4)));
-	
-	buildable->Add(makeBuildable(CubeBodyBuildingID, FVector(7, 7, 4)));
+	////TODO
+	///*auto door = makeBuildable(EBlockName::Door, FVector(7, 7, 11));
+	//door->AdditionalFlags.Add(GetNameForTag(ENamedTag::DoorOpening), (int32)EDoorOpening::Right);
+	//door->Name = TEXT("Dveøe");
+	//buildable->Add(door);*/
 
-	buildable->Add(makeBuildable(TerminalID, FVector(1, 1, 1)));
+	//buildable->Add(makeBuildable(CubeBaseID, FVector(20, 20, 4)));
+	//buildable->Add(makeBuildable(CubeBuildingID, FVector(7, 7, 4)));
+	//buildable->Add(makeBuildable(CubeSideBaseID, FVector(20, 20, 4)));
+	//buildable->Add(makeBuildable(CubeSideBuildingID, FVector(7, 7, 4)));
+	//
+	//buildable->Add(makeBuildable(CubeBodyBuildingID, FVector(7, 7, 4)));
 
-	buildable->Add(makeBuildable(WindowID, FVector(5, 1, 4)));
+	//buildable->Add(makeBuildable(TerminalID, FVector(1, 1, 1)));
 
-	auto UsedBlocks = &c->UsedBlocks;
+	//buildable->Add(makeBuildable(WindowID, FVector(5, 1, 4)));
+
+	//auto UsedBlocks = &c->UsedBlocks;
 
 	return c;
 
@@ -116,9 +118,9 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 	c->PartOfDay = 0.5f;
 	c->PlayerUseFPSCamera = false;
 
-	c->InventoryTags = UInventoryTags::GetDefault();
+	/*c->InventoryTags = UInventoryTags::GetDefault();
 
-	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
+	c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();*/
 	return c;
 
 }
@@ -140,7 +142,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave()
 
 
 
-	auto UsedBlocks = &c->UsedBlocks;
+	//auto UsedBlocks = &c->UsedBlocks;
 
 	// TODO
 	/*UsedBlocks->Add(make(EBlockName::WindowCube, FVector(-11, 3, 0), FVector(4, 4, 1), FRotator(0, 0, 0)));

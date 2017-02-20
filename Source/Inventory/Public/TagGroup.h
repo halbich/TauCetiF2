@@ -29,17 +29,6 @@ public:
 		static UTagGroup* GetFromTags(const TArray<FString>& tagList);
 
 
-	/*FORCEINLINE FTagGroup ToContainer() {
-		FTagGroup result;
-		result.GroupName = GroupName;
-		result.Tags = TArray<FString>(Tags);
-		return result;
-	}*/
-
-	/*FORCEINLINE void FromContainer(const FTagGroup& group) {
-		GroupName = group.GroupName;
-		Tags = TArray<FString>(group.Tags);
-	}*/
 
 
 	bool IsSatisfied(TArray<FString>& tags)

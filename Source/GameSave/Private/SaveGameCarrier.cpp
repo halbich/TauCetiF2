@@ -11,10 +11,22 @@ USaveGameCarrier::USaveGameCarrier() {
 	SaveLoaded = false;
 
 	HardcodedLevelName = ENamedHardcodedLevel::HardcodedLevelsMax;
-		
+	
+	usedBlocks = TArray<FBlockInfo>();
+
+	inventoryTags = FInventoryTags();
+
+	buildableBlocks = TArray<FInventoryBuildableBlockInfo>();
 }
 
+USaveGameCarrier::~USaveGameCarrier() {
 
+	usedBlocks.Empty();
+
+	//inventoryTags = FInventoryTags();
+
+	buildableBlocks.Empty();
+}
 
 
 

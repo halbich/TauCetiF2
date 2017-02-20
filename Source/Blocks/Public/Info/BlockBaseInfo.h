@@ -3,7 +3,6 @@
 #pragma once
 
 #include "Object.h"
-//#include "Helpers/Saving/BlockSaveInfo.h"
 #include "BlockBaseInfo.generated.h"
 
 /*
@@ -28,22 +27,7 @@ public:
 		TMap<FString, int32> AdditionalFlags;
 
 
-	/*FORCEINLINE FBlockBaseInfo ToBaseContainer() {
-		FBlockBaseInfo result;
-		result.ID = ID;
-		result.Scale = Scale;
-		result.Name = Name;
-		result.AdditionalFlags = AdditionalFlags;
-		return result;
-	}
-
-
-	FORCEINLINE void FromBaseContainer(const FBlockBaseInfo& block) {
-		ID = block.ID;
-		Scale = block.Scale;
-		Name = block.Name;
-		AdditionalFlags = block.AdditionalFlags;
-	}*/
+	
 
 
 

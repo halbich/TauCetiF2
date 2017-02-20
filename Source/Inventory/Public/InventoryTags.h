@@ -30,15 +30,15 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryTags)
 		static UInventoryTags* GetDefault();
-	
+
 	FORCEINLINE UInventoryTagGroup* GetCurrentActiveTagGroup()
 	{
-		return InventoryGroupList[CurrentActiveIndex];
+		return InventoryGroupList.IsValidIndex(CurrentActiveIndex) ? InventoryGroupList[CurrentActiveIndex] : NULL;
 	}
-	
+
 	FORCEINLINE FString GetCurrentActiveTagGroupName()
 	{
-		return GetCurrentActiveTagGroup()->Name;
+		return InventoryGroupList.IsValidIndex(CurrentActiveIndex) ? GetCurrentActiveTagGroup()->Name : FString();
 	}
 
 public:
@@ -120,33 +120,6 @@ public:
 
 
 
-	/*FORCEINLINE FInventoryTags ToContainer() {
-		FInventoryTags result;
-		result.CurrentActiveIndex = CurrentActiveIndex;
-
-		for (auto invTagGroup : InventoryGroupList)
-		{
-			if (invTagGroup && invTagGroup->IsValidLowLevel())
-				result.InventoryGroupList.Add(invTagGroup->ToContainer());
-		}
-
-
-		return result;
-	}
-
-	FORCEINLINE void FromContainer(const FInventoryTags& invTags) {
-
-
-		CurrentActiveIndex = invTags.CurrentActiveIndex;
-
-		for (auto invTagGroup : invTags.InventoryGroupList)
-		{
-			auto igl = NewObject<UInventoryTagGroup>();
-			igl->FromContainer(invTagGroup);
-			InventoryGroupList.Add(igl);
-		}
-
-	}*/
 
 
 };

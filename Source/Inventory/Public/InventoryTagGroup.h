@@ -28,35 +28,7 @@ public:
 		bool IsEnabled;
 	
 
-	//FORCEINLINE FInventoryTagGroup ToContainer() {
-	//	FInventoryTagGroup result;
-	//	result.Name = Name;
-	//	result.IsEnabled = IsEnabled;
-
-	//	for (auto tagGroup : GroupList)
-	//	{
-	//		if (tagGroup && tagGroup->IsValidLowLevel())
-	//			result.GroupList.Add(tagGroup->ToContainer());
-	//	}
-
-
-	//	return result;
-	//}
-
-	//FORCEINLINE void FromContainer(const FInventoryTagGroup& invTagGroup) {
-
-
-	//	Name = invTagGroup.Name;
-	//	IsEnabled = invTagGroup.IsEnabled;
-
-	//	for (auto groupList : invTagGroup.GroupList)
-	//	{
-	//		auto gl = NewObject<UTagGroup>(this);
-	//		gl->FromContainer(groupList);
-	//		GroupList.Add(gl);
-	//	}
-
-	//}
+	
 
 
 	bool IsSatisfied(TArray<FString>& tags)

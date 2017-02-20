@@ -7,6 +7,7 @@
 #include "Commons/Public/Enums.h"
 #include "Commons/Public/GameDefinitions.h"
 #include "ArchiveHelpers.h"
+#include "SaveHelpers.h"
 #include "BlockSaveInfo.h"
 #include "Blocks/Public/Info/BlockInfo.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
@@ -23,6 +24,8 @@ class GAMESAVE_API USaveGameCarrier : public UObject
 
 public:
 	USaveGameCarrier();
+
+	~USaveGameCarrier();
 
 	static const uint8 CURRENT_VERSION;
 
@@ -93,21 +96,21 @@ public:
 
 
 	// blocks 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
-		TArray<UBlockInfo*> UsedBlocks;
+	//UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+	//	TArray<UBlockInfo*> UsedBlocks;
 
 	// Serializable array
 	TArray<FBlockInfo> usedBlocks;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
-		UInventoryTags* InventoryTags;
+	/*UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+		UInventoryTags* InventoryTags;*/
 
 	//serializable Item
 	FInventoryTags inventoryTags;
 
 	// blocks 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
-		TArray<UBuildableBlockInfo*> BuildableBlocks;
+	/*UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+		TArray<UBuildableBlockInfo*> BuildableBlocks;*/
 
 	// Serializable array
 	TArray<FInventoryBuildableBlockInfo> buildableBlocks;
@@ -170,55 +173,92 @@ private:
 #endif
 	}
 
-private:
-	FORCEINLINE void updateBeforeSave() {
+public:
+
+	FORCEINLINE void FillData(TArray<UBlockInfo*>& UsedBlocks)
+	{
+		usedBlocks.Empty();
+		usedBlocks << UsedBlocks;
+	}
+
+	FORCEINLINE void FillData(TArray<UBuildableBlockInfo*>& BuildableBlocks)
+	{
+		buildableBlocks.Empty();
+		buildableBlocks << BuildableBlocks;
+	}
+
+	FORCEINLINE void FillData(UInventoryTags* InventoryTags)
+	{
+		
+	}
+
+
+	/*FORCEINLINE*/ TArray<UBlockInfo*> GetBlockData()
+	{
+		TArray<UBlockInfo*> result;
 
 		usedBlocks.Empty();
-		for (auto usedBlock : UsedBlocks)
-		{
-			// TODO
-			/*if (usedBlock)
-				usedBlocks.Add(usedBlock->ToContainer());*/
-		}
 
+		return result;
+	}
+
+	/*FORCEINLINE*/ TArray<UBuildableBlockInfo*> GetBuildableBlockData()
+	{
+		TArray<UBuildableBlockInfo*> result;
 
 		buildableBlocks.Empty();
-		for (auto buildableBlock : BuildableBlocks)
-		{
-		/*	if (buildableBlock && buildableBlock->IsValidLowLevel() && !buildableBlock->IsSystemAction())
-				buildableBlocks.Add(buildableBlock->ToContainer());*/
-		}
 
-		check(InventoryTags && InventoryTags->IsValidLowLevel());
+		return result;
+	}
+
+	FORCEINLINE UInventoryTags* GetInventoryTags()
+	{
+		auto result = NewObject<UInventoryTags>(this);
+
+		return result;
+	}
+
+
+	FORCEINLINE void updateBeforeSave() {
+
+		
+
+		
+		
+
+		//check(InventoryTags && InventoryTags->IsValidLowLevel());
 		//inventoryTags = InventoryTags->ToContainer();
 
 		DEBUGPrintSave();
 	}
 
+
+	
+
 	FORCEINLINE void updateAfterLoad() {
 
-		UsedBlocks.Empty();
-		for (auto usedBlock : usedBlocks)
-		{
-			auto newBlock = NewObject<UBlockInfo>(this);
-			//newBlock->FromContainer(usedBlock);
-			
-			// TODO
-			UsedBlocks.Add(newBlock);
-		}
+		//UsedBlocks.Empty();
+		//for (auto usedBlock : usedBlocks)
+		//{
+		//	auto newBlock = NewObject<UBlockInfo>(this);
+		//	//newBlock->FromContainer(usedBlock);
+
+		//	// TODO
+		//	UsedBlocks.Add(newBlock);
+		//}
 
 
-		BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
+		//BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
 
-		for (auto buildableBlock : buildableBlocks)
-		{
-			auto buildableBlockInfoBlock = NewObject<UBuildableBlockInfo>(this);
-			/*buildableBlockInfoBlock->FromContainer(buildableBlock);*/
-			BuildableBlocks.Add(buildableBlockInfoBlock);
-		}
+		//for (auto buildableBlock : buildableBlocks)
+		//{
+		//	auto buildableBlockInfoBlock = NewObject<UBuildableBlockInfo>(this);
+		//	//buildableBlockInfoBlock->FromContainer(buildableBlock);
+		//	BuildableBlocks.Add(buildableBlockInfoBlock);
+		//}
 
-		InventoryTags = NewObject<UInventoryTags>(this);
-		//InventoryTags->FromContainer(inventoryTags);
+		//InventoryTags = NewObject<UInventoryTags>(this);
+		////InventoryTags->FromContainer(inventoryTags);
 	}
 
 
