@@ -10,6 +10,9 @@
 #include "NewGameSaveHolder.generated.h"
 
 
+#define EmptyHandID -10
+#define DeleteID -5
+
 #define CubeBaseID 0
 #define CubeBuildingID 1
 #define CubeSideBaseID 100
@@ -78,12 +81,14 @@ private:
 
 	}
 
-	FORCEINLINE UBuildableBlockInfo* makeBuildable(int32 blockID, FVector blockScale)
+	FORCEINLINE FInventoryBuildableBlockInfo makeBuildable(int32 blockID, FVector blockScale)
 	{
-		auto ret = NewObject<UBuildableBlockInfo>(this);
-		ret->ID = blockID;
-		ret->Scale = blockScale;
-		ret->AddImplicitTags();
+		FInventoryBuildableBlockInfo ret;
+		ret.ID = blockID;
+		ret.Scale = blockScale;
+
+		// TODO tags
+		//ret->AddImplicitTags();
 		return ret;
 	}
 };

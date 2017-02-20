@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "BlockSaveInfo.h"
@@ -18,14 +16,9 @@ class GAMESAVE_API USaveHelpers : public UObject
 
 public:
 
-
-
-
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
 		static TArray<FString> GetAllSaveGameSlots();
 
-
-	
 	static FORCEINLINE FString USaveHelpers::GetCleanSaveFileName(const FString& worldName, const FDateTime& saveTime) {
 		auto name = worldName.Replace(TEXT(" "), TEXT("_"));
 		name.ToLowerInline();
@@ -33,41 +26,69 @@ public:
 
 		return FString::Printf(TEXT("%s_%s"), *name, *date);
 	}
-	
+
 };
 
+#pragma region Loading
 
-
-/*FORCEINLINE FBlockInfo ToContainer() {
-FBlockInfo result = ToBaseContainer();
-result.Location = Location;
-result.Rotation = Rotation;
-return result;
+FORCEINLINE void FromBaseContainer(UBlockBaseInfo* info, const FBlockBaseInfo& block) {
+	info->ID = block.ID;
+	info->Scale = block.Scale;
+	info->Name = block.Name;
+	info->AdditionalFlags = block.AdditionalFlags;
 }
 
-FORCEINLINE void FromContainer(const FBlockInfo& block) {
+FORCEINLINE void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
 
-FromBaseContainer(block);
-Location = block.Location;
-Rotation = block.Rotation;
-}*/
-
-/*FORCEINLINE FBlockBaseInfo ToBaseContainer() {
-FBlockBaseInfo result;
-result.ID = ID;
-result.Scale = Scale;
-result.Name = Name;
-result.AdditionalFlags = AdditionalFlags;
-return result;
+	FromBaseContainer(info, block);
+	info->Location = block.Location;
+	info->Rotation = block.Rotation;
 }
 
+FORCEINLINE void FromContainer(UBuildableBlockInfo* info, const FInventoryBuildableBlockInfo& block) {
+	FromBaseContainer(info, block);
+	info->Tags = block.Tags;
+}
 
-FORCEINLINE void FromBaseContainer(const FBlockBaseInfo& block) {
-ID = block.ID;
-Scale = block.Scale;
-Name = block.Name;
-AdditionalFlags = block.AdditionalFlags;
-}*/
+FORCEINLINE TArray<FBlockInfo>& operator >> (TArray<FBlockInfo>& blockArray, TArray<UBlockInfo*>& blockObjectArray)
+{
+	for (auto block : blockArray)
+	{
+		auto NewItem = NewObject<UBlockInfo>();
+		FromContainer(NewItem, block);
+		blockObjectArray.Add(NewItem);
+	}
+	return blockArray;
+}
+
+FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator >> (TArray<FInventoryBuildableBlockInfo>& blockArray, TArray<UBuildableBlockInfo*>& blockObjectArray)
+{
+	for (auto block : blockArray)
+	{
+		auto NewItem = NewObject<UBuildableBlockInfo>();
+		FromContainer(NewItem, block);
+		blockObjectArray.Add(NewItem);
+	}
+	return blockArray;
+}
+
+#pragma endregion
+
+//FORCEINLINE FBlockBaseInfo ToBaseContainer() {
+//	FBlockBaseInfo result;
+//	result.ID = ID;
+//	result.Scale = Scale;
+//	result.Name = Name;
+//	result.AdditionalFlags = AdditionalFlags;
+//	return result;
+//}
+
+//FORCEINLINE FBlockInfo ToContainer() {
+//	FBlockInfo result = ToBaseContainer();
+//	result.Location = Location;
+//	result.Rotation = Rotation;
+//	return result;
+//}
 
 
 //FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
@@ -77,10 +98,6 @@ AdditionalFlags = block.AdditionalFlags;
 //	return result;
 //}
 
-//FORCEINLINE void FromContainer(FInventoryBuildableBlockInfo& info) {
-//	//FromBaseContainer(info);
-//	Tags = info.Tags;
-//}
 
 
 FORCEINLINE TArray<FBlockInfo>& operator<<(TArray<FBlockInfo>& blockArray, TArray<UBlockInfo*>& blockObjectArray)
@@ -118,6 +135,9 @@ FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator<<(TArray<FInventoryBu
 	Ar << block.AdditionalFlags;*/
 	return blockArray;
 }
+
+
+
 
 
 /*FORCEINLINE FInventoryTags ToContainer() {

@@ -40,12 +40,6 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 
 	for (auto buildable : carrier->GetBuildableBlockData())
 	{
-		/*if (buildable->IsSystemAction)
-		{
-			BuildableItems.Add(buildable);
-			continue;
-		}*/
-
 		if (aviable.Contains(buildable->ID))
 		{
 			buildable->BlockDefinition = blockRef->GetDefinitionFor(buildable->ID);

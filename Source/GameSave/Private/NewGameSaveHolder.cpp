@@ -77,9 +77,9 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	// TODO
 	//c->InventoryTags = UInventoryTags::GetDefault();
 
-	//c->BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
+	c->buildableBlocks.Add(makeBuildable(EmptyHandID, FVector(1, 1, 1)));
+	c->buildableBlocks.Add(makeBuildable(DeleteID, FVector(1, 1, 1)));
 
-	//auto buildable = &c->BuildableBlocks;
 
 	////TODO
 	///*auto door = makeBuildable(EBlockName::Door, FVector(7, 7, 11));
@@ -87,16 +87,16 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	//door->Name = TEXT("Dveøe");
 	//buildable->Add(door);*/
 
-	//buildable->Add(makeBuildable(CubeBaseID, FVector(20, 20, 4)));
-	//buildable->Add(makeBuildable(CubeBuildingID, FVector(7, 7, 4)));
-	//buildable->Add(makeBuildable(CubeSideBaseID, FVector(20, 20, 4)));
-	//buildable->Add(makeBuildable(CubeSideBuildingID, FVector(7, 7, 4)));
-	//
-	//buildable->Add(makeBuildable(CubeBodyBuildingID, FVector(7, 7, 4)));
+	c->buildableBlocks.Add(makeBuildable(CubeBaseID, FVector(20, 20, 4)));
+	c->buildableBlocks.Add(makeBuildable(CubeBuildingID, FVector(7, 7, 4)));
+	c->buildableBlocks.Add(makeBuildable(CubeSideBaseID, FVector(20, 20, 4)));
+	c->buildableBlocks.Add(makeBuildable(CubeSideBuildingID, FVector(7, 7, 4)));
 
-	//buildable->Add(makeBuildable(TerminalID, FVector(1, 1, 1)));
-
-	//buildable->Add(makeBuildable(WindowID, FVector(5, 1, 4)));
+	c->buildableBlocks.Add(makeBuildable(CubeBodyBuildingID, FVector(7, 7, 4)));
+	
+	c->buildableBlocks.Add(makeBuildable(TerminalID, FVector(1, 1, 1)));
+	
+	c->buildableBlocks.Add(makeBuildable(WindowID, FVector(5, 1, 4)));
 
 	//auto UsedBlocks = &c->UsedBlocks;
 

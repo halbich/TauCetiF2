@@ -196,19 +196,15 @@ public:
 	/*FORCEINLINE*/ TArray<UBlockInfo*> GetBlockData()
 	{
 		TArray<UBlockInfo*> result;
-
-		usedBlocks.Empty();
-
+		usedBlocks >> result;
 		return result;
 	}
 
 	/*FORCEINLINE*/ TArray<UBuildableBlockInfo*> GetBuildableBlockData()
 	{
 		TArray<UBuildableBlockInfo*> result;
-
-		buildableBlocks.Empty();
-
-		return result;
+		buildableBlocks >> result;
+	return result;
 	}
 
 	FORCEINLINE UInventoryTags* GetInventoryTags()
