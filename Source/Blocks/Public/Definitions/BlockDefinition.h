@@ -86,19 +86,16 @@ public:
 
 	FVector GetMeshScale(const FVector& inScale) const
 	{
-		// TODO opravit custom scaling
-		return FVector(HasCustomScaling ? inScale : inScale);
+		return inScale;
 	}
 
 	FVector GetObjectScale(const FVector& inScale) const
 	{
-		// TODO opravit custom scaling
 		return FVector(HasCustomScaling ? CustomBlockScale : inScale);
 	}
 
 	FORCEINLINE bool IsInLimits(FVector dimensions)
 	{
-		// TODO opravit custom scaling
 		auto scale = HasCustomScaling ? CustomBlockScale : dimensions;
 
 		auto min = MinBlockScale.X <= scale.X && MinBlockScale.Y <= scale.Y && MinBlockScale.Z <= scale.Z;

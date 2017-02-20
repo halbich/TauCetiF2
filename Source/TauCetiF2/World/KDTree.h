@@ -98,8 +98,7 @@ private:
 
 	}
 
-	// TODO FORCEINLINE
-	bool checkElem(UKDTree*& elem)
+	FORCEINLINE bool checkElem(UKDTree*& elem)
 	{
 		auto hasElem = false;
 		if (elem && elem->IsValidLowLevel())

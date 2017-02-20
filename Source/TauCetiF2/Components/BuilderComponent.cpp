@@ -117,7 +117,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!currentDefinitionForBlock)
 		return;
 
-	// TODO
+	// TODO resolve rotation (facing player?)
 	//currentBlockInfo->Rotation = currentBuildableBlockInfo->DefaultBuildingRotation;
 	currentBlockInfo->Scale = currentBuildableBlockInfo->Scale;
 	currentBlockInfo->Location = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);

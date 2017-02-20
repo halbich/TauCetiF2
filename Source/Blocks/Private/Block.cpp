@@ -46,7 +46,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 		auto meshComp = genBlock->Execute_GetMeshStructureComponent(this, index++);
 
 
-		// TODO
+		// TODO validaèní error
 		if (!meshComp)
 			continue;
 

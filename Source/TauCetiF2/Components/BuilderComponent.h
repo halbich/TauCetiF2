@@ -79,7 +79,6 @@ public:
 			if (!selector->SelectedTarget)
 				return;
 
-			// TODO
 			if (worldController->DestroyWorldObject(selector->SelectedTarget))
 				print(TEXT("TODO! deletion seccessfull"));
 

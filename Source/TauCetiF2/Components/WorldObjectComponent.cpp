@@ -23,9 +23,8 @@ void UWorldObjectComponent::BeginPlay()
 
 	ensure(BlockInfo);
 
-	// TODO?
-	//if (BlockInfo->UnderConstruction)
-		//return;
+	if (BlockInfo->UnderConstruction)
+		return;
 
 	ensure(BuildingTree);
 
