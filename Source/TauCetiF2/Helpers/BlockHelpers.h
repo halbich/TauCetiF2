@@ -51,7 +51,7 @@ public:
 		return trans;
 	}*/
 
-	static FORCEINLINE FTransform GetSpawnTransform(const UBlockDefinition* definition, const UBlockInfo* blockInfo)
+	static FTransform GetSpawnTransform(const UBlockDefinition* definition, const UBlockInfo* blockInfo)
 	{
 		FTransform trans;
 		trans.SetScale3D(definition->GetMeshScale(blockInfo->Scale));

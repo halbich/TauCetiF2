@@ -25,6 +25,12 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 		return;
 	}
 
+	if (!BlockInfo)
+	{
+		BlockInfo = NewObject<UBlockInfo>();
+		BlockInfo->Scale = FVector(5, 1, 4);
+	}
+
 	auto genBlock = Cast<IGenericBlock>(this);
 	auto def = Definition->GetDefaultObject<UBlockDefinition>();
 

@@ -87,7 +87,7 @@ public:
 	FVector GetMeshScale(const FVector& inScale) const
 	{
 		// TODO opravit custom scaling
-		return FVector(HasCustomScaling ? FVector(1, 1, 1) : inScale);
+		return FVector(HasCustomScaling ? inScale : inScale);
 	}
 
 	FVector GetObjectScale(const FVector& inScale) const
