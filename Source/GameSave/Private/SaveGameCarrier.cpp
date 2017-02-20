@@ -74,7 +74,6 @@ USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier()
 
 bool USaveGameCarrier::SaveGameDataToFile(const FString& saveFilePath)
 {
-	updateBeforeSave();
 	FBufferArchive ToBinary;
 	SaveLoadData(ToBinary, *this);
 
@@ -185,14 +184,12 @@ bool USaveGameCarrier::LoadGameDataFromFile(const FString& saveGameFile, bool bF
 
 	this->FullFilePath = FString(saveGameFile);
 
-	updateAfterLoad();
-
 	return SaveLoaded;
 }
 
-bool USaveGameCarrier::IsSaveCompatible(const USaveGameCarrier & carrier)
+bool USaveGameCarrier::IsSaveCompatible(const USaveGameCarrier& carrier)
 {
-	return true;
+	return carrier.SaveFileVersion == CURRENT_VERSION;
 }
 
 void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, bool bFullObject)

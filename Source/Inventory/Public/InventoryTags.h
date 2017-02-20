@@ -2,7 +2,6 @@
 
 #include "Object.h"
 #include "InventoryTagGroup.h"
-//#include "GameSave/Public/Inventory/FInventoryTags.h"
 #include "InventoryTags.generated.h"
 
 DECLARE_DELEGATE(FSelectionChanged);
@@ -64,10 +63,7 @@ public:
 		OnSelectionChanged.Broadcast();
 	}
 
-#pragma optimize("", off)
-
-	// TODO FORCEINLINE
-	void PrevBank()
+	FORCEINLINE void PrevBank()
 	{
 		auto length = InventoryGroupList.Num();
 		auto start = CurrentActiveIndex - 1 + length;
@@ -88,8 +84,6 @@ public:
 
 		OnSelectionChanged.Broadcast();
 	}
-
-#pragma optimize("", on)
 
 	FORCEINLINE int32 GetEnabledGroupsCount()
 	{

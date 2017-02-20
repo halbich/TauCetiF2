@@ -175,14 +175,14 @@ public:
 	{
 	}
 
-	/*FORCEINLINE*/ TArray<UBlockInfo*> GetBlockData()
+	FORCEINLINE TArray<UBlockInfo*> GetBlockData()
 	{
 		TArray<UBlockInfo*> result;
 		usedBlocks >> result;
 		return result;
 	}
 
-	/*FORCEINLINE*/ TArray<UBuildableBlockInfo*> GetBuildableBlockData()
+	FORCEINLINE TArray<UBuildableBlockInfo*> GetBuildableBlockData()
 	{
 		TArray<UBuildableBlockInfo*> result;
 		buildableBlocks >> result;

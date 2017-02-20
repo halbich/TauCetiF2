@@ -1,9 +1,12 @@
 #pragma once
 
+#include "Object.h"
 #include "BlockSaveInfo.h"
 #include "Blocks/Public/Info/BlockBaseInfo.h"
 #include "Blocks/Public/Info/BlockInfo.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
+#include "Inventory/Public/InventoryTags.h"
+#include "Inventory/FInventoryTagGroup.h"
 #include "SaveHelpers.generated.h"
 
 /**
@@ -26,6 +29,8 @@ public:
 
 		return FString::Printf(TEXT("%s_%s"), *name, *date);
 	}
+
+	//static FInventoryTags& MakeFromTags(UInventoryTags* inventoryTagsObject);
 };
 
 #pragma region Loading
@@ -128,6 +133,7 @@ FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator<<(TArray<FInventoryBu
 	Ar << block.AdditionalFlags;*/
 	return blockArray;
 }
+
 
 /*FORCEINLINE FInventoryTags ToContainer() {
 FInventoryTags result;

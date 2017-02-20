@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Object.h"
-//#include "GameSave/Public/Inventory/FTagGroup.h"
 #include "TagGroup.generated.h"
 
 /**

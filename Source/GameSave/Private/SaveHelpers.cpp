@@ -38,3 +38,19 @@ TArray<FString> USaveHelpers::GetAllSaveGameSlots()
 
 	return ret;
 }
+
+//
+//FInventoryTags& USaveHelpers::MakeFromTags(UInventoryTags* inventoryTagsObject)
+//{
+//	FInventoryTags inventory;
+//	//for (auto usedBlock : blockObjectArray)
+//	//{
+//	//	/*if (usedBlock)
+//	//	blockArray.Add(usedBlock->ToContainer());*/
+//	//}
+//	/*Ar << block.ID;
+//	Ar << block.Scale;
+//	Ar << block.Name;
+//	Ar << block.AdditionalFlags;*/
+//	return inventory;
+//}

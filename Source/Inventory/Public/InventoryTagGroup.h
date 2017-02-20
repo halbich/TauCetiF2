@@ -3,7 +3,6 @@
 #include "Object.h"
 
 #include "TagGroup.h"
-//#include "GameSave/Public/Inventory/FInventoryTagGroup.h"
 #include "InventoryTagGroup.generated.h"
 
 /**
