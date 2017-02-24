@@ -189,41 +189,11 @@ public:
 		return result;
 	}
 
-	FORCEINLINE UInventoryTags* GetInventoryTags()
+	UInventoryTags* GetInventoryTags()
 	{
 		auto result = NewObject<UInventoryTags>(this);
-
+		FromContainer(result, inventoryTags);
 		return result;
 	}
 
-	FORCEINLINE void updateBeforeSave() {
-		//check(InventoryTags && InventoryTags->IsValidLowLevel());
-		//inventoryTags = InventoryTags->ToContainer();
-
-		DEBUGPrintSave();
-	}
-
-	FORCEINLINE void updateAfterLoad() {
-		//UsedBlocks.Empty();
-		//for (auto usedBlock : usedBlocks)
-		//{
-		//	auto newBlock = NewObject<UBlockInfo>(this);
-		//	//newBlock->FromContainer(usedBlock);
-
-		//	// TODO
-		//	UsedBlocks.Add(newBlock);
-		//}
-
-		//BuildableBlocks = UBuildableBlockInfo::GetSystemActions();
-
-		//for (auto buildableBlock : buildableBlocks)
-		//{
-		//	auto buildableBlockInfoBlock = NewObject<UBuildableBlockInfo>(this);
-		//	//buildableBlockInfoBlock->FromContainer(buildableBlock);
-		//	BuildableBlocks.Add(buildableBlockInfoBlock);
-		//}
-
-		//InventoryTags = NewObject<UInventoryTags>(this);
-		////InventoryTags->FromContainer(inventoryTags);
-	}
 };

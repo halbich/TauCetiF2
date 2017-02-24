@@ -5,7 +5,11 @@
 #include "Blocks/Public/Info/BlockBaseInfo.h"
 #include "Blocks/Public/Info/BlockInfo.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
+#include "Inventory/Public/TagGroup.h"
+#include "Inventory/FTagGroup.h"
 #include "Inventory/Public/InventoryTags.h"
+#include "Inventory/FInventoryTags.h"
+#include "Inventory/Public/InventoryTagGroup.h"
 #include "Inventory/FInventoryTagGroup.h"
 #include "SaveHelpers.generated.h"
 
@@ -30,7 +34,7 @@ public:
 		return FString::Printf(TEXT("%s_%s"), *name, *date);
 	}
 
-	//static FInventoryTags& MakeFromTags(UInventoryTags* inventoryTagsObject);
+	static FInventoryTags MakeFromTags(UInventoryTags* inventoryTagsObject);
 };
 
 #pragma region Loading
@@ -147,17 +151,34 @@ result.InventoryGroupList.Add(invTagGroup->ToContainer());
 
 return result;
 }
-
-FORCEINLINE void FromContainer(const FInventoryTags& invTags) {
-CurrentActiveIndex = invTags.CurrentActiveIndex;
-
-for (auto invTagGroup : invTags.InventoryGroupList)
-{
-auto igl = NewObject<UInventoryTagGroup>();
-igl->FromContainer(invTagGroup);
-InventoryGroupList.Add(igl);
+*/
+FORCEINLINE void FromContainer(UTagGroup* grp, const FTagGroup& group) {
+	grp->GroupName = group.GroupName;
+	grp->Tags = TArray<FString>(group.Tags);
 }
-}*/
+
+FORCEINLINE void FromContainer(UInventoryTagGroup* tagGroup, const FInventoryTagGroup& invTagGroup) {
+	tagGroup->Name = invTagGroup.Name;
+	tagGroup->IsEnabled = invTagGroup.IsEnabled;
+
+	for (auto groupList : invTagGroup.GroupList)
+	{
+		auto gl = NewObject<UTagGroup>();
+		FromContainer(gl, groupList);
+		tagGroup->GroupList.Add(gl);
+	}
+}
+
+FORCEINLINE void FromContainer(UInventoryTags* tags, const FInventoryTags& invTags) {
+	tags->CurrentActiveIndex = invTags.CurrentActiveIndex;
+
+	for (auto invTagGroup : invTags.InventoryGroupList)
+	{
+		auto igl = NewObject<UInventoryTagGroup>();
+		FromContainer(igl, invTagGroup);
+		tags->InventoryGroupList.Add(igl);
+	}
+}
 
 //FORCEINLINE FInventoryTagGroup ToContainer() {
 //	FInventoryTagGroup result;
@@ -173,18 +194,6 @@ InventoryGroupList.Add(igl);
 //	return result;
 //}
 
-//FORCEINLINE void FromContainer(const FInventoryTagGroup& invTagGroup) {
-//	Name = invTagGroup.Name;
-//	IsEnabled = invTagGroup.IsEnabled;
-
-//	for (auto groupList : invTagGroup.GroupList)
-//	{
-//		auto gl = NewObject<UTagGroup>(this);
-//		gl->FromContainer(groupList);
-//		GroupList.Add(gl);
-//	}
-
-//}
 
 /*FORCEINLINE FTagGroup ToContainer() {
 FTagGroup result;
@@ -193,7 +202,3 @@ result.Tags = TArray<FString>(Tags);
 return result;
 }*/
 
-/*FORCEINLINE void FromContainer(const FTagGroup& group) {
-GroupName = group.GroupName;
-Tags = TArray<FString>(group.Tags);
-}*/

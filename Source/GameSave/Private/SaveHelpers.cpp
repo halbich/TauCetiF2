@@ -39,18 +39,41 @@ TArray<FString> USaveHelpers::GetAllSaveGameSlots()
 	return ret;
 }
 
-//
-//FInventoryTags& USaveHelpers::MakeFromTags(UInventoryTags* inventoryTagsObject)
-//{
-//	FInventoryTags inventory;
-//	//for (auto usedBlock : blockObjectArray)
-//	//{
-//	//	/*if (usedBlock)
-//	//	blockArray.Add(usedBlock->ToContainer());*/
-//	//}
-//	/*Ar << block.ID;
-//	Ar << block.Scale;
-//	Ar << block.Name;
-//	Ar << block.AdditionalFlags;*/
-//	return inventory;
-//}
+
+FInventoryTags USaveHelpers::MakeFromTags(UInventoryTags* inventoryTagsObject)
+{
+	FInventoryTags inventory;
+
+	if (!inventoryTagsObject || !inventoryTagsObject->IsValidLowLevel())
+		return inventory;
+
+	inventory.CurrentActiveIndex = inventoryTagsObject->CurrentActiveIndex;
+
+	for (auto invGroup : inventoryTagsObject->InventoryGroupList)
+	{
+		if (!invGroup || !invGroup->IsValidLowLevel())
+			continue;
+
+		FInventoryTagGroup tagGroup;
+
+		tagGroup.Name = invGroup->Name;
+		tagGroup.IsEnabled = invGroup->IsEnabled;
+
+		for (auto group : invGroup->GroupList)
+		{
+			if (!group || !group->IsValidLowLevel())
+				continue;
+
+			FTagGroup grp;
+			grp.GroupName = group->GroupName;
+
+			grp.Tags = TArray<FString>(group->Tags);
+
+			tagGroup.GroupList.Add(grp);
+		}
+
+
+		inventory.InventoryGroupList.Add(tagGroup);
+	}
+	return inventory;
+}

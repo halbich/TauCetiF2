@@ -64,7 +64,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	// TODO
 	auto invTags = UInventoryTags::GetDefault();
 
-	//c->inventoryTags = USaveHelpers::MakeFromTags(invTags);
+	c->inventoryTags = USaveHelpers::MakeFromTags(invTags);
 
 	c->buildableBlocks.Add(makeBuildable(EmptyHandID, FVector(1, 1, 1)));
 	c->buildableBlocks.Add(makeBuildable(DeleteID, FVector(1, 1, 1)));
