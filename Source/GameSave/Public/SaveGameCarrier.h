@@ -55,9 +55,6 @@ public:
 		FString SaveName;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
-		FText SystemSaveName;
-
-	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
 		FDateTime SavedDate;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)

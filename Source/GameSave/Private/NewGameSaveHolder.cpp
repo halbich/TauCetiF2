@@ -51,8 +51,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 {
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
-	c->SaveName = TEXT("Bìžná hra");
-	c->SystemSaveName = LC_SystemSave_Default;
+	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemDefault", "Default game").ToString();
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
@@ -95,8 +94,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 {
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
-	c->SaveName = TEXT("Prázdná hra");
-	c->SystemSaveName = LC_SystemSave_Empty;
+	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemEmpty", "Empty game").ToString();
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
