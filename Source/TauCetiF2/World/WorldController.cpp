@@ -211,6 +211,8 @@ void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReasonType)
 
 void AWorldController::LoadDataFromCarrier(USaveGameCarrier* carrier)
 {
+	check(carrier != nullptr);
+
 	auto usedBlocks = carrier->GetBlockData();
 
 	loadBlocksArray(usedBlocks);

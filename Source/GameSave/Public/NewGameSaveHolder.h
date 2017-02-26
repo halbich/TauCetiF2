@@ -78,8 +78,7 @@ private:
 		ret.ID = blockID;
 		ret.Scale = blockScale;
 
-		// TODO tags
-		//ret->AddImplicitTags();
+		ret.AddImplicitTags();
 		return ret;
 	}
 };

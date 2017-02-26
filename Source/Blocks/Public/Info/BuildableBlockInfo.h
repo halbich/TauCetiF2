@@ -30,12 +30,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
 		UBlockDefinition* BlockDefinition;
 
-	FORCEINLINE void AddImplicitTags()
-	{
-		Tags.Add(FString::Printf(TEXT("kX_%d"), (int32)Scale.X));
-		Tags.Add(FString::Printf(TEXT("kY_%d"), (int32)Scale.Y));
-		Tags.Add(FString::Printf(TEXT("kZ_%d"), (int32)Scale.Z));
-	}
+	
 
 	FORCEINLINE bool IsSystemAction()
 	{
