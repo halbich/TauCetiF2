@@ -15,7 +15,7 @@ UInventoryTags* UInventoryTags::GetDefault()
 			res->CurrentActiveIndex = 0;
 		}
 
-		itm->GroupName = FString::Printf(TEXT("Group %d"), i + 1);
+		itm->GroupName = FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryTags.Default_Group_Name", "Skupina {0}"), FText::AsNumber(i + 1)).ToString();
 		res->InventoryGroupList.Add(itm);
 	}
 
