@@ -35,34 +35,113 @@ public:
 	}
 
 	static FInventoryTags MakeFromTags(UInventoryTags* inventoryTagsObject);
+
+private:
+	FORCEINLINE static void FromBaseContainer(UBlockBaseInfo* info, const FBlockBaseInfo& block) {
+		info->ID = block.ID;
+		info->Scale = block.Scale;
+		info->Name = block.Name;
+		info->AdditionalFlags = block.AdditionalFlags;
+	}
+
+	FORCEINLINE static void ToBaseContainer(FBlockBaseInfo& block, const UBlockBaseInfo* info) {
+		block.ID = info->ID;
+		block.Scale = info->Scale;
+		block.Name = info->Name;
+		block.AdditionalFlags = info->AdditionalFlags;
+	}
+public:
+	FORCEINLINE static void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
+		FromBaseContainer(info, block);
+		info->Location = block.Location;
+		info->Rotation = block.Rotation;
+	}
+
+	FORCEINLINE static void ToContainer(FBlockInfo& block, const UBlockInfo* info) {
+		ToBaseContainer(block, info);
+		block.Location = info->Location;
+		block.Rotation = info->Rotation;
+	}
+
+	FORCEINLINE static void FromContainer(UBuildableBlockInfo* info, const FInventoryBuildableBlockInfo& block) {
+		FromBaseContainer(info, block);
+		info->Tags = block.Tags;
+	}
+
+
+	FORCEINLINE static void ToContainer(FInventoryBuildableBlockInfo& block, const UBuildableBlockInfo* info) {
+		ToBaseContainer(block, info);
+		block.Tags = info->Tags;
+	}
+
+private:
+	FORCEINLINE static void FromContainer(UTagGroup* grp, const FTagGroup& group) {
+		grp->GroupName = group.GroupName;
+		grp->Tags = TArray<FString>(group.Tags);
+	}
+
+	FORCEINLINE static void ToContainer(FTagGroup& group, const UTagGroup* grp) {
+		group.GroupName = grp->GroupName;
+		group.Tags = TArray<FString>(grp->Tags);
+	}
+
+	FORCEINLINE static void FromContainer(UInventoryTagGroup* tagGroup, const FInventoryTagGroup& invTagGroup) {
+		tagGroup->Name = invTagGroup.Name;
+		tagGroup->IsEnabled = invTagGroup.IsEnabled;
+
+		for (auto groupList : invTagGroup.GroupList)
+		{
+			auto gl = NewObject<UTagGroup>();
+			FromContainer(gl, groupList);
+			tagGroup->GroupList.Add(gl);
+		}
+	}
+
+	FORCEINLINE static void ToContainer(FInventoryTagGroup& invTagGroup, const UInventoryTagGroup* tagGroup) {
+		invTagGroup.Name = tagGroup->Name;
+		invTagGroup.IsEnabled = tagGroup->IsEnabled;
+		invTagGroup.GroupList.Empty();
+
+		for (auto tagGroup : tagGroup->GroupList)
+		{
+			FTagGroup grp;
+			ToContainer(grp, tagGroup);
+			invTagGroup.GroupList.Add(grp);
+		}
+	}
+
+public:
+	FORCEINLINE static void FromContainer(UInventoryTags* tags, const FInventoryTags& invTags) {
+		tags->CurrentActiveIndex = invTags.CurrentActiveIndex;
+
+		for (auto invTagGroup : invTags.InventoryGroupList)
+		{
+			auto igl = NewObject<UInventoryTagGroup>();
+			FromContainer(igl, invTagGroup);
+			tags->InventoryGroupList.Add(igl);
+		}
+	}
+
+	FORCEINLINE static void ToContainer(FInventoryTags& invTags, const UInventoryTags* tags) {
+		invTags.CurrentActiveIndex = tags->CurrentActiveIndex;
+		invTags.InventoryGroupList.Empty();
+
+		for (auto group : tags->InventoryGroupList)
+		{
+			FInventoryTagGroup grp;
+			ToContainer(grp, group);
+			invTags.InventoryGroupList.Add(grp);
+		}
+	}
 };
-
 #pragma region Loading
-
-FORCEINLINE void FromBaseContainer(UBlockBaseInfo* info, const FBlockBaseInfo& block) {
-	info->ID = block.ID;
-	info->Scale = block.Scale;
-	info->Name = block.Name;
-	info->AdditionalFlags = block.AdditionalFlags;
-}
-
-FORCEINLINE void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
-	FromBaseContainer(info, block);
-	info->Location = block.Location;
-	info->Rotation = block.Rotation;
-}
-
-FORCEINLINE void FromContainer(UBuildableBlockInfo* info, const FInventoryBuildableBlockInfo& block) {
-	FromBaseContainer(info, block);
-	info->Tags = block.Tags;
-}
 
 FORCEINLINE TArray<FBlockInfo>& operator >> (TArray<FBlockInfo>& blockArray, TArray<UBlockInfo*>& blockObjectArray)
 {
 	for (auto block : blockArray)
 	{
 		auto NewItem = NewObject<UBlockInfo>();
-		FromContainer(NewItem, block);
+		USaveHelpers::FromContainer(NewItem, block);
 		blockObjectArray.Add(NewItem);
 	}
 	return blockArray;
@@ -73,48 +152,30 @@ FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator >> (TArray<FInventory
 	for (auto block : blockArray)
 	{
 		auto NewItem = NewObject<UBuildableBlockInfo>();
-		FromContainer(NewItem, block);
+		USaveHelpers::FromContainer(NewItem, block);
 		blockObjectArray.Add(NewItem);
 	}
 	return blockArray;
 }
 
+FORCEINLINE FInventoryTags& operator >> (FInventoryTags& invTags, UInventoryTags* tags)
+{
+	USaveHelpers::FromContainer(tags, invTags);
+	return invTags;
+}
+
 #pragma endregion
 
-//FORCEINLINE FBlockBaseInfo ToBaseContainer() {
-//	FBlockBaseInfo result;
-//	result.ID = ID;
-//	result.Scale = Scale;
-//	result.Name = Name;
-//	result.AdditionalFlags = AdditionalFlags;
-//	return result;
-//}
-
-//FORCEINLINE FBlockInfo ToContainer() {
-//	FBlockInfo result = ToBaseContainer();
-//	result.Location = Location;
-//	result.Rotation = Rotation;
-//	return result;
-//}
-
-//FORCEINLINE FInventoryBuildableBlockInfo ToContainer() {
-//	FInventoryBuildableBlockInfo result; // = ToBaseContainer();
-//	//TODO
-//	result.Tags = Tags;
-//	return result;
-//}
+#pragma region Saving
 
 FORCEINLINE TArray<FBlockInfo>& operator<<(TArray<FBlockInfo>& blockArray, TArray<UBlockInfo*>& blockObjectArray)
 {
 	for (auto usedBlock : blockObjectArray)
 	{
-		/*if (usedBlock)
-			blockArray.Add(usedBlock->ToContainer());*/
+		FBlockInfo block;
+		USaveHelpers::ToContainer(block, usedBlock);
+		blockArray.Add(block);
 	}
-	/*Ar << block.ID;
-	Ar << block.Scale;
-	Ar << block.Name;
-	Ar << block.AdditionalFlags;*/
 	return blockArray;
 }
 
@@ -122,83 +183,18 @@ FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator<<(TArray<FInventoryBu
 {
 	for (auto usedBlock : blockObjectArray)
 	{
-		/*if (usedBlock)
-			blockArray.Add(usedBlock->ToContainer());*/
+		FInventoryBuildableBlockInfo block;
+		USaveHelpers::ToContainer(block, usedBlock);
+		blockArray.Add(block);
 	}
-	//for (auto buildableBlock : BuildableBlocks)
-	//{
-	//	if (buildableBlock && buildableBlock->IsValidLowLevel() && !buildableBlock->IsSystemAction())
-	//		buildableBlocks.Add(buildableBlock->ToContainer());
-	//}
-
-	/*Ar << block.ID;
-	Ar << block.Scale;
-	Ar << block.Name;
-	Ar << block.AdditionalFlags;*/
 	return blockArray;
 }
 
-
-/*FORCEINLINE FInventoryTags ToContainer() {
-FInventoryTags result;
-result.CurrentActiveIndex = CurrentActiveIndex;
-
-for (auto invTagGroup : InventoryGroupList)
+FORCEINLINE FInventoryTags& operator << (FInventoryTags& invTags, UInventoryTags* tags)
 {
-if (invTagGroup && invTagGroup->IsValidLowLevel())
-result.InventoryGroupList.Add(invTagGroup->ToContainer());
+	USaveHelpers::ToContainer(invTags, tags);
+	return invTags;
 }
 
-return result;
-}
-*/
-FORCEINLINE void FromContainer(UTagGroup* grp, const FTagGroup& group) {
-	grp->GroupName = group.GroupName;
-	grp->Tags = TArray<FString>(group.Tags);
-}
 
-FORCEINLINE void FromContainer(UInventoryTagGroup* tagGroup, const FInventoryTagGroup& invTagGroup) {
-	tagGroup->Name = invTagGroup.Name;
-	tagGroup->IsEnabled = invTagGroup.IsEnabled;
-
-	for (auto groupList : invTagGroup.GroupList)
-	{
-		auto gl = NewObject<UTagGroup>();
-		FromContainer(gl, groupList);
-		tagGroup->GroupList.Add(gl);
-	}
-}
-
-FORCEINLINE void FromContainer(UInventoryTags* tags, const FInventoryTags& invTags) {
-	tags->CurrentActiveIndex = invTags.CurrentActiveIndex;
-
-	for (auto invTagGroup : invTags.InventoryGroupList)
-	{
-		auto igl = NewObject<UInventoryTagGroup>();
-		FromContainer(igl, invTagGroup);
-		tags->InventoryGroupList.Add(igl);
-	}
-}
-
-//FORCEINLINE FInventoryTagGroup ToContainer() {
-//	FInventoryTagGroup result;
-//	result.Name = Name;
-//	result.IsEnabled = IsEnabled;
-
-//	for (auto tagGroup : GroupList)
-//	{
-//		if (tagGroup && tagGroup->IsValidLowLevel())
-//			result.GroupList.Add(tagGroup->ToContainer());
-//	}
-
-//	return result;
-//}
-
-
-/*FORCEINLINE FTagGroup ToContainer() {
-FTagGroup result;
-result.GroupName = GroupName;
-result.Tags = TArray<FString>(Tags);
-return result;
-}*/
-
+#pragma endregion

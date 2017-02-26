@@ -173,6 +173,7 @@ public:
 
 	FORCEINLINE void FillData(UInventoryTags* InventoryTags)
 	{
+		inventoryTags << InventoryTags;
 	}
 
 	FORCEINLINE TArray<UBlockInfo*> GetBlockData()
@@ -189,10 +190,10 @@ public:
 		return result;
 	}
 
-	UInventoryTags* GetInventoryTags()
+	FORCEINLINE UInventoryTags* GetInventoryTags()
 	{
 		auto result = NewObject<UInventoryTags>(this);
-		FromContainer(result, inventoryTags);
+		inventoryTags >> result;
 		return result;
 	}
 
