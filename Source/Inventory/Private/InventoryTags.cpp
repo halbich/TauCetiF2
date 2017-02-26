@@ -11,11 +11,11 @@ UInventoryTags* UInventoryTags::GetDefault()
 		auto itm = NewObject<UInventoryTagGroup>();
 		if (i == 0)
 		{
-			itm->IsEnabled = true;
+			itm->IsGroupEnabled = true;
 			res->CurrentActiveIndex = 0;
 		}
 
-		itm->Name = FString::Printf(TEXT("Group %d"), i + 1);
+		itm->GroupName = FString::Printf(TEXT("Group %d"), i + 1);
 		res->InventoryGroupList.Add(itm);
 	}
 

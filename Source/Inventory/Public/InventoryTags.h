@@ -33,7 +33,7 @@ public:
 
 	FORCEINLINE FString GetCurrentActiveTagGroupName()
 	{
-		return InventoryGroupList.IsValidIndex(CurrentActiveIndex) ? GetCurrentActiveTagGroup()->Name : FString();
+		return InventoryGroupList.IsValidIndex(CurrentActiveIndex) ? GetCurrentActiveTagGroup()->GroupName : FString();
 	}
 
 public:
@@ -53,7 +53,7 @@ public:
 			auto index = i % length;
 			check(InventoryGroupList.IsValidIndex(index));
 
-			if (InventoryGroupList[index]->IsEnabled)
+			if (InventoryGroupList[index]->IsGroupEnabled)
 			{
 				CurrentActiveIndex = index;
 				break;
@@ -75,7 +75,7 @@ public:
 
 			check(InventoryGroupList.IsValidIndex(index));
 
-			if (InventoryGroupList[index]->IsEnabled)
+			if (InventoryGroupList[index]->IsGroupEnabled)
 			{
 				CurrentActiveIndex = index;
 				break;
@@ -91,7 +91,7 @@ public:
 
 		for (auto g : InventoryGroupList)
 		{
-			if (g->IsEnabled)
+			if (g->IsGroupEnabled)
 				res++;
 		}
 
@@ -99,7 +99,7 @@ public:
 	}
 
 	FORCEINLINE void CheckCurrentSelection() {
-		if (InventoryGroupList[CurrentActiveIndex]->IsEnabled)
+		if (InventoryGroupList[CurrentActiveIndex]->IsGroupEnabled)
 			return;
 
 		NextBank();

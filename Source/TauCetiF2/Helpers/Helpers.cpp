@@ -96,7 +96,7 @@ TArray<UInventoryFlagItem*> UHelpers::GetBlockFlags(UBlockBaseInfo* blockBaseInf
 {
 	TArray<UInventoryFlagItem*> result;
 
-	if (blockBaseInfo->ID <= 0)
+	if (!blockBaseInfo || blockBaseInfo->ID <= 0)
 		return result; // system actions
 
 	auto def = UBlockHolderComponent::GetInstance()->GetDefinitionFor(blockBaseInfo->ID);

@@ -86,8 +86,8 @@ private:
 	}
 
 	FORCEINLINE static void FromContainer(UInventoryTagGroup* tagGroup, const FInventoryTagGroup& invTagGroup) {
-		tagGroup->Name = invTagGroup.Name;
-		tagGroup->IsEnabled = invTagGroup.IsEnabled;
+		tagGroup->GroupName = invTagGroup.GroupName;
+		tagGroup->IsGroupEnabled = invTagGroup.IsGroupEnabled;
 
 		for (auto groupList : invTagGroup.GroupList)
 		{
@@ -98,11 +98,11 @@ private:
 	}
 
 	FORCEINLINE static void ToContainer(FInventoryTagGroup& invTagGroup, const UInventoryTagGroup* tagGroup) {
-		invTagGroup.Name = tagGroup->Name;
-		invTagGroup.IsEnabled = tagGroup->IsEnabled;
+		invTagGroup.GroupName = tagGroup->GroupName;
+		invTagGroup.IsGroupEnabled = tagGroup->IsGroupEnabled;
 		invTagGroup.GroupList.Empty();
 
-		for (auto tagGroup : tagGroup->GroupList)
+		for (const auto tagGroup : tagGroup->GroupList)
 		{
 			FTagGroup grp;
 			ToContainer(grp, tagGroup);

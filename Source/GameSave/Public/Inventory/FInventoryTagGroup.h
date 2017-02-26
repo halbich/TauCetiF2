@@ -10,9 +10,9 @@ class GAMESAVE_API FInventoryTagGroup
 public:
 	FInventoryTagGroup();
 
-	FString Name;
+	FString GroupName;
 
-	bool IsEnabled;
+	bool IsGroupEnabled;
 
 	TArray<FTagGroup> GroupList;
 };

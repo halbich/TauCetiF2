@@ -18,10 +18,10 @@ public:
 		TArray<UTagGroup*> GroupList;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
-		FString Name;
+		FString GroupName;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
-		bool IsEnabled;
+		bool IsGroupEnabled;
 
 	bool IsSatisfied(TArray<FString>& tags)
 	{

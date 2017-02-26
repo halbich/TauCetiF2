@@ -56,8 +56,8 @@ FInventoryTags USaveHelpers::MakeFromTags(UInventoryTags* inventoryTagsObject)
 
 		FInventoryTagGroup tagGroup;
 
-		tagGroup.Name = invGroup->Name;
-		tagGroup.IsEnabled = invGroup->IsEnabled;
+		tagGroup.GroupName = invGroup->GroupName;
+		tagGroup.IsGroupEnabled = invGroup->IsGroupEnabled;
 
 		for (auto group : invGroup->GroupList)
 		{

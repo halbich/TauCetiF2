@@ -38,8 +38,8 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FTagGroup& group)
 
 FORCEINLINE FArchive& operator<<(FArchive &Ar, FInventoryTagGroup& tagGroup)
 {
-	Ar << tagGroup.Name;
-	Ar << tagGroup.IsEnabled;
+	Ar << tagGroup.GroupName;
+	Ar << tagGroup.IsGroupEnabled;
 	Ar << tagGroup.GroupList;
 	return Ar;
 }
