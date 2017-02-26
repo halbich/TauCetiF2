@@ -97,7 +97,7 @@ void UBlockHolderComponent::tryAddBlockToAviables(UClass* blockClass)
 	else
 	{
 		// TODO better approach
-		print(TEXT("Key already existed! Skipping block"));
+		print(NSLOCTEXT("TCF2LocSpace", "LC.BlockHoldeComp.Error_Key_Exist", "Key already existed! Skipping block").ToString());
 	}
 }
 
