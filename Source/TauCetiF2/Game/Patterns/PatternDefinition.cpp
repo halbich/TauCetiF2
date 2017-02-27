@@ -14,7 +14,7 @@ void UPatternDefinition::InitData()
 	{
 		// TODO
 		/*auto definition = FBlockDefinitionHolder::Instance().GetDefinition(block->ID);
-		auto spawnBox = BlockHelpers::GetSpawnBox(definition, block);
+		auto spawnBox = BlockHelpers1::GetSpawnBox(definition, block);
 		MinMaxSpawnBoxes.Add(spawnBox);
 		MinMaxTrees.Add(NewObject<UMinMaxTree>()->Init(spawnBox));
 

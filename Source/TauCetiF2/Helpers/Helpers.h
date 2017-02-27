@@ -56,33 +56,6 @@ public:
 		return LoadObjFromPath<UTexture2D>(name);
 	}
 
-	/*static FORCEINLINE FString GetMaterialName(const EMaterialInstance& instance, bool isConstruct = false) {
-		const FString baseFolder = isConstruct ? TEXT("Material'/Game/Materials/BuildingObjects/Construction/%s") : TEXT("Material'/Game/Materials/BuildingObjects/%s");
-
-		switch (instance)
-		{
-		case EMaterialInstance::Empty: return TEXT("Material'/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial'");
-		case EMaterialInstance::InnerMaterial: return FString::Printf(*baseFolder, TEXT("InsideMat.InsideMat'"));
-		case EMaterialInstance::BaseFloor: return FString::Printf(*baseFolder, TEXT("MaterialBaseFloor.MaterialBaseFloor'"));
-		case EMaterialInstance::BaseSide: return FString::Printf(*baseFolder, TEXT("MaterialBaseSide.MaterialBaseSide'"));
-		case EMaterialInstance::Polycarbonate: return FString::Printf(*baseFolder, TEXT("MaterialPolycarbonate.MaterialPolycarbonate'"));
-		case EMaterialInstance::ConstructRectangle: return FString::Printf(*baseFolder, TEXT("MaterialRectangle.MaterialRectangle'"));
-		case EMaterialInstance::ConstructRectangleBody: return FString::Printf(*baseFolder, TEXT("MaterialRectangleBody.MaterialRectangleBody'"));
-		case EMaterialInstance::ConstructTriangle: return FString::Printf(*baseFolder, TEXT("MaterialTriangle.MaterialTriangle'"));
-		case EMaterialInstance::TerminalScreen: return FString::Printf(*baseFolder, TEXT("TerminalScreen.TerminalScreen'"));
-		case EMaterialInstance::TerminalBase: return FString::Printf(*baseFolder, TEXT("TerminalBase.TerminalBase'"));
-		case EMaterialInstance::DoorFrame: return FString::Printf(*baseFolder, TEXT("DoorFrame.DoorFrame'"));
-		case EMaterialInstance::DoorBody: return FString::Printf(*baseFolder, TEXT("DoorBody.DoorBody'"));
-		case EMaterialInstance::DoorCircle: return FString::Printf(*baseFolder, TEXT("DoorCircle.DoorCircle'"));
-		default:
-			return TEXT("");
-		}
-	}*/
-
-	//static FORCEINLINE UMaterial* GetMaterialByInstance(const EMaterialInstance& instance, bool isConstruct = false) {
-	//	auto name = GetMaterialName(instance, isConstruct);
-	//	return name.Len() > 0 ? GetMaterialByName(*name) : nullptr;
-	//}
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Definitions")
 		static int32 GetCubeMinSize();

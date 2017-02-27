@@ -83,7 +83,7 @@ public:
 			if (!currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
 				return;
 
-			auto spawnBox = BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+			auto spawnBox = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 			if (!worldController->IsValidSpawnPoint(spawnBox))
 				return;
 
@@ -104,7 +104,7 @@ public:
 
 			spawnBlock->UnderConstruction = false;
 
-			if (worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
+			if (worldController->IsValidSpawnPoint(BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
 				worldController->SpawnWorldObject(GetWorld(), spawnBlock, true);
 			else
 				print(TEXT("Invalid location"));

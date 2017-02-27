@@ -41,7 +41,7 @@ TArray<UBlockInfo*> UPatternDefinitionsHolder::DEBUGUsedPatternElements(const FV
 			NewBlock->Location = FVector::ZeroVector;
 
 			// TODO
-			/*auto box = BlockHelpers::GetSpawnBox(gr->Definition, NewBlock);
+			/*auto box = BlockHelpers1::GetSpawnBox(gr->Definition, NewBlock);
 
 			auto localStartDim = currentStartDim - box->MinWorldCoord ;
 

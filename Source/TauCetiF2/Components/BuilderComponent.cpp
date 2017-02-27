@@ -55,7 +55,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		return;
 
 	currentBlockInfo->Location = newLocation;
-	auto spawnBlock = BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+	auto spawnBlock = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 	if (!worldController->IsValidSpawnPoint(spawnBlock))
 	{
 		toggleHiddenCurrentSpawned();
@@ -116,7 +116,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!worldController || !worldController->IsValidLowLevel())
 		return;
 
-	if (!worldController->IsValidSpawnPoint(BlockHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo)))
+	if (!worldController->IsValidSpawnPoint(BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo)))
 		return;
 
 	auto used = usedObjects.FindRef(currentBuildableBlockInfo);
