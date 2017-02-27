@@ -3,6 +3,7 @@
 
 UTagGroup::UTagGroup()
 {
+	// TODO Localization!
 	GroupName = TEXT("Nová skupina");
 }
 

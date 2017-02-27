@@ -103,12 +103,14 @@ public:
 			auto index = flagNames.IndexOfByKey(definedFlag.TagID);
 			if (index == INDEX_NONE)
 			{
+				// TODO Localization!
 				validationErrors.Add(TEXT("nenalezen index flagu"));
 				return false;
 			}
 
 			if (!flagValues.IsValidIndex(index))
 			{
+				// TODO Localization!
 				validationErrors.Add(TEXT(" nenalezena hodnota flagu"));
 				return false;
 			}
@@ -117,6 +119,7 @@ public:
 
 			if (definedFlag.PossibleValues.IndexOfByPredicate([value](const FBlockFlagValue& v) { return v.Value == value; }) == INDEX_NONE)
 			{
+				// TODO Localization!
 				validationErrors.Add(TEXT(""));
 				return false;
 			}

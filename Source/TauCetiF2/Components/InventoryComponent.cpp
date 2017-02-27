@@ -44,7 +44,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 		else
 		{
 			// TODO better handling?
-			print(TEXT("Failed to load builadble block"));
+			print(TEXT("Failed to load builadble block")); // TODO Localization!
 		}
 	}
 

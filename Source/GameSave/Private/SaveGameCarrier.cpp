@@ -65,6 +65,7 @@ USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier()
 	if (!result)
 	{
 		result = GetEmptyCarrier();
+		// TODO Localization!
 		result->SaveName = TEXT("Rychlé uložení");
 		result->IsQuickSave = true;
 	}

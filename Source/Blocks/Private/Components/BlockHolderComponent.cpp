@@ -1,4 +1,5 @@
 #include "Blocks.h"
+#include "ARFilter.h"
 #include "AssetRegistryModule.h"
 #include "BlockHolderComponent.h"
 

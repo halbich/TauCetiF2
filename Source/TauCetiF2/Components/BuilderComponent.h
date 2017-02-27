@@ -75,7 +75,7 @@ public:
 				return;
 
 			if (worldController->DestroyWorldObject(selector->SelectedTarget))
-				print(TEXT("TODO! deletion seccessfull"));
+				print(TEXT("TODO! deletion seccessfull")); // TODO Localization!
 
 			return;
 		case EBuildableObjectAction::ConstructObject:
@@ -96,7 +96,7 @@ public:
 
 			if (!(box.Overlap(charBox) == 0))
 			{
-				print(TEXT("overlap"));
+				print(TEXT("overlap")); // TODO Localization!
 				return;
 			}
 
@@ -107,7 +107,7 @@ public:
 			if (worldController->IsValidSpawnPoint(BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
 				worldController->SpawnWorldObject(GetWorld(), spawnBlock, true);
 			else
-				print(TEXT("Invalid location"));
+				print(TEXT("Invalid location")); // TODO Localization!
 
 			return;
 		}

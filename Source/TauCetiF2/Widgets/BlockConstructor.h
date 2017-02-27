@@ -33,12 +33,14 @@ private:
 
 		if (!definition)
 		{
+			// TODO Localization!
 			validationErrors.Add(TEXT("vadná definice"));
 			return nullptr;
 		}
 
 		if (!definition->IsInLimits(dimensions))
 		{
+			// TODO Localization!
 			validationErrors.Add(TEXT("Objekt není v dimenzi"));
 			return nullptr;
 		}

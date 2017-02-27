@@ -1,4 +1,5 @@
 #include "TauCetiF2.h"
+#include "ButtonWidgetStyle.h"
 #include "DeleteButton.h"
 
 UDeleteButton::UDeleteButton(const FObjectInitializer& ObjectInitializer)

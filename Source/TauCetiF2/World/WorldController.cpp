@@ -65,6 +65,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 
 	if (!definition)
 	{
+		// TODO Localization!
 		UE_LOG(LogTemp, Error, TEXT("Neznámé ID (%d) objektu. Vynechávám"), block->ID);
 		return nullptr;
 	}
@@ -73,6 +74,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	ensure(box != nullptr);
 	if (!IsValidSpawnPoint(box))
 	{
+		// TODO Localization!
 		UE_LOG(LogTemp, Error, TEXT("Objekt nelze korektnì pøidat do stromu. Vynechávám."));
 		return nullptr;
 	}
@@ -81,6 +83,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	bool isValid = BlockHelpers::CheckBlockValidity(definition, block, invalidReason);
 	if (!isValid)
 	{
+		// TODO Localization!
 		UE_LOG(LogTemp, Error, TEXT("Blok není validní. Dùvod: %s. nechávám"), *invalidReason);
 		return nullptr;
 	}
@@ -94,6 +97,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 
 	if (!actor)
 	{
+		// TODO Localization!
 		UE_LOG(LogTemp, Error, TEXT("Neznámé ID (%d) objektu. Vynechávám"), block->ID);
 		ensure(actor != nullptr);			// chceme vyhodit chybu
 		return nullptr;

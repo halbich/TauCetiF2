@@ -29,6 +29,7 @@
 //
 //void ATerminalObject::ListeningOnUse(AActor* actor)
 //{
+// TODO Localization!
 //	print(TEXT("using terminal!"));
 //}
 //

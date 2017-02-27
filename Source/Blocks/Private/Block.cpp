@@ -18,6 +18,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 {
 	if (!Definition)
 	{
+		// TODO Localization!
 		auto errorText = TEXT("No definition used for block ") + GetFullName();
 		error(*errorText);
 		return;
@@ -38,6 +39,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 
 	for (auto structureDef : def->MeshStructure)
 	{
+		// TODO Localization!
 		check(structureDef.Mesh && "Structure element has no Mesh assigned!");
 
 		auto meshComp = genBlock->Execute_GetMeshStructureComponent(this, index++);
@@ -46,6 +48,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 		if (!meshComp)
 			continue;
 
+		// TODO Localization!
 		check(meshComp && "Function GetMeshStructureComponent returned NULL!");
 		meshComp->SetStaticMesh(structureDef.Mesh);
 
@@ -81,6 +84,7 @@ void ABlock::EndPlay(const EEndPlayReason::Type EndPlayReasonType) {
 
 UStaticMeshComponent* ABlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {
+	// TODO Localization!
 	print(TEXT("base impl"));
 
 	return NULL;

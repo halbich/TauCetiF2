@@ -111,12 +111,7 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	auto defRot = currentBuildableBlockInfo->BlockDefinition->DefaultBuildingRotation;
 	auto curRot = character->GetActorTransform().GetRotation().Rotator().GridSnap(GameDefinitions::WorldGrid);
 
-	// TODO resolve rotation (facing player?)
 	currentBlockInfo->Rotation = (FQuat(defRot) * FQuat(curRot)).Rotator();
-
-	print(currentBlockInfo->Rotation.ToCompactString());
-	print(currentBlockInfo->Rotation.ToCompactString());
-
 	currentBlockInfo->Scale = currentBuildableBlockInfo->Scale;
 	currentBlockInfo->Location = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);
 	currentBlockInfo->AdditionalFlags = currentBuildableBlockInfo->AdditionalFlags;
@@ -164,7 +159,6 @@ void UBuilderComponent::RotatePitch(float Value)
 		return;
 
 	AddRotation(Value * 90, 0, 0);
-	print(TEXT("Pitch"));
 }
 void UBuilderComponent::RotateRoll(float Value)
 {
@@ -174,7 +168,6 @@ void UBuilderComponent::RotateRoll(float Value)
 	if (!currentDefinitionForBlock->AllowRoll)
 		return;
 
-	print(TEXT("Roll"));
 	AddRotation(0, 0, Value * 90);
 }
 void UBuilderComponent::RotateYaw(float Value)
@@ -185,6 +178,5 @@ void UBuilderComponent::RotateYaw(float Value)
 	if (!currentDefinitionForBlock->AllowYaw)
 		return;
 
-	print(TEXT("Yaw"));
 	AddRotation(0, Value * 90, 0);
 }

@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.14",
+	"EngineAssociation": "4.15",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -40,16 +40,16 @@
 				"Engine"
 			]
 		},
-    {
-      "Name": "GameSave",
-      "Type": "Runtime",
-      "LoadingPhase": "Default",
-      "AdditionalDependencies": [
-        "Engine",
-        "CoreUObject"
-      ]
-    },
-    {
+		{
+			"Name": "GameSave",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"CoreUObject"
+			]
+		},
+		{
 			"Name": "Inventory",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
