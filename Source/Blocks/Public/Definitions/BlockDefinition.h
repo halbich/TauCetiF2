@@ -74,6 +74,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition", meta = (ShowOnlyInnerProperties))
 		TArray<FBlockAdditionalFlags> AdditionalFlags;
 
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
+		FRotator DefaultBuildingRotation;
+
 	FVector GetMeshScale(const FVector& inScale) const
 	{
 		return inScale;

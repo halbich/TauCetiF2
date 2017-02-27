@@ -107,8 +107,16 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!currentDefinitionForBlock)
 		return;
 
+
+	auto defRot = currentBuildableBlockInfo->BlockDefinition->DefaultBuildingRotation;
+	auto curRot = character->GetActorTransform().GetRotation().Rotator().GridSnap(GameDefinitions::WorldGrid);
+
 	// TODO resolve rotation (facing player?)
-	//currentBlockInfo->Rotation = currentBuildableBlockInfo->DefaultBuildingRotation;
+	currentBlockInfo->Rotation = (FQuat(defRot) * FQuat(curRot)).Rotator();
+
+	print(currentBlockInfo->Rotation.ToCompactString());
+	print(currentBlockInfo->Rotation.ToCompactString());
+
 	currentBlockInfo->Scale = currentBuildableBlockInfo->Scale;
 	currentBlockInfo->Location = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);
 	currentBlockInfo->AdditionalFlags = currentBuildableBlockInfo->AdditionalFlags;
