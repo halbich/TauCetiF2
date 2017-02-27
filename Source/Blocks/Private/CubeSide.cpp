@@ -18,3 +18,7 @@ UStaticMeshComponent* ACubeSide::GetMeshStructureComponent_Implementation(int32 
 
 	return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
 }
+
+UPrimitiveComponent* ACubeSide::GetComponentForObjectOutline_Implementation() {
+	return CubeSideMesh;
+}

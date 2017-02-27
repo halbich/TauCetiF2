@@ -83,24 +83,13 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		bool PlayerUseFPSCamera;
 
-	// blocks
-	//UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
-	//	TArray<UBlockInfo*> UsedBlocks;
-
 	// Serializable array
 	TArray<FBlockInfo> usedBlocks;
 
-	/*UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
-		UInventoryTags* InventoryTags;*/
-
-		//serializable Item
+	//serializable Item
 	FInventoryTags inventoryTags;
 
-	// blocks
-	/*UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
-		TArray<UBuildableBlockInfo*> BuildableBlocks;*/
-
-		// Serializable array
+	// Serializable array
 	TArray<FInventoryBuildableBlockInfo> buildableBlocks;
 
 #pragma endregion

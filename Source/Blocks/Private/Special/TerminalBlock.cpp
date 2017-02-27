@@ -18,3 +18,34 @@ UStaticMeshComponent* ATerminalBlock::GetMeshStructureComponent_Implementation(i
 
 	return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
 }
+
+
+void  ATerminalBlock::OnConstruction(const FTransform& Transform) {
+
+	Super::OnConstruction(Transform);
+
+	SelectTargetComponent->EnableUse(400);
+
+	FUseDelegate Subscriber;
+	Subscriber.BindUObject(this, &ATerminalBlock::ListeningOnUse);
+	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
+
+}
+
+void ATerminalBlock::ListeningOnUse(AActor* actor)
+{
+	//TODO Localization!
+	print(TEXT("using terminal!"));
+}
+
+void ATerminalBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if (ListeningHandle.IsValid() && SelectTargetComponent)
+		SelectTargetComponent->RemoveEventListener(ListeningHandle);
+
+	ABlock::EndPlay(EndPlayReason);
+}
+
+UPrimitiveComponent* ATerminalBlock::GetComponentForObjectOutline_Implementation() {
+	return TerminalBlockMesh;
+}

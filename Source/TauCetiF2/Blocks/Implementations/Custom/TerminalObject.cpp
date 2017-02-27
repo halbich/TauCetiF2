@@ -15,29 +15,5 @@
 //}
 //
 //
-//void  ATerminalObject::OnConstruction(const FTransform& Transform) {
-//
-//	Super::OnConstruction(Transform);
-//
-//	SelectTargetComponent->EnableUse(200);
-//
-//	FUseDelegate Subscriber;
-//	Subscriber.BindUObject(this, &ATerminalObject::ListeningOnUse);
-//	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
-//
-//}
-//
-//void ATerminalObject::ListeningOnUse(AActor* actor)
-//{
-// TODO Localization!
-//	print(TEXT("using terminal!"));
-//}
-//
-//void ATerminalObject::EndPlay(const EEndPlayReason::Type EndPlayReason)
-//{
-//	if (ListeningHandle.IsValid() && SelectTargetComponent)
-//		SelectTargetComponent->RemoveEventListener(ListeningHandle);
-//
-//	AWorldObject::EndPlay(EndPlayReason);
-//}
+
 //

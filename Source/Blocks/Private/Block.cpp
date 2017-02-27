@@ -24,10 +24,9 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 		return;
 	}
 
-	if (!BlockInfo)
-	{
-		BlockInfo = NewObject<UBlockInfo>();
-		BlockInfo->Scale = FVector(5, 1, 4);
+	if (!BlockInfo) {
+		Super::OnConstruction(Transform);
+		return;
 	}
 
 	auto genBlock = Cast<IGenericBlock>(this);
@@ -60,6 +59,11 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 		}
 	}
 
+	auto targetCompo = genBlock->Execute_GetComponentForObjectOutline(this);
+	if (targetCompo)
+		SelectTargetComponent->RegisterTargetObjectPrimitiveComponent(targetCompo);
+
+
 	this->UpdateBlockOnConstruction(def);
 
 	Super::OnConstruction(Transform);
@@ -82,11 +86,11 @@ void ABlock::EndPlay(const EEndPlayReason::Type EndPlayReasonType) {
 	Super::EndPlay(EndPlayReasonType);
 }
 
-UStaticMeshComponent* ABlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
-{
-	// TODO Localization!
-	print(TEXT("base impl"));
+UStaticMeshComponent* ABlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) {
+	return NULL;
+}
 
+UPrimitiveComponent* ABlock::GetComponentForObjectOutline_Implementation() {
 	return NULL;
 }
 

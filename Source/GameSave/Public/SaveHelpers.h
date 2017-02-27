@@ -1,5 +1,7 @@
 #pragma once
 
+
+
 #include "Object.h"
 #include "BlockSaveInfo.h"
 #include "Blocks/Public/Info/BlockBaseInfo.h"
@@ -34,7 +36,6 @@ public:
 		return FString::Printf(TEXT("%s_%s"), *name, *date);
 	}
 
-	static FInventoryTags MakeFromTags(UInventoryTags* inventoryTagsObject);
 
 private:
 	FORCEINLINE static void FromBaseContainer(UBlockBaseInfo* info, const FBlockBaseInfo& block) {
@@ -153,6 +154,8 @@ FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator >> (TArray<FInventory
 	{
 		auto NewItem = NewObject<UBuildableBlockInfo>();
 		USaveHelpers::FromContainer(NewItem, block);
+
+		
 		blockObjectArray.Add(NewItem);
 	}
 	return blockArray;

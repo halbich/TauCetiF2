@@ -7,17 +7,7 @@
 #include "Inventory/Public/InventoryTags.h"
 #include "NewGameSaveHolder.generated.h"
 
-#define EmptyHandID -10
-#define DeleteID -5
 
-#define CubeBaseID 0
-#define CubeBuildingID 1
-#define CubeSideBaseID 100
-#define CubeSideBuildingID 101
-#define CubeBodyBuildingID 201
-
-#define TerminalID 500
-#define WindowID 600
 
 /**
  *

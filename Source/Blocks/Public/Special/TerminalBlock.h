@@ -18,4 +18,16 @@ public:
 		UStaticMeshComponent* TerminalBlockMesh;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
+
+	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	FDelegateHandle ListeningHandle;
+
+
+private:
+	void ListeningOnUse(AActor* actor);
 };

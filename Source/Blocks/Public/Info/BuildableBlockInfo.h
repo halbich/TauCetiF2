@@ -37,4 +37,6 @@ public:
 		ensure(BlockDefinition);
 		return BlockDefinition->IsSystemAction;
 	}
+
+	void DefinitionSet();
 };

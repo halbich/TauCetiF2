@@ -16,4 +16,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | Block")
 		UStaticMeshComponent* GetMeshStructureComponent(int32 BlockMeshStructureDefIndex);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | Block")
+		UPrimitiveComponent* GetComponentForObjectOutline();
 };

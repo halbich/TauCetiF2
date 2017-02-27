@@ -18,4 +18,6 @@ public:
 		UStaticMeshComponent* CubeSideMesh;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
+
+	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 };

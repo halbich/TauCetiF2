@@ -38,6 +38,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 		if (aviable.Contains(buildable->ID))
 		{
 			buildable->BlockDefinition = blockRef->GetDefinitionFor(buildable->ID);
+			buildable->DefinitionSet();
 			BuildableItems.Add(buildable);
 			continue;
 		}

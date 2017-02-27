@@ -28,6 +28,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
 		UStaticMeshComponent* GetMeshStructureComponent(int32 BlockMeshStructureDefIndex);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
+		UPrimitiveComponent* GetComponentForObjectOutline();
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual void BeginPlay() override;
@@ -35,6 +38,8 @@ public:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReasonType) override;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
+
+	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
 	virtual FVector GetBlockScale();
 
