@@ -80,6 +80,8 @@ TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForBank(UInventoryTagG
 {
 	TArray<UBuildableBlockInfo*> result;
 
+	print(TEXT("Getting items for bank"));
+
 	if (!filterGroup)
 		return result;
 

@@ -34,7 +34,7 @@ public:
 		{
 			for (auto tag : tags)
 			{
-				if (groupTag == tag)
+				if (tag.Contains(groupTag))
 					return true;
 			}
 		}
