@@ -10,4 +10,5 @@ public:
 
 	FString GroupName;
 	TArray<FString> Tags;
+	bool LetVisibleAll;
 };

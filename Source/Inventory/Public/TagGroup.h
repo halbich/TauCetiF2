@@ -19,6 +19,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = Tags)
 		FString GroupName;
 
+	UPROPERTY(BlueprintReadWrite, Transient, Category = Tags)
+		bool LetVisibleAll;
+
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = Tags)
 		static UTagGroup* GetEmpty();
 

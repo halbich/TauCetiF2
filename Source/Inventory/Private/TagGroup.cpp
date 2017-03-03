@@ -4,7 +4,8 @@
 UTagGroup::UTagGroup()
 {
 	// TODO Localization!
-	GroupName = TEXT("Nová skupina");
+	GroupName = NSLOCTEXT("TCF2LocSpace", "LC.TagGroup.NewTagGroup", "Nová skupina").ToString();
+	LetVisibleAll = true;
 }
 
 UTagGroup* UTagGroup::GetEmpty()
@@ -14,7 +15,7 @@ UTagGroup* UTagGroup::GetEmpty()
 
 UTagGroup* UTagGroup::GetFromTags(const TArray<FString>& tagList)
 {
-	auto obj = NewObject<UTagGroup>();
+	auto obj = GetEmpty();
 
 	obj->Tags.Reserve(tagList.Num());
 	for (auto t : tagList) {

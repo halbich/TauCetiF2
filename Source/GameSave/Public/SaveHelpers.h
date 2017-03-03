@@ -78,11 +78,13 @@ public:
 private:
 	FORCEINLINE static void FromContainer(UTagGroup* grp, const FTagGroup& group) {
 		grp->GroupName = group.GroupName;
+		grp->LetVisibleAll = group.LetVisibleAll;
 		grp->Tags = TArray<FString>(group.Tags);
 	}
 
 	FORCEINLINE static void ToContainer(FTagGroup& group, const UTagGroup* grp) {
 		group.GroupName = grp->GroupName;
+		group.LetVisibleAll = grp->LetVisibleAll;
 		group.Tags = TArray<FString>(grp->Tags);
 	}
 
