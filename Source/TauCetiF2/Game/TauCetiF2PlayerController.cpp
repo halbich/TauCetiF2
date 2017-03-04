@@ -33,8 +33,6 @@ void ATauCetiF2PlayerController::BeginPlay()
 
 void ATauCetiF2PlayerController::OnEscapeKey()
 {
-	print(TEXT("Escape pressed"));
-
 	switch (CurrentShownWidget)
 	{
 	case EShownWidget::None:
@@ -77,8 +75,6 @@ void ATauCetiF2PlayerController::OnEscapeKey()
 
 void ATauCetiF2PlayerController::OnEnterKey()
 {
-	print(TEXT("Enter pressed"));
-
 	switch (CurrentShownWidget)
 	{
 	case EShownWidget::None: break;

@@ -45,8 +45,8 @@ private:
 			return nullptr;
 		}
 
-		if (!definition->ValidateFlags(flagNames, flagValues, validationErrors))
-			return nullptr;
+	/*	if (!definition->ValidateFlags(flagNames, flagValues, validationErrors))
+			return nullptr;*/
 
 		// TODO
 		/*auto res = UBuildableBlockInfo::GetDefaultBuildableForID(id);

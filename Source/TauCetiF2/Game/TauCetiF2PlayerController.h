@@ -76,7 +76,7 @@ private:
 		if (anythingShown)
 		{
 			FInputModeGameAndUI mode;
-			mode.SetLockMouseToViewportBehavior(EMouseLockMode::LockOnCapture);
+			mode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
 
 			if (focus)
 				mode.SetWidgetToFocus(focus->TakeWidget());
@@ -90,6 +90,8 @@ private:
 		}
 
 		bShowMouseCursor = anythingShown;
+		bEnableClickEvents = anythingShown;
+		bEnableMouseOverEvents = anythingShown;
 		SetIgnoreMoveInput(anythingShown);
 		SetIgnoreLookInput(anythingShown);
 	}

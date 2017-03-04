@@ -3,6 +3,7 @@
 #include "Blocks/Public/Info/BlockBaseInfo.h"
 #include "Blocks/Public/Definitions/BlockDefinition.h"
 #include "Commons/Public/GameDefinitions.h"
+#include "BlockHolderComponent.h"
 #include "BuildableBlockInfo.generated.h"
 
 /**
@@ -31,6 +32,7 @@ public:
 		UBlockDefinition* BlockDefinition;
 
 	
+	bool ValidateObject(TArray<FText>& validationErrors);
 
 	FORCEINLINE bool IsSystemAction()
 	{

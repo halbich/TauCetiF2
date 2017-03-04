@@ -31,6 +31,8 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 
 	check(blockRef);
 
+	TArray<FText> validationErrors;
+
 	auto aviable = blockRef->GetAviableItems();
 
 	for (auto buildable : carrier->GetBuildableBlockData())
@@ -39,13 +41,14 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 		{
 			buildable->BlockDefinition = blockRef->GetDefinitionFor(buildable->ID);
 			buildable->DefinitionSet();
-			BuildableItems.Add(buildable);
+
+			if (buildable->ValidateObject(validationErrors))
+				BuildableItems.Add(buildable);
 			continue;
 		}
 		else
 		{
-			// TODO better handling?
-			print(TEXT("Failed to load builadble block")); // TODO Localization!
+			validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "Nepodaøilo se nahrát blok!"));
 		}
 	}
 

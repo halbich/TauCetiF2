@@ -96,35 +96,25 @@ public:
 		return min && max;
 	}
 
-	FORCEINLINE bool ValidateFlags(TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString>& validationErrors)
+	FORCEINLINE bool ValidateFlags(TMap<FString, int32> flags, TArray<FText>& validationErrors)
 	{
 		for (auto definedFlag : AdditionalFlags)
 		{
-			auto index = flagNames.IndexOfByKey(definedFlag.TagID);
-			if (index == INDEX_NONE)
+			auto value = flags.Find(definedFlag.TagID);
+			if (!value)
 			{
-				// TODO Localization!
-				validationErrors.Add(TEXT("nenalezen index flagu"));
+				validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlag", "Požadovaný flag nebyl nalezen."));
 				return false;
 			}
-
-			if (!flagValues.IsValidIndex(index))
+			
+			if (definedFlag.PossibleValues.IndexOfByPredicate([value](const FBlockFlagValue& v) { return v.Value == *value; }) == INDEX_NONE)
 			{
-				// TODO Localization!
-				validationErrors.Add(TEXT(" nenalezena hodnota flagu"));
-				return false;
-			}
-
-			auto value = flagValues[index];
-
-			if (definedFlag.PossibleValues.IndexOfByPredicate([value](const FBlockFlagValue& v) { return v.Value == value; }) == INDEX_NONE)
-			{
-				// TODO Localization!
-				validationErrors.Add(TEXT(""));
+				validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlagValue", "Hodnota požadovaného flagu nebyla nalezena."));
 				return false;
 			}
 		}
 
 		return true;
 	}
+
 };
