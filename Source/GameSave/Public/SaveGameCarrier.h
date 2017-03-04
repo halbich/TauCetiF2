@@ -100,30 +100,28 @@ public:
 		static USaveGameCarrier* GetEmptyCarrier();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
-		static USaveGameCarrier* GetQuickSaveCarrier();
+		static USaveGameCarrier* GetQuickSaveCarrier(TArray<FText>& errorList);
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		bool DeleteSaveFile();
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
-		bool SaveBinary();
+		bool SaveBinary(TArray<FText>& errorList);
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
-		bool LoadBinary(const FString& FilePath);
+		bool LoadBinary(const FString& FilePath, TArray<FText>& errorList);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
-		static TArray<USaveGameCarrier*> GetSaveGameInfoList();
+		static TArray<USaveGameCarrier*> GetSaveGameInfoList(TArray<FText>& errorList);
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
 		bool IsSaveNameValid();
 
 private:
 
-	void SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, bool bFullObject = true);
-	bool SaveGameDataToFile(const FString& FullFilePath);
-	bool LoadGameDataFromFile(const FString& FullFilePath, bool bFullObject = true);
-
-	bool IsSaveCompatible(const USaveGameCarrier& carrier);
+	void SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, TArray<FText>& errorList, bool bFullObject = true);
+	bool SaveGameDataToFile(const FString& FullFilePath, TArray<FText>& errorList);
+	bool LoadGameDataFromFile(const FString& FullFilePath, TArray<FText>& errorList, bool bFullObject = true);
 
 	void DEBUGPrintSave() {
 #if WITH_EDITOR

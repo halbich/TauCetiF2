@@ -22,7 +22,7 @@ USaveGameCarrier::USaveGameCarrier() {
 USaveGameCarrier::~USaveGameCarrier() {
 	usedBlocks.Empty();
 
-	//inventoryTags = FInventoryTags();
+	inventoryTags.Empty();
 
 	buildableBlocks.Empty();
 }
@@ -32,7 +32,7 @@ USaveGameCarrier* USaveGameCarrier::GetEmptyCarrier()
 	return  NewObject<USaveGameCarrier>();
 }
 
-USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier()
+USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier(TArray<FText>& errorList)
 {
 	USaveGameCarrier* result = nullptr;
 
@@ -41,7 +41,7 @@ USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier()
 	for (auto save : saves)
 	{
 		auto carrier = NewObject<USaveGameCarrier>();
-		if (carrier->LoadGameDataFromFile(save, false)) {
+		if (carrier->LoadGameDataFromFile(save, errorList, false)) {
 			if (!carrier->IsQuickSave)
 				continue;
 
@@ -73,10 +73,10 @@ USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier()
 	return result;
 }
 
-bool USaveGameCarrier::SaveGameDataToFile(const FString& saveFilePath)
+bool USaveGameCarrier::SaveGameDataToFile(const FString& saveFilePath, TArray<FText>& errorList)
 {
 	FBufferArchive ToBinary;
-	SaveLoadData(ToBinary, *this);
+	SaveLoadData(ToBinary, *this, errorList);
 
 	if (ToBinary.Num() <= 0)
 		return false;
@@ -98,13 +98,12 @@ bool USaveGameCarrier::SaveGameDataToFile(const FString& saveFilePath)
 bool USaveGameCarrier::DeleteSaveFile()
 {
 	if (FPlatformFileManager::Get().GetPlatformFile().FileExists(*FullFilePath))
-
 		return FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*FullFilePath);
 
 	return false;
 }
 
-bool USaveGameCarrier::SaveBinary()
+bool USaveGameCarrier::SaveBinary(TArray<FText>& errorList)
 {
 	SavedDate = FDateTime::Now();
 
@@ -113,15 +112,15 @@ bool USaveGameCarrier::SaveBinary()
 		FullFilePath = FString::Printf(TEXT("%s\\SaveGames\\%s.sav"), *FPaths::GameSavedDir(), *saveName);
 	}
 
-	return SaveGameDataToFile(FullFilePath);
+	return SaveGameDataToFile(FullFilePath, errorList);
 }
 
-bool USaveGameCarrier::LoadBinary(const FString& FilePath)
+bool USaveGameCarrier::LoadBinary(const FString& FilePath, TArray<FText>& errorList)
 {
-	return LoadGameDataFromFile(FilePath, true);
+	return LoadGameDataFromFile(FilePath, errorList, true);
 }
 
-TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
+TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList(TArray<FText>& errorList)
 {
 	TArray<USaveGameCarrier*> result;
 
@@ -130,7 +129,7 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 	for (auto save : saves)
 	{
 		auto carrier = NewObject<USaveGameCarrier>();
-		if (carrier->LoadGameDataFromFile(save, false)) {
+		if (carrier->LoadGameDataFromFile(save, errorList, false)) {
 			if (carrier->IsQuickSave && hasQuickSave)
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Found another quick save. Deleting %s."), *save);
@@ -154,17 +153,21 @@ TArray<USaveGameCarrier*> USaveGameCarrier::GetSaveGameInfoList()
 	return result;
 }
 
-bool USaveGameCarrier::LoadGameDataFromFile(const FString& saveGameFile, bool bFullObject) {
+bool USaveGameCarrier::LoadGameDataFromFile(const FString& saveGameFile, TArray<FText>& errorList, bool bFullObject) {
 	TArray<uint8> TheBinaryArray;
 	if (!FFileHelper::LoadFileToArray(TheBinaryArray, *saveGameFile))
 	{
-		print("FFILEHELPER:>> Invalid File");
+		errorList.Add(NSLOCTEXT("TCF2LocSpace", "LC.LoadSaveError.InvalidFile", "Soubor savu se nepodaøilo otevøít. Soubor je pravdìpodobnì poškozen."));
 		return false;
 	}
 
 	//File Load Error
 	if (TheBinaryArray.Num() <= 0)
+	{
+		errorList.Add(NSLOCTEXT("TCF2LocSpace", "LC.LoadSaveError.InvalidFile_Empty", "Soubor savu není validní, neobsahuje žádná data."));
+
 		return false;
+	}
 
 	//~
 	//		  Read the Data Retrieved by GFileManager
@@ -172,7 +175,7 @@ bool USaveGameCarrier::LoadGameDataFromFile(const FString& saveGameFile, bool bF
 
 	FMemoryReader FromBinary = FMemoryReader(TheBinaryArray, true); //true, free data after done
 	FromBinary.Seek(0);
-	SaveLoadData(FromBinary, *this, bFullObject);
+	SaveLoadData(FromBinary, *this, errorList, bFullObject);
 
 	//~
 	//								Clean up
@@ -188,17 +191,15 @@ bool USaveGameCarrier::LoadGameDataFromFile(const FString& saveGameFile, bool bF
 	return SaveLoaded;
 }
 
-bool USaveGameCarrier::IsSaveCompatible(const USaveGameCarrier& carrier)
-{
-	return carrier.SaveFileVersion == CURRENT_VERSION;
-}
-
-void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, bool bFullObject)
+void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, TArray<FText>& errorList, bool bFullObject)
 {
 	Ar << carrier.SaveFileVersion;
 
 	if (carrier.SaveFileVersion != CURRENT_VERSION)
+	{
+		errorList.Add(NSLOCTEXT("TCF2LocSpace", "LC.LoadSaveError.IncompatibleVersion", "Uvedený formát savu neodpovídá aktuální verzi."));
 		return;
+	}
 
 	Ar << carrier.SaveName;
 	Ar << carrier.SavedDate;
