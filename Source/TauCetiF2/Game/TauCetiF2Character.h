@@ -92,7 +92,7 @@ protected:
 	void OnUse();
 
 	UFUNCTION(BlueprintCallable, Category = Character)
-		void LoadFromCarrier(USaveGameCarrier* carrier);
+		void LoadFromCarrier(USaveGameCarrier* carrier, TArray<FText>& validationErrors);
 
 	UFUNCTION(BlueprintCallable, Category = Character)
 		void SaveToCarrier(USaveGameCarrier* carrier);

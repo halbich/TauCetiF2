@@ -44,7 +44,7 @@ public:
 
 	void InventoryTagsSelectionChanged();
 
-	void LoadFromCarrier(USaveGameCarrier* carrier);
+	void LoadFromCarrier(USaveGameCarrier* carrier, TArray<FText>& validationErrors);
 
 	void SaveToCarrier(USaveGameCarrier* carrier);
 

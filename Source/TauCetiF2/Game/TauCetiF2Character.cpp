@@ -203,9 +203,9 @@ void ATauCetiF2Character::OnUse()
 		Selector->TrySelect();
 }
 
-void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier)
+void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FText>& validationErrors)
 {
-	Inventory->LoadFromCarrier(carrier);
+	Inventory->LoadFromCarrier(carrier, validationErrors);
 
 	PC->Inventory->InventoryComponent = Inventory;
 }

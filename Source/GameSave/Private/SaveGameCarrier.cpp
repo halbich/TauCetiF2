@@ -34,41 +34,18 @@ USaveGameCarrier* USaveGameCarrier::GetEmptyCarrier()
 
 USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier(TArray<FText>& errorList)
 {
-	USaveGameCarrier* result = nullptr;
 
 	auto saves = USaveHelpers::GetAllSaveGameSlots();
 	bool hasQuickSave = false;
-	for (auto save : saves)
+	for (auto save : GetSaveGameInfoList(errorList))
 	{
-		auto carrier = NewObject<USaveGameCarrier>();
-		if (carrier->LoadGameDataFromFile(save, errorList, false)) {
-			if (!carrier->IsQuickSave)
-				continue;
-
-			if (hasQuickSave)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Found another quick save. Deleting %s."), *save);
-				FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*save);
-			}
-			else {
-				hasQuickSave |= carrier->IsQuickSave;
-
-				result = carrier;
-			}
-		}
-		else {
-			UE_LOG(LogTemp, Warning, TEXT("Found save with incorrect version(%d / current: %d). Deleting %s."), carrier->SaveFileVersion, CURRENT_VERSION, *save);
-			FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*save);
-		}
+		if (save->IsQuickSave)
+			return save;
 	}
 
-	if (!result)
-	{
-		result = GetEmptyCarrier();
-		// TODO Localization!
-		result->SaveName = TEXT("Rychlé uložení");
-		result->IsQuickSave = true;
-	}
+	auto result = GetEmptyCarrier();
+	result->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveGameCarrier.QuickSave", "Rychlé uložení").ToString();
+	result->IsQuickSave = true;
 
 	return result;
 }

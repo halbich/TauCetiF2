@@ -17,7 +17,7 @@ void UInventoryComponent::InventoryTagsSelectionChanged()
 	ForceItemsChanged(false);
 }
 
-void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
+void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FText>& validationErrors)
 {
 	check(carrier != nullptr);
 
@@ -30,8 +30,6 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier)
 	auto blockRef = UBlockHolderComponent::GetInstance();
 
 	check(blockRef);
-
-	TArray<FText> validationErrors;
 
 	auto aviable = blockRef->GetAviableItems();
 
