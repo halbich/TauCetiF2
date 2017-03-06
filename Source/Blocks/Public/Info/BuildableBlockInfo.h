@@ -31,7 +31,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
 		UBlockDefinition* BlockDefinition;
 
-	
+
 	bool ValidateObject(TArray<FText>& validationErrors);
 
 	FORCEINLINE bool IsSystemAction()
@@ -41,4 +41,9 @@ public:
 	}
 
 	void DefinitionSet();
+
+	static UBuildableBlockInfo* GetBuildable(UBlockDefinition* def);
+	
+	UBuildableBlockInfo* GetCopy();
+
 };

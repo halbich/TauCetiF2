@@ -96,7 +96,7 @@ TArray<UInventoryFlagItem*> UHelpers::GetBlockFlags(UBlockBaseInfo* blockBaseInf
 {
 	TArray<UInventoryFlagItem*> result;
 
-	if (!blockBaseInfo || blockBaseInfo->ID <= 0)
+	if (!blockBaseInfo || blockBaseInfo->ID < 0)
 		return result; // system actions
 
 	auto def = UBlockHolderComponent::GetInstance()->GetDefinitionFor(blockBaseInfo->ID);
@@ -116,12 +116,28 @@ TArray<UInventoryFlagItem*> UHelpers::GetBlockFlags(UBlockBaseInfo* blockBaseInf
 			invItem->AviableValues.Add(cmbIt);
 		}
 
+		result.Add(invItem);
 		if (blockBaseInfo->AdditionalFlags.Contains(fl.TagID))
 		{
 			invItem->TagValue = blockBaseInfo->AdditionalFlags[fl.TagID];
 			invItem->TagReadOnly = true;
-			result.Add(invItem);
 		}
 	}
 	return result;
+}
+
+void UHelpers::GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, bool IsSaveEnabled, FVector& Min, FVector& Max)
+{
+	auto bd = buildableInfo->BlockDefinition;
+	if (!IsSaveEnabled)
+	{
+		auto actualValue = bd->GetObjectScale(buildableInfo->Scale);
+		Min = actualValue;
+		Max = actualValue;
+		return;
+	}
+
+	Min = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MinBlockScale;
+	Max = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MaxBlockScale;
+
 }

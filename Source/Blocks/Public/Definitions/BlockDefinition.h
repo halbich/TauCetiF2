@@ -65,10 +65,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition", meta = (EditCondition = HasCustomScaling))
 		FVector CustomBlockScale;
 
-	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition", meta = (EditCondition = "!HasCustomScaling"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BlockDefinition", meta = (EditCondition = "!HasCustomScaling"))
 		FVector MinBlockScale;
 
-	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition", meta = (EditCondition = "!HasCustomScaling"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BlockDefinition", meta = (EditCondition = "!HasCustomScaling"))
 		FVector MaxBlockScale;
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition", meta = (ShowOnlyInnerProperties))

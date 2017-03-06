@@ -48,16 +48,37 @@ bool UBuildableBlockInfo::ValidateObject(TArray<FText>& validationErrors)
 	if (!definition->ValidateFlags(AdditionalFlags, validationErrors))
 		return false;
 
-	// TODO
-	/*auto res = UBuildableBlockInfo::GetDefaultBuildableForID(id);
-
-	res->Scale = dimensions;
-
-	for (auto i = 0; i < flagNames.Num(); ++i)
-	{
-	res->AdditionalFlags.Add(flagNames[i], flagValues[i]);
-	}
-
-	return res;*/
 	return true;
+}
+
+
+UBuildableBlockInfo* UBuildableBlockInfo::GetBuildable(UBlockDefinition* def)
+{
+	auto res = NewObject<UBuildableBlockInfo>();
+	res->ID = def->BlockID;
+	res->Scale = def->GetObjectScale(def->MinBlockScale);
+
+	res->BlockDefinition = def;
+
+	res->DefinitionSet();
+
+	return res;
+
+}
+
+UBuildableBlockInfo* UBuildableBlockInfo::GetCopy()
+{
+	auto res = NewObject<UBuildableBlockInfo>();
+	res->ID = ID;
+	res->Scale = Scale;
+	res->Name = Name;
+	res->AdditionalFlags.Append(AdditionalFlags);
+	res->Tags.Append(Tags);
+	res->Action = Action;
+	res->AllowOutlineOnSelected = AllowOutlineOnSelected;
+	res->StencilOverride = StencilOverride;
+	res->BlockDefinition = BlockDefinition;
+
+	return res;
+
 }

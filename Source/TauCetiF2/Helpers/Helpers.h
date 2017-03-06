@@ -66,6 +66,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers")
 		static void ObjectApplyLocalTrans(UStaticMeshComponent* comp, FVector loc, FRotator rot, FVector scal);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
 		static TArray<UInventoryFlagItem*> GetBlockFlags(UBlockBaseInfo* blockBaseInfo);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers")
+		static void GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, bool IsSaveEnabled, FVector& Min, FVector& Max);
 };

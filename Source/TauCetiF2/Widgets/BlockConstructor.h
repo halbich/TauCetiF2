@@ -2,6 +2,7 @@
 
 #include "Widgets/TerminalBaseWidget.h"
 #include "Game/TauCetiF2Character.h"
+#include "Blocks/Public/Info/BuildableBlockInfo.h"
 #include "BlockConstructor.generated.h"
 
 /**
@@ -20,45 +21,25 @@ public:
 		UBlockHolderComponent* blockHolder;
 
 	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
-		bool AddItemToInventory(int32 id, FString name, FVector dimensions, TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString> tags, UPARAM(ref)TArray<FString>& validationErrors);
+		bool AddItemToInventory(UBuildableBlockInfo* buildable, TArray<FText>& validationErrors);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
-		TArray<int32> GetAllAviableBlocks();
+		TArray<UBuildableBlockInfo*> GetAllBuildableBlocks();
 
 private:
-	//TODO localizace
-	UBuildableBlockInfo* validate(int32 id, FVector dimensions, TArray<FString> flagNames, TArray<int32> flagValues, TArray<FString>& validationErrors)
+
+	FORCEINLINE void ensureHolder()
 	{
-		auto definition = blockHolder->GetDefinitionFor(id);
+		if (blockHolder && blockHolder->IsValidLowLevel())
+			return;
 
-		if (!definition)
-		{
-			// TODO Localization!
-			validationErrors.Add(TEXT("vadná definice"));
-			return nullptr;
-		}
+		blockHolder = UBlockHolderComponent::GetInstance();
+	}
 
-		if (!definition->IsInLimits(dimensions))
-		{
-			// TODO Localization!
-			validationErrors.Add(TEXT("Objekt není v dimenzi"));
-			return nullptr;
-		}
-
-	/*	if (!definition->ValidateFlags(flagNames, flagValues, validationErrors))
-			return nullptr;*/
-
-		// TODO
-		/*auto res = UBuildableBlockInfo::GetDefaultBuildableForID(id);
-
-		res->Scale = dimensions;
-
-		for (auto i = 0; i < flagNames.Num(); ++i)
-		{
-			res->AdditionalFlags.Add(flagNames[i], flagValues[i]);
-		}
-
-		return res;*/
-		return nullptr;
+	FORCEINLINE void AddImplicitTags(UBuildableBlockInfo* block)
+	{
+		block->Tags.Add(FString::Printf(TEXT("kX_%d"), (int32)block->Scale.X));
+		block->Tags.Add(FString::Printf(TEXT("kY_%d"), (int32)block->Scale.Y));
+		block->Tags.Add(FString::Printf(TEXT("kZ_%d"), (int32)block->Scale.Z));
 	}
 };

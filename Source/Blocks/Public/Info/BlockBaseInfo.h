@@ -15,12 +15,12 @@ public:
 	UPROPERTY(Transient)
 		int32 ID;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = BlockInfo)
 		FVector Scale;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = BlockInfo)
 		FString Name;
 
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = BlockInfo)
 		TMap<FString, int32> AdditionalFlags;
 };
