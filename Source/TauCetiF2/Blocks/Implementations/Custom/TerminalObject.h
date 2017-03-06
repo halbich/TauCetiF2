@@ -1,6 +1,5 @@
 #pragma once
 
-#include "WorldObject.h"
 //#include "TerminalObject.generated.h"
 
 /**

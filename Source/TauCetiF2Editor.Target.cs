@@ -24,7 +24,6 @@ public class TauCetiF2EditorTarget : TargetRules
         OutExtraModuleNames.Add("Blocks");
         OutExtraModuleNames.Add("Commons");
         OutExtraModuleNames.Add("GameSave");
-        OutExtraModuleNames.Add("GameWorld");
         OutExtraModuleNames.Add("Inventory");
     }
 }

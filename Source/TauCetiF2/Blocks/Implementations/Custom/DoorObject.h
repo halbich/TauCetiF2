@@ -1,7 +1,6 @@
 #pragma once
 
 //#include "Commons/Public/LocalizationHelpers.h"
-#include "WorldObject.h"
 //#include "DoorObject.generated.h"
 
 //enum class EDoorState : uint8

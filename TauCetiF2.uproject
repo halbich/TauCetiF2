@@ -33,14 +33,6 @@
 			]
 		},
 		{
-			"Name": "GameWorld",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine"
-			]
-		},
-		{
 			"Name": "GameSave",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",

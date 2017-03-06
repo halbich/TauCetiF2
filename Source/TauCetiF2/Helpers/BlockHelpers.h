@@ -1,6 +1,5 @@
-#pragma optimize("", off)
-
 #pragma once
+
 #include "World/MinMaxBox.h"
 #include "Blocks/Public/Helpers/BlockHelpers.h"
 
@@ -20,4 +19,3 @@ struct TAUCETIF2_API BlockHelpers1
 	
 };
 
-#pragma optimize("", on)

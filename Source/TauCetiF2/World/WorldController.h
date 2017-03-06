@@ -2,7 +2,6 @@
 
 #include "GameFramework/Actor.h"
 #include "Blocks/Public/Components/BlockHolderComponent.h"
-#include "WorldObject.h"
 #include "Helpers/BlockHelpers.h"
 #include "Helpers/WorldHelpers.h"
 #include "MinMaxBox.h"

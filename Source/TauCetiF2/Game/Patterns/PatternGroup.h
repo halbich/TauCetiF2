@@ -24,14 +24,14 @@ public:
 
 	void Insert(UBlockInfo* info);
 
-	//FBlockDefinition* Definition;
+	UBlockDefinition* Definition;
 
 	FORCEINLINE UPatternGroup* Init(int32 groupID)
 	{
 		GroupID = groupID;
-		/*	Definition = FBlockDefinitionHolder::Instance().GetDefinition(GroupID);
+		//Definition = UBlockHolderComponent::Instance().GetDefinition(GroupID);
 
-			ensure(Definition != nullptr);*/
+		ensure(Definition != nullptr);
 		return this;
 	}
 };
