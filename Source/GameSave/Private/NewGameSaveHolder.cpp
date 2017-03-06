@@ -74,14 +74,18 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	//door->Name = TEXT("Dveøe");
 	//buildable->Add(door);*/
 
-	c->buildableBlocks.Add(makeBuildable(CubeBaseID, FVector(20, 20, 4)));
+	auto cb = makeBuildable(CubeBaseID, FVector(20, 20, 4));
+	cb.AdditionalFlags.Add(TEXT("MyTag"), 0);
+	c->buildableBlocks.Add(cb);
 	c->buildableBlocks.Add(makeBuildable(CubeBuildingID, FVector(7, 7, 4)));
 	c->buildableBlocks.Add(makeBuildable(CubeSideBaseID, FVector(20, 20, 4)));
 	c->buildableBlocks.Add(makeBuildable(CubeSideBuildingID, FVector(7, 7, 4)));
 
 	c->buildableBlocks.Add(makeBuildable(CubeBodyBuildingID, FVector(7, 7, 4)));
 
-	c->buildableBlocks.Add(makeBuildable(TerminalID, FVector(1, 1, 1)));
+	auto t = makeBuildable(TerminalID, FVector(1, 1, 1));
+	t.AdditionalFlags.Add(TEXT("IsUsable"), 1);
+	c->buildableBlocks.Add(t);
 
 	c->buildableBlocks.Add(makeBuildable(WindowID, FVector(5, 1, 4)));
 

@@ -42,11 +42,10 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 
 			if (buildable->ValidateObject(validationErrors))
 				BuildableItems.Add(buildable);
-			continue;
 		}
 		else
 		{
-			validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "Nepodaøilo se nahrát blok!"));
+			validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "Nepodaøilo se nahrát blok! ID bloku: {0} "), buildable->ID));
 		}
 	}
 

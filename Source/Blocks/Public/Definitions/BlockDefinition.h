@@ -103,13 +103,13 @@ public:
 			auto value = flags.Find(definedFlag.TagID);
 			if (!value)
 			{
-				validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlag", "Požadovaný flag nebyl nalezen."));
+				validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlag", "Chyba v bloku s ID {0}: Požadovaný flag '{1}' nebyl nalezen."), BlockID, FText::FromString( definedFlag.TagID)));
 				return false;
 			}
 			
 			if (definedFlag.PossibleValues.IndexOfByPredicate([value](const FBlockFlagValue& v) { return v.Value == *value; }) == INDEX_NONE)
 			{
-				validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlagValue", "Hodnota požadovaného flagu nebyla nalezena."));
+				validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlagValue", "Chyba v bloku s ID {0}: Hodnota flagu '{1}' není platná."), BlockID, *value));
 				return false;
 			}
 		}

@@ -34,13 +34,13 @@ bool UBuildableBlockInfo::ValidateObject(TArray<FText>& validationErrors)
 
 	if (!definition)
 	{
-		validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BuildableBlockInfo.No_Definition", "Blok má neplatnou definici."));
+		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BuildableBlockInfo.No_Definition", "Blok s ID {0} má neplatnou definici."), ID));
 		return false;
 	}
 
 	if (!definition->IsInLimits(Scale))
 	{
-		validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BuildableBlockInfo.Invalid_Dimensions", "Blok není v rozmezí platné velikosti."));
+		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BuildableBlockInfo.Invalid_Dimensions", "Blok s ID {0} není v rozmezí platné velikosti. (Min: {1}, Max: {2}, Scale: {3})"), FText::AsNumber(ID), definition->MinBlockScale.ToText(), definition->MaxBlockScale.ToText(), (definition->HasCustomScaling ? definition->CustomBlockScale : Scale).ToText()));
 		return false;
 	}
 
