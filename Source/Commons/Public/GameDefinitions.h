@@ -27,6 +27,7 @@ public:
 
 #define CubeBaseID 0
 #define CubeBuildingID 1
+#define CubePolycarbonateID 2
 #define CubeSideBaseID 100
 #define CubeSideBuildingID 101
 #define CubeBodyBuildingID 201

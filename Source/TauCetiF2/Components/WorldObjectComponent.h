@@ -17,7 +17,7 @@ public:
 	UWorldObjectComponent();
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = WorldObjectComponent)
-		UBlockInfo* BlockInfo;
+		ABlock* Element;
 
 	// Elements taken in WorldTree. This collection could be changes as WorldTree Changes
 	UPROPERTY(Transient)
@@ -37,8 +37,6 @@ public:
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void UpdateDefiningBox(UKDTree* definingBox);
 

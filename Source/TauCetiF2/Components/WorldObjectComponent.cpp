@@ -18,9 +18,11 @@ void UWorldObjectComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ensure(BlockInfo);
+	ensure(Element);
 
-	if (BlockInfo->UnderConstruction)
+
+
+	if (Element->BlockInfo->UnderConstruction)
 		return;
 
 	ensure(BuildingTree);
@@ -35,7 +37,7 @@ void UWorldObjectComponent::BeginPlay()
 
 	auto surroundings = NewObject<UKDTree>(this)->Init(DefiningBox, RootBox);
 
-	//surroundings->DEBUGDrawSurrondings(GetWorld());
+	surroundings->DEBUGDrawSurrondings(GetWorld());
 
 	// TODO
 
@@ -70,13 +72,6 @@ void UWorldObjectComponent::BeginPlay()
 
 #pragma optimize("",on)
 
-// Called every frame
-void UWorldObjectComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
 
 void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 {

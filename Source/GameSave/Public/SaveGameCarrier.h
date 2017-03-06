@@ -129,8 +129,8 @@ private:
 
 		for (auto info : usedBlocks)
 		{
-			UE_LOG(LogTemp, Log, TEXT("UsedBlocks.Add(make(EBlockName::%s, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d)));"),
-				TEXT("TODO dodelej me"),
+			UE_LOG(LogTemp, Log, TEXT("UsedBlocks->Add(make(%d, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d)));"),
+				info.ID,
 				FMath::RoundToInt(info.Location.X), FMath::RoundToInt(info.Location.Y), FMath::RoundToInt(info.Location.Z),
 				FMath::RoundToInt(info.Scale.X), FMath::RoundToInt(info.Scale.Y), FMath::RoundToInt(info.Scale.Z),
 				FMath::RoundToInt(info.Rotation.Pitch), FMath::RoundToInt(info.Rotation.Yaw), FMath::RoundToInt(info.Rotation.Roll));

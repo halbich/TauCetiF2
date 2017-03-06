@@ -52,13 +52,13 @@ private:
 	USaveGameCarrier* getEmptyGameSave();
 	USaveGameCarrier* getMainMenuSave();
 
-	FORCEINLINE UBlockInfo* make(int32 id, FVector location, FVector blockScale, FRotator blockRotation)
+	FORCEINLINE FBlockInfo make(int32 id, FVector location, FVector blockScale, FRotator blockRotation)
 	{
-		auto ret = NewObject<UBlockInfo>(this);
-		ret->ID = id;
-		ret->Location = location;
-		ret->Scale = blockScale;
-		ret->Rotation = blockRotation;
+		FBlockInfo ret;
+		ret.ID = id;
+		ret.Location = location;
+		ret.Scale = blockScale;
+		ret.Rotation = blockRotation;
 		return ret;
 	}
 

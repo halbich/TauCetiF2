@@ -6,8 +6,7 @@
 #include "Blocks/Public/Block.h"
 #include "KDTree.generated.h"
 
-//class AWorldObject;
-//class UWorldObjectComponent;
+class UWorldObjectComponent;
 
 /**
  *

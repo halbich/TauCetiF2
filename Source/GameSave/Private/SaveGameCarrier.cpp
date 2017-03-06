@@ -89,6 +89,8 @@ bool USaveGameCarrier::SaveBinary(TArray<FText>& errorList)
 		FullFilePath = FString::Printf(TEXT("%s\\SaveGames\\%s.sav"), *FPaths::GameSavedDir(), *saveName);
 	}
 
+	DEBUGPrintSave();
+
 	return SaveGameDataToFile(FullFilePath, errorList);
 }
 

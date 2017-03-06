@@ -60,7 +60,6 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	c->PartOfDay = 0.5f;
 	c->PlayerUseFPSCamera = true;
 
-	// TODO
 	auto invTags = UInventoryTags::GetDefault();
 
 	USaveHelpers::ToContainer(c->inventoryTags, invTags);
@@ -75,13 +74,17 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	//buildable->Add(door);*/
 
 	auto cb = makeBuildable(CubeBaseID, FVector(20, 20, 4));
-	cb.AdditionalFlags.Add(TEXT("MyTag"), 0);
+	//cb.AdditionalFlags.Add(TEXT("MyTag"), 0);
 	c->buildableBlocks.Add(cb);
-	c->buildableBlocks.Add(makeBuildable(CubeBuildingID, FVector(7, 7, 4)));
-	c->buildableBlocks.Add(makeBuildable(CubeSideBaseID, FVector(20, 20, 4)));
-	c->buildableBlocks.Add(makeBuildable(CubeSideBuildingID, FVector(7, 7, 4)));
 
-	c->buildableBlocks.Add(makeBuildable(CubeBodyBuildingID, FVector(7, 7, 4)));
+	c->buildableBlocks.Add(makeBuildable(CubePolycarbonateID, FVector(4, 4, 1)));
+
+	c->buildableBlocks.Add(makeBuildable(CubeBuildingID, FVector(6, 6, 1)));
+	c->buildableBlocks.Add(makeBuildable(CubeSideBaseID, FVector(20, 20, 4)));
+
+	c->buildableBlocks.Add(makeBuildable(CubeSideBuildingID, FVector(1, 4, 1)));
+
+	c->buildableBlocks.Add(makeBuildable(CubeBodyBuildingID, FVector(1, 1, 1)));
 
 	auto t = makeBuildable(TerminalID, FVector(1, 1, 1));
 	t.AdditionalFlags.Add(TEXT("IsUsable"), 1);
@@ -89,7 +92,27 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 
 	c->buildableBlocks.Add(makeBuildable(WindowID, FVector(5, 1, 4)));
 
-	//auto UsedBlocks = &c->UsedBlocks;
+	auto UsedBlocks = &c->usedBlocks;
+
+	UsedBlocks->Add(make(0, FVector(-27, -21, 1), FVector(20, 20, 4), FRotator(0, -90, 0)));
+	UsedBlocks->Add(make(1, FVector(-27, -22, 4), FVector(6, 6, 1), FRotator(0, -90, 0)));
+	UsedBlocks->Add(make(2, FVector(-27, -20, 7), FVector(4, 4, 1), FRotator(-90, 0, -90)));
+	UsedBlocks->Add(make(2, FVector(-27, -25, 7), FVector(4, 4, 1), FRotator(-90, 0, -90)));
+	UsedBlocks->Add(make(2, FVector(-24, -22, 7), FVector(4, 4, 1), FRotator(-90, 0, 180)));
+	UsedBlocks->Add(make(2, FVector(-29, -22, 7), FVector(4, 4, 1), FRotator(-90, 0, 180)));
+	UsedBlocks->Add(make(101, FVector(-29, -25, 7), FVector(4, 1, 1), FRotator(-90, 0, 180)));
+	UsedBlocks->Add(make(101, FVector(-24, -25, 7), FVector(4, 1, 1), FRotator(-90, 0, -90)));
+	UsedBlocks->Add(make(101, FVector(-24, -20, 7), FVector(4, 1, 1), FRotator(-90, 0, 0)));
+	UsedBlocks->Add(make(101, FVector(-29, -20, 7), FVector(4, 1, 1), FRotator(-90, 0, 90)));
+	UsedBlocks->Add(make(101, FVector(-29, -22, 9), FVector(4, 1, 1), FRotator(0, -90, -90)));
+	UsedBlocks->Add(make(101, FVector(-26, -20, 9), FVector(4, 1, 1), FRotator(0, 180, -90)));
+	UsedBlocks->Add(make(101, FVector(-24, -23, 9), FVector(4, 1, 1), FRotator(0, 90, -90)));
+	UsedBlocks->Add(make(101, FVector(-27, -25, 9), FVector(4, 1, 1), FRotator(0, 0, -90)));
+	UsedBlocks->Add(make(2, FVector(-26, -22, 9), FVector(4, 4, 1), FRotator(0, -180, 0)));
+	UsedBlocks->Add(make(201, FVector(-29, -20, 9), FVector(1, 1, 1), FRotator(0, 90, 0)));
+	UsedBlocks->Add(make(201, FVector(-29, -25, 9), FVector(1, 1, 1), FRotator(0, -180, 0)));
+	UsedBlocks->Add(make(201, FVector(-24, -25, 9), FVector(1, 1, 1), FRotator(0, -90, 0)));
+	UsedBlocks->Add(make(201, FVector(-24, -20, 9), FVector(1, 1, 1), FRotator(0, 0, 0)));
 
 	return c;
 }

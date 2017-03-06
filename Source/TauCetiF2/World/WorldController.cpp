@@ -23,9 +23,6 @@ void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
 
 	BlockHolder->ReinitializeAviableBlocks();
 
-	print(TEXT("Foud items: "));
-	print(*FString::FromInt(BlockHolder->AviableBlocks.Num()));
-
 	UsedBlocks.Empty();
 	UsedBlocks.Reserve(blocks.Num());
 	for (auto block : blocks)
@@ -110,15 +107,20 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 		MinMax->ContainingObject = actor;
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 
-		//actor->WorldObjectComponent->UpdateDefiningBox(MinMax);
+
+		auto woc = NewObject<UWorldObjectComponent>(actor);
+		woc->Element = actor;
+		woc->UpdateDefiningBox(MinMax);
+		woc->RegisterComponent();
+		
 		RootBox->AddToTree(MinMax);
-		/*for (auto usedBox : actor->WorldObjectComponent->TreeElements)
+		for (auto usedBox : woc->TreeElements)
 		{
 			check(usedBox->GetRootNode<UKDTree>() == RootBox && TEXT("Used box don't have RootBox as ROOT !"));
 			check(usedBox->ContainingObject == actor && TEXT("Used box has another ContainingObject than it should have!"));
-		}*/
+		}
 
-		MinMax->DEBUGDrawContainingBox(GetWorld());
+		//MinMax->DEBUGDrawContainingBox(GetWorld());
 	}
 
 	UGameplayStatics::FinishSpawningActor(actor, trans);

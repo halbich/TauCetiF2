@@ -36,9 +36,11 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 	{
 		SingleChild = box;
 		box->SetParent(this);
-		//TODO
-		//SingleChild->ContainingObject->WorldObjectComponent->TreeElements.Add(box);
-		//SingleChild->ContainingObject->WorldObjectComponent->OnTreeElementsChanged();
+
+		auto woc = Cast<UWorldObjectComponent>(SingleChild->ContainingObject->GetComponentByClass(UWorldObjectComponent::StaticClass()));
+		check(woc);
+		woc->TreeElements.Add(box);
+		woc->OnTreeElementsChanged();
 		return;
 	}
 
@@ -46,8 +48,11 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 	{
 		SingleChild->SetParent(nullptr);
 		// TODO
-		//SingleChild->ContainingObject->WorldObjectComponent->TreeElements.Remove(SingleChild);// this box could be split
-		//SingleChild->ContainingObject->WorldObjectComponent->OnTreeElementsChanged();
+
+		auto woc = Cast<UWorldObjectComponent>(SingleChild->ContainingObject->GetComponentByClass(UWorldObjectComponent::StaticClass()));
+		check(woc);
+		woc->TreeElements.Remove(SingleChild);// this box could be split
+		woc->OnTreeElementsChanged();
 		AddToTree(SingleChild, true); // forcing to insert
 
 		SingleChild = nullptr;
