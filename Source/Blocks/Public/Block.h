@@ -31,6 +31,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
 		UPrimitiveComponent* GetComponentForObjectOutline();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
+		void UpdateBlockOnConstruction(UBlockDefinition* BlockDef);
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual void BeginPlay() override;
@@ -41,6 +44,8 @@ public:
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
+	virtual void UpdateBlockOnConstruction_Implementation(UBlockDefinition* BlockDef) override;
+
 	virtual FVector GetBlockScale();
 
 	virtual void SetBlockInfo(UBlockInfo* info);
@@ -50,8 +55,6 @@ public:
 		return SelectTargetComponent && SelectTargetComponent->IsValidLowLevel() && SelectTargetComponent->IsInUsableArea(owner);
 	}
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "TCF2 | Block")
-		void UpdateBlockOnConstruction(UBlockDefinition* BlockDef);
 
 private:
 

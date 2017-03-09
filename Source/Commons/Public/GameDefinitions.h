@@ -34,3 +34,5 @@ public:
 
 #define TerminalID 500
 #define WindowID 600
+
+#define DoorID 700

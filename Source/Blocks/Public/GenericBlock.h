@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Definitions/BlockDefinition.h"
 #include "GenericBlock.generated.h"
 
 UINTERFACE(BlueprintType)
@@ -19,4 +20,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | Block")
 		UPrimitiveComponent* GetComponentForObjectOutline();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | Block")
+		void UpdateBlockOnConstruction(UBlockDefinition* BlockDef);
 };

@@ -27,7 +27,6 @@ public:
 
 	FDelegateHandle ListeningHandle;
 
-
 private:
 	void ListeningOnUse(AActor* actor);
 };

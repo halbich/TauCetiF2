@@ -64,21 +64,12 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 		SelectTargetComponent->RegisterTargetObjectPrimitiveComponent(targetCompo);
 
 
-	this->UpdateBlockOnConstruction(def);
+	genBlock->Execute_UpdateBlockOnConstruction(this,def);
 
 	Super::OnConstruction(Transform);
 }
 
 void ABlock::BeginPlay() {
-	//IGenericBlock* genBlock = Cast<IGenericBlock>(this);
-	//if (genBlock)
-	//{
-	//	//Don't call your functions directly, use the 'Execute_' prefix
-	//	//the Execute_ReactToHighNoon and Execute_ReactToMidnight are generated on compile
-	//	//you may need to compile before these functions will appear
-	//	genBlock->Execute_GetMeshStructureComponent(this, 0);
-	//}
-
 	Super::BeginPlay();
 }
 
@@ -92,6 +83,10 @@ UStaticMeshComponent* ABlock::GetMeshStructureComponent_Implementation(int32 Blo
 
 UPrimitiveComponent* ABlock::GetComponentForObjectOutline_Implementation() {
 	return NULL;
+}
+
+void ABlock::UpdateBlockOnConstruction_Implementation(UBlockDefinition* BlockDef)
+{
 }
 
 FVector ABlock::GetBlockScale()

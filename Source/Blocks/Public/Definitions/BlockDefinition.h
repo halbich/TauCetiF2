@@ -79,7 +79,7 @@ public:
 
 	FVector GetMeshScale(const FVector& inScale) const
 	{
-		return inScale;
+		return HasCustomScaling ? FVector(1,1,1) : inScale;
 	}
 
 	FVector GetObjectScale(const FVector& inScale) const
@@ -91,8 +91,12 @@ public:
 	{
 		auto scale = HasCustomScaling ? CustomBlockScale : dimensions;
 
-		auto min = MinBlockScale.X <= scale.X && MinBlockScale.Y <= scale.Y && MinBlockScale.Z <= scale.Z;
-		auto max = MaxBlockScale.X >= scale.X && MaxBlockScale.Y >= scale.Y && MaxBlockScale.Z >= scale.Z;
+		auto minS = MinBlockScale;
+		auto maxS = MaxBlockScale;
+
+
+		auto min = minS.X <= scale.X && minS.Y <= scale.Y && minS.Z <= scale.Z;
+		auto max = maxS.X >= scale.X && maxS.Y >= scale.Y && maxS.Z >= scale.Z;
 		return min && max;
 	}
 

@@ -12,7 +12,7 @@ USelectTargetComponent::USelectTargetComponent()
 
 void USelectTargetComponent::BeginPlay()
 {
-	UActorComponent::BeginPlay();
+	Super::BeginPlay();
 	owner = GetOwner();
 	if (!owner)
 		print(TEXT("No Owner! "));

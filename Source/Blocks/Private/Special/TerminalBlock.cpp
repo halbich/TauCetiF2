@@ -2,7 +2,7 @@
 #include "TerminalBlock.h"
 
 ATerminalBlock::ATerminalBlock()
-	: Super()
+	: Super(), ListeningHandle()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
@@ -19,9 +19,7 @@ UStaticMeshComponent* ATerminalBlock::GetMeshStructureComponent_Implementation(i
 	return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
 }
 
-
 void  ATerminalBlock::OnConstruction(const FTransform& Transform) {
-
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(400);
@@ -29,7 +27,6 @@ void  ATerminalBlock::OnConstruction(const FTransform& Transform) {
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ATerminalBlock::ListeningOnUse);
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
-
 }
 
 void ATerminalBlock::ListeningOnUse(AActor* actor)
@@ -43,7 +40,7 @@ void ATerminalBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 
-	ABlock::EndPlay(EndPlayReason);
+	Super::EndPlay(EndPlayReason);
 }
 
 UPrimitiveComponent* ATerminalBlock::GetComponentForObjectOutline_Implementation() {
