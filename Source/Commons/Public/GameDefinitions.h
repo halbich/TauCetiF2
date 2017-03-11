@@ -36,3 +36,10 @@ public:
 #define WindowID 600
 
 #define DoorID 700
+
+#define LightSmallID 1000
+
+#define BatteryID 1200
+
+#define OxygenTankFiller 1400
+#define OxygenTank  1500
