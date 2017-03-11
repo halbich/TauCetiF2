@@ -4,5 +4,36 @@
 #include "OxygenTankFillerBlock.h"
 
 
+AOxygenTankFillerBlock::AOxygenTankFillerBlock()
+	: Super()
+{
+	PrimaryActorTick.bCanEverTick = false;
+
+	OxygenTankFillerBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerBodyMesh"));
+	OxygenTankFillerBodyMesh->SetupAttachment(GetRootComponent());
+
+
+	OxygenTankFillerHeadMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerHeadMesh"));
+	OxygenTankFillerHeadMesh->SetupAttachment(OxygenTankFillerBodyMesh);
+
+}
+
+UStaticMeshComponent* AOxygenTankFillerBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
+{
+	switch (BlockMeshStructureDefIndex)
+	{
+	case 0:
+		return OxygenTankFillerBodyMesh;
+	case 1:
+		return OxygenTankFillerHeadMesh;
+	default:
+		return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
+	}
+
+}
+
+UPrimitiveComponent* AOxygenTankFillerBlock::GetComponentForObjectOutline_Implementation() {
+	return OxygenTankFillerBodyMesh;
+}
 
 
