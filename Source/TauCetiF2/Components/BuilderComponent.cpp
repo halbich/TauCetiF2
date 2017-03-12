@@ -36,9 +36,8 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		return;
 
 	check(currentBuildableBlockInfo);
-	check(currentBuildableBlockInfo->BlockDefinition);
 
-	if (currentBuildableBlockInfo->BlockDefinition->IsEmptyHand)
+	if (currentBuildableBlockInfo->Action == EBuildableObjectAction::None)
 		return;
 
 	if (!currentSpawnedObject)
@@ -82,11 +81,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 {
-	if (!blockInfo || !blockInfo->IsValidLowLevel())
-		return;
-
-	if (!selector || !selector->IsValidLowLevel())
-		return;
+	check(selector && selector->IsValidLowLevel());
 
 	if (currentSpawnedObject)
 	{
@@ -94,10 +89,19 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 		selector->traceIgnoreActor = nullptr;
 		currentSpawnedObject = nullptr;
 	}
+
+	if (!blockInfo || !blockInfo->IsValidLowLevel())
+	{
+		selector->IsUsableAllowed = true;
+		return;
+	}
+
 	currentBuildableBlockInfo = blockInfo;
+	selector->IsUsableAllowed = currentBuildableBlockInfo->BlockDefinition->AllowUsable;
 	selector->SetOutlining(currentBuildableBlockInfo->AllowOutlineOnSelected, currentBuildableBlockInfo->StencilOverride);
 
-	if (currentBuildableBlockInfo->BlockDefinition->IsEmptyHand)
+
+	if (currentBuildableBlockInfo->Action == EBuildableObjectAction::None)
 		return;
 
 	currentBlockInfo->ID = currentBuildableBlockInfo->ID;

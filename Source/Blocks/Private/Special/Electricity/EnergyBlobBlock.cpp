@@ -1,8 +1,5 @@
-
-
 #include "Blocks.h"
 #include "EnergyBlobBlock.h"
-
 
 AEnergyBlobBlock::AEnergyBlobBlock()
 	: Super(), ListeningHandle()
@@ -13,7 +10,6 @@ AEnergyBlobBlock::AEnergyBlobBlock()
 	BlobBlockMesh->SetupAttachment(GetRootComponent());
 }
 
-
 UStaticMeshComponent* AEnergyBlobBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {
 	switch (BlockMeshStructureDefIndex)
@@ -23,7 +19,6 @@ UStaticMeshComponent* AEnergyBlobBlock::GetMeshStructureComponent_Implementation
 	default:
 		return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
 	}
-
 }
 
 UPrimitiveComponent* AEnergyBlobBlock::GetComponentForObjectOutline_Implementation() {
@@ -34,6 +29,7 @@ void  AEnergyBlobBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(500);
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.PickupItem", "Vzít");
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &AEnergyBlobBlock::ListeningOnUse);

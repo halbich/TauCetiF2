@@ -1,8 +1,5 @@
-
-
 #include "Blocks.h"
 #include "OxygenTankFillerBlock.h"
-
 
 AOxygenTankFillerBlock::AOxygenTankFillerBlock()
 	: Super()
@@ -12,10 +9,8 @@ AOxygenTankFillerBlock::AOxygenTankFillerBlock()
 	OxygenTankFillerBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerBodyMesh"));
 	OxygenTankFillerBodyMesh->SetupAttachment(GetRootComponent());
 
-
 	OxygenTankFillerHeadMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerHeadMesh"));
 	OxygenTankFillerHeadMesh->SetupAttachment(OxygenTankFillerBodyMesh);
-
 }
 
 UStaticMeshComponent* AOxygenTankFillerBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -29,11 +24,8 @@ UStaticMeshComponent* AOxygenTankFillerBlock::GetMeshStructureComponent_Implemen
 	default:
 		return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
 	}
-
 }
 
 UPrimitiveComponent* AOxygenTankFillerBlock::GetComponentForObjectOutline_Implementation() {
 	return OxygenTankFillerBodyMesh;
 }
-
-

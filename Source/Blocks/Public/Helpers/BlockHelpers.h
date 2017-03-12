@@ -33,7 +33,6 @@ private:
 		return rotatedVect;
 	}
 
-
 public:
 	static FORCEINLINE FVector GetSpawnCoords(const FVector& localPosition, const FVector& size, const FRotator& rotator)
 	{
@@ -48,7 +47,6 @@ public:
 		trans.SetRotation(FQuat(blockInfo->Rotation));
 		return trans;
 	}
-
 
 	static  FVector GetSpawnPoint(const FVector& ImpactPointWithSnap, const FVector& ImpactNormal, const UBlockDefinition* definition, const UBlockInfo* blockInfo) {
 		auto baseLocation = ImpactPointWithSnap / GameDefinitions::CubeMinSize;

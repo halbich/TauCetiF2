@@ -49,6 +49,11 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 		}
 	}
 
+	for (auto buildable : carrier->GetInventoryBuildableBlockData())
+	{
+		// TODO
+	}
+
 	ForceItemsChanged(false);
 }
 
@@ -58,7 +63,7 @@ void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 
 	carrier->FillData(InventoryTags);
 	carrier->FillData(BuildableItems);
-	carrier->FillDataItems(InventoryItems);
+	carrier->FillData(InventoryItems);
 }
 
 void UInventoryComponent::SelectNextBank()
@@ -97,7 +102,7 @@ TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForBank(UInventoryTagG
 		break;
 
 	case EInventoryGroupType::Inventory:
-		for (auto b : BuildableItems)
+		for (auto b : InventoryItems)
 		{
 			if (b->BlockDefinition->IsInventoryObject && filterGroup->IsSatisfied(b->Tags))
 				result.Add(b);
@@ -128,5 +133,12 @@ void UInventoryComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 void UInventoryComponent::AddItem(UBuildableBlockInfo* block)
 {
 	BuildableItems.Add(block);
+	ForceItemsChanged(false);
+}
+
+void UInventoryComponent::AddItem(UInventoryBuildableBlockInfo* block)
+{
+	//TODO TEST
+	InventoryItems.Add(block);
 	ForceItemsChanged(false);
 }

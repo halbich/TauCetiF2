@@ -123,7 +123,7 @@ void USelectorComponent::TrySelect() {
 	if (!usableObjectTargeted)
 		return;
 
-	SelectedTarget->SelectTargetComponent->OnUse(owner);
+	SelectedBlock->SelectTargetComponent->OnUse(owner);
 }
 
 void USelectorComponent::SetOutlining(bool enableOutlining, int32 outlineStencilValue)
@@ -132,8 +132,8 @@ void USelectorComponent::SetOutlining(bool enableOutlining, int32 outlineStencil
 	outliningEnabled = enableOutlining;
 
 	hideObjectOutline();
-	showObjectOutline();
-
 	hideUsableObjectOutline();
+
+	showObjectOutline();
 	showUsableObjectOutline();
 }

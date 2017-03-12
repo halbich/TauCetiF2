@@ -71,4 +71,14 @@ private:
 		ret.AddImplicitTags();
 		return ret;
 	}
+
+	/*FORCEINLINE FInventoryBuildableItemBlockInfo makeBuildable(int32 blockID, FVector blockScale)
+	{
+		FInventoryBuildableBlockInfo ret;
+		ret.ID = blockID;
+		ret.Scale = blockScale;
+
+		ret.AddImplicitTags();
+		return ret;
+	}*/
 };

@@ -22,7 +22,6 @@ void UBuildableBlockInfo::DefinitionSet()
 		Action = EBuildableObjectAction::ConstructObject;
 		break;
 	}
-
 }
 
 bool UBuildableBlockInfo::ValidateObject(TArray<FText>& validationErrors)
@@ -44,13 +43,11 @@ bool UBuildableBlockInfo::ValidateObject(TArray<FText>& validationErrors)
 		return false;
 	}
 
-
 	if (!definition->ValidateFlags(AdditionalFlags, validationErrors))
 		return false;
 
 	return true;
 }
-
 
 UBuildableBlockInfo* UBuildableBlockInfo::GetBuildable(UBlockDefinition* def)
 {
@@ -63,7 +60,6 @@ UBuildableBlockInfo* UBuildableBlockInfo::GetBuildable(UBlockDefinition* def)
 	res->DefinitionSet();
 
 	return res;
-
 }
 
 UBuildableBlockInfo* UBuildableBlockInfo::GetCopy()
@@ -82,5 +78,4 @@ UBuildableBlockInfo* UBuildableBlockInfo::GetCopy()
 	res->DisplayValue = DisplayValue;
 
 	return res;
-
 }

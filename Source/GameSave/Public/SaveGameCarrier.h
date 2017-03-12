@@ -9,6 +9,7 @@
 #include "BlockSaveInfo.h"
 #include "Blocks/Public/Info/BlockInfo.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
+#include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
 #include "Inventory/Public/InventoryTags.h"
 #include "SaveGameCarrier.generated.h"
 
@@ -92,6 +93,9 @@ public:
 	// Serializable array
 	TArray<FInventoryBuildableBlockInfo> buildableBlocks;
 
+	//Serializable array
+	TArray<FInventoryBuildableItemBlockInfo> inventoryBuildableBlocks;
+
 #pragma endregion
 
 	// functions
@@ -155,10 +159,10 @@ public:
 		buildableBlocks << BuildableBlocks;
 	}
 
-	FORCEINLINE void FillDataItems(TArray<UBuildableBlockInfo*>& InventoryBlocks)
+	FORCEINLINE void FillData(TArray<UInventoryBuildableBlockInfo*>& InventoryBlocks)
 	{
-		/*buildableBlocks.Empty();
-		buildableBlocks << BuildableBlocks;*/
+		inventoryBuildableBlocks.Empty();
+		inventoryBuildableBlocks << InventoryBlocks;
 	}
 	
 
@@ -178,6 +182,13 @@ public:
 	{
 		TArray<UBuildableBlockInfo*> result;
 		buildableBlocks >> result;
+		return result;
+	}
+
+	FORCEINLINE TArray<UInventoryBuildableBlockInfo*> GetInventoryBuildableBlockData()
+	{
+		TArray<UInventoryBuildableBlockInfo*> result;
+		inventoryBuildableBlocks >> result;
 		return result;
 	}
 

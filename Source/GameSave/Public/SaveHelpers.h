@@ -7,6 +7,7 @@
 #include "Blocks/Public/Info/BlockBaseInfo.h"
 #include "Blocks/Public/Info/BlockInfo.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
+#include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
 #include "Inventory/Public/TagGroup.h"
 #include "Inventory/FTagGroup.h"
 #include "Inventory/Public/InventoryTags.h"
@@ -69,11 +70,21 @@ public:
 		info->Tags = block.Tags;
 	}
 
-
 	FORCEINLINE static void ToContainer(FInventoryBuildableBlockInfo& block, const UBuildableBlockInfo* info) {
 		ToBaseContainer(block, info);
 		block.Tags = info->Tags;
 	}
+
+	FORCEINLINE static void FromInventoryContainer(UInventoryBuildableBlockInfo* info, const FInventoryBuildableItemBlockInfo& block) {
+		FromContainer(info, block);
+		info->Tags = block.Tags;
+	}
+
+	FORCEINLINE static void ToInventoryContainer(FInventoryBuildableItemBlockInfo& block, const UInventoryBuildableBlockInfo* info) {
+		ToContainer(block, info);
+		block.Tags = info->Tags;
+	}
+	
 
 private:
 	FORCEINLINE static void FromContainer(UTagGroup* grp, const FTagGroup& group) {
@@ -171,6 +182,20 @@ FORCEINLINE FInventoryTags& operator >> (FInventoryTags& invTags, UInventoryTags
 	return invTags;
 }
 
+FORCEINLINE TArray<FInventoryBuildableItemBlockInfo>& operator >> (TArray<FInventoryBuildableItemBlockInfo>& blockArray, TArray<UInventoryBuildableBlockInfo*>& blockObjectArray)
+{
+	for (auto block : blockArray)
+	{
+		auto NewItem = NewObject<UInventoryBuildableBlockInfo>();
+		USaveHelpers::FromInventoryContainer(NewItem, block);
+
+
+		blockObjectArray.Add(NewItem);
+	}
+	return blockArray;
+}
+
+
 #pragma endregion
 
 #pragma region Saving
@@ -202,6 +227,18 @@ FORCEINLINE FInventoryTags& operator << (FInventoryTags& invTags, UInventoryTags
 	USaveHelpers::ToContainer(invTags, tags);
 	return invTags;
 }
+
+FORCEINLINE TArray<FInventoryBuildableItemBlockInfo>& operator<<(TArray<FInventoryBuildableItemBlockInfo>& blockArray, TArray<UInventoryBuildableBlockInfo*>& blockObjectArray)
+{
+	for (auto usedBlock : blockObjectArray)
+	{
+		FInventoryBuildableItemBlockInfo block;
+		USaveHelpers::ToInventoryContainer(block, usedBlock);
+		blockArray.Add(block);
+	}
+	return blockArray;
+}
+
 
 
 #pragma endregion

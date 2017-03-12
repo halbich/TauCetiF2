@@ -61,10 +61,9 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 
 	auto targetCompo = genBlock->Execute_GetComponentForObjectOutline(this);
 	if (targetCompo)
-		SelectTargetComponent->RegisterTargetObjectPrimitiveComponent(targetCompo);
+		SelectTargetComponent->EnableSelect(targetCompo);
 
-
-	genBlock->Execute_UpdateBlockOnConstruction(this,def);
+	genBlock->Execute_UpdateBlockOnConstruction(this, def);
 
 	Super::OnConstruction(Transform);
 }

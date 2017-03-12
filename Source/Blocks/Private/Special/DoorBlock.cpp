@@ -30,7 +30,7 @@ UStaticMeshComponent* ADoorBlock::GetMeshStructureComponent_Implementation(int32
 void ADoorBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
-	SelectTargetComponent->RegisterTargetObjectPrimitiveComponent(DoorBlockFrameMesh);
+	SelectTargetComponent->EnableSelect(DoorBlockFrameMesh);
 	SelectTargetComponent->EnableUse(200, DoorBlockMesh);
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ADoorBlock::ListeningOnUse);

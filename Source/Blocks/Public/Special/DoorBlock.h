@@ -76,4 +76,3 @@ private:
 		DoorBlockMesh->SetRelativeTransform(currentTrans);
 	}
 };
-

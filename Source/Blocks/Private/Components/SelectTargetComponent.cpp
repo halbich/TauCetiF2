@@ -22,41 +22,30 @@ void USelectTargetComponent::SelectObject(int32 stencilValue)
 {
 	if (HasObjectOutline && objectOutlinePrimitive && objectOutlinePrimitive->IsValidLowLevel())
 	{
-		objectOutlinePrimitive->SetRenderCustomDepth(true);
 		objectOutlinePrimitive->CustomDepthStencilValue = stencilValue > STENCIL_MINIMUM_USABLE_EXCLUDING ? stencilValue : STENCIL_ITEM_HIGHLIGHT;
+		objectOutlinePrimitive->SetRenderCustomDepth(true);
 	}
 }
 
 void USelectTargetComponent::DeselectObject()
 {
 	if (HasObjectOutline && objectOutlinePrimitive && objectOutlinePrimitive->IsValidLowLevel())
-	{
 		objectOutlinePrimitive->SetRenderCustomDepth(false);
-	}
 }
 
 void USelectTargetComponent::SelectUsableObject()
 {
 	if (HasUsableObjectOutline && usableObjectOutlinePrimitive && usableObjectOutlinePrimitive->IsValidLowLevel())
 	{
-		usableObjectOutlinePrimitive->SetRenderCustomDepth(true);
 		usableObjectOutlinePrimitive->CustomDepthStencilValue = STENCIL_USE_HIGHLIGHT;
+		usableObjectOutlinePrimitive->SetRenderCustomDepth(true);
 	}
 }
 
 void USelectTargetComponent::DeselectUsableObject()
 {
 	if (HasUsableObjectOutline && usableObjectOutlinePrimitive && usableObjectOutlinePrimitive->IsValidLowLevel())
-	{
 		usableObjectOutlinePrimitive->SetRenderCustomDepth(false);
-	}
-}
-
-void USelectTargetComponent::RegisterTargetObjectPrimitiveComponent(UPrimitiveComponent* comp) {
-	objectOutlinePrimitive = comp;
-	if (comp != nullptr && comp->IsValidLowLevel()) {
-		HasObjectOutline = true;
-	}
 }
 
 void USelectTargetComponent::OnUse(AActor* selectingActor) {

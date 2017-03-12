@@ -3,7 +3,7 @@
 #include "ArchiveHelpers.h"
 #include "SaveHelpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 20;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 21;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -13,18 +13,18 @@ USaveGameCarrier::USaveGameCarrier() {
 	HardcodedLevelName = ENamedHardcodedLevel::HardcodedLevelsMax;
 
 	usedBlocks = TArray<FBlockInfo>();
-
-	inventoryTags = FInventoryTags();
-
 	buildableBlocks = TArray<FInventoryBuildableBlockInfo>();
+	inventoryBuildableBlocks = TArray<FInventoryBuildableItemBlockInfo>();
+	
+	inventoryTags = FInventoryTags();
 }
 
 USaveGameCarrier::~USaveGameCarrier() {
 	usedBlocks.Empty();
-
-	inventoryTags.Empty();
-
 	buildableBlocks.Empty();
+	inventoryBuildableBlocks.Empty();
+	
+	inventoryTags.Empty();
 }
 
 USaveGameCarrier* USaveGameCarrier::GetEmptyCarrier()
@@ -201,6 +201,7 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, TAr
 
 	Ar << carrier.usedBlocks;
 	Ar << carrier.buildableBlocks;
+	Ar << carrier.inventoryBuildableBlocks;
 
 	Ar << carrier.inventoryTags;
 }

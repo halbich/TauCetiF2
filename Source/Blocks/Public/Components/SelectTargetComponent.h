@@ -50,9 +50,15 @@ public:
 
 	virtual void DeselectUsableObject();
 
-	void RegisterTargetObjectPrimitiveComponent(UPrimitiveComponent* comp);
-
 	void OnUse(AActor* selectingActor);
+
+	FORCEINLINE void EnableSelect(UPrimitiveComponent* comp)
+	{
+		objectOutlinePrimitive = comp;
+		if (comp != nullptr && comp->IsValidLowLevel()) {
+			HasObjectOutline = true;
+		}
+	}
 
 	FORCEINLINE void EnableUse(float maxDistance = -1.0f, UPrimitiveComponent* comp = nullptr)
 	{

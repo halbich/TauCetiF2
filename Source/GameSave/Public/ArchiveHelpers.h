@@ -29,6 +29,12 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FInventoryBuildableBlockInfo& blo
 	return Ar;
 }
 
+FORCEINLINE FArchive& operator<<(FArchive &Ar, FInventoryBuildableItemBlockInfo& block)
+{
+	Ar << (FInventoryBuildableBlockInfo&)block;
+	return Ar;
+}
+
 FORCEINLINE FArchive& operator<<(FArchive &Ar, FTagGroup& group)
 {
 	Ar << group.GroupName;

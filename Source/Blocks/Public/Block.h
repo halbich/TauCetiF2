@@ -55,7 +55,6 @@ public:
 		return SelectTargetComponent && SelectTargetComponent->IsValidLowLevel() && SelectTargetComponent->IsInUsableArea(owner);
 	}
 
-
 private:
 
 	FORCEINLINE void setMaterial(UPrimitiveComponent* mesh, UMaterial* material, int32 index, float scaleX, float scaleY) {

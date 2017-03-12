@@ -42,9 +42,6 @@ public:
 		UTexture2D* BlockImage;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
-		bool IsEmptyHand;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		bool IsSystemAction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
@@ -55,6 +52,10 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
 		bool IsInventoryObject;
+
+
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
+		bool AllowUsable;
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		EShapeType ShapeType;
@@ -91,7 +92,7 @@ public:
 
 	FVector GetMeshScale(const FVector& inScale) const
 	{
-		return HasCustomScaling ? FVector(1,1,1) : inScale;
+		return HasCustomScaling ? FVector(1, 1, 1) : inScale;
 	}
 
 	FVector GetObjectScale(const FVector& inScale) const
@@ -106,7 +107,6 @@ public:
 		auto minS = MinBlockScale;
 		auto maxS = MaxBlockScale;
 
-
 		auto min = minS.X <= scale.X && minS.Y <= scale.Y && minS.Z <= scale.Z;
 		auto max = maxS.X >= scale.X && maxS.Y >= scale.Y && maxS.Z >= scale.Z;
 		return min && max;
@@ -119,10 +119,10 @@ public:
 			auto value = flags.Find(definedFlag.TagID);
 			if (!value)
 			{
-				validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlag", "Chyba v bloku s ID {0}: Požadovaný flag '{1}' nebyl nalezen."), BlockID, FText::FromString( definedFlag.TagID)));
+				validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlag", "Chyba v bloku s ID {0}: Požadovaný flag '{1}' nebyl nalezen."), BlockID, FText::FromString(definedFlag.TagID)));
 				return false;
 			}
-			
+
 			if (definedFlag.PossibleValues.IndexOfByPredicate([value](const FBlockFlagValue& v) { return v.Value == *value; }) == INDEX_NONE)
 			{
 				validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlagValue", "Chyba v bloku s ID {0}: Hodnota flagu '{1}' není platná."), BlockID, *value));
@@ -132,5 +132,4 @@ public:
 
 		return true;
 	}
-
 };

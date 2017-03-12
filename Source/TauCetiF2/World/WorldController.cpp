@@ -12,6 +12,8 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	BlockHolder = ObjectInitializer.CreateDefaultSubobject<UBlockHolderComponent>(this, TEXT("Block Holder"));
 
 	BaseControl = ObjectInitializer.CreateDefaultSubobject<UBaseControlComponent>(this, TEXT("Base Control"));
+
+	pickableDelegates = TMap<ABlock*, FDelegateHandle>();
 }
 
 void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
@@ -35,6 +37,16 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 {
 	if (!object || !object->IsValidLowLevel() || object->IsPendingKill())
 		return false;
+
+	auto pickable = Cast<IPickableBlock>(object);
+	if (pickable)
+	{
+		auto ref = pickableDelegates.Find(object);
+		if(ref && ref->IsValid())
+				pickable->RemovePickupItemEventListener(*ref);
+
+	}
+
 
 	auto count = UsedBlocks.Remove(object->BlockInfo);
 	check(count == 1 && "Failed to remove block info.");
@@ -112,12 +124,24 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 		woc->Element = actor;
 		woc->UpdateDefiningBox(MinMax);
 		woc->RegisterComponent();
-		
+
 		RootBox->AddToTree(MinMax);
 		for (auto usedBox : woc->TreeElements)
 		{
 			check(usedBox->GetRootNode<UKDTree>() == RootBox && TEXT("Used box don't have RootBox as ROOT !"));
 			check(usedBox->ContainingObject == actor && TEXT("Used box has another ContainingObject than it should have!"));
+		}
+
+
+		auto pickable = Cast<IPickableBlock>(actor);
+		if (pickable)
+		{
+			FPickupItemDelegate Subscriber;
+			Subscriber.BindUObject(this, &AWorldController::onPickupItem);
+			auto ListeningHandle = pickable->AddPickupItemEventListener(Subscriber);
+
+			pickableDelegates.Add(actor, ListeningHandle);
+
 		}
 
 		//MinMax->DEBUGDrawContainingBox(GetWorld());
@@ -193,24 +217,27 @@ void AWorldController::BeginPlay() {
 
 	UPatternDefinitionsHolder::Instance();
 
-	TArray<UObject*> MeshAssets;
-	EngineUtils::FindOrLoadAssetsByPath(TEXT("/Game/BuildingObjects/Meshes/"), MeshAssets, EngineUtils::ATL_Class);
-	for (auto asset : MeshAssets) {
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, *asset->GetFullName());
-		UStaticMesh* mesh = Cast<UStaticMesh>(asset);
-		if (mesh != nullptr) {
-			// do something with the mesh, create a component with it, etc.
-		}
-	}
-
 	Super::BeginPlay();
 }
 
 void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReasonType)
 {
+	for (auto del : pickableDelegates)
+	{
+		if (del.Key && del.Key->IsValidLowLevel() && del.Value.IsValid())
+		{
+			auto pickable = Cast<IPickableBlock>(del.Key);
+			if (pickable)
+				pickable->RemovePickupItemEventListener(del.Value);
+		}
+
+	}
+
 	for (auto block : UsedBlocks)
 	{
 	}
+
+
 
 	Super::EndPlay(EndPlayReasonType);
 }
@@ -229,6 +256,12 @@ void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
 	check(carrier != nullptr);
 
 	carrier->FillData(UsedBlocks);
+}
+
+void AWorldController::onPickupItem(ABlock* pickingItem)
+{
+
+
 }
 
 #pragma optimize("", on)

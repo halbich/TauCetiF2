@@ -2,6 +2,7 @@
 
 #include "GameFramework/Actor.h"
 #include "Blocks/Public/Components/BlockHolderComponent.h"
+#include "Blocks/Public/PickableBlock.h"
 #include "Helpers/BlockHelpers.h"
 #include "Helpers/WorldHelpers.h"
 #include "MinMaxBox.h"
@@ -65,6 +66,8 @@ public:
 		return RootBox->IsPlaceEmpty(box);
 	}
 
+	TMap<ABlock*, FDelegateHandle> pickableDelegates;
+
 private:
 
 	void loadBlocksArray(TArray<UBlockInfo*>& blocks);
@@ -78,4 +81,6 @@ private:
 
 		return Cast<ObjClass>(StaticLoadObject(ObjClass::StaticClass(), NULL, *Path.ToString()));
 	}
+
+	void onPickupItem(ABlock* pickingItem);
 };

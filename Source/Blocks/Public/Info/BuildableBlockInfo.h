@@ -42,7 +42,6 @@ public:
 	void DefinitionSet();
 
 	static UBuildableBlockInfo* GetBuildable(UBlockDefinition* def);
-	
-	UBuildableBlockInfo* GetCopy();
 
+	UBuildableBlockInfo* GetCopy();
 };

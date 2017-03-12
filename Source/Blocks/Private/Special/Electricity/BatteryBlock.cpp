@@ -1,9 +1,5 @@
-
-
 #include "Blocks.h"
 #include "BatteryBlock.h"
-
-
 
 ABatteryBlock::ABatteryBlock()
 	: Super()
@@ -12,8 +8,6 @@ ABatteryBlock::ABatteryBlock()
 
 	BatteryBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BatteryBlockMesh"));
 	BatteryBlockMesh->SetupAttachment(GetRootComponent());
-
-
 }
 
 UStaticMeshComponent* ABatteryBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -25,7 +19,6 @@ UStaticMeshComponent* ABatteryBlock::GetMeshStructureComponent_Implementation(in
 	default:
 		return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
 	}
-
 }
 
 UPrimitiveComponent* ABatteryBlock::GetComponentForObjectOutline_Implementation() {

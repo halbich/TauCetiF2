@@ -45,3 +45,12 @@ struct GAMESAVE_API FInventoryBuildableBlockInfo : FBlockBaseInfo
 		Tags.Add(FString::Printf(TEXT("kZ_%d"), (int32)Scale.Z));
 	}
 };
+
+/*
+Info about blocks which nas player in inventory
+*/
+struct GAMESAVE_API FInventoryBuildableItemBlockInfo : FInventoryBuildableBlockInfo
+{
+
+
+};

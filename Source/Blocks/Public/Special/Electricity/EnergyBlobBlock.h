@@ -1,5 +1,3 @@
-
-
 #pragma once
 #include "Block.h"
 #include "EnergyBlobBlock.generated.h"
@@ -8,8 +6,8 @@ UCLASS()
 class BLOCKS_API AEnergyBlobBlock : public ABlock
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	AEnergyBlobBlock();
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | EnergyBlobBlock")

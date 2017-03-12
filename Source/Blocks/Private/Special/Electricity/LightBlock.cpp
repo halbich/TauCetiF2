@@ -11,7 +11,6 @@ ALightBlock::ALightBlock()
 	LightBlockMesh->SetupAttachment(GetRootComponent());
 	LightBlockMesh->AddLocalOffset(FVector(0, 0, -1));
 
-
 	Light = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light"));
 	Light->SetupAttachment(LightBlockMesh);
 	Light->AddLocalOffset(FVector(0, 0, -4));

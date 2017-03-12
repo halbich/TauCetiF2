@@ -70,10 +70,10 @@ public:
 		case EBuildableObjectAction::None:			return;
 		case EBuildableObjectAction::DeleteObject:
 
-			if (!selector->SelectedTarget)
+			if (!selector->SelectedBlock)
 				return;
 
-			if (worldController->DestroyWorldObject(selector->SelectedTarget))
+			if (worldController->DestroyWorldObject(selector->SelectedBlock))
 				print(TEXT("TODO! deletion seccessfull")); // TODO Localization!
 
 			return;

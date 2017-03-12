@@ -21,7 +21,7 @@ public:
 		TArray<UBuildableBlockInfo*> BuildableItems;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
-		TArray<UBuildableBlockInfo*> InventoryItems;
+		TArray<UInventoryBuildableBlockInfo*> InventoryItems;
 
 	UPROPERTY(BlueprintAssignable, Transient, Category = InventoryComponent)
 		FHudBuildableItemsChanged OnHudBuildableItemsChanged;
@@ -55,4 +55,6 @@ public:
 	void SelectPrevBank();
 
 	void AddItem(UBuildableBlockInfo* block);
+
+	void AddItem(UInventoryBuildableBlockInfo* block);
 };
