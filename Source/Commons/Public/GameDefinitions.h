@@ -37,6 +37,7 @@ public:
 
 #define DoorID 700
 
+#define EnergyBlobID 999
 #define LightSmallID 1000
 #define GeneratorID 1100
 #define BatteryID 1200
