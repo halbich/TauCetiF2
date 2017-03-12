@@ -42,8 +42,8 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 	if (pickable)
 	{
 		auto ref = pickableDelegates.Find(object);
-		if(ref && ref->IsValid())
-				pickable->RemovePickupItemEventListener(*ref);
+		if (ref && ref->IsValid())
+			pickable->RemovePickupItemEventListener(*ref);
 
 	}
 
@@ -254,7 +254,6 @@ void AWorldController::LoadDataFromCarrier(USaveGameCarrier* carrier)
 void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
-
 	carrier->FillData(UsedBlocks);
 }
 

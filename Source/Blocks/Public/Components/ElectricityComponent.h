@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
+#include "Info/Components/BlockWithElectricityInfo.h"
 #include "ElectricityComponent.generated.h"
 
 
@@ -14,6 +15,9 @@ class BLOCKS_API UElectricityComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UElectricityComponent();
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+		UBlockWithElectricityInfo* ElectricityInfo;
 
 protected:
 	// Called when the game starts

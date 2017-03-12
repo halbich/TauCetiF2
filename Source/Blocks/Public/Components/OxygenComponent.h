@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
+#include "Info/Components/BlockWithOxygenInfo.h"
 #include "OxygenComponent.generated.h"
 
 
@@ -14,6 +15,11 @@ class BLOCKS_API UOxygenComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UOxygenComponent();
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+		UBlockWithOxygenInfo* OxygenInfo;
+
+	
 
 protected:
 	// Called when the game starts

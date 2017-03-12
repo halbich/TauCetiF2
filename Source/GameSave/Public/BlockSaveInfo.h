@@ -1,5 +1,8 @@
 #pragma once
 
+#include "BlockComponents/OxygenComponentInfo.h"
+#include "BlockComponents/ElectricityComponentInfo.h"
+
 // Help class to save / load data as saveGame
 
 /*
@@ -18,15 +21,24 @@ struct GAMESAVE_API FBlockBaseInfo {
 };
 
 /*
-	Info for blocks with block location and rotation, used to load / save to save game
+	Info for blocks with block location and rotation anc componentData, used to load / save to save game
 */
 struct GAMESAVE_API FBlockInfo : FBlockBaseInfo
 {
 	FVector Location;
 	FRotator Rotation;
 
-	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator) {};
-	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator) {};
+	bool HasOxygenData;
+	FOxygenComponentInfo OxygenInfo;
+	bool HasElectricityData;
+	FElectricityComponentInfo ElectricityInfo;
+
+	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), 
+		HasOxygenData(false), HasElectricityData(false), OxygenInfo(), ElectricityInfo()
+	{};
+	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator),
+		HasOxygenData(false), HasElectricityData(false), OxygenInfo(), ElectricityInfo()
+	{};
 };
 
 /*

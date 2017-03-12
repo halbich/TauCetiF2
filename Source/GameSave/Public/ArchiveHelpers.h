@@ -1,9 +1,10 @@
 #pragma once
 
 #include "BlockSaveInfo.h"
-#include "Inventory/FTagGroup.h"
-#include "Inventory/FInventoryTagGroup.h"
-#include "Inventory/FInventoryTags.h"
+
+#include "BlockComponents/BlockComponentsArchiveHelpers.h"
+#include "Inventory/InventoryArchiveHelpers.h"
+
 
 FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockBaseInfo& block)
 {
@@ -19,6 +20,15 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo& block)
 	Ar << (FBlockBaseInfo&)block;
 	Ar << block.Location;
 	Ar << block.Rotation;
+	
+	Ar << block.HasOxygenData;
+	if (block.HasOxygenData)
+		Ar << block.OxygenInfo;
+
+	Ar << block.HasElectricityData;
+	if (block.HasElectricityData)
+		Ar << block.ElectricityInfo;
+	
 	return Ar;
 }
 
@@ -35,25 +45,3 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FInventoryBuildableItemBlockInfo&
 	return Ar;
 }
 
-FORCEINLINE FArchive& operator<<(FArchive &Ar, FTagGroup& group)
-{
-	Ar << group.GroupName;
-	Ar << group.Tags;
-	return Ar;
-}
-
-FORCEINLINE FArchive& operator<<(FArchive &Ar, FInventoryTagGroup& tagGroup)
-{
-	Ar << tagGroup.GroupName;
-	Ar << tagGroup.IsGroupEnabled;
-	Ar << tagGroup.GroupList;
-	Ar << tagGroup.GroupType;
-	return Ar;
-}
-
-FORCEINLINE FArchive& operator<<(FArchive &Ar, FInventoryTags& invTags)
-{
-	Ar << invTags.CurrentActiveIndex;
-	Ar << invTags.InventoryGroupList;
-	return Ar;
-}
