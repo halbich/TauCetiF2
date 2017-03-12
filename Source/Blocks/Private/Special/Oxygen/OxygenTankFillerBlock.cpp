@@ -11,6 +11,9 @@ AOxygenTankFillerBlock::AOxygenTankFillerBlock()
 
 	OxygenTankFillerHeadMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerHeadMesh"));
 	OxygenTankFillerHeadMesh->SetupAttachment(OxygenTankFillerBodyMesh);
+
+	OxygenComponent = CreateDefaultSubobject<UOxygenComponent>(TEXT("OxygenComponent"));
+	AddOwnedComponent(OxygenComponent);
 }
 
 UStaticMeshComponent* AOxygenTankFillerBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)

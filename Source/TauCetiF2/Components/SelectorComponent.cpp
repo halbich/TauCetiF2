@@ -134,6 +134,6 @@ void USelectorComponent::SetOutlining(bool enableOutlining, int32 outlineStencil
 	hideObjectOutline();
 	hideUsableObjectOutline();
 
-	showObjectOutline();
-	showUsableObjectOutline();
+	if (!showUsableObjectOutline())
+		showObjectOutline();
 }

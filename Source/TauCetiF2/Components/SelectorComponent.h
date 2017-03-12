@@ -118,22 +118,24 @@ private:
 		}
 	}
 
-	FORCEINLINE void showUsableObjectOutline()
+	FORCEINLINE bool showUsableObjectOutline()
 	{
 		if (!SelectedActor || !IsUsableAllowed)
-			return;
+			return false;
 
 		if (SelectedBlock && SelectedBlock->IsValidLowLevelFast())
 		{
 			if (SelectedBlock->SelectTargetComponent && SelectedBlock->SelectTargetComponent->IsValidLowLevelFast())
 			{
 				SelectedBlock->SelectTargetComponent->SelectUsableObject();
+				return true;
 			}
 			else {
 				SelectedActor = nullptr;
 				SelectedBlock = nullptr;
 			}
 		}
+		return false;
 	}
 
 	FORCEINLINE void selectComponent(AActor* actor, ABlock* worldObj)

@@ -19,9 +19,6 @@ class TAUCETIF2_API UHelpers : public UObject
 
 public:
 
-	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
-		static TArray<FString> GetAllSaveGameSlots();
-
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Change Localization"), Category = "Locale")
 		static bool ChangeLocalization(FString target);
 
@@ -33,29 +30,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
 		static void FatalError(const FName text);
-
-	// https://wiki.unrealengine.com/Dynamic_Load_Object
-	template <typename ObjClass>
-	static FORCEINLINE ObjClass* LoadObjFromPath(const FName& Path)
-	{
-		if (Path == NAME_None)
-			return nullptr;
-
-		return Cast<ObjClass>(StaticLoadObject(ObjClass::StaticClass(), NULL, *Path.ToString()));
-	}
-
-	static FORCEINLINE UMaterial* GetMaterialByName(const FName& name) {
-		return LoadObjFromPath<UMaterial>(name);
-	}
-
-	static FORCEINLINE UImage* GetImageByName(const FName& name) {
-		return LoadObjFromPath<UImage>(name);
-	}
-
-	static FORCEINLINE UTexture2D* GetTexture2DByName(const FName& name) {
-		return LoadObjFromPath<UTexture2D>(name);
-	}
-
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Definitions")
 		static int32 GetCubeMinSize();

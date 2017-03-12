@@ -2,6 +2,7 @@
 
 #include "Block.h"
 #include "PickableBlock.h"
+#include "Components/OxygenComponent.h"
 #include "OxygenTank.generated.h"
 
 /**
@@ -18,6 +19,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTank")
 		UStaticMeshComponent* OxygenTankMesh;
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTank", meta = (AllowPrivateAcces = "true"))
+		UOxygenComponent* OxygenComponent;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 

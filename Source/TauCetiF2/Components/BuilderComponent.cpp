@@ -32,10 +32,8 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!selector || !selector->IsValidLowLevelFast() || !currentBuildableBlockInfo || !currentBuildableBlockInfo->IsValidLowLevelFast())
+	if (!currentBuildableBlockInfo || !currentBuildableBlockInfo->IsValidLowLevelFast())
 		return;
-
-	check(currentBuildableBlockInfo);
 
 	if (currentBuildableBlockInfo->Action == EBuildableObjectAction::None)
 		return;
@@ -43,7 +41,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	if (!currentSpawnedObject)
 	{
 		SetCurrentBuildingItem(currentBuildableBlockInfo);
-		return;  // Spawning might failed, probably due to invalid location. If not, we want to update next time.
+		return;  // if spawn was successful, we have actual data (spawn point etc)
 	}
 
 	check(currentDefinitionForBlock);
@@ -81,13 +79,12 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 {
-	check(selector && selector->IsValidLowLevel());
-
 	if (currentSpawnedObject)
 	{
 		toggleHiddenCurrentSpawned();
 		selector->traceIgnoreActor = nullptr;
 		currentSpawnedObject = nullptr;
+		currentDefinitionForBlock = nullptr;
 	}
 
 	if (!blockInfo || !blockInfo->IsValidLowLevel())

@@ -4,6 +4,8 @@
 #include "Commons/Public/Enums.h"
 #include "BlockMeshStructureDefinition.h"
 #include "BlockAdditionalFlags.h"
+#include "OxygenComponentDefinition.h"
+#include "ElectricityComponentDefinition.h"
 #include "BlockDefinition.generated.h"
 
 namespace BuildDefinition {
@@ -53,7 +55,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
 		bool IsInventoryObject;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
 		bool AllowUsable;
 
@@ -89,6 +90,18 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		FRotator DefaultBuildingRotation;
+
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | OxygenComponent")
+		bool HasOxygenComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | OxygenComponent", meta = (ShowOnlyInnerProperties, EditCondition = "HasOxygenComponent"))
+		FOxygenComponentDefinition OxygenComponentDef;
+
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | ElectricityComponent")
+		bool HasElectricityComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | ElectricityComponent", meta = (ShowOnlyInnerProperties, EditCondition = "HasElectricityComponent"))
+		FElectricityComponentDefinition ElectricityComponentDef;
 
 	FVector GetMeshScale(const FVector& inScale) const
 	{

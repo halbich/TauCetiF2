@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Block.h"
+#include "Components/OxygenComponent.h"
 #include "OxygenTankFillerBlock.generated.h"
 
 /**
@@ -20,6 +21,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTankFiller")
 		UStaticMeshComponent* OxygenTankFillerHeadMesh;
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTank", meta = (AllowPrivateAcces = "true"))
+		UOxygenComponent* OxygenComponent;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 

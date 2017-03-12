@@ -8,6 +8,9 @@ AOxygenTank::AOxygenTank()
 
 	OxygenTankMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankMesh"));
 	OxygenTankMesh->SetupAttachment(GetRootComponent());
+
+	OxygenComponent = CreateDefaultSubobject<UOxygenComponent>(TEXT("OxygenComponent"));
+	AddOwnedComponent(OxygenComponent);
 }
 
 UStaticMeshComponent* AOxygenTank::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
