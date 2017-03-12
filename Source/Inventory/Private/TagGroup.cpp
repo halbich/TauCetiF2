@@ -3,7 +3,6 @@
 
 UTagGroup::UTagGroup()
 {
-	// TODO Localization!
 	GroupName = NSLOCTEXT("TCF2LocSpace", "LC.TagGroup.NewTagGroup", "Nová skupina").ToString();
 	LetVisibleAll = true;
 }

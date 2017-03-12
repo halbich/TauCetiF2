@@ -165,10 +165,10 @@ private:
 		invTagGroup.GroupType = (uint8)tagGroup->GroupType;
 		invTagGroup.GroupList.Empty();
 
-		for (const auto tagGroup : tagGroup->GroupList)
+		for (const auto tagGrp : tagGroup->GroupList)
 		{
 			FTagGroup grp;
-			ToContainer(grp, tagGroup);
+			ToContainer(grp, tagGrp);
 			invTagGroup.GroupList.Add(grp);
 		}
 	}
