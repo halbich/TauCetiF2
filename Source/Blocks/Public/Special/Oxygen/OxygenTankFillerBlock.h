@@ -2,13 +2,14 @@
 
 #include "Block.h"
 #include "Components/OxygenComponent.h"
+#include "BlockWithOxygen.h"
 #include "OxygenTankFillerBlock.generated.h"
 
 /**
  *
  */
 UCLASS()
-class BLOCKS_API AOxygenTankFillerBlock : public ABlock
+class BLOCKS_API AOxygenTankFillerBlock : public ABlock, public IBlockWithOxygen
 {
 	GENERATED_BODY()
 

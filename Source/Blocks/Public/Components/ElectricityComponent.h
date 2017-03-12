@@ -19,6 +19,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
 		UBlockWithElectricityInfo* ElectricityInfo;
 
+	UBlockWithElectricityInfo* SetInfo(UBlockWithElectricityInfo* info);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

@@ -2,7 +2,7 @@
 
 #include "GameFramework/Actor.h"
 #include "Blocks/Public/Components/BlockHolderComponent.h"
-#include "Blocks/Public/PickableBlock.h"
+#include "Blocks/Public/Interfaces/PickableBlock.h"
 #include "Helpers/BlockHelpers.h"
 #include "Helpers/WorldHelpers.h"
 #include "MinMaxBox.h"

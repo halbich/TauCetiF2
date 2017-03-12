@@ -6,6 +6,8 @@
 #include "BlockAdditionalFlags.h"
 #include "SelectTargetComponent.h"
 #include "BlockInfo.h"
+#include "BlockWithElectricity.h"
+#include "BlockWithOxygen.h"
 #include "Block.generated.h"
 
 UCLASS()

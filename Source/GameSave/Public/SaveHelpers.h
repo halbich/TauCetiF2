@@ -14,6 +14,13 @@
 #include "Inventory/FInventoryTags.h"
 #include "Inventory/Public/InventoryTagGroup.h"
 #include "Inventory/FInventoryTagGroup.h"
+
+#include "Blocks/Public/Info/Components/BlockWithOxygenInfo.h"
+#include "BlockComponents/OxygenComponentInfo.h"
+#include "Blocks/Public/Info/Components/BlockWithElectricityInfo.h"
+#include "BlockComponents/ElectricityComponentInfo.h"
+
+
 #include "SaveHelpers.generated.h"
 
 /**
@@ -52,17 +59,57 @@ private:
 		block.Name = info->Name;
 		block.AdditionalFlags = info->AdditionalFlags;
 	}
+
+	FORCEINLINE static void FromContainer(UBlockWithOxygenInfo* info, const FOxygenComponentInfo& block) {
+		info->CurrentFillingValue = block.CurrentFillingValue;
+	}
+
+	FORCEINLINE static void ToContainer(FOxygenComponentInfo& block, const UBlockWithOxygenInfo* info) {
+		block.CurrentFillingValue = info->CurrentFillingValue;
+	}
+
+	FORCEINLINE static void FromContainer(UBlockWithElectricityInfo* info, const FElectricityComponentInfo& block) {
+	}
+
+	FORCEINLINE static void ToContainer(FElectricityComponentInfo& block, const UBlockWithElectricityInfo* info) {
+	}
+
 public:
-	FORCEINLINE static void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
+	 static void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
 		FromBaseContainer(info, block);
 		info->Location = block.Location;
 		info->Rotation = block.Rotation;
+
+		if (block.HasOxygenData)
+		{
+			info->OxygenInfo = NewObject<UBlockWithOxygenInfo>();
+			FromContainer(info->OxygenInfo, block.OxygenInfo);
+		}
+
+		if (block.HasElectricityData)
+		{
+			info->ElectricityInfo = NewObject<UBlockWithElectricityInfo>();
+			FromContainer(info->ElectricityInfo, block.ElectricityInfo);
+		}
+
 	}
 
-	FORCEINLINE static void ToContainer(FBlockInfo& block, const UBlockInfo* info) {
+	 static void ToContainer(FBlockInfo& block, const UBlockInfo* info) {
 		ToBaseContainer(block, info);
 		block.Location = info->Location;
 		block.Rotation = info->Rotation;
+
+		if (info->OxygenInfo && info->OxygenInfo->IsValidLowLevel())
+		{
+			block.HasOxygenData = true;
+			ToContainer(block.OxygenInfo, info->OxygenInfo);
+		}
+
+		if (info->ElectricityInfo && info->ElectricityInfo->IsValidLowLevel())
+		{
+			block.HasElectricityData = true;
+			ToContainer(block.ElectricityInfo, info->ElectricityInfo);
+		}
 	}
 
 	FORCEINLINE static void FromContainer(UBuildableBlockInfo* info, const FInventoryBuildableBlockInfo& block) {

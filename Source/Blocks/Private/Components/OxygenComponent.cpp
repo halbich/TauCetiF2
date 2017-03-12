@@ -21,7 +21,7 @@ void UOxygenComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
+
 }
 
 
@@ -31,5 +31,17 @@ void UOxygenComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+UBlockWithOxygenInfo* UOxygenComponent::SetInfo(UBlockWithOxygenInfo* info)
+{
+	if (!info || !info->IsValidLowLevel())
+	{
+		info = NewObject<UBlockWithOxygenInfo>();
+		info->CurrentFillingValue = FMath::FRandRange(0, 20.0f);
+	}
+
+	OxygenInfo = info;
+	return OxygenInfo;
 }
 

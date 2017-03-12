@@ -7,8 +7,10 @@
  */
 struct GAMESAVE_API FOxygenComponentInfo {
 
+	float CurrentFillingValue;
 	/*
 	Default constructor
 	*/
-	FOxygenComponentInfo()  {};
+	FOxygenComponentInfo() :CurrentFillingValue(0)
+	{};
 };

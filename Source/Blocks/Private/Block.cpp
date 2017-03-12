@@ -96,6 +96,17 @@ FVector ABlock::GetBlockScale()
 void ABlock::SetBlockInfo(UBlockInfo* info)
 {
 	BlockInfo = info;
+
+	if (BlockInfo->UnderConstruction)
+		return;
+
+	auto oxygenBlock = Cast<UOxygenComponent>(GetComponentByClass(UOxygenComponent::StaticClass()));
+	if (oxygenBlock)
+		info->OxygenInfo = oxygenBlock->SetInfo(info->OxygenInfo);
+
+	auto electricityBlock = Cast<UElectricityComponent>(GetComponentByClass(UElectricityComponent::StaticClass()));
+	if (electricityBlock)
+		info->ElectricityInfo = electricityBlock->SetInfo(info->ElectricityInfo);
 }
 
 #pragma optimize("",on)

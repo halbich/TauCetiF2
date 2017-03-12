@@ -7,8 +7,11 @@
 */
 struct GAMESAVE_API FElectricityComponentInfo {
 
+
+	float CurrentFillingValue;
 	/*
 	Default constructor
 	*/
-	FElectricityComponentInfo() {};
+	FElectricityComponentInfo() :CurrentFillingValue(0)
+	{};
 };

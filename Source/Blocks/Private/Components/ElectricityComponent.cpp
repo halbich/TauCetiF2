@@ -33,3 +33,9 @@ void UElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	// ...
 }
 
+UBlockWithElectricityInfo* UElectricityComponent::SetInfo(UBlockWithElectricityInfo* info)
+{
+	ElectricityInfo = info;
+
+	return ElectricityInfo;
+}

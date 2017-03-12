@@ -19,7 +19,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
 		UBlockWithOxygenInfo* OxygenInfo;
 
-	
+	UBlockWithOxygenInfo* SetInfo(UBlockWithOxygenInfo* info);
 
 protected:
 	// Called when the game starts
