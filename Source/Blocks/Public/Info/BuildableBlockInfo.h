@@ -31,14 +31,13 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
 		UBlockDefinition* BlockDefinition;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+		bool IsInventoryItemInfo;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+		uint8 DisplayValue;
 
 	bool ValidateObject(TArray<FText>& validationErrors);
-
-	FORCEINLINE bool IsSystemAction()
-	{
-		ensure(BlockDefinition);
-		return BlockDefinition->IsSystemAction;
-	}
 
 	void DefinitionSet();
 

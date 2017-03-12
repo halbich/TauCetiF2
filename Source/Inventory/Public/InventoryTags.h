@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Object.h"
+#include "Commons/Public/Enums.h"
 #include "InventoryTagGroup.h"
 #include "InventoryTags.generated.h"
 

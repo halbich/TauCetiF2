@@ -41,6 +41,7 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FInventoryTagGroup& tagGroup)
 	Ar << tagGroup.GroupName;
 	Ar << tagGroup.IsGroupEnabled;
 	Ar << tagGroup.GroupList;
+	Ar << tagGroup.GroupType;
 	return Ar;
 }
 

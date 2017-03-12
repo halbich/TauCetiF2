@@ -155,6 +155,13 @@ public:
 		buildableBlocks << BuildableBlocks;
 	}
 
+	FORCEINLINE void FillDataItems(TArray<UBuildableBlockInfo*>& InventoryBlocks)
+	{
+		/*buildableBlocks.Empty();
+		buildableBlocks << BuildableBlocks;*/
+	}
+	
+
 	FORCEINLINE void FillData(UInventoryTags* InventoryTags)
 	{
 		inventoryTags << InventoryTags;

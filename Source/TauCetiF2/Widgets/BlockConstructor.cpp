@@ -50,7 +50,7 @@ TArray<UBuildableBlockInfo*> UBlockConstructor::GetAllBuildableBlocks()
 	{
 		auto def = blockHolder->GetDefinitionFor(buildable);
 
-		if (!def->IsSystemAction)
+		if (!def->IsSystemAction && def->IsBuildable)
 			result.Add(UBuildableBlockInfo::GetBuildable(def));
 	}
 

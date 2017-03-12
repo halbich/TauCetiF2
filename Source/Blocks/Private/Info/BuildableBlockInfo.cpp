@@ -78,6 +78,8 @@ UBuildableBlockInfo* UBuildableBlockInfo::GetCopy()
 	res->AllowOutlineOnSelected = AllowOutlineOnSelected;
 	res->StencilOverride = StencilOverride;
 	res->BlockDefinition = BlockDefinition;
+	res->IsInventoryItemInfo = IsInventoryItemInfo;
+	res->DisplayValue = DisplayValue;
 
 	return res;
 

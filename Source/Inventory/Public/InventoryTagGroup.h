@@ -3,6 +3,7 @@
 #include "Object.h"
 
 #include "TagGroup.h"
+#include "Commons/Public/Enums.h"
 #include "InventoryTagGroup.generated.h"
 
 /**
@@ -22,6 +23,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
 		bool IsGroupEnabled;
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
+		EInventoryGroupType GroupType;
 
 	bool IsSatisfied(TArray<FString>& tags)
 	{

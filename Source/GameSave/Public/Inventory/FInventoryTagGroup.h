@@ -14,6 +14,8 @@ public:
 
 	bool IsGroupEnabled;
 
+	uint8 GroupType;
+
 	TArray<FTagGroup> GroupList;
 
 	FORCEINLINE void Empty() {

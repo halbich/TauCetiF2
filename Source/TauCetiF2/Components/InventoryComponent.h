@@ -20,6 +20,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
 		TArray<UBuildableBlockInfo*> BuildableItems;
 
+	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
+		TArray<UBuildableBlockInfo*> InventoryItems;
+
 	UPROPERTY(BlueprintAssignable, Transient, Category = InventoryComponent)
 		FHudBuildableItemsChanged OnHudBuildableItemsChanged;
 

@@ -27,6 +27,9 @@ public:
 		MinBlockScale = FVector(1, 1, 1);
 		MaxBlockScale = FVector(20, 20, 20);
 		AllowPitch = AllowRoll = AllowYaw = true;
+		IsBuildable = true;
+		IsPlaceable = true;
+		IsInventoryObject = false;
 	};
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
@@ -43,6 +46,15 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		bool IsSystemAction;
+
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
+		bool IsBuildable;
+
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
+		bool IsPlaceable;
+
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
+		bool IsInventoryObject;
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		EShapeType ShapeType;

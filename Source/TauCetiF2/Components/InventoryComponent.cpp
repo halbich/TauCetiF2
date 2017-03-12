@@ -58,6 +58,7 @@ void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 
 	carrier->FillData(InventoryTags);
 	carrier->FillData(BuildableItems);
+	carrier->FillDataItems(InventoryItems);
 }
 
 void UInventoryComponent::SelectNextBank()
@@ -85,11 +86,29 @@ TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForBank(UInventoryTagG
 	if (!filterGroup)
 		return result;
 
-	for (auto b : BuildableItems)
+	switch (filterGroup->GroupType)
 	{
-		if (filterGroup->IsSatisfied(b->Tags))
-			result.Add(b);
+	case EInventoryGroupType::Building:
+		for (auto b : BuildableItems)
+		{
+			if (b->BlockDefinition->IsPlaceable && filterGroup->IsSatisfied(b->Tags))
+				result.Add(b);
+		}
+		break;
+
+	case EInventoryGroupType::Inventory:
+		for (auto b : BuildableItems)
+		{
+			if (b->BlockDefinition->IsInventoryObject && filterGroup->IsSatisfied(b->Tags))
+				result.Add(b);
+		}
+		break;
+	default:
+		checkNoEntry();
+		break;
 	}
+
+
 	return result;
 }
 

@@ -13,6 +13,7 @@ UInventoryTags* UInventoryTags::GetDefault()
 		{
 			itm->IsGroupEnabled = true;
 			res->CurrentActiveIndex = 0;
+			itm->GroupType = EInventoryGroupType::Inventory;
 		}
 
 		itm->GroupName = FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryTags.Default_Group_Name", "Skupina {0}"), FText::AsNumber(i + 1)).ToString();
