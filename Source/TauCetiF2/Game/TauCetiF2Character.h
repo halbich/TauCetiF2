@@ -29,6 +29,12 @@ class ATauCetiF2Character : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
 		class UBuilderComponent* Builder;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
+		class UOxygenComponent* OxygenComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
+		class UElectricityComponent* ElectricityComponent;
+
 public:
 	ATauCetiF2Character();
 

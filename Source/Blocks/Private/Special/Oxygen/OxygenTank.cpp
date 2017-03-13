@@ -37,7 +37,7 @@ void  AOxygenTank::OnConstruction(const FTransform& Transform) {
 }
 
 
-void AOxygenTank::ListeningOnUse(AActor* actor)
+void AOxygenTank::ListeningOnUse(AActor* actor, bool isSpecial)
 {
 
 	print(TEXT("Getting Oxy tank!"));

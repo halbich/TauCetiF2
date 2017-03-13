@@ -48,11 +48,11 @@ void USelectTargetComponent::DeselectUsableObject()
 		usableObjectOutlinePrimitive->SetRenderCustomDepth(false);
 }
 
-void USelectTargetComponent::OnUse(AActor* selectingActor) {
+void USelectTargetComponent::OnUse(AActor* selectingActor, bool isSpecial) {
 	if (!IsInUsableArea(selectingActor))
 		return;
 
-	MyUseEvent.Broadcast(selectingActor);
+	MyUseEvent.Broadcast(selectingActor, isSpecial);
 }
 
 FDelegateHandle USelectTargetComponent::AddEventListener(FUseDelegate& UseDelegate)

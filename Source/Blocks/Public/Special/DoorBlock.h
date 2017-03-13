@@ -51,7 +51,7 @@ private:
 	EDoorState doorState;
 	EDoorOpening doorOpening;
 
-	void ListeningOnUse(AActor* actor);
+	void ListeningOnUse(AActor* actor, bool isSpecial);
 
 	void updateDoorState(FTransform& currentTrans, int32 openingConstant)
 	{

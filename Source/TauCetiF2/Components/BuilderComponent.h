@@ -62,12 +62,25 @@ public:
 
 	// TODO FORCEINLINE
 	void DoAction() {
-		if (!worldController || !selector->IsValidLowLevel() || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel() || !currentBuildableBlockInfo || !currentBuildableBlockInfo->IsValidLowLevel())
+
+		if(!currentBuildableBlockInfo && selector->SelectedBlock)
+		{
+			selector->TryUse(true);
+			return;
+		}
+
+		if (!worldController || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel() || !currentBuildableBlockInfo || !currentBuildableBlockInfo->IsValidLowLevel())
 			return;
 
 		switch (currentBuildableBlockInfo->Action)
 		{
-		case EBuildableObjectAction::None:			return;
+		case EBuildableObjectAction::None:
+			if (!selector->SelectedBlock)
+				return;
+
+			selector->TryUse(true);
+
+			return;
 		case EBuildableObjectAction::DeleteObject:
 
 			if (!selector->SelectedBlock)

@@ -36,7 +36,7 @@ void  AEnergyBlobBlock::OnConstruction(const FTransform& Transform) {
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 }
 
-void AEnergyBlobBlock::ListeningOnUse(AActor* actor)
+void AEnergyBlobBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 {
 	print(TEXT("Getting Blob!"));
 }

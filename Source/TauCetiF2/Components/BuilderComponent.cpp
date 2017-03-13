@@ -87,13 +87,14 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 		currentDefinitionForBlock = nullptr;
 	}
 
+	currentBuildableBlockInfo = blockInfo;
 	if (!blockInfo || !blockInfo->IsValidLowLevel())
 	{
 		selector->IsUsableAllowed = true;
+		selector->SetOutlining(false, 0);
 		return;
 	}
 
-	currentBuildableBlockInfo = blockInfo;
 	selector->IsUsableAllowed = currentBuildableBlockInfo->BlockDefinition->AllowUsable;
 	selector->SetOutlining(currentBuildableBlockInfo->AllowOutlineOnSelected, currentBuildableBlockInfo->StencilOverride);
 

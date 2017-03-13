@@ -51,7 +51,7 @@ void ADoorBlock::SetBlockInfo(UBlockInfo* info)
 	updateDoorState(transf, openingConstant);
 }
 
-void ADoorBlock::ListeningOnUse(AActor* actor)
+void ADoorBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 {
 	if (doorState == EDoorState::Closed)
 	{

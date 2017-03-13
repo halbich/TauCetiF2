@@ -73,7 +73,7 @@ public:
 		void HidePlane();
 
 	UFUNCTION(BlueprintCallable, Category = TargetSelector)
-		void TrySelect();
+		void TryUse(bool isSpecialUse = false);
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

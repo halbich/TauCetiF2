@@ -11,6 +11,7 @@ void UBuildableBlockInfo::DefinitionSet()
 	{
 	case EmptyHandID: {
 		Action = EBuildableObjectAction::None;
+		AllowOutlineOnSelected = false;
 		break;
 	}
 	case DeleteID: {

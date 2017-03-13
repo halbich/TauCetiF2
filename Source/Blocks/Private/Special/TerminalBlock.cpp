@@ -29,7 +29,7 @@ void  ATerminalBlock::OnConstruction(const FTransform& Transform) {
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 }
 
-void ATerminalBlock::ListeningOnUse(AActor* actor)
+void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 {
 	//TODO Localization!
 	print(TEXT("using terminal!"));

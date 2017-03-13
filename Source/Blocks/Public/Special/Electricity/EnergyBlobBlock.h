@@ -24,5 +24,5 @@ public:
 	FDelegateHandle ListeningHandle;
 
 private:
-	void ListeningOnUse(AActor* actor);
+	void ListeningOnUse(AActor* actor, bool isSpecial);
 };

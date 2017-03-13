@@ -119,12 +119,13 @@ void USelectorComponent::HidePlane()
 	spawnedPlane->SetActorEnableCollision(false);
 }
 
-void USelectorComponent::TrySelect() {
+void USelectorComponent::TryUse(bool isSpecialUse) {
 	if (!usableObjectTargeted)
 		return;
 
-	SelectedBlock->SelectTargetComponent->OnUse(owner);
+	SelectedBlock->SelectTargetComponent->OnUse(owner, isSpecialUse);
 }
+
 
 void USelectorComponent::SetOutlining(bool enableOutlining, int32 outlineStencilValue)
 {

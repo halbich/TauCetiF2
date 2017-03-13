@@ -3,8 +3,8 @@
 #include "Components/ActorComponent.h"
 #include "SelectTargetComponent.generated.h"
 
-DECLARE_DELEGATE_OneParam(FUseDelegate, AActor*);
-DECLARE_EVENT_OneParam(USelectTargetComponent, FUseEvent, AActor*);
+DECLARE_DELEGATE_TwoParams(FUseDelegate, AActor*, bool);
+DECLARE_EVENT_TwoParams(USelectTargetComponent, FUseEvent, AActor*, bool);
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API USelectTargetComponent : public UActorComponent
@@ -50,7 +50,7 @@ public:
 
 	virtual void DeselectUsableObject();
 
-	void OnUse(AActor* selectingActor);
+	void OnUse(AActor* selectingActor, bool isSpecial);
 
 	FORCEINLINE void EnableSelect(UPrimitiveComponent* comp)
 	{

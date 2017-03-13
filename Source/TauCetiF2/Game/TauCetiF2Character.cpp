@@ -45,6 +45,10 @@ ATauCetiF2Character::ATauCetiF2Character()
 	Builder = CreateDefaultSubobject<UBuilderComponent>(TEXT("Builder"));
 	Builder->selector = Selector;
 
+
+	OxygenComponent = CreateDefaultSubobject<UOxygenComponent>(TEXT("OxygenComponent"));
+	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
+
 	lastPitchWasZero = false;
 	lastRollWasZero = false;
 	lastYawWasZero = false;
@@ -200,7 +204,7 @@ void ATauCetiF2Character::OnInventory()
 void ATauCetiF2Character::OnUse()
 {
 	if (!IsMoveInputIgnored())
-		Selector->TrySelect();
+		Selector->TryUse();
 }
 
 void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FText>& validationErrors)
