@@ -34,6 +34,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ModalWidget")
 		void SetDesignationOkCancel();
 
+	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ModalWidget")
+		void SetDesignationOK();
+
 	virtual void OnEnterKey() override;
 
 	virtual bool OnEscapeKey() override;

@@ -32,6 +32,9 @@ public:
 
 	void SetDefinition(FOxygenComponentDefinition def);
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenComponent")
+		bool ObtainAmount(float requested, float& actuallyObtained);
+
 public:
 	FORCEINLINE const FOxygenComponentDefinition* GetDefinition()
 	{

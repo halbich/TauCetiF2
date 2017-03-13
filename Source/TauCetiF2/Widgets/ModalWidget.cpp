@@ -27,6 +27,12 @@ void UModalWidget::SetDesignationOkCancel()
 	EnabledButtons.Add(EModalDialogResult::Cancel);
 }
 
+void UModalWidget::SetDesignationOK()
+{
+	EnabledButtons.Empty();
+	EnabledButtons.Add(EModalDialogResult::OK);
+}
+
 void UModalWidget::OnEnterKey()
 {
 	print(TEXT("Modal enter key"));

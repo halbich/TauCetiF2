@@ -52,6 +52,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
 	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemDefault", "Výchozí hra").ToString();
+	c->FullFilePath = TEXT("_system_default");
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
@@ -143,6 +144,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
 	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemEmpty", "Prázdná hra").ToString();
+	c->FullFilePath = TEXT("_system_empty");
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
@@ -194,4 +196,28 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave()
 	UsedBlocks->Add(make(EBlockName::BaseCube, FVector(-8, 6, 0), FVector(1, 1, 1), FRotator(0, 0, 0)));*/
 
 	return c;
+}
+
+USaveGameCarrier* UNewGameSaveHolder::GetSaveByPath(FString path)
+{
+	if (path.IsEmpty())
+		return NULL;
+
+	if (path == TEXT("_system_default"))
+		return getDefaultGameSave();
+
+	if (path == TEXT("_system_empty"))
+		return getEmptyGameSave();
+
+	TArray<FText> errorList;
+	auto currentSaves = USaveGameCarrier::GetSaveGameInfoList(errorList);
+
+	for (auto save : currentSaves)
+	{
+		if (save->FullFilePath == path)
+			return save;
+	}
+
+	return NULL;
+
 }

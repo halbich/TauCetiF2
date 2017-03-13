@@ -34,3 +34,25 @@ void UOxygenComponent::onComponentDataChanged()
 		OnComponentDataChangedEvent.Broadcast(OxygenInfo);
 }
 
+bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained)
+{
+	if (FMath::IsNearlyZero(requested))
+	{
+		actuallyObtained = 0;
+		return true;
+	}
+
+	if (FMath::IsNearlyZero(OxygenInfo->CurrentFillingValue))
+	{
+		actuallyObtained = 0;
+		return false;
+	}
+
+	actuallyObtained = FMath::Min(requested, OxygenInfo->CurrentFillingValue);
+
+	OxygenInfo->CurrentFillingValue -= actuallyObtained;
+	onComponentDataChanged();
+	return true;
+
+}
+

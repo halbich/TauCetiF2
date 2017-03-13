@@ -35,6 +35,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SaveGame)
 		static UNewGameSaveHolder* Instance();
 
+	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
+		USaveGameCarrier* GetSaveByPath(FString path);
+
 private:
 
 	void init();

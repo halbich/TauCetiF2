@@ -83,9 +83,22 @@ bool USaveGameCarrier::SaveBinary(TArray<FText>& errorList)
 {
 	SavedDate = FDateTime::Now();
 
-	if (FullFilePath.Len() == 0) {
+	if (IsQuickSave || FullFilePath.Len() == 0) {
 		auto saveName = USaveHelpers::GetCleanSaveFileName(IsQuickSave ? TEXT("tcf2_quick") : TEXT("tcf2"), SavedDate);
-		FullFilePath = FString::Printf(TEXT("%s\\SaveGames\\%s.sav"), *FPaths::GameSavedDir(), *saveName);
+		FullFilePath = FString::Printf(TEXT("%s/SaveGames/%s.sav"), *FPaths::GameSavedDir(), *saveName);
+		FPaths::NormalizeFilename(FullFilePath);
+
+		if (IsQuickSave)
+		{
+			auto saves = USaveHelpers::GetAllSaveGameSlots();
+			for (auto save : saves)
+			{
+				auto carrier = NewObject<USaveGameCarrier>();
+				if (carrier->LoadGameDataFromFile(save, errorList, false) && carrier->IsQuickSave) {
+						FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*save);			// we need to cleanup saves
+				}
+			}
+		}
 	}
 
 	DEBUGPrintSave();
