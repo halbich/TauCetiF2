@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Object.h"
+#include "Components/BlockWithOxygenInfo.h"
+#include "Components/BlockWithElectricityInfo.h"
 #include "BlockBaseInfo.generated.h"
 
 /*
@@ -23,4 +25,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = BlockInfo)
 		TMap<FString, int32> AdditionalFlags;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+		UBlockWithOxygenInfo* OxygenInfo;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+		UBlockWithElectricityInfo* ElectricityInfo;
 };

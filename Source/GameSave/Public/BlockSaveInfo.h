@@ -14,10 +14,17 @@ struct GAMESAVE_API FBlockBaseInfo {
 	FString Name;
 	TMap<FString, int32> AdditionalFlags;
 
+	bool HasOxygenData;
+	FOxygenComponentInfo OxygenInfo;
+	bool HasElectricityData;
+	FElectricityComponentInfo ElectricityInfo;
+
 	/*
-		Default constructor with 0 ID, Zero scale and empty name
+		Default constructor with 0 ID, Zero scale, Empty name and component data
 	*/
-	FBlockBaseInfo() : ID(0), Scale(FVector::ZeroVector), Name(TEXT("")), AdditionalFlags() {};
+	FBlockBaseInfo() : ID(0), Scale(FVector::ZeroVector), Name(TEXT("")), AdditionalFlags(),
+		HasOxygenData(false), HasElectricityData(false), OxygenInfo(), ElectricityInfo()
+	{};
 };
 
 /*
@@ -28,16 +35,11 @@ struct GAMESAVE_API FBlockInfo : FBlockBaseInfo
 	FVector Location;
 	FRotator Rotation;
 
-	bool HasOxygenData;
-	FOxygenComponentInfo OxygenInfo;
-	bool HasElectricityData;
-	FElectricityComponentInfo ElectricityInfo;
 
-	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator),
-		HasOxygenData(false), HasElectricityData(false), OxygenInfo(), ElectricityInfo()
+
+	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator)
 	{};
-	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator),
-		HasOxygenData(false), HasElectricityData(false), OxygenInfo(), ElectricityInfo()
+	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator)
 	{};
 };
 

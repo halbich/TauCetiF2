@@ -10,6 +10,7 @@
 #include "Game/Patterns/PatternDefinition.h"
 #include "Game/Patterns/PatternDefinitionsHolder.h"
 #include "Components/BaseControlComponent.h"
+//#include "Game/TauCetiF2Character.h"
 
 #include "WorldController.generated.h"
 

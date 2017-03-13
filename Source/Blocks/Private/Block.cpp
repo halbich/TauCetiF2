@@ -118,9 +118,6 @@ void ABlock::SetBlockInfo(UBlockInfo* info)
 {
 	BlockInfo = info;
 
-	if (BlockInfo->UnderConstruction)
-		return;
-
 	auto oxygenBlock = Cast<UOxygenComponent>(GetComponentByClass(UOxygenComponent::StaticClass()));
 	if (oxygenBlock)
 		info->OxygenInfo = oxygenBlock->SetInfo(info->OxygenInfo);

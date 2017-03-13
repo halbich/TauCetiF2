@@ -41,5 +41,5 @@ public:
 #define GeneratorID 1100
 #define BatteryID 1200
 
-#define OxygenTankFiller 1400
-#define OxygenTank  1500
+#define OxygenTankFillerID 1400
+#define OxygenTankID  1500

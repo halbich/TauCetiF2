@@ -125,6 +125,13 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	auto used = usedObjects.FindRef(currentBuildableBlockInfo);
 	if (!used)
 	{
+		if (currentBuildableBlockInfo->IsA(UInventoryBuildableBlockInfo::StaticClass()))
+		{
+			auto temp = Cast<UInventoryBuildableBlockInfo>(currentBuildableBlockInfo);
+			currentBlockInfo->ElectricityInfo = temp->ElectricityInfo;
+			currentBlockInfo->OxygenInfo = temp->OxygenInfo;
+		}
+
 		used = worldController->SpawnWorldObject(GetWorld(), currentBlockInfo, false);
 		if (!used)
 			return;

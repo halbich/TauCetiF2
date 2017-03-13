@@ -1,8 +1,7 @@
 #pragma once
 
 #include "BlockBaseInfo.h"
-#include "Components/BlockWithOxygenInfo.h"
-#include "Components/BlockWithElectricityInfo.h"
+
 #include "BlockInfo.generated.h"
 
 /*
@@ -23,9 +22,5 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
 		bool UnderConstruction;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
-		UBlockWithOxygenInfo* OxygenInfo;
-
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
-		UBlockWithElectricityInfo* ElectricityInfo;
+	
 };

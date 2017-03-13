@@ -32,10 +32,7 @@ public:
 		UBlockDefinition* BlockDefinition;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
-		bool IsInventoryItemInfo;
-
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
-		uint8 DisplayValue;
+		FText DisplayValue;
 
 	bool ValidateObject(TArray<FText>& validationErrors);
 

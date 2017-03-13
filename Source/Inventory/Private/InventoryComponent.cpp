@@ -51,7 +51,18 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 
 	for (auto buildable : carrier->GetInventoryBuildableBlockData())
 	{
-		// TODO
+		if (aviable.Contains(buildable->ID))
+		{
+			buildable->BlockDefinition = blockRef->GetDefinitionFor(buildable->ID);
+			buildable->DefinitionSet();
+
+			if (buildable->ValidateObject(validationErrors))
+				InventoryItems.Add(buildable);
+		}
+		else
+		{
+			validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "Nepodaøilo se nahrát blok! ID bloku: {0} "), buildable->ID));
+		}
 	}
 
 	ForceItemsChanged(false);

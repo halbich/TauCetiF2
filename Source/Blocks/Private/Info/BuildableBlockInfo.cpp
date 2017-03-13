@@ -70,13 +70,16 @@ UBuildableBlockInfo* UBuildableBlockInfo::GetCopy()
 	res->Scale = Scale;
 	res->Name = Name;
 	res->AdditionalFlags.Append(AdditionalFlags);
+	res->OxygenInfo = OxygenInfo;
+	res->ElectricityInfo = ElectricityInfo;
+	
 	res->Tags.Append(Tags);
 	res->Action = Action;
 	res->AllowOutlineOnSelected = AllowOutlineOnSelected;
 	res->StencilOverride = StencilOverride;
 	res->BlockDefinition = BlockDefinition;
-	res->IsInventoryItemInfo = IsInventoryItemInfo;
 	res->DisplayValue = DisplayValue;
+
 
 	return res;
 }

@@ -60,9 +60,25 @@ private:
 		return ret;
 	}
 
+	FORCEINLINE void makeOxygen(FBlockBaseInfo& blockInfo, float currentFilling)
+	{
+		blockInfo.HasOxygenData = true;
+		blockInfo.OxygenInfo.CurrentFillingValue = currentFilling;
+	}
+
 	FORCEINLINE FInventoryBuildableBlockInfo makeBuildable(int32 blockID, FVector blockScale)
 	{
 		FInventoryBuildableBlockInfo ret;
+		ret.ID = blockID;
+		ret.Scale = blockScale;
+
+		ret.AddImplicitTags();
+		return ret;
+	}
+
+	FORCEINLINE FInventoryBuildableItemBlockInfo makeInventoryBuildable(int32 blockID, FVector blockScale)
+	{
+		FInventoryBuildableItemBlockInfo ret;
 		ret.ID = blockID;
 		ret.Scale = blockScale;
 

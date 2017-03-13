@@ -86,6 +86,8 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 
 	c->buildableBlocks.Add(makeBuildable(CubeBodyBuildingID, FVector(1, 1, 1)));
 
+	c->buildableBlocks.Add(makeBuildable(OxygenTankID, FVector(2, 2, 2)));
+
 	auto t = makeBuildable(TerminalID, FVector(1, 1, 1));
 	t.AdditionalFlags.Add(TEXT("IsUsable"), 1);
 	c->buildableBlocks.Add(t);
@@ -113,6 +115,22 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	UsedBlocks->Add(make(201, FVector(-29, -25, 9), FVector(1, 1, 1), FRotator(0, -180, 0)));
 	UsedBlocks->Add(make(201, FVector(-24, -25, 9), FVector(1, 1, 1), FRotator(0, -90, 0)));
 	UsedBlocks->Add(make(201, FVector(-24, -20, 9), FVector(1, 1, 1), FRotator(0, 0, 0)));
+
+	auto ox1 = make(1500, FVector(-32, -12, 4), FVector(2, 2, 2), FRotator(0, -90, 0));
+	makeOxygen(ox1, 5);
+	UsedBlocks->Add(ox1);
+
+	auto ox2 = make(1500, FVector(-18, -12, 4), FVector(2, 2, 2), FRotator(0, -90, 0));
+	makeOxygen(ox2, 9);
+	UsedBlocks->Add(ox2);
+
+
+
+
+	auto oxInventory1 = makeInventoryBuildable(OxygenTankID, FVector(2, 2, 2));
+	makeOxygen(oxInventory1, 7.5f);
+	c->inventoryBuildableBlocks.Add(oxInventory1);
+
 
 	return c;
 }

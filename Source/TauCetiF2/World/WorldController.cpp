@@ -251,6 +251,11 @@ void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
 
 void AWorldController::onPickupItem(ABlock* pickingItem)
 {
+
+	/*auto playerChar = Cast<ATauCetiF2Character>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	if (!playerChar || !playerChar->IsValidLowLevel())
+		return;
+*/
 	DestroyWorldObject(pickingItem);
 }
 

@@ -42,20 +42,6 @@ public:
 	}
 
 private:
-	FORCEINLINE static void FromBaseContainer(UBlockBaseInfo* info, const FBlockBaseInfo& block) {
-		info->ID = block.ID;
-		info->Scale = block.Scale;
-		info->Name = block.Name;
-		info->AdditionalFlags = block.AdditionalFlags;
-	}
-
-	FORCEINLINE static void ToBaseContainer(FBlockBaseInfo& block, const UBlockBaseInfo* info) {
-		block.ID = info->ID;
-		block.Scale = info->Scale;
-		block.Name = info->Name;
-		block.AdditionalFlags = info->AdditionalFlags;
-	}
-
 	FORCEINLINE static void FromContainer(UBlockWithOxygenInfo* info, const FOxygenComponentInfo& block) {
 		info->CurrentFillingValue = block.CurrentFillingValue;
 	}
@@ -70,11 +56,11 @@ private:
 	FORCEINLINE static void ToContainer(FElectricityComponentInfo& block, const UBlockWithElectricityInfo* info) {
 	}
 
-public:
-	static void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
-		FromBaseContainer(info, block);
-		info->Location = block.Location;
-		info->Rotation = block.Rotation;
+	FORCEINLINE static void FromBaseContainer(UBlockBaseInfo* info, const FBlockBaseInfo& block) {
+		info->ID = block.ID;
+		info->Scale = block.Scale;
+		info->Name = block.Name;
+		info->AdditionalFlags = block.AdditionalFlags;
 
 		if (block.HasOxygenData)
 		{
@@ -89,10 +75,11 @@ public:
 		}
 	}
 
-	static void ToContainer(FBlockInfo& block, const UBlockInfo* info) {
-		ToBaseContainer(block, info);
-		block.Location = info->Location;
-		block.Rotation = info->Rotation;
+	FORCEINLINE static void ToBaseContainer(FBlockBaseInfo& block, const UBlockBaseInfo* info) {
+		block.ID = info->ID;
+		block.Scale = info->Scale;
+		block.Name = info->Name;
+		block.AdditionalFlags = info->AdditionalFlags;
 
 		if (info->OxygenInfo && info->OxygenInfo->IsValidLowLevel())
 		{
@@ -105,6 +92,19 @@ public:
 			block.HasElectricityData = true;
 			ToContainer(block.ElectricityInfo, info->ElectricityInfo);
 		}
+	}
+
+public:
+	static void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
+		FromBaseContainer(info, block);
+		info->Location = block.Location;
+		info->Rotation = block.Rotation;
+	}
+
+	static void ToContainer(FBlockInfo& block, const UBlockInfo* info) {
+		ToBaseContainer(block, info);
+		block.Location = info->Location;
+		block.Rotation = info->Rotation;
 	}
 
 	FORCEINLINE static void FromContainer(UBuildableBlockInfo* info, const FInventoryBuildableBlockInfo& block) {

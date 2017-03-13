@@ -4,6 +4,7 @@
 #include "Components/ActorComponent.h"
 #include "Components/SelectorComponent.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
+#include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
 #include "World/WorldController.h"
 #include "Blocks/Public/Components/BlockHolderComponent.h"
 #include "Helpers/BlockHelpers.h"
@@ -116,7 +117,17 @@ public:
 			spawnBlock->UnderConstruction = false;
 
 			if (worldController->IsValidSpawnPoint(BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
+			{
+				if (currentBuildableBlockInfo->IsA(UInventoryBuildableBlockInfo::StaticClass()))
+				{
+					auto temp = Cast<UInventoryBuildableBlockInfo>(currentBuildableBlockInfo);
+					spawnBlock->ElectricityInfo = temp->ElectricityInfo;
+					spawnBlock->OxygenInfo = temp->OxygenInfo;
+					print("BuildItem!!!");
+				}
+
 				worldController->SpawnWorldObject(GetWorld(), spawnBlock, true);
+			}
 			else
 				print(TEXT("Invalid location")); // TODO Localization!
 
