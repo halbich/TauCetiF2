@@ -43,6 +43,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
 		static TArray<UInventoryFlagItem*> GetBlockFlags(UBlockBaseInfo* blockBaseInfo);
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
+		static FDateTime GetTimeFromSeconds(float seconds);
+
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers")
 		static void GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, bool IsSaveEnabled, FVector& Min, FVector& Max);
 };

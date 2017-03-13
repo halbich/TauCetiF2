@@ -67,7 +67,7 @@ public:
 	// game - related stuff
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
-		float PartOfDay;	// interval [0,1]
+		float CurrentTime;	// interval [0,86400]
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		uint8 MinBoxSize;

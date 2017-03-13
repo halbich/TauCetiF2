@@ -58,7 +58,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
 
 	c->PlayerPosition = FVector(-600, 0, 90);
-	c->PartOfDay = 0.5f;
+	c->CurrentTime = 34920.0f;
 	c->PlayerUseFPSCamera = true;
 
 	c->PlayerOxygenComponent.CurrentFillingValue = 150.0f;
@@ -144,13 +144,13 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
 	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemEmpty", "Prázdná hra").ToString();
-	c->FullFilePath = TEXT("_system_empty");
+	c->CurrentTime = 34920.0f;
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
 
 	c->PlayerPosition = FVector(0, 0, 90);
-	c->PartOfDay = 0.5f;
+	c->CurrentTime = 0.5f;
 	c->PlayerUseFPSCamera = false;
 
 	return c;
@@ -166,7 +166,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave()
 	c->HardcodedLevelName = ENamedHardcodedLevel::MainMenu;
 
 	c->PlayerPosition = FVector(-600, 0, 90);
-	c->PartOfDay = 0.5f;
+	c->CurrentTime = 0.5f;
 	c->PlayerUseFPSCamera = true;
 
 	//auto UsedBlocks = &c->UsedBlocks;

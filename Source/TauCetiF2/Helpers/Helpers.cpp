@@ -102,3 +102,21 @@ void UHelpers::GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, bool
 	Min = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MinBlockScale;
 	Max = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MaxBlockScale;
 }
+
+FDateTime UHelpers::GetTimeFromSeconds(float seconds)
+{
+	int32 sec = FMath::RoundToInt(seconds);
+
+	auto days = sec / 86400;
+	auto hoursRest = sec % 86400;
+
+	auto hours = hoursRest / 3600;
+	auto minutesRest = hoursRest % 3600;
+
+	auto minutes = minutesRest / 60;
+	auto secondsRest = minutesRest % 60;
+
+	check(FDateTime::Validate(1, 1, 1, hours, minutes, secondsRest, 0));
+
+	return FDateTime(1,1,1,hours, minutes, secondsRest,0);
+}

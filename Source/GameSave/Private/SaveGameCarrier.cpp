@@ -204,7 +204,7 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, TAr
 		return;
 
 	Ar << carrier.MinBoxSize;
-	Ar << carrier.PartOfDay;
+	Ar << carrier.CurrentTime;
 
 	Ar << carrier.PlayerPosition;
 	Ar << carrier.PlayerRotation;
