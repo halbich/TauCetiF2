@@ -37,6 +37,9 @@ public:
 
 private:
 	void ListeningOnUse(AActor* actor, bool isSpecial);
-	void ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source);
+
+protected:
+	UFUNCTION()
+		void ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source);
 };
 

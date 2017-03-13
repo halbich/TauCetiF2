@@ -41,7 +41,6 @@ public:
 		return FString::Printf(TEXT("%s_%s"), *name, *date);
 	}
 
-private:
 	FORCEINLINE static void FromContainer(UBlockWithOxygenInfo* info, const FOxygenComponentInfo& block) {
 		info->CurrentFillingValue = block.CurrentFillingValue;
 	}
@@ -51,10 +50,14 @@ private:
 	}
 
 	FORCEINLINE static void FromContainer(UBlockWithElectricityInfo* info, const FElectricityComponentInfo& block) {
+		info->CurrentObjectEnergy = block.CurrentObjectEnergy;
 	}
 
 	FORCEINLINE static void ToContainer(FElectricityComponentInfo& block, const UBlockWithElectricityInfo* info) {
+		block.CurrentObjectEnergy = info->CurrentObjectEnergy;
 	}
+
+private:
 
 	FORCEINLINE static void FromBaseContainer(UBlockBaseInfo* info, const FBlockBaseInfo& block) {
 		info->ID = block.ID;

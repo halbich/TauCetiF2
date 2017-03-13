@@ -35,9 +35,8 @@ void  AOxygenTank::OnConstruction(const FTransform& Transform) {
 	Subscriber.BindUObject(this, &AOxygenTank::ListeningOnUse);
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 
-	FOxygenComponentDataChangedDelegate OxygenSubscriber;
-	OxygenSubscriber.BindUObject(this, &AOxygenTank::ListeningOnOxygenCompChanged);
-	OxygenDataChangedHandle = OxygenComponent->AddEventListener(OxygenSubscriber);
+	OxygenComponent->OnComponentDataChangedEvent.AddDynamic(this, &AOxygenTank::ListeningOnOxygenCompChanged);
+
 }
 
 void AOxygenTank::ListeningOnUse(AActor* actor, bool isSpecial)
@@ -76,8 +75,8 @@ void AOxygenTank::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 
-	if (OxygenDataChangedHandle.IsValid() && OxygenComponent)
-		OxygenComponent->RemoveEventListener(OxygenDataChangedHandle);
+	if (OxygenComponent)
+		OxygenComponent->OnComponentDataChangedEvent.RemoveDynamic(this, &AOxygenTank::ListeningOnOxygenCompChanged);
 
 	Super::EndPlay(EndPlayReason);
 }

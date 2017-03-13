@@ -48,6 +48,7 @@ ATauCetiF2Character::ATauCetiF2Character()
 	OxygenComponent = CreateDefaultSubobject<UOxygenComponent>(TEXT("OxygenComponent"));
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 
+
 	lastPitchWasZero = false;
 	lastRollWasZero = false;
 	lastYawWasZero = false;
@@ -210,12 +211,22 @@ void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 {
 	Inventory->LoadFromCarrier(carrier, validationErrors);
 
+	OxygenComponent->SetDefinition(OxygenDef);
+	OxygenComponent->SetInfo(carrier->GetOxygenInfo());
+
+	ElectricityComponent->SetDefinition(ElectricityDef);
+	ElectricityComponent->SetInfo(carrier->GetElectricityInfo());
+
 	PC->Inventory->InventoryComponent = Inventory;
 }
 
 void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
 {
 	Inventory->SaveToCarrier(carrier);
+
+	carrier->FillData(OxygenComponent->OxygenInfo);
+	carrier->FillData(ElectricityComponent->ElectricityInfo);
+
 }
 
 void ATauCetiF2Character::BecomeViewTarget(APlayerController* pc)
@@ -235,4 +246,10 @@ void ATauCetiF2Character::OnNextInventoryBank()
 void ATauCetiF2Character::OnPrevInventoryBank()
 {
 	Inventory->SelectPrevBank();
+}
+
+void ATauCetiF2Character::BeginPlay()
+{
+	Super::BeginPlay();
+
 }

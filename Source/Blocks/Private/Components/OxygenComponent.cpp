@@ -10,11 +10,6 @@ UOxygenComponent::UOxygenComponent()
 	// ...
 }
 
-void UOxygenComponent::BeginPlay()
-{
-	onComponentDataChanged();
-	Super::BeginPlay();
-}
 
 UBlockWithOxygenInfo* UOxygenComponent::SetInfo(UBlockWithOxygenInfo* info)
 {
@@ -24,6 +19,7 @@ UBlockWithOxygenInfo* UOxygenComponent::SetInfo(UBlockWithOxygenInfo* info)
 	}
 
 	OxygenInfo = info;
+	onComponentDataChanged();
 	return OxygenInfo;
 }
 
@@ -35,15 +31,6 @@ void UOxygenComponent::SetDefinition(FOxygenComponentDefinition def)
 void UOxygenComponent::onComponentDataChanged()
 {
 	if (OxygenInfo)
-		MyComponentDataChangedEvent.Broadcast(OxygenInfo);
+		OnComponentDataChangedEvent.Broadcast(OxygenInfo);
 }
 
-FDelegateHandle UOxygenComponent::AddEventListener(FOxygenComponentDataChangedDelegate& dataChangedDelegate)
-{
-	return MyComponentDataChangedEvent.Add(dataChangedDelegate);
-}
-
-void UOxygenComponent::RemoveEventListener(FDelegateHandle DelegateHandle)
-{
-	MyComponentDataChangedEvent.Remove(DelegateHandle);
-}

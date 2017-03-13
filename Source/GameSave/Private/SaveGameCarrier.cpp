@@ -203,6 +203,9 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, TAr
 	Ar << carrier.inventoryBuildableBlocks;
 
 	Ar << carrier.inventoryTags;
+
+	Ar << carrier.PlayerOxygenComponent;
+	Ar << carrier.PlayerElectricityComponent;
 }
 
 bool USaveGameCarrier::IsSaveNameValid()

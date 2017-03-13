@@ -5,6 +5,8 @@
 #include "Inventory/Public/InventoryComponent.h"
 #include "Components/BuilderComponent.h"
 #include "Game/TauCetiF2PlayerController.h"
+#include "Blocks/Public/Definitions/OxygenComponentDefinition.h"
+#include "Blocks/Public/Definitions/ElectricityComponentDefinition.h"
 #include "TauCetiF2Character.generated.h"
 
 UCLASS(config = Game)
@@ -35,6 +37,7 @@ class ATauCetiF2Character : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
 		class UElectricityComponent* ElectricityComponent;
 
+
 public:
 	ATauCetiF2Character();
 
@@ -48,7 +51,14 @@ public:
 
 	virtual void BecomeViewTarget(APlayerController* pc) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | OxygenComponent", meta = (ShowOnlyInnerProperties))
+		FOxygenComponentDefinition OxygenDef;
+
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | ElectricityComponent", meta = (ShowOnlyInnerProperties))
+		FElectricityComponentDefinition ElectricityDef;
 protected:
+
+	void BeginPlay();
 
 	/** Called for forwards/backward input */
 	void MoveForward(float Value);

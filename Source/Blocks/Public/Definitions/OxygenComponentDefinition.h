@@ -12,7 +12,7 @@ struct BLOCKS_API FOxygenComponentDefinition
 
 public:
 
-	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | OxygenDefinition")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | OxygenDefinition")
 		float TotalObjectVolume;
 
 	FOxygenComponentDefinition()

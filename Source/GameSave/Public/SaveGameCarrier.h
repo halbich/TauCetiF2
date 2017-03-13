@@ -84,6 +84,12 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		bool PlayerUseFPSCamera;
 
+	// Serializable item
+	FElectricityComponentInfo PlayerElectricityComponent;
+
+	// Serializable item
+	FOxygenComponentInfo PlayerOxygenComponent;
+
 	// Serializable array
 	TArray<FBlockInfo> usedBlocks;
 
@@ -170,6 +176,16 @@ public:
 		inventoryTags << InventoryTags;
 	}
 
+	FORCEINLINE void FillData(UBlockWithOxygenInfo* OxygenInfo)
+	{
+		USaveHelpers::ToContainer(PlayerOxygenComponent, OxygenInfo);
+	}
+
+	FORCEINLINE void FillData(UBlockWithElectricityInfo* ElectricityInfo)
+	{
+		USaveHelpers::ToContainer(PlayerElectricityComponent, ElectricityInfo);
+	}
+
 	FORCEINLINE TArray<UBlockInfo*> GetBlockData()
 	{
 		TArray<UBlockInfo*> result;
@@ -197,4 +213,20 @@ public:
 		inventoryTags >> result;
 		return result;
 	}
+
+	FORCEINLINE UBlockWithOxygenInfo* GetOxygenInfo()
+	{
+		auto result = NewObject<UBlockWithOxygenInfo>(this);
+		USaveHelpers::FromContainer(result, PlayerOxygenComponent);
+		return result;
+	}
+
+	FORCEINLINE UBlockWithElectricityInfo* GetElectricityInfo()
+	{
+		auto result = NewObject<UBlockWithElectricityInfo>(this);
+		USaveHelpers::FromContainer(result, PlayerElectricityComponent);
+		return result;
+	}
+
+	
 };

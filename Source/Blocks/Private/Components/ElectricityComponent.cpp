@@ -15,10 +15,10 @@ UBlockWithElectricityInfo* UElectricityComponent::SetInfo(UBlockWithElectricityI
 	if (!info || !info->IsValidLowLevel())
 	{
 		info = NewObject<UBlockWithElectricityInfo>();
-		//info->CurrentFillingValue = FMath::FRandRange(0, OxygenComponentDef.MaxFilling); // TODO remove me!
 	}
 
 	ElectricityInfo = info;
+	onComponentDataChanged();
 	return ElectricityInfo;
 }
 
@@ -28,17 +28,10 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def)
 }
 
 
-void UElectricityComponent::OnComponentDataChanged()
+void UElectricityComponent::onComponentDataChanged()
 {
-	MyComponentDataChangedEvent.Broadcast(ElectricityInfo);
+	if (ElectricityInfo)
+		OnComponentDataChangedEvent.Broadcast(ElectricityInfo);
 }
 
-FDelegateHandle UElectricityComponent::AddEventListener(FElectricityComponentDataChangedDelegate& dataChangedDelegate)
-{
-	return MyComponentDataChangedEvent.Add(dataChangedDelegate);
-}
 
-void UElectricityComponent::RemoveEventListener(FDelegateHandle DelegateHandle)
-{
-	MyComponentDataChangedEvent.Remove(DelegateHandle);
-}

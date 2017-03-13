@@ -11,5 +11,6 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FOxygenComponentInfo& componentIn
 
 FORCEINLINE FArchive& operator<<(FArchive &Ar, FElectricityComponentInfo& componentInfo)
 {
+	Ar << componentInfo.CurrentObjectEnergy;
 	return Ar;
 }

@@ -60,6 +60,9 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	c->PartOfDay = 0.5f;
 	c->PlayerUseFPSCamera = true;
 
+	c->PlayerOxygenComponent.CurrentFillingValue = 150.0f;
+	c->PlayerElectricityComponent.CurrentObjectEnergy = 500.0f;
+
 	auto invTags = UInventoryTags::GetDefault();
 
 	USaveHelpers::ToContainer(c->inventoryTags, invTags);

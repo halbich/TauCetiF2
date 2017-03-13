@@ -4,10 +4,10 @@
 * Saving structure for Electricity component
 */
 struct GAMESAVE_API FElectricityComponentInfo {
-	float CurrentFillingValue;
+	float CurrentObjectEnergy;
 	/*
 	Default constructor
 	*/
-	FElectricityComponentInfo() :CurrentFillingValue(0)
+	FElectricityComponentInfo() :CurrentObjectEnergy(0)
 	{};
 };

@@ -8,7 +8,12 @@
 USTRUCT(BlueprintType)
 struct BLOCKS_API FElectricityComponentDefinition
 {
-	GENERATED_BODY();
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
+		float TotalObjectEnergy;
 
 	FElectricityComponentDefinition()
 	{

@@ -5,10 +5,9 @@
 #include "Definitions/ElectricityComponentDefinition.h"
 #include "ElectricityComponent.generated.h"
 
-DECLARE_DELEGATE_OneParam(FElectricityComponentDataChangedDelegate, UBlockWithElectricityInfo*);
-DECLARE_EVENT_OneParam(UElectricityComponent, FElectricityComponentDataChangedEvent, UBlockWithElectricityInfo*);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FElectricityComponentDataChangedDelegate, UBlockWithElectricityInfo*, info);
 
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+UCLASS(BlueprintType, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API UElectricityComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -17,14 +16,14 @@ public:
 	// Sets default values for this component's properties
 	UElectricityComponent();
 
-private:
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadOnly, Transient)
 		UBlockWithElectricityInfo* ElectricityInfo;
 
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenComponent")
 		FElectricityComponentDefinition ElectricityComponentDef;
 
-	void OnComponentDataChanged();
+private:
+	void onComponentDataChanged();
 
 public:
 
@@ -33,8 +32,11 @@ public:
 	void SetDefinition(FElectricityComponentDefinition def);
 
 public:
-	FDelegateHandle AddEventListener(FElectricityComponentDataChangedDelegate& dataChangedDelegate);
-	void RemoveEventListener(FDelegateHandle DelegateHandle);
-private:
-	FElectricityComponentDataChangedEvent MyComponentDataChangedEvent;
+	FORCEINLINE const FElectricityComponentDefinition* GetDefinition()
+	{
+		return &ElectricityComponentDef;
+	}
+
+	UPROPERTY(BlueprintAssignable, Category = "TCF2 | ElectricityComponent")
+		FElectricityComponentDataChangedDelegate OnComponentDataChangedEvent;
 };

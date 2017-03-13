@@ -5,11 +5,9 @@
 #include "Definitions/OxygenComponentDefinition.h"
 #include "OxygenComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOxygenComponentDataChangedDelegate, UBlockWithOxygenInfo*, info);
 
-DECLARE_DELEGATE_OneParam(FOxygenComponentDataChangedDelegate, UBlockWithOxygenInfo*);
-DECLARE_EVENT_OneParam(UOxygenComponent, FOxygenComponentDataChangedEvent, UBlockWithOxygenInfo*);
-
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+UCLASS(BlueprintType, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API UOxygenComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -18,19 +16,15 @@ public:
 	// Sets default values for this component's properties
 	UOxygenComponent();
 
-private:
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadOnly, Transient)
 		UBlockWithOxygenInfo* OxygenInfo;
 
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenComponent")
 		FOxygenComponentDefinition OxygenComponentDef;
 
+private:
 	void onComponentDataChanged();
 
-protected:
-
-	void BeginPlay();
-		 
 
 public:
 
@@ -39,14 +33,11 @@ public:
 	void SetDefinition(FOxygenComponentDefinition def);
 
 public:
-	FDelegateHandle AddEventListener(FOxygenComponentDataChangedDelegate& dataChangedDelegate);
-	void RemoveEventListener(FDelegateHandle DelegateHandle);
-
 	FORCEINLINE const FOxygenComponentDefinition* GetDefinition()
 	{
 		return &OxygenComponentDef;
 	}
 
-private:
-	FOxygenComponentDataChangedEvent MyComponentDataChangedEvent;
+	UPROPERTY(BlueprintAssignable, Category = "TCF2 | OxygenComponent")
+		FOxygenComponentDataChangedDelegate OnComponentDataChangedEvent;
 };
