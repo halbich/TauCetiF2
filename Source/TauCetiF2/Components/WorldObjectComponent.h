@@ -37,7 +37,6 @@ public:
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
-
 	void UpdateDefiningBox(UKDTree* definingBox);
 
 	void OnTreeElementsChanged();

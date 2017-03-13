@@ -113,7 +113,6 @@ TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForBank(UInventoryTagG
 		break;
 	}
 
-
 	return result;
 }
 

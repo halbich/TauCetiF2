@@ -33,7 +33,7 @@ struct GAMESAVE_API FBlockInfo : FBlockBaseInfo
 	bool HasElectricityData;
 	FElectricityComponentInfo ElectricityInfo;
 
-	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), 
+	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator),
 		HasOxygenData(false), HasElectricityData(false), OxygenInfo(), ElectricityInfo()
 	{};
 	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator),
@@ -63,6 +63,4 @@ Info about blocks which nas player in inventory
 */
 struct GAMESAVE_API FInventoryBuildableItemBlockInfo : FInventoryBuildableBlockInfo
 {
-
-
 };

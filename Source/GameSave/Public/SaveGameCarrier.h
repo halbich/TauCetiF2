@@ -164,7 +164,6 @@ public:
 		inventoryBuildableBlocks.Empty();
 		inventoryBuildableBlocks << InventoryBlocks;
 	}
-	
 
 	FORCEINLINE void FillData(UInventoryTags* InventoryTags)
 	{
@@ -198,5 +197,4 @@ public:
 		inventoryTags >> result;
 		return result;
 	}
-
 };

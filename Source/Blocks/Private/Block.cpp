@@ -86,6 +86,27 @@ UPrimitiveComponent* ABlock::GetComponentForObjectOutline_Implementation() {
 
 void ABlock::UpdateBlockOnConstruction_Implementation(UBlockDefinition* BlockDef)
 {
+	auto oxygenBlock = Cast<UOxygenComponent>(GetComponentByClass(UOxygenComponent::StaticClass()));
+	if (oxygenBlock)
+	{
+		check(BlockDef->HasOxygenComponent);	// musíme mít definici
+		oxygenBlock->SetDefinition(BlockDef->OxygenComponentDef);
+	}
+	else
+	{
+		check(!BlockDef->HasOxygenComponent);	// nemáme komponentu -> nesmíme mít definici
+	}
+
+	auto electricityBlock = Cast<UElectricityComponent>(GetComponentByClass(UElectricityComponent::StaticClass()));
+	if (electricityBlock)
+	{
+		check(BlockDef->HasElectricityComponent);	// musíme mít definici
+		electricityBlock->SetDefinition(BlockDef->ElectricityComponentDef);
+	}
+	else
+	{
+		check(!BlockDef->HasElectricityComponent);	// nemáme komponentu -> nesmíme mít definici
+	}
 }
 
 FVector ABlock::GetBlockScale()

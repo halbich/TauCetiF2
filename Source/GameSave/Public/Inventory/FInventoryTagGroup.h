@@ -21,7 +21,6 @@ public:
 	FORCEINLINE void Empty() {
 		GroupName.Empty();
 
-
 		for (auto tg : GroupList)
 			tg.Empty();
 

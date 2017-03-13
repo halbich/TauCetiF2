@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Components/OxygenComponent.h"
@@ -18,6 +16,5 @@ class BLOCKS_API IBlockWithOxygen
 
 public:
 
-	void SetupComponentData();
-
+	//void SetupComponentData();
 };

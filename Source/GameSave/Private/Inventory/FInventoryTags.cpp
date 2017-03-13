@@ -3,5 +3,4 @@
 
 FInventoryTags::FInventoryTags() : CurrentActiveIndex(0), InventoryGroupList()
 {
-	
 }

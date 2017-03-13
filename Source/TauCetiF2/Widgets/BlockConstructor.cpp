@@ -30,14 +30,12 @@ bool UBlockConstructor::AddItemToInventory(UBuildableBlockInfo* buildable, TArra
 		return false;
 	}
 
-
 	auto bc = buildable->GetCopy();
 	AddImplicitTags(bc);
 	tcf2Char->GetInventory()->AddItem(bc);
 
 	return true;
 }
-
 
 TArray<UBuildableBlockInfo*> UBlockConstructor::GetAllBuildableBlocks()
 {

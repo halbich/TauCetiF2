@@ -98,7 +98,6 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	selector->IsUsableAllowed = currentBuildableBlockInfo->BlockDefinition->AllowUsable;
 	selector->SetOutlining(currentBuildableBlockInfo->AllowOutlineOnSelected, currentBuildableBlockInfo->StencilOverride);
 
-
 	if (currentBuildableBlockInfo->Action == EBuildableObjectAction::None)
 		return;
 
@@ -108,7 +107,6 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 
 	if (!currentDefinitionForBlock)
 		return;
-
 
 	auto defRot = currentBuildableBlockInfo->BlockDefinition->DefaultBuildingRotation;
 	auto curRot = character->GetActorTransform().GetRotation().Rotator().GridSnap(GameDefinitions::WorldGrid);

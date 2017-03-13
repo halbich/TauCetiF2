@@ -1,5 +1,3 @@
-
-
 #pragma once
 #include "Components/ElectricityComponent.h"
 
@@ -16,6 +14,4 @@ class BLOCKS_API IBlockWithElectricity
 	GENERATED_IINTERFACE_BODY()
 
 public:
-
-
 };

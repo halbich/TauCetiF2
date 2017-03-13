@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "Object.h"
 #include "BlockSaveInfo.h"
 #include "Blocks/Public/Info/BlockBaseInfo.h"
@@ -19,7 +17,6 @@
 #include "BlockComponents/OxygenComponentInfo.h"
 #include "Blocks/Public/Info/Components/BlockWithElectricityInfo.h"
 #include "BlockComponents/ElectricityComponentInfo.h"
-
 
 #include "SaveHelpers.generated.h"
 
@@ -43,7 +40,6 @@ public:
 
 		return FString::Printf(TEXT("%s_%s"), *name, *date);
 	}
-
 
 private:
 	FORCEINLINE static void FromBaseContainer(UBlockBaseInfo* info, const FBlockBaseInfo& block) {
@@ -75,7 +71,7 @@ private:
 	}
 
 public:
-	 static void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
+	static void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
 		FromBaseContainer(info, block);
 		info->Location = block.Location;
 		info->Rotation = block.Rotation;
@@ -91,10 +87,9 @@ public:
 			info->ElectricityInfo = NewObject<UBlockWithElectricityInfo>();
 			FromContainer(info->ElectricityInfo, block.ElectricityInfo);
 		}
-
 	}
 
-	 static void ToContainer(FBlockInfo& block, const UBlockInfo* info) {
+	static void ToContainer(FBlockInfo& block, const UBlockInfo* info) {
 		ToBaseContainer(block, info);
 		block.Location = info->Location;
 		block.Rotation = info->Rotation;
@@ -131,7 +126,6 @@ public:
 		ToContainer(block, info);
 		block.Tags = info->Tags;
 	}
-	
 
 private:
 	FORCEINLINE static void FromContainer(UTagGroup* grp, const FTagGroup& group) {
@@ -217,7 +211,6 @@ FORCEINLINE TArray<FInventoryBuildableBlockInfo>& operator >> (TArray<FInventory
 		auto NewItem = NewObject<UBuildableBlockInfo>();
 		USaveHelpers::FromContainer(NewItem, block);
 
-		
 		blockObjectArray.Add(NewItem);
 	}
 	return blockArray;
@@ -236,12 +229,10 @@ FORCEINLINE TArray<FInventoryBuildableItemBlockInfo>& operator >> (TArray<FInven
 		auto NewItem = NewObject<UInventoryBuildableBlockInfo>();
 		USaveHelpers::FromInventoryContainer(NewItem, block);
 
-
 		blockObjectArray.Add(NewItem);
 	}
 	return blockArray;
 }
-
 
 #pragma endregion
 
@@ -285,7 +276,5 @@ FORCEINLINE TArray<FInventoryBuildableItemBlockInfo>& operator<<(TArray<FInvento
 	}
 	return blockArray;
 }
-
-
 
 #pragma endregion

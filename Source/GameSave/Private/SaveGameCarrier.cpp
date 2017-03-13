@@ -15,7 +15,7 @@ USaveGameCarrier::USaveGameCarrier() {
 	usedBlocks = TArray<FBlockInfo>();
 	buildableBlocks = TArray<FInventoryBuildableBlockInfo>();
 	inventoryBuildableBlocks = TArray<FInventoryBuildableItemBlockInfo>();
-	
+
 	inventoryTags = FInventoryTags();
 }
 
@@ -23,7 +23,7 @@ USaveGameCarrier::~USaveGameCarrier() {
 	usedBlocks.Empty();
 	buildableBlocks.Empty();
 	inventoryBuildableBlocks.Empty();
-	
+
 	inventoryTags.Empty();
 }
 
@@ -34,7 +34,6 @@ USaveGameCarrier* USaveGameCarrier::GetEmptyCarrier()
 
 USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier(TArray<FText>& errorList)
 {
-
 	auto saves = USaveHelpers::GetAllSaveGameSlots();
 	bool hasQuickSave = false;
 	for (auto save : GetSaveGameInfoList(errorList))

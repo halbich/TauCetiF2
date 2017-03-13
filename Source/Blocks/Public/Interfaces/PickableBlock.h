@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Block.h"
@@ -7,8 +5,6 @@
 
 DECLARE_DELEGATE_OneParam(FPickupItemDelegate, ABlock*);
 DECLARE_EVENT_OneParam(IPickableBlock, FPickupItemEvent, ABlock*);
-
-
 
 UINTERFACE(BlueprintType)
 class BLOCKS_API UPickableBlock : public UInterface
@@ -30,7 +26,6 @@ public:
 		MyPickupItemEvent = FPickupItemEvent();
 	};
 
-
 	void OnPickup(ABlock* source);
 
 	FDelegateHandle AddPickupItemEventListener(FPickupItemDelegate& PickupItemDelegate);
@@ -38,4 +33,3 @@ public:
 private:
 	FPickupItemEvent MyPickupItemEvent;
 };
-

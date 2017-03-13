@@ -19,7 +19,6 @@ enum class EBlockType : uint8
 	Custom		UMETA(DisplayName = "Custom"),
 };
 
-
 UENUM(BlueprintType)
 enum class EInventoryGroupType : uint8
 {
@@ -63,7 +62,6 @@ enum class ENamedHardcodedLevel : uint8
 	EmptyLevel,
 	HardcodedLevelsMax
 };
-
 
 UENUM(BlueprintType)
 enum class EApplyScaleToMaterialParam : uint8

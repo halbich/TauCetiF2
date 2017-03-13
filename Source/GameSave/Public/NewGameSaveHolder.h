@@ -7,8 +7,6 @@
 #include "Inventory/Public/InventoryTags.h"
 #include "NewGameSaveHolder.generated.h"
 
-
-
 /**
  *
  */

@@ -8,7 +8,6 @@
  */
 struct TAUCETIF2_API BlockHelpers1
 {
-
 	static UMinMaxBox* GetSpawnBox(const UBlockDefinition* definition, const UBlockInfo* blockInfo)
 	{
 		auto objectScale = definition->GetObjectScale(blockInfo->Scale).GridSnap(1);
@@ -16,6 +15,4 @@ struct TAUCETIF2_API BlockHelpers1
 		auto scaleHalf = blockInfo->Rotation.RotateVector(objectScale) * GameDefinitions::CubeMinSize* 0.5;
 		return NewObject<UMinMaxBox>()->InitBoxChecked((spawnCoord - scaleHalf).GridSnap(GameDefinitions::CubeMinSizeHalf), (spawnCoord + scaleHalf).GridSnap(GameDefinitions::CubeMinSizeHalf));
 	}
-	
 };
-

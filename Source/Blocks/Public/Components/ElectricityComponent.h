@@ -1,34 +1,29 @@
-
-
 #pragma once
 
 #include "Components/ActorComponent.h"
 #include "Info/Components/BlockWithElectricityInfo.h"
+#include "Definitions/ElectricityComponentDefinition.h"
 #include "ElectricityComponent.generated.h"
 
-
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API UElectricityComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UElectricityComponent();
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+private:
+	UPROPERTY(Transient)
 		UBlockWithElectricityInfo* ElectricityInfo;
+
+	UPROPERTY(Transient)
+		FElectricityComponentDefinition ElectricityComponentDef;
+
+public:
 
 	UBlockWithElectricityInfo* SetInfo(UBlockWithElectricityInfo* info);
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-		
-	
+	void SetDefinition(FElectricityComponentDefinition def);
 };

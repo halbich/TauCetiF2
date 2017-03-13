@@ -126,7 +126,6 @@ void USelectorComponent::TryUse(bool isSpecialUse) {
 	SelectedBlock->SelectTargetComponent->OnUse(owner, isSpecialUse);
 }
 
-
 void USelectorComponent::SetOutlining(bool enableOutlining, int32 outlineStencilValue)
 {
 	StencilValue = outlineStencilValue;

@@ -45,7 +45,6 @@ ATauCetiF2Character::ATauCetiF2Character()
 	Builder = CreateDefaultSubobject<UBuilderComponent>(TEXT("Builder"));
 	Builder->selector = Selector;
 
-
 	OxygenComponent = CreateDefaultSubobject<UOxygenComponent>(TEXT("OxygenComponent"));
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 

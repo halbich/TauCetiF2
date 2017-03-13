@@ -5,7 +5,6 @@
 #include "BlockComponents/BlockComponentsArchiveHelpers.h"
 #include "Inventory/InventoryArchiveHelpers.h"
 
-
 FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockBaseInfo& block)
 {
 	Ar << block.ID;
@@ -20,7 +19,7 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo& block)
 	Ar << (FBlockBaseInfo&)block;
 	Ar << block.Location;
 	Ar << block.Rotation;
-	
+
 	Ar << block.HasOxygenData;
 	if (block.HasOxygenData)
 		Ar << block.OxygenInfo;
@@ -28,7 +27,7 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo& block)
 	Ar << block.HasElectricityData;
 	if (block.HasElectricityData)
 		Ar << block.ElectricityInfo;
-	
+
 	return Ar;
 }
 
@@ -44,4 +43,3 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FInventoryBuildableItemBlockInfo&
 	Ar << (FInventoryBuildableBlockInfo&)block;
 	return Ar;
 }
-

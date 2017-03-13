@@ -91,7 +91,7 @@ private:
 
 		if (oldVal != usableObjectTargeted)
 		{
-			if ( usableObjectTargeted)
+			if (usableObjectTargeted)
 				showUsableObjectOutline();
 			else
 				hideUsableObjectOutline();

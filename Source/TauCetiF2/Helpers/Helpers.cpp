@@ -4,8 +4,6 @@
 #include "FFileVisitor.h"
 #include "Helpers.h"
 
-
-
 bool UHelpers::ChangeLocalization(FString target)
 {
 	return FInternationalization::Get().SetCurrentCulture(target);
@@ -103,5 +101,4 @@ void UHelpers::GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, bool
 
 	Min = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MinBlockScale;
 	Max = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MaxBlockScale;
-
 }

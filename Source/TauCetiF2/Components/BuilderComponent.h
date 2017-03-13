@@ -62,8 +62,7 @@ public:
 
 	// TODO FORCEINLINE
 	void DoAction() {
-
-		if(!currentBuildableBlockInfo && selector->SelectedBlock)
+		if (!currentBuildableBlockInfo && selector->SelectedBlock)
 		{
 			selector->TryUse(true);
 			return;

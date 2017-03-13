@@ -44,9 +44,7 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 		auto ref = pickableDelegates.Find(object);
 		if (ref && ref->IsValid())
 			pickable->RemovePickupItemEventListener(*ref);
-
 	}
-
 
 	auto count = UsedBlocks.Remove(object->BlockInfo);
 	check(count == 1 && "Failed to remove block info.");
@@ -119,7 +117,6 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 		MinMax->ContainingObject = actor;
 		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
 
-
 		auto woc = NewObject<UWorldObjectComponent>(actor);
 		woc->Element = actor;
 		woc->UpdateDefiningBox(MinMax);
@@ -132,7 +129,6 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			check(usedBox->ContainingObject == actor && TEXT("Used box has another ContainingObject than it should have!"));
 		}
 
-
 		auto pickable = Cast<IPickableBlock>(actor);
 		if (pickable)
 		{
@@ -141,7 +137,6 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			auto ListeningHandle = pickable->AddPickupItemEventListener(Subscriber);
 
 			pickableDelegates.Add(actor, ListeningHandle);
-
 		}
 
 		//MinMax->DEBUGDrawContainingBox(GetWorld());
@@ -230,14 +225,11 @@ void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReasonType)
 			if (pickable)
 				pickable->RemovePickupItemEventListener(del.Value);
 		}
-
 	}
 
 	for (auto block : UsedBlocks)
 	{
 	}
-
-
 
 	Super::EndPlay(EndPlayReasonType);
 }
@@ -259,8 +251,6 @@ void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
 
 void AWorldController::onPickupItem(ABlock* pickingItem)
 {
-
-
 }
 
 #pragma optimize("", on)

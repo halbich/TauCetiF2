@@ -36,10 +36,8 @@ void  AOxygenTank::OnConstruction(const FTransform& Transform) {
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 }
 
-
 void AOxygenTank::ListeningOnUse(AActor* actor, bool isSpecial)
 {
-
 	print(TEXT("Getting Oxy tank!"));
 	OnPickup(this);
 }

@@ -1,34 +1,29 @@
-
-
 #pragma once
 
 #include "Components/ActorComponent.h"
 #include "Info/Components/BlockWithOxygenInfo.h"
+#include "Definitions/OxygenComponentDefinition.h"
 #include "OxygenComponent.generated.h"
 
-
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API UOxygenComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UOxygenComponent();
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+private:
+	UPROPERTY(Transient)
 		UBlockWithOxygenInfo* OxygenInfo;
+
+	UPROPERTY(Transient)
+		FOxygenComponentDefinition OxygenComponentDef;
+
+public:
 
 	UBlockWithOxygenInfo* SetInfo(UBlockWithOxygenInfo* info);
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-		
-	
+	void SetDefinition(FOxygenComponentDefinition def);
 };

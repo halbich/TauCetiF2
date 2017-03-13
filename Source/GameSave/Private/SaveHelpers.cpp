@@ -38,5 +38,3 @@ TArray<FString> USaveHelpers::GetAllSaveGameSlots()
 
 	return ret;
 }
-
-

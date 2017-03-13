@@ -20,8 +20,6 @@ void UWorldObjectComponent::BeginPlay()
 
 	ensure(Element);
 
-
-
 	if (Element->BlockInfo->UnderConstruction)
 		return;
 
@@ -71,7 +69,6 @@ void UWorldObjectComponent::BeginPlay()
 }
 
 #pragma optimize("",on)
-
 
 void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 {

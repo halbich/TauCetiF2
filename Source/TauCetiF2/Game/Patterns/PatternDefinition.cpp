@@ -27,7 +27,6 @@ void UPatternDefinition::InitData()
 
 		currentMin = FVector(FMath::Min(currentMin.X, spawnBox->Min.X), FMath::Min(currentMin.Y, spawnBox->Min.Y), FMath::Min(currentMin.Z, spawnBox->Min.Z));
 		currentMax = FVector(FMath::Max(currentMax.X, spawnBox->Max.X), FMath::Max(currentMax.Y, spawnBox->Max.Y), FMath::Max(currentMax.Z, spawnBox->Max.Z));*/
-
 	}
 
 	ensure(currentMin != currentMax && currentMin != FVector::ZeroVector);

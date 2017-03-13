@@ -1,5 +1,3 @@
-
-
 #include "Blocks.h"
 #include "BlockWithElectricity.h"
 

@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "UObject/NoExportTypes.h"
@@ -17,6 +15,4 @@ public:
 
 	UPROPERTY(Transient)
 		float CurrentFillingValue;
-
-
 };
