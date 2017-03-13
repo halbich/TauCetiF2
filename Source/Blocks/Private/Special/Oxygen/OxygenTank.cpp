@@ -29,7 +29,7 @@ void  AOxygenTank::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(500);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.PickupItem", "Vzít");
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.PickupItem", "Použít / Sebrat");
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &AOxygenTank::ListeningOnUse);

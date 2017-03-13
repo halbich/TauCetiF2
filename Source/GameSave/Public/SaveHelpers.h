@@ -228,7 +228,7 @@ FORCEINLINE TArray<FInventoryBuildableItemBlockInfo>& operator >> (TArray<FInven
 	{
 		auto NewItem = NewObject<UInventoryBuildableBlockInfo>();
 		USaveHelpers::FromInventoryContainer(NewItem, block);
-
+		NewItem->UpdateDisplayValue();
 		blockObjectArray.Add(NewItem);
 	}
 	return blockArray;

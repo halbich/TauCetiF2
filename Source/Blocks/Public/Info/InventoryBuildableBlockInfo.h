@@ -10,4 +10,10 @@ UCLASS()
 class BLOCKS_API UInventoryBuildableBlockInfo : public UBuildableBlockInfo
 {
 	GENERATED_BODY()
+
+public:
+
+	UInventoryBuildableBlockInfo();
+
+	virtual void UpdateDisplayValue();
 };
