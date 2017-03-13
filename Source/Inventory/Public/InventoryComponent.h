@@ -2,14 +2,14 @@
 
 #include "Components/ActorComponent.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
-#include "Inventory/Public/InventoryTags.h"
+#include "InventoryTags.h"
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "InventoryComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHudBuildableItemsChanged, bool, ShowGroupName);
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class TAUCETIF2_API UInventoryComponent : public UActorComponent
+class INVENTORY_API UInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
 

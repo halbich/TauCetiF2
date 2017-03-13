@@ -2,7 +2,7 @@
 #pragma once
 #include "GameFramework/Character.h"
 #include "Components/SelectorComponent.h"
-#include "Components/InventoryComponent.h"
+#include "Inventory/Public/InventoryComponent.h"
 #include "Components/BuilderComponent.h"
 #include "Game/TauCetiF2PlayerController.h"
 #include "TauCetiF2Character.generated.h"

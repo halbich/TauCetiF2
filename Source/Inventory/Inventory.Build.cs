@@ -4,7 +4,7 @@ public class Inventory : ModuleRules
 {
     public Inventory(TargetInfo Target)
     {
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "Commons" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "Commons", "Blocks", "GameSave" });
         PrivateDependencyModuleNames.AddRange(new string[] { "RenderCore" });
         PrivateDependencyModuleNames.AddRange(new string[] { "PakFile", "StreamingFile" });
 

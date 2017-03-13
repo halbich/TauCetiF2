@@ -1,4 +1,4 @@
-#include "TauCetiF2.h"
+#include "Inventory.h"
 #include "InventoryComponent.h"
 
 // Sets default values for this component's properties

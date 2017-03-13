@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Widgets/ObjectWidget.h"
-#include "Components/InventoryComponent.h"
+#include "Inventory/Public/InventoryComponent.h"
 #include "Inventory/Public/InventoryTags.h"
 #include "InventoryScreen.generated.h"
 
