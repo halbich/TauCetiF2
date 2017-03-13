@@ -22,7 +22,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenComponent")
 		FOxygenComponentDefinition OxygenComponentDef;
 
-private:
 	void onComponentDataChanged();
 
 
@@ -34,6 +33,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenComponent")
 		bool ObtainAmount(float requested, float& actuallyObtained);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenComponent")
+		bool PutAmount(float aviable, float& actuallyPutted);
 
 public:
 	FORCEINLINE const FOxygenComponentDefinition* GetDefinition()

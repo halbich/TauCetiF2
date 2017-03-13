@@ -42,6 +42,8 @@ bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained)
 		return true;
 	}
 
+	check(OxygenInfo->CurrentFillingValue >= 0);
+
 	if (FMath::IsNearlyZero(OxygenInfo->CurrentFillingValue))
 	{
 		actuallyObtained = 0;
@@ -56,3 +58,27 @@ bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained)
 
 }
 
+bool UOxygenComponent::PutAmount(float aviable, float& actuallyPutted)
+{
+	if (FMath::IsNearlyZero(aviable))
+	{
+		actuallyPutted = 0;
+		return true;
+	}
+
+	auto aviableToFill = OxygenComponentDef.TotalObjectVolume - OxygenInfo->CurrentFillingValue;
+	check(aviableToFill >= 0);
+
+	if (FMath::IsNearlyZero(aviableToFill))
+	{
+		actuallyPutted = 0;
+		return false;
+	}
+
+	actuallyPutted = FMath::Min(aviable, aviableToFill);
+
+	OxygenInfo->CurrentFillingValue += actuallyPutted;
+	onComponentDataChanged();
+	return true;
+
+}

@@ -36,18 +36,39 @@ void  AOxygenTank::OnConstruction(const FTransform& Transform) {
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 
 	OxygenComponent->OnComponentDataChangedEvent.AddDynamic(this, &AOxygenTank::ListeningOnOxygenCompChanged);
-
+	OxygenComponent->onComponentDataChanged();
 }
 
 void AOxygenTank::ListeningOnUse(AActor* actor, bool isSpecial)
 {
+	if (!actor || !actor->IsValidLowLevel())
+		return;
+
 	print(TEXT("using Oxy tank!"));
 
 	if (!isSpecial)
 		IPickableBlock::OnPickup(this);
 
 	if (isSpecial)
-		print(TEXT("Deplenishing Oxy tank!"));
+	{
+		auto actorOxygen = Cast<UOxygenComponent>(actor->GetComponentByClass(UOxygenComponent::StaticClass()));
+		if (!actorOxygen)
+			return;
+
+		if (FMath::IsNearlyZero(OxygenComponent->OxygenInfo->CurrentFillingValue))		// nemáme z èeho bychom brali
+			return;
+
+		float actuallyPutted = 0.0f;
+		float actuallyObtained = 0.0f;
+		bool obtainResult = false;
+		if (actorOxygen->PutAmount(OxygenComponent->OxygenInfo->CurrentFillingValue, actuallyPutted))
+		{
+			obtainResult = OxygenComponent->ObtainAmount(actuallyPutted, actuallyObtained);
+
+			check(obtainResult && FMath::IsNearlyZero(actuallyObtained - actuallyPutted));
+		}
+
+	}
 	else
 		print(TEXT("Getting Oxy tank!"));
 }
