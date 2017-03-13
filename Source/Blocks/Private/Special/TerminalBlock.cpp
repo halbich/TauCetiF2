@@ -33,6 +33,12 @@ void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 {
 	//TODO Localization!
 	print(TEXT("using terminal!"));
+
+	if (isSpecial)
+		print(TEXT("Special"));
+	else
+		print(TEXT("not so Special"));
+
 }
 
 void ATerminalBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)

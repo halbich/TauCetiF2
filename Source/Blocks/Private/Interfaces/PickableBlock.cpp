@@ -20,3 +20,4 @@ void IPickableBlock::RemovePickupItemEventListener(FDelegateHandle DelegateHandl
 {
 	MyPickupItemEvent.Remove(DelegateHandle);
 }
+

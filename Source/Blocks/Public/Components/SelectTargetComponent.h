@@ -50,7 +50,7 @@ public:
 
 	virtual void DeselectUsableObject();
 
-	void OnUse(AActor* selectingActor, bool isSpecial);
+	void OnUse(AActor* selectingActor, bool isSpecial = false);
 
 	FORCEINLINE void EnableSelect(UPrimitiveComponent* comp)
 	{

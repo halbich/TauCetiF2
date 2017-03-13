@@ -251,6 +251,7 @@ void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
 
 void AWorldController::onPickupItem(ABlock* pickingItem)
 {
+	DestroyWorldObject(pickingItem);
 }
 
 #pragma optimize("", on)

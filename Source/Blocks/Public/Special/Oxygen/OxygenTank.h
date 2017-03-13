@@ -33,7 +33,10 @@ public:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	FDelegateHandle ListeningHandle;
+	FDelegateHandle OxygenDataChangedHandle;
 
 private:
 	void ListeningOnUse(AActor* actor, bool isSpecial);
+	void ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source);
 };
+

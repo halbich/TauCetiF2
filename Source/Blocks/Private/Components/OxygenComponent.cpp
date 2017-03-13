@@ -10,12 +10,17 @@ UOxygenComponent::UOxygenComponent()
 	// ...
 }
 
+void UOxygenComponent::BeginPlay()
+{
+	onComponentDataChanged();
+	Super::BeginPlay();
+}
+
 UBlockWithOxygenInfo* UOxygenComponent::SetInfo(UBlockWithOxygenInfo* info)
 {
 	if (!info || !info->IsValidLowLevel())
 	{
 		info = NewObject<UBlockWithOxygenInfo>();
-		info->CurrentFillingValue = FMath::FRandRange(0, OxygenComponentDef.TotalObjectVolume); // TODO remove me!
 	}
 
 	OxygenInfo = info;
@@ -25,4 +30,20 @@ UBlockWithOxygenInfo* UOxygenComponent::SetInfo(UBlockWithOxygenInfo* info)
 void UOxygenComponent::SetDefinition(FOxygenComponentDefinition def)
 {
 	OxygenComponentDef = def;
+}
+
+void UOxygenComponent::onComponentDataChanged()
+{
+	if (OxygenInfo)
+		MyComponentDataChangedEvent.Broadcast(OxygenInfo);
+}
+
+FDelegateHandle UOxygenComponent::AddEventListener(FOxygenComponentDataChangedDelegate& dataChangedDelegate)
+{
+	return MyComponentDataChangedEvent.Add(dataChangedDelegate);
+}
+
+void UOxygenComponent::RemoveEventListener(FDelegateHandle DelegateHandle)
+{
+	MyComponentDataChangedEvent.Remove(DelegateHandle);
 }

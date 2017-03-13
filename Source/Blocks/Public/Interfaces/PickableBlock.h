@@ -30,6 +30,6 @@ public:
 
 	FDelegateHandle AddPickupItemEventListener(FPickupItemDelegate& PickupItemDelegate);
 	void RemovePickupItemEventListener(FDelegateHandle DelegateHandle);
-private:
+protected :
 	FPickupItemEvent MyPickupItemEvent;
 };

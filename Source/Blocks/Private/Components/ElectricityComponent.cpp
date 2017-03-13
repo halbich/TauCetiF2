@@ -26,3 +26,19 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def)
 {
 	ElectricityComponentDef = def;
 }
+
+
+void UElectricityComponent::OnComponentDataChanged()
+{
+	MyComponentDataChangedEvent.Broadcast(ElectricityInfo);
+}
+
+FDelegateHandle UElectricityComponent::AddEventListener(FElectricityComponentDataChangedDelegate& dataChangedDelegate)
+{
+	return MyComponentDataChangedEvent.Add(dataChangedDelegate);
+}
+
+void UElectricityComponent::RemoveEventListener(FDelegateHandle DelegateHandle)
+{
+	MyComponentDataChangedEvent.Remove(DelegateHandle);
+}

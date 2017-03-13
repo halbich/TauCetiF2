@@ -5,6 +5,10 @@
 #include "Definitions/OxygenComponentDefinition.h"
 #include "OxygenComponent.generated.h"
 
+
+DECLARE_DELEGATE_OneParam(FOxygenComponentDataChangedDelegate, UBlockWithOxygenInfo*);
+DECLARE_EVENT_OneParam(UOxygenComponent, FOxygenComponentDataChangedEvent, UBlockWithOxygenInfo*);
+
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API UOxygenComponent : public UActorComponent
 {
@@ -21,9 +25,28 @@ private:
 	UPROPERTY(Transient)
 		FOxygenComponentDefinition OxygenComponentDef;
 
+	void onComponentDataChanged();
+
+protected:
+
+	void BeginPlay();
+		 
+
 public:
 
 	UBlockWithOxygenInfo* SetInfo(UBlockWithOxygenInfo* info);
 
 	void SetDefinition(FOxygenComponentDefinition def);
+
+public:
+	FDelegateHandle AddEventListener(FOxygenComponentDataChangedDelegate& dataChangedDelegate);
+	void RemoveEventListener(FDelegateHandle DelegateHandle);
+
+	FORCEINLINE const FOxygenComponentDefinition* GetDefinition()
+	{
+		return &OxygenComponentDef;
+	}
+
+private:
+	FOxygenComponentDataChangedEvent MyComponentDataChangedEvent;
 };
