@@ -29,7 +29,7 @@ void  AEnergyBlobBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(500);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.PickupItem", "Vzít");
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.EnergyBlobBlock.PickupItem", "Vzít");
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &AEnergyBlobBlock::ListeningOnUse);
