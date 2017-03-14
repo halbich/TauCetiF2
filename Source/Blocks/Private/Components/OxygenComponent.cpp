@@ -14,9 +14,7 @@ UOxygenComponent::UOxygenComponent()
 UBlockWithOxygenInfo* UOxygenComponent::SetInfo(UBlockWithOxygenInfo* info)
 {
 	if (!info || !info->IsValidLowLevel())
-	{
 		info = NewObject<UBlockWithOxygenInfo>();
-	}
 
 	OxygenInfo = info;
 	onComponentDataChanged();
@@ -34,7 +32,7 @@ void UOxygenComponent::onComponentDataChanged()
 		OnComponentDataChangedEvent.Broadcast(OxygenInfo);
 }
 
-bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained)
+bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained, bool requireExact)
 {
 	if (FMath::IsNearlyZero(requested))
 	{
@@ -51,6 +49,12 @@ bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained)
 	}
 
 	actuallyObtained = FMath::Min(requested, OxygenInfo->CurrentFillingValue);
+
+	if (requireExact && !FMath::IsNearlyZero(requested - actuallyObtained))
+	{
+		actuallyObtained = 0;
+		return false;
+	}
 
 	OxygenInfo->CurrentFillingValue -= actuallyObtained;
 	onComponentDataChanged();

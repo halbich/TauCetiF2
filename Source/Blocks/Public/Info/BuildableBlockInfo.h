@@ -42,7 +42,7 @@ public:
 
 	bool ValidateObject(TArray<FText>& validationErrors);
 
-	void DefinitionSet();
+	virtual void DefinitionSet();
 
 	static UBuildableBlockInfo* GetBuildable(UBlockDefinition* def);
 

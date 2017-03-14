@@ -19,10 +19,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient)
 		UBlockWithElectricityInfo* ElectricityInfo;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenComponent")
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
 		FElectricityComponentDefinition ElectricityComponentDef;
 
-private:
 	void onComponentDataChanged();
 
 public:
@@ -30,6 +29,12 @@ public:
 	UBlockWithElectricityInfo* SetInfo(UBlockWithElectricityInfo* info);
 
 	void SetDefinition(FElectricityComponentDefinition def);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | ElectricityComponent")
+		bool ObtainAmount(float requested, float& actuallyObtained, bool requireExact = false);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | ElectricityComponent")
+		bool PutAmount(float aviable, float& actuallyPutted);
 
 public:
 	FORCEINLINE const FElectricityComponentDefinition* GetDefinition()

@@ -7,6 +7,7 @@
 #include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
 #include "World/WorldController.h"
 #include "Blocks/Public/Components/BlockHolderComponent.h"
+#include "Blocks/Public/Components/ElectricityComponent.h"
 #include "Helpers/BlockHelpers.h"
 #include "BuilderComponent.generated.h"
 
@@ -42,6 +43,9 @@ public:
 
 	UPROPERTY(Transient)
 		bool ForceRecomputePosition;
+
+	UPROPERTY(Transient)
+		UElectricityComponent* BuilderElectricityComponent;
 
 	UPROPERTY(Transient)
 		ACharacter* character;
@@ -86,14 +90,15 @@ public:
 			if (!selector->SelectedBlock)
 				return;
 
-			if (worldController->DestroyWorldObject(selector->SelectedBlock))
-				print(TEXT("TODO! deletion seccessfull")); // TODO Localization!
+			worldController->DestroyWorldObject(selector->SelectedBlock);
 
 			return;
 		case EBuildableObjectAction::ConstructObject:
 
 			if (!currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
 				return;
+
+
 
 			auto spawnBox = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 			if (!worldController->IsValidSpawnPoint(spawnBox))
@@ -107,31 +112,36 @@ public:
 			auto charBox = FBox::BuildAABB(origin, extent);
 
 			if (!(box.Overlap(charBox) == 0))
-			{
-				print(TEXT("overlap")); // TODO Localization!
 				return;
-			}
 
 			auto spawnBlock = NewObject<UBlockInfo>(this, NAME_None, RF_NoFlags, currentBlockInfo);
 
 			spawnBlock->UnderConstruction = false;
 
-			if (worldController->IsValidSpawnPoint(BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
+			if (!worldController->IsValidSpawnPoint(BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
+				return;
+
+			if (currentBuildableBlockInfo->IsA(UInventoryBuildableBlockInfo::StaticClass()))
 			{
-				if (currentBuildableBlockInfo->IsA(UInventoryBuildableBlockInfo::StaticClass()))
-				{
-					auto temp = Cast<UInventoryBuildableBlockInfo>(currentBuildableBlockInfo);
-					spawnBlock->ElectricityInfo = temp->ElectricityInfo;
-					spawnBlock->OxygenInfo = temp->OxygenInfo;
-					print("BuildItem!!!");
-				}
-
-				worldController->SpawnWorldObject(GetWorld(), spawnBlock, true);
+				auto temp = Cast<UInventoryBuildableBlockInfo>(currentBuildableBlockInfo);
+				spawnBlock->ElectricityInfo = temp->ElectricityInfo;
+				spawnBlock->OxygenInfo = temp->OxygenInfo;
 			}
-			else
-				print(TEXT("Invalid location")); // TODO Localization!
 
-			return;
+			// kontrola, zda opravdu mùžeme postavit
+			if (!BuilderElectricityComponent || !BuilderElectricityComponent->IsValidLowLevel())
+				BuilderElectricityComponent = Cast<UElectricityComponent>(character->GetComponentByClass(UElectricityComponent::StaticClass()));
+
+			check(BuilderElectricityComponent);
+
+			float actuallyObtainedEnergy = 0.0f;
+			if (BuilderElectricityComponent->ObtainAmount(currentBuildableBlockInfo->BuildingEnergyRequired, actuallyObtainedEnergy, true))
+			{
+				float actuallyReturnedEnergy = 0.0f;
+				if (!worldController->SpawnWorldObject(GetWorld(), spawnBlock, true))
+					BuilderElectricityComponent->PutAmount(actuallyObtainedEnergy, actuallyReturnedEnergy);
+
+			}
 		}
 	}
 
@@ -144,7 +154,6 @@ public:
 		auto gr = grid.Add(90, 0, 0);
 		auto rotator = character->GetControlRotation().GridSnap(gr);
 
-		print(*rotator.ToString());
 		auto desiredRotation = rotator.UnrotateVector(FVector(Pitch, Roll, Yaw));
 
 		currentBlockInfo->Rotation = (FQuat(FRotator(desiredRotation.X, desiredRotation.Z, desiredRotation.Y)) *  FQuat(currentBlockInfo->Rotation)).Rotator();

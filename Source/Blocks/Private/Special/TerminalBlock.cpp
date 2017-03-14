@@ -7,8 +7,10 @@ ATerminalBlock::ATerminalBlock()
 	PrimaryActorTick.bCanEverTick = false;
 
 	TerminalBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TerminalBlockMesh"));
-
 	TerminalBlockMesh->SetupAttachment(GetRootComponent());
+
+	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
+	AddOwnedComponent(ElectricityComponent);
 }
 
 UStaticMeshComponent* ATerminalBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -23,6 +25,7 @@ void  ATerminalBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(400);
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.UseTerminal", "Použít / Otevøít");
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ATerminalBlock::ListeningOnUse);
@@ -31,13 +34,27 @@ void  ATerminalBlock::OnConstruction(const FTransform& Transform) {
 
 void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 {
-	//TODO Localization!
-	print(TEXT("using terminal!"));
+	if (!actor || !actor->IsValidLowLevel())
+		return;
 
-	if (isSpecial)
-		print(TEXT("Special"));
-	else
-		print(TEXT("not so Special"));
+	if (!isSpecial)
+		return;		// TODO
+
+	auto actorElectricity = Cast<UElectricityComponent>(actor->GetComponentByClass(UElectricityComponent::StaticClass()));
+	if (!actorElectricity)
+		return;
+
+	if (FMath::IsNearlyZero(ElectricityComponent->ElectricityInfo->CurrentObjectEnergy))		// nemáme z èeho bychom brali
+		return;
+
+	float actuallyPutted = 0.0f;
+	float actuallyObtained = 0.0f;
+	bool obtainResult = false;
+	if (actorElectricity->PutAmount(ElectricityComponent->ElectricityInfo->CurrentObjectEnergy, actuallyPutted))
+	{
+		obtainResult = ElectricityComponent->ObtainAmount(actuallyPutted, actuallyObtained);
+		check(obtainResult && FMath::IsNearlyZero(actuallyObtained - actuallyPutted));
+	}
 
 }
 

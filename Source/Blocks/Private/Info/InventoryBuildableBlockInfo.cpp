@@ -21,3 +21,9 @@ void UInventoryBuildableBlockInfo::UpdateDisplayValue()
 		DisplayValueName = NSLOCTEXT("TCF2LocSpace", "LC.UInventoryBuildableBlockInfo.ElectricityDisplayName", "Obsah energie:");
 	}
 }
+
+void UInventoryBuildableBlockInfo::DefinitionSet()
+{
+	Super::DefinitionSet();
+	BuildingEnergyRequired = 0.0f;
+}

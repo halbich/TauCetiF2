@@ -28,12 +28,9 @@ void UMinMaxTree::Insert(UMinMaxTree* other)
 	if (GtMin(other->Min) && LtMax(other->Max))
 	{
 		// other is fully in my box
-		//print(TEXT("fully in me"));
 		AppendChildren(other);
 		return;
 	}
-
-	//print(TEXT("MustExtend"));
 
 	auto tmin = FVector(FMath::Min(Min.X, other->Min.X), FMath::Min(Min.Y, other->Min.Y), FMath::Min(Min.Z, other->Min.Z));
 	auto tmax = FVector(FMath::Max(Max.X, other->Max.X), FMath::Max(Max.Y, other->Max.Y), FMath::Max(Max.Z, other->Max.Z));
@@ -54,7 +51,6 @@ void UMinMaxTree::ChildrenDeleted()
 		if (child && child->IsValidLowLevel() && !child->IsPendingKill())
 		{
 			newChildren.Add(child);
-			//print(TEXT("Child"));
 			if (currentMin == currentMax && currentMin == FVector::ZeroVector)
 			{
 				currentMin = child->Min;

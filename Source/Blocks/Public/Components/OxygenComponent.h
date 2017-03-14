@@ -24,7 +24,6 @@ public:
 
 	void onComponentDataChanged();
 
-
 public:
 
 	UBlockWithOxygenInfo* SetInfo(UBlockWithOxygenInfo* info);
@@ -32,7 +31,7 @@ public:
 	void SetDefinition(FOxygenComponentDefinition def);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenComponent")
-		bool ObtainAmount(float requested, float& actuallyObtained);
+		bool ObtainAmount(float requested, float& actuallyObtained, bool requireExact = false);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenComponent")
 		bool PutAmount(float aviable, float& actuallyPutted);

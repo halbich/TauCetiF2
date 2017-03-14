@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Block.h"
+#include "Components/ElectricityComponent.h"
+#include "BlockWithElectricity.h"
 #include "TerminalBlock.generated.h"
 
 /**
@@ -16,6 +18,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | TerminalBlock")
 		UStaticMeshComponent* TerminalBlockMesh;
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | TerminalBlock", meta = (AllowPrivateAcces = "true"))
+		UElectricityComponent* ElectricityComponent;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 

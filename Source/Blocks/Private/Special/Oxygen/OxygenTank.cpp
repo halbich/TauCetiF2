@@ -44,39 +44,28 @@ void AOxygenTank::ListeningOnUse(AActor* actor, bool isSpecial)
 	if (!actor || !actor->IsValidLowLevel())
 		return;
 
-	print(TEXT("using Oxy tank!"));
-
 	if (!isSpecial)
 		IPickableBlock::OnPickup(this);
 
-	if (isSpecial)
+	auto actorOxygen = Cast<UOxygenComponent>(actor->GetComponentByClass(UOxygenComponent::StaticClass()));
+	if (!actorOxygen)
+		return;
+
+	if (FMath::IsNearlyZero(OxygenComponent->OxygenInfo->CurrentFillingValue))		// nemáme z èeho bychom brali
+		return;
+
+	float actuallyPutted = 0.0f;
+	float actuallyObtained = 0.0f;
+	bool obtainResult = false;
+	if (actorOxygen->PutAmount(OxygenComponent->OxygenInfo->CurrentFillingValue, actuallyPutted))
 	{
-		auto actorOxygen = Cast<UOxygenComponent>(actor->GetComponentByClass(UOxygenComponent::StaticClass()));
-		if (!actorOxygen)
-			return;
-
-		if (FMath::IsNearlyZero(OxygenComponent->OxygenInfo->CurrentFillingValue))		// nemáme z èeho bychom brali
-			return;
-
-		float actuallyPutted = 0.0f;
-		float actuallyObtained = 0.0f;
-		bool obtainResult = false;
-		if (actorOxygen->PutAmount(OxygenComponent->OxygenInfo->CurrentFillingValue, actuallyPutted))
-		{
-			obtainResult = OxygenComponent->ObtainAmount(actuallyPutted, actuallyObtained);
-
-			check(obtainResult && FMath::IsNearlyZero(actuallyObtained - actuallyPutted));
-		}
-
+		obtainResult = OxygenComponent->ObtainAmount(actuallyPutted, actuallyObtained);
+		check(obtainResult && FMath::IsNearlyZero(actuallyObtained - actuallyPutted));
 	}
-	else
-		print(TEXT("Getting Oxy tank!"));
 }
 
 void AOxygenTank::ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source)
 {
-	print(TEXT("data changed"));
-
 	auto mat = Cast<UMaterialInstanceDynamic>(OxygenTankMesh->GetMaterial(0));
 	if (!mat)
 		return;
@@ -85,11 +74,8 @@ void AOxygenTank::ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source)
 	if (!def)
 		return;
 
-
-
 	mat->SetScalarParameterValue(TEXT("Filling"), def->TotalObjectVolume > 0 ? source->CurrentFillingValue / def->TotalObjectVolume : 0.0f);
 }
-
 
 void AOxygenTank::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {

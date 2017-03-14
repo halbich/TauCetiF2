@@ -35,8 +35,6 @@ void UModalWidget::SetDesignationOK()
 
 void UModalWidget::OnEnterKey()
 {
-	print(TEXT("Modal enter key"));
-
 	if (IsButtonEnabled(EModalDialogResult::OK))
 	{
 		SetDecisionMade(EModalDialogResult::OK);

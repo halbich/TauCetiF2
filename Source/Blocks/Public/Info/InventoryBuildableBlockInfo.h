@@ -16,4 +16,6 @@ public:
 	UInventoryBuildableBlockInfo();
 
 	virtual void UpdateDisplayValue();
+
+	virtual void DefinitionSet() override;
 };
