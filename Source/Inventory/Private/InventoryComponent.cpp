@@ -150,6 +150,14 @@ void UInventoryComponent::AddItem(UBuildableBlockInfo* block)
 void UInventoryComponent::AddItem(UInventoryBuildableBlockInfo* block)
 {
 	block->DefinitionSet();
-	InventoryItems.Add(block);
+	InventoryItems.AddUnique(block);
 	ForceItemsChanged(false);
+}
+
+void UInventoryComponent::ItemBuilt(UInventoryBuildableBlockInfo* block)
+{
+	auto removed = InventoryItems.Remove(block);
+	check(removed == 1);
+	ForceItemsChanged(false);
+
 }

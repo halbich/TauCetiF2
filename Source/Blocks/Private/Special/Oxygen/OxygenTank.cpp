@@ -45,7 +45,10 @@ void AOxygenTank::ListeningOnUse(AActor* actor, bool isSpecial)
 		return;
 
 	if (!isSpecial)
+	{
 		IPickableBlock::OnPickup(this);
+		return;
+	}
 
 	auto actorOxygen = Cast<UOxygenComponent>(actor->GetComponentByClass(UOxygenComponent::StaticClass()));
 	if (!actorOxygen)

@@ -3,6 +3,7 @@
 #include "GameFramework/Character.h"
 #include "Components/ActorComponent.h"
 #include "Components/SelectorComponent.h"
+#include "Inventory/Public/InventoryComponent.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
 #include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
 #include "World/WorldController.h"
@@ -22,6 +23,9 @@ public:
 
 	UPROPERTY(Transient)
 		USelectorComponent* selector;
+
+	UPROPERTY(Transient)
+		UInventoryComponent* inventory;
 
 	UPROPERTY(Transient)
 		AWorldController* worldController;
@@ -121,11 +125,12 @@ public:
 			if (!worldController->IsValidSpawnPoint(BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
 				return;
 
+			UInventoryBuildableBlockInfo* invBuildable = nullptr;
 			if (currentBuildableBlockInfo->IsA(UInventoryBuildableBlockInfo::StaticClass()))
 			{
-				auto temp = Cast<UInventoryBuildableBlockInfo>(currentBuildableBlockInfo);
-				spawnBlock->ElectricityInfo = temp->ElectricityInfo;
-				spawnBlock->OxygenInfo = temp->OxygenInfo;
+				invBuildable = Cast<UInventoryBuildableBlockInfo>(currentBuildableBlockInfo);
+				spawnBlock->ElectricityInfo = invBuildable->ElectricityInfo;
+				spawnBlock->OxygenInfo = invBuildable->OxygenInfo;
 			}
 
 			// kontrola, zda opravdu mùžeme postavit
@@ -140,6 +145,11 @@ public:
 				float actuallyReturnedEnergy = 0.0f;
 				if (!worldController->SpawnWorldObject(GetWorld(), spawnBlock, true))
 					BuilderElectricityComponent->PutAmount(actuallyObtainedEnergy, actuallyReturnedEnergy);
+				else
+				{
+					if (invBuildable)
+						inventory->ItemBuilt(invBuildable);
+				}
 
 			}
 		}

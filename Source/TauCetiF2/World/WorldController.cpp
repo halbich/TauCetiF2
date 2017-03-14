@@ -252,11 +252,18 @@ void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
 void AWorldController::onPickupItem(ABlock* pickingItem)
 {
 
-	/*auto playerChar = Cast<ATauCetiF2Character>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	auto playerChar = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	if (!playerChar || !playerChar->IsValidLowLevel())
 		return;
-*/
-	DestroyWorldObject(pickingItem);
+
+	auto invComp = Cast<UInventoryComponent>(playerChar->GetComponentByClass(UInventoryComponent::StaticClass()));
+	if (!invComp || !invComp->IsValidLowLevel())
+		return;
+
+	auto invBuildable = UInventoryBuildableBlockInfo::GetInventoryBuildable(pickingItem->BlockInfo, pickingItem->Definition.GetDefaultObject());
+
+	if (DestroyWorldObject(pickingItem))
+		invComp->AddItem(invBuildable);
 }
 
 #pragma optimize("", on)

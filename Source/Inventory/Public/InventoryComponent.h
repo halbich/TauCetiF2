@@ -57,4 +57,7 @@ public:
 	void AddItem(UBuildableBlockInfo* block);
 
 	void AddItem(UInventoryBuildableBlockInfo* block);
+
+
+	void ItemBuilt(UInventoryBuildableBlockInfo* block);
 };

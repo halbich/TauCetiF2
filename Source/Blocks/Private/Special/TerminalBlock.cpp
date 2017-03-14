@@ -38,7 +38,10 @@ void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 		return;
 
 	if (!isSpecial)
-		return;		// TODO
+	{
+		// TODO
+		return;
+	}
 
 	auto actorElectricity = Cast<UElectricityComponent>(actor->GetComponentByClass(UElectricityComponent::StaticClass()));
 	if (!actorElectricity)

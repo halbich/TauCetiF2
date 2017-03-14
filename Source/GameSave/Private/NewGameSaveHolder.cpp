@@ -69,6 +69,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	USaveHelpers::ToContainer(c->inventoryTags, invTags);
 
 	c->buildableBlocks.Add(makeBuildable(EmptyHandID, FVector(1, 1, 1)));
+	c->inventoryBuildableBlocks.Add(makeInventoryBuildable(EmptyHandID, FVector(1, 1, 1)));
 	c->buildableBlocks.Add(makeBuildable(DeleteID, FVector(1, 1, 1)));
 
 	////TODO

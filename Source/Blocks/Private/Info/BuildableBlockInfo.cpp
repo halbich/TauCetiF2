@@ -67,6 +67,8 @@ UBuildableBlockInfo* UBuildableBlockInfo::GetBuildable(UBlockDefinition* def)
 	return res;
 }
 
+
+
 UBuildableBlockInfo* UBuildableBlockInfo::GetCopy()
 {
 	auto res = NewObject<UBuildableBlockInfo>();
@@ -76,7 +78,7 @@ UBuildableBlockInfo* UBuildableBlockInfo::GetCopy()
 	res->AdditionalFlags.Append(AdditionalFlags);
 	res->OxygenInfo = OxygenInfo;
 	res->ElectricityInfo = ElectricityInfo;
-	
+
 	res->Tags.Append(Tags);
 	res->Action = Action;
 	res->AllowOutlineOnSelected = AllowOutlineOnSelected;
