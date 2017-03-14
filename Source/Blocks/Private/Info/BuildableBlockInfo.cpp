@@ -21,6 +21,10 @@ void UBuildableBlockInfo::DefinitionSet()
 	}
 	default:
 		Action = EBuildableObjectAction::ConstructObject;
+		auto baseEnergyReq = BlockDefinition->EnergyReqiredToBuild * buildingCoeficient();
+		auto dimensions = BlockDefinition->HasCustomScaling ? FVector(1, 1, 1) : Scale;
+		BuildingEnergyRequired = baseEnergyReq * dimensions.X * dimensions.Y * dimensions.Z;
+
 		break;
 	}
 }

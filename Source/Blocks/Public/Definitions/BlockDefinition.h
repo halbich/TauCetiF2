@@ -91,6 +91,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		FRotator DefaultBuildingRotation;
 
+	// The result is equal: This value * Coeficient by type * HasCustomScaling ? (1*1*1) : Scale 
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
+		float EnergyReqiredToBuild;
+
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | OxygenComponent")
 		bool HasOxygenComponent;
 

@@ -142,13 +142,14 @@ void UInventoryComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 void UInventoryComponent::AddItem(UBuildableBlockInfo* block)
 {
+	block->DefinitionSet();
 	BuildableItems.Add(block);
 	ForceItemsChanged(false);
 }
 
 void UInventoryComponent::AddItem(UInventoryBuildableBlockInfo* block)
 {
-	//TODO TEST
+	block->DefinitionSet();
 	InventoryItems.Add(block);
 	ForceItemsChanged(false);
 }

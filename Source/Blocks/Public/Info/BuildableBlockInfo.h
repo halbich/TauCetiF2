@@ -9,7 +9,7 @@
 /**
  *
  */
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, BlueprintType)
 class BLOCKS_API UBuildableBlockInfo : public UBlockBaseInfo
 {
 	GENERATED_BODY()
@@ -34,6 +34,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
 		FText DisplayValue;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+		FText DisplayValueName;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+		float BuildingEnergyRequired;
+
 	bool ValidateObject(TArray<FText>& validationErrors);
 
 	void DefinitionSet();
@@ -41,4 +47,18 @@ public:
 	static UBuildableBlockInfo* GetBuildable(UBlockDefinition* def);
 
 	UBuildableBlockInfo* GetCopy();
+
+private:
+
+	FORCEINLINE float buildingCoeficient()
+	{
+		switch (BlockDefinition->ShapeType)
+		{
+		case EShapeType::Empty: return 1.0f;
+		case EShapeType::CubeBody: return 0.5f;
+		case EShapeType::CubeSide: return 0.333333f;
+
+		default: return 1.0f;
+		}
+	}
 };
