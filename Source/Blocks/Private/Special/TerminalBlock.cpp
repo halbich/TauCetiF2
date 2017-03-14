@@ -1,4 +1,4 @@
-#include "Blocks.h"
+ï»¿#include "Blocks.h"
 #include "TerminalBlock.h"
 
 ATerminalBlock::ATerminalBlock()
@@ -25,7 +25,7 @@ void  ATerminalBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(400);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.UseTerminal", "Použít / Otevøít");
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.UseTerminal", "PouÅ¾Ã­t / OtevÅ™Ã­t");
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ATerminalBlock::ListeningOnUse);
@@ -47,7 +47,7 @@ void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 	if (!actorElectricity)
 		return;
 
-	if (FMath::IsNearlyZero(ElectricityComponent->ElectricityInfo->CurrentObjectEnergy))		// nemáme z èeho bychom brali
+	if (FMath::IsNearlyZero(ElectricityComponent->ElectricityInfo->CurrentObjectEnergy))		// nemÃ¡me z Äeho bychom brali
 		return;
 
 	float actuallyPutted = 0.0f;
@@ -58,7 +58,6 @@ void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 		obtainResult = ElectricityComponent->ObtainAmount(actuallyPutted, actuallyObtained);
 		check(obtainResult && FMath::IsNearlyZero(actuallyObtained - actuallyPutted));
 	}
-
 }
 
 void ATerminalBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)

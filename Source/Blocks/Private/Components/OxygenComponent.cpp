@@ -1,4 +1,4 @@
-#include "Blocks.h"
+﻿#include "Blocks.h"
 #include "OxygenComponent.h"
 
 // Sets default values for this component's properties
@@ -9,7 +9,6 @@ UOxygenComponent::UOxygenComponent()
 	PrimaryComponentTick.bCanEverTick = false;
 	// ...
 }
-
 
 UBlockWithOxygenInfo* UOxygenComponent::SetInfo(UBlockWithOxygenInfo* info)
 {
@@ -59,7 +58,6 @@ bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained, bo
 	OxygenInfo->CurrentFillingValue -= actuallyObtained;
 	onComponentDataChanged();
 	return true;
-
 }
 
 bool UOxygenComponent::PutAmount(float aviable, float& actuallyPutted)
@@ -84,5 +82,4 @@ bool UOxygenComponent::PutAmount(float aviable, float& actuallyPutted)
 	OxygenInfo->CurrentFillingValue += actuallyPutted;
 	onComponentDataChanged();
 	return true;
-
 }

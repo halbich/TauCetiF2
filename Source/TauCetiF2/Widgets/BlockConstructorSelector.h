@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Widgets/SynchronizeWidget.h"
 #include "Widgets/Common/InventoryFlagItem.h"

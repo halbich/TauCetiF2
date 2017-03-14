@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "BlockBaseInfo.h"
 
@@ -21,6 +21,4 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
 		bool UnderConstruction;
-
-	
 };

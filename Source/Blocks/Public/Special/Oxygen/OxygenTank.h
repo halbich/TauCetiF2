@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Block.h"
 #include "PickableBlock.h"
@@ -42,4 +42,3 @@ protected:
 	UFUNCTION()
 		void ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source);
 };
-

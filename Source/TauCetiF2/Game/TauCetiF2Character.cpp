@@ -1,4 +1,4 @@
-// Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
+﻿// Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 #include "TauCetiF2.h"
 #include "TauCetiF2Character.h"
@@ -48,7 +48,6 @@ ATauCetiF2Character::ATauCetiF2Character()
 
 	OxygenComponent = CreateDefaultSubobject<UOxygenComponent>(TEXT("OxygenComponent"));
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
-
 
 	lastPitchWasZero = false;
 	lastRollWasZero = false;
@@ -227,7 +226,6 @@ void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
 
 	carrier->FillData(OxygenComponent->OxygenInfo);
 	carrier->FillData(ElectricityComponent->ElectricityInfo);
-
 }
 
 void ATauCetiF2Character::BecomeViewTarget(APlayerController* pc)
@@ -252,5 +250,4 @@ void ATauCetiF2Character::OnPrevInventoryBank()
 void ATauCetiF2Character::BeginPlay()
 {
 	Super::BeginPlay();
-
 }

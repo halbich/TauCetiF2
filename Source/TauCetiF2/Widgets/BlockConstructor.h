@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Widgets/TerminalBaseWidget.h"
 #include "Game/TauCetiF2Character.h"

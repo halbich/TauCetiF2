@@ -1,4 +1,4 @@
-#include "Blocks.h"
+﻿#include "Blocks.h"
 #include "BatteryBlock.h"
 
 ABatteryBlock::ABatteryBlock()

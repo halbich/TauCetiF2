@@ -1,4 +1,4 @@
-#include "Blocks.h"
+ï»¿#include "Blocks.h"
 #include "BuildableBlockInfo.h"
 
 UBuildableBlockInfo::UBuildableBlockInfo() : UBlockBaseInfo(), Action(EBuildableObjectAction::None), AllowOutlineOnSelected(true)
@@ -38,13 +38,13 @@ bool UBuildableBlockInfo::ValidateObject(TArray<FText>& validationErrors)
 
 	if (!definition)
 	{
-		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BuildableBlockInfo.No_Definition", "Blok s ID {0} má neplatnou definici."), ID));
+		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BuildableBlockInfo.No_Definition", "Blok s ID {0} mÃ¡ neplatnou definici."), ID));
 		return false;
 	}
 
 	if (!definition->IsInLimits(Scale))
 	{
-		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BuildableBlockInfo.Invalid_Dimensions", "Blok s ID {0} není v rozmezí platné velikosti. (Min: {1}, Max: {2}, Scale: {3})"), FText::AsNumber(ID), definition->MinBlockScale.ToText(), definition->MaxBlockScale.ToText(), (definition->HasCustomScaling ? definition->CustomBlockScale : Scale).ToText()));
+		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BuildableBlockInfo.Invalid_Dimensions", "Blok s ID {0} nenÃ­ v rozmezÃ­ platnÃ© velikosti. (Min: {1}, Max: {2}, Scale: {3})"), FText::AsNumber(ID), definition->MinBlockScale.ToText(), definition->MaxBlockScale.ToText(), (definition->HasCustomScaling ? definition->CustomBlockScale : Scale).ToText()));
 		return false;
 	}
 
@@ -67,8 +67,6 @@ UBuildableBlockInfo* UBuildableBlockInfo::GetBuildable(UBlockDefinition* def)
 	return res;
 }
 
-
-
 UBuildableBlockInfo* UBuildableBlockInfo::GetCopy()
 {
 	auto res = NewObject<UBuildableBlockInfo>();
@@ -85,7 +83,6 @@ UBuildableBlockInfo* UBuildableBlockInfo::GetCopy()
 	res->StencilOverride = StencilOverride;
 	res->BlockDefinition = BlockDefinition;
 	res->DisplayValue = DisplayValue;
-
 
 	return res;
 }

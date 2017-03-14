@@ -1,4 +1,4 @@
-#include "TauCetiF2.h"
+﻿#include "TauCetiF2.h"
 #include "ModalWidget.h"
 
 bool UModalWidget::IsButtonEnabled(const EModalDialogResult buttonWithResult)

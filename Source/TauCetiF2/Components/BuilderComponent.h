@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "GameFramework/Character.h"
 #include "Components/ActorComponent.h"
@@ -102,8 +102,6 @@ public:
 			if (!currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
 				return;
 
-
-
 			auto spawnBox = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 			if (!worldController->IsValidSpawnPoint(spawnBox))
 				return;
@@ -133,7 +131,7 @@ public:
 				spawnBlock->OxygenInfo = invBuildable->OxygenInfo;
 			}
 
-			// kontrola, zda opravdu mùžeme postavit
+			// kontrola, zda opravdu mÅ¯Å¾eme postavit
 			if (!BuilderElectricityComponent || !BuilderElectricityComponent->IsValidLowLevel())
 				BuilderElectricityComponent = Cast<UElectricityComponent>(character->GetComponentByClass(UElectricityComponent::StaticClass()));
 
@@ -150,7 +148,6 @@ public:
 					if (invBuildable)
 						inventory->ItemBuilt(invBuildable);
 				}
-
 			}
 		}
 	}

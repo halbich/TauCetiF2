@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Info/BuildableBlockInfo.h"
 #include "InventoryBuildableBlockInfo.generated.h"
@@ -18,7 +18,6 @@ public:
 	virtual void UpdateDisplayValue();
 
 	virtual void DefinitionSet() override;
-
 
 	static UInventoryBuildableBlockInfo* GetInventoryBuildable(UBlockBaseInfo* info, UBlockDefinition* def);
 

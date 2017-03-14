@@ -1,4 +1,4 @@
-// Include our game's header file
+﻿// Include our game's header file
 #include "Inventory.h"
 
 // Designate the module as primary

@@ -1,4 +1,4 @@
-#include "Blocks.h"
+ï»¿#include "Blocks.h"
 #include "OxygenTank.h"
 
 AOxygenTank::AOxygenTank()
@@ -29,7 +29,7 @@ void  AOxygenTank::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(500);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.OxygenTank.Pickup", "Pouít / Sebrat");
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.OxygenTank.Pickup", "PouÅ¾Ã­t / Sebrat");
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &AOxygenTank::ListeningOnUse);
@@ -54,7 +54,7 @@ void AOxygenTank::ListeningOnUse(AActor* actor, bool isSpecial)
 	if (!actorOxygen)
 		return;
 
-	if (FMath::IsNearlyZero(OxygenComponent->OxygenInfo->CurrentFillingValue))		// nemáme z èeho bychom brali
+	if (FMath::IsNearlyZero(OxygenComponent->OxygenInfo->CurrentFillingValue))		// nemÃ¡me z Äeho bychom brali
 		return;
 
 	float actuallyPutted = 0.0f;

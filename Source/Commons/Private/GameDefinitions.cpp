@@ -1,4 +1,4 @@
-#include "Commons.h"
+﻿#include "Commons.h"
 #include "GameDefinitions.h"
 
 const FVector GameDefinitions::WorldBorders(50000, 50000, 10000);

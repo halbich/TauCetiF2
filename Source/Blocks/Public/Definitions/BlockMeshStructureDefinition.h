@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "BlockMaterialDefinition.h"
 #include "BlockMeshStructureDefinition.generated.h"

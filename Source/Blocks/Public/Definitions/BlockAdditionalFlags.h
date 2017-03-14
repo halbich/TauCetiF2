@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "BlockFlagValue.h"
 #include "BlockAdditionalFlags.generated.h"
 

@@ -1,4 +1,4 @@
-// Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
+﻿// Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/Character.h"
 #include "Components/SelectorComponent.h"
@@ -36,7 +36,6 @@ class ATauCetiF2Character : public ACharacter
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
 		class UElectricityComponent* ElectricityComponent;
-
 
 public:
 	ATauCetiF2Character();
@@ -103,7 +102,7 @@ protected:
 	void OnPrevInventoryBank();
 
 	UPROPERTY()
-		ATauCetiF2PlayerController* PC;   // todo p�esunout?
+		ATauCetiF2PlayerController* PC;   // todo přesunout?
 
 	void OnUse();
 

@@ -1,4 +1,4 @@
-#include "GameSave.h"
+ï»¿#include "GameSave.h"
 #include "NewGameSaveHolder.h"
 
 UNewGameSaveHolder* UNewGameSaveHolder::Instance()
@@ -51,7 +51,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 {
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
-	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemDefault", "Výchozí hra").ToString();
+	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemDefault", "VÃ½chozÃ­ hra").ToString();
 	c->FullFilePath = TEXT("_system_default");
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
@@ -75,7 +75,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	////TODO
 	///*auto door = makeBuildable(EBlockName::Door, FVector(7, 7, 11));
 	//door->AdditionalFlags.Add(GetNameForTag(ENamedTag::DoorOpening), (int32)EDoorOpening::Right);
-	//door->Name = TEXT("Dveøe");
+	//door->Name = TEXT("DveÅ™e");
 	//buildable->Add(door);*/
 
 	auto cb = makeBuildable(CubeBaseID, FVector(20, 20, 4));
@@ -129,13 +129,9 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	makeOxygen(ox2, 9);
 	UsedBlocks->Add(ox2);
 
-
-
-
 	auto oxInventory1 = makeInventoryBuildable(OxygenTankID, FVector(2, 2, 2));
 	makeOxygen(oxInventory1, 7.5f);
 	c->inventoryBuildableBlocks.Add(oxInventory1);
-
 
 	return c;
 }
@@ -144,7 +140,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 {
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
-	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemEmpty", "Prázdná hra").ToString();
+	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemEmpty", "PrÃ¡zdnÃ¡ hra").ToString();
 	c->CurrentTime = 34920.0f;
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
@@ -220,5 +216,4 @@ USaveGameCarrier* UNewGameSaveHolder::GetSaveByPath(FString path)
 	}
 
 	return NULL;
-
 }

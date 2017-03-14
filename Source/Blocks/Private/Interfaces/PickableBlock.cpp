@@ -1,4 +1,4 @@
-#include "Blocks.h"
+﻿#include "Blocks.h"
 #include "PickableBlock.h"
 
 UPickableBlock::UPickableBlock(const class FObjectInitializer& ObjectInitializer)
@@ -20,4 +20,3 @@ void IPickableBlock::RemovePickupItemEventListener(FDelegateHandle DelegateHandl
 {
 	MyPickupItemEvent.Remove(DelegateHandle);
 }
-

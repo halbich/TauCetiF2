@@ -1,4 +1,4 @@
-#include "GameSave.h"
+ï»¿#include "GameSave.h"
 #include "SaveGameCarrier.h"
 #include "ArchiveHelpers.h"
 #include "SaveHelpers.h"
@@ -43,7 +43,7 @@ USaveGameCarrier* USaveGameCarrier::GetQuickSaveCarrier(TArray<FText>& errorList
 	}
 
 	auto result = GetEmptyCarrier();
-	result->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveGameCarrier.QuickSave", "Rychlé uložení").ToString();
+	result->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveGameCarrier.QuickSave", "RychlÃ© uloÅ¾enÃ­").ToString();
 	result->IsQuickSave = true;
 
 	return result;
@@ -95,7 +95,7 @@ bool USaveGameCarrier::SaveBinary(TArray<FText>& errorList)
 			{
 				auto carrier = NewObject<USaveGameCarrier>();
 				if (carrier->LoadGameDataFromFile(save, errorList, false) && carrier->IsQuickSave) {
-						FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*save);			// we need to cleanup saves
+					FPlatformFileManager::Get().GetPlatformFile().DeleteFile(*save);			// we need to cleanup saves
 				}
 			}
 		}
@@ -148,14 +148,14 @@ bool USaveGameCarrier::LoadGameDataFromFile(const FString& saveGameFile, TArray<
 	TArray<uint8> TheBinaryArray;
 	if (!FFileHelper::LoadFileToArray(TheBinaryArray, *saveGameFile))
 	{
-		errorList.Add(NSLOCTEXT("TCF2LocSpace", "LC.LoadSaveError.InvalidFile", "Soubor savu se nepodaøilo otevøít. Soubor je pravdìpodobnì poškozen."));
+		errorList.Add(NSLOCTEXT("TCF2LocSpace", "LC.LoadSaveError.InvalidFile", "Soubor savu se nepodaÅ™ilo otevÅ™Ã­t. Soubor je pravdÄ›podobnÄ› poÅ¡kozen."));
 		return false;
 	}
 
 	//File Load Error
 	if (TheBinaryArray.Num() <= 0)
 	{
-		errorList.Add(NSLOCTEXT("TCF2LocSpace", "LC.LoadSaveError.InvalidFile_Empty", "Soubor savu není validní, neobsahuje žádná data."));
+		errorList.Add(NSLOCTEXT("TCF2LocSpace", "LC.LoadSaveError.InvalidFile_Empty", "Soubor savu nenÃ­ validnÃ­, neobsahuje Å¾Ã¡dnÃ¡ data."));
 
 		return false;
 	}
@@ -188,7 +188,7 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, TAr
 
 	if (carrier.SaveFileVersion != CURRENT_VERSION)
 	{
-		errorList.Add(NSLOCTEXT("TCF2LocSpace", "LC.LoadSaveError.IncompatibleVersion", "Uvedený formát savu neodpovídá aktuální verzi."));
+		errorList.Add(NSLOCTEXT("TCF2LocSpace", "LC.LoadSaveError.IncompatibleVersion", "UvedenÃ½ formÃ¡t savu neodpovÃ­dÃ¡ aktuÃ¡lnÃ­ verzi."));
 		return;
 	}
 

@@ -1,4 +1,4 @@
-#include "TauCetiF2.h"
+﻿#include "TauCetiF2.h"
 #include "CmbItem.h"
 
 UCmbItem* UCmbItem::MakeCmbItem(FText displayText, int32 itemValue)

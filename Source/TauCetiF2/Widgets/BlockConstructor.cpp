@@ -1,4 +1,4 @@
-#include "TauCetiF2.h"
+ï»¿#include "TauCetiF2.h"
 #include "BlockConstructor.h"
 
 UBlockConstructor::UBlockConstructor() {
@@ -9,7 +9,7 @@ bool UBlockConstructor::AddItemToInventory(UBuildableBlockInfo* buildable, TArra
 	validationErrors.Empty();
 	if (!buildable || !buildable->IsValidLowLevel())
 	{
-		validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.InvalidBuildbale", "Vstup není korektní."));
+		validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.InvalidBuildbale", "Vstup nenÃ­ korektnÃ­."));
 		return false;
 	}
 
@@ -20,13 +20,13 @@ bool UBlockConstructor::AddItemToInventory(UBuildableBlockInfo* buildable, TArra
 	auto pc = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	if (!pc || !pc->IsValidLowLevel())
 	{
-		validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.InvalidPC", "Neplatný PlayerCharacter."));
+		validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.InvalidPC", "NeplatnÃ½ PlayerCharacter."));
 		return false;
 	}
 	auto tcf2Char = Cast<ATauCetiF2Character>(pc);
 	if (!tcf2Char || !tcf2Char->IsValidLowLevel())
 	{
-		validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.InvalidTcf2PC", "Neplatný ATauCetiF2Character."));
+		validationErrors.Add(NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.InvalidTcf2PC", "NeplatnÃ½ ATauCetiF2Character."));
 		return false;
 	}
 

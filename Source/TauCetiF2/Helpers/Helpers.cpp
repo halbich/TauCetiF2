@@ -1,4 +1,4 @@
-#include "TauCetiF2.h"
+﻿#include "TauCetiF2.h"
 #include "PlatformFeatures.h"
 #include "GameFramework/SaveGame.h"
 #include "FFileVisitor.h"
@@ -118,5 +118,5 @@ FDateTime UHelpers::GetTimeFromSeconds(float seconds)
 
 	check(FDateTime::Validate(1, 1, 1, hours, minutes, secondsRest, 0));
 
-	return FDateTime(1,1,1,hours, minutes, secondsRest,0);
+	return FDateTime(1, 1, 1, hours, minutes, secondsRest, 0);
 }

@@ -1,4 +1,4 @@
-#include "TauCetiF2.h"
+ï»¿#include "TauCetiF2.h"
 #include "EngineUtils.h"
 #include "Blocks/Public/Block.h"
 
@@ -73,7 +73,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	if (!definition)
 	{
 		// TODO Localization!
-		UE_LOG(LogTemp, Error, TEXT("Neznámé ID (%d) objektu. Vynechávám"), block->ID);
+		UE_LOG(LogTemp, Error, TEXT("NeznÃ¡mÃ© ID (%d) objektu. VynechÃ¡vÃ¡m"), block->ID);
 		return nullptr;
 	}
 
@@ -82,7 +82,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	if (!IsValidSpawnPoint(box))
 	{
 		// TODO Localization!
-		UE_LOG(LogTemp, Error, TEXT("Objekt nelze korektnì pøidat do stromu. Vynechávám."));
+		UE_LOG(LogTemp, Error, TEXT("Objekt nelze korektnÄ› pÅ™idat do stromu. VynechÃ¡vÃ¡m."));
 		return nullptr;
 	}
 
@@ -91,7 +91,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	if (!isValid)
 	{
 		// TODO Localization!
-		UE_LOG(LogTemp, Error, TEXT("Blok není validní. Dùvod: %s. nechávám"), *invalidReason);
+		UE_LOG(LogTemp, Error, TEXT("Blok nenÃ­ validnÃ­. DÅ¯vod: %s. nechÃ¡vÃ¡m"), *invalidReason);
 		return nullptr;
 	}
 
@@ -105,7 +105,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	if (!actor)
 	{
 		// TODO Localization!
-		UE_LOG(LogTemp, Error, TEXT("Neznámé ID (%d) objektu. Vynechávám"), block->ID);
+		UE_LOG(LogTemp, Error, TEXT("NeznÃ¡mÃ© ID (%d) objektu. VynechÃ¡vÃ¡m"), block->ID);
 		ensure(actor != nullptr);			// chceme vyhodit chybu
 		return nullptr;
 	}
@@ -115,7 +115,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	if (addToRoot) {
 		auto MinMax = NewObject<UKDTree>()->Init(box);
 		MinMax->ContainingObject = actor;
-		UE_LOG(LogTemp, Log, TEXT("---   Pøidávám do svìta objekt  %s"), *actor->GetName());
+		UE_LOG(LogTemp, Log, TEXT("---   PÅ™idÃ¡vÃ¡m do svÄ›ta objekt  %s"), *actor->GetName());
 
 		auto woc = NewObject<UWorldObjectComponent>(actor);
 		woc->Element = actor;
@@ -251,7 +251,6 @@ void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
 
 void AWorldController::onPickupItem(ABlock* pickingItem)
 {
-
 	auto playerChar = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	if (!playerChar || !playerChar->IsValidLowLevel())
 		return;

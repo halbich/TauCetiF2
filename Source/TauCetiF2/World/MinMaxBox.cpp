@@ -1,4 +1,4 @@
-#include "TauCetiF2.h"
+﻿#include "TauCetiF2.h"
 #include "MinMaxBox.h"
 
 UMinMaxBox* UMinMaxBox::InitBox(FVector min, FVector max)

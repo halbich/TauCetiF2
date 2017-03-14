@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Commons/Public/Enums.h"
 #include "Widgets/ObjectWidget.h"

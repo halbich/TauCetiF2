@@ -1,4 +1,4 @@
-#include "Inventory.h"
+ï»¿#include "Inventory.h"
 #include "InventoryComponent.h"
 
 // Sets default values for this component's properties
@@ -45,7 +45,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 		}
 		else
 		{
-			validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "Nepodaøilo se nahrát blok! ID bloku: {0} "), buildable->ID));
+			validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "NepodaÅ™ilo se nahrÃ¡t blok! ID bloku: {0} "), buildable->ID));
 		}
 	}
 
@@ -61,7 +61,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 		}
 		else
 		{
-			validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "Nepodaøilo se nahrát blok! ID bloku: {0} "), buildable->ID));
+			validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "NepodaÅ™ilo se nahrÃ¡t blok! ID bloku: {0} "), buildable->ID));
 		}
 	}
 
@@ -159,5 +159,4 @@ void UInventoryComponent::ItemBuilt(UInventoryBuildableBlockInfo* block)
 	auto removed = InventoryItems.Remove(block);
 	check(removed == 1);
 	ForceItemsChanged(false);
-
 }

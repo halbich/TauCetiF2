@@ -1,4 +1,4 @@
-#include "Commons.h"
+﻿#include "Commons.h"
 #include "FFileVisitor.h"
 
 bool FFileVisitor::Visit(const TCHAR * FilenameOrDirectory, bool bIsDirectory)

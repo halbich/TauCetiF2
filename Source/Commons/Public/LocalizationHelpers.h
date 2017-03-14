@@ -1,5 +1,5 @@
-#pragma once
+Ôªø#pragma once
 //
-//// ZÌsk·nÌ hodnoty
+//// Z√≠sk√°n√≠ hodnoty
 ////FInternationalization::ForUseOnlyByLocMacroAndGraphNodeTextLiterals_CreateText(*SourceString, *Namespace, *KeyString);
 //

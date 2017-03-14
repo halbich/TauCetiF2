@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Blocks/Public/Info/BlockBaseInfo.h"
 #include "Blocks/Public/Definitions/BlockDefinition.h"

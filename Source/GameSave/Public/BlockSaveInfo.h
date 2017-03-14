@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "BlockComponents/OxygenComponentInfo.h"
 #include "BlockComponents/ElectricityComponentInfo.h"
@@ -34,8 +34,6 @@ struct GAMESAVE_API FBlockInfo : FBlockBaseInfo
 {
 	FVector Location;
 	FRotator Rotation;
-
-
 
 	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator)
 	{};

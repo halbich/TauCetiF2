@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "GameSave.h"
 #include "Object.h"
@@ -227,6 +227,4 @@ public:
 		USaveHelpers::FromContainer(result, PlayerElectricityComponent);
 		return result;
 	}
-
-	
 };

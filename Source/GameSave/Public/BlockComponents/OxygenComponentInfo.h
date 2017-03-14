@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 /**
  * Saving structure for Oxygen component

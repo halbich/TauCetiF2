@@ -1,4 +1,4 @@
-#include "Blocks.h"
+﻿#include "Blocks.h"
 #include "ElectricityComponent.h"
 
 // Sets default values for this component's properties
@@ -25,13 +25,11 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def)
 	ElectricityComponentDef = def;
 }
 
-
 void UElectricityComponent::onComponentDataChanged()
 {
 	if (ElectricityInfo)
 		OnComponentDataChangedEvent.Broadcast(ElectricityInfo);
 }
-
 
 bool UElectricityComponent::ObtainAmount(float requested, float& actuallyObtained, bool requireExact)
 {
@@ -60,7 +58,6 @@ bool UElectricityComponent::ObtainAmount(float requested, float& actuallyObtaine
 	ElectricityInfo->CurrentObjectEnergy -= actuallyObtained;
 	onComponentDataChanged();
 	return true;
-
 }
 
 bool UElectricityComponent::PutAmount(float aviable, float& actuallyPutted)
@@ -85,5 +82,4 @@ bool UElectricityComponent::PutAmount(float aviable, float& actuallyPutted)
 	ElectricityInfo->CurrentObjectEnergy += actuallyPutted;
 	onComponentDataChanged();
 	return true;
-
 }

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Object.h"
 #include "Blocks/Public/Info/BlockInfo.h"
 #include "PatternElement.generated.h"

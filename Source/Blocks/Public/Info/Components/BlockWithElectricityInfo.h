@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "UObject/NoExportTypes.h"
 #include "BlockWithElectricityInfo.generated.h"
@@ -15,5 +15,4 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithElectricityInfo")
 		float CurrentObjectEnergy;
-	
 };

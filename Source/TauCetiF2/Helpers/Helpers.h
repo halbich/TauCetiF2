@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "SlateBasics.h"

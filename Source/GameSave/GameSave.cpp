@@ -1,4 +1,4 @@
-// Include our game's header file
+﻿// Include our game's header file
 #include "GameSave.h"
 
 // Designate the module as primary

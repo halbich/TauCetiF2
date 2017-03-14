@@ -1,4 +1,4 @@
-#include "Blocks.h"
+Ôªø#include "Blocks.h"
 #include "Block.h"
 
 ABlock::ABlock()
@@ -43,7 +43,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 
 		auto meshComp = genBlock->Execute_GetMeshStructureComponent(this, index++);
 
-		// TODO validaËnÌ error
+		// TODO validaƒçn√≠ error
 		if (!meshComp)
 			continue;
 
@@ -89,23 +89,23 @@ void ABlock::UpdateBlockOnConstruction_Implementation(UBlockDefinition* BlockDef
 	auto oxygenBlock = Cast<UOxygenComponent>(GetComponentByClass(UOxygenComponent::StaticClass()));
 	if (oxygenBlock)
 	{
-		check(BlockDef->HasOxygenComponent);	// musÌme mÌt definici
+		check(BlockDef->HasOxygenComponent);	// mus√≠me m√≠t definici
 		oxygenBlock->SetDefinition(BlockDef->OxygenComponentDef);
 	}
 	else
 	{
-		check(!BlockDef->HasOxygenComponent);	// nem·me komponentu -> nesmÌme mÌt definici
+		check(!BlockDef->HasOxygenComponent);	// nem√°me komponentu -> nesm√≠me m√≠t definici
 	}
 
 	auto electricityBlock = Cast<UElectricityComponent>(GetComponentByClass(UElectricityComponent::StaticClass()));
 	if (electricityBlock)
 	{
-		check(BlockDef->HasElectricityComponent);	// musÌme mÌt definici
+		check(BlockDef->HasElectricityComponent);	// mus√≠me m√≠t definici
 		electricityBlock->SetDefinition(BlockDef->ElectricityComponentDef);
 	}
 	else
 	{
-		check(!BlockDef->HasElectricityComponent);	// nem·me komponentu -> nesmÌme mÌt definici
+		check(!BlockDef->HasElectricityComponent);	// nem√°me komponentu -> nesm√≠me m√≠t definici
 	}
 }
 

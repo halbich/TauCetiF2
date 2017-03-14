@@ -1,9 +1,9 @@
-#include "Inventory.h"
+﻿#include "Inventory.h"
 #include "TagGroup.h"
 
 UTagGroup::UTagGroup()
 {
-	GroupName = NSLOCTEXT("TCF2LocSpace", "LC.TagGroup.NewTagGroup", "Nov� skupina").ToString();
+	GroupName = NSLOCTEXT("TCF2LocSpace", "LC.TagGroup.NewTagGroup", "Nová skupina").ToString();
 	LetVisibleAll = true;
 }
 

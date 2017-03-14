@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 
 #include "Block.h"
 #include "Commons/Public/GameDefinitions.h"
@@ -59,14 +59,14 @@ private:
 		{
 		case EDoorState::Closed:
 			currentTrans.SetLocation(FVector::ZeroVector);
-			SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.DoorOpen", "Otev¯Ìt dve¯e");
+			SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.DoorOpen", "Otev≈ô√≠t dve≈ôe");
 			break;
 		case EDoorState::Opening:
 			currentTrans.SetLocation(FMath::InterpSinIn(FVector::ZeroVector, FVector(-60 * openingConstant, 60, 0), FMath::Abs(currentTrans.Rotator().Yaw / 90.0f)));
 			break;
 		case EDoorState::Opened:
 			currentTrans.SetLocation(FVector(-60 * openingConstant, 60, 0));
-			SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.DoorClose", "Zav¯Ìt dve¯e");
+			SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.DoorClose", "Zav≈ô√≠t dve≈ôe");
 			break;
 		case EDoorState::Closing:
 			currentTrans.SetLocation(FMath::InterpSinIn(FVector::ZeroVector, FVector(60 * openingConstant, 60, 0), FMath::Abs(currentTrans.Rotator().Yaw / 90.0f)));

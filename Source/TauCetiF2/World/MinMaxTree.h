@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "World/MinMaxBox.h"
 #include "MinMaxTree.generated.h"

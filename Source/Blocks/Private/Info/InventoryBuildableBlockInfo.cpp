@@ -1,10 +1,9 @@
-#include "Blocks.h"
+﻿#include "Blocks.h"
 #include "InventoryBuildableBlockInfo.h"
 
 UInventoryBuildableBlockInfo::UInventoryBuildableBlockInfo()
 	:UBuildableBlockInfo()
 {
-
 }
 
 void UInventoryBuildableBlockInfo::UpdateDisplayValue()
@@ -12,7 +11,7 @@ void UInventoryBuildableBlockInfo::UpdateDisplayValue()
 	if (OxygenInfo)
 	{
 		DisplayValue = CustomFormat(OxygenInfo->CurrentFillingValue);
-		DisplayValueName = NSLOCTEXT("TCF2LocSpace", "LC.UInventoryBuildableBlockInfo.OxygenDisplayName", "Obsah kysl�ku:");
+		DisplayValueName = NSLOCTEXT("TCF2LocSpace", "LC.UInventoryBuildableBlockInfo.OxygenDisplayName", "Obsah kyslíku:");
 	}
 
 	if (ElectricityInfo)

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "FTagGroup.h"
 #include "FInventoryTagGroup.h"

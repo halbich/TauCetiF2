@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Block.h"
 #include "PickableBlock.generated.h"
@@ -30,6 +30,6 @@ public:
 
 	FDelegateHandle AddPickupItemEventListener(FPickupItemDelegate& PickupItemDelegate);
 	void RemovePickupItemEventListener(FDelegateHandle DelegateHandle);
-protected :
+protected:
 	FPickupItemEvent MyPickupItemEvent;
 };

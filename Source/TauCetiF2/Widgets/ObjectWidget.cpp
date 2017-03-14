@@ -1,4 +1,4 @@
-#include "TauCetiF2.h"
+﻿#include "TauCetiF2.h"
 #include "ObjectWidget.h"
 
 void UObjectWidget::RequestClose()

@@ -1,4 +1,4 @@
-#include "TauCetiF2.h"
+﻿#include "TauCetiF2.h"
 #include "PatternGroup.h"
 
 UPatternGroup::UPatternGroup() : UObject()

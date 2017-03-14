@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "OxygenComponentInfo.h"
 #include "ElectricityComponentInfo.h"

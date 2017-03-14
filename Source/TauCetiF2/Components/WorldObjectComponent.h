@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Components/ActorComponent.h"
 #include "Blocks/Public/Info/BlockInfo.h"

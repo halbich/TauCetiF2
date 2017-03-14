@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Components/ActorComponent.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
@@ -57,7 +57,6 @@ public:
 	void AddItem(UBuildableBlockInfo* block);
 
 	void AddItem(UInventoryBuildableBlockInfo* block);
-
 
 	void ItemBuilt(UInventoryBuildableBlockInfo* block);
 };

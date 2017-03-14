@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 
 #include "Object.h"
 #include "Commons/Public/Enums.h"
@@ -91,7 +91,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		FRotator DefaultBuildingRotation;
 
-	// The result is equal: This value * Coeficient by type * HasCustomScaling ? (1*1*1) : Scale 
+	// The result is equal: This value * Coeficient by type * HasCustomScaling ? (1*1*1) : Scale
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		float EnergyReqiredToBuild;
 
@@ -136,13 +136,13 @@ public:
 			auto value = flags.Find(definedFlag.TagID);
 			if (!value)
 			{
-				validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlag", "Chyba v bloku s ID {0}: Poûadovan˝ flag '{1}' nebyl nalezen."), BlockID, FText::FromString(definedFlag.TagID)));
+				validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlag", "Chyba v bloku s ID {0}: Po≈æadovan√Ω flag '{1}' nebyl nalezen."), BlockID, FText::FromString(definedFlag.TagID)));
 				return false;
 			}
 
 			if (definedFlag.PossibleValues.IndexOfByPredicate([value](const FBlockFlagValue& v) { return v.Value == *value; }) == INDEX_NONE)
 			{
-				validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlagValue", "Chyba v bloku s ID {0}: Hodnota flagu '{1}' nenÌ platn·."), BlockID, *value));
+				validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockDefinition.InvalidFlagValue", "Chyba v bloku s ID {0}: Hodnota flagu '{1}' nen√≠ platn√°."), BlockID, *value));
 				return false;
 			}
 		}
