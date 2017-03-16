@@ -238,7 +238,7 @@ void AWorldController::LoadDataFromCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
 
-	auto usedBlocks = carrier->GetBlockData();
+	auto usedBlocks = BlockSavingHelpers::GetBlockData(carrier);
 
 	loadBlocksArray(usedBlocks);
 }
@@ -246,7 +246,7 @@ void AWorldController::LoadDataFromCarrier(USaveGameCarrier* carrier)
 void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
-	carrier->FillData(UsedBlocks);
+	BlockSavingHelpers::SetBlockData(carrier, UsedBlocks);
 }
 
 void AWorldController::onPickupItem(ABlock* pickingItem)

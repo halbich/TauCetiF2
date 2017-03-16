@@ -1,12 +1,13 @@
 ﻿#include "Inventory.h"
 #include "InventoryTags.h"
 
-const int32 UInventoryTags::DefaultCount = 10;
 
 UInventoryTags* UInventoryTags::GetDefault()
 {
+	// TODO check aginst gamesave, ii could be removed from here and elt this method live only in gamesave
+
 	auto res = NewObject<UInventoryTags>();
-	for (int32 i = 0; i < DefaultCount; i++)
+	for (int32 i = 0; i < GameDefinitions::DefaultInventoryTagGroupsCount; i++)
 	{
 		auto itm = NewObject<UInventoryTagGroup>();
 		if (i == 0)

@@ -16,7 +16,6 @@ class INVENTORY_API UInventoryTags : public UObject
 {
 	GENERATED_BODY()
 public:
-	static const int32 DefaultCount;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = InventoryTags)
 		TArray<UInventoryTagGroup*> InventoryGroupList;

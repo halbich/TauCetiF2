@@ -15,6 +15,8 @@
 #include "GameSave/Public/BlockComponents/OxygenComponentInfo.h"
 #include "GameSave/Public/BlockComponents/ElectricityComponentInfo.h"
 
+#include "GameSave/Public/SaveGameCarrier.h"
+
 /**
 *
 */
@@ -139,7 +141,7 @@ namespace BlockSavingHelpers {
 		block.Rotation = info->Rotation;
 	}
 
-	FORCEINLINE void SetData(USaveGameCarrier* carrier, TArray<UBlockInfo*>& UsedBlocks)
+	FORCEINLINE static void SetBlockData(USaveGameCarrier* carrier, TArray<UBlockInfo*>& UsedBlocks)
 	{
 		carrier->usedBlocks.Empty();
 

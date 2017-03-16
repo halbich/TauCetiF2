@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Components/ActorComponent.h"
+#include "Blocks/Public/Block.h"
 #include "SelectorComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUsableObjectTargetedChanged, bool, IsUsableObjectTargeted);

@@ -12,6 +12,7 @@ public:
 	static const int32 CubeMinSizeHalf;
 	static const FRotator WorldGrid;
 	static const int32 CubeMaxSizeMultiplier;
+	static const int32 DefaultInventoryTagGroupsCount;
 };
 
 /* Stencil index mapping to PP_OutlineColored  http://www.tomlooman.com/multi-color-outline-post-process-in-unreal-engine-4/ */
