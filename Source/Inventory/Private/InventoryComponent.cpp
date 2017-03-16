@@ -21,7 +21,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 {
 	check(carrier != nullptr);
 
-	InventoryTags = carrier->GetInventoryTags();
+	InventoryTags = InventoryHelpers::GetInventoryTags(carrier);
 
 	FSelectionChanged Subscriber;
 	Subscriber.BindUObject(this, &UInventoryComponent::InventoryTagsSelectionChanged);
@@ -33,7 +33,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 
 	auto aviable = blockRef->GetAviableItems();
 
-	for (auto buildable : carrier->GetBuildableBlockData())
+	for (auto buildable : InventoryHelpers::GetBuildableBlockData(carrier))
 	{
 		if (aviable.Contains(buildable->ID))
 		{
@@ -49,7 +49,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 		}
 	}
 
-	for (auto buildable : carrier->GetInventoryBuildableBlockData())
+	for (auto buildable : InventoryHelpers::GetInventoryBuildableBlockData(carrier))
 	{
 		if (aviable.Contains(buildable->ID))
 		{
@@ -72,9 +72,10 @@ void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
 
-	carrier->FillData(InventoryTags);
-	carrier->FillData(BuildableItems);
-	carrier->FillData(InventoryItems);
+	InventoryHelpers::SetInventoryTags(carrier, InventoryTags);
+	InventoryHelpers::SetBuildableBlocks(carrier, BuildableItems);
+	InventoryHelpers::SetInventoryBuildableBlocks(carrier, InventoryItems);
+
 }
 
 void UInventoryComponent::SelectNextBank()

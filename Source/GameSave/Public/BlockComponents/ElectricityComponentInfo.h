@@ -3,11 +3,13 @@
 /**
 * Saving structure for Electricity component
 */
-struct GAMESAVE_API FElectricityComponentInfo {
+struct FElectricityComponentInfo {
 	float CurrentObjectEnergy;
 	/*
 	Default constructor
 	*/
-	FElectricityComponentInfo() :CurrentObjectEnergy(0)
-	{};
+	FElectricityComponentInfo()
+	{
+		CurrentObjectEnergy = 0;
+	};
 };

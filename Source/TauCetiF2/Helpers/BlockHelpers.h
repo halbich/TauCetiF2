@@ -6,7 +6,7 @@
 /**
  *
  */
-struct TAUCETIF2_API BlockHelpers1
+namespace BlockHelpers1
 {
 	static UMinMaxBox* GetSpawnBox(const UBlockDefinition* definition, const UBlockInfo* blockInfo)
 	{

@@ -1,16 +1,11 @@
 ﻿#pragma once
 
-#include "GameSave.h"
 #include "Object.h"
 #include "Commons/Public/Enums.h"
 #include "Commons/Public/GameDefinitions.h"
 #include "ArchiveHelpers.h"
 #include "SaveHelpers.h"
 #include "BlockSaveInfo.h"
-#include "Blocks/Public/Info/BlockInfo.h"
-#include "Blocks/Public/Info/BuildableBlockInfo.h"
-#include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
-#include "Inventory/Public/InventoryTags.h"
 #include "SaveGameCarrier.generated.h"
 
 /**
@@ -153,78 +148,5 @@ private:
 
 public:
 
-	FORCEINLINE void FillData(TArray<UBlockInfo*>& UsedBlocks)
-	{
-		usedBlocks.Empty();
-		usedBlocks << UsedBlocks;
-	}
 
-	FORCEINLINE void FillData(TArray<UBuildableBlockInfo*>& BuildableBlocks)
-	{
-		buildableBlocks.Empty();
-		buildableBlocks << BuildableBlocks;
-	}
-
-	FORCEINLINE void FillData(TArray<UInventoryBuildableBlockInfo*>& InventoryBlocks)
-	{
-		inventoryBuildableBlocks.Empty();
-		inventoryBuildableBlocks << InventoryBlocks;
-	}
-
-	FORCEINLINE void FillData(UInventoryTags* InventoryTags)
-	{
-		inventoryTags << InventoryTags;
-	}
-
-	FORCEINLINE void FillData(UBlockWithOxygenInfo* OxygenInfo)
-	{
-		USaveHelpers::ToContainer(PlayerOxygenComponent, OxygenInfo);
-	}
-
-	FORCEINLINE void FillData(UBlockWithElectricityInfo* ElectricityInfo)
-	{
-		USaveHelpers::ToContainer(PlayerElectricityComponent, ElectricityInfo);
-	}
-
-	FORCEINLINE TArray<UBlockInfo*> GetBlockData()
-	{
-		TArray<UBlockInfo*> result;
-		usedBlocks >> result;
-		return result;
-	}
-
-	FORCEINLINE TArray<UBuildableBlockInfo*> GetBuildableBlockData()
-	{
-		TArray<UBuildableBlockInfo*> result;
-		buildableBlocks >> result;
-		return result;
-	}
-
-	FORCEINLINE TArray<UInventoryBuildableBlockInfo*> GetInventoryBuildableBlockData()
-	{
-		TArray<UInventoryBuildableBlockInfo*> result;
-		inventoryBuildableBlocks >> result;
-		return result;
-	}
-
-	FORCEINLINE UInventoryTags* GetInventoryTags()
-	{
-		auto result = NewObject<UInventoryTags>(this);
-		inventoryTags >> result;
-		return result;
-	}
-
-	FORCEINLINE UBlockWithOxygenInfo* GetOxygenInfo()
-	{
-		auto result = NewObject<UBlockWithOxygenInfo>(this);
-		USaveHelpers::FromContainer(result, PlayerOxygenComponent);
-		return result;
-	}
-
-	FORCEINLINE UBlockWithElectricityInfo* GetElectricityInfo()
-	{
-		auto result = NewObject<UBlockWithElectricityInfo>(this);
-		USaveHelpers::FromContainer(result, PlayerElectricityComponent);
-		return result;
-	}
 };

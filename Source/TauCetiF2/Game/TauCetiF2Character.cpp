@@ -212,10 +212,10 @@ void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 	Inventory->LoadFromCarrier(carrier, validationErrors);
 
 	OxygenComponent->SetDefinition(OxygenDef);
-	OxygenComponent->SetInfo(carrier->GetOxygenInfo());
+	OxygenComponent->SetInfo(BlockSavingHelpers::GetOxygenInfo(carrier));
 
 	ElectricityComponent->SetDefinition(ElectricityDef);
-	ElectricityComponent->SetInfo(carrier->GetElectricityInfo());
+	ElectricityComponent->SetInfo(BlockSavingHelpers::GetElectricityInfo(carrier));
 
 	PC->Inventory->InventoryComponent = Inventory;
 }
@@ -224,8 +224,8 @@ void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
 {
 	Inventory->SaveToCarrier(carrier);
 
-	carrier->FillData(OxygenComponent->OxygenInfo);
-	carrier->FillData(ElectricityComponent->ElectricityInfo);
+	BlockSavingHelpers::FillData(carrier, OxygenComponent->OxygenInfo);
+	BlockSavingHelpers::FillData(carrier, ElectricityComponent->ElectricityInfo);
 }
 
 void ATauCetiF2Character::BecomeViewTarget(APlayerController* pc)

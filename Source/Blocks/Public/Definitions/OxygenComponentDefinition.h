@@ -6,11 +6,9 @@
  *
  */
 USTRUCT(BlueprintType)
-struct BLOCKS_API FOxygenComponentDefinition
+struct FOxygenComponentDefinition
 {
 	GENERATED_BODY()
-
-public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | OxygenDefinition")
 		float TotalObjectVolume;

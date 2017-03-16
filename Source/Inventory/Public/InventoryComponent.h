@@ -2,9 +2,12 @@
 
 #include "Components/ActorComponent.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
+#include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
 #include "InventoryTags.h"
 #include "GameSave/Public/SaveGameCarrier.h"
+#include "InventoryHelpers.h"
 #include "InventoryComponent.generated.h"
+
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHudBuildableItemsChanged, bool, ShowGroupName);
 

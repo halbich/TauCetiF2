@@ -7,7 +7,7 @@
  *
  */
 USTRUCT(BlueprintType)
-struct  FBlockMaterialDefinition
+struct FBlockMaterialDefinition
 {
 	GENERATED_BODY();
 

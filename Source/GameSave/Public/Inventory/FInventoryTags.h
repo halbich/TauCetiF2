@@ -1,13 +1,13 @@
 ﻿#pragma once
 
-#include "Inventory/FInventoryTagGroup.h"
+#include "FInventoryTagGroup.h"
 
 /**
  *
  */
-class GAMESAVE_API FInventoryTags
+struct FInventoryTags
 {
-public:
+
 	FInventoryTags();
 
 	int32 CurrentActiveIndex;

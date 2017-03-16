@@ -3,9 +3,9 @@
 /**
  *
  */
-class GAMESAVE_API FTagGroup
+struct FTagGroup
 {
-public:
+
 	FTagGroup();
 
 	FString GroupName;

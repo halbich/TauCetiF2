@@ -1,13 +1,13 @@
 ﻿#pragma once
 
-#include "Inventory/FTagGroup.h"
+#include "FTagGroup.h"
 
 /**
  *
  */
-class GAMESAVE_API FInventoryTagGroup
+struct FInventoryTagGroup
 {
-public:
+
 	FInventoryTagGroup();
 
 	FString GroupName;

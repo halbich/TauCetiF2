@@ -8,7 +8,7 @@
 /*
  Base info for blocks, used to load / save to save game
 */
-struct GAMESAVE_API FBlockBaseInfo {
+struct FBlockBaseInfo {
 	int32 ID;
 	FVector Scale;
 	FString Name;
@@ -30,7 +30,7 @@ struct GAMESAVE_API FBlockBaseInfo {
 /*
 	Info for blocks with block location and rotation anc componentData, used to load / save to save game
 */
-struct GAMESAVE_API FBlockInfo : FBlockBaseInfo
+struct FBlockInfo : FBlockBaseInfo
 {
 	FVector Location;
 	FRotator Rotation;
@@ -44,7 +44,7 @@ struct GAMESAVE_API FBlockInfo : FBlockBaseInfo
 /*
 	Info about blocks which can be built by player
 */
-struct GAMESAVE_API FInventoryBuildableBlockInfo : FBlockBaseInfo
+struct FInventoryBuildableBlockInfo : FBlockBaseInfo
 {
 	TArray<FString> Tags;
 	FInventoryBuildableBlockInfo() : FBlockBaseInfo(), Tags() {};
@@ -61,6 +61,6 @@ struct GAMESAVE_API FInventoryBuildableBlockInfo : FBlockBaseInfo
 /*
 Info about blocks which nas player in inventory
 */
-struct GAMESAVE_API FInventoryBuildableItemBlockInfo : FInventoryBuildableBlockInfo
+struct FInventoryBuildableItemBlockInfo : FInventoryBuildableBlockInfo
 {
 };

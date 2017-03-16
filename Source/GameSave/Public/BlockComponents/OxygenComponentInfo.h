@@ -3,11 +3,13 @@
 /**
  * Saving structure for Oxygen component
  */
-struct GAMESAVE_API FOxygenComponentInfo {
+struct FOxygenComponentInfo {
 	float CurrentFillingValue;
 	/*
 	Default constructor
 	*/
-	FOxygenComponentInfo() :CurrentFillingValue(0)
-	{};
+	FOxygenComponentInfo() 
+	{
+		CurrentFillingValue = 0;
+	};
 };
