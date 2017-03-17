@@ -156,9 +156,9 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave(bool full)
 
 	auto UsedBlocks = &c->usedBlocks;
 
-	for (size_t x = 2495; x < 25000; x++)
+	for (size_t x = 24995; x < 25000; x++)
 	{
-		for (size_t y = 2495; y < 25000; y++)
+		for (size_t y = 24995; y < 25000; y++)
 		{
 			for (size_t z = 0; z < 1; z++)
 			{
