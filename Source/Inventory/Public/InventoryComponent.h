@@ -5,7 +5,9 @@
 #include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
 #include "InventoryTags.h"
 #include "GameSave/Public/SaveGameCarrier.h"
+#include "GameSave/Public/Inventory/FTagGroup.h"
 #include "InventoryHelpers.h"
+#include "Blocks/Public/Components/BlockHolderComponent.h"
 #include "InventoryComponent.generated.h"
 
 

@@ -23,9 +23,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = InventoryTags)
 		int32 CurrentActiveIndex;
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryTags)
-		static UInventoryTags* GetDefault();
-
 	FORCEINLINE UInventoryTagGroup* GetCurrentActiveTagGroup()
 	{
 		return InventoryGroupList.IsValidIndex(CurrentActiveIndex) ? InventoryGroupList[CurrentActiveIndex] : NULL;

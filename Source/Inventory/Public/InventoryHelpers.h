@@ -2,7 +2,13 @@
 
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "InventoryTags.h"
+#include "TagGroup.h"
+#include "InventoryTagGroup.h"
 #include "Blocks/Public/Helpers/BlockHelpers.h"
+
+#include "GameSave/Public/Inventory/FTagGroup.h"
+#include "GameSave/Public/Inventory/FInventoryTagGroup.h"
+#include "GameSave/Public/Inventory/FInventoryTags.h"
 
 namespace InventoryHelpers {
 
@@ -92,7 +98,7 @@ namespace InventoryHelpers {
 		block.Tags = info->Tags;
 	}
 
-	TArray<UBuildableBlockInfo*> GetBuildableBlockData(USaveGameCarrier* carrier)
+	FORCEINLINE static TArray<UBuildableBlockInfo*> GetBuildableBlockData(USaveGameCarrier* carrier)
 	{
 		TArray<UBuildableBlockInfo*> result;
 
@@ -100,14 +106,12 @@ namespace InventoryHelpers {
 		{
 			auto NewItem = NewObject<UBuildableBlockInfo>();
 			FromContainer(NewItem, block);
-
 			result.Add(NewItem);
 		}
-
 		return result;
 	}
 
-	TArray<UInventoryBuildableBlockInfo*> GetInventoryBuildableBlockData(USaveGameCarrier* carrier)
+	FORCEINLINE static TArray<UInventoryBuildableBlockInfo*> GetInventoryBuildableBlockData(USaveGameCarrier* carrier)
 	{
 		TArray<UInventoryBuildableBlockInfo*> result;
 		for (auto block : carrier->inventoryBuildableBlocks)
@@ -120,7 +124,7 @@ namespace InventoryHelpers {
 		return result;
 	}
 
-	UInventoryTags* GetInventoryTags(USaveGameCarrier* carrier)
+	FORCEINLINE static UInventoryTags* GetInventoryTags(USaveGameCarrier* carrier)
 	{
 		auto result = NewObject<UInventoryTags>();
 		FromContainer(result, carrier->inventoryTags);
@@ -128,12 +132,12 @@ namespace InventoryHelpers {
 		return result;
 	}
 
-	void SetInventoryTags(USaveGameCarrier* carrier, UInventoryTags* InventoryTags)
+	FORCEINLINE static void SetInventoryTags(USaveGameCarrier* carrier, UInventoryTags* InventoryTags)
 	{
 		ToContainer(carrier->inventoryTags, InventoryTags);
 	}
 
-	void SetBuildableBlocks(USaveGameCarrier* carrier, TArray<UBuildableBlockInfo*>& BuildableBlocks)
+	FORCEINLINE static void SetBuildableBlocks(USaveGameCarrier* carrier, TArray<UBuildableBlockInfo*>& BuildableBlocks)
 	{
 		carrier->buildableBlocks.Empty();
 
@@ -146,7 +150,7 @@ namespace InventoryHelpers {
 
 	}
 
-	void SetInventoryBuildableBlocks(USaveGameCarrier* carrier, TArray<UInventoryBuildableBlockInfo*>& InventoryBlocks)
+	FORCEINLINE static void SetInventoryBuildableBlocks(USaveGameCarrier* carrier, TArray<UInventoryBuildableBlockInfo*>& InventoryBlocks)
 	{
 		carrier->inventoryBuildableBlocks.Empty();
 		for (auto usedBlock : InventoryBlocks)

@@ -163,7 +163,7 @@ namespace BlockSavingHelpers {
 		ToContainer(carrier->PlayerElectricityComponent, ElectricityInfo);
 	}
 
-	FORCEINLINE TArray<UBlockInfo*> GetBlockData(USaveGameCarrier* carrier)
+	FORCEINLINE static TArray<UBlockInfo*> GetBlockData(USaveGameCarrier* carrier)
 	{
 		TArray<UBlockInfo*> result;
 		for (auto block : carrier->usedBlocks)
@@ -175,14 +175,14 @@ namespace BlockSavingHelpers {
 		return result;
 	}
 
-	FORCEINLINE UBlockWithOxygenInfo* GetOxygenInfo(USaveGameCarrier* carrier)
+	FORCEINLINE static UBlockWithOxygenInfo* GetOxygenInfo(USaveGameCarrier* carrier)
 	{
 		auto result = NewObject<UBlockWithOxygenInfo>();
 		FromContainer(result, carrier->PlayerOxygenComponent);
 		return result;
 	}
 
-	FORCEINLINE UBlockWithElectricityInfo* GetElectricityInfo(USaveGameCarrier* carrier)
+	FORCEINLINE static UBlockWithElectricityInfo* GetElectricityInfo(USaveGameCarrier* carrier)
 	{
 		auto result = NewObject<UBlockWithElectricityInfo>();
 		FromContainer(result, carrier->PlayerElectricityComponent);

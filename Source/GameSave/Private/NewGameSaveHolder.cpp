@@ -64,9 +64,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	c->PlayerOxygenComponent.CurrentFillingValue = 150.0f;
 	c->PlayerElectricityComponent.CurrentObjectEnergy = 500.0f;
 
-	auto invTags = UInventoryTags::GetDefault();
-
-	USaveHelpers::ToContainer(c->inventoryTags, invTags);
+	c->inventoryTags = makeDefault();
 
 	c->buildableBlocks.Add(makeBuildable(EmptyHandID, FVector(1, 1, 1)));
 	c->inventoryBuildableBlocks.Add(makeInventoryBuildable(EmptyHandID, FVector(1, 1, 1)));
@@ -149,6 +147,8 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 	c->PlayerPosition = FVector(0, 0, 90);
 	c->CurrentTime = 0.5f;
 	c->PlayerUseFPSCamera = false;
+
+	c->inventoryTags = makeDefault();
 
 	return c;
 }
