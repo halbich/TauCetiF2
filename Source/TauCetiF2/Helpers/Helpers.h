@@ -18,6 +18,11 @@ class TAUCETIF2_API UHelpers : public UObject
 {
 	GENERATED_BODY()
 
+private:
+	static const FString customSectionName;
+
+	static FString getConfigVariableNameFor(EGameUserSettingsVariable settings);
+
 public:
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Change Localization"), Category = "Locale")
@@ -55,4 +60,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Sound")
 		static bool SetSoundClassVolume(USoundClass* TargetClass, float targetValue);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
+		static bool GetSettingsValueFloat(EGameUserSettingsVariable settings, float& value);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
+		static bool SetSettingsValueFloat(EGameUserSettingsVariable settings, float value);
 };

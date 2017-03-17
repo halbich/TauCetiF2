@@ -4,6 +4,8 @@
 #include "FFileVisitor.h"
 #include "Helpers.h"
 
+const FString UHelpers::customSectionName = TEXT("TCF2.CustomSettings");
+
 bool UHelpers::ChangeLocalization(FString target)
 {
 	return FInternationalization::Get().SetCurrentCulture(target);
@@ -141,3 +143,57 @@ bool UHelpers::SetSoundClassVolume(USoundClass* TargetClass, float targetValue)
 	TargetClass->Properties.Volume = targetValue;
 	return true;
 }
+
+bool UHelpers::GetSettingsValueFloat(EGameUserSettingsVariable settings, float& value)
+{
+	if (!GConfig)
+		return false;
+
+	auto varName = UHelpers::getConfigVariableNameFor(settings);
+
+	float floatValueReceived = 0;
+	return GConfig->GetFloat(
+		*UHelpers::customSectionName,
+		*varName,
+		value,
+		GGameIni
+	);
+
+}
+
+bool UHelpers::SetSettingsValueFloat(EGameUserSettingsVariable settings, float value)
+{
+	if (!GConfig)
+		return false;
+
+	auto varName = UHelpers::getConfigVariableNameFor(settings);
+
+	GConfig->SetFloat(
+		*UHelpers::customSectionName,
+		*varName,
+		value,
+		GGameIni
+	);
+
+	GConfig->Flush(false, GGameIni);
+
+	return true;
+}
+
+
+FString UHelpers::getConfigVariableNameFor(EGameUserSettingsVariable settings)
+{
+	switch (settings)
+	{
+	case EGameUserSettingsVariable::MasterVolume:	return TEXT("MasterVolume");
+	case EGameUserSettingsVariable::MusicVolume:	return TEXT("MusicVolume");
+	case EGameUserSettingsVariable::OtherVolume:	return TEXT("OtherVolume");
+	default:
+		checkNoEntry();
+		return TEXT("");
+	}
+
+}
+
+
+

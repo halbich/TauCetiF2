@@ -163,7 +163,8 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave()
 	c->HardcodedLevelName = ENamedHardcodedLevel::MainMenu;
 
 	c->PlayerPosition = FVector(-600, 0, 90);
-	c->CurrentTime = 0.5f;
+	auto n = FDateTime::Now().GetTimeOfDay();
+	c->CurrentTime = (float)n.GetTotalSeconds();
 	c->PlayerUseFPSCamera = true;
 
 	//auto UsedBlocks = &c->UsedBlocks;
