@@ -3,7 +3,7 @@
 #include "ArchiveHelpers.h"
 #include "SaveHelpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 22;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 23;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -219,6 +219,8 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, TAr
 
 	Ar << carrier.PlayerOxygenComponent;
 	Ar << carrier.PlayerElectricityComponent;
+
+	Ar << carrier.IsCreativeMode;
 }
 
 bool USaveGameCarrier::IsSaveNameValid()

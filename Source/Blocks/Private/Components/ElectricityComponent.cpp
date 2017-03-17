@@ -83,3 +83,9 @@ bool UElectricityComponent::PutAmount(float aviable, float& actuallyPutted)
 	onComponentDataChanged();
 	return true;
 }
+
+void UElectricityComponent::ToggleIsInCreative(bool newInCreative)
+{
+	IsInCreative = newInCreative;
+	onComponentDataChanged();
+}

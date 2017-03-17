@@ -22,6 +22,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenComponent")
 		FOxygenComponentDefinition OxygenComponentDef;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenComponent")
+		bool IsInCreative;
+
 	void onComponentDataChanged();
 
 public:
@@ -35,6 +38,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenComponent")
 		bool PutAmount(float aviable, float& actuallyPutted);
+
+
+	void ToggleIsInCreative(bool newInCreative);
 
 public:
 	FORCEINLINE const FOxygenComponentDefinition* GetDefinition()

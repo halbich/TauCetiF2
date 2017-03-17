@@ -22,6 +22,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
 		FElectricityComponentDefinition ElectricityComponentDef;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
+		bool IsInCreative;
+
 	void onComponentDataChanged();
 
 public:
@@ -35,6 +38,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | ElectricityComponent")
 		bool PutAmount(float aviable, float& actuallyPutted);
+
+	void ToggleIsInCreative(bool newInCreative);
 
 public:
 	FORCEINLINE const FElectricityComponentDefinition* GetDefinition()

@@ -81,6 +81,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
 		bool PlayerUseFPSCamera;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
+		bool IsCreativeMode;
+
 	// Serializable item
 	FElectricityComponentInfo PlayerElectricityComponent;
 

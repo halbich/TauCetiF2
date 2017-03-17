@@ -94,6 +94,8 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* input
 
 	inputComponent->BindAction("SelectNextInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnNextInventoryBank);
 	inputComponent->BindAction("SelectPrevInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnPrevInventoryBank);
+
+	inputComponent->BindAction("OnToggleCreativeMode", IE_Pressed, this, &ATauCetiF2Character::OnToggleCreativeMode);
 }
 
 void ATauCetiF2Character::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
@@ -218,6 +220,8 @@ void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 	ElectricityComponent->SetInfo(BlockSavingHelpers::GetElectricityInfo(carrier));
 
 	PC->Inventory->InventoryComponent = Inventory;
+
+	toogleCreative(carrier->IsCreativeMode);
 }
 
 void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
@@ -226,6 +230,8 @@ void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
 
 	BlockSavingHelpers::SetOxygenInfo(carrier, OxygenComponent->OxygenInfo);
 	BlockSavingHelpers::SetElectricityInfo(carrier, ElectricityComponent->ElectricityInfo);
+
+	carrier->IsCreativeMode = IsInCreativeMode;
 }
 
 void ATauCetiF2Character::BecomeViewTarget(APlayerController* pc)
@@ -250,4 +256,17 @@ void ATauCetiF2Character::OnPrevInventoryBank()
 void ATauCetiF2Character::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void ATauCetiF2Character::toogleCreative(bool isCreative)
+{
+	IsInCreativeMode = isCreative;
+	Builder->IsInCreative = isCreative;
+	OxygenComponent->ToggleIsInCreative(isCreative);
+	ElectricityComponent->ToggleIsInCreative(isCreative);
+}
+
+void ATauCetiF2Character::OnToggleCreativeMode()
+{
+	toogleCreative(!IsInCreativeMode);
 }

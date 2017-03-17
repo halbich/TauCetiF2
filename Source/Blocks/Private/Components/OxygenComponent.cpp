@@ -83,3 +83,10 @@ bool UOxygenComponent::PutAmount(float aviable, float& actuallyPutted)
 	onComponentDataChanged();
 	return true;
 }
+
+
+void UOxygenComponent::ToggleIsInCreative(bool newInCreative)
+{
+	IsInCreative = newInCreative;
+	onComponentDataChanged();
+}

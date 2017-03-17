@@ -60,6 +60,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
 		void SetWorldController(AWorldController* controller);
 
+	UPROPERTY(Transient)
+		bool IsInCreative;
+
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
@@ -138,7 +141,7 @@ public:
 			check(BuilderElectricityComponent);
 
 			float actuallyObtainedEnergy = 0.0f;
-			if (BuilderElectricityComponent->ObtainAmount(currentBuildableBlockInfo->BuildingEnergyRequired, actuallyObtainedEnergy, true))
+			if (IsInCreative || BuilderElectricityComponent->ObtainAmount(currentBuildableBlockInfo->BuildingEnergyRequired, actuallyObtainedEnergy, true))
 			{
 				float actuallyReturnedEnergy = 0.0f;
 				if (!worldController->SpawnWorldObject(GetWorld(), spawnBlock, true))

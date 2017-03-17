@@ -59,6 +59,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | ElectricityComponent", meta = (ShowOnlyInnerProperties))
 		FElectricityComponentDefinition ElectricityDef;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | GameMode")
+		bool IsInCreativeMode;
 protected:
 
 	void BeginPlay();
@@ -104,6 +107,9 @@ protected:
 
 	void OnNextInventoryBank();
 	void OnPrevInventoryBank();
+
+	void toogleCreative(bool isCreative);
+	void OnToggleCreativeMode();
 
 	UPROPERTY()
 		ATauCetiF2PlayerController* PC;   // todo přesunout?

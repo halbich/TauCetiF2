@@ -60,6 +60,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	c->PlayerPosition = FVector(-600, 0, 90);
 	c->CurrentTime = 34920.0f;
 	c->PlayerUseFPSCamera = true;
+	c->IsCreativeMode = true;
 
 	c->PlayerOxygenComponent.CurrentFillingValue = 150.0f;
 	c->PlayerElectricityComponent.CurrentObjectEnergy = 500.0f;
