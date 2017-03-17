@@ -5,7 +5,7 @@
 /**
  *
  */
-struct FInventoryTagGroup
+struct GAMESAVE_API FInventoryTagGroup
 {
 
 	FInventoryTagGroup();

@@ -3,7 +3,7 @@
 /**
  *
  */
-struct FTagGroup
+struct GAMESAVE_API FTagGroup
 {
 
 	FTagGroup();

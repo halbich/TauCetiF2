@@ -73,9 +73,9 @@ namespace InventoryHelpers {
 
 		for (auto group : tags->InventoryGroupList)
 		{
-			/*FInventoryTagGroup grp;
+			FInventoryTagGroup grp;
 			ToInvTagGroupContainer(grp, group);
-			invTags.InventoryGroupList.Add(grp);*/
+			invTags.InventoryGroupList.Add(grp);
 		}
 	}
 
