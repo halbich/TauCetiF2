@@ -6,6 +6,8 @@
 #include "ArchiveHelpers.h"
 #include "SaveHelpers.h"
 #include "BlockSaveInfo.h"
+#include "Inventory/FInventoryTags.h"
+#include "Inventory/InventoryArchiveHelpers.h"
 #include "SaveGameCarrier.generated.h"
 
 /**
@@ -146,7 +148,6 @@ private:
 #endif
 	}
 
-public:
 
 
 };

@@ -4,6 +4,7 @@
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
 #include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
 #include "InventoryTags.h"
+#include "InventoryTagGroup.h"
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "GameSave/Public/Inventory/FTagGroup.h"
 #include "InventoryHelpers.h"

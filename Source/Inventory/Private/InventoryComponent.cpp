@@ -21,7 +21,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 {
 	check(carrier != nullptr);
 
-	InventoryTags = InventoryHelpers::GetInventoryTags(carrier);
+	/*InventoryTags = InventoryHelpers::GetInventoryTags(carrier);
 
 	FSelectionChanged Subscriber;
 	Subscriber.BindUObject(this, &UInventoryComponent::InventoryTagsSelectionChanged);
@@ -63,7 +63,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 		{
 			validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "Nepodařilo se nahrát blok! ID bloku: {0} "), buildable->ID));
 		}
-	}
+	}*/
 
 	ForceItemsChanged(false);
 }
@@ -72,9 +72,9 @@ void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
 
-	InventoryHelpers::SetInventoryTags(carrier, InventoryTags);
+	/*InventoryHelpers::SetInventoryTags(carrier, InventoryTags);
 	InventoryHelpers::SetBuildableBlocks(carrier, BuildableItems);
-	InventoryHelpers::SetInventoryBuildableBlocks(carrier, InventoryItems);
+	InventoryHelpers::SetInventoryBuildableBlocks(carrier, InventoryItems);*/
 
 }
 
