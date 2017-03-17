@@ -49,4 +49,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers")
 		static void GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, bool IsSaveEnabled, FVector& Min, FVector& Max);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Sound")
+		static bool GetSoundClassVolume(USoundClass* TargetClass, float& resultValue);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Sound")
+		static bool SetSoundClassVolume(USoundClass* TargetClass, float targetValue);
 };

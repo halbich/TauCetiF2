@@ -120,3 +120,24 @@ FDateTime UHelpers::GetTimeFromSeconds(float seconds)
 
 	return FDateTime(1, 1, 1, hours, minutes, secondsRest, 0);
 }
+
+bool UHelpers::GetSoundClassVolume(USoundClass* TargetClass, float& resultValue)
+{
+	resultValue = -1;
+
+	if (!TargetClass || !TargetClass->IsValidLowLevel())
+		return false;
+
+	resultValue = TargetClass->Properties.Volume;
+	return true;
+}
+
+bool UHelpers::SetSoundClassVolume(USoundClass* TargetClass, float targetValue)
+{
+
+	if (!TargetClass || !TargetClass->IsValidLowLevel())
+		return false;
+
+	TargetClass->Properties.Volume = targetValue;
+	return true;
+}
