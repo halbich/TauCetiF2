@@ -16,19 +16,20 @@ class GAMESAVE_API UNewGameSaveHolder : public UObject
 {
 	GENERATED_BODY()
 
+private:
+	//The Function Pointer Variable Type
+	//Functions take in 0 parameters and return void
+	typedef USaveGameCarrier* (UNewGameSaveHolder::*FunctionPtrType)(bool);
+
 public:
+	UNewGameSaveHolder();
+	~UNewGameSaveHolder();
 
-	UPROPERTY(Transient)
-		TArray<USaveGameCarrier*> newGameSaves;
 
-	UPROPERTY(Transient)
-		USaveGameCarrier* mainMenuSave;
+	TMap<ENamedHardcodedLevel, FunctionPtrType> systemSaves;
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
 		TArray<USaveGameCarrier*> GetNewSaveGamesList();
-
-	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
-		USaveGameCarrier* DEBUG_GetTestSave();
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
 		USaveGameCarrier* GetSaveForMainMenu();
@@ -41,18 +42,9 @@ public:
 
 private:
 
-	void init();
-
-	//The Function Pointer Variable Type
-	//Functions take in 0 parameters and return void
-	typedef USaveGameCarrier* (UNewGameSaveHolder::*FunctionPtrType)(void);
-
-	//A static array of to Function Pointers
-	FunctionPtrType fillingFunctions[(uint8)ENamedHardcodedLevel::HardcodedLevelsMax];
-
-	USaveGameCarrier* getDefaultGameSave();
-	USaveGameCarrier* getEmptyGameSave();
-	USaveGameCarrier* getMainMenuSave();
+	USaveGameCarrier* getDefaultGameSave(bool full = false);
+	USaveGameCarrier* getEmptyGameSave(bool full = false);
+	USaveGameCarrier* getMainMenuSave(bool full = false);
 
 	FORCEINLINE FBlockInfo make(int32 id, FVector location, FVector blockScale, FRotator blockRotation)
 	{

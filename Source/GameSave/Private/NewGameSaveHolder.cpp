@@ -1,53 +1,50 @@
 ﻿#include "GameSave.h"
 #include "NewGameSaveHolder.h"
 
+UNewGameSaveHolder::UNewGameSaveHolder()
+{
+	systemSaves = TMap<ENamedHardcodedLevel, FunctionPtrType>();
+
+	systemSaves.Add(ENamedHardcodedLevel::MainMenu, &UNewGameSaveHolder::getMainMenuSave);
+	systemSaves.Add(ENamedHardcodedLevel::DefaultLevel, &UNewGameSaveHolder::getDefaultGameSave);
+	systemSaves.Add(ENamedHardcodedLevel::EmptyLevel, &UNewGameSaveHolder::getEmptyGameSave);
+}
+
+UNewGameSaveHolder::~UNewGameSaveHolder()
+{
+	systemSaves.Empty();
+}
+
+
 UNewGameSaveHolder* UNewGameSaveHolder::Instance()
 {
-	auto instance = NewObject<UNewGameSaveHolder>();
-	instance->init();
-	return instance;
+	return NewObject<UNewGameSaveHolder>();
 }
 
-void UNewGameSaveHolder::init()
-{
-	fillingFunctions[(uint8)ENamedHardcodedLevel::MainMenu] = &UNewGameSaveHolder::getMainMenuSave;
-	fillingFunctions[(uint8)ENamedHardcodedLevel::DefaultLevel] = &UNewGameSaveHolder::getDefaultGameSave;
-	fillingFunctions[(uint8)ENamedHardcodedLevel::EmptyLevel] = &UNewGameSaveHolder::getEmptyGameSave;
-
-	mainMenuSave = (this->* (fillingFunctions[(uint8)ENamedHardcodedLevel::MainMenu]))();
-
-	for (uint8 i = ((uint8)ENamedHardcodedLevel::MainMenu + 1); i < (uint8)ENamedHardcodedLevel::HardcodedLevelsMax; i++)
-	{
-		newGameSaves.Add((this->* (fillingFunctions[i]))());
-	}
-}
 
 TArray<USaveGameCarrier*> UNewGameSaveHolder::GetNewSaveGamesList()
 {
-	return Instance()->newGameSaves;
-}
-
-USaveGameCarrier * UNewGameSaveHolder::DEBUG_GetTestSave()
-{
+	TArray<USaveGameCarrier*> result;
 	auto i = Instance();
-	if (i && i->IsValidLowLevel())
+
+	for (auto level : systemSaves)
 	{
-		if (i->newGameSaves.Num() > 0)
-		{
-			auto sav = i->newGameSaves[0];
-			if (sav && sav->IsValidLowLevel())
-				return sav;
-		}
+		if (level.Key != ENamedHardcodedLevel::MainMenu)
+			result.Add((i->* (level.Value))(false));
 	}
-	return nullptr;
+
+	return result;
 }
 
 USaveGameCarrier* UNewGameSaveHolder::GetSaveForMainMenu()
 {
-	return Instance()->mainMenuSave;
+	auto i = Instance();
+	auto fn = i->systemSaves[ENamedHardcodedLevel::MainMenu];
+
+	return (i->* (fn))(false);
 }
 
-USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
+USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 {
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
@@ -56,6 +53,9 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
+
+	if (!full)
+		return c;
 
 	c->PlayerPosition = FVector(-600, 0, 90);
 	c->CurrentTime = 34920.0f;
@@ -134,15 +134,19 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave()
 	return c;
 }
 
-USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
+USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave(bool full)
 {
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
 	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemEmpty", "Prázdná hra").ToString();
+	c->FullFilePath = TEXT("_system_empty");
 	c->CurrentTime = 34920.0f;
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::DefaultLevel;
+
+	if (!full)
+		return c;
 
 	c->PlayerPosition = FVector(0, 0, 90);
 	c->CurrentTime = 0.5f;
@@ -150,17 +154,38 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave()
 
 	c->inventoryTags = makeDefault();
 
+	auto UsedBlocks = &c->usedBlocks;
+
+	for (size_t x = 2495; x < 25000; x++)
+	{
+		for (size_t y = 2495; y < 25000; y++)
+		{
+			for (size_t z = 0; z < 1; z++)
+			{
+				UsedBlocks->Add(make(1, FVector(-1 * x, -1 * y, z+1), FVector(1, 1, 1), FRotator(0, 0, 0)));
+				UsedBlocks->Add(make(1, FVector(x, y, z), FVector(1, 1, 1), FRotator(0, 0, 0)));
+			}
+		}
+	}
+
+	c->PlayerOxygenComponent.CurrentFillingValue = 150.0f;
+	c->PlayerElectricityComponent.CurrentObjectEnergy = 1000.0f;
+
 	return c;
 }
 
-USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave()
+USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave(bool full)
 {
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
 	c->SaveName = TEXT("Main Menu Save");
+	c->FullFilePath = TEXT("_system_mainMenu");
 	c->IsSystemSave = true;
 	c->SaveLoaded = true;
 	c->HardcodedLevelName = ENamedHardcodedLevel::MainMenu;
+
+	if (!full)
+		return c;
 
 	c->PlayerPosition = FVector(-600, 0, 90);
 	auto n = FDateTime::Now().GetTimeOfDay();
@@ -201,11 +226,16 @@ USaveGameCarrier* UNewGameSaveHolder::GetSaveByPath(FString path)
 	if (path.IsEmpty())
 		return NULL;
 
-	if (path == TEXT("_system_default"))
-		return getDefaultGameSave();
-
-	if (path == TEXT("_system_empty"))
-		return getEmptyGameSave();
+	if (path.StartsWith(TEXT("_system_")))
+	{
+		for (auto level : systemSaves)
+		{
+			auto lvl = (this->* (level.Value))(false);
+			if (lvl->FullFilePath == path)
+				return (this->* (level.Value))(true);
+		}
+		checkNoEntry();
+	}
 
 	TArray<FText> errorList;
 	auto currentSaves = USaveGameCarrier::GetSaveGameInfoList(errorList);

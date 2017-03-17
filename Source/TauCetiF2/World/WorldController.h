@@ -15,6 +15,7 @@
 
 #include "WorldController.generated.h"
 
+
 UCLASS()
 class TAUCETIF2_API AWorldController : public AActor
 {
@@ -70,9 +71,12 @@ public:
 
 	TMap<ABlock*, FDelegateHandle> pickableDelegates;
 
+
 private:
 
 	void loadBlocksArray(TArray<UBlockInfo*>& blocks);
 
 	void onPickupItem(ABlock* pickingItem);
+
 };
+
