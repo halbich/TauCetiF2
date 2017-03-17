@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "Widgets/SynchronizeWidget.h"
+#include "Blocks/Public/Components/BlockHolderComponent.h"
+#include "Blocks/Public/Definitions/BlockDefinition.h"
 #include "Widgets/Common/InventoryFlagItem.h"
 #include "BlockConstructorSelector.generated.h"
 

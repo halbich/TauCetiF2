@@ -3,6 +3,7 @@
 #include "Widgets/TerminalBaseWidget.h"
 #include "Game/TauCetiF2Character.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
+#include "Blocks/Public/Components/BlockHolderComponent.h"
 #include "BlockConstructor.generated.h"
 
 /**

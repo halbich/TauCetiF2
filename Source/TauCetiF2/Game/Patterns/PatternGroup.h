@@ -2,6 +2,8 @@
 
 #include "Object.h"
 #include "Game/Patterns/PatternElement.h"
+#include "Blocks/Public/Info/BlockInfo.h"
+#include "Blocks/Public/Definitions/BlockDefinition.h"
 #include "PatternGroup.generated.h"
 
 /**

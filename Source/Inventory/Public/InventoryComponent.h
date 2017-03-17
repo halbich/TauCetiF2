@@ -4,11 +4,34 @@
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
 #include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
 #include "InventoryTags.h"
+#include "TagGroup.h"
 #include "InventoryTagGroup.h"
+
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "GameSave/Public/Inventory/FTagGroup.h"
+#include "GameSave/Public/Inventory/FInventoryTagGroup.h"
+#include "GameSave/Public/Inventory/FInventoryTags.h"
+
 #include "InventoryHelpers.h"
 #include "Blocks/Public/Components/BlockHolderComponent.h"
+
+#include "Commons/Public/Enums.h"
+#include "GameSave/Public/SaveGameCarrier.h"
+#include "GameSave/Public/BlockSaveInfo.h"
+#include "Blocks/Public/Helpers/BlockHelpers.h"
+
+#include "Blocks/Public/Info/BuildableBlockInfo.h"
+#include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
+
+#include "InventoryTags.h"
+#include "TagGroup.h"
+#include "InventoryTagGroup.h"
+
+#include "GameSave/Public/Inventory/FTagGroup.h"
+#include "GameSave/Public/Inventory/FInventoryTagGroup.h"
+#include "GameSave/Public/Inventory/FInventoryTags.h"
+
+
 #include "InventoryComponent.generated.h"
 
 

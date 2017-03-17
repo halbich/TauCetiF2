@@ -1,11 +1,12 @@
 ﻿#pragma once
 
-#include "GameSave/Public/SaveGameCarrier.h"
 #include "SlateBasics.h"
 #include "Runtime/UMG/Public/UMG.h"
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 #include "Runtime/UMG/Public/Components/Widget.h"
 #include "Runtime/UMG/Public/Components/Image.h"
+#include "Blocks/Public/Info/BlockBaseInfo.h"
+#include "Blocks/Public/Info/BuildableBlockInfo.h"
 #include "Widgets/Common/InventoryFlagItem.h"
 #include "Helpers.generated.h"
 

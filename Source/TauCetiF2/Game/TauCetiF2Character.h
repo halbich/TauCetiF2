@@ -7,6 +7,10 @@
 #include "Game/TauCetiF2PlayerController.h"
 #include "Blocks/Public/Definitions/OxygenComponentDefinition.h"
 #include "Blocks/Public/Definitions/ElectricityComponentDefinition.h"
+#include "Blocks/Public/Components/OxygenComponent.h"
+#include "Blocks/Public/Components/ElectricityComponent.h"
+#include "GameSave/Public/SaveGameCarrier.h"
+#include "Blocks/Public/Helpers/BlockHelpers.h"
 #include "TauCetiF2Character.generated.h"
 
 UCLASS(config = Game)

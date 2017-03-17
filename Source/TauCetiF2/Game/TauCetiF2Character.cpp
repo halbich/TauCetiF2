@@ -224,8 +224,8 @@ void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
 {
 	Inventory->SaveToCarrier(carrier);
 
-	BlockSavingHelpers::FillData(carrier, OxygenComponent->OxygenInfo);
-	BlockSavingHelpers::FillData(carrier, ElectricityComponent->ElectricityInfo);
+	BlockSavingHelpers::SetOxygenInfo(carrier, OxygenComponent->OxygenInfo);
+	BlockSavingHelpers::SetElectricityInfo(carrier, ElectricityComponent->ElectricityInfo);
 }
 
 void ATauCetiF2Character::BecomeViewTarget(APlayerController* pc)

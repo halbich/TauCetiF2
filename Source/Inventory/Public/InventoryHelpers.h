@@ -1,31 +1,35 @@
 ﻿#pragma once
 
+#include "Commons/Public/Enums.h"
 #include "GameSave/Public/SaveGameCarrier.h"
+#include "GameSave/Public/BlockSaveInfo.h"
+#include "Blocks/Public/Helpers/BlockHelpers.h"
+
+#include "Blocks/Public/Info/BuildableBlockInfo.h"
+#include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
+
 #include "InventoryTags.h"
 #include "TagGroup.h"
 #include "InventoryTagGroup.h"
-#include "Blocks/Public/Helpers/BlockHelpers.h"
 
 #include "GameSave/Public/Inventory/FTagGroup.h"
 #include "GameSave/Public/Inventory/FInventoryTagGroup.h"
 #include "GameSave/Public/Inventory/FInventoryTags.h"
 
 namespace InventoryHelpers {
-
-
-	FORCEINLINE static void FromContainer(UTagGroup* grp, const FTagGroup& group) {
+	static void FromTagGroupContainer(UTagGroup* grp, FTagGroup& group) {
 		grp->GroupName = group.GroupName;
 		grp->LetVisibleAll = group.LetVisibleAll;
 		grp->Tags = TArray<FString>(group.Tags);
 	}
 
-	FORCEINLINE static void ToContainer(FTagGroup& group, const UTagGroup* grp) {
+	static void ToTagGroupContainer(FTagGroup& group, UTagGroup* grp) {
 		group.GroupName = grp->GroupName;
 		group.LetVisibleAll = grp->LetVisibleAll;
 		group.Tags = TArray<FString>(grp->Tags);
 	}
 
-	FORCEINLINE static void FromContainer(UInventoryTagGroup* tagGroup, const FInventoryTagGroup& invTagGroup) {
+	static void FromInvTagGroupContainer(UInventoryTagGroup* tagGroup, FInventoryTagGroup& invTagGroup) {
 		tagGroup->GroupName = invTagGroup.GroupName;
 		tagGroup->IsGroupEnabled = invTagGroup.IsGroupEnabled;
 		tagGroup->GroupType = (EInventoryGroupType)invTagGroup.GroupType;
@@ -33,135 +37,131 @@ namespace InventoryHelpers {
 		for (auto groupList : invTagGroup.GroupList)
 		{
 			auto gl = NewObject<UTagGroup>();
-			FromContainer(gl, groupList);
+			FromTagGroupContainer(gl, groupList);
 			tagGroup->GroupList.Add(gl);
 		}
 	}
 
-	FORCEINLINE static void ToContainer(FInventoryTagGroup& invTagGroup, const UInventoryTagGroup* tagGroup) {
+	static void ToInvTagGroupContainer(FInventoryTagGroup& invTagGroup, UInventoryTagGroup* tagGroup) {
 		invTagGroup.GroupName = tagGroup->GroupName;
 		invTagGroup.IsGroupEnabled = tagGroup->IsGroupEnabled;
 		invTagGroup.GroupType = (uint8)tagGroup->GroupType;
 		invTagGroup.GroupList.Empty();
 
-		for (const auto tagGrp : tagGroup->GroupList)
+		for (auto tagGrp : tagGroup->GroupList)
 		{
 			FTagGroup grp;
-			ToContainer(grp, tagGrp);
+			ToTagGroupContainer(grp, tagGrp);
 			invTagGroup.GroupList.Add(grp);
 		}
 	}
 
-	FORCEINLINE static void FromContainer(UInventoryTags* tags, const FInventoryTags& invTags) {
+	static void FromInventoryContainer(UInventoryTags* tags, FInventoryTags& invTags) {
 		tags->CurrentActiveIndex = invTags.CurrentActiveIndex;
 
 		for (auto invTagGroup : invTags.InventoryGroupList)
 		{
 			auto igl = NewObject<UInventoryTagGroup>();
-			FromContainer(igl, invTagGroup);
+			FromInvTagGroupContainer(igl, invTagGroup);
 			tags->InventoryGroupList.Add(igl);
 		}
 	}
 
-	FORCEINLINE static void ToContainer(FInventoryTags& invTags, const UInventoryTags* tags) {
+	static void ToInventoryContainer(FInventoryTags& invTags, UInventoryTags* tags) {
 		invTags.CurrentActiveIndex = tags->CurrentActiveIndex;
 		invTags.InventoryGroupList.Empty();
 
 		for (auto group : tags->InventoryGroupList)
 		{
-			FInventoryTagGroup grp;
-			ToContainer(grp, group);
-			invTags.InventoryGroupList.Add(grp);
+			/*FInventoryTagGroup grp;
+			ToInvTagGroupContainer(grp, group);
+			invTags.InventoryGroupList.Add(grp);*/
 		}
 	}
 
-
-
-
-	FORCEINLINE static void FromContainer(UBuildableBlockInfo* info, const FInventoryBuildableBlockInfo& block) {
+	static void FromBuildableContainer(UBuildableBlockInfo* info, FInventoryBuildableBlockInfo& block) {
 		BlockSavingHelpers::FromBaseContainer(info, block);
 		info->Tags = block.Tags;
 	}
 
-	FORCEINLINE static void ToContainer(FInventoryBuildableBlockInfo& block, const UBuildableBlockInfo* info) {
+	static void ToBuildableContainer(FInventoryBuildableBlockInfo& block, UBuildableBlockInfo* info) {
 		BlockSavingHelpers::ToBaseContainer(block, info);
 		block.Tags = info->Tags;
 	}
 
-	FORCEINLINE static void FromInventoryContainer(UInventoryBuildableBlockInfo* info, const FInventoryBuildableItemBlockInfo& block) {
-		FromContainer(info, block);
+	static void FromInvBuildableContainer(UInventoryBuildableBlockInfo* info, FInventoryBuildableItemBlockInfo& block) {
+		FromBuildableContainer(info, block);
 		info->Tags = block.Tags;
 	}
 
-	FORCEINLINE static void ToInventoryContainer(FInventoryBuildableItemBlockInfo& block, const UInventoryBuildableBlockInfo* info) {
-		ToContainer(block, info);
+	static void ToInvBuildableContainer(FInventoryBuildableItemBlockInfo& block, UInventoryBuildableBlockInfo* info) {
+		ToBuildableContainer(block, info);
 		block.Tags = info->Tags;
 	}
 
-	FORCEINLINE static TArray<UBuildableBlockInfo*> GetBuildableBlockData(USaveGameCarrier* carrier)
+	static void SetInventoryTags(USaveGameCarrier* carrier, UInventoryTags* InventoryTags)
 	{
-		TArray<UBuildableBlockInfo*> result;
-
-		for (auto block : carrier->buildableBlocks)
-		{
-			auto NewItem = NewObject<UBuildableBlockInfo>();
-			FromContainer(NewItem, block);
-			result.Add(NewItem);
-		}
-		return result;
+		ToInventoryContainer(carrier->inventoryTags, InventoryTags);
 	}
 
-	FORCEINLINE static TArray<UInventoryBuildableBlockInfo*> GetInventoryBuildableBlockData(USaveGameCarrier* carrier)
-	{
-		TArray<UInventoryBuildableBlockInfo*> result;
-		for (auto block : carrier->inventoryBuildableBlocks)
-		{
-			auto NewItem = NewObject<UInventoryBuildableBlockInfo>();
-			FromInventoryContainer(NewItem, block);
-			NewItem->UpdateDisplayValue();
-			result.Add(NewItem);
-		}
-		return result;
-	}
-
-	FORCEINLINE static UInventoryTags* GetInventoryTags(USaveGameCarrier* carrier)
+	static UInventoryTags* GetInventoryTags(USaveGameCarrier* carrier)
 	{
 		auto result = NewObject<UInventoryTags>();
-		FromContainer(result, carrier->inventoryTags);
-
+		FromInventoryContainer(result, carrier->inventoryTags);
 		return result;
 	}
 
-	FORCEINLINE static void SetInventoryTags(USaveGameCarrier* carrier, UInventoryTags* InventoryTags)
-	{
-		ToContainer(carrier->inventoryTags, InventoryTags);
-	}
-
-	FORCEINLINE static void SetBuildableBlocks(USaveGameCarrier* carrier, TArray<UBuildableBlockInfo*>& BuildableBlocks)
+	static void SetBuildableBlocks(USaveGameCarrier* carrier, TArray<UBuildableBlockInfo*>& BuildableBlocks)
 	{
 		carrier->buildableBlocks.Empty();
 
 		for (auto usedBlock : BuildableBlocks)
 		{
 			FInventoryBuildableBlockInfo block;
-			ToContainer(block, usedBlock);
+			ToBuildableContainer(block, usedBlock);
 			carrier->buildableBlocks.Add(block);
 		}
-
 	}
 
-	FORCEINLINE static void SetInventoryBuildableBlocks(USaveGameCarrier* carrier, TArray<UInventoryBuildableBlockInfo*>& InventoryBlocks)
+	static TArray<UBuildableBlockInfo*> GetBuildableBlocks(USaveGameCarrier* carrier)
+	{
+		TArray<UBuildableBlockInfo*> result;
+
+		for (auto block : carrier->buildableBlocks)
+		{
+			auto NewItem = NewObject<UBuildableBlockInfo>();
+			FromBuildableContainer(NewItem, block);
+			result.Add(NewItem);
+		}
+		return result;
+	}
+
+
+
+
+
+
+	static void SetInventoryBuildableBlocks(USaveGameCarrier* carrier, TArray<UInventoryBuildableBlockInfo*>& InventoryBlocks)
 	{
 		carrier->inventoryBuildableBlocks.Empty();
 		for (auto usedBlock : InventoryBlocks)
 		{
 			FInventoryBuildableItemBlockInfo  block;
-			ToInventoryContainer(block, usedBlock);
+			ToInvBuildableContainer(block, usedBlock);
 			carrier->buildableBlocks.Add(block);
 		}
 	}
 
-
-
-
+	static TArray<UInventoryBuildableBlockInfo*> GetInventoryBuildableBlocks(USaveGameCarrier* carrier)
+	{
+		TArray<UInventoryBuildableBlockInfo*> result;
+		for (auto block : carrier->inventoryBuildableBlocks)
+		{
+			auto NewItem = NewObject<UInventoryBuildableBlockInfo>();
+			FromInvBuildableContainer(NewItem, block);
+			NewItem->UpdateDisplayValue();
+			result.Add(NewItem);
+		}
+		return result;
+	}
 }

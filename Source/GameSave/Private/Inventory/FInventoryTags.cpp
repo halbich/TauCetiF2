@@ -4,3 +4,12 @@
 FInventoryTags::FInventoryTags() : CurrentActiveIndex(0), InventoryGroupList()
 {
 }
+
+void FInventoryTags::Empty() {
+	CurrentActiveIndex = 0;
+
+	for (auto igl : InventoryGroupList)
+		igl.Empty();
+
+	InventoryGroupList.Empty();
+}

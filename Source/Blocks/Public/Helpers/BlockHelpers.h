@@ -75,23 +75,23 @@ namespace BlockHelpers
 };
 
 namespace BlockSavingHelpers {
-	FORCEINLINE static void FromContainer(UBlockWithOxygenInfo* info, const FOxygenComponentInfo& block) {
+	static void FromOxygenContainer(UBlockWithOxygenInfo* info, FOxygenComponentInfo& block) {
 		info->CurrentFillingValue = block.CurrentFillingValue;
 	}
 
-	FORCEINLINE static void ToContainer(FOxygenComponentInfo& block, const UBlockWithOxygenInfo* info) {
+	static void ToOxygenContainer(FOxygenComponentInfo& block, UBlockWithOxygenInfo* info) {
 		block.CurrentFillingValue = info->CurrentFillingValue;
 	}
 
-	FORCEINLINE static void FromContainer(UBlockWithElectricityInfo* info, const FElectricityComponentInfo& block) {
+	static void FromElectricityContainer(UBlockWithElectricityInfo* info, FElectricityComponentInfo& block) {
 		info->CurrentObjectEnergy = block.CurrentObjectEnergy;
 	}
 
-	FORCEINLINE static void ToContainer(FElectricityComponentInfo& block, const UBlockWithElectricityInfo* info) {
+	static void ToElectricityContainer(FElectricityComponentInfo& block, UBlockWithElectricityInfo* info) {
 		block.CurrentObjectEnergy = info->CurrentObjectEnergy;
 	}
 
-	FORCEINLINE static void FromBaseContainer(UBlockBaseInfo* info, const FBlockBaseInfo& block) {
+	static void FromBaseContainer(UBlockBaseInfo* info, FBlockBaseInfo& block) {
 		info->ID = block.ID;
 		info->Scale = block.Scale;
 		info->Name = block.Name;
@@ -100,17 +100,17 @@ namespace BlockSavingHelpers {
 		if (block.HasOxygenData)
 		{
 			info->OxygenInfo = NewObject<UBlockWithOxygenInfo>();
-			FromContainer(info->OxygenInfo, block.OxygenInfo);
+			FromOxygenContainer(info->OxygenInfo, block.OxygenInfo);
 		}
 
 		if (block.HasElectricityData)
 		{
 			info->ElectricityInfo = NewObject<UBlockWithElectricityInfo>();
-			FromContainer(info->ElectricityInfo, block.ElectricityInfo);
+			FromElectricityContainer(info->ElectricityInfo, block.ElectricityInfo);
 		}
 	}
 
-	FORCEINLINE static void ToBaseContainer(FBlockBaseInfo& block, const UBlockBaseInfo* info) {
+	static void ToBaseContainer(FBlockBaseInfo& block, UBlockBaseInfo* info) {
 		block.ID = info->ID;
 		block.Scale = info->Scale;
 		block.Name = info->Name;
@@ -119,29 +119,29 @@ namespace BlockSavingHelpers {
 		if (info->OxygenInfo && info->OxygenInfo->IsValidLowLevel())
 		{
 			block.HasOxygenData = true;
-			ToContainer(block.OxygenInfo, info->OxygenInfo);
+			ToOxygenContainer(block.OxygenInfo, info->OxygenInfo);
 		}
 
 		if (info->ElectricityInfo && info->ElectricityInfo->IsValidLowLevel())
 		{
 			block.HasElectricityData = true;
-			ToContainer(block.ElectricityInfo, info->ElectricityInfo);
+			ToElectricityContainer(block.ElectricityInfo, info->ElectricityInfo);
 		}
 	}
 
-	FORCEINLINE static void FromContainer(UBlockInfo* info, const FBlockInfo& block) {
+	static void FromContainer(UBlockInfo* info, FBlockInfo& block) {
 		FromBaseContainer(info, block);
 		info->Location = block.Location;
 		info->Rotation = block.Rotation;
 	}
 
-	FORCEINLINE static void ToContainer(FBlockInfo& block, const UBlockInfo* info) {
+	static void ToContainer(FBlockInfo& block, UBlockInfo* info) {
 		ToBaseContainer(block, info);
 		block.Location = info->Location;
 		block.Rotation = info->Rotation;
 	}
 
-	FORCEINLINE static void SetBlockData(USaveGameCarrier* carrier, TArray<UBlockInfo*>& UsedBlocks)
+	static void SetBlockData(USaveGameCarrier* carrier, TArray<UBlockInfo*>& UsedBlocks)
 	{
 		carrier->usedBlocks.Empty();
 
@@ -153,17 +153,8 @@ namespace BlockSavingHelpers {
 		}
 	}
 
-	FORCEINLINE void FillData(USaveGameCarrier* carrier, UBlockWithOxygenInfo* OxygenInfo)
-	{
-		ToContainer(carrier->PlayerOxygenComponent, OxygenInfo);
-	}
 
-	FORCEINLINE void FillData(USaveGameCarrier* carrier, UBlockWithElectricityInfo* ElectricityInfo)
-	{
-		ToContainer(carrier->PlayerElectricityComponent, ElectricityInfo);
-	}
-
-	FORCEINLINE static TArray<UBlockInfo*> GetBlockData(USaveGameCarrier* carrier)
+	static TArray<UBlockInfo*> GetBlockData(USaveGameCarrier* carrier)
 	{
 		TArray<UBlockInfo*> result;
 		for (auto block : carrier->usedBlocks)
@@ -175,17 +166,26 @@ namespace BlockSavingHelpers {
 		return result;
 	}
 
-	FORCEINLINE static UBlockWithOxygenInfo* GetOxygenInfo(USaveGameCarrier* carrier)
+	static void SetOxygenInfo(USaveGameCarrier* carrier, UBlockWithOxygenInfo* OxygenInfo)
+	{
+		ToOxygenContainer(carrier->PlayerOxygenComponent, OxygenInfo);
+	}
+
+	static UBlockWithOxygenInfo* GetOxygenInfo(USaveGameCarrier* carrier)
 	{
 		auto result = NewObject<UBlockWithOxygenInfo>();
-		FromContainer(result, carrier->PlayerOxygenComponent);
+		FromOxygenContainer(result, carrier->PlayerOxygenComponent);
 		return result;
 	}
 
-	FORCEINLINE static UBlockWithElectricityInfo* GetElectricityInfo(USaveGameCarrier* carrier)
+	static void SetElectricityInfo(USaveGameCarrier* carrier, UBlockWithElectricityInfo* ElectricityInfo)
+	{
+		ToElectricityContainer(carrier->PlayerElectricityComponent, ElectricityInfo);
+	}
+	static UBlockWithElectricityInfo* GetElectricityInfo(USaveGameCarrier* carrier)
 	{
 		auto result = NewObject<UBlockWithElectricityInfo>();
-		FromContainer(result, carrier->PlayerElectricityComponent);
+		FromElectricityContainer(result, carrier->PlayerElectricityComponent);
 		return result;
 	}
 }

@@ -4,3 +4,8 @@
 FTagGroup::FTagGroup() : GroupName(), Tags(), LetVisibleAll(true)
 {
 }
+
+void FTagGroup::Empty() {
+	GroupName.Empty();
+	Tags.Empty();
+}

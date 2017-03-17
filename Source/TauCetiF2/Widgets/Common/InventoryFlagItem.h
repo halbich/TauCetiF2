@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "Object.h"
-#include "Widgets/Common/CmbItem.h"
+#include "CmbItem.h"
 #include "InventoryFlagItem.generated.h"
 
 /**
