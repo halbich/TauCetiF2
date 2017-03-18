@@ -25,7 +25,6 @@ public:
 	UNewGameSaveHolder();
 	~UNewGameSaveHolder();
 
-
 	TMap<ENamedHardcodedLevel, FunctionPtrType> systemSaves;
 
 	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
@@ -94,8 +93,6 @@ private:
 
 	FORCEINLINE FInventoryTags makeDefault()
 	{
-		// TODO check aginst gamesave, ii could be removed from here and elt this method live only in gamesave
-
 		FInventoryTags res;
 		for (int32 i = 0; i < GameDefinitions::DefaultInventoryTagGroupsCount; i++)
 		{
@@ -115,6 +112,13 @@ private:
 			itm.GroupName = FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryTags.Default_Group_Name", "Skupina {0}"), FText::AsNumber(i + 1)).ToString();
 			res.InventoryGroupList.Add(itm);
 		}
+
+		return res;
+	}
+
+	FORCEINLINE FWeatherState makeRandomWeatherState()
+	{
+		FWeatherState res;
 
 		return res;
 	}

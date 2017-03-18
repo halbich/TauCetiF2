@@ -3,7 +3,7 @@
 #include "ArchiveHelpers.h"
 #include "SaveHelpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 23;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 24;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -17,6 +17,7 @@ USaveGameCarrier::USaveGameCarrier() {
 	inventoryBuildableBlocks = TArray<FInventoryBuildableItemBlockInfo>();
 
 	inventoryTags = FInventoryTags();
+
 }
 
 USaveGameCarrier::~USaveGameCarrier() {
@@ -221,6 +222,8 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, TAr
 	Ar << carrier.PlayerElectricityComponent;
 
 	Ar << carrier.IsCreativeMode;
+
+	Ar << carrier.weatherState;
 }
 
 bool USaveGameCarrier::IsSaveNameValid()

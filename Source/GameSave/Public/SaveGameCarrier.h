@@ -8,6 +8,8 @@
 #include "BlockSaveInfo.h"
 #include "Inventory/FInventoryTags.h"
 #include "Inventory/InventoryArchiveHelpers.h"
+#include "Weather/FWeatherState.h"
+#include "Weather/WeatherArchiveHelpers.h"
 #include "SaveGameCarrier.generated.h"
 
 /**
@@ -101,6 +103,9 @@ public:
 
 	//Serializable array
 	TArray<FInventoryBuildableItemBlockInfo> inventoryBuildableBlocks;
+
+	//serializable Item
+	FWeatherState weatherState;
 
 #pragma endregion
 
