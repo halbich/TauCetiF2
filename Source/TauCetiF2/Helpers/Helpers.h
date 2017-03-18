@@ -8,6 +8,7 @@
 #include "Blocks/Public/Info/BlockBaseInfo.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
 #include "Widgets/Common/InventoryFlagItem.h"
+#include "Game/Weather/WeatherDefinition.h"
 #include "Helpers.generated.h"
 
 /**
@@ -66,4 +67,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
 		static bool SetSettingsValueFloat(EGameUserSettingsVariable settings, float value);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers | Settings")
+		static FWeatherDefinition GetRandomDefinition(UPARAM(ref)TArray<FWeatherDefinition>& aviableDefinitions, int32& outIndex);
 };

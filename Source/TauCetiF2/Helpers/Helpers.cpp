@@ -197,3 +197,11 @@ FString UHelpers::getConfigVariableNameFor(EGameUserSettingsVariable settings)
 
 
 
+FWeatherDefinition UHelpers::GetRandomDefinition(UPARAM(ref)TArray<FWeatherDefinition>& aviableDefinitions, int32& outIndex)
+{
+	check(aviableDefinitions.Num() > 0);
+
+	outIndex = FMath::RandHelper(aviableDefinitions.Num());
+
+	return aviableDefinitions[outIndex];
+}
