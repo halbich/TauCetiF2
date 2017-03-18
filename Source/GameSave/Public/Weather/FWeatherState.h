@@ -11,7 +11,7 @@ public:
 	FWeatherState();
 
 	int32 CurrentDefinitionID;
-	float CurrentWorldTime;
 	float CurrentWaitingTime;
+	float TargetWaitingTime;
 	bool  IsInWeatherChange;
 };

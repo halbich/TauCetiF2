@@ -6,24 +6,29 @@
 #include "CurrentWeatherState.generated.h"
 
 /**
- * 
+ *
  */
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, Blueprintable)
 class TAUCETIF2_API UCurrentWeatherState : public UObject
 {
 	GENERATED_BODY()
 public:
 
-	UPROPERTY(BlueprintReadWrite, Category = "TCF2 | Weather")
+	UCurrentWeatherState();
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		int32 CurrentDefinitionID;
-	
-	
-	UPROPERTY(BlueprintReadWrite, Category = "TCF2 | Weather")
+
+	// This property is not serializable to the SaveGame
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		float CurrentWorldTime;
 
-	UPROPERTY(BlueprintReadWrite, Category = "TCF2 | Weather")
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		float CurrentWaitingTime;
 
-	UPROPERTY(BlueprintReadWrite, Category = "TCF2 | Weather")
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
+		float TargetWaitingTime;
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		bool IsInWeatherChange;
 };

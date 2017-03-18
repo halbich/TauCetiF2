@@ -16,7 +16,7 @@ public:
 	// Sets default values for this component's properties
 	UGameWeatherComponent();
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | GameWeatherComponent")
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | GameWeatherComponent")
 		UCurrentWeatherState* currentWeatherState;
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameWeatherComponent")

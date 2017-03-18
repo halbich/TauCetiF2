@@ -4,5 +4,8 @@
 #include "CurrentWeatherState.h"
 
 
-
+UCurrentWeatherState::UCurrentWeatherState()
+{
+	CurrentWorldTime = -1;
+}
 
