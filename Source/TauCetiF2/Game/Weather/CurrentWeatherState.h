@@ -24,11 +24,36 @@ public:
 		float CurrentWorldTime;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
+		bool IsInWeatherChange;
+
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		float CurrentWaitingTime;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		float TargetWaitingTime;
 
+
+	// This property is not serializable to the SaveGame
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
-		bool IsInWeatherChange;
+		float BaseWeatherIntensity;
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
+		float CurrentWeatherIntensity;
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
+		float TargetWeatherIntensity;
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
+		float BaseCloudOpacity;
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
+		float CurrentCloudOpacity;
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
+		float TargetCloudOpacity;
+
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Weather")
+		void MakeTargetsCurrent();
 };

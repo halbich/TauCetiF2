@@ -68,6 +68,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
 		static bool SetSettingsValueFloat(EGameUserSettingsVariable settings, float value);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers | Settings")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
 		static FWeatherDefinition GetRandomDefinition(UPARAM(ref)TArray<FWeatherDefinition>& aviableDefinitions, int32& outIndex);
 };

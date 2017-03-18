@@ -11,7 +11,12 @@ public:
 	FWeatherState();
 
 	int32 CurrentDefinitionID;
+	bool  IsInWeatherChange;
 	float CurrentWaitingTime;
 	float TargetWaitingTime;
-	bool  IsInWeatherChange;
+
+	float CurrentWeatherIntensity;
+	float TargetWeatherIntensity;
+	float CurrentCloudOpacity;
+	float TargetCloudOpacity;
 };

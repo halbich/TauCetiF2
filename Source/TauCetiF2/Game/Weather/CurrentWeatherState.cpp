@@ -9,3 +9,9 @@ UCurrentWeatherState::UCurrentWeatherState()
 	CurrentWorldTime = -1;
 }
 
+void UCurrentWeatherState::MakeTargetsCurrent()
+{
+	CurrentWeatherIntensity = BaseWeatherIntensity = TargetWeatherIntensity;
+	CurrentCloudOpacity = BaseCloudOpacity = TargetCloudOpacity;
+
+}
