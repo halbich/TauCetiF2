@@ -129,7 +129,6 @@ void ABlock::SetBlockInfo(UBlockInfo* info)
 		info->ElectricityInfo = electricityBlock->SetInfo(info->ElectricityInfo);
 }
 
-
 void ABlock::InitWorldObjectComponent()
 {
 	auto woc = WorldObjectComponent;
@@ -150,31 +149,35 @@ void ABlock::InitWorldObjectComponent()
 
 	// TODO
 
-	TArray<UObject*> items;
 	woc->TreeElements[0]->DEBUGDrawSurrondings(GetWorld(), FColor::Black);
+
+	auto def = Definition->GetDefaultObject<UBlockDefinition>();
+
+	// potřebujeme okolí pro propojení elektriky nebo zapojení do patternů
+	if (!def->HasElectricityComponent && !def->UsingInPatterns)
+		return;
+
+	TArray<UObject*> items;
 	woc->TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items, this);
 	print(TEXT("surroundings:"));
 
 	TArray<UMinMaxTree*> usedTrees;
 
-
 	for (auto obj : items)
 	{
 		auto object = Cast<ABlock>(obj);
 
-		check(object && object->IsValidLowLevelFast());
+		check(object && object->IsValidLowLevelFast() && object->WorldObjectComponent && object->WorldObjectComponent->IsValidLowLevelFast());
 
-		if (object->BlockInfo->ID != BlockInfo->ID)
-			continue;
+		// TODO try bind electricity
 
-		if (!object->WorldObjectComponent || !object->WorldObjectComponent->IsValidLowLevel())
-			continue;
+		if (def->UsingInPatterns && object->BlockInfo->ID == BlockInfo->ID) {
 
-		ensure(object->WorldObjectComponent->BuildingTree);
-		usedTrees.AddUnique(object->WorldObjectComponent->BuildingTree->GetRoot());
-		print(*object->WorldObjectComponent->DefiningBox->ContainingObject->GetName());
+			ensure(object->WorldObjectComponent->BuildingTree);
+			usedTrees.AddUnique(object->WorldObjectComponent->BuildingTree->GetRoot());
+			print(*object->WorldObjectComponent->DefiningBox->ContainingObject->GetName());
+		}
 	}
-
 	for (auto rootObj : usedTrees)
 	{
 		rootObj->Insert(woc->BuildingTree);
@@ -183,7 +186,7 @@ void ABlock::InitWorldObjectComponent()
 	woc->BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
 }
 
-// *********** friend methods ******** 
+// *********** friend methods ********
 
 bool CheckCommonBoundaries(UObject* o1, const UObject* o2)
 {
@@ -194,7 +197,6 @@ bool CheckCommonBoundaries(UObject* o1, const UObject* o2)
 	ensure(b2);
 
 	return UMinMaxBox::HasCommonBoundaries(b1->WorldObjectComponent->DefiningBox, b2->WorldObjectComponent->DefiningBox);
-
 }
 
 void AddToTreeElements(UObject* obj, UKDTree* box)
@@ -214,6 +216,5 @@ void RemoveFromTreeElements(UObject* obj, UKDTree* box)
 	b->WorldObjectComponent->TreeElements.Remove(box);
 	b->WorldObjectComponent->OnTreeElementsChanged();
 }
-
 
 #pragma optimize("",on)

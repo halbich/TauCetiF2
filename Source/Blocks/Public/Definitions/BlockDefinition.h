@@ -95,6 +95,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		float EnergyReqiredToBuild;
 
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
+		bool UsingInPatterns;
+
+
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | OxygenComponent")
 		bool HasOxygenComponent;
 
