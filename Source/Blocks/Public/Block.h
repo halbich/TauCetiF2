@@ -8,6 +8,7 @@
 #include "BlockInfo.h"
 #include "BlockWithElectricity.h"
 #include "BlockWithOxygen.h"
+#include "Components/WorldObjectComponent.h"
 #include "Block.generated.h"
 
 UCLASS()
@@ -26,6 +27,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | Block", meta = (AllowPrivateAccess = "true"))
 		USelectTargetComponent* SelectTargetComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | Block", meta = (AllowPrivateAccess = "true"))
+		UWorldObjectComponent* WorldObjectComponent;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
 		UStaticMeshComponent* GetMeshStructureComponent(int32 BlockMeshStructureDefIndex);

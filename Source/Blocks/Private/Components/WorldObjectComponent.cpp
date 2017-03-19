@@ -1,4 +1,4 @@
-﻿#include "TauCetiF2.h"
+﻿#include "Blocks.h"
 #include "WorldObjectComponent.h"
 
 // Sets default values for this component's properties
@@ -15,7 +15,7 @@ UWorldObjectComponent::UWorldObjectComponent()
 
 // Called when the game starts
 void UWorldObjectComponent::BeginPlay()
-{
+{/*
 	Super::BeginPlay();
 
 	ensure(Element);
@@ -35,7 +35,7 @@ void UWorldObjectComponent::BeginPlay()
 
 	auto surroundings = NewObject<UKDTree>(this)->Init(DefiningBox, RootBox);
 
-	surroundings->DEBUGDrawSurrondings(GetWorld());
+	surroundings->DEBUGDrawSurrondings(GetWorld());*/
 
 	// TODO
 
@@ -72,10 +72,10 @@ void UWorldObjectComponent::BeginPlay()
 
 void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 {
-	DefiningBox = definingBox;
-	ensure(DefiningBox != nullptr);
+	//DefiningBox = definingBox;
+	//ensure(DefiningBox != nullptr);
 
-	BuildingTree = NewObject<UMinMaxTree>(this)->Init(DefiningBox);
+	//BuildingTree = NewObject<UMinMaxTree>(this)->Init(DefiningBox);
 }
 
 void UWorldObjectComponent::OnTreeElementsChanged()
@@ -84,7 +84,7 @@ void UWorldObjectComponent::OnTreeElementsChanged()
 
 void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	if (EndPlayReason == EEndPlayReason::Type::Quit)
+	/*if (EndPlayReason == EEndPlayReason::Type::Quit)
 		return;
 
 	for (auto object : TreeElements)
@@ -109,5 +109,5 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 			FlushPersistentDebugLines(GetWorld());
 			parent->GetRoot()->DEBUGDrawBorder(GetWorld());
 		}
-	}
+	}*/
 }

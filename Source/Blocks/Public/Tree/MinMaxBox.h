@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "Object.h"
-#include "Helpers/Helpers.h"
 #include "MinMaxBox.generated.h"
 
 #pragma optimize("", off)
@@ -9,7 +8,7 @@
  *
  */
 UCLASS(BlueprintType)
-class TAUCETIF2_API UMinMaxBox : public UObject
+class BLOCKS_API UMinMaxBox : public UObject
 {
 	GENERATED_BODY()
 

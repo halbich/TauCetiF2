@@ -1,4 +1,4 @@
-﻿#include "TauCetiF2.h"
+﻿#include "Blocks.h"
 #include "KDTree.h"
 
 UKDTree* UKDTree::Init(FVector min, FVector max, int8 dividingIndex)
@@ -37,7 +37,7 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 		SingleChild = box;
 		box->SetParent(this);
 
-		auto woc = Cast<UWorldObjectComponent>(SingleChild->ContainingObject->GetComponentByClass(UWorldObjectComponent::StaticClass()));
+		auto woc = SingleChild->ContainingObject->WorldObjectComponent;
 		check(woc);
 		woc->TreeElements.Add(box);
 		woc->OnTreeElementsChanged();
@@ -49,7 +49,7 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 		SingleChild->SetParent(nullptr);
 		// TODO
 
-		auto woc = Cast<UWorldObjectComponent>(SingleChild->ContainingObject->GetComponentByClass(UWorldObjectComponent::StaticClass()));
+		auto woc = SingleChild->ContainingObject->WorldObjectComponent;
 		check(woc);
 		woc->TreeElements.Remove(SingleChild);// this box could be split
 		woc->OnTreeElementsChanged();

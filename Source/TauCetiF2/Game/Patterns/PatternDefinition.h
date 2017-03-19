@@ -2,7 +2,7 @@
 
 #include "Object.h"
 #include "Blocks/Public/Info/BlockInfo.h"
-#include "World/MinMaxTree.h"
+#include "Blocks/Public/Tree/MinMaxTree.h"
 #include "Game/Patterns/PatternElement.h"
 #include "Game/Patterns/PatternGroup.h"
 #include "PatternDefinition.generated.h"

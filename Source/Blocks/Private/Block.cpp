@@ -10,6 +10,8 @@ ABlock::ABlock()
 	SetRootComponent(root);
 
 	SelectTargetComponent = CreateDefaultSubobject<USelectTargetComponent>(TEXT("SelectTarget"));
+
+	WorldObjectComponent = CreateDefaultSubobject<UWorldObjectComponent>(TEXT("WorldObjectComponent"));
 }
 
 #pragma optimize("", off)

@@ -117,8 +117,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 		MinMax->ContainingObject = actor;
 		UE_LOG(LogTemp, Log, TEXT("---   Přidávám do světa objekt  %s"), *actor->GetName());
 
-		auto woc = NewObject<UWorldObjectComponent>(actor);
-		woc->Element = actor;
+		auto woc = actor->WorldObjectComponent;
 		woc->UpdateDefiningBox(MinMax);
 		woc->RegisterComponent();
 
@@ -139,7 +138,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			pickableDelegates.Add(actor, ListeningHandle);
 		}
 
-		//MinMax->DEBUGDrawContainingBox(GetWorld());
+		MinMax->DEBUGDrawContainingBox(GetWorld());
 	}
 
 	UGameplayStatics::FinishSpawningActor(actor, trans);

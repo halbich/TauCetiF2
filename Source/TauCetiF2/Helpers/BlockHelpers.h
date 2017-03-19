@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "World/MinMaxBox.h"
+#include "Blocks/Public/Tree/MinMaxBox.h"
 #include "Blocks/Public/Helpers/BlockHelpers.h"
 
 /**

@@ -2,17 +2,17 @@
 
 #include "Object.h"
 #include "MinMaxBox.h"
-#include "Helpers/Helpers.h"
-#include "Blocks/Public/Block.h"
+#include "Block.h"
+#include "Components/WorldObjectComponent.h"
 #include "KDTree.generated.h"
 
-class UWorldObjectComponent;
+
 
 /**
  *
  */
 UCLASS(BlueprintType)
-class TAUCETIF2_API UKDTree : public UMinMaxBox
+class BLOCKS_API UKDTree : public UMinMaxBox
 {
 	GENERATED_BODY()
 
