@@ -30,3 +30,26 @@ void UGameWeatherComponent::SaveToCarrier(USaveGameCarrier* carrier)
 	check(carrier != NULL);
 	WeatherSavingHelpers::ToWeatherState(carrier->weatherState, currentWeatherState);
 }
+
+
+
+void UGameWeatherComponent::DEBUGShowMinMaxBoxes() {
+	if (WeatherRootTree)
+	{
+		debugBoxesShown = true;
+		WeatherRootTree->DEBUGDrawContainingBox(GetWorld());
+	}
+	else
+		print(TEXT("NO Root!"));
+}
+
+void UGameWeatherComponent::DEBUGHideMinMaxBoxes() {
+	if (WeatherRootTree)
+	{
+		FlushPersistentDebugLines(GetWorld());
+		debugBoxesShown = false;
+		//
+	}
+	else
+		print(TEXT("NO Root!"));
+}

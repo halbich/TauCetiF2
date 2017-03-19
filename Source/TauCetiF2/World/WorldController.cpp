@@ -126,6 +126,10 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			check(usedBox->ContainingObject == actor && TEXT("Used box has another ContainingObject than it should have!"));
 		}
 
+		auto weatherMinMax = NewObject<UWeatherTargetsKDTree>()->Init(box);
+		weatherMinMax->ContainingObject = actor;
+		weatherComponent->WeatherRootTree->AddToTree(weatherMinMax);
+
 		actor->InitWorldObjectComponent();
 
 		auto pickable = Cast<IPickableBlock>(actor);
@@ -208,6 +212,20 @@ void AWorldController::BeginPlay() {
 	FVector max((maxCube + 0.5 * FVector(1, 1, 1))* GameDefinitions::CubeMinSize);
 
 	RootBox->Init(min, max, 0);
+
+	for (TActorIterator<APawn> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		auto comp = Cast<UGameWeatherComponent>((*ActorItr)->GetComponentByClass(UGameWeatherComponent::StaticClass()));
+		if (comp)
+		{
+			weatherComponent = comp;
+			break;
+		}
+	}
+
+	check(weatherComponent);
+	weatherComponent->WeatherRootTree = NewObject<UWeatherTargetsKDTree>(GetTransientPackage(), TEXT("WeatherRootBox"));
+	weatherComponent->WeatherRootTree->Init(min, max, 0);
 
 	UPatternDefinitionsHolder::Instance();
 

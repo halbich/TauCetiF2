@@ -12,6 +12,7 @@
 #include "Components/BaseControlComponent.h"
 #include "Inventory/Public/InventoryComponent.h"
 #include "Blocks/Public/Info/BlockInfo.h"
+#include "Components/GameWeatherComponent.h"
 
 #include "WorldController.generated.h"
 
@@ -34,6 +35,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldController, meta = (AllowPrivateAccess = "true"))
 		UBaseControlComponent* BaseControl;
+
+	UPROPERTY(Transient)
+		UGameWeatherComponent* weatherComponent;
 
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
