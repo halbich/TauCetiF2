@@ -61,6 +61,8 @@ public:
 		return SelectTargetComponent && SelectTargetComponent->IsValidLowLevel() && SelectTargetComponent->IsInUsableArea(owner);
 	}
 
+	void InitWorldObjectComponent();
+
 private:
 
 	FORCEINLINE void setMaterial(UPrimitiveComponent* mesh, UMaterial* material, int32 index, float scaleX, float scaleY) {
@@ -80,3 +82,5 @@ private:
 		setMaterial(mesh, material, index, vect.X, vect.Y);
 	}
 };
+
+

@@ -15,67 +15,27 @@ UWorldObjectComponent::UWorldObjectComponent()
 
 // Called when the game starts
 void UWorldObjectComponent::BeginPlay()
-{/*
+{
 	Super::BeginPlay();
+
+	/*auto Element = Cast<ABlock>(GetOwner);
 
 	ensure(Element);
 
 	if (Element->BlockInfo->UnderConstruction)
-		return;
+		return;*/
 
-	ensure(BuildingTree);
-
-	FlushPersistentDebugLines(GetWorld());
-
-	ensure(DefiningBox);
-	ensure(TreeElements.Num() > 0);
-
-	RootBox = TreeElements[0]->GetRootNode<UKDTree>(true);
-	ensure(RootBox != nullptr);
-
-	auto surroundings = NewObject<UKDTree>(this)->Init(DefiningBox, RootBox);
-
-	surroundings->DEBUGDrawSurrondings(GetWorld());*/
-
-	// TODO
-
-	//TArray<AWorldObject*> items;
-	////TreeElements[0]->DEBUGDrawSurrondings(GetWorld(), FColor::Black);
-	//TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items, this);
-	////print(TEXT("surroundings:"));
-
-	//TArray<UMinMaxTree*> usedTrees;
-
-	//for (auto object : items)
-	//{
-	//	if (!object || !object->IsValidLowLevelFast())
-	//		continue;
-
-	//	auto woc = object->WorldObjectComponent;
-	//	if (!woc || !woc->IsValidLowLevel())
-	//		continue;
-
-	//	ensure(woc->BuildingTree);
-	//	usedTrees.AddUnique(woc->BuildingTree->GetRoot());
-	//	print(*woc->DefiningBox->ContainingObject->GetName());
-	//}
-
-	//for (auto rootObj : usedTrees)
-	//{
-	//	rootObj->Insert(BuildingTree);
-	//}
-
-	//BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
+	
 }
 
 #pragma optimize("",on)
 
 void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 {
-	//DefiningBox = definingBox;
-	//ensure(DefiningBox != nullptr);
+	DefiningBox = definingBox;
+	ensure(DefiningBox != nullptr);
 
-	//BuildingTree = NewObject<UMinMaxTree>(this)->Init(DefiningBox);
+	BuildingTree = NewObject<UMinMaxTree>()->Init(DefiningBox);
 }
 
 void UWorldObjectComponent::OnTreeElementsChanged()
@@ -84,7 +44,7 @@ void UWorldObjectComponent::OnTreeElementsChanged()
 
 void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	/*if (EndPlayReason == EEndPlayReason::Type::Quit)
+	if (EndPlayReason == EEndPlayReason::Type::Quit)
 		return;
 
 	for (auto object : TreeElements)
@@ -109,5 +69,5 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 			FlushPersistentDebugLines(GetWorld());
 			parent->GetRoot()->DEBUGDrawBorder(GetWorld());
 		}
-	}*/
+	}
 }

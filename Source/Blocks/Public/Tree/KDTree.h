@@ -2,8 +2,7 @@
 
 #include "Object.h"
 #include "MinMaxBox.h"
-#include "Block.h"
-#include "Components/WorldObjectComponent.h"
+#include "Commons/Public/GameDefinitions.h"
 #include "KDTree.generated.h"
 
 
@@ -29,7 +28,7 @@ public:
 		UKDTree* B2;
 
 	UPROPERTY(Transient)
-		ABlock* ContainingObject;
+		UObject* ContainingObject;
 
 	UPROPERTY(Transient)
 		int32 DividingIndex;
@@ -48,8 +47,8 @@ public:
 
 	void AddToTree(UKDTree* box, bool forceInsert = false);
 	bool IsPlaceEmpty(const UMinMaxBox* box);
-	/*void GetContainingObjects(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement = nullptr);
-	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<AWorldObject*>& outArray, const UWorldObjectComponent* ignoreElement);*/
+	void GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement = nullptr);
+	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement);
 
 	void UpdateAfterChildDestroyed();
 
@@ -57,6 +56,10 @@ public:
 	{
 		return GetParentNodeTemplate<UKDTree>();
 	}
+
+	friend bool CheckCommonBoundaries(UObject* o1, const UObject* o2);
+	friend void AddToTreeElements(UObject* obj, UKDTree* box);
+	friend void RemoveFromTreeElements(UObject* obj, UKDTree* box);
 
 private:
 

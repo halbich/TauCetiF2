@@ -3,6 +3,8 @@
 #include "Definitions/BlockDefinition.h"
 #include "GenericBlock.generated.h"
 
+class UMinMaxBox;
+
 UINTERFACE(BlueprintType)
 class BLOCKS_API UGenericBlock : public UInterface
 {
@@ -23,4 +25,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | Block")
 		void UpdateBlockOnConstruction(UBlockDefinition* BlockDef);
+
+	UMinMaxBox* GetDefiningBox();
+
 };

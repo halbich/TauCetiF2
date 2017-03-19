@@ -1,10 +1,10 @@
 ﻿#pragma once
 
 #include "Components/ActorComponent.h"
+#include "Tree/KDTree.h"
+#include "Tree/MinMaxTree.h"
 #include "WorldObjectComponent.generated.h"
 
-class UMinMaxTree;
-class UKDTree;
 
 UCLASS(Blueprintable, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API UWorldObjectComponent : public UActorComponent

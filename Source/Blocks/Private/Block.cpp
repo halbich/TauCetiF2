@@ -129,4 +129,91 @@ void ABlock::SetBlockInfo(UBlockInfo* info)
 		info->ElectricityInfo = electricityBlock->SetInfo(info->ElectricityInfo);
 }
 
+
+void ABlock::InitWorldObjectComponent()
+{
+	auto woc = WorldObjectComponent;
+
+	ensure(woc->BuildingTree);
+
+	FlushPersistentDebugLines(GetWorld());
+
+	ensure(woc->DefiningBox);
+	ensure(woc->TreeElements.Num() > 0);
+
+	woc->RootBox = woc->TreeElements[0]->GetRootNode<UKDTree>(true);
+	ensure(woc->RootBox != nullptr);
+
+	auto surroundings = NewObject<UKDTree>()->Init(woc->DefiningBox, woc->RootBox);
+
+	surroundings->DEBUGDrawSurrondings(GetWorld());
+
+	// TODO
+
+	TArray<UObject*> items;
+	woc->TreeElements[0]->DEBUGDrawSurrondings(GetWorld(), FColor::Black);
+	woc->TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items, this);
+	print(TEXT("surroundings:"));
+
+	TArray<UMinMaxTree*> usedTrees;
+
+
+	for (auto obj : items)
+	{
+		auto object = Cast<ABlock>(obj);
+
+		check(object && object->IsValidLowLevelFast());
+
+		if (object->BlockInfo->ID != BlockInfo->ID)
+			continue;
+
+		if (!object->WorldObjectComponent || !object->WorldObjectComponent->IsValidLowLevel())
+			continue;
+
+		ensure(object->WorldObjectComponent->BuildingTree);
+		usedTrees.AddUnique(object->WorldObjectComponent->BuildingTree->GetRoot());
+		print(*object->WorldObjectComponent->DefiningBox->ContainingObject->GetName());
+	}
+
+	for (auto rootObj : usedTrees)
+	{
+		rootObj->Insert(woc->BuildingTree);
+	}
+
+	woc->BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
+}
+
+// *********** friend methods ******** 
+
+bool CheckCommonBoundaries(UObject* o1, const UObject* o2)
+{
+	auto b1 = Cast<ABlock>(o1);
+	ensure(b1);
+
+	auto b2 = Cast<ABlock>(o2);
+	ensure(b2);
+
+	return UMinMaxBox::HasCommonBoundaries(b1->WorldObjectComponent->DefiningBox, b2->WorldObjectComponent->DefiningBox);
+
+}
+
+void AddToTreeElements(UObject* obj, UKDTree* box)
+{
+	auto b = Cast<ABlock>(obj);
+	ensure(b);
+
+	b->WorldObjectComponent->TreeElements.Add(box);
+	b->WorldObjectComponent->OnTreeElementsChanged();
+}
+
+void RemoveFromTreeElements(UObject* obj, UKDTree* box)
+{
+	auto b = Cast<ABlock>(obj);
+	ensure(b);
+
+	b->WorldObjectComponent->TreeElements.Remove(box);
+	b->WorldObjectComponent->OnTreeElementsChanged();
+}
+
+
 #pragma optimize("",on)

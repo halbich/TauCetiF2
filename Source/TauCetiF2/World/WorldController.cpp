@@ -119,14 +119,14 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 
 		auto woc = actor->WorldObjectComponent;
 		woc->UpdateDefiningBox(MinMax);
-		woc->RegisterComponent();
-
 		RootBox->AddToTree(MinMax);
 		for (auto usedBox : woc->TreeElements)
 		{
 			check(usedBox->GetRootNode<UKDTree>() == RootBox && TEXT("Used box don't have RootBox as ROOT !"));
 			check(usedBox->ContainingObject == actor && TEXT("Used box has another ContainingObject than it should have!"));
 		}
+
+		actor->InitWorldObjectComponent();
 
 		auto pickable = Cast<IPickableBlock>(actor);
 		if (pickable)
