@@ -3,7 +3,19 @@
 #include "Components/ActorComponent.h"
 #include "Game/Weather/WeatherSavingHelpers.h"
 #include "Blocks/Public/Tree/WeatherTargetsKDTree.h"
+#include "GameSave/Public/SaveGameCarrier.h"
 #include "GameWeatherComponent.generated.h"
+
+
+
+UENUM(BlueprintType)
+enum class EStormState : uint8
+{
+	NoStorm	 	UMETA(DisplayName = "NoStorm"),
+	EaseIn		UMETA(DisplayName = "EaseIn"),
+	Running		UMETA(DisplayName = "Running"),
+	EaseOut		UMETA(DisplayName = "EaseOut")
+};
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TAUCETIF2_API UGameWeatherComponent : public UActorComponent
@@ -26,14 +38,32 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | GameWeatherComponent")
 		UWeatherTargetsKDTree* WeatherRootTree;
 
-	UPROPERTY(EditDefaultsOnly, Category = Curve)
-		UCurveFloat* Curve;
 
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | GameWeatherComponent")
-		bool IsInStorm;
+#pragma region StormMechanics
+
+	UPROPERTY(EditDefaultsOnly, Category = Curve)
+		UCurveFloat* IntensityCurve;
+
+	UPROPERTY(Transient)
+		float CurrentHitIntensity;
+
+	UPROPERTY(Transient)
+		float hitpointsCounter;
+
+	UPROPERTY(Transient)
+		float currentEasingTime;
+
+	UPROPERTY(EditDefaultsOnly, Category = Curve)
+		float EntryEasingTime;
+
+	UPROPERTY(Transient)
+		EStormState StormState;
+
+
+#pragma endregion
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameWeatherComponent")
 		void DEBUGShowMinMaxBoxes();
@@ -65,5 +95,9 @@ public:
 private:
 
 	FDelegateHandle ListeningHandle;
+
+	void doDamage(int targets) {
+		print(TEXT("Doing damage"));
+	}
 
 };

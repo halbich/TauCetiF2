@@ -62,23 +62,94 @@ void UGameWeatherComponent::ObjectsChanged() {
 
 void UGameWeatherComponent::OnStormBegin()
 {
+	// we want to be sure that the weather changing simulation is done and completed
+	check(currentWeatherState->TargetWeatherIntensity == currentWeatherState->CurrentWeatherIntensity);
 
-	IsInStorm = true;
+	CurrentHitIntensity = IntensityCurve->GetFloatValue(currentWeatherState->CurrentWeatherIntensity);
+	currentEasingTime = 0;
+	hitpointsCounter = 0;
+	
+	StormState = EStormState::EaseIn;
 }
 
 void UGameWeatherComponent::OnStormEnd()
 {
-	IsInStorm = false;
+	StormState = EStormState::NoStorm;
+
+	CurrentHitIntensity = 0;
+	currentEasingTime = 0;
+	hitpointsCounter = 0;
 }
 
 void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!IsInStorm)
+	if (StormState == EStormState::NoStorm)
 		return;
 
-	print0(*FString::FromInt(Targets.Num()));
+
+
+	switch (StormState)
+	{
+
+	case EStormState::EaseIn: {
+
+		currentEasingTime += DeltaTime;
+
+		auto lerpedIntensity = EntryEasingTime > 0 ? FMath::Lerp(0.0f, CurrentHitIntensity, currentEasingTime / EntryEasingTime) : CurrentHitIntensity;
+
+		hitpointsCounter += lerpedIntensity * DeltaTime;
+
+		if (currentEasingTime > EntryEasingTime)
+		{
+			StormState = EStormState::Running;
+			currentEasingTime = 0;
+		}
+
+		break;
+	}
+
+	case EStormState::Running: {
+
+		hitpointsCounter += CurrentHitIntensity * DeltaTime;
+
+		auto remaining = currentWeatherState->TargetWaitingTime - currentWeatherState->CurrentWaitingTime;
+		if (remaining < EntryEasingTime)
+		{
+			StormState = EStormState::EaseOut;
+			currentEasingTime = EntryEasingTime - remaining;
+		}
+
+		break;
+	}
+
+	case EStormState::EaseOut: {
+
+		currentEasingTime += DeltaTime;
+
+		auto lerpedIntensity = EntryEasingTime > 0 ?  FMath::Lerp(CurrentHitIntensity, 0.0f, currentEasingTime / EntryEasingTime) : CurrentHitIntensity;
+
+		hitpointsCounter += lerpedIntensity * DeltaTime;
+
+		break;
+	}
+	default:
+		break;
+	}
+
+	auto remainingTargets = FMath::FloorToInt(hitpointsCounter);
+	if(remainingTargets > 0)
+	{
+		doDamage(remainingTargets);
+		hitpointsCounter -= remainingTargets;
+	}
+
+	print0(*FString::FromInt(CurrentHitIntensity));
+
+
+
+
 }
 #pragma optimize("", off)
 void UGameWeatherComponent::OnTargetElementsChanged(UWeatherTargetsKDTree* target, bool isAdding)
