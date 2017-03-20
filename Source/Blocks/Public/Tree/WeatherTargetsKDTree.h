@@ -5,9 +5,9 @@
 #include "Commons/Public/GameDefinitions.h"
 #include "WeatherTargetsKDTree.generated.h"
 
+class UWeatherTargetsKDTree;
 
-
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FWeatherTargetsChanged, UWeatherTargetsKDTree*, target, bool, isAdding);
 
 /**
  *
@@ -44,6 +44,9 @@ public:
 	UPROPERTY(Transient)
 		float DividingCoordValue;
 
+	UPROPERTY()
+		FWeatherTargetsChanged OnWeatherTargetsChanged;
+
 	void DEBUGDrawContainingBox(UWorld* world);
 	void DEBUGDrawSurrondings(UWorld* world, FColor usedColor = FColor::Magenta);
 
@@ -52,10 +55,13 @@ public:
 	void GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement = nullptr);
 	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement);
 
-
 	FORCEINLINE UWeatherTargetsKDTree* GetParent()
 	{
 		return GetParentNodeTemplate<UWeatherTargetsKDTree>();
+	}
+
+	FORCEINLINE UWeatherTargetsKDTree* GetRoot() {
+		return GetRootNode<UWeatherTargetsKDTree>(true);
 	}
 
 	//friend bool CheckCommonBoundaries1(UObject* o1, const UObject* o2);
@@ -64,7 +70,11 @@ public:
 
 	void RemoveFromTree(UObject* obj);
 
+	UPROPERTY(Transient)
+		UWeatherTargetsKDTree* rootNode;
+
 private:
+
 
 	void addToTreeByCoord(UWeatherTargetsKDTree* box);
 

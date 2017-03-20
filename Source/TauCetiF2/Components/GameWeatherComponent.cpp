@@ -7,11 +7,9 @@
 // Sets default values for this component's properties
 UGameWeatherComponent::UGameWeatherComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = false;
+	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	WeatherRootTree = CreateDefaultSubobject<UWeatherTargetsKDTree>(TEXT("WeatherRootBox"));
 }
 
 
@@ -48,7 +46,6 @@ void UGameWeatherComponent::DEBUGHideMinMaxBoxes() {
 	{
 		FlushPersistentDebugLines(GetWorld());
 		debugBoxesShown = false;
-		//
 	}
 	else
 		print(TEXT("NO Root!"));
@@ -62,3 +59,44 @@ void UGameWeatherComponent::ObjectsChanged() {
 	}
 
 }
+
+void UGameWeatherComponent::OnStormBegin()
+{
+
+	IsInStorm = true;
+}
+
+void UGameWeatherComponent::OnStormEnd()
+{
+	IsInStorm = false;
+}
+
+void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (!IsInStorm)
+		return;
+
+	print0(*FString::FromInt(Targets.Num()));
+}
+#pragma optimize("", off)
+void UGameWeatherComponent::OnTargetElementsChanged(UWeatherTargetsKDTree* target, bool isAdding)
+{
+	if (isAdding)
+		Targets.Add(target);
+	else
+	{
+		auto cnt = Targets.Remove(target);
+		check(cnt == 1);
+	}
+}
+
+void UGameWeatherComponent::InitComp()
+{
+	WeatherRootTree->rootNode = WeatherRootTree->GetRoot();
+	WeatherRootTree->OnWeatherTargetsChanged.AddDynamic(this, &UGameWeatherComponent::OnTargetElementsChanged);
+
+}
+
+#pragma optimize("", on)

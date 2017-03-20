@@ -39,6 +39,11 @@ void UWeatherTargetsKDTree::AddToTree(UWeatherTargetsKDTree* box)
 	{
 		AddToWeatherTreeElements(box->ContainingObject, this);
 		ChildHeap.HeapPush(box, WeatherTargetsPriorityPredicate());
+		if (ChildHeap.Num() == 1)
+		{
+			check(rootNode);
+			rootNode->OnWeatherTargetsChanged.Broadcast(this, true);
+		}
 		return;
 	}
 
@@ -53,6 +58,7 @@ void UWeatherTargetsKDTree::addToTreeByCoord(UWeatherTargetsKDTree* box) {
 			B1 = NewObject<UWeatherTargetsKDTree>();
 			B1->SetParent(this);
 			B1->Init(Min, (FVector(1, 1, 1) - DividingCoord) *  Max + (DividingCoord * DividingCoordValue), DividingIndex + 1);
+			B1->rootNode = rootNode;
 		}
 		B1->AddToTree(box);
 		return;
@@ -65,6 +71,7 @@ void UWeatherTargetsKDTree::addToTreeByCoord(UWeatherTargetsKDTree* box) {
 			B2 = NewObject<UWeatherTargetsKDTree>();
 			B2->SetParent(this);
 			B2->Init((FVector(1, 1, 1) - DividingCoord) *  Min + (DividingCoord * DividingCoordValue), Max, DividingIndex + 1);
+			B2->rootNode = rootNode;
 		}
 
 		B2->AddToTree(box);
@@ -259,11 +266,16 @@ void UWeatherTargetsKDTree::RemoveFromTree(UObject* obj)
 
 	if (ChildHeap.Num() == 0)
 	{
+		check(rootNode);
+		rootNode->OnWeatherTargetsChanged.Broadcast(this, false);
+
 		auto parent = GetParent();
 		MarkPendingKill();
 		if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
 			parent->updateAfterChildDestroyedInner();
 	}
 }
+
+
 
 #pragma optimize("", on)

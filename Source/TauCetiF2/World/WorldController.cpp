@@ -230,8 +230,9 @@ void AWorldController::BeginPlay() {
 	}
 
 	check(weatherComponent);
-	weatherComponent->WeatherRootTree = NewObject<UWeatherTargetsKDTree>(GetTransientPackage(), TEXT("WeatherRootBox"));
+	
 	weatherComponent->WeatherRootTree->Init(min, max, 0);
+	weatherComponent->InitComp();
 
 	UPatternDefinitionsHolder::Instance();
 
