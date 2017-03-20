@@ -59,6 +59,18 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 			par->UpdateAfterChildDestroyed();
 	}
 
+	for (auto object : WeatherTreeElements)
+	{
+		if (!object || !object->IsValidLowLevelFast() || object->IsPendingKill())
+			continue;
+
+		auto par = object->GetParent();
+		object->MarkPendingKill();
+
+		if (par && par->IsValidLowLevelFast())
+			par->UpdateAfterChildDestroyed();
+	}
+
 	if (BuildingTree && BuildingTree->IsValidLowLevel() && !BuildingTree->IsPendingKill())
 	{
 		auto parent = BuildingTree->GetParent();

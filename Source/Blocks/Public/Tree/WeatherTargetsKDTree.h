@@ -7,6 +7,8 @@
 
 
 
+
+
 /**
  *
  */
@@ -28,13 +30,13 @@ public:
 		UWeatherTargetsKDTree* B2;
 
 	UPROPERTY(Transient)
-		 UObject* ContainingObject;
+		UObject* ContainingObject;
 
 	UPROPERTY(Transient)
 		int32 DividingIndex;
 
 	UPROPERTY(Transient)
-		TArray<UWeatherTargetsKDTree*> ChildStack;
+		TArray<UWeatherTargetsKDTree*> ChildHeap;
 
 	UPROPERTY(Transient)
 		FVector DividingCoord;
@@ -45,7 +47,7 @@ public:
 	void DEBUGDrawContainingBox(UWorld* world);
 	void DEBUGDrawSurrondings(UWorld* world, FColor usedColor = FColor::Magenta);
 
-	void AddToTree(UWeatherTargetsKDTree* box, bool forceInsert = false);
+	void AddToTree(UWeatherTargetsKDTree* box);
 	bool IsPlaceEmpty(const UMinMaxBox* box);
 	void GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement = nullptr);
 	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement);
@@ -60,6 +62,7 @@ public:
 	//friend bool CheckCommonBoundaries1(UObject* o1, const UObject* o2);
 	//friend void AddToTreeElements1(UObject* obj, UWeatherTargetsKDTree* box);
 	//friend void RemoveFromTreeElements1(UObject* obj, UWeatherTargetsKDTree* box);
+
 
 private:
 
@@ -100,5 +103,14 @@ private:
 				elem = nullptr;
 		}
 		return hasElem;
+	}
+};
+
+// struct for heap sorting
+struct WeatherTargetsPriorityPredicate
+{
+	bool operator() (const UWeatherTargetsKDTree& A, const UWeatherTargetsKDTree& B) const
+	{
+		return A.Max.Z < B.Max.Z;
 	}
 };

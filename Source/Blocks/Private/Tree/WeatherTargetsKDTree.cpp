@@ -1,6 +1,8 @@
 ﻿#include "Blocks.h"
 #include "WeatherTargetsKDTree.h"
 
+#pragma optimize("", off)
+
 UWeatherTargetsKDTree* UWeatherTargetsKDTree::Init(FVector min, FVector max, int8 dividingIndex)
 {
 	InitBox(min, max);
@@ -26,26 +28,17 @@ UWeatherTargetsKDTree* UWeatherTargetsKDTree::Init(UMinMaxBox* box, UMinMaxBox* 
 	return Init(min, max, 0);
 }
 
-void UWeatherTargetsKDTree::AddToTree(UWeatherTargetsKDTree* box, bool forceInsert)
+void UWeatherTargetsKDTree::AddToTree(UWeatherTargetsKDTree* box)
 {
 	ensure(box != nullptr);
 
-	check(GtMin(box->Min) && LtMax(box->Max));
+	check(GtMin2(box->Min) && LtMax2(box->Max)); // todo opravit na 2
 
-	if (!B1 && !B2 && ChildStack.Num() == 0 && GtMin(box->Min) && LtMax(box->Max))
+	bool forceSplit = false;
+	if (((Max - Min) * FVector(1, 1, 0)) == FVector(1, 1, 0) * GameDefinitions::CubeMinSize)
 	{
-		ChildStack.Push(box);
-		box->SetParent(this);
+		ChildHeap.HeapPush(box, WeatherTargetsPriorityPredicate());
 		return;
-	}
-
-	if (ChildStack.Num() == 1 && !forceInsert)
-	{
-		ChildStack.Top()->SetParent(nullptr);
-
-		auto t = ChildStack.Top();
-		AddToTree(t, true); // forcing to insert
-		ChildStack.Pop();
 	}
 
 	addToTreeByCoord(box);
@@ -56,7 +49,7 @@ void UWeatherTargetsKDTree::addToTreeByCoord(UWeatherTargetsKDTree* box) {
 	{
 		if (!B1 || !B1->IsValidLowLevel() || B1->IsPendingKill())
 		{
-			B1 = NewObject<UWeatherTargetsKDTree>(this);
+			B1 = NewObject<UWeatherTargetsKDTree>();
 			B1->SetParent(this);
 			B1->Init(Min, (FVector(1, 1, 1) - DividingCoord) *  Max + (DividingCoord * DividingCoordValue), DividingIndex + 1);
 		}
@@ -68,7 +61,7 @@ void UWeatherTargetsKDTree::addToTreeByCoord(UWeatherTargetsKDTree* box) {
 	{
 		if (!B2 || !B2->IsValidLowLevel() || B2->IsPendingKill())
 		{
-			B2 = NewObject<UWeatherTargetsKDTree>(this);
+			B2 = NewObject<UWeatherTargetsKDTree>();
 			B2->SetParent(this);
 			B2->Init((FVector(1, 1, 1) - DividingCoord) *  Min + (DividingCoord * DividingCoordValue), Max, DividingIndex + 1);
 		}
@@ -79,14 +72,12 @@ void UWeatherTargetsKDTree::addToTreeByCoord(UWeatherTargetsKDTree* box) {
 
 	// object is in between. We need to split and then add object to both branches
 
-	UWeatherTargetsKDTree* newB1 = NewObject<UWeatherTargetsKDTree>(this);
+	UWeatherTargetsKDTree* newB1 = NewObject<UWeatherTargetsKDTree>();
 	newB1->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
 	newB1->recomputeDividingCoordValue();
-	newB1->ContainingObject = box->ContainingObject;
-	UWeatherTargetsKDTree* newB2 = NewObject<UWeatherTargetsKDTree>(this);
+	UWeatherTargetsKDTree* newB2 = NewObject<UWeatherTargetsKDTree>();
 	newB2->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
 	newB2->recomputeDividingCoordValue();
-	newB2->ContainingObject = box->ContainingObject;
 
 	addToTreeByCoord(newB1);
 	addToTreeByCoord(newB2);
@@ -97,24 +88,26 @@ void UWeatherTargetsKDTree::DEBUGDrawContainingBox(UWorld* world)
 	if (!world || IsPendingKill())
 		return;
 
-	auto center = (Max + Min) * 0.5 * (FVector(1, 1, 1) - DividingCoord) + DividingCoord * DividingCoordValue;
-	auto extend = (Max - center) *  (FVector(1, 1, 1) - DividingCoord);
+	auto tMax = Max; tMax.Z = 5;
+
+	auto center = (tMax + Min) * 0.5 * (FVector(1, 1, 1) - DividingCoord) + DividingCoord * DividingCoordValue;
+	auto extend = (tMax - center) *  (FVector(1, 1, 1) - DividingCoord);
 
 	auto di = DividingIndex % 2;
 
-	if ((B1 && B1->IsValidLowLevel() && !B1->IsPendingKill()) || (B2 && B2->IsValidLowLevel() && !B2->IsPendingKill()))
-		DrawDebugBox(world, center, extend, di == 0 ? FColor::Red : FColor::Green, true);
+	/*if ((B1 && B1->IsValidLowLevel() && !B1->IsPendingKill()) || (B2 && B2->IsValidLowLevel() && !B2->IsPendingKill()))
+		DrawDebugBox(world, center, extend, di == 0 ? FColor::Red : FColor::Green, true);*/
 
-	if (ContainingObject && !ContainingObject->IsPendingKill())
+	if (ChildHeap.Num() > 0)
 	{
-		auto bcenter = (Max + Min) * 0.5;
-		auto bextend = (Max - bcenter);
-		DrawDebugBox(world, bcenter, bextend, FColor::White, true);
-	}
+		auto stMin = ChildHeap[0]->Min;
+		auto stMax = ChildHeap.Top()->Max;
+		stMax.Z += 10;
 
-	if (ChildStack.Num() == 1 && !ChildStack.Top()->IsPendingKill())
-	{
-		ChildStack.Top()->DEBUGDrawContainingBox(world);
+		auto stCentre = (stMin + stMax) * 0.5f;
+		auto stExtend = (stMax - stCentre);
+
+		DrawDebugBox(world, stCentre, stExtend, FColor::Yellow, true);
 		return;
 	}
 	if (B1 && B1->IsValidLowLevel() && !B1->IsPendingKill())
@@ -138,8 +131,8 @@ bool UWeatherTargetsKDTree::IsPlaceEmpty(const UMinMaxBox* box) {
 	if (!(GtMin(box->Min) && LtMax(box->Max)))
 		return false;
 
-	if (ChildStack.Num() == 1)
-		return ChildStack.Top()->isPlaceEmptySingleChild(box);
+	if (ChildHeap.Num() == 1)
+		return ChildHeap.Top()->isPlaceEmptySingleChild(box);
 
 	if (sum(box->Max * DividingCoord) <= DividingCoordValue)		// whole object is in left plane
 	{
@@ -173,23 +166,22 @@ void UWeatherTargetsKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<U
 	if (!(GtMin(box->Min) && LtMax(box->Max)))
 		return;
 
-	if (ChildStack.Num() == 1)
+	if (ChildHeap.Num() == 1)
 	{
 		if (!ignoreElement || !ignoreElement->IsValidLowLevel())
 			return;
 
-		if (ChildStack.Top()->ContainingObject == ignoreElement)
+		/*if (ChildStack.Top()->ContainingObject == ignoreElement)
 			return;
 
 		if (outArray.Contains(ChildStack.Top()->ContainingObject))
-			return;
+			return;*/
 
-		//TODO 
-		//if (!CheckCommonBoundaries(SingleChild->ContainingObject, ignoreElement))
+			//TODO
+			//if (!CheckCommonBoundaries(SingleChild->ContainingObject, ignoreElement))
 		return;
 
-
-		outArray.Add(ChildStack.Top()->ContainingObject);
+		//outArray.Add(ChildStack.Top()->ContainingObject);
 		return;
 	}
 
@@ -214,11 +206,8 @@ void UWeatherTargetsKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<U
 	UMinMaxBox* newB1 = NewObject<UMinMaxBox>()->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
 	UMinMaxBox* newB2 = NewObject<UMinMaxBox>()->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
 
-
 	GetContainingObjects(newB1, outArray, ignoreElement);
 	GetContainingObjects(newB2, outArray, ignoreElement);
-
-
 }
 
 void UWeatherTargetsKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement)
@@ -232,13 +221,11 @@ void UWeatherTargetsKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box
 	}
 
 	GetContainingObjects(box, outArray, ignoreElement);
-
-
 }
 
 void UWeatherTargetsKDTree::UpdateAfterChildDestroyed()
 {
-	check(ChildStack.Num() == 1 && !B1 && !B2);
+	check(ChildHeap.Num() == 1 && !B1 && !B2);
 
 	auto parent = GetParent();
 	MarkPendingKill();
@@ -251,9 +238,9 @@ void UWeatherTargetsKDTree::updateAfterChildDestroyedInner()
 	if (!canBeDeleted())
 		return;
 
-	check(ChildStack.Num() == 1 || B1 || B2);
+	check(ChildHeap.Num() == 1 || B1 || B2);
 
-	auto hasSingle = checkElem(ChildStack.Top());
+	auto hasSingle = checkElem(ChildHeap.Top());
 	auto hasB1 = checkElem(B1);
 	auto hasB2 = checkElem(B2);
 
@@ -265,3 +252,5 @@ void UWeatherTargetsKDTree::updateAfterChildDestroyedInner()
 	if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
 		parent->updateAfterChildDestroyedInner();
 }
+
+#pragma optimize("", on)

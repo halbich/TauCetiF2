@@ -3,6 +3,7 @@
 #include "Components/ActorComponent.h"
 #include "Tree/KDTree.h"
 #include "Tree/MinMaxTree.h"
+#include "Tree/WeatherTargetsKDTree.h"
 #include "WorldObjectComponent.generated.h"
 
 
@@ -26,8 +27,13 @@ public:
 	UPROPERTY(Transient)
 		UKDTree* DefiningBox;
 
+	// Tree for shapes recognition
 	UPROPERTY(Transient)
 		UMinMaxTree* BuildingTree;
+
+	// Elements taken in Weather. This collection could be changes as WeatherTree Changes
+	UPROPERTY(Transient)
+		TArray<UWeatherTargetsKDTree*> WeatherTreeElements;
 
 	// Called when the game starts
 	virtual void BeginPlay() override;

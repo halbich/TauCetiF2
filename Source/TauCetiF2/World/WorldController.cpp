@@ -55,6 +55,7 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 		DEBUGShowMinMaxBoxes();
 	}
 
+	weatherComponent->ObjectsChanged();
 	check(RootBox && RootBox->IsValidLowLevel() && !RootBox->IsPendingKill());
 
 	return true;
@@ -154,6 +155,9 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			DEBUGHideMinMaxBoxes();
 			DEBUGShowMinMaxBoxes();
 		}
+
+
+		weatherComponent->ObjectsChanged();
 	}
 
 	return actor;

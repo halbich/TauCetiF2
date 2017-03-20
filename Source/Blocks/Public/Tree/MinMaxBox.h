@@ -91,6 +91,16 @@ protected:
 	{
 		return Max.X >= max.X && Max.Y >= max.Y && Max.Z >= max.Z;
 	}
+
+	FORCEINLINE bool GtMin2(const FVector& min)
+	{
+		return Min.X <= min.X && Min.Y <= min.Y;
+	}
+
+	FORCEINLINE bool LtMax2(const FVector& max)
+	{
+		return Max.X >= max.X && Max.Y >= max.Y;
+	}
 };
 
 #pragma optimize("", on)

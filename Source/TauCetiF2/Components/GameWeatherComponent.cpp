@@ -53,3 +53,12 @@ void UGameWeatherComponent::DEBUGHideMinMaxBoxes() {
 	else
 		print(TEXT("NO Root!"));
 }
+
+void UGameWeatherComponent::ObjectsChanged() {
+	if (debugBoxesShown)
+	{
+		FlushPersistentDebugLines(GetWorld());
+		WeatherRootTree->DEBUGDrawContainingBox(GetWorld());
+	}
+
+}

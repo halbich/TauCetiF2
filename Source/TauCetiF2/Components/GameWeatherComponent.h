@@ -38,4 +38,5 @@ public:
 	UFUNCTION(BlueprintCallable, Category = WorldController)
 		void DEBUGHideMinMaxBoxes();
 
+	void ObjectsChanged();
 };
