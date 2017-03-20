@@ -10,6 +10,10 @@
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "TauCetiF2PlayerController.generated.h"
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameShouldBePaused, bool, NewPaused);
+
+
 /**
  *
  */
@@ -47,6 +51,10 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UInventoryScreen* Inventory;
 
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Widgets")
+		FGameShouldBePaused OnGameShouldBePaused;
+
+
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
 		void OnEnterKey();
 
@@ -73,6 +81,12 @@ private:
 	FORCEINLINE void updateState(UObjectWidget* focus = nullptr) {
 		auto anythingShown = CurrentShownWidget != EShownWidget::None;
 
+		bShowMouseCursor = anythingShown;
+		bEnableClickEvents = anythingShown;
+		bEnableMouseOverEvents = anythingShown;
+		SetIgnoreMoveInput(anythingShown);
+		SetIgnoreLookInput(anythingShown);
+
 		if (anythingShown)
 		{
 			FInputModeGameAndUI mode;
@@ -82,6 +96,11 @@ private:
 				mode.SetWidgetToFocus(focus->TakeWidget());
 
 			SetInputMode(mode);
+
+			// https://answers.unrealengine.com/questions/69251/disabling-mouse-cursor-requires-extra-click-to-re.html
+			auto CurrentFocus = FSlateApplication::Get().GetKeyboardFocusedWidget();
+			FSlateApplication::Get().ClearKeyboardFocus(EKeyboardFocusCause::SetDirectly);
+			FSlateApplication::Get().SetKeyboardFocus(CurrentFocus);
 		}
 		else
 		{
@@ -89,10 +108,6 @@ private:
 			SetInputMode(mode);
 		}
 
-		bShowMouseCursor = anythingShown;
-		bEnableClickEvents = anythingShown;
-		bEnableMouseOverEvents = anythingShown;
-		SetIgnoreMoveInput(anythingShown);
-		SetIgnoreLookInput(anythingShown);
+		OnGameShouldBePaused.Broadcast(CurrentShownWidget == EShownWidget::InGameMenu);
 	}
 };
