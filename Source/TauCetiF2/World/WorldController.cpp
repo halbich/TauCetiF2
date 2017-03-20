@@ -56,7 +56,9 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 	}
 
 	weatherComponent->ObjectsChanged();
-	check(RootBox && RootBox->IsValidLowLevel() && !RootBox->IsPendingKill());
+	check(RootBox);
+	check(RootBox->IsValidLowLevel());
+	check(!RootBox->IsPendingKill());
 
 	return true;
 }

@@ -52,7 +52,6 @@ public:
 	void GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement = nullptr);
 	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement);
 
-	void UpdateAfterChildDestroyed();
 
 	FORCEINLINE UWeatherTargetsKDTree* GetParent()
 	{
@@ -60,9 +59,10 @@ public:
 	}
 
 	//friend bool CheckCommonBoundaries1(UObject* o1, const UObject* o2);
-	//friend void AddToTreeElements1(UObject* obj, UWeatherTargetsKDTree* box);
+	friend void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box);
 	//friend void RemoveFromTreeElements1(UObject* obj, UWeatherTargetsKDTree* box);
 
+	void RemoveFromTree(UObject* obj);
 
 private:
 

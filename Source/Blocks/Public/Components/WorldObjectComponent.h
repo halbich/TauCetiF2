@@ -43,4 +43,6 @@ public:
 	void UpdateDefiningBox(UKDTree* definingBox);
 
 	void OnTreeElementsChanged();
+
+	void OnWeatherTreeElementsChanged();
 };

@@ -40,7 +40,15 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 
 void UWorldObjectComponent::OnTreeElementsChanged()
 {
+	// TODO impl?
 }
+
+void UWorldObjectComponent::OnWeatherTreeElementsChanged()
+{
+	// TODO impl?
+}
+
+#pragma optimize("", off)
 
 void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
@@ -64,11 +72,13 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 		if (!object || !object->IsValidLowLevelFast() || object->IsPendingKill())
 			continue;
 
-		auto par = object->GetParent();
+		object->RemoveFromTree(GetOwner());
+
+	/*	auto par = object->GetParent();
 		object->MarkPendingKill();
 
 		if (par && par->IsValidLowLevelFast())
-			par->UpdateAfterChildDestroyed();
+			par->UpdateAfterChildDestroyed();*/
 	}
 
 	if (BuildingTree && BuildingTree->IsValidLowLevel() && !BuildingTree->IsPendingKill())
@@ -83,3 +93,4 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 		}
 	}
 }
+#pragma optimize("", on)

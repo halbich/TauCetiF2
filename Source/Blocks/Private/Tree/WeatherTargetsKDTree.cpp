@@ -37,6 +37,7 @@ void UWeatherTargetsKDTree::AddToTree(UWeatherTargetsKDTree* box)
 	bool forceSplit = false;
 	if (((Max - Min) * FVector(1, 1, 0)) == FVector(1, 1, 0) * GameDefinitions::CubeMinSize)
 	{
+		AddToWeatherTreeElements(box->ContainingObject, this);
 		ChildHeap.HeapPush(box, WeatherTargetsPriorityPredicate());
 		return;
 	}
@@ -75,9 +76,11 @@ void UWeatherTargetsKDTree::addToTreeByCoord(UWeatherTargetsKDTree* box) {
 	UWeatherTargetsKDTree* newB1 = NewObject<UWeatherTargetsKDTree>();
 	newB1->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
 	newB1->recomputeDividingCoordValue();
+	newB1->ContainingObject = box->ContainingObject;
 	UWeatherTargetsKDTree* newB2 = NewObject<UWeatherTargetsKDTree>();
 	newB2->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
 	newB2->recomputeDividingCoordValue();
+	newB2->ContainingObject = box->ContainingObject;
 
 	addToTreeByCoord(newB1);
 	addToTreeByCoord(newB2);
@@ -95,8 +98,8 @@ void UWeatherTargetsKDTree::DEBUGDrawContainingBox(UWorld* world)
 
 	auto di = DividingIndex % 2;
 
-	/*if ((B1 && B1->IsValidLowLevel() && !B1->IsPendingKill()) || (B2 && B2->IsValidLowLevel() && !B2->IsPendingKill()))
-		DrawDebugBox(world, center, extend, di == 0 ? FColor::Red : FColor::Green, true);*/
+	if ((B1 && B1->IsValidLowLevel() && !B1->IsPendingKill()) || (B2 && B2->IsValidLowLevel() && !B2->IsPendingKill()))
+		DrawDebugBox(world, center, extend, di == 0 ? FColor::Red : FColor::Green, true);
 
 	if (ChildHeap.Num() > 0)
 	{
@@ -223,9 +226,19 @@ void UWeatherTargetsKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box
 	GetContainingObjects(box, outArray, ignoreElement);
 }
 
-void UWeatherTargetsKDTree::UpdateAfterChildDestroyed()
+
+void UWeatherTargetsKDTree::updateAfterChildDestroyedInner()
 {
-	check(ChildHeap.Num() == 1 && !B1 && !B2);
+	if (!canBeDeleted())
+		return;
+
+	check(B1 || B2);
+
+	auto hasB1 = checkElem(B1);
+	auto hasB2 = checkElem(B2);
+
+	if (hasB1 || hasB2)
+		return;
 
 	auto parent = GetParent();
 	MarkPendingKill();
@@ -233,24 +246,24 @@ void UWeatherTargetsKDTree::UpdateAfterChildDestroyed()
 		parent->updateAfterChildDestroyedInner();
 }
 
-void UWeatherTargetsKDTree::updateAfterChildDestroyedInner()
+void UWeatherTargetsKDTree::RemoveFromTree(UObject* obj)
 {
-	if (!canBeDeleted())
-		return;
+	check(IsValidLowLevel() && !IsPendingKill());
 
-	check(ChildHeap.Num() == 1 || B1 || B2);
+	auto f = ChildHeap.IndexOfByPredicate([obj](UWeatherTargetsKDTree* tree) { return tree->ContainingObject == obj; });
 
-	auto hasSingle = checkElem(ChildHeap.Top());
-	auto hasB1 = checkElem(B1);
-	auto hasB2 = checkElem(B2);
+	if (f != INDEX_NONE)
+	{
+		ChildHeap.HeapRemoveAt(f, WeatherTargetsPriorityPredicate());
+	}
 
-	if (hasSingle || hasB1 || hasB2)
-		return;
-
-	auto parent = GetParent();
-	MarkPendingKill();
-	if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
-		parent->updateAfterChildDestroyedInner();
+	if (ChildHeap.Num() == 0)
+	{
+		auto parent = GetParent();
+		MarkPendingKill();
+		if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
+			parent->updateAfterChildDestroyedInner();
+	}
 }
 
 #pragma optimize("", on)

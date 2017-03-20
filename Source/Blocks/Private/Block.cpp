@@ -217,6 +217,15 @@ void RemoveFromTreeElements(UObject* obj, UKDTree* box)
 	b->WorldObjectComponent->OnTreeElementsChanged();
 }
 
+void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
+{
+	auto b = Cast<ABlock>(obj);
+	ensure(b);
+
+	b->WorldObjectComponent->WeatherTreeElements.Add(box);
+	b->WorldObjectComponent->OnWeatherTreeElementsChanged();
+}
+
 //bool CheckCommonBoundaries1(UObject* o1, const UObject* o2)
 //{
 //	auto b1 = Cast<ABlock>(o1);
@@ -228,14 +237,6 @@ void RemoveFromTreeElements(UObject* obj, UKDTree* box)
 //	return UMinMaxBox::HasCommonBoundaries(b1->WorldObjectComponent->DefiningBox, b2->WorldObjectComponent->DefiningBox);
 //}
 //
-//void AddToTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
-//{
-//	auto b = Cast<ABlock>(obj);
-//	ensure(b);
-//
-//	b->WorldObjectComponent->TreeElements.Add(box);
-//	b->WorldObjectComponent->OnTreeElementsChanged();
-//}
 //
 //void RemoveFromTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
 //{
