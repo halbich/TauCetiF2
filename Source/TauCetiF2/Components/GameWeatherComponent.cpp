@@ -88,7 +88,7 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	if (StormState == EStormState::NoStorm)
 		return;
 
-
+	// TODO implementovat algoritmus DeltaTime * intensity * aktuální velikost plochy v m^2 - z toho poèítat hitpointy. to je pak poèet náhodných výbìrù ze senamu kandidátù
 
 	switch (StormState)
 	{
