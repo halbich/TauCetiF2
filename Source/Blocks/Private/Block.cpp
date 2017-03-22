@@ -247,6 +247,9 @@ void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
 //	b->WorldObjectComponent->OnTreeElementsChanged();
 //}
 
-
+void ABlock::WasHitByStorm()
+{
+	//WorldObjectComponent->RootBox->DEBUGDrawBorder(GetWorld(), FColor::Orange, 2);
+}
 
 #pragma optimize("",on)

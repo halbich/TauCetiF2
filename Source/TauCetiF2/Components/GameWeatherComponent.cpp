@@ -90,6 +90,8 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 	// TODO implementovat algoritmus DeltaTime * intensity * aktuální velikost plochy v m^2 - z toho poèítat hitpointy. to je pak poèet náhodných výbìrù ze senamu kandidátù
 
+	auto currentSurface = Targets.Num() * GameDefinitions::CubeSurfaceInMetersSquared;
+
 	switch (StormState)
 	{
 
@@ -99,7 +101,7 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 		auto lerpedIntensity = EntryEasingTime > 0 ? FMath::Lerp(0.0f, CurrentHitIntensity, currentEasingTime / EntryEasingTime) : CurrentHitIntensity;
 
-		hitpointsCounter += lerpedIntensity * DeltaTime;
+		hitpointsCounter += lerpedIntensity * DeltaTime * currentSurface;
 
 		if (currentEasingTime > EntryEasingTime)
 		{
@@ -112,7 +114,7 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 	case EStormState::Running: {
 
-		hitpointsCounter += CurrentHitIntensity * DeltaTime;
+		hitpointsCounter += CurrentHitIntensity * DeltaTime * currentSurface;
 
 		auto remaining = currentWeatherState->TargetWaitingTime - currentWeatherState->CurrentWaitingTime;
 		if (remaining < EntryEasingTime)
@@ -130,7 +132,7 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 		auto lerpedIntensity = EntryEasingTime > 0 ?  FMath::Lerp(CurrentHitIntensity, 0.0f, currentEasingTime / EntryEasingTime) : CurrentHitIntensity;
 
-		hitpointsCounter += lerpedIntensity * DeltaTime;
+		hitpointsCounter += lerpedIntensity * DeltaTime * currentSurface;
 
 		break;
 	}

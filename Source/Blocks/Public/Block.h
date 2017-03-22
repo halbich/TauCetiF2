@@ -63,6 +63,8 @@ public:
 
 	void InitWorldObjectComponent();
 
+	void WasHitByStorm();
+
 private:
 
 	FORCEINLINE void setMaterial(UPrimitiveComponent* mesh, UMaterial* material, int32 index, float scaleX, float scaleY) {

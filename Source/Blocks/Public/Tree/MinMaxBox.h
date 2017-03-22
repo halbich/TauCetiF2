@@ -52,14 +52,18 @@ public:
 		return Cast<T>(returnValue);
 	}
 
-	FORCEINLINE	void DEBUGDrawBorder(UWorld* world, FColor color = FColor::Magenta)
+	FORCEINLINE	void DEBUGDrawBorder(UWorld* world, FColor color = FColor::Magenta, float duration = -1.0f)
 	{
 		if (!world || IsPendingKill())
 			return;
 
 		auto bcenter = (Max + Min) * 0.5;
 		auto bextend = (Max - bcenter);
-		DrawDebugBox(world, bcenter, bextend, color, true);
+
+		if (duration <= 0)
+			DrawDebugBox(world, bcenter, bextend, color, true);
+		else
+			DrawDebugBox(world, bcenter, bextend, color, false, duration);
 	}
 
 	FORCEINLINE FBox GetBox()

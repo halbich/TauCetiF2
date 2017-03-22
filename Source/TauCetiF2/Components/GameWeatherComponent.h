@@ -47,6 +47,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Curve)
 		UCurveFloat* IntensityCurve;
 
+	// Target hits per sq. meter per second
 	UPROPERTY(Transient)
 		float CurrentHitIntensity;
 
@@ -96,8 +97,28 @@ private:
 
 	FDelegateHandle ListeningHandle;
 
-	void doDamage(int targets) {
-		print(TEXT("Doing damage"));
+	void doDamage(int32 currentHitPoints) {
+
+		auto targNum = Targets.Num();
+
+		if (targNum == 0)
+			return;
+
+		for (auto i = 0; i < currentHitPoints; i++)
+		{
+			auto target = Targets[FMath::RandHelper(targNum)];
+			check(target && target->IsValidLowLevelFast() && !target->IsPendingKill() && target->ChildHeap.Num() > 0);
+
+			auto targObj = target->ChildHeap.HeapTop();
+			check(targObj && targObj->IsValidLowLevelFast() && !targObj->IsPendingKill() );
+			check(targObj->ContainingObject && targObj->ContainingObject->IsValidLowLevelFast() && !targObj->ContainingObject->IsPendingKill());
+			
+			auto bl = Cast<ABlock>(targObj->ContainingObject);
+			check(bl && bl->IsValidLowLevelFast() && !bl->IsPendingKill());
+			bl->WasHitByStorm();
+			targObj->DEBUGDrawBorder(GetWorld(), FColor::Orange, 0.75f);
+		}
+
 	}
 
 };
