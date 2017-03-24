@@ -56,4 +56,16 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Weather")
 		void MakeTargetsCurrent();
+
+
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Weather")
+		bool CheckTimeExceeded(FWeatherDefinition& definition, int32 newDefinitionID);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Weather")
+		bool CheckChangingWeather(FWeatherDefinition& definition);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Weather")
+		bool CheckRunningWeather(FWeatherDefinition& definition, int32 newDefinitionID);
+
 };

@@ -68,7 +68,7 @@ void UGameWeatherComponent::OnStormBegin()
 	CurrentHitIntensity = IntensityCurve->GetFloatValue(currentWeatherState->CurrentWeatherIntensity);
 	currentEasingTime = 0;
 	hitpointsCounter = 0;
-	
+
 	StormState = EStormState::EaseIn;
 }
 
@@ -92,22 +92,19 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 	auto currentSurface = Targets.Num() * GameDefinitions::CubeSurfaceInMetersSquared;
 
+	currentEasingTime += DeltaTime;
 	switch (StormState)
 	{
 
 	case EStormState::EaseIn: {
 
-		currentEasingTime += DeltaTime;
 
 		auto lerpedIntensity = EntryEasingTime > 0 ? FMath::Lerp(0.0f, CurrentHitIntensity, currentEasingTime / EntryEasingTime) : CurrentHitIntensity;
 
 		hitpointsCounter += lerpedIntensity * DeltaTime * currentSurface;
 
 		if (currentEasingTime > EntryEasingTime)
-		{
 			StormState = EStormState::Running;
-			currentEasingTime = 0;
-		}
 
 		break;
 	}
@@ -115,6 +112,8 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	case EStormState::Running: {
 
 		hitpointsCounter += CurrentHitIntensity * DeltaTime * currentSurface;
+
+		auto ratio = currentWeatherState->CurrentWaitingTime / currentEasingTime;
 
 		auto remaining = currentWeatherState->TargetWaitingTime - currentWeatherState->CurrentWaitingTime;
 		if (remaining < EntryEasingTime)
@@ -128,9 +127,7 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 	case EStormState::EaseOut: {
 
-		currentEasingTime += DeltaTime;
-
-		auto lerpedIntensity = EntryEasingTime > 0 ?  FMath::Lerp(CurrentHitIntensity, 0.0f, currentEasingTime / EntryEasingTime) : CurrentHitIntensity;
+		auto lerpedIntensity = EntryEasingTime > 0 ? FMath::Lerp(CurrentHitIntensity, 0.0f, currentEasingTime / EntryEasingTime) : CurrentHitIntensity;
 
 		hitpointsCounter += lerpedIntensity * DeltaTime * currentSurface;
 
@@ -141,7 +138,7 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	}
 
 	auto remainingTargets = FMath::FloorToInt(hitpointsCounter);
-	if(remainingTargets > 0)
+	if (remainingTargets > 0)
 	{
 		doDamage(remainingTargets);
 		hitpointsCounter -= remainingTargets;
