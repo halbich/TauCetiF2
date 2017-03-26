@@ -58,6 +58,9 @@ void AOxygenTankFillerBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 	if (!isSpecial)
 	{
 		print(TEXT("not special use"));
+		auto def = Definition->GetDefaultObject<UBlockDefinition>();
+		check(def);
+		IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
 		return;
 	}
 
@@ -104,3 +107,4 @@ void AOxygenTankFillerBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 	Super::EndPlay(EndPlayReason);
 }
+

@@ -247,7 +247,12 @@ void UKDTree::UpdateAfterChildDestroyed()
 	check(SingleChild && !B1 && !B2);
 
 	auto parent = GetParent();
-	MarkPendingKill();
+
+	SingleChild = NULL;
+
+	if (parent)
+		MarkPendingKill();
+
 	if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
 		parent->updateAfterChildDestroyedInner();
 }

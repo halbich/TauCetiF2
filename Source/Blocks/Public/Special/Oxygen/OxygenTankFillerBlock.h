@@ -4,13 +4,14 @@
 #include "Components/OxygenComponent.h"
 #include "Components/ElectricityComponent.h"
 #include "BlockWithOxygen.h"
+#include "Interfaces/BlockWithShowableWidget.h"
 #include "OxygenTankFillerBlock.generated.h"
 
 /**
  *
  */
 UCLASS()
-class BLOCKS_API AOxygenTankFillerBlock : public ABlock, public IBlockWithOxygen
+class BLOCKS_API AOxygenTankFillerBlock : public ABlock, public IBlockWithOxygen, public IBlockWithShowableWidget
 {
 	GENERATED_BODY()
 
@@ -30,6 +31,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTankFiller", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 
+
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
@@ -47,4 +49,5 @@ private:
 protected:
 	UFUNCTION()
 		void ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source);
+
 };

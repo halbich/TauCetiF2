@@ -3,6 +3,8 @@
 #include "GameFramework/Actor.h"
 #include "Blocks/Public/Components/BlockHolderComponent.h"
 #include "Blocks/Public/Interfaces/PickableBlock.h"
+#include "Blueprint/UserWidget.h"
+#include "Blocks/Public/Interfaces/BlockWithShowableWidget.h"
 #include "Helpers/BlockHelpers.h"
 #include "Helpers/WorldHelpers.h"
 #include "MinMaxBox.h"
@@ -75,12 +77,16 @@ public:
 
 	TMap<ABlock*, FDelegateHandle> pickableDelegates;
 
+	TMap<ABlock*, FDelegateHandle> showableWidgetDelegates;
+
 
 private:
 
 	void loadBlocksArray(TArray<UBlockInfo*>& blocks);
 
 	void onPickupItem(ABlock* pickingItem);
+
+	void onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidget> widget);
 
 };
 

@@ -14,6 +14,8 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	BaseControl = ObjectInitializer.CreateDefaultSubobject<UBaseControlComponent>(this, TEXT("Base Control"));
 
 	pickableDelegates = TMap<ABlock*, FDelegateHandle>();
+	showableWidgetDelegates = TMap<ABlock*, FDelegateHandle>();
+
 }
 
 void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
@@ -37,6 +39,18 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 {
 	if (!object || !object->IsValidLowLevel() || object->IsPendingKill())
 		return false;
+
+	auto usableWithWidget = Cast<IBlockWithShowableWidget>(object);
+	if (usableWithWidget)
+	{
+		auto ref = showableWidgetDelegates.Find(object);
+		if (ref && ref->IsValid())
+		{
+			usableWithWidget->RemoveShowWidgetForBlockEventListener(*ref);
+			print(TEXT("RemoveDynamicShow"));
+		}
+	}
+
 
 	auto pickable = Cast<IPickableBlock>(object);
 	if (pickable)
@@ -145,6 +159,18 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			pickableDelegates.Add(actor, ListeningHandle);
 		}
 
+		auto usableWithWidget = Cast<IBlockWithShowableWidget>(actor);
+		if (usableWithWidget)
+		{
+			FShowWidgetForBlockDelegate Subscriber;
+			Subscriber.BindUObject(this, &AWorldController::onShowWidgetRequest);
+			auto ListeningHandle = usableWithWidget->AddShowWidgetForBlockEventListener(Subscriber);
+
+			showableWidgetDelegates.Add(actor, ListeningHandle);
+
+			print(TEXT("AddDynamicShow"));
+		}
+
 		MinMax->DEBUGDrawContainingBox(GetWorld());
 	}
 
@@ -230,7 +256,7 @@ void AWorldController::BeginPlay() {
 	}
 
 	check(weatherComponent);
-	
+
 	weatherComponent->WeatherRootTree->Init(min, max, 0);
 	weatherComponent->InitComp();
 
@@ -287,6 +313,12 @@ void AWorldController::onPickupItem(ABlock* pickingItem)
 
 	if (DestroyWorldObject(pickingItem))
 		invComp->AddItem(invBuildable);
+}
+
+
+void AWorldController::onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidget> widget)
+{
+
 }
 
 #pragma optimize("", on)
