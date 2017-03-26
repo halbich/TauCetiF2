@@ -103,7 +103,8 @@ void ABlock::UpdateBlockOnConstruction_Implementation(UBlockDefinition* BlockDef
 	if (electricityBlock)
 	{
 		check(BlockDef->HasElectricityComponent);	// musíme mít definici
-		electricityBlock->SetDefinition(BlockDef->ElectricityComponentDef, BlockInfo);
+		auto scaleVect = BlockDef->HasCustomScaling ? FVector(1, 1, 1) : BlockInfo->Scale;
+		electricityBlock->SetDefinition(BlockDef->ElectricityComponentDef, scaleVect, BlockInfo->Rotation);
 	}
 	else
 	{

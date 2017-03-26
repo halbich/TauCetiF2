@@ -3,7 +3,6 @@
 #pragma once
 
 #include "UObject/NoExportTypes.h"
-#include "BlockInfo.h"
 #include "Definitions/ElectricityBindableAreas.h"
 #include "Commons/Public/GameDefinitions.h"
 #include "ElectricityBindableAreaInfo.generated.h"
@@ -24,7 +23,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = ElectricityBindableAreaInfo)
 		FVector DominantPlane;
 	
-	void InitArea(UBlockInfo* blockInfo, TArray<FVector> usedPoints, FElectricityBindableArea& definedPlane, FVector worldLocation);
+	void InitArea(TArray<FVector> usedPoints, FElectricityBindableArea& definedPlane, FVector& blockScale, FRotator& blockRotation, FVector worldLocation);
 	
 	void DEBUG_DrawPoints(UWorld* world);
 };

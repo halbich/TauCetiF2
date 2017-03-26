@@ -5,10 +5,10 @@
 
 #pragma optimize("", off)
 
-void UElectricityBindableAreaInfo::InitArea(UBlockInfo* blockInfo, TArray<FVector> usedPoints, FElectricityBindableArea& definedPlane, FVector worldLocation)
+void UElectricityBindableAreaInfo::InitArea(TArray<FVector> usedPoints, FElectricityBindableArea& definedPlane, FVector& blockScale, FRotator& blockRotation,  FVector worldLocation)
 {
 
-	auto scaleMultipl = blockInfo->Scale * GameDefinitions::CubeMinSizeHalf;
+	auto scaleMultipl = blockScale * GameDefinitions::CubeMinSizeHalf;
 
 	auto dominantPlane = FVector(1, 1, 1);
 
@@ -21,7 +21,7 @@ void UElectricityBindableAreaInfo::InitArea(UBlockInfo* blockInfo, TArray<FVecto
 
 		auto origPoint = usedPoints[index];
 		auto scaled = origPoint * scaleMultipl;
-		auto rotated = blockInfo->Rotation.RotateVector(scaled).GridSnap(GameDefinitions::CubeMinSizeHalf);
+		auto rotated = blockRotation.RotateVector(scaled).GridSnap(GameDefinitions::CubeMinSizeHalf);
 		AreaPoints.Add(worldLocation + rotated);
 
 		if (AreaPoints.Num() > 1)

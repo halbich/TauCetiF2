@@ -23,19 +23,23 @@ UBlockWithElectricityInfo* UElectricityComponent::SetInfo(UBlockWithElectricityI
 	return ElectricityInfo;
 }
 
-void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, UBlockInfo* blockInfo)
+void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def)
 {
 	ElectricityComponentDef = def;
 
-	if (!blockInfo)
-		return;
+}
+
+void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, FVector& blockScale, FRotator& blockRotation)
+{
+	SetDefinition(def);
+
 
 	auto worldLocation = GetOwner()->GetActorLocation();
 
 	for (auto areaDef : ElectricityComponentDef.BindableAreas.Planes)
 	{
 		auto bindArea = NewObject<UElectricityBindableAreaInfo>();
-		bindArea->InitArea(blockInfo, ElectricityComponentDef.BindableAreas.UsedPoints, areaDef, worldLocation);
+		bindArea->InitArea( ElectricityComponentDef.BindableAreas.UsedPoints, areaDef, blockScale, blockRotation, worldLocation);
 		ElectricityBindableAreas.Add(bindArea);
 		bindArea->DEBUG_DrawPoints(GetWorld());
 	}

@@ -4,7 +4,6 @@
 #include "Info/Components/BlockWithElectricityInfo.h"
 #include "Definitions/ElectricityComponentDefinition.h"
 #include "Info/ElectricityBindableAreaInfo.h"
-#include "Info/BlockInfo.h"
 #include "ElectricityComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FElectricityComponentDataChangedDelegate, UBlockWithElectricityInfo*, info);
@@ -42,7 +41,9 @@ public:
 
 	UBlockWithElectricityInfo* SetInfo(UBlockWithElectricityInfo* info);
 
-	void SetDefinition(FElectricityComponentDefinition def, UBlockInfo* blockInfo);
+	void SetDefinition(FElectricityComponentDefinition def);
+
+	void SetDefinition(FElectricityComponentDefinition def, FVector& blockScale, FRotator& blockRotation);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | ElectricityComponent")
 		bool ObtainAmount(float requested, float& actuallyObtained, bool requireExact = false);
