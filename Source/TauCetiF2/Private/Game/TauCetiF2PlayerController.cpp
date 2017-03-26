@@ -6,7 +6,7 @@ void ATauCetiF2PlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (wInGameMenu)
+	if (wMainMenu)
 	{
 		MainMenu = CreateWidget<UMainMenuWidget>(this, wMainMenu);
 		MainMenu->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
