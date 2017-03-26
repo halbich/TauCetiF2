@@ -8,6 +8,9 @@ AEnergyBlobBlock::AEnergyBlobBlock()
 
 	BlobBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlobBlockMesh"));
 	BlobBlockMesh->SetupAttachment(GetRootComponent());
+
+	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
+	AddOwnedComponent(ElectricityComponent);
 }
 
 UStaticMeshComponent* AEnergyBlobBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)

@@ -2,6 +2,7 @@
 
 #include "Block.h"
 #include "Commons/Public/GameDefinitions.h"
+#include "Components/ElectricityComponent.h"
 #include "DoorBlock.generated.h"
 
 enum class EDoorState : uint8
@@ -34,6 +35,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | DoorBlock")
 		UStaticMeshComponent* DoorBlockMesh;
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | DoorBlock", meta = (AllowPrivateAcces = "true"))
+		UElectricityComponent* ElectricityComponent;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 

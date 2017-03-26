@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Block.h"
+#include "Components/ElectricityComponent.h"
 #include "EnergyBlobBlock.generated.h"
 
 UCLASS()
@@ -12,6 +13,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | EnergyBlobBlock")
 		UStaticMeshComponent* BlobBlockMesh;
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | EnergyBlobBlock", meta = (AllowPrivateAcces = "true"))
+		UElectricityComponent* ElectricityComponent;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 

@@ -27,6 +27,8 @@ void UBuilderComponent::BeginPlay()
 	ensure(character);
 }
 
+#pragma optimize("", off)
+
 // Called every frame
 void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -44,19 +46,76 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		return;  // if spawn was successful, we have actual data (spawn point etc)
 	}
 
+
+	if (!selector->IsValidBuildingLocation)
+	{
+		toggleHiddenCurrentSpawned();
+		return;
+	}
+
 	check(currentDefinitionForBlock);
 
+	auto oldLocation = currentBlockInfo->Location;
 	auto newLocation = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);
 
-	if (!ForceRecomputePosition && currentBlockInfo->Location == newLocation)
-		return;
+	/*if (!ForceRecomputePosition && currentBlockInfo->Location == newLocation)
+		return;*/
 
 	currentBlockInfo->Location = newLocation;
 	auto spawnBlock = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 	if (!worldController->IsValidSpawnPoint(spawnBlock))
 	{
-		toggleHiddenCurrentSpawned();
-		return;
+		TMap<FVector, float> tempSuccesses;
+
+		const int32 plusMinus = 4;
+
+		auto plusMinusX = selector->ImpactNormal.X == 0 ? plusMinus : 0;
+		auto plusMinusY = selector->ImpactNormal.Y == 0 ? plusMinus : 0;
+		auto plusMinusZ = selector->ImpactNormal.Z == 0 ? plusMinus : 0;
+
+		for (int8 x = -1 * plusMinusX; x <= plusMinusX; x++)
+		{
+			for (int8 y = -1 * plusMinusY; y <= plusMinusY; y++)
+			{
+				for (int8 z = -1 * plusMinusZ; z <= plusMinusZ; z++)
+				{
+					if (x == 0 && y == 0 && z == 0)		// we don't want the same failed result
+						continue;
+
+					auto offsetVect = FVector(x, y, z);
+					auto newTestLocation = newLocation + offsetVect;
+					currentBlockInfo->Location = newTestLocation;
+					auto testSpawnBlock = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+					if (worldController->IsValidSpawnPoint(testSpawnBlock))
+						tempSuccesses.Add(offsetVect, FVector::DistSquared(newTestLocation, newLocation));	// we do not need to do sqrt on results;
+
+
+
+				}
+			}
+		}
+
+		if (tempSuccesses.Num() == 0)
+		{
+			// we don't have any usable results
+			currentBlockInfo->Location = newLocation;
+			return;
+		}
+
+		// get the closest point to our target point
+		tempSuccesses.ValueSort([](const float& l, const float& r) {
+			return l < r;
+		});
+
+		// and select the first one, using it as valid spawn location
+		for (auto keyValue : tempSuccesses)
+		{
+			auto targetOffset = keyValue.Key;
+			currentBlockInfo->Location = newLocation + targetOffset;
+			spawnBlock = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+			break;
+		}
+
 	}
 
 	auto box = spawnBlock->GetBox();
@@ -187,3 +246,5 @@ void UBuilderComponent::RotateYaw(float Value)
 
 	AddRotation(0, Value * 90, 0);
 }
+
+#pragma optimize("", on)

@@ -8,6 +8,9 @@ ABatteryBlock::ABatteryBlock()
 
 	BatteryBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BatteryBlockMesh"));
 	BatteryBlockMesh->SetupAttachment(GetRootComponent());
+
+	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
+	AddOwnedComponent(ElectricityComponent);
 }
 
 UStaticMeshComponent* ABatteryBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)

@@ -9,6 +9,9 @@ ACubeSide::ACubeSide()
 	CubeSideMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeSideMesh"));
 
 	CubeSideMesh->SetupAttachment(GetRootComponent());
+
+	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
+	AddOwnedComponent(ElectricityComponent);
 }
 
 UStaticMeshComponent* ACubeSide::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)

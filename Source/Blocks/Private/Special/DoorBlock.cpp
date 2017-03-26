@@ -12,6 +12,9 @@ ADoorBlock::ADoorBlock()
 
 	DoorBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DoorBlockMesh"));
 	DoorBlockMesh->SetupAttachment(DoorBlockFrameMesh);
+
+	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
+	AddOwnedComponent(ElectricityComponent);
 }
 
 UStaticMeshComponent* ADoorBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)

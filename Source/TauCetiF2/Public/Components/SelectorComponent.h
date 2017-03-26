@@ -76,6 +76,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = TargetSelector)
 		void TryUse(bool isSpecialUse = false);
 
+
+
+	UPROPERTY(Transient)
+		bool IsValidBuildingLocation;
+
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -187,6 +192,7 @@ private:
 
 		SelectedBlock = nullptr;
 		SelectedActor = nullptr;
+		IsValidBuildingLocation = false;
 		updateUsableObjectTarget();
 	}
 };

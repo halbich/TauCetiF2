@@ -2,6 +2,7 @@
 
 #include "Block.h"
 #include "Components/OxygenComponent.h"
+#include "Components/ElectricityComponent.h"
 #include "BlockWithOxygen.h"
 #include "OxygenTankFillerBlock.generated.h"
 
@@ -23,8 +24,11 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTankFiller")
 		UStaticMeshComponent* OxygenTankFillerHeadMesh;
 
-	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTank", meta = (AllowPrivateAcces = "true"))
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTankFiller", meta = (AllowPrivateAcces = "true"))
 		UOxygenComponent* OxygenComponent;
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTankFiller", meta = (AllowPrivateAcces = "true"))
+		UElectricityComponent* ElectricityComponent;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 

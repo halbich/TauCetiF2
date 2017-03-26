@@ -1,7 +1,7 @@
 ﻿#include "Blocks.h"
 #include "CubeBlock.h"
 
-ACubeBlock::ACubeBlock()
+ACubeBlockWithoutElectricity::ACubeBlockWithoutElectricity()
 	: Super()
 {
 	PrimaryActorTick.bCanEverTick = false;
@@ -11,7 +11,7 @@ ACubeBlock::ACubeBlock()
 	CubeMesh->SetupAttachment(GetRootComponent());
 }
 
-UStaticMeshComponent* ACubeBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
+UStaticMeshComponent* ACubeBlockWithoutElectricity::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {
 	if (BlockMeshStructureDefIndex == 0)
 		return CubeMesh;
@@ -19,6 +19,6 @@ UStaticMeshComponent* ACubeBlock::GetMeshStructureComponent_Implementation(int32
 	return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
 }
 
-UPrimitiveComponent* ACubeBlock::GetComponentForObjectOutline_Implementation() {
+UPrimitiveComponent* ACubeBlockWithoutElectricity::GetComponentForObjectOutline_Implementation() {
 	return CubeMesh;
 }

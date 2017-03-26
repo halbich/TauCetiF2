@@ -1,18 +1,18 @@
 ﻿#pragma once
 
 #include "Block.h"
-#include "CubeBlock.generated.h"
+#include "CubeBlockWithoutElectricity.generated.h"
 
 /**
  *
  */
 UCLASS()
-class BLOCKS_API ACubeBlock : public ABlock
+class BLOCKS_API ACubeBlockWithoutElectricity : public ABlock
 {
 	GENERATED_BODY()
 
 public:
-	ACubeBlock();
+	ACubeBlockWithoutElectricity();
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | CubeBlock")
 		UStaticMeshComponent* CubeMesh;

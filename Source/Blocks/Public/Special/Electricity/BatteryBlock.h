@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Block.h"
+#include "Components/ElectricityComponent.h"
 #include "BatteryBlock.generated.h"
 
 /**
@@ -17,6 +18,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | BatteryBlock")
 		UStaticMeshComponent* BatteryBlockMesh;
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | BatteryBlock", meta = (AllowPrivateAcces = "true"))
+		UElectricityComponent* ElectricityComponent;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 

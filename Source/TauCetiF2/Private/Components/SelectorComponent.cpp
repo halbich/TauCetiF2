@@ -79,6 +79,7 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 
 	//DrawDebugDirectionalArrow(World, ImpactPointWithSnap, ImpactPointWithSnap + ImpactNormal * GameDefinitions::CubeMinSize, 1, FColor::Red, false, 5);
 
+	IsValidBuildingLocation = true;
 	selectComponent(act, worldAct);
 }
 
