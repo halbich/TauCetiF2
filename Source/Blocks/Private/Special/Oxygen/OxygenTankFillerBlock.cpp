@@ -35,3 +35,72 @@ UStaticMeshComponent* AOxygenTankFillerBlock::GetMeshStructureComponent_Implemen
 UPrimitiveComponent* AOxygenTankFillerBlock::GetComponentForObjectOutline_Implementation() {
 	return OxygenTankFillerBodyMesh;
 }
+
+void  AOxygenTankFillerBlock::OnConstruction(const FTransform& Transform) {
+	Super::OnConstruction(Transform);
+
+	SelectTargetComponent->EnableUse(500);
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.OxygenTankFillerBlock.Pickup", "Použít / Otevřít konzoli");
+
+	FUseDelegate Subscriber;
+	Subscriber.BindUObject(this, &AOxygenTankFillerBlock::ListeningOnUse);
+	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
+
+	OxygenComponent->OnComponentDataChangedEvent.AddDynamic(this, &AOxygenTankFillerBlock::ListeningOnOxygenCompChanged);
+	OxygenComponent->onComponentDataChanged();
+}
+
+void AOxygenTankFillerBlock::ListeningOnUse(AActor* actor, bool isSpecial)
+{
+	if (!actor || !actor->IsValidLowLevel())
+		return;
+
+	if (!isSpecial)
+	{
+		print(TEXT("not special use"));
+		return;
+	}
+
+	auto actorOxygen = Cast<UOxygenComponent>(actor->GetComponentByClass(UOxygenComponent::StaticClass()));
+	if (!actorOxygen)
+		return;
+
+	if (FMath::IsNearlyZero(OxygenComponent->OxygenInfo->CurrentFillingValue))		// nemáme z čeho bychom brali
+		return;
+
+	float actuallyPutted = 0.0f;
+	float actuallyObtained = 0.0f;
+	bool obtainResult = false;
+	if (actorOxygen->PutAmount(OxygenComponent->OxygenInfo->CurrentFillingValue, actuallyPutted))
+	{
+		obtainResult = OxygenComponent->ObtainAmount(actuallyPutted, actuallyObtained);
+		check(obtainResult && FMath::IsNearlyZero(actuallyObtained - actuallyPutted));
+	}
+}
+
+void AOxygenTankFillerBlock::ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source)
+{
+	// TODO
+	/*auto mat = Cast<UMaterialInstanceDynamic>(OxygenTankMesh->GetMaterial(0));
+	if (!mat)
+		return;
+
+	auto def = OxygenComponent->GetDefinition();
+	if (!def)
+		return;
+
+	mat->SetScalarParameterValue(TEXT("Filling"), def->TotalObjectVolume > 0 ? source->CurrentFillingValue / def->TotalObjectVolume : 0.0f);
+*/
+}
+
+
+void AOxygenTankFillerBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if (ListeningHandle.IsValid() && SelectTargetComponent)
+		SelectTargetComponent->RemoveEventListener(ListeningHandle);
+
+	if (OxygenComponent)
+		OxygenComponent->OnComponentDataChangedEvent.RemoveDynamic(this, &AOxygenTankFillerBlock::ListeningOnOxygenCompChanged);
+
+	Super::EndPlay(EndPlayReason);
+}

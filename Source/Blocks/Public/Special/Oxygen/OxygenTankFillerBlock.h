@@ -33,4 +33,18 @@ public:
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	FDelegateHandle ListeningHandle;
+	FDelegateHandle OxygenDataChangedHandle;
+
+private:
+	void ListeningOnUse(AActor* actor, bool isSpecial);
+
+protected:
+	UFUNCTION()
+		void ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source);
 };

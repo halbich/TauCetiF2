@@ -6,6 +6,7 @@
 #include "BlockAdditionalFlags.h"
 #include "OxygenComponentDefinition.h"
 #include "ElectricityComponentDefinition.h"
+#include "UsableBlockDefinition.h"
 #include "BlockDefinition.generated.h"
 
 namespace BuildDefinition {
@@ -55,8 +56,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
 		bool IsInventoryObject;
 
-	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | UsableDefinition")
 		bool AllowUsable;
+
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | UsableDefinition", meta = (EditCondition = AllowUsable))
+		FUsableBlockDefinition UsableDef;
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		EShapeType ShapeType;
