@@ -142,4 +142,17 @@ bool UElectricityComponent::isValidConnection(UElectricityBindableAreaInfo* area
 
 }
 
+void UElectricityComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if (EndPlayReason == EEndPlayReason::Type::Quit)
+		return;
+
+	for (auto connected : ConnectedComponents)
+	{
+		connected->ConnectedComponents.Remove(this);
+	}
+	ConnectedComponents.Empty();
+
+}
+
 #pragma optimize("", on)

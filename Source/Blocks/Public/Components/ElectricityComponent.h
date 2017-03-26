@@ -52,6 +52,8 @@ public:
 
 	void ToggleIsInCreative(bool newInCreative);
 
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 public:
 	FORCEINLINE const FElectricityComponentDefinition* GetDefinition()
 	{
