@@ -3,6 +3,8 @@
 #include "Components/ActorComponent.h"
 #include "Info/Components/BlockWithElectricityInfo.h"
 #include "Definitions/ElectricityComponentDefinition.h"
+#include "Info/ElectricityBindableAreaInfo.h"
+#include "Info/BlockInfo.h"
 #include "ElectricityComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FElectricityComponentDataChangedDelegate, UBlockWithElectricityInfo*, info);
@@ -25,13 +27,22 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
 		bool IsInCreative;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
+		TArray<UElectricityBindableAreaInfo*> ElectricityBindableAreas;
+
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
+		TArray<UElectricityComponent*> ConnectedComponents;
+
 	void onComponentDataChanged();
+
+	friend TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source);
 
 public:
 
 	UBlockWithElectricityInfo* SetInfo(UBlockWithElectricityInfo* info);
 
-	void SetDefinition(FElectricityComponentDefinition def);
+	void SetDefinition(FElectricityComponentDefinition def, UBlockInfo* blockInfo);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | ElectricityComponent")
 		bool ObtainAmount(float requested, float& actuallyObtained, bool requireExact = false);
@@ -49,4 +60,8 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "TCF2 | ElectricityComponent")
 		FElectricityComponentDataChangedDelegate OnComponentDataChangedEvent;
+
+private:
+
+	static bool isValidConnection(UElectricityBindableAreaInfo* area, UElectricityBindableAreaInfo* otherArea);
 };

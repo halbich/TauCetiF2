@@ -9,6 +9,7 @@
 #include "BlockWithElectricity.h"
 #include "BlockWithOxygen.h"
 #include "Components/WorldObjectComponent.h"
+#include "Components/ElectricityComponent.h"
 #include "Block.generated.h"
 
 UCLASS()

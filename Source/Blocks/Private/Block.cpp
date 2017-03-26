@@ -103,7 +103,7 @@ void ABlock::UpdateBlockOnConstruction_Implementation(UBlockDefinition* BlockDef
 	if (electricityBlock)
 	{
 		check(BlockDef->HasElectricityComponent);	// musíme mít definici
-		electricityBlock->SetDefinition(BlockDef->ElectricityComponentDef);
+		electricityBlock->SetDefinition(BlockDef->ElectricityComponentDef, BlockInfo);
 	}
 	else
 	{
@@ -159,7 +159,6 @@ void ABlock::InitWorldObjectComponent()
 
 	TArray<UObject*> items;
 	woc->TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items, this);
-	print(TEXT("surroundings:"));
 
 	TArray<UMinMaxTree*> usedTrees;
 
@@ -169,7 +168,12 @@ void ABlock::InitWorldObjectComponent()
 
 		check(object && object->IsValidLowLevelFast() && object->WorldObjectComponent && object->WorldObjectComponent->IsValidLowLevelFast());
 
-		// TODO try bind electricity
+		if (def->HasElectricityComponent && object->Definition.GetDefaultObject()->HasElectricityComponent)
+		{
+			auto ec = Cast<UElectricityComponent>(object->GetComponentByClass(UElectricityComponent::StaticClass()));
+			check(ec);
+			woc->SurroundingElectricityComponent.Add(ec);
+		}
 
 		if (def->UsingInPatterns && object->BlockInfo->ID == BlockInfo->ID) {
 
@@ -249,7 +253,17 @@ void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
 
 void ABlock::WasHitByStorm()
 {
-	//WorldObjectComponent->RootBox->DEBUGDrawBorder(GetWorld(), FColor::Orange, 2);
+}
+
+TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source)
+{
+	check(source);
+	auto bl = Cast<ABlock>(source->GetOwner());
+	check(bl && bl->WorldObjectComponent);
+
+	auto result = TArray<UElectricityComponent*>( bl->WorldObjectComponent->SurroundingElectricityComponent);
+	bl->WorldObjectComponent->SurroundingElectricityComponent.Empty();
+	return result;
 }
 
 #pragma optimize("",on)

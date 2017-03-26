@@ -152,11 +152,6 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 		hitpointsCounter -= remainingTargets;
 	}
 
-	print0(*FString::FromInt(CurrentHitIntensity));
-
-
-
-
 }
 
 void UGameWeatherComponent::OnTargetElementsChanged(UWeatherTargetsKDTree* target, bool isAdding)

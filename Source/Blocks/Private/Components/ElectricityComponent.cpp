@@ -1,6 +1,9 @@
 ﻿#include "Blocks.h"
 #include "ElectricityComponent.h"
 
+
+#pragma optimize("", off)
+
 // Sets default values for this component's properties
 UElectricityComponent::UElectricityComponent()
 {
@@ -20,9 +23,50 @@ UBlockWithElectricityInfo* UElectricityComponent::SetInfo(UBlockWithElectricityI
 	return ElectricityInfo;
 }
 
-void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def)
+void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, UBlockInfo* blockInfo)
 {
 	ElectricityComponentDef = def;
+
+	if (!blockInfo)
+		return;
+
+	auto worldLocation = GetOwner()->GetActorLocation();
+
+	for (auto areaDef : ElectricityComponentDef.BindableAreas.Planes)
+	{
+		auto bindArea = NewObject<UElectricityBindableAreaInfo>();
+		bindArea->InitArea(blockInfo, ElectricityComponentDef.BindableAreas.UsedPoints, areaDef, worldLocation);
+		ElectricityBindableAreas.Add(bindArea);
+		bindArea->DEBUG_DrawPoints(GetWorld());
+	}
+
+	auto surroundings = GetSurroundingComponents(this);
+
+	for (auto surrounding : surroundings)
+	{
+
+
+		for (auto bindable : surrounding->ElectricityBindableAreas)
+		{
+			for (auto myBindable : ElectricityBindableAreas)
+			{
+				if (bindable->DominantPlane != myBindable->DominantPlane)
+					continue;
+
+				if (isValidConnection(myBindable, bindable))
+				{
+					ConnectedComponents.Add(surrounding);
+					surrounding->ConnectedComponents.Add(this);
+				}
+			}
+		}
+
+	}
+
+	if (ConnectedComponents.Num() > 0) {
+		print(TEXT("Valid connections:"));
+		print(*FText::AsNumber(ConnectedComponents.Num()).ToString());
+	}
 }
 
 void UElectricityComponent::onComponentDataChanged()
@@ -89,3 +133,13 @@ void UElectricityComponent::ToggleIsInCreative(bool newInCreative)
 	IsInCreative = newInCreative;
 	onComponentDataChanged();
 }
+
+bool UElectricityComponent::isValidConnection(UElectricityBindableAreaInfo* area, UElectricityBindableAreaInfo* otherArea)
+{
+
+	// TODO
+	return true;
+
+}
+
+#pragma optimize("", on)

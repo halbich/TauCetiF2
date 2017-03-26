@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "ElectricityBindableAreas.h"
 #include "ElectricityComponentDefinition.generated.h"
 
 /**
@@ -10,8 +11,11 @@ struct FElectricityComponentDefinition
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
+		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
 		float TotalObjectEnergy;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
+		FElectricityBindableAreas BindableAreas;
 
 	FElectricityComponentDefinition()
 	{

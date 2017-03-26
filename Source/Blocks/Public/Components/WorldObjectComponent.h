@@ -4,6 +4,7 @@
 #include "Tree/KDTree.h"
 #include "Tree/MinMaxTree.h"
 #include "Tree/WeatherTargetsKDTree.h"
+#include "Components/ElectricityComponent.h"
 #include "WorldObjectComponent.generated.h"
 
 
@@ -34,6 +35,9 @@ public:
 	// Elements taken in Weather. This collection could be changes as WeatherTree Changes
 	UPROPERTY(Transient)
 		TArray<UWeatherTargetsKDTree*> WeatherTreeElements;
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> SurroundingElectricityComponent;
 
 	// Called when the game starts
 	virtual void BeginPlay() override;

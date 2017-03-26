@@ -216,7 +216,7 @@ void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 	OxygenComponent->SetDefinition(OxygenDef);
 	OxygenComponent->SetInfo(BlockSavingHelpers::GetOxygenInfo(carrier));
 
-	ElectricityComponent->SetDefinition(ElectricityDef);
+	ElectricityComponent->SetDefinition(ElectricityDef, NULL);
 	ElectricityComponent->SetInfo(BlockSavingHelpers::GetElectricityInfo(carrier));
 
 	PC->Inventory->InventoryComponent = Inventory;
