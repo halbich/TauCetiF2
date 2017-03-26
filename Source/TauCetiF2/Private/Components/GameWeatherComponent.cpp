@@ -3,6 +3,10 @@
 #include "TauCetiF2.h"
 #include "GameWeatherComponent.h"
 
+#pragma optimize("", off)
+
+
+const float UGameWeatherComponent::OneSixth = 1.0f / 6.0f;
 
 // Sets default values for this component's properties
 UGameWeatherComponent::UGameWeatherComponent()
@@ -66,18 +70,28 @@ void UGameWeatherComponent::OnStormBegin()
 	check(currentWeatherState->TargetWeatherIntensity == currentWeatherState->CurrentWeatherIntensity);
 
 	CurrentHitIntensity = IntensityCurve->GetFloatValue(currentWeatherState->CurrentWeatherIntensity);
-	currentEasingTime = 0;
 	hitpointsCounter = 0;
+
+	currentEaseInTime = FMath::RandRange(OneSixth *currentWeatherState->TargetWaitingTime, 2 * OneSixth *currentWeatherState->TargetWaitingTime);
+	currentEaseOutTime = FMath::RandRange(4 * OneSixth *currentWeatherState->TargetWaitingTime, 5 * OneSixth *currentWeatherState->TargetWaitingTime);
 
 	StormState = EStormState::EaseIn;
 }
 
 void UGameWeatherComponent::OnStormEnd()
 {
+	auto remainingTargets = FMath::FloorToInt(hitpointsCounter);
+	if (remainingTargets > 0)
+		doDamage(remainingTargets);
+
+
 	StormState = EStormState::NoStorm;
 
 	CurrentHitIntensity = 0;
-	currentEasingTime = 0;
+
+	currentEaseInTime = 0;
+	currentEaseOutTime = 0;
+
 	hitpointsCounter = 0;
 }
 
@@ -99,11 +113,11 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	case EStormState::EaseIn: {
 
 
-		auto lerpedIntensity = EntryEasingTime > 0 ? FMath::Lerp(0.0f, CurrentHitIntensity, currentEasingTime / EntryEasingTime) : CurrentHitIntensity;
+		auto lerpedIntensity = FMath::Lerp(0.0f, CurrentHitIntensity, currentWeatherState->CurrentWaitingTime / currentEaseInTime);
 
 		hitpointsCounter += lerpedIntensity * DeltaTime * currentSurface;
 
-		if (currentEasingTime > EntryEasingTime)
+		if (currentWeatherState->CurrentWaitingTime > currentEaseInTime)
 			StormState = EStormState::Running;
 
 		break;
@@ -112,22 +126,16 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	case EStormState::Running: {
 
 		hitpointsCounter += CurrentHitIntensity * DeltaTime * currentSurface;
-
-		auto ratio = currentWeatherState->CurrentWaitingTime / currentEasingTime;
-
-		auto remaining = currentWeatherState->TargetWaitingTime - currentWeatherState->CurrentWaitingTime;
-		if (remaining < EntryEasingTime)
-		{
+		
+		if (currentWeatherState->CurrentWaitingTime > currentEaseOutTime)
 			StormState = EStormState::EaseOut;
-			currentEasingTime = EntryEasingTime - remaining;
-		}
 
 		break;
 	}
 
 	case EStormState::EaseOut: {
 
-		auto lerpedIntensity = EntryEasingTime > 0 ? FMath::Lerp(CurrentHitIntensity, 0.0f, currentEasingTime / EntryEasingTime) : CurrentHitIntensity;
+		auto lerpedIntensity = FMath::Max( FMath::Lerp(CurrentHitIntensity, 0.0f, (currentWeatherState->CurrentWaitingTime - currentEaseOutTime) / (currentWeatherState->TargetWaitingTime - currentEaseOutTime)), .0f);
 
 		hitpointsCounter += lerpedIntensity * DeltaTime * currentSurface;
 
@@ -150,7 +158,7 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 
 }
-#pragma optimize("", off)
+
 void UGameWeatherComponent::OnTargetElementsChanged(UWeatherTargetsKDTree* target, bool isAdding)
 {
 	if (isAdding)

@@ -57,8 +57,11 @@ public:
 	UPROPERTY(Transient)
 		float currentEasingTime;
 
-	UPROPERTY(EditDefaultsOnly, Category = Curve)
-		float EntryEasingTime;
+	UPROPERTY(Transient)
+		float currentEaseInTime;
+
+	UPROPERTY(Transient)
+		float currentEaseOutTime;
 
 	UPROPERTY(Transient)
 		EStormState StormState;
@@ -120,5 +123,7 @@ private:
 		}
 
 	}
+
+	static const float OneSixth;
 
 };

@@ -4,6 +4,7 @@
 #include "CurrentWeatherState.h"
 
 
+
 UCurrentWeatherState::UCurrentWeatherState()
 {
 	CurrentWorldTime = -1;
@@ -21,7 +22,7 @@ bool UCurrentWeatherState::CheckTimeExceeded(FWeatherDefinition& definition, int
 {
 	CurrentDefinitionID = newDefinitionID;
 	CurrentWaitingTime = 0;
-	
+
 	TargetWaitingTime = FMath::RandRange(definition.MinChangeDuration, definition.MaxChangeDuration);
 	TargetWeatherIntensity = FMath::RandRange(definition.MinCloudsSpeed, definition.MaxCloudsSpeed);
 	TargetCloudOpacity = FMath::RandRange(definition.MinCloudsOpacity, definition.MaxCloudsOpacity);
