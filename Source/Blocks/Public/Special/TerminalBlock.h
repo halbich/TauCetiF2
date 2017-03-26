@@ -3,13 +3,14 @@
 #include "Block.h"
 #include "Components/ElectricityComponent.h"
 #include "BlockWithElectricity.h"
+#include "Interfaces/BlockWithShowableWidget.h"
 #include "TerminalBlock.generated.h"
 
 /**
  *
  */
 UCLASS()
-class BLOCKS_API ATerminalBlock : public ABlock
+class BLOCKS_API ATerminalBlock : public ABlock, public IBlockWithShowableWidget
 {
 	GENERATED_BODY()
 

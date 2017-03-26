@@ -62,3 +62,7 @@ void UObjectWidget::RemoveTopWidgetFromStack()
 	if (ItemsStack.Num() != 0)
 		pop();
 }
+
+void UObjectWidget::InitForBlock_Implementation(ABlock* block)
+{
+}

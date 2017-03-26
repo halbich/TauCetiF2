@@ -15,6 +15,7 @@
 #include "Inventory/Public/InventoryComponent.h"
 #include "Blocks/Public/Info/BlockInfo.h"
 #include "Components/GameWeatherComponent.h"
+#include "Game/TauCetiF2PlayerController.h"
 
 #include "WorldController.generated.h"
 

@@ -39,9 +39,9 @@ enum class EShownWidget : uint8
 {
 	None,
 	InGameMenu,
-	BaseControl,
 	MainMenu,
-	Inventory
+	Inventory,
+	Registered
 };
 
 UENUM(BlueprintType)

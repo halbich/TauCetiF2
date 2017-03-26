@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "Blocks/Public/Block.h"
 #include "Blueprint/UserWidget.h"
 #include "Widgets/SynchronizeWidget.h"
 #include "ObjectWidget.generated.h"
@@ -30,6 +31,9 @@ public:
 	UPROPERTY(Transient)
 		TArray<UObjectWidget*> ItemsStack;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CustomWidgets|ObjectWidget")
+		FString WidgetID;
+
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
 		void AddToStack(UObjectWidget* widget);
 
@@ -51,6 +55,11 @@ public:
 	virtual bool OnEscapeKey();
 
 	void WidgetShown();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
+		void InitForBlock(ABlock* block);
+
+	virtual void InitForBlock_Implementation(ABlock* block);
 
 private:
 

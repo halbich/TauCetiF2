@@ -319,6 +319,27 @@ void AWorldController::onPickupItem(ABlock* pickingItem)
 void AWorldController::onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidget> widget)
 {
 
+	if (!widget || !block)
+		return;
+
+	auto pc = Cast<ATauCetiF2PlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+
+	ensure(pc);
+
+	if (widget->IsChildOf(UObjectWidget::StaticClass()))
+	{
+		TSubclassOf<UObjectWidget> objW = *widget;
+		auto id = pc->EnsureRegisterWidget(objW);
+		pc->ShowRegisteredWidget(id, block);
+
+		return;
+
+	}
+
+	auto defW = widget.GetDefaultObject();
+
+	defW->AddToPlayerScreen();
+
 }
 
 #pragma optimize("", on)

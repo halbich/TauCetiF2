@@ -18,12 +18,6 @@ void ATauCetiF2PlayerController::BeginPlay()
 		InGameMenu->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
 	}
 
-	if (wBaseControl)
-	{
-		BaseControl = CreateWidget<UObjectWidget>(this, wBaseControl);
-		BaseControl->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
-	}
-
 	if (wInventory)
 	{
 		Inventory = CreateWidget<UInventoryScreen>(this, wInventory);
@@ -46,14 +40,6 @@ void ATauCetiF2PlayerController::OnEscapeKey()
 			updateState();
 		}
 		break;
-	case EShownWidget::BaseControl:
-		if (BaseControl->OnEscapeKey())
-		{
-			BaseControl->RemoveFromViewport();
-			CurrentShownWidget = EShownWidget::None;
-			updateState();
-		}
-		break;
 	case EShownWidget::MainMenu:
 		if (MainMenu->OnEscapeKey())
 		{
@@ -65,6 +51,17 @@ void ATauCetiF2PlayerController::OnEscapeKey()
 		{
 			Inventory->RemoveFromViewport();
 			CurrentShownWidget = EShownWidget::None;
+			updateState();
+		}
+		break;
+
+	case EShownWidget::Registered:
+		ensure(currentShownRegisteredWidget);
+		if (currentShownRegisteredWidget->OnEscapeKey())
+		{
+			currentShownRegisteredWidget->RemoveFromViewport();
+			CurrentShownWidget = EShownWidget::None;
+			currentShownRegisteredWidget = NULL;
 			updateState();
 		}
 		break;
@@ -81,14 +78,15 @@ void ATauCetiF2PlayerController::OnEnterKey()
 	case EShownWidget::InGameMenu:
 		InGameMenu->OnEnterKey();
 		break;
-	case EShownWidget::BaseControl:
-		BaseControl->OnEnterKey();
-		break;
 	case EShownWidget::MainMenu:
 		MainMenu->OnEnterKey();
 		break;
 	case EShownWidget::Inventory:
 		MainMenu->OnEnterKey();
+		break;
+	case EShownWidget::Registered:
+		ensure(currentShownRegisteredWidget);
+		currentShownRegisteredWidget->OnEnterKey();
 		break;
 	default:
 		checkNoEntry();
@@ -106,14 +104,15 @@ void ATauCetiF2PlayerController::ShowWidget(const EShownWidget widget)
 	case EShownWidget::InGameMenu:
 		focus = InGameMenu;
 		break;
-	case EShownWidget::BaseControl:
-		focus = BaseControl;
-		break;
 	case EShownWidget::MainMenu:
 		focus = MainMenu;
 		break;
 	case EShownWidget::Inventory:
 		focus = Inventory;
+		break;
+	case EShownWidget::Registered:
+		ensure(currentShownRegisteredWidget);
+		focus = currentShownRegisteredWidget;
 		break;
 	default:
 		checkNoEntry();
@@ -148,4 +147,40 @@ void ATauCetiF2PlayerController::ToggleInventory()
 void ATauCetiF2PlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
+}
+
+FString ATauCetiF2PlayerController::EnsureRegisterWidget(TSubclassOf<UObjectWidget> widget)
+{
+	ensure(widget);
+
+	auto widgDefaults = widget.GetDefaultObject();
+
+	auto id = widgDefaults->WidgetID;
+	ensure(id.Len() > 0);
+
+	auto w = registeredWidgets.Find(id);
+
+	if (!w)
+	{
+		auto widg = CreateWidget<UObjectWidget>(this, widget);
+
+		widg->OnWidgetCloseRequest.AddDynamic(this, &ATauCetiF2PlayerController::OnEscapeKey);
+		&registeredWidgets.Add(id, widg);
+	}
+
+	return id;
+}
+
+void ATauCetiF2PlayerController::ShowRegisteredWidget(const FString widgetID, ABlock* block)
+{
+	auto w = registeredWidgets.Find(widgetID);
+	ensure(w);
+
+	currentShownRegisteredWidget = *w;
+
+	if (block)
+		currentShownRegisteredWidget->InitForBlock(block);
+
+	ShowWidget(EShownWidget::Registered);
+
 }

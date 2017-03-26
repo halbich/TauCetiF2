@@ -8,6 +8,7 @@
 #include "Widgets/InventoryScreen.h"
 #include "Helpers/Helpers.h"
 #include "GameSave/Public/SaveGameCarrier.h"
+#include "Blocks/Public/Block.h"
 #include "TauCetiF2PlayerController.generated.h"
 
 
@@ -34,12 +35,6 @@ public:
 		UObjectWidget* InGameMenu;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
-		TSubclassOf<class UObjectWidget> wBaseControl;
-
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
-		UObjectWidget* BaseControl;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 		TSubclassOf<class UMainMenuWidget> wMainMenu;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
@@ -54,6 +49,11 @@ public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Widgets")
 		FGameShouldBePaused OnGameShouldBePaused;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
+		TMap<FString, UObjectWidget*> registeredWidgets;
+
+	UPROPERTY(Transient)
+		UObjectWidget* currentShownRegisteredWidget;
 
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
 		void OnEnterKey();
@@ -63,6 +63,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
 		void ShowWidget(const EShownWidget widget);
+
+	UFUNCTION(BlueprintCallable, Category = "Widgets")
+		void ShowRegisteredWidget(const FString widgetID, ABlock* block = NULL);
 
 	// Override BeginPlay()
 	virtual void BeginPlay() override;
@@ -75,6 +78,8 @@ public:
 	{
 		return CurrentShownWidget == EShownWidget::None;
 	}
+
+	FString EnsureRegisterWidget(TSubclassOf<UObjectWidget> widget);
 
 private:
 
