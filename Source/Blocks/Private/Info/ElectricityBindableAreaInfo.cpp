@@ -42,6 +42,25 @@ void UElectricityBindableAreaInfo::DEBUG_DrawPoints(UWorld* world)
 
 	for (auto p : AreaPoints)
 		DrawDebugSphere(world, p, 5, 10, FColor::Green, false, 60);
+
+
+	for (size_t i = 0; i < AreaPoints.Num(); i++)
+	{
+		auto p1 = AreaPoints[i];
+		auto p2 = AreaPoints[(i + 1) % AreaPoints.Num()];
+
+		DrawDebugLine(world, p1, p2, FColor::Green, false, 60, 0, 3);
+
+	}
+	TArray<int> indices;
+	indices.Add(0); indices.Add(1); indices.Add(2);
+
+	if (AreaPoints.Num() == 4)
+	{
+		indices.Add(0); indices.Add(2); indices.Add(3);
+	}
+
+	DrawDebugMesh(world, AreaPoints, indices, FColor::Green, false, 30);
 }
 
 #pragma optimize("", on)
