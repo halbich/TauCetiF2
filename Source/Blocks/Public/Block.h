@@ -64,7 +64,7 @@ public:
 
 	void InitWorldObjectComponent();
 
-	void WasHitByStorm();
+	virtual void  WasHitByStorm(const FVector& blockLocation);
 
 private:
 

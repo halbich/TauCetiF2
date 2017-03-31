@@ -100,6 +100,11 @@ private:
 
 	FDelegateHandle ListeningHandle;
 
+
+
+
+#pragma optimize("", off)
+
 	void doDamage(int32 currentHitPoints) {
 
 		auto targNum = Targets.Num();
@@ -113,16 +118,30 @@ private:
 			check(target && target->IsValidLowLevelFast() && !target->IsPendingKill() && target->ChildHeap.Num() > 0);
 
 			auto targObj = target->ChildHeap.HeapTop();
-			check(targObj && targObj->IsValidLowLevelFast() && !targObj->IsPendingKill() );
+			check(targObj && targObj->IsValidLowLevelFast() && !targObj->IsPendingKill());
 			check(targObj->ContainingObject && targObj->ContainingObject->IsValidLowLevelFast() && !targObj->ContainingObject->IsPendingKill());
-			
+
 			auto bl = Cast<ABlock>(targObj->ContainingObject);
 			check(bl && bl->IsValidLowLevelFast() && !bl->IsPendingKill());
-			bl->WasHitByStorm();
+
+			auto defBox = bl->WorldObjectComponent->DefiningBox;
+			auto myBox = targObj;
+
+			auto v = ((myBox->Min - defBox->Min) / GameDefinitions::CubeMinSize).GridSnap(1);
+
+			print(*defBox->Min.ToString());
+			print(*myBox->Min.ToString());
+
+			auto unrotated = bl->BlockInfo->Rotation.UnrotateVector(v).GridSnap(1);
+			bl->WasHitByStorm(unrotated);
+
 			targObj->DEBUGDrawBorder(GetWorld(), FColor::Orange, 0.75f);
 		}
 
 	}
+
+
+#pragma optimize("", on)
 
 	static const float OneSixth;
 

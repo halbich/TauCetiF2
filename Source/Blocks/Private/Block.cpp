@@ -252,8 +252,9 @@ void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
 //	b->WorldObjectComponent->OnTreeElementsChanged();
 //}
 
-void ABlock::WasHitByStorm()
+void ABlock::WasHitByStorm(const FVector& blockLocation)
 {
+	
 }
 
 TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source)
