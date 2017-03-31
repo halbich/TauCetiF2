@@ -65,4 +65,6 @@ private:
 
 	void UpdateCustomTexture();
 
+	int32 pixelsPerBaseBlock;
+
 };

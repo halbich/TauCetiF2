@@ -89,8 +89,11 @@ void  AGeneratorBlock::OnConstruction(const FTransform& Transform) {
 	if (dynamicColorsFloat) { delete[] dynamicColorsFloat; dynamicColorsFloat = nullptr; }
 	if (updateTextureRegion) { delete updateTextureRegion; updateTextureRegion = nullptr; }
 
+
+	pixelsPerBaseBlock = 64;
+
 	auto currentScale = GetBlockScale();
-	int32 w = FMath::RoundToInt(currentScale.X), h = FMath::RoundToInt(currentScale.Y);
+	int32 w = FMath::RoundToInt(currentScale.X) * pixelsPerBaseBlock, h = FMath::RoundToInt(currentScale.Y) * pixelsPerBaseBlock;
 
 	dynamicMaterials.Empty();
 
@@ -120,7 +123,6 @@ void  AGeneratorBlock::OnConstruction(const FTransform& Transform) {
 	for (uint32 i = 0; i < dataSize; ++i)
 		dynamicColors[i] = 0;
 
-	//dynamicColorsFloat = new float[arraySize];
 }
 
 #pragma optimize("", off)
@@ -141,13 +143,24 @@ void AGeneratorBlock::Tick(float DeltaTime)
 
 		elem->ActualTime += DeltaTime;
 
-		uint32 baseIndex = (elem->X + elem->Y * rowSize) * 4;
 
-		ensure(baseIndex + RED >= 0 && baseIndex + RED < dataSize);
-		ensure(baseIndex + GREEN >= 0 && baseIndex + GREEN < dataSize);
-		ensure(baseIndex + BLUE >= 0 && baseIndex + BLUE < dataSize);
+		for (int32 kx = 0; kx < pixelsPerBaseBlock; kx++)
+		{
 
-		dynamicColors[baseIndex + RED] = dynamicColors[baseIndex + GREEN] = dynamicColors[baseIndex + BLUE] = (uint8)FMath::Lerp(256, 0, elem->ActualTime / 2.0f);
+			for (int32 ky = 0; ky < pixelsPerBaseBlock; ky++)
+			{
+				uint32 baseIndex = ((elem->X * pixelsPerBaseBlock + kx) + (elem->Y * pixelsPerBaseBlock + ky) * rowSize) * 4;
+
+				ensure(baseIndex + RED >= 0 && baseIndex + RED < dataSize);
+				ensure(baseIndex + GREEN >= 0 && baseIndex + GREEN < dataSize);
+				ensure(baseIndex + BLUE >= 0 && baseIndex + BLUE < dataSize);
+
+				dynamicColors[baseIndex + RED] = dynamicColors[baseIndex + GREEN] = dynamicColors[baseIndex + BLUE] = (uint8)FMath::Lerp(256, 0, elem->ActualTime / 2.0f);
+			}
+
+		}
+
+
 
 		if (elem->ActualTime > 2.0f)
 			toDel.Push(i);
