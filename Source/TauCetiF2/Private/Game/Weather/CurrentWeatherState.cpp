@@ -18,7 +18,7 @@ void UCurrentWeatherState::MakeTargetsCurrent()
 }
 
 
-bool UCurrentWeatherState::CheckTimeExceeded(FWeatherDefinition& definition, int32 newDefinitionID)
+bool UCurrentWeatherState::CheckTimeExceeded(UPARAM(REF)FWeatherDefinition& definition, int32 newDefinitionID)
 {
 	CurrentDefinitionID = newDefinitionID;
 	CurrentWaitingTime = 0;
@@ -30,7 +30,7 @@ bool UCurrentWeatherState::CheckTimeExceeded(FWeatherDefinition& definition, int
 	return definition.ApplyDamage;
 }
 
-bool UCurrentWeatherState::CheckChangingWeather(FWeatherDefinition& definition)
+bool UCurrentWeatherState::CheckChangingWeather(UPARAM(REF)FWeatherDefinition& definition)
 {
 
 	CurrentWaitingTime = 0;
@@ -43,7 +43,7 @@ bool UCurrentWeatherState::CheckChangingWeather(FWeatherDefinition& definition)
 	return definition.ApplyDamage;
 }
 
-bool UCurrentWeatherState::CheckRunningWeather(FWeatherDefinition& definition, int32 newDefinitionID)
+bool UCurrentWeatherState::CheckRunningWeather(UPARAM(REF)FWeatherDefinition& definition, int32 newDefinitionID)
 {
 	CurrentDefinitionID = newDefinitionID;
 

@@ -143,7 +143,7 @@ void AGeneratorBlock::Tick(float DeltaTime)
 
 		elem->ActualTime += DeltaTime;
 
-
+		uint8 setValue = (uint8)FMath::Lerp(256, 0, FMath::Min(1.0f, elem->ActualTime));
 		for (int32 kx = 0; kx < pixelsPerBaseBlock; kx++)
 		{
 
@@ -155,14 +155,14 @@ void AGeneratorBlock::Tick(float DeltaTime)
 				ensure(baseIndex + GREEN >= 0 && baseIndex + GREEN < dataSize);
 				ensure(baseIndex + BLUE >= 0 && baseIndex + BLUE < dataSize);
 
-				dynamicColors[baseIndex + RED] = dynamicColors[baseIndex + GREEN] = dynamicColors[baseIndex + BLUE] = (uint8)FMath::Lerp(256, 0, elem->ActualTime / 2.0f);
+				dynamicColors[baseIndex + RED] = dynamicColors[baseIndex + GREEN] = dynamicColors[baseIndex + BLUE] = setValue;
 			}
 
 		}
 
 
 
-		if (elem->ActualTime > 2.0f)
+		if (setValue == 0)
 			toDel.Push(i);
 	}
 
@@ -196,15 +196,26 @@ void  AGeneratorBlock::WasHitByStorm(const FVector& blockLocation)
 
 	auto currentScale = GetBlockScale();
 
-	hitted.X = (uint8)(FMath::RoundToInt(blockLocation.X + currentScale.X) % FMath::RoundToInt(currentScale.X));
+	hitted.X = (uint8)((FMath::RoundToInt(blockLocation.X + currentScale.X) % FMath::RoundToInt(currentScale.X)));
 	ensure(hitted.X >= 0 && hitted.X < currentScale.X);
 
-	hitted.Y = (uint8)(FMath::RoundToInt(blockLocation.Y + currentScale.Y) % FMath::RoundToInt(currentScale.Y));
+	hitted.Y = (uint8)((FMath::RoundToInt(blockLocation.Y + currentScale.Y) % FMath::RoundToInt(currentScale.Y)));
 	ensure(hitted.Y >= 0 && hitted.Y < currentScale.Y);
 
 	hitted.ActualTime = 0;
 
-	spots.Insert(hitted, 0);
+	//hitted.X = hitted.Y = 0;
+
+	print(*FVector2D(hitted.X, hitted.Y).ToString());
+
+	auto existing = spots.IndexOfByPredicate([hitted](const FHittedSpot& spot) {
+		return hitted.X == spot.X && hitted.Y == spot.Y;
+	});
+
+	if (existing != INDEX_NONE)
+		spots[existing].ActualTime = 0;
+	else
+		spots.Insert(hitted, 0);
 }
 
 

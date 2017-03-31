@@ -129,11 +129,22 @@ private:
 
 			auto v = ((myBox->Min - defBox->Min) / GameDefinitions::CubeMinSize).GridSnap(1);
 
-			print(*defBox->Min.ToString());
-			print(*myBox->Min.ToString());
+			auto norm = FMath::RoundToInt(bl->BlockInfo->Rotation.GetNormalized().Yaw + 360) % 360;
 
-			auto unrotated = bl->BlockInfo->Rotation.UnrotateVector(v).GridSnap(1);
-			bl->WasHitByStorm(unrotated);
+			auto hitStorm = FVector(v);
+			auto rotSc = bl->BlockInfo->Rotation.RotateVector(bl->BlockInfo->Scale).GridSnap(1);
+			switch (norm)
+			{
+			case 0: break;
+			case 90: break;
+			case 180: v *= (-1) ;   break;
+			case 270:break;
+			default:
+				checkNoEntry();
+			}
+
+
+			bl->WasHitByStorm(hitStorm);
 
 			targObj->DEBUGDrawBorder(GetWorld(), FColor::Orange, 0.75f);
 		}
