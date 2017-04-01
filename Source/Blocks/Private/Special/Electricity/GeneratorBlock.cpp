@@ -16,6 +16,10 @@ AGeneratorBlock::AGeneratorBlock()
 	dynamicColors = nullptr;
 	dynamicColorsFloat = nullptr;
 	updateTextureRegion = nullptr;
+
+
+	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
+	AddOwnedComponent(ElectricityComponent);
 }
 
 void AGeneratorBlock::UpdateTextureRegions(UTexture2D* Texture, int32 MipIndex, uint32 NumRegions, FUpdateTextureRegion2D* Regions, uint32 SrcPitch, uint32 SrcBpp, uint8* SrcData, bool bFreeData)
