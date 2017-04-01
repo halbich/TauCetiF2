@@ -164,6 +164,6 @@ private:
 
 #pragma optimize("", on)
 
-	static const float OneSixth;
+	static const float EasingBorderValue;
 
 };

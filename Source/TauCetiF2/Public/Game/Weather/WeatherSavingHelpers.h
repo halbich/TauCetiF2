@@ -25,6 +25,14 @@ namespace WeatherSavingHelpers {
 
 	}
 
+	static void GetAdditionals(const FWeatherState& weatherState, float& hitpointsCounter, float& easeIn, float& easeOut, uint8& stormState)
+	{
+		hitpointsCounter = weatherState.HitpointsCounter;
+		easeIn = weatherState.EaseIn;
+		easeOut = weatherState.EaseOut;
+		stormState = weatherState.StormState;
+	}
+
 	static void ToWeatherState(FWeatherState& weatherState, UCurrentWeatherState* currentState) {
 		weatherState.CurrentDefinitionID = currentState->CurrentDefinitionID;
 		weatherState.CurrentWaitingTime = currentState->CurrentWaitingTime;
@@ -40,4 +48,13 @@ namespace WeatherSavingHelpers {
 		weatherState.TargetCloudOpacity = currentState->TargetCloudOpacity;
 
 	}
+
+	static void SetAdditionals(FWeatherState& weatherState, const float hitpointsCounter, const float easeIn, const float easeOut, const uint8 stormState)
+	{
+		weatherState.HitpointsCounter = hitpointsCounter;
+		weatherState.EaseIn = easeIn;
+		weatherState.EaseOut = easeOut;
+		weatherState.StormState = stormState;
+	}
+
 }

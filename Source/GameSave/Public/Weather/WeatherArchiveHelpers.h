@@ -19,5 +19,11 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FWeatherState& state)
 	Ar << state.CurrentCloudOpacity;
 	Ar << state.TargetCloudOpacity;
 
+
+	Ar << state.HitpointsCounter;
+	Ar << state.EaseIn;
+	Ar << state.EaseOut;
+	Ar << state.StormState;
+
 	return Ar;
 }

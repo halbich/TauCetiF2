@@ -22,4 +22,11 @@ public:
 	float BaseCloudOpacity;
 	float CurrentCloudOpacity;
 	float TargetCloudOpacity;
+
+
+	float HitpointsCounter;
+	float EaseIn;
+	float EaseOut;
+	uint8 StormState;
+
 };
