@@ -11,8 +11,11 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FWeatherState& state)
 	Ar << state.CurrentWaitingTime;
 	Ar << state.TargetWaitingTime;
 
+	Ar << state.BaseWeatherIntensity;
 	Ar << state.CurrentWeatherIntensity;
 	Ar << state.TargetWeatherIntensity;
+	
+	Ar << state.BaseCloudOpacity;
 	Ar << state.CurrentCloudOpacity;
 	Ar << state.TargetCloudOpacity;
 

@@ -15,8 +15,11 @@ public:
 	float CurrentWaitingTime;
 	float TargetWaitingTime;
 
+	float BaseWeatherIntensity;
 	float CurrentWeatherIntensity;
 	float TargetWeatherIntensity;
+	
+	float BaseCloudOpacity;
 	float CurrentCloudOpacity;
 	float TargetCloudOpacity;
 };

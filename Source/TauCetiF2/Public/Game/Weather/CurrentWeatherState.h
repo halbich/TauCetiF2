@@ -34,7 +34,7 @@ public:
 		float TargetWaitingTime;
 
 
-	// This property is not serializable to the SaveGame
+	
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		float BaseWeatherIntensity;
 
