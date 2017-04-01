@@ -132,13 +132,23 @@ private:
 			auto norm = FMath::RoundToInt(bl->BlockInfo->Rotation.GetNormalized().Yaw + 360) % 360;
 
 			auto hitStorm = FVector(v);
-			auto rotSc = bl->BlockInfo->Rotation.RotateVector(bl->BlockInfo->Scale).GridSnap(1);
+			auto rotSc = bl->BlockInfo->Rotation.RotateVector(bl->BlockInfo->Scale - FVector(1, 1, 1)).GridSnap(1);
 			switch (norm)
 			{
 			case 0: break;
-			case 90: break;
-			case 180: v *= (-1) ;   break;
-			case 270:break;
+			case 90: {
+				auto mrsrc = (-1) * rotSc;
+				hitStorm = FVector(hitStorm.Y, mrsrc.X - hitStorm.X, 0);
+				break;
+			}
+			case 180: {
+				hitStorm = (-1) * rotSc - hitStorm; break;
+			}
+			case 270: {
+				auto mrsrc = (-1) * rotSc;
+				hitStorm = FVector( mrsrc.Y - hitStorm.Y ,hitStorm.X , 0);
+				break;
+			}
 			default:
 				checkNoEntry();
 			}

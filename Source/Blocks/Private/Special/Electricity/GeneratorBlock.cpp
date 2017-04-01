@@ -196,10 +196,10 @@ void  AGeneratorBlock::WasHitByStorm(const FVector& blockLocation)
 
 	auto currentScale = GetBlockScale();
 
-	hitted.X = (uint8)((FMath::RoundToInt(blockLocation.X + currentScale.X) % FMath::RoundToInt(currentScale.X)));
+	hitted.X = blockLocation.X; // (uint8)((FMath::RoundToInt(blockLocation.X + currentScale.X) % FMath::RoundToInt(currentScale.X)));
 	ensure(hitted.X >= 0 && hitted.X < currentScale.X);
 
-	hitted.Y = (uint8)((FMath::RoundToInt(blockLocation.Y + currentScale.Y) % FMath::RoundToInt(currentScale.Y)));
+	hitted.Y = blockLocation.Y; // (uint8)((FMath::RoundToInt(blockLocation.Y + currentScale.Y) % FMath::RoundToInt(currentScale.Y)));
 	ensure(hitted.Y >= 0 && hitted.Y < currentScale.Y);
 
 	hitted.ActualTime = 0;
