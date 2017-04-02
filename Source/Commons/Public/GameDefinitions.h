@@ -25,6 +25,7 @@ public:
 /* BlockIDs*/
 #define EmptyHandID -10
 #define DeleteID -5
+#define ElectricToolID -4
 
 #define CubeBaseID 0
 #define CubeBuildingID 1
@@ -35,12 +36,13 @@ public:
 
 #define TerminalID 500
 #define WindowID 600
-
 #define DoorID 700
 
 
 #define LightSmallID 1000
+#define SwitcherID 1050
 #define GeneratorID 1100
+#define CreatorID 1150
 #define BatteryID 1200
 
 #define OxygenTankFillerID 1400
