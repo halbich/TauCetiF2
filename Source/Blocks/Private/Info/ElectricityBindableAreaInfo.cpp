@@ -40,6 +40,8 @@ void UElectricityBindableAreaInfo::InitArea(TArray<FVector> usedPoints, FElectri
 void UElectricityBindableAreaInfo::DEBUG_DrawPoints(UWorld* world)
 {
 
+	return;
+
 	for (auto p : AreaPoints)
 		DrawDebugSphere(world, p, 5, 10, FColor::Green, false, 60);
 

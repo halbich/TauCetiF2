@@ -151,6 +151,14 @@ private:
 				FMath::RoundToInt(info.Rotation.Pitch), FMath::RoundToInt(info.Rotation.Yaw), FMath::RoundToInt(info.Rotation.Roll));
 		}
 
+		UE_LOG(LogTemp, Log, TEXT("c->PlayerPosition = FVector(%d, %d, %d);"),
+			FMath::RoundToInt(PlayerPosition.X), FMath::RoundToInt(PlayerPosition.Y), FMath::RoundToInt(PlayerPosition.Z)
+		);
+
+		UE_LOG(LogTemp, Log, TEXT("c->PlayerRotation = FRotator(%d, %d, %d);"),
+			FMath::RoundToInt(PlayerRotation.Pitch), FMath::RoundToInt(PlayerRotation.Yaw), FMath::RoundToInt(PlayerRotation.Roll)
+		);
+
 		UE_LOG(LogTemp, Log, TEXT("~~~~~~~~~~~~~~~~~~  Save  ends ~~~~~~~~~~~~~~~~~~~~~~~~"));
 
 #endif

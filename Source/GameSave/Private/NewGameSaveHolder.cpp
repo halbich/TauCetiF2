@@ -100,25 +100,38 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 
 	auto UsedBlocks = &c->usedBlocks;
 
-	/*UsedBlocks->Add(make(0, FVector(-27, -21, 1), FVector(20, 20, 4), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1, FVector(-27, -22, 4), FVector(6, 6, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(2, FVector(-27, -20, 7), FVector(4, 4, 1), FRotator(-90, 0, -90)));
-	UsedBlocks->Add(make(2, FVector(-27, -25, 7), FVector(4, 4, 1), FRotator(-90, 0, -90)));
-	UsedBlocks->Add(make(2, FVector(-24, -22, 7), FVector(4, 4, 1), FRotator(-90, 0, 180)));
-	UsedBlocks->Add(make(2, FVector(-29, -22, 7), FVector(4, 4, 1), FRotator(-90, 0, 180)));
-	UsedBlocks->Add(make(101, FVector(-29, -25, 7), FVector(4, 1, 1), FRotator(-90, 0, 180)));
-	UsedBlocks->Add(make(101, FVector(-24, -25, 7), FVector(4, 1, 1), FRotator(-90, 0, -90)));
-	UsedBlocks->Add(make(101, FVector(-24, -20, 7), FVector(4, 1, 1), FRotator(-90, 0, 0)));
-	UsedBlocks->Add(make(101, FVector(-29, -20, 7), FVector(4, 1, 1), FRotator(-90, 0, 90)));
-	UsedBlocks->Add(make(101, FVector(-29, -22, 9), FVector(4, 1, 1), FRotator(0, -90, -90)));
-	UsedBlocks->Add(make(101, FVector(-26, -20, 9), FVector(4, 1, 1), FRotator(0, 180, -90)));
-	UsedBlocks->Add(make(101, FVector(-24, -23, 9), FVector(4, 1, 1), FRotator(0, 90, -90)));
-	UsedBlocks->Add(make(101, FVector(-27, -25, 9), FVector(4, 1, 1), FRotator(0, 0, -90)));
-	UsedBlocks->Add(make(2, FVector(-26, -22, 9), FVector(4, 4, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(201, FVector(-29, -20, 9), FVector(1, 1, 1), FRotator(0, 90, 0)));
-	UsedBlocks->Add(make(201, FVector(-29, -25, 9), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(201, FVector(-24, -25, 9), FVector(1, 1, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(201, FVector(-24, -20, 9), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	UsedBlocks->Add(make(0, FVector(-27, -21, 1), FVector(20, 20, 4), FRotator(0, -90, 0)));
+	UsedBlocks->Add(make(1500, FVector(-32, -12, 4), FVector(2, 2, 2), FRotator(0, -90, 0)));
+	UsedBlocks->Add(make(1500, FVector(-18, -12, 4), FVector(2, 2, 2), FRotator(0, -90, 0)));
+	UsedBlocks->Add(make(1150, FVector(-26, -23, 4), FVector(4, 4, 2), FRotator(0, 90, 0)));
+	UsedBlocks->Add(make(500, FVector(-27, -12, 6), FVector(1, 1, 1), FRotator(0, -90, 0)));
+	UsedBlocks->Add(make(1, FVector(-29, -23, 4), FVector(4, 1, 1), FRotator(0, 90, 0)));
+	UsedBlocks->Add(make(1, FVector(-26, -25, 4), FVector(4, 1, 1), FRotator(0, -180, 0)));
+	UsedBlocks->Add(make(1, FVector(-24, -22, 4), FVector(4, 1, 1), FRotator(0, -90, 0)));
+	UsedBlocks->Add(make(1, FVector(-27, -20, 4), FVector(4, 1, 1), FRotator(0, 0, 0)));
+	UsedBlocks->Add(make(2, FVector(-29, -23, 7), FVector(5, 4, 1), FRotator(-90, 0, 0)));
+	UsedBlocks->Add(make(2, FVector(-26, -25, 7), FVector(5, 4, 1), FRotator(-90, 0, 90)));
+	UsedBlocks->Add(make(2, FVector(-24, -22, 7), FVector(5, 4, 1), FRotator(-90, 0, -180)));
+	UsedBlocks->Add(make(2, FVector(-27, -20, 7), FVector(5, 4, 1), FRotator(-90, 0, -90)));
+	UsedBlocks->Add(make(101, FVector(-27, -20, 10), FVector(4, 1, 1), FRotator(0, 0, 0)));
+	UsedBlocks->Add(make(101, FVector(-29, -23, 10), FVector(4, 1, 1), FRotator(0, 90, 0)));
+	UsedBlocks->Add(make(101, FVector(-26, -25, 10), FVector(4, 1, 1), FRotator(0, -180, 0)));
+	UsedBlocks->Add(make(101, FVector(-24, -22, 10), FVector(4, 1, 1), FRotator(0, -90, 0)));
+	UsedBlocks->Add(make(101, FVector(-24, -20, 6), FVector(6, 1, 1), FRotator(90, 0, 90)));
+	UsedBlocks->Add(make(101, FVector(-29, -20, 6), FVector(6, 1, 1), FRotator(90, 0, 0)));
+	UsedBlocks->Add(make(101, FVector(-29, -25, 6), FVector(6, 1, 1), FRotator(90, 0, -90)));
+	UsedBlocks->Add(make(101, FVector(-24, -25, 6), FVector(6, 1, 1), FRotator(90, -90, 90)));
+	UsedBlocks->Add(make(201, FVector(-24, -25, 10), FVector(1, 1, 1), FRotator(0, -90, 0)));
+	UsedBlocks->Add(make(201, FVector(-29, -25, 10), FVector(1, 1, 1), FRotator(0, 180, 0)));
+	UsedBlocks->Add(make(201, FVector(-29, -20, 10), FVector(1, 1, 1), FRotator(0, 90, 0)));
+	UsedBlocks->Add(make(201, FVector(-24, -20, 10), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	UsedBlocks->Add(make(1000, FVector(-35, -30, 4), FVector(1, 1, 1), FRotator(0, 90, 0)));
+	UsedBlocks->Add(make(1000, FVector(-35, -13, 4), FVector(1, 1, 1), FRotator(0, 90, 0)));
+	UsedBlocks->Add(make(1000, FVector(-18, -29, 4), FVector(1, 1, 1), FRotator(0, 90, 0)));
+	UsedBlocks->Add(make(1000, FVector(-17, -15, 4), FVector(1, 1, 1), FRotator(0, 90, 0)));
+	UsedBlocks->Add(make(2, FVector(-26, -23, 10), FVector(4, 4, 1), FRotator(0, 90, 0)));
+	c->PlayerPosition = FVector(-703, -600, 171);
+	c->PlayerRotation = FRotator(0, 44, 0);
 
 	auto ox1 = make(1500, FVector(-32, -12, 4), FVector(2, 2, 2), FRotator(0, -90, 0));
 	makeOxygen(ox1, 5);
@@ -131,7 +144,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	auto oxInventory1 = makeInventoryBuildable(OxygenTankID, FVector(2, 2, 2));
 	makeOxygen(oxInventory1, 7.5f);
 	c->inventoryBuildableBlocks.Add(oxInventory1);
-*/
+
 	return c;
 }
 
@@ -163,7 +176,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave(bool full)
 		{
 			for (size_t z = 0; z < 1; z++)
 			{
-				UsedBlocks->Add(make(1, FVector(-1 * x, -1 * y, z+1), FVector(1, 1, 1), FRotator(0, 0, 0)));
+				UsedBlocks->Add(make(1, FVector(-1 * x, -1 * y, z + 1), FVector(1, 1, 1), FRotator(0, 0, 0)));
 				UsedBlocks->Add(make(1, FVector(x, y, z), FVector(1, 1, 1), FRotator(0, 0, 0)));
 			}
 		}
