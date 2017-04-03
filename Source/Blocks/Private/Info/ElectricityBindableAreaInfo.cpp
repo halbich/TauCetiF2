@@ -46,7 +46,7 @@ void UElectricityBindableAreaInfo::DEBUG_DrawPoints(UWorld* world)
 		DrawDebugSphere(world, p, 5, 10, FColor::Green, false, 60);
 
 
-	for (size_t i = 0; i < AreaPoints.Num(); i++)
+	for (int32 i = 0; i < AreaPoints.Num(); i++)
 	{
 		auto p1 = AreaPoints[i];
 		auto p2 = AreaPoints[(i + 1) % AreaPoints.Num()];
@@ -63,6 +63,36 @@ void UElectricityBindableAreaInfo::DEBUG_DrawPoints(UWorld* world)
 	}
 
 	DrawDebugMesh(world, AreaPoints, indices, FColor::Green, false, 30);
+}
+
+FBox UElectricityBindableAreaInfo::GetBox()
+{
+	FVector min = FVector(1,1,1) * GameDefinitions::WorldBorders;
+	FVector max = (-1)* FVector(1, 1, 1) * GameDefinitions::WorldBorders;
+
+	for (auto p : AreaPoints)
+	{
+		if (p.X < min.X)
+			min.X = p.X;
+
+		if (p.Y < min.Y)
+			min.Y = p.Y;
+
+		if (p.Z < min.Z)
+			min.Z = p.Z;
+
+		if (p.X > max.X)
+			max.X = p.X;
+
+		if (p.Y > max.Y)
+			max.Y = p.Y;
+
+		if (p.Z > max.Z)
+			max.Z = p.Z;
+	}
+
+	return FBox(min, max);
+
 }
 
 #pragma optimize("", on)

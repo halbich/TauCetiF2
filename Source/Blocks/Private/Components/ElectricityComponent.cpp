@@ -39,7 +39,7 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, F
 	for (auto areaDef : ElectricityComponentDef.BindableAreas.Planes)
 	{
 		auto bindArea = NewObject<UElectricityBindableAreaInfo>();
-		bindArea->InitArea( ElectricityComponentDef.BindableAreas.UsedPoints, areaDef, blockScale, blockRotation, worldLocation);
+		bindArea->InitArea(ElectricityComponentDef.BindableAreas.UsedPoints, areaDef, blockScale, blockRotation, worldLocation);
 		ElectricityBindableAreas.Add(bindArea);
 		bindArea->DEBUG_DrawPoints(GetWorld());
 	}
@@ -140,6 +140,20 @@ void UElectricityComponent::ToggleIsInCreative(bool newInCreative)
 
 bool UElectricityComponent::isValidConnection(UElectricityBindableAreaInfo* area, UElectricityBindableAreaInfo* otherArea)
 {
+
+	auto box1 = area->GetBox();
+	auto box2 = otherArea->GetBox();
+
+	box1 = box1.ExpandBy(area->DominantPlane.GetSafeNormal().GetAbs());
+	box2 = box2.ExpandBy(otherArea->DominantPlane.GetSafeNormal().GetAbs());
+
+	if (box1.Intersect(box2))
+	{
+		auto volume = IntersectVolume(box1, box2);
+		if (volume == 0)
+			return false;
+
+	}
 
 	// TODO
 	return true;

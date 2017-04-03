@@ -67,4 +67,19 @@ public:
 private:
 
 	static bool isValidConnection(UElectricityBindableAreaInfo* area, UElectricityBindableAreaInfo* otherArea);
+
+	static float IntersectVolume(const FBox& box, const FBox& other) 
+	{
+
+		auto tmin = FVector(FMath::Max(box.Min.X, other.Min.X), FMath::Max(box.Min.Y, other.Min.Y), FMath::Max(box.Min.Z, other.Min.Z));
+		auto tmax = FVector(FMath::Min(box.Max.X, other.Max.X), FMath::Min(box.Max.Y, other.Max.Y), FMath::Min(box.Max.Z, other.Max.Z));
+
+		FBox bx(tmin, tmax);
+
+		if (bx.IsValid == 0)
+			return 0;
+
+		return bx.GetVolume();
+
+	}
 };

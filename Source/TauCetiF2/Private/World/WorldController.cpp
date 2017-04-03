@@ -100,7 +100,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	if (!IsValidSpawnPoint(box))
 	{
 		// TODO Localization!
-		UE_LOG(LogTemp, Error, TEXT("Objekt nelze korektně přidat do stromu. Vynechávám."));
+		UE_LOG(LogTemp, Error, TEXT("Objekt s ID %d nelze korektně přidat do stromu. Vynechávám."), block->ID);
 		return nullptr;
 	}
 
