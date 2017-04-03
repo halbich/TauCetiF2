@@ -7,6 +7,7 @@
 #define ALPHA 3
 
 AGeneratorBlock::AGeneratorBlock()
+	:Super()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -116,7 +117,12 @@ void  AGeneratorBlock::OnConstruction(const FTransform& Transform) {
 
 	updateTextureRegion = new FUpdateTextureRegion2D(0, 0, 0, 0, w, h);
 
-	dynamicMaterials[0]->SetTextureParameterValue("DynamicTextureParam", DynamicTexture);
+	auto dyn = dynamicMaterials[0];
+
+	if (!dyn)
+		return;
+
+	dyn->SetTextureParameterValue("DynamicTextureParam", DynamicTexture);
 
 	dataSize = w * h * 4;
 	dataSqrtSize = w * 4;

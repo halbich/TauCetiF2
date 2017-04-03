@@ -34,7 +34,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | GeneratorBlock")
 		UStaticMeshComponent* GeneratorMesh;
 
-	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | BatteryBlock", meta = (AllowPrivateAcces = "true"))
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | GeneratorBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 
 	UPROPERTY(Transient)
