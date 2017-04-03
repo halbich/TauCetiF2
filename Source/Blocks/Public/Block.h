@@ -64,7 +64,11 @@ public:
 
 	void InitWorldObjectComponent();
 
-	virtual void  WasHitByStorm(const FVector& blockLocation);
+	virtual void WasHitByStorm(const FVector& blockLocation);
+
+	virtual UMinMaxBox* GetWatchingBox();
+
+	virtual void CheckWatchingBox();
 
 private:
 

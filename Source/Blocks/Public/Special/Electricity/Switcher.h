@@ -3,13 +3,14 @@
 #pragma once
 
 #include "Block.h"
+#include "Interfaces/BlockWithShowableWidget.h"
 #include "Switcher.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class BLOCKS_API ASwitcher : public ABlock
+class BLOCKS_API ASwitcher : public ABlock, public IBlockWithShowableWidget
 {
 	GENERATED_BODY()
 	
@@ -35,4 +36,7 @@ public:
 
 private:
 	void ListeningOnUse(AActor* actor, bool isSpecial);
+
+	
+
 };

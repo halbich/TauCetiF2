@@ -26,7 +26,37 @@ UKDTree* UKDTree::Init(UMinMaxBox* box, UMinMaxBox* constrainingBox)
 	return Init(min, max, 0);
 }
 
-void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
+void UKDTree::AddToTree(UKDTree* box)
+{
+	ensure(box != nullptr);
+
+	addToTree(box);
+
+
+	for (auto checkedRegion : watchedBoxes)
+	{
+		auto reg = checkedRegion.Value;
+
+		if (box->GetBox().Intersect(reg->GetBox()))
+			WatchingRegionChanged(checkedRegion.Key);
+	}
+
+}
+
+void UKDTree::NotifyRegionChanged(UMinMaxBox* box)
+{
+	ensure(box != nullptr);
+
+	for (auto checkedRegion : watchedBoxes)
+	{
+		auto reg = checkedRegion.Value;
+
+		if (box->GetBox().Intersect(reg->GetBox()))
+			WatchingRegionChanged(checkedRegion.Key);
+	}
+}
+
+void UKDTree::addToTree(UKDTree* box, bool forceInsert)
 {
 	ensure(box != nullptr);
 
@@ -47,7 +77,7 @@ void UKDTree::AddToTree(UKDTree* box, bool forceInsert)
 
 		RemoveFromTreeElements(SingleChild->ContainingObject, box);
 
-		AddToTree(SingleChild, true); // forcing to insert
+		addToTree(SingleChild, true); // forcing to insert
 
 		SingleChild = nullptr;
 	}
@@ -126,6 +156,19 @@ void UKDTree::DEBUGDrawContainingBox(UWorld* world)
 
 	if (B2 && B2->IsValidLowLevel() && !B2->IsPendingKill())
 		B2->DEBUGDrawContainingBox(world);
+
+	if (!GetParent())
+	{
+		for (auto i : watchedBoxes)
+		{
+
+			auto box = i.Value;
+			auto bcenter = (box->Max + box->Min) * 0.5;
+			auto bextend = (box->Max - bcenter);
+			DrawDebugBox(world, bcenter, bextend, FColor::Orange, true);
+		}
+
+	}
 }
 
 void UKDTree::DEBUGDrawSurrondings(UWorld* world, FColor usedColor)
@@ -172,30 +215,26 @@ bool UKDTree::isPlaceEmptySingleChild(const UMinMaxBox* box)
 	return x || y || z;
 }
 
-void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement)
+void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement, const bool checkForCommonBoundaries)
 {
 	if (!(GtMin(box->Min) && LtMax(box->Max)))
 		return;
 
 	if (SingleChild)
 	{
-		if (!ignoreElement || !ignoreElement->IsValidLowLevel())
-			return;
-
-		if (SingleChild->ContainingObject == ignoreElement)
+		if (ignoreElement && ignoreElement->IsValidLowLevel() && SingleChild->ContainingObject == ignoreElement)
 			return;
 
 		if (outArray.Contains(SingleChild->ContainingObject))
 			return;
 
-		/*if (!HasCommonBoundaries(SingleChild->ContainingObject->WorldObjectComponent->DefiningBox, ignoreElement->DefiningBox))
-			return;*/
 
-		if (!CheckCommonBoundaries(SingleChild->ContainingObject, ignoreElement))
-			return;
+		auto commonBound = checkForCommonBoundaries
+			? CheckCommonBoundaries(SingleChild->ContainingObject, ignoreElement)
+			: SingleChild->GetBox().Intersect(box->GetBox());
+		if (commonBound)
+			outArray.Add(SingleChild->ContainingObject);
 
-
-		outArray.Add(SingleChild->ContainingObject);
 		return;
 	}
 
@@ -203,7 +242,7 @@ void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outA
 	{
 		if (!B1)
 			return;
-		B1->GetContainingObjects(box, outArray, ignoreElement);
+		B1->GetContainingObjects(box, outArray, ignoreElement, checkForCommonBoundaries);
 		return;
 	}
 
@@ -211,7 +250,7 @@ void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outA
 	{
 		if (!B2)
 			return;
-		B2->GetContainingObjects(box, outArray, ignoreElement);
+		B2->GetContainingObjects(box, outArray, ignoreElement, checkForCommonBoundaries);
 		return;
 	}
 
@@ -221,8 +260,8 @@ void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outA
 	UMinMaxBox* newB2 = NewObject<UMinMaxBox>()->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
 
 
-	GetContainingObjects(newB1, outArray, ignoreElement);
-	GetContainingObjects(newB2, outArray, ignoreElement);
+	GetContainingObjects(newB1, outArray, ignoreElement, checkForCommonBoundaries);
+	GetContainingObjects(newB2, outArray, ignoreElement, checkForCommonBoundaries);
 
 
 }
@@ -237,7 +276,7 @@ void UKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<UObje
 		return;
 	}
 
-	GetContainingObjects(box, outArray, ignoreElement);
+	GetContainingObjects(box, outArray, ignoreElement, true);
 
 
 }
@@ -275,4 +314,30 @@ void UKDTree::updateAfterChildDestroyedInner()
 	MarkPendingKill();
 	if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
 		parent->updateAfterChildDestroyedInner();
+}
+
+
+void UKDTree::RegisterWatchingBox(UObject* actor, UMinMaxBox* box)
+{
+	print(TEXT("register box"));
+
+	TryUnregisterWatchingBox(actor);
+
+	watchedBoxes.Add(actor, box);
+
+
+	auto bcenter = (box->Max + box->Min) * 0.5;
+	auto bextend = (box->Max - bcenter);
+	DrawDebugBox(GetWorld(), bcenter, bextend, FColor::Red, false, 60, 0, 5);
+
+}
+
+void UKDTree::TryUnregisterWatchingBox(UObject* actor)
+{
+	auto existing = watchedBoxes.Find(actor);
+	if (!existing)
+		return;
+
+	print(TEXT("unregister box"));
+	watchedBoxes.Remove(actor);
 }

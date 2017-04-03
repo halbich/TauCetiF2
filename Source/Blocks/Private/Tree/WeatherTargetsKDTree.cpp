@@ -32,7 +32,7 @@ void UWeatherTargetsKDTree::AddToTree(UWeatherTargetsKDTree* box)
 {
 	ensure(box != nullptr);
 
-	check(GtMin2(box->Min) && LtMax2(box->Max)); // todo opravit na 2
+	check(GtMin2(box->Min) && LtMax2(box->Max)); 
 
 	bool forceSplit = false;
 	if (((Max - Min) * FVector(1, 1, 0)) == FVector(1, 1, 0) * GameDefinitions::CubeMinSize)
@@ -135,102 +135,6 @@ void UWeatherTargetsKDTree::DEBUGDrawSurrondings(UWorld* world, FColor usedColor
 	auto bcenter = (Max + Min) * 0.5;
 	auto bextend = (Max - bcenter);
 	DrawDebugBox(world, bcenter, bextend, usedColor, true);
-}
-
-bool UWeatherTargetsKDTree::IsPlaceEmpty(const UMinMaxBox* box) {
-	if (!(GtMin(box->Min) && LtMax(box->Max)))
-		return false;
-
-	if (ChildHeap.Num() == 1)
-		return ChildHeap.Top()->isPlaceEmptySingleChild(box);
-
-	if (sum(box->Max * DividingCoord) <= DividingCoordValue)		// whole object is in left plane
-	{
-		return	!B1 ? true : B1->IsPlaceEmpty(box);
-	}
-
-	if (sum(box->Min *DividingCoord) >= DividingCoordValue)		// whole object is in right plane
-	{
-		return	!B2 ? true : B2->IsPlaceEmpty(box);
-	}
-
-	// object is in between. We need to split and then add object to both branches
-
-	UMinMaxBox* newB1 = NewObject<UMinMaxBox>()->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
-	UMinMaxBox* newB2 = NewObject<UMinMaxBox>()->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
-
-	return IsPlaceEmpty(newB1) && IsPlaceEmpty(newB2);
-}
-
-bool UWeatherTargetsKDTree::isPlaceEmptySingleChild(const UMinMaxBox* box)
-{
-	auto x = box->Max.X <= Min.X || box->Min.X >= Max.X;		// false if there is netrivial intersection
-	auto y = box->Max.Y <= Min.Y || box->Min.Y >= Max.Y;		// false if there is netrivial intersection
-	auto z = box->Max.Z <= Min.Z || box->Min.Z >= Max.Z;		// false if there is netrivial intersection
-
-	return x || y || z;
-}
-
-void UWeatherTargetsKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement)
-{
-	if (!(GtMin(box->Min) && LtMax(box->Max)))
-		return;
-
-	if (ChildHeap.Num() == 1)
-	{
-		if (!ignoreElement || !ignoreElement->IsValidLowLevel())
-			return;
-
-		/*if (ChildStack.Top()->ContainingObject == ignoreElement)
-			return;
-
-		if (outArray.Contains(ChildStack.Top()->ContainingObject))
-			return;*/
-
-			//TODO
-			//if (!CheckCommonBoundaries(SingleChild->ContainingObject, ignoreElement))
-		return;
-
-		//outArray.Add(ChildStack.Top()->ContainingObject);
-		return;
-	}
-
-	if (sum(box->Max * DividingCoord) <= DividingCoordValue)		// whole object is in left plane
-	{
-		if (!B1)
-			return;
-		B1->GetContainingObjects(box, outArray, ignoreElement);
-		return;
-	}
-
-	if (sum(box->Min *DividingCoord) >= DividingCoordValue)		// whole object is in right plane
-	{
-		if (!B2)
-			return;
-		B2->GetContainingObjects(box, outArray, ignoreElement);
-		return;
-	}
-
-	// object is in between. We need to split and then add object to both branches
-
-	UMinMaxBox* newB1 = NewObject<UMinMaxBox>()->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
-	UMinMaxBox* newB2 = NewObject<UMinMaxBox>()->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
-
-	GetContainingObjects(newB1, outArray, ignoreElement);
-	GetContainingObjects(newB2, outArray, ignoreElement);
-}
-
-void UWeatherTargetsKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement)
-{
-	if (!(GtMin(box->Min) && LtMax(box->Max)))
-	{
-		auto parent = GetParent();
-		ensure(parent != nullptr);
-		parent->GetContainingObjectsFromBottom(box, outArray, ignoreElement);
-		return;
-	}
-
-	GetContainingObjects(box, outArray, ignoreElement);
 }
 
 

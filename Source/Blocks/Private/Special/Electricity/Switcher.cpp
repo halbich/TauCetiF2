@@ -51,10 +51,14 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 
 	if (!isSpecial)
 	{
-		/*IPickableBlock::OnPickup(this);*/
+		print(TEXT("not special use"));
+		auto def = Definition->GetDefaultObject<UBlockDefinition>();
+		check(def);
+		IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
 		return;
 	}
 
+	// TODO if connected, switch state
 	
 }
 

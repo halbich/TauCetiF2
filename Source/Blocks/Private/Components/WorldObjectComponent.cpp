@@ -25,7 +25,7 @@ void UWorldObjectComponent::BeginPlay()
 	if (Element->BlockInfo->UnderConstruction)
 		return;*/
 
-	
+
 }
 
 #pragma optimize("",on)
@@ -67,6 +67,9 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 			par->UpdateAfterChildDestroyed();
 	}
 
+	if (DefiningBox && DefiningBox->IsValidLowLevel())
+		RootBox->NotifyRegionChanged(DefiningBox);
+
 	for (auto object : WeatherTreeElements)
 	{
 		if (!object || !object->IsValidLowLevelFast() || object->IsPendingKill())
@@ -74,11 +77,11 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 		object->RemoveFromTree(GetOwner());
 
-	/*	auto par = object->GetParent();
-		object->MarkPendingKill();
+		/*	auto par = object->GetParent();
+			object->MarkPendingKill();
 
-		if (par && par->IsValidLowLevelFast())
-			par->UpdateAfterChildDestroyed();*/
+			if (par && par->IsValidLowLevelFast())
+				par->UpdateAfterChildDestroyed();*/
 	}
 
 	if (BuildingTree && BuildingTree->IsValidLowLevel() && !BuildingTree->IsPendingKill())

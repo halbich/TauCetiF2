@@ -15,7 +15,6 @@ AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 
 	pickableDelegates = TMap<ABlock*, FDelegateHandle>();
 	showableWidgetDelegates = TMap<ABlock*, FDelegateHandle>();
-
 }
 
 void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
@@ -40,6 +39,9 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 	if (!object || !object->IsValidLowLevel() || object->IsPendingKill())
 		return false;
 
+	if (object->Definition.GetDefaultObject()->UsingInPatterns)
+		RootBox->TryUnregisterWatchingBox(object);
+
 	auto usableWithWidget = Cast<IBlockWithShowableWidget>(object);
 	if (usableWithWidget)
 	{
@@ -50,7 +52,6 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 			print(TEXT("RemoveDynamicShow"));
 		}
 	}
-
 
 	auto pickable = Cast<IPickableBlock>(object);
 	if (pickable)
@@ -179,13 +180,20 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	if (addToRoot)
 	{
 		UsedBlocks.Add(block);
+
 		if (debugBoxesShown) {
 			DEBUGHideMinMaxBoxes();
 			DEBUGShowMinMaxBoxes();
 		}
 
-
 		weatherComponent->ObjectsChanged();
+
+		if (definition->UsingInPatterns)
+		{
+			auto watchingBox = actor->GetWatchingBox();
+			if (watchingBox)
+				RootBox->RegisterWatchingBox(actor, watchingBox);
+		}
 	}
 
 	return actor;
@@ -315,10 +323,8 @@ void AWorldController::onPickupItem(ABlock* pickingItem)
 		invComp->AddItem(invBuildable);
 }
 
-
 void AWorldController::onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidget> widget)
 {
-
 	if (!widget || !block)
 		return;
 
@@ -333,13 +339,11 @@ void AWorldController::onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidge
 		pc->ShowRegisteredWidget(id, block);
 
 		return;
-
 	}
 
 	auto defW = widget.GetDefaultObject();
 
 	defW->AddToPlayerScreen();
-
 }
 
 #pragma optimize("", on)

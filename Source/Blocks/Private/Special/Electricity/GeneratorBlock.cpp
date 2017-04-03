@@ -200,7 +200,7 @@ UStaticMeshComponent* AGeneratorBlock::GetMeshStructureComponent_Implementation(
 
 void  AGeneratorBlock::WasHitByStorm(const FVector& blockLocation)
 {
-	print(*blockLocation.ToString());
+	//print(*blockLocation.ToString());
 
 	FHittedSpot hitted;
 
@@ -216,7 +216,7 @@ void  AGeneratorBlock::WasHitByStorm(const FVector& blockLocation)
 
 	//hitted.X = hitted.Y = 0;
 
-	print(*FVector2D(hitted.X, hitted.Y).ToString());
+	//print(*FVector2D(hitted.X, hitted.Y).ToString());
 
 	auto existing = spots.IndexOfByPredicate([hitted](const FHittedSpot& spot) {
 		return hitted.X == spot.X && hitted.Y == spot.Y;

@@ -6,8 +6,6 @@
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "GameWeatherComponent.generated.h"
 
-
-
 UENUM(BlueprintType)
 enum class EStormState : uint8
 {
@@ -38,7 +36,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | GameWeatherComponent")
 		UWeatherTargetsKDTree* WeatherRootTree;
 
-
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
 
@@ -66,7 +63,6 @@ public:
 	UPROPERTY(Transient)
 		EStormState StormState;
 
-
 #pragma endregion
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameWeatherComponent")
@@ -86,13 +82,11 @@ public:
 
 	void ObjectsChanged();
 
-
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | GameWeatherComponent")
 		TArray<UWeatherTargetsKDTree*> Targets;
 
 	UFUNCTION()
 		void OnTargetElementsChanged(UWeatherTargetsKDTree* target, bool isAdding);
-
 
 	void InitComp();
 
@@ -100,13 +94,9 @@ private:
 
 	FDelegateHandle ListeningHandle;
 
-
-
-
 #pragma optimize("", off)
 
 	void doDamage(int32 currentHitPoints) {
-
 		auto targNum = Targets.Num();
 
 		if (targNum == 0)
@@ -146,24 +136,18 @@ private:
 			}
 			case 270: {
 				auto mrsrc = (-1) * rotSc;
-				hitStorm = FVector( mrsrc.Y - hitStorm.Y ,hitStorm.X , 0);
+				hitStorm = FVector(mrsrc.Y - hitStorm.Y, hitStorm.X, 0);
 				break;
 			}
 			default:
 				checkNoEntry();
 			}
 
-
 			bl->WasHitByStorm(hitStorm);
-
-			targObj->DEBUGDrawBorder(GetWorld(), FColor::Orange, 0.75f);
 		}
-
 	}
-
 
 #pragma optimize("", on)
 
 	static const float EasingBorderValue;
-
 };

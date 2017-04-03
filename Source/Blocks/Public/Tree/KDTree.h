@@ -42,12 +42,15 @@ public:
 	UPROPERTY(Transient)
 		float DividingCoordValue;
 
+	UPROPERTY(Transient)
+		TMap<UObject*, UMinMaxBox*> watchedBoxes;
+
 	void DEBUGDrawContainingBox(UWorld* world);
 	void DEBUGDrawSurrondings(UWorld* world, FColor usedColor = FColor::Magenta);
 
-	void AddToTree(UKDTree* box, bool forceInsert = false);
+	void AddToTree(UKDTree* box);
 	bool IsPlaceEmpty(const UMinMaxBox* box);
-	void GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement = nullptr);
+	void GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement = nullptr, const bool checkForCommonBoundaries = false);
 	void GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement);
 
 	void UpdateAfterChildDestroyed();
@@ -60,8 +63,15 @@ public:
 	friend bool CheckCommonBoundaries(UObject* o1, const UObject* o2);
 	friend void AddToTreeElements(UObject* obj, UKDTree* box);
 	friend void RemoveFromTreeElements(UObject* obj, UKDTree* box);
+	friend void WatchingRegionChanged(UObject* obj);
+
+	void NotifyRegionChanged(UMinMaxBox* box);
+	void RegisterWatchingBox(UObject* actor, UMinMaxBox* box);
+	void TryUnregisterWatchingBox(UObject* actor);
 
 private:
+
+	void addToTree(UKDTree* box, bool forceInsert = false);
 
 	void addToTreeByCoord(UKDTree* box);
 

@@ -66,7 +66,7 @@ public:
 			DrawDebugBox(world, bcenter, bextend, color, false, duration);
 	}
 
-	FORCEINLINE FBox GetBox()
+	FORCEINLINE FBox GetBox() const
 	{
 		FBox ret(Min, Max);
 		return ret;

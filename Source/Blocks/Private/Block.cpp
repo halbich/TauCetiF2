@@ -146,11 +146,11 @@ void ABlock::InitWorldObjectComponent()
 
 	auto surroundings = NewObject<UKDTree>()->Init(woc->DefiningBox, woc->RootBox);
 
-	surroundings->DEBUGDrawSurrondings(GetWorld());
+	//surroundings->DEBUGDrawSurrondings(GetWorld());
 
 	// TODO
 
-	woc->TreeElements[0]->DEBUGDrawSurrondings(GetWorld(), FColor::Black);
+	//woc->TreeElements[0]->DEBUGDrawSurrondings(GetWorld(), FColor::Black);
 
 	auto def = Definition->GetDefaultObject<UBlockDefinition>();
 
@@ -188,7 +188,22 @@ void ABlock::InitWorldObjectComponent()
 		rootObj->Insert(woc->BuildingTree);
 	}
 
-	woc->BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
+	//woc->BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
+}
+
+void ABlock::WasHitByStorm(const FVector& blockLocation)
+{
+
+}
+
+UMinMaxBox* ABlock::GetWatchingBox()
+{
+	return nullptr;
+}
+
+void ABlock::CheckWatchingBox()
+{
+
 }
 
 // *********** friend methods ********
@@ -231,31 +246,7 @@ void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
 	b->WorldObjectComponent->OnWeatherTreeElementsChanged();
 }
 
-//bool CheckCommonBoundaries1(UObject* o1, const UObject* o2)
-//{
-//	auto b1 = Cast<ABlock>(o1);
-//	ensure(b1);
-//
-//	auto b2 = Cast<ABlock>(o2);
-//	ensure(b2);
-//
-//	return UMinMaxBox::HasCommonBoundaries(b1->WorldObjectComponent->DefiningBox, b2->WorldObjectComponent->DefiningBox);
-//}
-//
-//
-//void RemoveFromTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
-//{
-//	auto b = Cast<ABlock>(obj);
-//	ensure(b);
-//
-//	b->WorldObjectComponent->TreeElements.Remove(box);
-//	b->WorldObjectComponent->OnTreeElementsChanged();
-//}
 
-void ABlock::WasHitByStorm(const FVector& blockLocation)
-{
-	
-}
 
 TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source)
 {
@@ -267,5 +258,14 @@ TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* s
 	bl->WorldObjectComponent->SurroundingElectricityComponent.Empty();
 	return result;
 }
+
+void WatchingRegionChanged(UObject* obj)
+{
+	auto b = Cast<ABlock>(obj);
+	ensure(b);
+
+	b->CheckWatchingBox();
+}
+
 
 #pragma optimize("",on)
