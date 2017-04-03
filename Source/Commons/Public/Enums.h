@@ -80,3 +80,11 @@ enum class EGameUserSettingsVariable : uint8
 	MusicVolume			UMETA(DisplayName = "MusicVolume"),
 	OtherVolume			UMETA(DisplayName = "OtherVolume")
 };
+
+UENUM(BlueprintType)
+enum class EElectricNetworkState : uint8
+{
+	Invalid	 		UMETA(DisplayName = "Invalid"),
+	InRecompute		UMETA(DisplayName = "InRecompute"),
+	Valid			UMETA(DisplayName = "Valid")
+};

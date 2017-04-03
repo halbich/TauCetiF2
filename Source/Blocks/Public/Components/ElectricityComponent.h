@@ -4,6 +4,8 @@
 #include "Info/Components/BlockWithElectricityInfo.h"
 #include "Definitions/ElectricityComponentDefinition.h"
 #include "Info/ElectricityBindableAreaInfo.h"
+#include "Electricity/ElectricNetwork.h"
+#include "Commons/Public/Enums.h"
 #include "ElectricityComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FElectricityComponentDataChangedDelegate, UBlockWithElectricityInfo*, info);
@@ -32,6 +34,12 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
 		TArray<UElectricityComponent*> ConnectedComponents;
+
+	UPROPERTY(Transient)
+		UElectricNetwork* Network;
+
+	UPROPERTY(Transient)
+		EElectricNetworkState NetworkState;
 
 	void onComponentDataChanged();
 

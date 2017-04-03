@@ -61,6 +61,10 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 			pickable->RemovePickupItemEventListener(*ref);
 	}
 
+	auto electricityComp = Cast<UElectricityComponent>(object->GetComponentByClass(UElectricityComponent::StaticClass()));
+	if (electricityComp)
+		electricityComponent->RemoveFromWorldNetwork(electricityComp);
+
 	auto count = UsedBlocks.Remove(object->BlockInfo);
 	check(count == 1 && "Failed to remove block info.");
 	object->Destroy();
@@ -172,7 +176,9 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			print(TEXT("AddDynamicShow"));
 		}
 
-		MinMax->DEBUGDrawContainingBox(GetWorld());
+
+
+		//MinMax->DEBUGDrawContainingBox(GetWorld());
 	}
 
 	UGameplayStatics::FinishSpawningActor(actor, trans);
@@ -193,6 +199,12 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			auto watchingBox = actor->GetWatchingBox();
 			if (watchingBox)
 				RootBox->RegisterWatchingBox(actor, watchingBox);
+		}
+
+		if (definition->HasElectricityComponent) {
+			auto electricityComp = Cast<UElectricityComponent>(actor->GetComponentByClass(UElectricityComponent::StaticClass()));
+			if (electricityComp)
+				electricityComponent->AddToWorldNetwork(electricityComp);
 		}
 	}
 
@@ -255,15 +267,18 @@ void AWorldController::BeginPlay() {
 
 	for (TActorIterator<APawn> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 	{
-		auto comp = Cast<UGameWeatherComponent>((*ActorItr)->GetComponentByClass(UGameWeatherComponent::StaticClass()));
-		if (comp)
-		{
-			weatherComponent = comp;
+		if (!weatherComponent)
+			weatherComponent = Cast<UGameWeatherComponent>((*ActorItr)->GetComponentByClass(UGameWeatherComponent::StaticClass()));
+
+		if (!electricityComponent)
+			electricityComponent = Cast<UGameElectricityComponent>((*ActorItr)->GetComponentByClass(UGameElectricityComponent::StaticClass()));
+
+		if (weatherComponent && electricityComponent)
 			break;
-		}
 	}
 
 	check(weatherComponent);
+	check(electricityComponent);
 
 	weatherComponent->WeatherRootTree->Init(min, max, 0);
 	weatherComponent->InitComp();

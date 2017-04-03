@@ -15,7 +15,10 @@
 #include "Inventory/Public/InventoryComponent.h"
 #include "Blocks/Public/Info/BlockInfo.h"
 #include "Components/GameWeatherComponent.h"
+#include "Components/GameElectricityComponent.h"
 #include "Game/TauCetiF2PlayerController.h"
+
+#include "Blocks/Public/Components/ElectricityComponent.h"
 
 #include "WorldController.generated.h"
 
@@ -41,6 +44,10 @@ public:
 
 	UPROPERTY(Transient)
 		UGameWeatherComponent* weatherComponent;
+
+	UPROPERTY(Transient)
+		UGameElectricityComponent* electricityComponent;
+
 
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
