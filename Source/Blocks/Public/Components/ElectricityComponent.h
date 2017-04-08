@@ -39,7 +39,7 @@ public:
 		UElectricNetwork* Network;
 
 	UPROPERTY(Transient)
-		EElectricNetworkState NetworkState;
+		EElectricNetworkState ComponentNetworkState;
 
 	void onComponentDataChanged();
 

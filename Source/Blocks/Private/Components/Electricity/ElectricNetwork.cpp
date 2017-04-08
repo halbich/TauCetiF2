@@ -4,16 +4,20 @@
 #include "ElectricNetwork.h"
 
 
+UElectricNetwork::UElectricNetwork()
+	:Super(), ToRecompute()
+{
 
+}
 
 
 void UElectricNetwork::RegisterEntity(UElectricityComponent* comp)
 {
-	entities.Add(comp);
+	Entities.Add(comp);
 }
 
 
 void UElectricNetwork::UnregisterEntity(UElectricityComponent* comp)
 {
-	entities.Remove(comp);
+	Entities.Remove(comp);
 }
