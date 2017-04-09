@@ -28,7 +28,7 @@ public:
 	UPROPERTY(Transient)
 		EElectricNetworkState NetworkState;
 
-	void RegisterEntity(UElectricityComponent* comp);
-	void UnregisterEntity(UElectricityComponent* comp);
+	//void RegisterEntity(UElectricityComponent* comp);
+	//void UnregisterEntity(UElectricityComponent* comp);
 	
 };

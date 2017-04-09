@@ -45,17 +45,33 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 		if (!networksToUpdate.Dequeue(toResolve))
 			break;
 
+		if (!toResolve || !toResolve->IsValidLowLevel() || toResolve->IsPendingKill())
+			continue;
+
 		processNetwork(toResolve);
+
+		if (!toResolve || !toResolve->IsValidLowLevel() || toResolve->IsPendingKill())
+			continue;
 
 		if (!toResolve->ToRecompute.IsEmpty())	// we have another items to recompute
 			networksToUpdate.Enqueue(toResolve);
 		else
-			toResolve->NetworkState = EElectricNetworkState::Valid;	
+			toResolve->NetworkState = EElectricNetworkState::Valid;
 
 	} while (FPlatformTime::Seconds() <= time);
 
 	if (networksToUpdate.IsEmpty())
+	{
 		print(TEXT("Everything recomputed!"));
+
+		for (auto toDel : networksTodelete)
+		{
+			ensure(toDel->Entities.Num() == 0);
+			ensure(toDel->ToRecompute.IsEmpty());
+
+			toDel->MarkPendingKill();
+		}
+	}
 
 }
 
@@ -63,16 +79,11 @@ void UGameElectricityComponent::AddToWorldNetwork(UElectricityComponent* comp)
 {
 	ensure(!comp->Network);
 
-	comp->ComponentNetworkState = EElectricNetworkState::InRecompute;
+	auto n = addToNetwork(comp, NewObject<UElectricNetwork>());
 
-	auto net = NewObject<UElectricNetwork>();
-	net->Entities.Add(comp);
-	net->ToRecompute.Enqueue(comp);
-	net->NetworkState = EElectricNetworkState::InRecompute;
+	enqueueItem(comp);
 
-	comp->Network = net;
-
-	networksToUpdate.Enqueue(net);
+	networksToUpdate.Enqueue(n);
 
 }
 
@@ -80,25 +91,19 @@ void UGameElectricityComponent::processNetwork(UElectricNetwork* network)
 {
 	UElectricityComponent* part;
 	auto deq = network->ToRecompute.Dequeue(part);
-	ensure(deq && part);
-
-	// todo check fro pending delete
+	
+	if (!deq || !part || !part->IsValidLowLevel() || part->IsPendingKill())
+		return;
 
 	part->ComponentNetworkState = EElectricNetworkState::Valid;
-
-
-
 
 	// new block without connections
 	if (part->ConnectedComponents.Num() == 0)
 		return;
 
+	// foreach connected item:
 
-
-
-	// foreach connected triage to:
-
-	//	mine
+	//	mine network
 	//		-	invalid				->	take for processing
 	//		-	to be processed		->	nothing - will be processed
 	//		-	valid				->	nothing
@@ -110,63 +115,63 @@ void UGameElectricityComponent::processNetwork(UElectricNetwork* network)
 
 
 
+	for (auto connected : part->ConnectedComponents)
+	{
+		auto areDifferent = connected->Network != part->Network;
 
 
+		switch (connected->ComponentNetworkState)
+		{
+		case EElectricNetworkState::Invalid:
 
+			if (areDifferent) {
+				// we need to steal network
+				auto removed = connected->Network->Entities.Remove(connected);
+				check(removed > 0);
 
+				addToNetwork(connected, part->Network);
+			}
 
-
-
-
-
-	//TMap<UElectricNetwork*, TArray< UElectricityComponent*>> updateItems;
-	//for (auto c : comp->ConnectedComponents)
-	//{
-	//	auto target = updateItems.FindOrAdd(c->Network);
-	//	target.Add(c);
-	//}
-
-	//if (updateItems.Num() == 1)	// we are adding to single network
-	//{
-	//	for (auto n : updateItems)
-	//	{
-	//		comp->Network = n.Key;
-	//		comp->Network->RegisterEntity(comp);
-	//		comp->NetworkState = EElectricNetworkState::Valid;
-	//		//comp->Network->SetState(EElectricNetworkState::Valid);
-	//	}
-
-	//	return;
-	//}
-
-	//for (auto n : updateItems)
-	//{
-	//	comp->Network = n.Key;
-	//	comp->Network->RegisterEntity(comp);
-	//	comp->NetworkState = EElectricNetworkState::Valid;
-	//	//comp->Network->SetState(EElectricNetworkState::Valid);
-	//}
-
-	// we have multipleNetworks
-
-	/*updateItems.KeySort([](UElectricNetwork* n1, UElectricNetwork* n2) {
-		return n1->entities.Num() < n2->entities.Num();
-	});*/
-
-	print(TEXT("d"));
-
+			enqueueItem(connected);
+			break;
+		case EElectricNetworkState::InRecompute:
+			break;
+		case EElectricNetworkState::Valid:
+			if (areDifferent) {
+				// we need to merge networks
+				auto pn = part->Network;
+				auto cn = connected->Network;
+				if (pn->Entities.Num() >= cn->Entities.Num())
+					mergeNetworks(pn, cn);
+				else
+					mergeNetworks(cn, pn);
+			}
+			break;
+		default:
+			checkNoEntry();
+			break;
+		}
+	}
 }
 
 void UGameElectricityComponent::RemoveFromWorldNetwork(UElectricityComponent* comp)
 {
 	ensure(comp && comp->Network);
-	comp->Network->UnregisterEntity(comp);
 
-	// force invalidate network
+	forceInvalidateNetwork(comp->Network);
+	comp->Network->Entities.Remove(comp);
 
-	// foreach connected block remove connection, create new network for them and plan them to recompute
 
-	// if no connected networks, destroy network
+	for (auto connected : comp->ConnectedComponents)
+	{
+		connected->Network->Entities.Remove(connected);
+
+		auto n = addToNetwork(connected, NewObject<UElectricNetwork>());
+		enqueueItem(connected);
+		networksToUpdate.Enqueue(n);
+	}
+
+	networksTodelete.AddUnique(comp->Network);
 }
 
 #pragma optimize("", on)
