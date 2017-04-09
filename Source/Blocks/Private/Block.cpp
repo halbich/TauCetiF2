@@ -36,6 +36,11 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 
 	auto currentScale = GetBlockScale();
 
+	auto baseHealth = def->HealthSize * buildingCoeficient(def);
+	auto dimensions = def->GetMeshScale(currentScale);
+	BlockInfo->Health = baseHealth * dimensions.X * dimensions.Y * dimensions.Z;
+
+
 	int32 index = 0;
 
 	for (auto structureDef : def->MeshStructure)
@@ -191,9 +196,25 @@ void ABlock::InitWorldObjectComponent()
 	//woc->BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
 }
 
-void ABlock::WasHitByStorm(const FVector& blockLocation)
+void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 {
+	auto healthToRemove = amount;
 
+	auto ec = Cast<UElectricityComponent>(GetComponentByClass(UElectricityComponent::StaticClass()));
+	if (ec && ec->IsValidLowLevel())
+	{
+		auto energyRequired = amount;
+		float actuallyObtained = 0;
+		if (ec->ObtainAmount(energyRequired, actuallyObtained))
+		{
+
+		}
+	}
+
+	BlockInfo->Health -= healthToRemove;
+
+	if (BlockInfo->Health < 0)
+		Destroy();
 }
 
 UMinMaxBox* ABlock::GetWatchingBox()
@@ -254,7 +275,7 @@ TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* s
 	auto bl = Cast<ABlock>(source->GetOwner());
 	check(bl && bl->WorldObjectComponent);
 
-	auto result = TArray<UElectricityComponent*>( bl->WorldObjectComponent->SurroundingElectricityComponent);
+	auto result = TArray<UElectricityComponent*>(bl->WorldObjectComponent->SurroundingElectricityComponent);
 	bl->WorldObjectComponent->SurroundingElectricityComponent.Empty();
 	return result;
 }

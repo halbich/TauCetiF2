@@ -47,7 +47,7 @@ public:
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
-	virtual void  WasHitByStorm(const FVector& blockLocation) override;
+	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount) override;
 
 	UPROPERTY(Transient)
 		TArray<FHittedSpot> spots;

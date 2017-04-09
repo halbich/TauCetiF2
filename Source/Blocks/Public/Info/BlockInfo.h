@@ -21,4 +21,7 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
 		bool UnderConstruction;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+		float Health;
 };

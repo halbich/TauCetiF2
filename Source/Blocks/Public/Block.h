@@ -64,7 +64,7 @@ public:
 
 	void InitWorldObjectComponent();
 
-	virtual void WasHitByStorm(const FVector& blockLocation);
+	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount);
 
 	virtual UMinMaxBox* GetWatchingBox();
 
@@ -87,6 +87,18 @@ private:
 
 	FORCEINLINE void setMaterial(UPrimitiveComponent* mesh, UMaterial* material, int32 index, const FVector2D& vect) {
 		setMaterial(mesh, material, index, vect.X, vect.Y);
+	}
+
+	FORCEINLINE float buildingCoeficient(UBlockDefinition* def)
+	{
+		switch (def->ShapeType)
+		{
+		case EShapeType::Empty: return 1.0f;
+		case EShapeType::CubeBody: return 0.5f;
+		case EShapeType::CubeSide: return (1.0f / 3.0f);
+
+		default: return 1.0f;
+		}
 	}
 };
 

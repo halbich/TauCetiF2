@@ -99,6 +99,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
 		float EnergyReqiredToBuild;
 
+	// The result is equal: This value * Coeficient by type * HasCustomScaling ? (1*1*1) : Scale
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BlockDefinition")
+		float HealthSize;
+
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
 		bool UsingInPatterns;
 

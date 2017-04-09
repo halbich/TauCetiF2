@@ -198,25 +198,21 @@ UStaticMeshComponent* AGeneratorBlock::GetMeshStructureComponent_Implementation(
 
 
 
-void  AGeneratorBlock::WasHitByStorm(const FVector& blockLocation)
+void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 {
-	//print(*blockLocation.ToString());
+	
 
 	FHittedSpot hitted;
 
 	auto currentScale = GetBlockScale();
 
-	hitted.X = blockLocation.X; // (uint8)((FMath::RoundToInt(blockLocation.X + currentScale.X) % FMath::RoundToInt(currentScale.X)));
+	hitted.X = blockHitLocation.X;
 	ensure(hitted.X >= 0 && hitted.X < currentScale.X);
 
-	hitted.Y = blockLocation.Y; // (uint8)((FMath::RoundToInt(blockLocation.Y + currentScale.Y) % FMath::RoundToInt(currentScale.Y)));
+	hitted.Y = blockHitLocation.Y;
 	ensure(hitted.Y >= 0 && hitted.Y < currentScale.Y);
 
 	hitted.ActualTime = 0;
-
-	//hitted.X = hitted.Y = 0;
-
-	//print(*FVector2D(hitted.X, hitted.Y).ToString());
 
 	auto existing = spots.IndexOfByPredicate([hitted](const FHittedSpot& spot) {
 		return hitted.X == spot.X && hitted.Y == spot.Y;

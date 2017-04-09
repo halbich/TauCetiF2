@@ -34,10 +34,11 @@ struct FBlockInfo : FBlockBaseInfo
 {
 	FVector Location;
 	FRotator Rotation;
+	float Health;
 
-	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator)
+	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), Health(0)
 	{};
-	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator)
+	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), Health(0)
 	{};
 };
 

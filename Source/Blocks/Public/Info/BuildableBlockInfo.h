@@ -48,7 +48,7 @@ public:
 
 	UBuildableBlockInfo* GetCopy();
 
-private:
+
 
 	FORCEINLINE float buildingCoeficient()
 	{
@@ -56,7 +56,7 @@ private:
 		{
 		case EShapeType::Empty: return 1.0f;
 		case EShapeType::CubeBody: return 0.5f;
-		case EShapeType::CubeSide: return 0.333333f;
+		case EShapeType::CubeSide: return (1.0f / 3.0f);
 
 		default: return 1.0f;
 		}

@@ -143,7 +143,8 @@ private:
 				checkNoEntry();
 			}
 
-			bl->WasHitByStorm(hitStorm);
+			// TODO value
+			bl->WasHitByStorm(hitStorm, 1);
 		}
 	}
 
