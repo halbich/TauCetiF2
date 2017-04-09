@@ -26,6 +26,9 @@ protected:
 	UPROPERTY(Transient)
 		TArray<UElectricNetwork*> networksTodelete;
 
+	UPROPERTY(Transient)
+		TArray<UElectricNetwork*> networks;
+
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -50,6 +53,7 @@ private:
 
 	FORCEINLINE UElectricNetwork* addToNetwork(UElectricityComponent* comp, UElectricNetwork* network)
 	{
+		networks.AddUnique(network);
 		auto r = comp->Network = network;
 		r->Entities.Add(comp);
 		return r;
@@ -57,6 +61,7 @@ private:
 
 	void mergeNetworks(UElectricNetwork* bigger, UElectricNetwork* smaller)
 	{
+		ensure(!networksTodelete.Contains(bigger));
 
 		for (auto smEnt : smaller->Entities)
 			addToNetwork(smEnt, bigger);
@@ -67,6 +72,7 @@ private:
 		while (smaller->ToRecompute.Dequeue(deq))
 			enqueueItem(deq);
 
+		networks.Remove(smaller);
 		smaller->MarkPendingKill();
 	}
 

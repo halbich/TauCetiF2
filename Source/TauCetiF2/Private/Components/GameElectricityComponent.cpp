@@ -48,6 +48,8 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 		if (!toResolve || !toResolve->IsValidLowLevel() || toResolve->IsPendingKill())
 			continue;
 
+		ensure(!networksTodelete.Contains(toResolve));
+
 		processNetwork(toResolve);
 
 		if (!toResolve || !toResolve->IsValidLowLevel() || toResolve->IsPendingKill())
@@ -66,11 +68,15 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 
 		for (auto toDel : networksTodelete)
 		{
+			networks.Remove(toDel);
 			ensure(toDel->Entities.Num() == 0);
 			ensure(toDel->ToRecompute.IsEmpty());
 
 			toDel->MarkPendingKill();
 		}
+		networksTodelete.Empty();
+
+		print(*FText::AsNumber(networks.Num()).ToString());
 	}
 
 }
@@ -91,9 +97,11 @@ void UGameElectricityComponent::processNetwork(UElectricNetwork* network)
 {
 	UElectricityComponent* part;
 	auto deq = network->ToRecompute.Dequeue(part);
-	
+
 	if (!deq || !part || !part->IsValidLowLevel() || part->IsPendingKill())
 		return;
+
+	ensure(part->ComponentNetworkState == EElectricNetworkState::InRecompute);
 
 	part->ComponentNetworkState = EElectricNetworkState::Valid;
 
@@ -138,13 +146,10 @@ void UGameElectricityComponent::processNetwork(UElectricNetwork* network)
 			break;
 		case EElectricNetworkState::Valid:
 			if (areDifferent) {
-				// we need to merge networks
+				// we need to merge networks. And we just say our si bigger since our is not pending delete and connected could be
 				auto pn = part->Network;
 				auto cn = connected->Network;
-				if (pn->Entities.Num() >= cn->Entities.Num())
-					mergeNetworks(pn, cn);
-				else
-					mergeNetworks(cn, pn);
+				mergeNetworks(pn, cn);
 			}
 			break;
 		default:
