@@ -65,4 +65,5 @@ void UObjectWidget::RemoveTopWidgetFromStack()
 
 void UObjectWidget::InitForBlock_Implementation(ABlock* block)
 {
+	InitedForBlock = block;
 }

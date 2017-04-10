@@ -9,6 +9,7 @@
 #include "Helpers/Helpers.h"
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "Blocks/Public/Block.h"
+#include "Blocks/Public/Interfaces/BlockWithShowableWidget.h"
 #include "TauCetiF2PlayerController.generated.h"
 
 

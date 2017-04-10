@@ -108,3 +108,9 @@ void AOxygenTankFillerBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 }
 
+void AOxygenTankFillerBlock::SetDisplayedWidget(UUserWidget* widget)
+{
+	shownWidget = widget;
+}
+
+UUserWidget* AOxygenTankFillerBlock::GetShownWidget() { return shownWidget; }

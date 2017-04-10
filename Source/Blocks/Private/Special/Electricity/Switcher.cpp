@@ -82,3 +82,10 @@ void ASwitcher::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 	Super::EndPlay(EndPlayReason);
 }
+
+void ASwitcher::SetDisplayedWidget(UUserWidget* widget)
+{
+	shownWidget = widget;
+}
+
+UUserWidget* ASwitcher::GetShownWidget() { return shownWidget; }

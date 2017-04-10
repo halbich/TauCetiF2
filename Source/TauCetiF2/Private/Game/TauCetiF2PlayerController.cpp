@@ -179,7 +179,13 @@ void ATauCetiF2PlayerController::ShowRegisteredWidget(const FString widgetID, AB
 	currentShownRegisteredWidget = *w;
 
 	if (block)
-		currentShownRegisteredWidget->InitForBlock(block);
+	{
+		currentShownRegisteredWidget->InitForBlock_Implementation(block);
+
+		auto showable = Cast<IBlockWithShowableWidget>(block);
+		if (showable)
+			showable->SetDisplayedWidget(currentShownRegisteredWidget);
+	}
 
 	ShowWidget(EShownWidget::Registered);
 

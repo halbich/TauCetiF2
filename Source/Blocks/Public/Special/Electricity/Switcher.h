@@ -24,6 +24,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | SwitcherBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 
+	UPROPERTY(Transient)
+		UUserWidget* shownWidget;
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
@@ -31,6 +34,10 @@ public:
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 	
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	virtual void SetDisplayedWidget(UUserWidget* widget) override;
+
+	virtual UUserWidget* GetShownWidget() override;
 
 	FDelegateHandle ListeningHandle;
 

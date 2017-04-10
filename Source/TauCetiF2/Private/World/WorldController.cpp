@@ -42,12 +42,17 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 	object->OnDestroyRequestedEvent.RemoveDynamic(this, &AWorldController::DestroyRequestEventHandler);
 
 
+
 	if (object->Definition.GetDefaultObject()->UsingInPatterns)
 		RootBox->TryUnregisterWatchingBox(object);
 
 	auto usableWithWidget = Cast<IBlockWithShowableWidget>(object);
 	if (usableWithWidget)
 	{
+		auto showedWidget = Cast<UObjectWidget>(usableWithWidget->GetShownWidget());
+		if (showedWidget && showedWidget->IsValidLowLevel() && showedWidget->InitedForBlock == object && showedWidget->IsVisible())
+			showedWidget->RequestClose();
+
 		auto ref = showableWidgetDelegates.Find(object);
 		if (ref && ref->IsValid())
 		{
@@ -369,7 +374,7 @@ void AWorldController::onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidge
 void AWorldController::DestroyRequestEventHandler(ABlock* block)
 {
 	print(TEXT("Block Destroy requested"));
-	//DestroyWorldObject(block);
+	DestroyWorldObject(block);
 }
 
 #pragma optimize("", on)

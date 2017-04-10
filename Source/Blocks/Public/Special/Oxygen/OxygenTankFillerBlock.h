@@ -31,6 +31,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTankFiller", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 
+	UPROPERTY(Transient)
+		UUserWidget* shownWidget;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
@@ -40,8 +42,14 @@ public:
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
+	virtual void SetDisplayedWidget(UUserWidget* widget) override;
+
+	virtual UUserWidget* GetShownWidget() override;
+
 	FDelegateHandle ListeningHandle;
 	FDelegateHandle OxygenDataChangedHandle;
+
+
 
 private:
 	void ListeningOnUse(AActor* actor, bool isSpecial);

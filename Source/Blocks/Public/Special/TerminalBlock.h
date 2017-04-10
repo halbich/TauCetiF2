@@ -23,6 +23,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | TerminalBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 
+	UPROPERTY(Transient)
+		UUserWidget* shownWidget;
+
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
@@ -30,6 +33,10 @@ public:
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	virtual void SetDisplayedWidget(UUserWidget* widget) override;
+
+	virtual UUserWidget* GetShownWidget() override;
 
 	FDelegateHandle ListeningHandle;
 

@@ -34,6 +34,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CustomWidgets|ObjectWidget")
 		FString WidgetID;
 
+
+	UPROPERTY(Transient)
+		ABlock* InitedForBlock;
+
 	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
 		void AddToStack(UObjectWidget* widget);
 

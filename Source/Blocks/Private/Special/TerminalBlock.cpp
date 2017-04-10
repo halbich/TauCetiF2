@@ -65,6 +65,7 @@ void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 
 void ATerminalBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 
@@ -74,3 +75,10 @@ void ATerminalBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 UPrimitiveComponent* ATerminalBlock::GetComponentForObjectOutline_Implementation() {
 	return TerminalBlockMesh;
 }
+
+void ATerminalBlock::SetDisplayedWidget(UUserWidget* widget)
+{
+	shownWidget = widget;
+}
+
+UUserWidget* ATerminalBlock::GetShownWidget() { return shownWidget; }

@@ -29,6 +29,11 @@ public:
 
 	FDelegateHandle AddShowWidgetForBlockEventListener(FShowWidgetForBlockDelegate& ShowWidgetForBlockDelegate);
 	void RemoveShowWidgetForBlockEventListener(FDelegateHandle DelegateHandle);
+
+	virtual void SetDisplayedWidget(UUserWidget* widget) = 0;
+
+	virtual UUserWidget* GetShownWidget() = 0;
+
 protected:
 	FShowWidgetForBlockEvent MyShowWidgetForBlockEvent;
 };
