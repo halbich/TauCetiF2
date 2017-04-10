@@ -16,3 +16,18 @@ UBaseControlWidget::UBaseControlWidget(const FObjectInitializer& ObjectInitializ
 		ContainingTerminalWidgets.Add(BlockConstructor);*/
 	}
 }
+
+void UBaseControlWidget::InitForBlock_Implementation(ABlock* block)
+{
+	Super::InitForBlock_Implementation(block);
+
+}
+
+void UBaseControlWidget::LateInit()
+{
+	for (auto term : ContainingTerminalWidgets)
+	{
+		term->InitForBlock(InitedForBlock);
+	}
+
+}

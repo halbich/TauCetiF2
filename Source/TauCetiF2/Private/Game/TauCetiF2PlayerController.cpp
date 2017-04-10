@@ -180,7 +180,7 @@ void ATauCetiF2PlayerController::ShowRegisteredWidget(const FString widgetID, AB
 
 	if (block)
 	{
-		currentShownRegisteredWidget->InitForBlock_Implementation(block);
+		currentShownRegisteredWidget->InitForBlock(block);
 
 		auto showable = Cast<IBlockWithShowableWidget>(block);
 		if (showable)

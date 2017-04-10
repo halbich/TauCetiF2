@@ -17,15 +17,20 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, Category = "TCF2 | BaseControlWidget")
 		TArray<UTerminalBaseWidget*> ContainingTerminalWidgets;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TCF2 | BaseControlWidget")
 		TSubclassOf<class UTerminalBaseWidget> wTerminalBase;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BaseControlWidget")
 		UTerminalBaseWidget* TerminalBase;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TCF2 | BaseControlWidget")
 		TSubclassOf<class UBlockConstructor> wBlockConstructor;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BaseControlWidget")
 		UBlockConstructor* BlockConstructor;
+
+	virtual void InitForBlock_Implementation(ABlock* block) override;
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | BaseControlWidget")
+		void LateInit();
 };

@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Widgets/ObjectWidget.h"
+#include "Blocks/Public/Special/TerminalBlock.h"
 #include "TerminalBaseWidget.generated.h"
 
 /**

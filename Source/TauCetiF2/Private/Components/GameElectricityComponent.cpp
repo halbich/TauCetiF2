@@ -135,7 +135,7 @@ void UGameElectricityComponent::processNetwork(UElectricNetwork* network)
 
 			if (areDifferent) {
 				// we need to steal network
-				auto removed = connected->Network->Entities.Remove(connected);
+				auto removed = connected->Network->UnregisterEntity(connected);
 				check(removed > 0);
 
 				addToNetwork(connected, part->Network);
@@ -165,12 +165,12 @@ void UGameElectricityComponent::RemoveFromWorldNetwork(UElectricityComponent* co
 	ensure(comp && comp->Network);
 
 	forceInvalidateNetwork(comp->Network);
-	comp->Network->Entities.Remove(comp);
+	comp->Network->UnregisterEntity(comp);
 
 
 	for (auto connected : comp->ConnectedComponents)
 	{
-		connected->Network->Entities.Remove(connected);
+		connected->Network->UnregisterEntity(connected);
 
 		auto n = addToNetwork(connected, NewObject<UElectricNetwork>());
 		enqueueItem(connected);

@@ -28,7 +28,22 @@ public:
 	UPROPERTY(Transient)
 		EElectricNetworkState NetworkState;
 
-	//void RegisterEntity(UElectricityComponent* comp);
-	//void UnregisterEntity(UElectricityComponent* comp);
 	
+	FORCEINLINE void RegisterEntity(UElectricityComponent* comp)
+	{
+		Entities.Add(comp);
+		EntitiesCount = Entities.Num();
+	}
+
+
+	FORCEINLINE int32 UnregisterEntity(UElectricityComponent* comp)
+	{
+		auto r = Entities.Remove(comp);
+		EntitiesCount = Entities.Num();
+		return r;
+	}
+
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 EntitiesCount;
 };

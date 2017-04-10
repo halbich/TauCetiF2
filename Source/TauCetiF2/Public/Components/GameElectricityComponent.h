@@ -55,7 +55,7 @@ private:
 	{
 		networks.AddUnique(network);
 		auto r = comp->Network = network;
-		r->Entities.Add(comp);
+		r->RegisterEntity(comp);
 		return r;
 	}
 
