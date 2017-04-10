@@ -25,19 +25,19 @@ public:
 	UPROPERTY(Transient)
 		AActor* owner;
 
-	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | SelectTargetComponent")
 		bool HasObjectOutline;
 
-	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | SelectTargetComponent")
 		bool HasUsableObjectOutline;
 
-	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | SelectTargetComponent")
 		bool IsUsable;
 
-	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | SelectTargetComponent")
 		float MaxDistance;
 
-	UPROPERTY(BlueprintReadOnly, Category = SelectTargetComponent)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | SelectTargetComponent")
 		FText CustomUsingMessage;
 
 	virtual void BeginPlay() override;

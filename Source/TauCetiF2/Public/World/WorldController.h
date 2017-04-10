@@ -30,16 +30,16 @@ class TAUCETIF2_API AWorldController : public AActor
 
 public:
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = WorldController)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | WorldController")
 		TArray<UBlockInfo*> UsedBlocks;
 
 	UPROPERTY(Transient)
 		UKDTree* RootBox;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldController, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | WorldController", meta = (AllowPrivateAccess = "true"))
 		UBlockHolderComponent* BlockHolder;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WorldController, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | WorldController", meta = (AllowPrivateAccess = "true"))
 		UBaseControlComponent* BaseControl;
 
 	UPROPERTY(Transient)
@@ -52,22 +52,22 @@ public:
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
 
-	UFUNCTION(BlueprintCallable, Category = WorldController)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
 		void DEBUGShowMinMaxBoxes();
 
-	UFUNCTION(BlueprintCallable, Category = WorldController)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
 		void DEBUGHideMinMaxBoxes();
 
-	UFUNCTION(BlueprintCallable, Category = WorldController)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
 		void DEBUGSpawnPatterns(const FVector & startingPoint);
 
-	UFUNCTION(BlueprintCallable, Category = WorldController)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
 		void DEBUGUsedPatternElements(const FVector & startingPoint);
 
-	UFUNCTION(BlueprintCallable, Category = WorldController)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
 		void LoadDataFromCarrier(USaveGameCarrier* carrier);
 
-	UFUNCTION(BlueprintCallable, Category = WorldController)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
 		void SaveDataToCarrier(USaveGameCarrier* carrier);
 
 	virtual void BeginPlay() override;

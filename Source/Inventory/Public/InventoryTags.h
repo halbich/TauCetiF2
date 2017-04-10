@@ -17,10 +17,10 @@ class INVENTORY_API UInventoryTags : public UObject
 	GENERATED_BODY()
 public:
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = InventoryTags)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | InventoryTags")
 		TArray<UInventoryTagGroup*> InventoryGroupList;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = InventoryTags)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | InventoryTags")
 		int32 CurrentActiveIndex;
 
 	FORCEINLINE UInventoryTagGroup* GetCurrentActiveTagGroup()

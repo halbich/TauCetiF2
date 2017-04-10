@@ -16,28 +16,28 @@ class BLOCKS_API UBuildableBlockInfo : public UBlockBaseInfo
 public:
 	UBuildableBlockInfo();
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | BuildableBlockInfo")
 		TArray<FString> Tags;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		EBuildableObjectAction Action;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		bool AllowOutlineOnSelected;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		int32 StencilOverride;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		UBlockDefinition* BlockDefinition;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		FText DisplayValue;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		FText DisplayValueName;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BuildableBlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		float BuildingEnergyRequired;
 
 	bool ValidateObject(TArray<FText>& validationErrors);

@@ -11,9 +11,9 @@ class TAUCETIF2_API UBaseControlComponent : public UActorComponent
 
 public:
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TCF2 | BaseControlComponent")
 		TSubclassOf<class UObjectWidget> BaseControl;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BaseControlComponent)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BaseControlComponent")
 		UObjectWidget* BaseControlWidget;
 };

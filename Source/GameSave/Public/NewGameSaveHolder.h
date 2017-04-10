@@ -27,16 +27,16 @@ public:
 
 	TMap<ENamedHardcodedLevel, FunctionPtrType> systemSaves;
 
-	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SaveGame")
 		TArray<USaveGameCarrier*> GetNewSaveGamesList();
 
-	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SaveGame")
 		USaveGameCarrier* GetSaveForMainMenu();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SaveGame)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | SaveGame")
 		static UNewGameSaveHolder* Instance();
 
-	UFUNCTION(BlueprintCallable, Category = TCF2SaveGame)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SaveGame")
 		USaveGameCarrier* GetSaveByPath(FString path);
 
 private:

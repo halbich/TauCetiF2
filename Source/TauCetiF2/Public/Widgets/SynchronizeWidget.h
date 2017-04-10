@@ -17,7 +17,7 @@ public:
 	* It can also be called by the editor to update modified state.
 	* Override this event in blueprint to update the widget after a default property is modified.
 	*/
-	UFUNCTION(BlueprintNativeEvent, Category = "User Interface")
+	UFUNCTION(BlueprintNativeEvent, Category = "TCF2 | User Interface")
 		void OnSynchronizeProperties();
 
 	virtual void SynchronizeProperties() override;

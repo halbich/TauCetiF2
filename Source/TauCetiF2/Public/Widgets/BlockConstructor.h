@@ -18,13 +18,13 @@ public:
 
 	UBlockConstructor();
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockConstructorSelector)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockConstructorSelector")
 		UBlockHolderComponent* blockHolder;
 
-	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | BlockConstructorSelector")
 		bool AddItemToInventory(UBuildableBlockInfo* buildable, TArray<FText>& validationErrors);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | BlockConstructorSelector")
 		TArray<UBuildableBlockInfo*> GetAllBuildableBlocks();
 
 private:

@@ -17,10 +17,10 @@ class BLOCKS_API UElectricityBindableAreaInfo : public UObject
 	
 public:
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = ElectricityBindableAreaInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityBindableAreaInfo")
 		TArray<FVector> AreaPoints;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = ElectricityBindableAreaInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityBindableAreaInfo")
 		FVector DominantPlane;
 	
 	void InitArea(TArray<FVector> usedPoints, FElectricityBindableArea& definedPlane, FVector& blockScale, FRotator& blockRotation, FVector worldLocation);

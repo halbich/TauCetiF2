@@ -17,10 +17,10 @@ class TAUCETIF2_API UOxygenFillerWidget : public UObjectWidget
 
 public:
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = OxygenFillerWidget)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenFillerWidget")
 		UInventoryComponent* InventoryComponent;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = OxygenFillerWidget)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenFillerWidget")
 		AOxygenTankFillerBlock* CurrentBlock;
 
 	virtual void InitForBlock_Implementation(ABlock* block) override;

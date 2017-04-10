@@ -33,57 +33,57 @@ public:
 
 #pragma region Properties
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
 		bool IsSystemSave;
 
 	UPROPERTY(Transient)
 		ENamedHardcodedLevel HardcodedLevelName;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
 		FString FullFilePath;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
 		bool ContainsFullSaveData;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
 		bool SaveLoaded;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
 		uint8 SaveFileVersion;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		FString SaveName;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
 		FDateTime SavedDate;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		FTimespan PlayedTime;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		bool IsQuickSave;
 
 	// game - related stuff
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		float CurrentTime;	// interval [0,86400]
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		uint8 MinBoxSize;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		FVector PlayerPosition;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		FRotator PlayerRotation;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		FRotator PlayerCameraRotation;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		bool PlayerUseFPSCamera;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = SaveGameCarrier)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
 		bool IsCreativeMode;
 
 	// Serializable item
@@ -111,25 +111,25 @@ public:
 
 	// functions
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | SaveGame")
 		static USaveGameCarrier* GetEmptyCarrier();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | SaveGame")
 		static USaveGameCarrier* GetQuickSaveCarrier(TArray<FText>& errorList);
 
-	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SaveGame")
 		bool DeleteSaveFile();
 
-	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SaveGame")
 		bool SaveBinary(TArray<FText>& errorList);
 
-	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SaveGame")
 		bool LoadBinary(const FString& FilePath, TArray<FText>& errorList);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = TCF2SAveGame)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | SaveGame")
 		static TArray<USaveGameCarrier*> GetSaveGameInfoList(TArray<FText>& errorList);
 
-	UFUNCTION(BlueprintCallable, Category = TCF2SAveGame)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SaveGame")
 		bool IsSaveNameValid();
 
 private:

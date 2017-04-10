@@ -19,38 +19,38 @@ class TAUCETIF2_API UObjectWidget : public USynchronizeWidget
 
 public:
 
-	UPROPERTY(BlueprintAssignable, Transient, Category = "CustomWidgets|ObjectWidget")
+	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		FWidgetCloseRequest OnWidgetCloseRequest;
 
-	UPROPERTY(BlueprintAssignable, Transient, Category = "CustomWidgets|ObjectWidget")
+	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		FWidgetShown OnWidgetShown;
 
-	UPROPERTY(BlueprintAssignable, Transient, Category = "CustomWidgets|ObjectWidget")
+	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		FWidgetRemoved OnWidgetRemoved;
 
 	UPROPERTY(Transient)
 		TArray<UObjectWidget*> ItemsStack;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CustomWidgets|ObjectWidget")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		FString WidgetID;
 
 
 	UPROPERTY(Transient)
 		ABlock* InitedForBlock;
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		void AddToStack(UObjectWidget* widget);
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		virtual void SwapWithTop(UObjectWidget* widget);
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		void AddToStackAndScreen(UObjectWidget* widget, int32 ZOrder = 0);
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		void RemoveTopWidgetFromStack();
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		void RequestClose();
 
 	virtual void OnEnterKey();
@@ -60,7 +60,7 @@ public:
 
 	void WidgetShown();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		void InitForBlock(ABlock* block);
 
 	virtual void InitForBlock_Implementation(ABlock* block);

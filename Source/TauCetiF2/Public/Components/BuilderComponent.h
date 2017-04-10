@@ -54,10 +54,10 @@ public:
 	UPROPERTY(Transient)
 		ACharacter* character;
 
-	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | BuilderComponent")
 		void SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo);
 
-	UFUNCTION(BlueprintCallable, Category = BuilderComponent)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | BuilderComponent")
 		void SetWorldController(AWorldController* controller);
 
 	UPROPERTY(Transient)

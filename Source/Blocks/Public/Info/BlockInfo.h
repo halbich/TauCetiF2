@@ -13,15 +13,15 @@ class BLOCKS_API UBlockInfo : public UBlockBaseInfo
 	GENERATED_BODY()
 public:
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		FVector Location;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		FRotator Rotation;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		bool UnderConstruction;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		float Health;
 };

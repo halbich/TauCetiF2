@@ -15,16 +15,16 @@ class INVENTORY_API UInventoryTagGroup : public UObject
 	GENERATED_BODY()
 public:
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryTagGroup")
 		TArray<UTagGroup*> GroupList;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryTagGroup")
 		FString GroupName;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryTagGroup")
 		bool IsGroupEnabled;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryTagGroup)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryTagGroup")
 		EInventoryGroupType GroupType;
 
 	bool IsSatisfied(TArray<FString>& tags)

@@ -12,10 +12,10 @@ class TAUCETIF2_API UCmbItem : public UObject
 	GENERATED_BODY()
 public:
 
-	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | UI | ComboBoxItem")
 		int32 Value;
 
-	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | UI | ComboBoxItem")
 		FText Text;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | UI | ComboBoxItem")

@@ -14,7 +14,7 @@ class TAUCETIF2_API UBaseControlWidget : public UObjectWidget
 	GENERATED_UCLASS_BODY()
 public:
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, Category = BaseControlWidget)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, Category = "TCF2 | BaseControlWidget")
 		TArray<UTerminalBaseWidget*> ContainingTerminalWidgets;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")

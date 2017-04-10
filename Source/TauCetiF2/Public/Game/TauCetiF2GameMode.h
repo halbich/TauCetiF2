@@ -11,6 +11,6 @@ class ATauCetiF2GameMode : public AGameMode
 public:
 	ATauCetiF2GameMode();
 
-	UPROPERTY(BlueprintReadOnly, Category = GameMode)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | GameMode")
 		TSubclassOf<APawn> PawnToSpawn;
 };

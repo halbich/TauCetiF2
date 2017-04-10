@@ -19,7 +19,7 @@ public:
 	UPROPERTY(Transient)
 		AActor* owner;
 
-	UPROPERTY(BlueprintAssignable, Transient, Category = TargetSelector)
+	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | TargetSelector")
 		FUsableObjectTargetedChanged OnUsableObjectTargetedChanged;
 
 	UPROPERTY(BlueprintReadOnly, Transient)
@@ -64,16 +64,16 @@ public:
 	UPROPERTY(Transient)
 		bool IsUsableAllowed;
 
-	UFUNCTION(BlueprintCallable, Category = TargetSelector)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | TargetSelector")
 		void SetOutlining(bool enableOutlining, int32 outlineStencilValue);
 
-	UFUNCTION(BlueprintCallable, Category = TargetSelector)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | TargetSelector")
 		void ShowPlane();
 
-	UFUNCTION(BlueprintCallable, Category = TargetSelector)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | TargetSelector")
 		void HidePlane();
 
-	UFUNCTION(BlueprintCallable, Category = TargetSelector)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | TargetSelector")
 		void TryUse(bool isSpecialUse = false);
 
 

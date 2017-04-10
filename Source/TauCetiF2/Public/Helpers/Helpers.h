@@ -35,7 +35,7 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Get Current Culture"), Category = "Locale")
 		static FString GetCurrentCultureIsoName();
 
-	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers")
 		static void FatalError(const FName text);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Definitions")

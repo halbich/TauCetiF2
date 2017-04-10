@@ -1,18 +1,22 @@
 ﻿#pragma once
 
-#include "Blueprint/UserWidget.h"
-#include "Widgets/SynchronizeWidget.h"
+#include "Widgets/ObjectWidget.h"
 #include "TerminalBaseWidget.generated.h"
 
 /**
  *
  */
 UCLASS()
-class TAUCETIF2_API UTerminalBaseWidget : public USynchronizeWidget
+class TAUCETIF2_API UTerminalBaseWidget : public UObjectWidget
 {
 	GENERATED_BODY()
 public:
 
-	UPROPERTY(BlueprintReadOnly, Transient, EditAnywhere, Category = TerminalBaseWidget)
+	UPROPERTY(BlueprintReadOnly, Transient, EditAnywhere, Category = "TCF2 | TerminalBaseWidget")
 		FText BaseControlDisplayName;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | TerminalBaseWidget")
+		UElectricNetwork* Network;
+
+	virtual void InitForBlock_Implementation(ABlock* block) override;
 };

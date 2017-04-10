@@ -17,28 +17,28 @@ public:
 
 	UBlockConstructorSelector();
 
-	UPROPERTY(BlueprintReadOnly, Transient, EditAnywhere, Category = BlockConstructorSelector, meta = (DisplayName = "Block ID", ExposeOnSpawn = true))
+	UPROPERTY(BlueprintReadOnly, Transient, EditAnywhere, Category = "TCF2 | BlockConstructorSelector", meta = (DisplayName = "Block ID", ExposeOnSpawn = true))
 		int32 BlockID;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockConstructorSelector, meta = (DisplayName = "Block Holder", ExposeOnSpawn = true))
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockConstructorSelector", meta = (DisplayName = "Block Holder", ExposeOnSpawn = true))
 		UBlockHolderComponent* BlockHolder;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockConstructorSelector)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockConstructorSelector")
 		UBlockDefinition* BlockDefinition;
 
-	UFUNCTION(BlueprintCallable, Category = BlockConstructorSelector)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | BlockConstructorSelector")
 		bool IsDefinitionValid();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | BlockConstructorSelector")
 		void GetMinMax(FVector& minSize, FVector& maxSize);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | BlockConstructorSelector")
 		TArray<UInventoryFlagItem*> GetAdditionalParams();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | BlockConstructorSelector")
 		TArray<FString> GetImplicitTags();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = BlockConstructorSelector)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | BlockConstructorSelector")
 		UTexture2D* GetBlockTexture();
 
 	virtual void SynchronizeProperties() override;

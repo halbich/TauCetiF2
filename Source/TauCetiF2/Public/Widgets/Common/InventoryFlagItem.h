@@ -14,18 +14,18 @@ class TAUCETIF2_API UInventoryFlagItem : public UObject
 
 public:
 
-	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | UI | ComboBoxItem")
 		FString TagName;
 
-	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | UI | ComboBoxItem")
 		FText DisplayText;
 
-	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | UI | ComboBoxItem")
 		TArray<UCmbItem*> AviableValues;
 
-	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | UI | ComboBoxItem")
 		int32 TagValue;
 
-	UPROPERTY(BlueprintReadOnly, Category = CmbItem)
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | UI | ComboBoxItem")
 		bool TagReadOnly;
 };

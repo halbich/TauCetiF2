@@ -17,18 +17,18 @@ public:
 	UPROPERTY(Transient)
 		int32 ID;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = BlockInfo)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | BlockInfo")
 		FVector Scale;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = BlockInfo)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | BlockInfo")
 		FString Name;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = BlockInfo)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | BlockInfo")
 		TMap<FString, int32> AdditionalFlags;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		UBlockWithOxygenInfo* OxygenInfo;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = BlockInfo)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		UBlockWithElectricityInfo* ElectricityInfo;
 };

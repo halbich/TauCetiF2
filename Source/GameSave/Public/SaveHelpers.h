@@ -16,7 +16,7 @@ class GAMESAVE_API USaveHelpers : public UObject
 
 public:
 
-	UFUNCTION(BlueprintCallable, Category = TCF2Helpers)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Helpers")
 		static TArray<FString> GetAllSaveGameSlots();
 
 	static FORCEINLINE FString USaveHelpers::GetCleanSaveFileName(const FString& worldName, const FDateTime& saveTime) {

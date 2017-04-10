@@ -16,25 +16,25 @@ class TAUCETIF2_API UModalWidget : public UObjectWidget
 
 public:
 
-	UPROPERTY(BlueprintAssignable, Transient, Category = "CustomWidgets|ModalWidget")
+	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | CustomWidgets | ModalWidget")
 		FModalDialogResult OnDecisionMade;
 
 	UPROPERTY(Transient)
 		TArray<EModalDialogResult> EnabledButtons;
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ModalWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets | ModalWidget")
 		bool IsButtonEnabled(const EModalDialogResult buttonWithResult);
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ModalWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets | ModalWidget")
 		void SetDecisionMade(const EModalDialogResult decision);
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ModalWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets | ModalWidget")
 		void SetDesignationYesNo();
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ModalWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets | ModalWidget")
 		void SetDesignationOkCancel();
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ModalWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets | ModalWidget")
 		void SetDesignationOK();
 
 	virtual void OnEnterKey() override;

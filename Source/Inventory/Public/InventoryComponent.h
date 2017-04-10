@@ -46,28 +46,28 @@ public:
 	// Sets default values for this component's properties
 	UInventoryComponent();
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryComponent")
 		TArray<UBuildableBlockInfo*> BuildableItems;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryComponent")
 		TArray<UInventoryBuildableBlockInfo*> InventoryItems;
 
-	UPROPERTY(BlueprintAssignable, Transient, Category = InventoryComponent)
+	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | InventoryComponent")
 		FHudBuildableItemsChanged OnHudBuildableItemsChanged;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = InventoryComponent)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryComponent")
 		UInventoryTags* InventoryTags;
 
-	UFUNCTION(BlueprintCallable, Category = InventoryComponent)
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
 		void ForceItemsChanged(bool showGroupName);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryComponent)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | InventoryComponent")
 		TArray<UBuildableBlockInfo*> GetItemsForCurrentBank();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryComponent)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | InventoryComponent")
 		TArray<UBuildableBlockInfo*> GetItemsForBank(UInventoryTagGroup* filterGroup);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = InventoryComponent)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | InventoryComponent")
 		FString GetCurrentBankName();
 
 	FDelegateHandle ListeningHandle;

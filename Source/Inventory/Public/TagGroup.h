@@ -13,19 +13,19 @@ class INVENTORY_API UTagGroup : public UObject
 public:
 	UTagGroup();
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = Tags)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Tags")
 		TArray<FString> Tags;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = Tags)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Tags")
 		FString GroupName;
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = Tags)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Tags")
 		bool LetVisibleAll;
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = Tags)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Tags")
 		static UTagGroup* GetEmpty();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = Tags)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Tags")
 		static UTagGroup* GetFromTags(const TArray<FString>& tagList);
 
 	bool IsSatisfied(TArray<FString>& tags)

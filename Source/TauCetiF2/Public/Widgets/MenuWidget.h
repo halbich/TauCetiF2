@@ -13,9 +13,9 @@ class TAUCETIF2_API UMenuWidget : public UObjectWidget
 
 public:
 
-	UPROPERTY(BlueprintReadWrite, Transient, Category = "CustomWidgets|ObjectWidget")
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | CustomWidgets | MenuWidget")
 		UWidgetSwitcher* switcher;
 
-	UFUNCTION(BlueprintCallable, Category = "CustomWidgets|ObjectWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | CustomWidgets |  MenuWidget")
 		virtual void SwapWithTop(UObjectWidget* widget) override;
 };
