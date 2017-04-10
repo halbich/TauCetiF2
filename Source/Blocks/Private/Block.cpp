@@ -214,7 +214,7 @@ void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 	BlockInfo->Health -= healthToRemove;
 
 	if (BlockInfo->Health < 0)
-		Destroy();
+		OnDestroyRequestedEvent.Broadcast(this);
 }
 
 UMinMaxBox* ABlock::GetWatchingBox()

@@ -39,6 +39,9 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 	if (!object || !object->IsValidLowLevel() || object->IsPendingKill())
 		return false;
 
+	object->OnDestroyRequestedEvent.RemoveDynamic(this, &AWorldController::DestroyRequestEventHandler);
+
+
 	if (object->Definition.GetDefaultObject()->UsingInPatterns)
 		RootBox->TryUnregisterWatchingBox(object);
 
@@ -177,6 +180,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 		}
 
 
+		actor->OnDestroyRequestedEvent.AddDynamic(this, &AWorldController::DestroyRequestEventHandler);
 
 		//MinMax->DEBUGDrawContainingBox(GetWorld());
 	}
@@ -359,6 +363,13 @@ void AWorldController::onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidge
 	auto defW = widget.GetDefaultObject();
 
 	defW->AddToPlayerScreen();
+}
+
+
+void AWorldController::DestroyRequestEventHandler(ABlock* block)
+{
+	print(TEXT("Block Destroy requested"));
+	//DestroyWorldObject(block);
 }
 
 #pragma optimize("", on)

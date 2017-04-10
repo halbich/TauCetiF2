@@ -12,6 +12,10 @@
 #include "Components/ElectricityComponent.h"
 #include "Block.generated.h"
 
+class ABlock;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDestroyRequestDelegate, ABlock*, block);
+
 UCLASS()
 class BLOCKS_API ABlock : public AActor, public IGenericBlock
 {
@@ -31,6 +35,11 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | Block", meta = (AllowPrivateAccess = "true"))
 		UWorldObjectComponent* WorldObjectComponent;
+
+	UPROPERTY(BlueprintAssignable, Category = "TCF2 | Block")
+		FDestroyRequestDelegate OnDestroyRequestedEvent;
+
+
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
 		UStaticMeshComponent* GetMeshStructureComponent(int32 BlockMeshStructureDefIndex);

@@ -97,13 +97,14 @@ private:
 #pragma optimize("", off)
 
 	void doDamage(int32 currentHitPoints) {
-		auto targNum = Targets.Num();
 
-		if (targNum == 0)
-			return;
 
 		for (auto i = 0; i < currentHitPoints; i++)
 		{
+			auto targNum = Targets.Num();
+			if (targNum == 0)
+				return;
+
 			auto target = Targets[FMath::RandHelper(targNum)];
 			check(target && target->IsValidLowLevelFast() && !target->IsPendingKill() && target->ChildHeap.Num() > 0);
 

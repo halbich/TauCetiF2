@@ -87,6 +87,13 @@ bool UElectricityComponent::ObtainAmount(float requested, float& actuallyObtaine
 		return true;
 	}
 
+	if (!ElectricityInfo || !ElectricityInfo->IsValidLowLevel() || ElectricityInfo->IsPendingKill())
+	{
+		actuallyObtained = 0;
+		return false;
+	}
+
+
 	check(ElectricityInfo->CurrentObjectEnergy >= 0);
 
 	if (FMath::IsNearlyZero(ElectricityInfo->CurrentObjectEnergy))

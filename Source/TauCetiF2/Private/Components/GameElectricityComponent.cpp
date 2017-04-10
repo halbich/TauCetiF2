@@ -48,7 +48,8 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 		if (!toResolve || !toResolve->IsValidLowLevel() || toResolve->IsPendingKill())
 			continue;
 
-		ensure(!networksTodelete.Contains(toResolve));
+		if (networksTodelete.Contains(toResolve))
+			continue;
 
 		processNetwork(toResolve);
 

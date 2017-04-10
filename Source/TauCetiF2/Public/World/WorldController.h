@@ -87,6 +87,8 @@ public:
 
 	TMap<ABlock*, FDelegateHandle> showableWidgetDelegates;
 
+	UFUNCTION()
+		void DestroyRequestEventHandler(ABlock* block);
 
 private:
 
