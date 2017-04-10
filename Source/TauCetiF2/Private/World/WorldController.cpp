@@ -374,7 +374,7 @@ void AWorldController::onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidge
 void AWorldController::DestroyRequestEventHandler(ABlock* block)
 {
 	print(TEXT("Block Destroy requested"));
-	DestroyWorldObject(block);
+	//DestroyWorldObject(block);
 }
 
 #pragma optimize("", on)

@@ -49,5 +49,8 @@
 				"Engine"
 			]
 		}
+	],
+	"TargetPlatforms": [
+		"AllDesktop"
 	]
 }
