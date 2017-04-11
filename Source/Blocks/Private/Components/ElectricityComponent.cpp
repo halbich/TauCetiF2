@@ -63,10 +63,10 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, F
 		}
 	}
 
-	if (ConnectedComponents.Num() > 0) {
-		print(TEXT("Valid connections:"));
-		print(*FText::AsNumber(ConnectedComponents.Num()).ToString());
-	}
+	//if (ConnectedComponents.Num() > 0) {
+	//	print(TEXT("Valid connections:"));
+	//	print(*FText::AsNumber(ConnectedComponents.Num()).ToString());
+	//}
 }
 
 void UElectricityComponent::onComponentDataChanged()

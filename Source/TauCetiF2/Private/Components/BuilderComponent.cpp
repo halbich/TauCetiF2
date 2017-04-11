@@ -160,9 +160,11 @@ void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (currentBuildableBlockInfo->Action == EBuildableObjectAction::None)
 		return;
 
+	ensureHolder();
+
 	currentBlockInfo->ID = currentBuildableBlockInfo->ID;
 	if (!currentDefinitionForBlock || currentDefinitionForBlock->BlockID != currentBlockInfo->ID)
-		currentDefinitionForBlock = UBlockHolderComponent::GetInstance()->GetDefinitionFor(currentBuildableBlockInfo->ID);
+		currentDefinitionForBlock = blockHolder->GetDefinitionFor(currentBuildableBlockInfo->ID);
 
 	if (!currentDefinitionForBlock)
 		return;

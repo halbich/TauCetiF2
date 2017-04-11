@@ -21,7 +21,7 @@ public:
 		int32 BlockID;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockConstructorSelector", meta = (DisplayName = "Block Holder", ExposeOnSpawn = true))
-		UBlockHolderComponent* BlockHolder;
+		UBlockHolder* BlockHolder;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockConstructorSelector")
 		UBlockDefinition* BlockDefinition;

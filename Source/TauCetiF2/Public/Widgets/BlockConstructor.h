@@ -19,7 +19,7 @@ public:
 	UBlockConstructor();
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockConstructorSelector")
-		UBlockHolderComponent* blockHolder;
+		UBlockHolder* blockHolder;
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | BlockConstructorSelector")
 		bool AddItemToInventory(UBuildableBlockInfo* buildable, TArray<FText>& validationErrors);
@@ -34,7 +34,10 @@ private:
 		if (blockHolder && blockHolder->IsValidLowLevel())
 			return;
 
-		blockHolder = UBlockHolderComponent::GetInstance();
+		auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+		ensure(inst);
+		blockHolder = Cast<UBlockHolder>(inst->BlockHolder);
+		ensure(blockHolder);
 	}
 
 	FORCEINLINE void AddImplicitTags(UBuildableBlockInfo* block)

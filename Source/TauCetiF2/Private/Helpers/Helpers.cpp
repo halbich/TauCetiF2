@@ -56,14 +56,19 @@ void UHelpers::ObjectApplyLocalTrans(UStaticMeshComponent* comp, FVector loc, FR
 	comp->SetRelativeTransform(rc);
 }
 
-TArray<UInventoryFlagItem*> UHelpers::GetBlockFlags(UBlockBaseInfo* blockBaseInfo)
+TArray<UInventoryFlagItem*> UHelpers::GetBlockFlags(UObject* WorldContextObject, UBlockBaseInfo* blockBaseInfo)
 {
 	TArray<UInventoryFlagItem*> result;
 
 	if (!blockBaseInfo || blockBaseInfo->ID < 0)
 		return result; // system actions
 
-	auto def = UBlockHolderComponent::GetInstance()->GetDefinitionFor(blockBaseInfo->ID);
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
+	ensure(inst);
+	auto blockHolder = Cast<UBlockHolder>(inst->BlockHolder);
+	ensure(blockHolder);
+
+	auto def = blockHolder->GetDefinitionFor(blockBaseInfo->ID);
 	ensure(def);
 
 	for (auto fl : def->AdditionalFlags)

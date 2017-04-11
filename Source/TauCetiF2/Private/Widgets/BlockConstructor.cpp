@@ -13,7 +13,7 @@ bool UBlockConstructor::AddItemToInventory(UBuildableBlockInfo* buildable, TArra
 		return false;
 	}
 
-	auto bi = buildable->ValidateObject(validationErrors);
+	auto bi = buildable->ValidateObject(validationErrors, blockHolder);
 	if (!bi)
 		return false;
 

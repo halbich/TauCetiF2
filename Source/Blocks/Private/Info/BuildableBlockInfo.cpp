@@ -29,12 +29,12 @@ void UBuildableBlockInfo::DefinitionSet()
 	}
 }
 
-bool UBuildableBlockInfo::ValidateObject(TArray<FText>& validationErrors)
+bool UBuildableBlockInfo::ValidateObject(TArray<FText>& validationErrors, UBlockHolder* holder)
 {
 	auto definition = BlockDefinition;
 
 	if (!definition || !definition->IsValidLowLevel())
-		definition = UBlockHolderComponent::GetInstance()->GetDefinitionFor(ID);
+		definition = holder->GetDefinitionFor(ID);
 
 	if (!definition)
 	{

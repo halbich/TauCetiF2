@@ -47,8 +47,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers")
 		static void ObjectApplyLocalTrans(UStaticMeshComponent* comp, FVector loc, FRotator rot, FVector scal);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
-		static TArray<UInventoryFlagItem*> GetBlockFlags(UBlockBaseInfo* blockBaseInfo);
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers", meta = (WorldContext = "WorldContextObject"))
+		static TArray<UInventoryFlagItem*> GetBlockFlags(UObject* WorldContextObject, UBlockBaseInfo* blockBaseInfo);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
 		static FDateTime GetTimeFromSeconds(float seconds);

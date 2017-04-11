@@ -9,8 +9,6 @@
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	BlockHolder = ObjectInitializer.CreateDefaultSubobject<UBlockHolderComponent>(this, TEXT("Block Holder"));
-
 	BaseControl = ObjectInitializer.CreateDefaultSubobject<UBaseControlComponent>(this, TEXT("Base Control"));
 
 	pickableDelegates = TMap<ABlock*, FDelegateHandle>();
@@ -21,10 +19,6 @@ void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
 	auto world = GetWorld();
 	if (!world)
 		return;
-
-	BlockHolder->instance = BlockHolder;
-
-	BlockHolder->ReinitializeAviableBlocks();
 
 	UsedBlocks.Empty();
 	UsedBlocks.Reserve(blocks.Num());
@@ -98,7 +92,12 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 
 	check(RootBox != nullptr);
 
-	auto definition = UBlockHolderComponent::GetInstance()->GetDefinitionFor(block->ID);
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	auto blockHolder = Cast<UBlockHolder>(inst->BlockHolder);
+	ensure(blockHolder);
+
+	auto definition = blockHolder->GetDefinitionFor(block->ID);
 
 	if (!definition)
 	{
@@ -125,7 +124,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 		return nullptr;
 	}
 
-	auto classBP = UBlockHolderComponent::GetInstance()->AviableBlocks[block->ID];
+	auto classBP = blockHolder->AviableBlocks[block->ID];
 
 	ensure(classBP != nullptr);
 

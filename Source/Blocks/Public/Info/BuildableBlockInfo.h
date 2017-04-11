@@ -3,7 +3,8 @@
 #include "Blocks/Public/Info/BlockBaseInfo.h"
 #include "Blocks/Public/Definitions/BlockDefinition.h"
 #include "Commons/Public/GameDefinitions.h"
-#include "BlockHolderComponent.h"
+#include "Commons/Public/TCF2GameInstance.h"
+#include "BlockHolder.h"
 #include "BuildableBlockInfo.generated.h"
 
 /**
@@ -40,7 +41,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		float BuildingEnergyRequired;
 
-	bool ValidateObject(TArray<FText>& validationErrors);
+	bool ValidateObject(TArray<FText>& validationErrors, UBlockHolder* holder);
 
 	virtual void DefinitionSet();
 

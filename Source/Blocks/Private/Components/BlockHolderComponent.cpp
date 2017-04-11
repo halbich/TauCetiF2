@@ -5,7 +5,6 @@
 
 #pragma optimize("", off)
 
-UBlockHolderComponent* UBlockHolderComponent::instance = NULL;
 
 // Sets default values for this component's properties
 UBlockHolderComponent::UBlockHolderComponent()
@@ -25,119 +24,68 @@ void UBlockHolderComponent::BeginPlay()
 	// ...
 }
 
-void UBlockHolderComponent::ReinitializeAviableBlocks()
-{
-	AviableBlocks.Empty();
 
-	FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>(AssetRegistryConstants::ModuleName);
-	TArray<FAssetData> AssetData;
-	FARFilter Filter;
-	Filter.ClassNames.Add(UBlueprint::StaticClass()->GetFName());
-	Filter.ClassNames.Add(UBlueprintGeneratedClass::StaticClass()->GetFName());
-	Filter.PackagePaths.Add("/Game/Blocks");
-	Filter.bRecursiveClasses = true;
-	Filter.bRecursivePaths = true;
-	AssetRegistryModule.Get().GetAssets(Filter, AssetData);
 
-	for (auto& a : AssetData)
-	{
-		auto bp = Cast<UBlueprint>(a.GetAsset());
-		if (bp)
-		{
-			auto gen = bp->GeneratedClass;
-			if (gen && gen->IsChildOf(ABlock::StaticClass()))
-			{
-				tryAddBlockToAviables(gen);
-				continue;
-			}
-		}
 
-		auto generatedClassName = (a.AssetName.ToString() + "_C");
 
-		UClass* genClass = FindObject<UClass>(a.GetPackage(), *generatedClassName);
-		if (genClass && genClass->IsChildOf(ABlock::StaticClass()))
-		{
-			tryAddBlockToAviables(genClass);
-			continue;
-		}
 
-		auto renamedClass = FindObject<UObjectRedirector>(a.GetPackage(), *generatedClassName);
-		if (renamedClass)
-		{
-			auto renamedTarget = CastChecked<UClass>(renamedClass->DestinationObject);
-			if (renamedTarget && renamedTarget->IsChildOf(ABlock::StaticClass()))
-			{
-				tryAddBlockToAviables(renamedTarget);
-			}
-		}
-	}
-
-	AviableBlocks.KeySort([](int32 A, int32 B) {
-		return A < B; // sort keys in reverse
-	});
-}
-
-void UBlockHolderComponent::tryAddBlockToAviables(UClass* blockClass)
-{
-	auto b = NewObject<ABlock>(this, blockClass);
-	check(b);
-
-	if (!b->Definition)
-		return;
-
-	auto def = b->Definition->GetDefaultObject<UBlockDefinition>();
-
-	if (!def)
-		return;
-
-	auto contains = AviableBlocks.Find(def->BlockID);
-	if (!contains)
-	{
-		AviableBlocks.Add(def->BlockID, b->GetClass());
-	}
-	else
-	{
-		// TODO better approach
-		print(NSLOCTEXT("TCF2LocSpace", "LC.BlockHoldeComp.Error_Key_Exist", "Key already existed! Skipping block").ToString());
-	}
-}
-
-TArray<int32> UBlockHolderComponent::GetAviableItems() {
-	TArray<int32> keys;
-	AviableBlocks.GenerateKeyArray(keys);
-	return keys;
-}
-
-UBlockDefinition* UBlockHolderComponent::GetDefinitionFor(int32 ID)
-{
-	auto bl = AviableBlocksDefinitionCache.Find(ID);
-
-	if (bl && (*bl)->IsValidLowLevel())
-		return *bl;
-
-	auto orig = AviableBlocks.Find(ID);
-
-	if (!orig)
-		return NULL;
-
-	auto def = Cast<ABlock>(orig->GetDefaultObject());
-	if (def && def->Definition)
-	{
-		auto toInsert = Cast<UBlockDefinition>(def->Definition->GetDefaultObject());
-
-		AviableBlocksDefinitionCache.Add(ID, toInsert);
-		return toInsert;
-	}
-
-	return NULL;
-}
-
-UBlockHolderComponent* UBlockHolderComponent::GetInstance()
-{
-	if (instance && instance->IsValidLowLevel())
-		return instance;
-
-	return NULL;
-}
+//UObject * UBlockHolderComponent::MyGetAsset(FAssetData & asset) {
+//	if (!asset.IsValid())
+//	{
+//		return NULL;
+//	}
+//
+//	UObject * Asset = FindObject<UObject>(asset.GetPackage(), *asset.ObjectPath.ToString());
+//	if (Asset == NULL)
+//	{
+//		FString tmpstring = asset.ObjectPath.ToString();
+//		UObject * InOuter = NULL;
+//		ResolveName(InOuter, tmpstring, true, true);
+//
+//		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Magenta, TEXT("Now string is ") + tmpstring);
+//		if (InOuter) {
+//			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Magenta, TEXT("InOuter->GetName is ") + InOuter->GetName());
+//			Asset = StaticFindObjectFast(UObject::StaticClass(), InOuter, *tmpstring);
+//		}
+//		if (Asset) {
+//			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Black, TEXT("WOW I Have Load Something with StaticFindObjectFast!") + Asset->GetName());
+//			return Asset;
+//		}
+//
+//		Asset = (UObject *)StaticLoadObject(UBlueprint::StaticClass(), NULL, *asset.ObjectPath.ToString());
+//		if (!Asset)
+//			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT(" FAILED LOAD Object like BLUEPRINT By StaticLoadObject"));
+//		else {
+//			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Blue, TEXT(" LOADED like BLUEPRINT By StaticLoadObject"));
+//			return Asset;
+//		}
+//
+//		Asset = (UObject *)StaticLoadObject(UObject::StaticClass(), NULL, *asset.ObjectPath.ToString());
+//		if (!Asset)
+//			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT(" FAILED LOAD Object like UOBJECT By StaticLoadObject"));
+//		else {
+//			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Blue, TEXT(" LOADED like UOBJECT By StaticLoadObject"));
+//			return Asset;
+//		}
+//
+//		Asset = (UObject *)LoadObject<UBlueprint>(NULL, *asset.ObjectPath.ToString());
+//		if (!Asset)
+//			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT(" FAILED LOAD Object like BLUERPRINT "));
+//		else {
+//			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Blue, TEXT(" LOADED like BLUEPRINT By LoadObject"));
+//			return Asset;
+//		}
+//
+//		Asset = LoadObject<UObject>(NULL, *asset.ObjectPath.ToString());
+//		if (!Asset)
+//			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT(" EVEN FAILED LOAD Object like UOBJECT "));
+//		else {
+//			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Blue, TEXT(" LOADED like UOBJECT By LoadObject"));
+//			return Asset;
+//		}
+//	}
+//
+//	return (UObject*)Asset;
+//}
 
 #pragma optimize("", on)

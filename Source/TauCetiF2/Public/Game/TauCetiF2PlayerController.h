@@ -106,7 +106,8 @@ private:
 			// https://answers.unrealengine.com/questions/69251/disabling-mouse-cursor-requires-extra-click-to-re.html
 			auto CurrentFocus = FSlateApplication::Get().GetKeyboardFocusedWidget();
 			FSlateApplication::Get().ClearKeyboardFocus(EKeyboardFocusCause::SetDirectly);
-			FSlateApplication::Get().SetKeyboardFocus(CurrentFocus);
+			if (CurrentFocus.IsValid())
+				FSlateApplication::Get().SetKeyboardFocus(CurrentFocus);
 		}
 		else
 		{

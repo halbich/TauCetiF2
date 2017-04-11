@@ -10,8 +10,13 @@ bool UBlockConstructorSelector::IsDefinitionValid()
 	if (BlockDefinition && BlockDefinition->IsValidLowLevel())
 		return true;
 
-	if (BlockHolder)
+	if (!BlockHolder)
 	{
+		auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+		ensure(inst);
+		BlockHolder = Cast<UBlockHolder>(inst->BlockHolder);
+		ensure(BlockHolder);
+
 		BlockDefinition = BlockHolder->GetDefinitionFor(BlockID);
 	}
 

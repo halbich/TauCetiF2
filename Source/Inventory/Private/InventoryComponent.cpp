@@ -27,7 +27,10 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 	Subscriber.BindUObject(this, &UInventoryComponent::InventoryTagsSelectionChanged);
 	ListeningHandle = InventoryTags->AddEventListener(Subscriber);
 
-	auto blockRef = UBlockHolderComponent::GetInstance();
+
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	auto blockRef = Cast<UBlockHolder>(inst->BlockHolder);
 
 	check(blockRef);
 
@@ -40,7 +43,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 			buildable->BlockDefinition = blockRef->GetDefinitionFor(buildable->ID);
 			buildable->DefinitionSet();
 
-			if (buildable->ValidateObject(validationErrors))
+			if (buildable->ValidateObject(validationErrors, blockRef))
 				BuildableItems.Add(buildable);
 		}
 		else
@@ -56,7 +59,7 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 			buildable->BlockDefinition = blockRef->GetDefinitionFor(buildable->ID);
 			buildable->DefinitionSet();
 
-			if (buildable->ValidateObject(validationErrors))
+			if (buildable->ValidateObject(validationErrors, blockRef))
 				InventoryItems.Add(buildable);
 		}
 		else

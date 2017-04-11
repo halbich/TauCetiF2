@@ -63,6 +63,10 @@ public:
 	UPROPERTY(Transient)
 		bool IsInCreative;
 
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuilderComponent")
+		UBlockHolder* blockHolder;
+
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
@@ -175,5 +179,16 @@ public:
 	{
 		currentSpawnedObject->SetActorHiddenInGame(newHidden);
 		currentSpawnedObject->SetActorTickEnabled(!newHidden);
+	}
+
+	FORCEINLINE void ensureHolder()
+	{
+		if (blockHolder && blockHolder->IsValidLowLevel())
+			return;
+
+		auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+		ensure(inst);
+		blockHolder = Cast<UBlockHolder>(inst->BlockHolder);
+		ensure(blockHolder);
 	}
 };

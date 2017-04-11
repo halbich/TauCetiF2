@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "GameFramework/Actor.h"
-#include "Blocks/Public/Components/BlockHolderComponent.h"
 #include "Blocks/Public/Interfaces/PickableBlock.h"
 #include "Blueprint/UserWidget.h"
 #include "Blocks/Public/Interfaces/BlockWithShowableWidget.h"
@@ -35,9 +34,6 @@ public:
 
 	UPROPERTY(Transient)
 		UKDTree* RootBox;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | WorldController", meta = (AllowPrivateAccess = "true"))
-		UBlockHolderComponent* BlockHolder;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | WorldController", meta = (AllowPrivateAccess = "true"))
 		UBaseControlComponent* BaseControl;
