@@ -205,3 +205,8 @@ FWeatherDefinition UHelpers::GetRandomDefinition(UPARAM(ref)TArray<FWeatherDefin
 
 	return aviableDefinitions[outIndex];
 }
+
+float UHelpers::GetGameDayLength()
+{
+	return GameDefinitions::GameDayLength;
+}

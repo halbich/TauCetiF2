@@ -14,6 +14,7 @@ public:
 	static const int32 CubeMaxSizeMultiplier;
 	static const int32 DefaultInventoryTagGroupsCount;
 	static const float CubeSurfaceInMetersSquared;
+	static const float GameDayLength;
 };
 
 /* Stencil index mapping to PP_OutlineColored  http://www.tomlooman.com/multi-color-outline-post-process-in-unreal-engine-4/ */

@@ -23,6 +23,9 @@ struct FElectricityComponentDefinition
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
 		bool IsConsument;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
+		float MaxConsumedEnergyPerGameSecond;
+
 	FElectricityComponentDefinition()
 	{
 	};

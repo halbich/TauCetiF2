@@ -70,4 +70,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
 		static FWeatherDefinition GetRandomDefinition(UPARAM(ref)TArray<FWeatherDefinition>& aviableDefinitions, int32& outIndex);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
+		static float GetGameDayLength();
 };
