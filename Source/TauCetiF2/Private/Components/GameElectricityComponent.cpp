@@ -17,6 +17,8 @@ UGameElectricityComponent::UGameElectricityComponent() : Super(), networksToUpda
 
 	// ...
 
+	dayMultiplier = 86400.0f / GameDefinitions::GameDayLength;
+
 }
 
 
@@ -36,6 +38,8 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	auto time = FPlatformTime::Seconds() + maxFloatingTime;
+
+	TimeSinceLastRecompute += DeltaTime;
 
 	for (auto n : networks)
 	{
@@ -79,6 +83,23 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 
 
 		// TODO remaining energy fill to consumers
+
+
+		if (TimeSinceLastRecompute >= 0.5f)
+		{
+
+			float producedEnergy = 0.0f;
+			for (auto producer : n->ElectricityProducers)
+			{
+				producedEnergy += producer->EnergyProduced;
+				producer->EnergyProduced = 0;
+			}
+
+			n->EnergyProductionPerSec = producedEnergy / (dayMultiplier * TimeSinceLastRecompute);
+
+			TimeSinceLastRecompute = 0.0f;
+		}
+
 	}
 
 

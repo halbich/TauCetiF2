@@ -110,7 +110,9 @@ void  AGeneratorBlock::OnConstruction(const FTransform& Transform) {
 	dynamicMaterials.Add(meshComp->CreateAndSetMaterialInstanceDynamic(0));
 	DynamicTexture = UTexture2D::CreateTransient(w, h);
 	DynamicTexture->CompressionSettings = TextureCompressionSettings::TC_VectorDisplacementmap;
+#if WITH_EDITORONLY_DATA
 	DynamicTexture->MipGenSettings = TextureMipGenSettings::TMGS_NoMipmaps;
+#endif
 	DynamicTexture->SRGB = false;
 	DynamicTexture->AddToRoot();
 	DynamicTexture->UpdateResource();
@@ -229,6 +231,7 @@ void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float
 	if (ElectricityComponent->PutAmount(energyToPut, actuallyPutted))
 	{
 		energyToPut -= actuallyPutted;
+		ElectricityComponent->EnergyProduced += actuallyPutted;
 	}
 
 	ensure(energyToPut >= 0);

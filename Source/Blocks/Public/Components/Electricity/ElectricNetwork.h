@@ -29,6 +29,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		int32 ConsumersCount;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float EnergyProductionPerSec;
 
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> Entities;

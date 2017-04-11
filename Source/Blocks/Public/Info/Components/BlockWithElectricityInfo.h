@@ -18,4 +18,12 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithElectricityInfo")
 		float CurrentObjectMaximumEnergy;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithElectricityInfo")
+		float CurrentPowerConsumptionPerSec;
+
+	FORCEINLINE const float GetRemainingPercentage() const
+	{
+		return FMath::IsNearlyZero(CurrentObjectMaximumEnergy) ? 0 : ((CurrentObjectEnergy / CurrentObjectMaximumEnergy) * 100.0f);
+	}
 };

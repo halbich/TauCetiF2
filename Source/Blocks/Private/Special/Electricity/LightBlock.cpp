@@ -11,12 +11,14 @@ ALightBlock::ALightBlock()
 	LightBlockMesh->SetupAttachment(GetRootComponent());
 	LightBlockMesh->AddLocalOffset(FVector(0, 0, -1));
 
-	Light = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light"));
-	Light->SetupAttachment(GetRootComponent());
-	Light->AddLocalOffset(FVector(0, 0, -4));
+	LightComp = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light Component"));
+	LightComp->SetupAttachment(GetRootComponent());
+	LightComp->AddLocalOffset(FVector(0, 0, -4));
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
+
+	dayMultiplier = 86400.0f / GameDefinitions::GameDayLength;
 }
 
 UStaticMeshComponent* ALightBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -29,4 +31,18 @@ UStaticMeshComponent* ALightBlock::GetMeshStructureComponent_Implementation(int3
 
 UPrimitiveComponent* ALightBlock::GetComponentForObjectOutline_Implementation() {
 	return LightBlockMesh;
+}
+
+void ALightBlock::Tick(float DeltaSeconds)
+{
+
+	auto elapsedSeconds = DeltaSeconds * dayMultiplier;
+
+	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
+	auto i = ElectricityComponent->GetInfo();
+	
+	auto powerConsumption = AutoregulatePowerOutput ? getAutoregulatedPower(i->GetRemainingPercentage(), max) : i->CurrentPowerConsumptionPerSec;
+	updateLightByConsumption(powerConsumption,max);
+
+	auto consumed = elapsedSeconds * powerConsumption;
 }

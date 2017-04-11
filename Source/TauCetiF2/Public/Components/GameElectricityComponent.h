@@ -29,6 +29,12 @@ protected:
 	UPROPERTY(Transient)
 		TArray<UElectricNetwork*> networks;
 
+	UPROPERTY(Transient)
+		float TimeSinceLastRecompute;
+
+	UPROPERTY(Transient)
+		float dayMultiplier;
+
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

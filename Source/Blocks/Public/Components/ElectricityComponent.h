@@ -44,6 +44,9 @@ public:
 	UPROPERTY(Transient)
 		EHealthSeverity HealthSeverity;
 
+	UPROPERTY(Transient)
+		float EnergyProduced;
+
 	void onComponentDataChanged();
 
 	friend TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source);
@@ -72,6 +75,11 @@ public:
 	FORCEINLINE const FElectricityComponentDefinition* GetDefinition()
 	{
 		return &ElectricityComponentDef;
+	}
+
+	FORCEINLINE const UBlockWithElectricityInfo* GetInfo()
+	{
+		return ElectricityInfo;
 	}
 
 	UPROPERTY(BlueprintAssignable, Category = "TCF2 | ElectricityComponent")

@@ -49,14 +49,16 @@ void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 	auto actorElectricity = Cast<UElectricityComponent>(actor->GetComponentByClass(UElectricityComponent::StaticClass()));
 	if (!actorElectricity)
 		return;
+	
+	auto i = ElectricityComponent->GetInfo();
 
-	if (FMath::IsNearlyZero(ElectricityComponent->ElectricityInfo->CurrentObjectEnergy))		// nemáme z čeho bychom brali
+	if (FMath::IsNearlyZero(i->CurrentObjectEnergy))		// nemáme z čeho bychom brali
 		return;
 
 	float actuallyPutted = 0.0f;
 	float actuallyObtained = 0.0f;
 	bool obtainResult = false;
-	if (actorElectricity->PutAmount(ElectricityComponent->ElectricityInfo->CurrentObjectEnergy, actuallyPutted))
+	if (actorElectricity->PutAmount(i->CurrentObjectEnergy, actuallyPutted))
 	{
 		obtainResult = ElectricityComponent->ObtainAmount(actuallyPutted, actuallyObtained);
 		check(obtainResult && FMath::IsNearlyZero(actuallyObtained - actuallyPutted));
