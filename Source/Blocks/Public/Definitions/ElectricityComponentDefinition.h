@@ -17,6 +17,12 @@ struct FElectricityComponentDefinition
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
 		FElectricityBindableAreas BindableAreas;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
+		bool IsProducer;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
+		bool IsConsument;
+
 	FElectricityComponentDefinition()
 	{
 	};
