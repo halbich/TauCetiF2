@@ -10,3 +10,17 @@ void IBlockWithElectricity::UpdateHealth(UElectricityComponent* comp, UBlockInfo
 {
 
 }
+
+float IBlockWithElectricity::WasHitByStorm(const float amount)
+{
+	float healthToRemove = amount;
+
+	if (FMath::IsNearlyZero(healthToRemove))
+		return healthToRemove;
+
+	float actuallyObtained = 0;
+	if (GetElectricityComponent()->ObtainAmount(healthToRemove, actuallyObtained))
+		healthToRemove -= actuallyObtained;
+
+	return healthToRemove;
+}

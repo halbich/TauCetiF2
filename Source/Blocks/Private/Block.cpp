@@ -180,7 +180,6 @@ void ABlock::InitWorldObjectComponent()
 		}
 
 		if (def->UsingInPatterns && object->BlockInfo->ID == BlockInfo->ID) {
-
 			ensure(object->WorldObjectComponent->BuildingTree);
 			usedTrees.AddUnique(object->WorldObjectComponent->BuildingTree->GetRoot());
 			print(*object->WorldObjectComponent->DefiningBox->ContainingObject->GetName());
@@ -196,25 +195,19 @@ void ABlock::InitWorldObjectComponent()
 
 void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 {
-	auto healthToRemove = amount;
+	auto damage = amount;
 
-	ensure(healthToRemove >= 0);
-
-	if (FMath::IsNearlyZero(healthToRemove))
+	if (FMath::IsNearlyZero(damage))
 		return;
 
-	auto ec = Cast<UElectricityComponent>(GetComponentByClass(UElectricityComponent::StaticClass()));
-	if (ec && ec->IsValidLowLevel())
-	{
-		auto energyRequired = amount;
-		float actuallyObtained = 0;
-		if (ec->ObtainAmount(energyRequired, actuallyObtained))
-		{
-			healthToRemove -= actuallyObtained;
-		}
-	}
+	auto electricity = Cast<IBlockWithElectricity>(this);
+	if (electricity)
+		damage = electricity->WasHitByStorm(damage);
 
-	BlockInfo->Health = FMath::Clamp(BlockInfo->Health - healthToRemove, 0.0f, BlockInfo->MaxHealth);
+	if (FMath::IsNearlyZero(damage))
+		return;
+
+	BlockInfo->Health = FMath::Clamp(BlockInfo->Health - damage, 0.0f, BlockInfo->MaxHealth);
 
 	HealthUpdated(BlockInfo->Health, BlockInfo->MaxHealth);
 
@@ -229,13 +222,10 @@ UMinMaxBox* ABlock::GetWatchingBox()
 
 void ABlock::CheckWatchingBox()
 {
-
 }
-
 
 void ABlock::HealthUpdated(float newHealth, float maxHealth)
 {
-
 }
 
 // *********** friend methods ********
@@ -278,8 +268,6 @@ void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
 	b->WorldObjectComponent->OnWeatherTreeElementsChanged();
 }
 
-
-
 TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source)
 {
 	check(source);
@@ -298,6 +286,5 @@ void WatchingRegionChanged(UObject* obj)
 
 	b->CheckWatchingBox();
 }
-
 
 #pragma optimize("",on)

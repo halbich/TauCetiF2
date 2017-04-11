@@ -4,13 +4,15 @@
 
 #include "Block.h"
 #include "Interfaces/BlockWithShowableWidget.h"
+#include "Components/ElectricityComponent.h"
+#include "BlockWithElectricity.h"
 #include "Switcher.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class BLOCKS_API ASwitcher : public ABlock, public IBlockWithShowableWidget
+class BLOCKS_API ASwitcher : public ABlock, public IBlockWithShowableWidget, public IBlockWithElectricity
 {
 	GENERATED_BODY()
 	
@@ -38,6 +40,11 @@ public:
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
 
 	virtual UUserWidget* GetShownWidget() override;
+
+	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
+	{
+		return ElectricityComponent;
+	}
 
 	FDelegateHandle ListeningHandle;
 

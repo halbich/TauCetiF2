@@ -2,13 +2,14 @@
 
 #include "Block.h"
 #include "Components/ElectricityComponent.h"
+#include "BlockWithElectricity.h"
 #include "CubeBody.generated.h"
 
 /**
  *
  */
 UCLASS()
-class BLOCKS_API ACubeBody : public ABlock
+class BLOCKS_API ACubeBody : public ABlock, public IBlockWithElectricity
 {
 	GENERATED_BODY()
 
@@ -24,4 +25,9 @@ public:
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
+
+	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
+	{
+		return ElectricityComponent;
+	}
 };

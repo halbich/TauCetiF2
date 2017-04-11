@@ -3,6 +3,7 @@
 #include "Block.h"
 #include "Commons/Public/GameDefinitions.h"
 #include "Components/ElectricityComponent.h"
+#include "BlockWithElectricity.h"
 #include "DoorBlock.generated.h"
 
 enum class EDoorState : uint8
@@ -23,7 +24,7 @@ enum class EDoorOpening : uint8
  *
  */
 UCLASS()
-class BLOCKS_API ADoorBlock : public ABlock
+class BLOCKS_API ADoorBlock : public ABlock, public IBlockWithElectricity
 {
 	GENERATED_BODY()
 
@@ -46,6 +47,11 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
+	{
+		return ElectricityComponent;
+	}
 
 	virtual void SetBlockInfo(UBlockInfo* info);
 

@@ -4,14 +4,15 @@
 #include "Components/OxygenComponent.h"
 #include "Components/ElectricityComponent.h"
 #include "BlockWithOxygen.h"
-#include "Interfaces/BlockWithShowableWidget.h"
+#include "BlockWithElectricity.h"
+#include "BlockWithShowableWidget.h"
 #include "OxygenTankFillerBlock.generated.h"
 
 /**
  *
  */
 UCLASS()
-class BLOCKS_API AOxygenTankFillerBlock : public ABlock, public IBlockWithOxygen, public IBlockWithShowableWidget
+class BLOCKS_API AOxygenTankFillerBlock : public ABlock, public IBlockWithOxygen, public IBlockWithElectricity, public IBlockWithShowableWidget
 {
 	GENERATED_BODY()
 
@@ -45,6 +46,11 @@ public:
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
 
 	virtual UUserWidget* GetShownWidget() override;
+
+	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
+	{
+		return ElectricityComponent;
+	}
 
 	FDelegateHandle ListeningHandle;
 	FDelegateHandle OxygenDataChangedHandle;

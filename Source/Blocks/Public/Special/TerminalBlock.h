@@ -10,7 +10,7 @@
  *
  */
 UCLASS()
-class BLOCKS_API ATerminalBlock : public ABlock, public IBlockWithShowableWidget
+class BLOCKS_API ATerminalBlock : public ABlock, public IBlockWithShowableWidget, public IBlockWithElectricity
 {
 	GENERATED_BODY()
 
@@ -37,6 +37,11 @@ public:
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
 
 	virtual UUserWidget* GetShownWidget() override;
+
+	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
+	{
+		return ElectricityComponent;
+	}
 
 	FDelegateHandle ListeningHandle;
 

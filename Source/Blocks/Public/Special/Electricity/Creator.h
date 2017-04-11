@@ -3,6 +3,8 @@
 #pragma once
 
 #include "Block.h"
+#include "Components/ElectricityComponent.h"
+#include "BlockWithElectricity.h"
 #include "Creator.generated.h"
 
 
@@ -12,7 +14,7 @@
  *
  */
 UCLASS()
-class BLOCKS_API ACreator : public ABlock
+class BLOCKS_API ACreator : public ABlock, public IBlockWithElectricity
 {
 	GENERATED_BODY()
 
@@ -34,13 +36,16 @@ public:
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
-	//virtual void OnConstruction(const FTransform& Transform) override;
-
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UMinMaxBox* GetWatchingBox() override;
 
 	virtual void CheckWatchingBox() override;
+
+	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
+	{
+		return ElectricityComponent;
+	}
 
 
 private:

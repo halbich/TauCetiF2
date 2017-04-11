@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "Block.h"
+#include "Components/ElectricityComponent.h"
+#include "BlockWithElectricity.h"
 #include "GeneratorBlock.generated.h"
 
 USTRUCT()
@@ -24,7 +26,7 @@ struct FHittedSpot
  *
  */
 UCLASS()
-class BLOCKS_API AGeneratorBlock : public ABlock
+class BLOCKS_API AGeneratorBlock : public ABlock, public IBlockWithElectricity
 {
 	GENERATED_BODY()
 
@@ -48,6 +50,11 @@ public:
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount) override;
+
+	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
+	{
+		return ElectricityComponent;
+	}
 
 	UPROPERTY(Transient)
 		TArray<FHittedSpot> spots;
