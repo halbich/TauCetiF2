@@ -7,7 +7,7 @@
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
 #include "Blocks/Public/Info/InventoryBuildableBlockInfo.h"
 #include "World/WorldController.h"
-#include "Blocks/Public/Components/BlockHolderComponent.h"
+#include "Blocks/Public/Info/BlockHolder.h"
 #include "Blocks/Public/Components/ElectricityComponent.h"
 #include "Helpers/BlockHelpers.h"
 #include "BuilderComponent.generated.h"

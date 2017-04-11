@@ -13,7 +13,7 @@
 #include "GameSave/Public/Inventory/FInventoryTags.h"
 
 #include "InventoryHelpers.h"
-#include "Blocks/Public/Components/BlockHolderComponent.h"
+#include "Blocks/Public/Info/BlockHolder.h"
 
 #include "Commons/Public/Enums.h"
 #include "GameSave/Public/SaveGameCarrier.h"
