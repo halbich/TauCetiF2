@@ -3,11 +3,12 @@
 #pragma once
 
 #include "UObject/NoExportTypes.h"
-//#include "../ElectricityComponent.h"
 #include "Commons/Public/Enums.h"
+#include "Info/BlockInfo.h"
+#include "Definitions/ElectricityComponentDefinition.h"
+#include "../ElectricityComponent.h"
 #include "ElectricNetwork.generated.h"
 
-class UElectricityComponent;
 
 /**
  * 
@@ -31,6 +32,12 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float EnergyProductionPerSec;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float EnergyConsumptionPerSec;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float TotalHealth;
 
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> Entities;
@@ -57,22 +64,31 @@ public:
 		TArray<UElectricityComponent*> ElectricityConsumers;
 
 	
-	FORCEINLINE void RegisterEntity(UElectricityComponent* comp, bool isProducer, bool isConsumer)
+	FORCEINLINE void RegisterEntity(UElectricityComponent* comp )
 	{
 		Entities.Add(comp);
 		EntitiesCount = Entities.Num();
 
-		if (isProducer)
+		auto def = comp->GetDefinition();
+		ensure(def);
+		
+
+		if (def->IsProducer)
 		{
 			ElectricityProducers.Add(comp);
 			ProducersCount = ElectricityProducers.Num();
 		}
 
-		if (isConsumer)
+		if (def->IsConsument)
 		{
 			ElectricityConsumers.Add(comp);
 			ConsumersCount = ElectricityConsumers.Num();
 		}
+
+		auto info = comp->GetBlockInfo();
+		ensure(info);
+
+		TotalHealth += info->MaxHealth;
 	}
 
 
@@ -80,6 +96,29 @@ public:
 	{
 		auto r = Entities.Remove(comp);
 		EntitiesCount = Entities.Num();
+
+		auto def = comp->GetDefinition();
+		ensure(def);
+
+		if (def->IsProducer)
+		{
+			ElectricityProducers.Remove(comp);
+			ProducersCount = ElectricityProducers.Num();
+		}
+
+		if (def->IsConsument)
+		{
+			ElectricityConsumers.Remove(comp);
+			ConsumersCount = ElectricityConsumers.Num();
+		}
+
+		auto info = comp->GetBlockInfo();
+		ensure(info);
+
+		TotalHealth -= info->MaxHealth;
+		check(TotalHealth >= 0);
+
+
 		return r;
 	}
 

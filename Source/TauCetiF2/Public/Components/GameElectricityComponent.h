@@ -4,6 +4,7 @@
 
 #include "Components/ActorComponent.h"
 #include "Blocks/Public/Components/ElectricityComponent.h"
+#include "Blocks/Public/Components/Electricity/ElectricNetwork.h"
 #include "Commons/Public/Enums.h"
 #include "GameElectricityComponent.generated.h"
 
@@ -61,7 +62,7 @@ private:
 	{
 		networks.AddUnique(network);
 		auto r = comp->Network = network;
-		r->RegisterEntity(comp, comp->ElectricityComponentDef.IsProducer, comp->ElectricityComponentDef.IsConsument);
+		r->RegisterEntity(comp);
 		return r;
 	}
 

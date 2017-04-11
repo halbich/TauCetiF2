@@ -97,6 +97,15 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 
 			n->EnergyProductionPerSec = producedEnergy / (dayMultiplier * TimeSinceLastRecompute);
 
+			float consumedEnergy = 0.0f;
+			for (auto consumer : n->ElectricityConsumers)
+			{
+				consumedEnergy += consumer->EnergyConsumed;
+				consumer->EnergyConsumed = 0;
+			}
+
+			n->EnergyConsumptionPerSec = consumedEnergy / (dayMultiplier * TimeSinceLastRecompute);
+
 			TimeSinceLastRecompute = 0.0f;
 		}
 

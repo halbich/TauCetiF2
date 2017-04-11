@@ -287,4 +287,13 @@ void WatchingRegionChanged(UObject* obj)
 	b->CheckWatchingBox();
 }
 
+UBlockInfo* GetBlockInfoFromParent(UElectricityComponent* source)
+{
+	check(source);
+	auto bl = Cast<ABlock>(source->GetOwner());
+	check(bl && bl->BlockInfo);
+
+	return bl->BlockInfo;
+}
+
 #pragma optimize("",on)

@@ -179,4 +179,12 @@ void UElectricityComponent::UpdateHealthSeverity()
 
 }
 
+UBlockInfo* UElectricityComponent::GetBlockInfo()
+{
+	if (!BlockInfo || !BlockInfo->IsValidLowLevel())
+		BlockInfo = GetBlockInfoFromParent(this);
+
+	return BlockInfo;
+}
+
 #pragma optimize("", on)

@@ -4,9 +4,12 @@
 #include "Info/Components/BlockWithElectricityInfo.h"
 #include "Definitions/ElectricityComponentDefinition.h"
 #include "Info/ElectricityBindableAreaInfo.h"
-#include "Electricity/ElectricNetwork.h"
+//#include "Electricity/ElectricNetwork.h"
 #include "Commons/Public/Enums.h"
 #include "ElectricityComponent.generated.h"
+
+
+class UElectricNetwork;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FElectricityComponentDataChangedDelegate, UBlockWithElectricityInfo*, info);
 
@@ -47,9 +50,17 @@ public:
 	UPROPERTY(Transient)
 		float EnergyProduced;
 
+	UPROPERTY(Transient)
+		float EnergyConsumed;
+
+	UPROPERTY(Transient)
+		UBlockInfo* BlockInfo;
+
 	void onComponentDataChanged();
 
 	friend TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source);
+
+	friend UBlockInfo* GetBlockInfoFromParent(UElectricityComponent* source);
 
 public:
 
@@ -70,6 +81,8 @@ public:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	void UpdateHealthSeverity();
+
+	UBlockInfo* GetBlockInfo();
 
 public:
 	FORCEINLINE const FElectricityComponentDefinition* GetDefinition()

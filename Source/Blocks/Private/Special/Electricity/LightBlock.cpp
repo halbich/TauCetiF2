@@ -40,9 +40,18 @@ void ALightBlock::Tick(float DeltaSeconds)
 
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
 	auto i = ElectricityComponent->GetInfo();
-	
-	auto powerConsumption = AutoregulatePowerOutput ? getAutoregulatedPower(i->GetRemainingPercentage(), max) : i->CurrentPowerConsumptionPerSec;
-	updateLightByConsumption(powerConsumption,max);
 
-	auto consumed = elapsedSeconds * powerConsumption;
+	auto powerConsumption = AutoregulatePowerOutput ? getAutoregulatedPower(i->GetRemainingPercentage(), max) : i->CurrentPowerConsumptionPerSec;
+
+	auto toObtain = elapsedSeconds * powerConsumption;
+
+	float actuallyObtained = 0;
+	if (ElectricityComponent->ObtainAmount(toObtain, actuallyObtained))
+		toObtain -= actuallyObtained;
+
+	ElectricityComponent->EnergyConsumed += actuallyObtained;
+
+
+	updateLightByConsumption(actuallyObtained / elapsedSeconds, max);
+
 }
