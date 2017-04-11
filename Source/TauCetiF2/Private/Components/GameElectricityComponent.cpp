@@ -44,7 +44,7 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 
 		float totalElectricityAviable = 0.0f;
 
-		for (auto producer : n->ElectricitySources)
+		for (auto producer : n->ElectricityProducers)
 			totalElectricityAviable += producer->ElectricityInfo->CurrentObjectEnergy;
 
 		if (FMath::IsNearlyZero(totalElectricityAviable))	// we do net have enough power

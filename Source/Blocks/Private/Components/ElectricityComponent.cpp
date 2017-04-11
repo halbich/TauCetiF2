@@ -26,13 +26,13 @@ UBlockWithElectricityInfo* UElectricityComponent::SetInfo(UBlockWithElectricityI
 void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def)
 {
 	ElectricityComponentDef = def;
-
 }
 
 void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, FVector& blockScale, FRotator& blockRotation)
 {
 	SetDefinition(def);
 
+	ElectricityInfo->CurrentObjectMaximumEnergy = ElectricityComponentDef.TotalObjectEnergy * blockScale.X * blockScale.Y * blockScale.Z;
 
 	auto worldLocation = GetOwner()->GetActorLocation();
 
@@ -123,7 +123,7 @@ bool UElectricityComponent::PutAmount(float aviable, float& actuallyPutted)
 		return true;
 	}
 
-	auto aviableToFill = ElectricityComponentDef.TotalObjectEnergy - ElectricityInfo->CurrentObjectEnergy;
+	auto aviableToFill = ElectricityInfo->CurrentObjectMaximumEnergy - ElectricityInfo->CurrentObjectEnergy;
 	check(aviableToFill >= 0);
 
 	if (FMath::IsNearlyZero(aviableToFill))

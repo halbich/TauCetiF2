@@ -55,7 +55,7 @@ private:
 	{
 		networks.AddUnique(network);
 		auto r = comp->Network = network;
-		r->RegisterEntity(comp);
+		r->RegisterEntity(comp, comp->ElectricityComponentDef.IsProducer, comp->ElectricityComponentDef.IsConsument);
 		return r;
 	}
 

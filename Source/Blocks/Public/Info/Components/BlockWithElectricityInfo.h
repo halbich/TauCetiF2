@@ -15,4 +15,7 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithElectricityInfo")
 		float CurrentObjectEnergy;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithElectricityInfo")
+		float CurrentObjectMaximumEnergy;
 };

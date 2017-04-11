@@ -39,16 +39,28 @@ public:
 
 
 	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> ElectricitySources;
+		TArray<UElectricityComponent*> ElectricityProducers;
 
 	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> ElectricityConsuments;
+		TArray<UElectricityComponent*> ElectricityConsumers;
 
 	
-	FORCEINLINE void RegisterEntity(UElectricityComponent* comp)
+	FORCEINLINE void RegisterEntity(UElectricityComponent* comp, bool isProducer, bool isConsumer)
 	{
 		Entities.Add(comp);
 		EntitiesCount = Entities.Num();
+
+		if (isProducer)
+		{
+			ElectricityProducers.Add(comp);
+			ProducersCount = ElectricityProducers.Num();
+		}
+
+		if (isConsumer)
+		{
+			ElectricityConsumers.Add(comp);
+			ConsumersCount = ElectricityConsumers.Num();
+		}
 	}
 
 
@@ -62,4 +74,10 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		int32 EntitiesCount;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 ProducersCount;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 ConsumersCount;
 };
