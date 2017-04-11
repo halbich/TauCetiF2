@@ -200,7 +200,7 @@ UStaticMeshComponent* AGeneratorBlock::GetMeshStructureComponent_Implementation(
 
 void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 {
-	
+
 
 	FHittedSpot hitted;
 
@@ -222,6 +222,20 @@ void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float
 		spots[existing].ActualTime = 0;
 	else
 		spots.Insert(hitted, 0);
+
+
+	auto energyToPut = amount;
+	float actuallyPutted = 0;
+	if (ElectricityComponent->PutAmount(energyToPut, actuallyPutted))
+	{
+		energyToPut -= actuallyPutted;
+	}
+
+	ensure(energyToPut >= 0);
+
+	if (!FMath::IsNearlyZero(energyToPut))
+		Super::WasHitByStorm(blockHitLocation, energyToPut);
+
 }
 
 

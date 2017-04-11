@@ -5,3 +5,8 @@ UBlockWithElectricity::UBlockWithElectricity(const class FObjectInitializer& Obj
 	: Super(ObjectInitializer)
 {
 }
+
+void IBlockWithElectricity::UpdateHealth(UElectricityComponent* comp, UBlockInfo* info)
+{
+
+}

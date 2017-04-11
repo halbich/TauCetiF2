@@ -41,6 +41,9 @@ public:
 	UPROPERTY(Transient)
 		EElectricNetworkState ComponentNetworkState;
 
+	UPROPERTY(Transient)
+		EHealthSeverity HealthSeverity;
+
 	void onComponentDataChanged();
 
 	friend TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source);
@@ -62,6 +65,8 @@ public:
 	void ToggleIsInCreative(bool newInCreative);
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	void UpdateHealthSeverity();
 
 public:
 	FORCEINLINE const FElectricityComponentDefinition* GetDefinition()

@@ -1,7 +1,6 @@
 ﻿#include "Blocks.h"
 #include "ElectricityComponent.h"
 
-
 #pragma optimize("", off)
 
 // Sets default values for this component's properties
@@ -48,8 +47,6 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, F
 
 	for (auto surrounding : surroundings)
 	{
-
-
 		for (auto bindable : surrounding->ElectricityBindableAreas)
 		{
 			for (auto myBindable : ElectricityBindableAreas)
@@ -64,7 +61,6 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, F
 				}
 			}
 		}
-
 	}
 
 	if (ConnectedComponents.Num() > 0) {
@@ -92,7 +88,6 @@ bool UElectricityComponent::ObtainAmount(float requested, float& actuallyObtaine
 		actuallyObtained = 0;
 		return false;
 	}
-
 
 	check(ElectricityInfo->CurrentObjectEnergy >= 0);
 
@@ -147,7 +142,6 @@ void UElectricityComponent::ToggleIsInCreative(bool newInCreative)
 
 bool UElectricityComponent::isValidConnection(UElectricityBindableAreaInfo* area, UElectricityBindableAreaInfo* otherArea)
 {
-
 	auto box1 = area->GetBox();
 	auto box2 = otherArea->GetBox();
 
@@ -159,12 +153,10 @@ bool UElectricityComponent::isValidConnection(UElectricityBindableAreaInfo* area
 		auto volume = IntersectVolume(box1, box2);
 		if (volume == 0)
 			return false;
-
 	}
 
 	// TODO
 	return true;
-
 }
 
 void UElectricityComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -177,6 +169,13 @@ void UElectricityComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 		connected->ConnectedComponents.Remove(this);
 	}
 	ConnectedComponents.Empty();
+}
+
+void UElectricityComponent::UpdateHealthSeverity()
+{
+	if (!Network || !Network->IsValidLowLevel())
+		return;
+
 
 }
 

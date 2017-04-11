@@ -79,7 +79,7 @@ public:
 
 	virtual void CheckWatchingBox();
 
-	virtual void HealthUpdated(float newHealth);
+	virtual void HealthUpdated(float newHealth, float maxHealth);
 
 private:
 

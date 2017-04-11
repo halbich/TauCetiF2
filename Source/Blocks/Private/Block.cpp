@@ -40,7 +40,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 	auto dimensions = def->GetMeshScale(currentScale);
 	BlockInfo->MaxHealth = baseHealth * dimensions.X * dimensions.Y * dimensions.Z;
 	BlockInfo->Health = FMath::Clamp(BlockInfo->Health, 0.0f, BlockInfo->MaxHealth);
-	HealthUpdated(BlockInfo->Health);
+	HealthUpdated(BlockInfo->Health, BlockInfo->MaxHealth);
 
 	int32 index = 0;
 
@@ -198,6 +198,11 @@ void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 {
 	auto healthToRemove = amount;
 
+	ensure(healthToRemove >= 0);
+
+	if (FMath::IsNearlyZero(healthToRemove))
+		return;
+
 	auto ec = Cast<UElectricityComponent>(GetComponentByClass(UElectricityComponent::StaticClass()));
 	if (ec && ec->IsValidLowLevel())
 	{
@@ -211,7 +216,7 @@ void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 
 	BlockInfo->Health = FMath::Clamp(BlockInfo->Health - healthToRemove, 0.0f, BlockInfo->MaxHealth);
 
-	HealthUpdated(BlockInfo->Health);
+	HealthUpdated(BlockInfo->Health, BlockInfo->MaxHealth);
 
 	if (BlockInfo->Health <= 0)
 		OnDestroyRequestedEvent.Broadcast(this);
@@ -228,7 +233,7 @@ void ABlock::CheckWatchingBox()
 }
 
 
-void ABlock::HealthUpdated(float newHealth)
+void ABlock::HealthUpdated(float newHealth, float maxHealth)
 {
 
 }

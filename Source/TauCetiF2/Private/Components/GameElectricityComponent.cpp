@@ -49,6 +49,36 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 
 		if (FMath::IsNearlyZero(totalElectricityAviable))	// we do net have enough power
 			continue;
+
+
+		float criticalAviable = 0.5f * totalElectricityAviable;
+		// TODO
+		float totalCriticalRequired = 0.0f;
+		for (auto critical : n->CriticalRepairEntities)
+		{
+			auto owner = Cast<ABlock>(critical->GetOwner());
+			ensure(owner);
+
+			// TODO get (required, divide it by totalCritical required) and multiply by aviable
+			//owner->Heal(...);
+		}
+
+		// TODO badly, to reapir
+
+
+		for (auto critical : n->CriticalRepairEntities)
+		{
+			auto owner = Cast<ABlock>(critical->GetOwner());
+			ensure(owner);
+
+			// TODO get (required, divide it by totalCritical required) and multiply by aviable
+		//	owner->HealthUpdated()
+		}
+
+		// TODO badly, to repair
+
+
+		// TODO remaining energy fill to consumers
 	}
 
 

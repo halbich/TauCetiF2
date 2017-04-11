@@ -20,6 +20,16 @@ class BLOCKS_API UElectricNetwork : public UObject
 public:
 	UElectricNetwork();
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 EntitiesCount;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 ProducersCount;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 ConsumersCount;
+
+
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> Entities;
 
@@ -71,13 +81,9 @@ public:
 		return r;
 	}
 
+	FORCEINLINE void RegisterEntitySeverity(UElectricityComponent* comp, EHealthSeverity newSeverity)
+	{
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		int32 EntitiesCount;
-
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		int32 ProducersCount;
-
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		int32 ConsumersCount;
+	}
+	
 };
