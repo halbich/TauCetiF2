@@ -377,4 +377,6 @@ void AWorldController::DestroyRequestEventHandler(ABlock* block)
 	//DestroyWorldObject(block);
 }
 
+
+
 #pragma optimize("", on)

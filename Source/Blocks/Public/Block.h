@@ -79,6 +79,8 @@ public:
 
 	virtual void CheckWatchingBox();
 
+	virtual void HealthUpdated(float newHealth);
+
 private:
 
 	FORCEINLINE void setMaterial(UPrimitiveComponent* mesh, UMaterial* material, int32 index, float scaleX, float scaleY) {

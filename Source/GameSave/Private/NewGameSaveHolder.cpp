@@ -87,80 +87,80 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 
 	auto UsedBlocks = &c->usedBlocks;
 
-	UsedBlocks->Add(make(0, FVector(-6, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(0, FVector(14, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(0, FVector(14, -22, 1), FVector(20, 20, 4), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(0, FVector(-6, -22, 1), FVector(20, 20, 4), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(500, FVector(0, -17, 6), FVector(1, 1, 1), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(1, FVector(-15, -30, 9), FVector(20, 1, 11), FRotator(0, 90, 0)));
-	UsedBlocks->Add(make(1, FVector(24, -21, 6), FVector(20, 1, 6), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1, FVector(24, -1, 6), FVector(20, 1, 6), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1, FVector(14, -31, 6), FVector(20, 1, 6), FRotator(0, 180, 0)));
-	UsedBlocks->Add(make(1, FVector(-15, -1, 6), FVector(20, 1, 6), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(600, FVector(-12, -39, 9), FVector(6, 1, 11), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(100, FVector(10, -35, 1), FVector(8, 14, 4), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1000, FVector(19, -32, 8), FVector(1, 1, 1), FRotator(0, 0, -90)));
-	UsedBlocks->Add(make(1000, FVector(25, -13, 8), FVector(1, 1, 1), FRotator(0, 90, -90)));
-	UsedBlocks->Add(make(1000, FVector(13, 9, 3), FVector(1, 1, 1), FRotator(0, -180, -90)));
-	UsedBlocks->Add(make(1000, FVector(-16, -10, 2), FVector(1, 1, 1), FRotator(0, -90, -90)));
-	UsedBlocks->Add(make(1000, FVector(4, -6, 4), FVector(1, 1, 1), FRotator(0, 90, 0)));
-	UsedBlocks->Add(make(1000, FVector(-11, -19, 4), FVector(1, 1, 1), FRotator(0, 90, 0)));
-	UsedBlocks->Add(make(0, FVector(-6, -35, 1), FVector(19, 8, 4), FRotator(0, 180, 0)));
-	UsedBlocks->Add(make(700, FVector(0, -35, 9), FVector(7, 7, 11), FRotator(0, 90, 0)));
-	UsedBlocks->Add(make(1, FVector(3, -39, 9), FVector(1, 1, 11), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(600, FVector(0, -39, 9), FVector(6, 1, 11), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(600, FVector(-6, -39, 9), FVector(5, 1, 11), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(1000, FVector(16, 68, 0), FVector(1, 1, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1000, FVector(9, 78, 0), FVector(1, 1, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1000, FVector(-9, 79, 0), FVector(1, 1, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1000, FVector(-17, 65, 0), FVector(1, 1, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1000, FVector(-29, 66, 0), FVector(1, 1, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1000, FVector(-37, 64, 0), FVector(1, 1, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1000, FVector(-39, 56, 0), FVector(1, 1, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1000, FVector(-36, 50, 0), FVector(1, 1, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1000, FVector(-41, 38, 0), FVector(1, 1, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1000, FVector(-86, -15, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-88, -6, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-86, 1, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-84, 14, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-83, 21, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-82, 27, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-85, 32, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-89, 38, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-93, 42, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-97, 46, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-100, 52, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-105, 56, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-108, 59, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-111, 65, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-116, 71, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-120, 75, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-123, 80, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-105, 89, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(1000, FVector(-98, 86, 0), FVector(1, 1, 1), FRotator(0, -180, 0)));
-	UsedBlocks->Add(make(2, FVector(4, -27, 4), FVector(2, 7, 1), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(2, FVector(6, -27, 5), FVector(2, 7, 1), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(2, FVector(8, -27, 6), FVector(2, 7, 1), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(2, FVector(10, -27, 7), FVector(2, 7, 1), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(2, FVector(12, -27, 8), FVector(2, 7, 1), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(2, FVector(14, -27, 9), FVector(2, 7, 1), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(1, FVector(21, -31, 13), FVector(8, 7, 1), FRotator(90, 0, 90)));
-	UsedBlocks->Add(make(1, FVector(14, -31, 13), FVector(8, 7, 1), FRotator(90, 0, 90)));
-	UsedBlocks->Add(make(1, FVector(24, -27, 13), FVector(8, 7, 1), FRotator(90, 0, -180)));
-	UsedBlocks->Add(make(1, FVector(24, -20, 13), FVector(8, 7, 1), FRotator(90, 0, -180)));
-	UsedBlocks->Add(make(2, FVector(16, -27, 10), FVector(2, 7, 1), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(1, FVector(20, -27, 10), FVector(6, 6, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(2, FVector(20, -23, 11), FVector(2, 7, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(2, FVector(20, -21, 12), FVector(2, 7, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(2, FVector(20, -19, 13), FVector(2, 7, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(2, FVector(20, -17, 14), FVector(2, 7, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1, FVector(24, -13, 14), FVector(8, 7, 1), FRotator(-90, 0, 0)));
-	UsedBlocks->Add(make(2, FVector(20, -15, 15), FVector(2, 7, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(2, FVector(20, -13, 16), FVector(2, 7, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(2, FVector(20, -11, 17), FVector(2, 7, 1), FRotator(0, -90, 0)));
-	UsedBlocks->Add(make(1, FVector(3, -31, 9), FVector(1, 1, 11), FRotator(0, 0, 0)));
-	UsedBlocks->Add(make(1, FVector(16, -23, 9), FVector(1, 1, 11), FRotator(0, 0, 0)));
-	
+	UsedBlocks->Add(make(0, FVector(-6, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 15979.000000));
+	UsedBlocks->Add(make(0, FVector(14, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 15971.000000));
+	UsedBlocks->Add(make(0, FVector(14, -22, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 15983.000000));
+	UsedBlocks->Add(make(0, FVector(-6, -22, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 15976.000000));
+	UsedBlocks->Add(make(500, FVector(0, -17, 6), FVector(1, 1, 1), FRotator(0, 0, 0), 9.000000));
+	UsedBlocks->Add(make(1, FVector(-15, -30, 9), FVector(20, 1, 11), FRotator(0, 90, 0), 2199.000000));
+	UsedBlocks->Add(make(1, FVector(24, -21, 6), FVector(20, 1, 6), FRotator(0, -90, 0), 1200.000000));
+	UsedBlocks->Add(make(1, FVector(24, -1, 6), FVector(20, 1, 6), FRotator(0, -90, 0), 1200.000000));
+	UsedBlocks->Add(make(1, FVector(14, -31, 6), FVector(20, 1, 6), FRotator(0, 180, 0), 1199.000000));
+	UsedBlocks->Add(make(1, FVector(-15, -1, 6), FVector(20, 1, 6), FRotator(0, -90, 0), 1200.000000));
+	UsedBlocks->Add(make(600, FVector(-12, -39, 9), FVector(6, 1, 11), FRotator(0, 0, 0), 660.000000));
+	UsedBlocks->Add(make(100, FVector(10, -35, 1), FVector(8, 14, 4), FRotator(0, -90, 0), 1484.333374));
+	UsedBlocks->Add(make(1000, FVector(19, -32, 8), FVector(1, 1, 1), FRotator(0, 0, -90), 9.000000));
+	UsedBlocks->Add(make(1000, FVector(25, -13, 8), FVector(1, 1, 1), FRotator(0, 90, -90), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(13, 9, 3), FVector(1, 1, 1), FRotator(0, -180, -90), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-16, -10, 2), FVector(1, 1, 1), FRotator(0, -90, -90), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(4, -6, 4), FVector(1, 1, 1), FRotator(0, 90, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-11, -19, 4), FVector(1, 1, 1), FRotator(0, 90, 0), 10.000000));
+	UsedBlocks->Add(make(0, FVector(-6, -35, 1), FVector(19, 8, 4), FRotator(0, 180, 0), 6072.000000));
+	UsedBlocks->Add(make(700, FVector(0, -35, 9), FVector(7, 7, 11), FRotator(0, 90, 0), 9.000000));
+	UsedBlocks->Add(make(1, FVector(3, -39, 9), FVector(1, 1, 11), FRotator(0, 0, 0), 110.000000));
+	UsedBlocks->Add(make(600, FVector(0, -39, 9), FVector(6, 1, 11), FRotator(0, -180, 0), 660.000000));
+	UsedBlocks->Add(make(600, FVector(-6, -39, 9), FVector(5, 1, 11), FRotator(0, 0, 0), 549.000000));
+	UsedBlocks->Add(make(1000, FVector(16, 68, 0), FVector(1, 1, 1), FRotator(0, -90, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(9, 78, 0), FVector(1, 1, 1), FRotator(0, -90, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-9, 79, 0), FVector(1, 1, 1), FRotator(0, -90, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-17, 65, 0), FVector(1, 1, 1), FRotator(0, -90, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-29, 66, 0), FVector(1, 1, 1), FRotator(0, -90, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-37, 64, 0), FVector(1, 1, 1), FRotator(0, -90, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-39, 56, 0), FVector(1, 1, 1), FRotator(0, -90, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-36, 50, 0), FVector(1, 1, 1), FRotator(0, -90, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-41, 38, 0), FVector(1, 1, 1), FRotator(0, -90, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-86, -15, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-88, -6, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-86, 1, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-84, 14, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-83, 21, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-82, 27, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-85, 32, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-89, 38, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-93, 42, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-97, 46, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-100, 52, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-105, 56, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-108, 59, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-111, 65, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-116, 71, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-120, 75, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-123, 80, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-105, 89, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(1000, FVector(-98, 86, 0), FVector(1, 1, 1), FRotator(0, -180, 0), 10.000000));
+	UsedBlocks->Add(make(2, FVector(4, -27, 4), FVector(2, 7, 1), FRotator(0, 0, 0), 140.000000));
+	UsedBlocks->Add(make(2, FVector(6, -27, 5), FVector(2, 7, 1), FRotator(0, 0, 0), 139.000000));
+	UsedBlocks->Add(make(2, FVector(8, -27, 6), FVector(2, 7, 1), FRotator(0, 0, 0), 140.000000));
+	UsedBlocks->Add(make(2, FVector(10, -27, 7), FVector(2, 7, 1), FRotator(0, 0, 0), 140.000000));
+	UsedBlocks->Add(make(2, FVector(12, -27, 8), FVector(2, 7, 1), FRotator(0, 0, 0), 139.000000));
+	UsedBlocks->Add(make(2, FVector(14, -27, 9), FVector(2, 7, 1), FRotator(0, 0, 0), 139.000000));
+	UsedBlocks->Add(make(1, FVector(21, -31, 13), FVector(8, 7, 1), FRotator(90, 0, 90), 558.000000));
+	UsedBlocks->Add(make(1, FVector(14, -31, 13), FVector(8, 7, 1), FRotator(90, 0, 90), 560.000000));
+	UsedBlocks->Add(make(1, FVector(24, -27, 13), FVector(8, 7, 1), FRotator(90, 0, -180), 559.000000));
+	UsedBlocks->Add(make(1, FVector(24, -20, 13), FVector(8, 7, 1), FRotator(90, 0, -180), 560.000000));
+	UsedBlocks->Add(make(2, FVector(16, -27, 10), FVector(2, 7, 1), FRotator(0, 0, 0), 139.000000));
+	UsedBlocks->Add(make(1, FVector(20, -27, 10), FVector(6, 6, 1), FRotator(0, -90, 0), 359.000000));
+	UsedBlocks->Add(make(2, FVector(20, -23, 11), FVector(2, 7, 1), FRotator(0, -90, 0), 138.000000));
+	UsedBlocks->Add(make(2, FVector(20, -21, 12), FVector(2, 7, 1), FRotator(0, -90, 0), 140.000000));
+	UsedBlocks->Add(make(2, FVector(20, -19, 13), FVector(2, 7, 1), FRotator(0, -90, 0), 140.000000));
+	UsedBlocks->Add(make(2, FVector(20, -17, 14), FVector(2, 7, 1), FRotator(0, -90, 0), 140.000000));
+	UsedBlocks->Add(make(1, FVector(24, -13, 14), FVector(8, 7, 1), FRotator(-90, 0, 0), 560.000000));
+	UsedBlocks->Add(make(2, FVector(20, -15, 15), FVector(2, 7, 1), FRotator(0, -90, 0), 140.000000));
+	UsedBlocks->Add(make(2, FVector(20, -13, 16), FVector(2, 7, 1), FRotator(0, -90, 0), 139.000000));
+	UsedBlocks->Add(make(2, FVector(20, -11, 17), FVector(2, 7, 1), FRotator(0, -90, 0), 139.000000));
+	UsedBlocks->Add(make(1, FVector(3, -31, 9), FVector(1, 1, 11), FRotator(0, 0, 0), 110.000000));
+	UsedBlocks->Add(make(1, FVector(16, -23, 9), FVector(1, 1, 11), FRotator(0, 0, 0), 110.000000));
+
 	c->PlayerPosition = FVector(-95, -139, 163);
 	c->PlayerRotation = FRotator(0, -20, 0);
 
@@ -189,17 +189,17 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave(bool full)
 
 	auto UsedBlocks = &c->usedBlocks;
 
-	for (size_t x = 24995; x < 25000; x++)
-	{
-		for (size_t y = 24995; y < 25000; y++)
-		{
-			for (size_t z = 0; z < 1; z++)
-			{
-				UsedBlocks->Add(make(1, FVector(-1 * x, -1 * y, z + 1), FVector(1, 1, 1), FRotator(0, 0, 0)));
-				UsedBlocks->Add(make(1, FVector(x, y, z), FVector(1, 1, 1), FRotator(0, 0, 0)));
-			}
-		}
-	}
+	//for (size_t x = 24995; x < 25000; x++)
+	//{
+	//	for (size_t y = 24995; y < 25000; y++)
+	//	{
+	//		for (size_t z = 0; z < 1; z++)
+	//		{
+	//			UsedBlocks->Add(make(1, FVector(-1 * x, -1 * y, z + 1), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	//			UsedBlocks->Add(make(1, FVector(x, y, z), FVector(1, 1, 1), FRotator(0, 0, 0)));
+	//		}
+	//	}
+	//}
 
 	c->PlayerOxygenComponent.CurrentFillingValue = 150.0f;
 	c->PlayerElectricityComponent.CurrentObjectEnergy = 1000.0f;

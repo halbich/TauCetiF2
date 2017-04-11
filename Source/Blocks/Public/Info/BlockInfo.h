@@ -24,4 +24,7 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		float Health;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
+		float MaxHealth;
 };

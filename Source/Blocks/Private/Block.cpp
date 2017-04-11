@@ -38,23 +38,21 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 
 	auto baseHealth = def->HealthSize * buildingCoeficient(def);
 	auto dimensions = def->GetMeshScale(currentScale);
-	BlockInfo->Health = baseHealth * dimensions.X * dimensions.Y * dimensions.Z;
-
+	BlockInfo->MaxHealth = baseHealth * dimensions.X * dimensions.Y * dimensions.Z;
+	BlockInfo->Health = FMath::Clamp(BlockInfo->Health, 0.0f, BlockInfo->MaxHealth);
+	HealthUpdated(BlockInfo->Health);
 
 	int32 index = 0;
 
 	for (auto structureDef : def->MeshStructure)
 	{
-		// TODO Localization!
 		check(structureDef.Mesh && "Structure element has no Mesh assigned!");
 
 		auto meshComp = genBlock->Execute_GetMeshStructureComponent(this, index++);
 
-		// TODO validační error
 		if (!meshComp)
 			continue;
 
-		// TODO Localization!
 		check(meshComp && "Function GetMeshStructureComponent returned NULL!");
 		meshComp->SetStaticMesh(structureDef.Mesh);
 
@@ -207,13 +205,15 @@ void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 		float actuallyObtained = 0;
 		if (ec->ObtainAmount(energyRequired, actuallyObtained))
 		{
-
+			healthToRemove -= actuallyObtained;
 		}
 	}
 
-	BlockInfo->Health -= healthToRemove;
+	BlockInfo->Health = FMath::Clamp(BlockInfo->Health - healthToRemove, 0.0f, BlockInfo->MaxHealth);
 
-	if (BlockInfo->Health < 0)
+	HealthUpdated(BlockInfo->Health);
+
+	if (BlockInfo->Health <= 0)
 		OnDestroyRequestedEvent.Broadcast(this);
 }
 
@@ -223,6 +223,12 @@ UMinMaxBox* ABlock::GetWatchingBox()
 }
 
 void ABlock::CheckWatchingBox()
+{
+
+}
+
+
+void ABlock::HealthUpdated(float newHealth)
 {
 
 }

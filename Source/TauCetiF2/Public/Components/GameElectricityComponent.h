@@ -87,4 +87,47 @@ private:
 	}
 
 
+	FORCEINLINE void tickRecomputeNetwork(double time) {
+		do {
+			UElectricNetwork* toResolve;
+			if (!networksToUpdate.Dequeue(toResolve))
+				break;
+
+			if (!toResolve || !toResolve->IsValidLowLevel() || toResolve->IsPendingKill())
+				continue;
+
+			if (networksTodelete.Contains(toResolve))
+				continue;
+
+			processNetwork(toResolve);
+
+			if (!toResolve || !toResolve->IsValidLowLevel() || toResolve->IsPendingKill())
+				continue;
+
+			if (!toResolve->ToRecompute.IsEmpty())	// we have another items to recompute
+				networksToUpdate.Enqueue(toResolve);
+			else
+				toResolve->NetworkState = EElectricNetworkState::Valid;
+
+		} while (FPlatformTime::Seconds() <= time);
+
+		if (networksToUpdate.IsEmpty())
+		{
+			print(TEXT("Everything recomputed!"));
+
+			for (auto toDel : networksTodelete)
+			{
+				networks.Remove(toDel);
+				ensure(toDel->Entities.Num() == 0);
+				ensure(toDel->ToRecompute.IsEmpty());
+
+				toDel->MarkPendingKill();
+			}
+			networksTodelete.Empty();
+
+			print(*FText::AsNumber(networks.Num()).ToString());
+		}
+	}
+
+
 };

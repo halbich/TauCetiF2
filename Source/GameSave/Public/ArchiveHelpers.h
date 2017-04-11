@@ -19,6 +19,7 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo& block)
 	Ar << (FBlockBaseInfo&)block;
 	Ar << block.Location;
 	Ar << block.Rotation;
+	Ar << block.Health;
 
 	Ar << block.HasOxygenData;
 	if (block.HasOxygenData)

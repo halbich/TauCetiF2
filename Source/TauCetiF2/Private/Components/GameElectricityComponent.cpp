@@ -35,50 +35,27 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	auto time = FPlatformTime::Seconds() + maxFloatingTime;
+
+	for (auto n : networks)
+	{
+		if (n->NetworkState == EElectricNetworkState::Invalid)
+			continue;
+
+		float totalElectricityAviable = 0.0f;
+
+		for (auto producer : n->ElectricitySources)
+			totalElectricityAviable += producer->ElectricityInfo->CurrentObjectEnergy;
+
+		if (FMath::IsNearlyZero(totalElectricityAviable))	// we do net have enough power
+			continue;
+	}
+
+
 	if (networksToUpdate.IsEmpty())
 		return;
 
-	auto time = FPlatformTime::Seconds() + maxFloatingTime;
-
-	do {
-		UElectricNetwork* toResolve;
-		if (!networksToUpdate.Dequeue(toResolve))
-			break;
-
-		if (!toResolve || !toResolve->IsValidLowLevel() || toResolve->IsPendingKill())
-			continue;
-
-		if (networksTodelete.Contains(toResolve))
-			continue;
-
-		processNetwork(toResolve);
-
-		if (!toResolve || !toResolve->IsValidLowLevel() || toResolve->IsPendingKill())
-			continue;
-
-		if (!toResolve->ToRecompute.IsEmpty())	// we have another items to recompute
-			networksToUpdate.Enqueue(toResolve);
-		else
-			toResolve->NetworkState = EElectricNetworkState::Valid;
-
-	} while (FPlatformTime::Seconds() <= time);
-
-	if (networksToUpdate.IsEmpty())
-	{
-		print(TEXT("Everything recomputed!"));
-
-		for (auto toDel : networksTodelete)
-		{
-			networks.Remove(toDel);
-			ensure(toDel->Entities.Num() == 0);
-			ensure(toDel->ToRecompute.IsEmpty());
-
-			toDel->MarkPendingKill();
-		}
-		networksTodelete.Empty();
-
-		print(*FText::AsNumber(networks.Num()).ToString());
-	}
+	tickRecomputeNetwork(time);
 
 }
 

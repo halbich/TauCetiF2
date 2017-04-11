@@ -144,11 +144,13 @@ private:
 
 		for (auto info : usedBlocks)
 		{
-			UE_LOG(LogTemp, Log, TEXT("UsedBlocks->Add(make(%d, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d)));"),
+			UE_LOG(LogTemp, Log, TEXT("UsedBlocks->Add(make(%d, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d), %f));"),
 				info.ID,
 				FMath::RoundToInt(info.Location.X), FMath::RoundToInt(info.Location.Y), FMath::RoundToInt(info.Location.Z),
 				FMath::RoundToInt(info.Scale.X), FMath::RoundToInt(info.Scale.Y), FMath::RoundToInt(info.Scale.Z),
-				FMath::RoundToInt(info.Rotation.Pitch), FMath::RoundToInt(info.Rotation.Yaw), FMath::RoundToInt(info.Rotation.Roll));
+				FMath::RoundToInt(info.Rotation.Pitch), FMath::RoundToInt(info.Rotation.Yaw), FMath::RoundToInt(info.Rotation.Roll),
+				info.Health
+				);
 		}
 
 		UE_LOG(LogTemp, Log, TEXT("c->PlayerPosition = FVector(%d, %d, %d);"),

@@ -28,6 +28,22 @@ public:
 	UPROPERTY(Transient)
 		EElectricNetworkState NetworkState;
 
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ToRepairEntities;
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ImportantRepairEntities;
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> CriticalRepairEntities;
+
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ElectricitySources;
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ElectricityConsuments;
+
 	
 	FORCEINLINE void RegisterEntity(UElectricityComponent* comp)
 	{

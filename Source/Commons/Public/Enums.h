@@ -88,3 +88,13 @@ enum class EElectricNetworkState : uint8
 	InRecompute		UMETA(DisplayName = "InRecompute"),
 	Valid			UMETA(DisplayName = "Valid")
 };
+
+UENUM(BlueprintType)
+enum class EHealthSeverity : uint8
+{
+	OK	 			UMETA(DisplayName = "OK"),
+	ToRepair		UMETA(DisplayName = "ToRepair"),
+	Important		UMETA(DisplayName = "Important"),
+	Critical		UMETA(DisplayName = "Critical"),
+	Dead			UMETA(DisplayName = "Dead")
+};
