@@ -34,10 +34,22 @@ public:
 		float EnergyProductionPerSec;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float TotalElectricityAviable;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float MaxElectricityAviable;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float TotalElectricityAviableFilling;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float EnergyConsumptionPerSec;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float TotalHealth;
+
+
+	
 
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> Entities;
@@ -77,6 +89,7 @@ public:
 		{
 			ElectricityProducers.Add(comp);
 			ProducersCount = ElectricityProducers.Num();
+			MaxElectricityAviable += comp->ElectricityInfo->CurrentObjectMaximumEnergy;
 		}
 
 		if (def->IsConsument)
@@ -104,6 +117,7 @@ public:
 		{
 			ElectricityProducers.Remove(comp);
 			ProducersCount = ElectricityProducers.Num();
+			MaxElectricityAviable -= comp->ElectricityInfo->CurrentObjectMaximumEnergy;
 		}
 
 		if (def->IsConsument)

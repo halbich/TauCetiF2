@@ -51,8 +51,15 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 		for (auto producer : n->ElectricityProducers)
 			totalElectricityAviable += producer->ElectricityInfo->CurrentObjectEnergy;
 
+		n->TotalElectricityAviable = totalElectricityAviable;
+
 		if (FMath::IsNearlyZero(totalElectricityAviable))	// we do net have enough power
+		{
+			n->TotalElectricityAviableFilling = 0;
 			continue;
+		}
+
+		n->TotalElectricityAviableFilling = n->TotalElectricityAviable / n->MaxElectricityAviable;
 
 
 		float criticalAviable = 0.5f * totalElectricityAviable;
