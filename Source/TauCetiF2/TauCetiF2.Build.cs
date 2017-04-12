@@ -9,8 +9,8 @@ public class TauCetiF2 : ModuleRules
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "Slate", "SlateCore",
             "Commons", "Blocks", "GameSave", "Inventory" });
 
-        PublicIncludePaths.AddRange(new string[] { "TauCetiF2/Blocks" });
+        PublicIncludePaths.AddRange(new string[] { "TauCetiF2/Public" });
 
-        PrivateIncludePaths.AddRange(new string[] { "TauCetiF2/Blocks" });
+        PrivateIncludePaths.AddRange(new string[] { "TauCetiF2/Private"});
     }
 }
