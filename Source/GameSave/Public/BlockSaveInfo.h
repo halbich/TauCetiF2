@@ -35,10 +35,11 @@ struct FBlockInfo : FBlockBaseInfo
 	FVector Location;
 	FRotator Rotation;
 	float Health;
+	TMap<FString, FString> BlockSpecificData;
 
-	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), Health(0)
+	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), Health(0), BlockSpecificData()
 	{};
-	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), Health(0)
+	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), Health(0), BlockSpecificData()
 	{};
 };
 

@@ -11,15 +11,6 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockBaseInfo& block)
 	Ar << block.Scale;
 	Ar << block.Name;
 	Ar << block.AdditionalFlags;
-	return Ar;
-}
-
-FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo& block)
-{
-	Ar << (FBlockBaseInfo&)block;
-	Ar << block.Location;
-	Ar << block.Rotation;
-	Ar << block.Health;
 
 	Ar << block.HasOxygenData;
 	if (block.HasOxygenData)
@@ -29,6 +20,17 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo& block)
 	if (block.HasElectricityData)
 		Ar << block.ElectricityInfo;
 
+	return Ar;
+}
+
+FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo& block)
+{
+	Ar << (FBlockBaseInfo&)block;
+	Ar << block.Location;
+	Ar << block.Rotation;
+	Ar << block.Health;
+	Ar << block.BlockSpecificData;
+	
 	return Ar;
 }
 

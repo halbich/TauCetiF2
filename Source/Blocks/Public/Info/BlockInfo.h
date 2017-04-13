@@ -27,4 +27,7 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		float MaxHealth;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
+		TMap<FString, FString> BlockSpecificData;
 };
