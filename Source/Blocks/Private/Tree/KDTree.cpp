@@ -32,7 +32,6 @@ void UKDTree::AddToTree(UKDTree* box)
 
 	addToTree(box);
 
-
 	for (auto checkedRegion : watchedBoxes)
 	{
 		auto reg = checkedRegion.Value;
@@ -40,7 +39,6 @@ void UKDTree::AddToTree(UKDTree* box)
 		if (box->GetBox().Intersect(reg->GetBox()))
 			WatchingRegionChanged(checkedRegion.Key);
 	}
-
 }
 
 void UKDTree::NotifyRegionChanged(UMinMaxBox* box)
@@ -161,13 +159,11 @@ void UKDTree::DEBUGDrawContainingBox(UWorld* world)
 	{
 		for (auto i : watchedBoxes)
 		{
-
 			auto box = i.Value;
 			auto bcenter = (box->Max + box->Min) * 0.5;
 			auto bextend = (box->Max - bcenter);
 			DrawDebugBox(world, bcenter, bextend, FColor::Orange, true);
 		}
-
 	}
 }
 
@@ -228,7 +224,6 @@ void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outA
 		if (outArray.Contains(SingleChild->ContainingObject))
 			return;
 
-
 		auto commonBound = checkForCommonBoundaries
 			? CheckCommonBoundaries(SingleChild->ContainingObject, ignoreElement)
 			: SingleChild->GetBox().Intersect(box->GetBox());
@@ -259,11 +254,8 @@ void UKDTree::GetContainingObjects(const UMinMaxBox* box, TArray<UObject*>& outA
 	UMinMaxBox* newB1 = NewObject<UMinMaxBox>()->InitBox(box->Min, (FVector(1, 1, 1) - DividingCoord) *  box->Max + (DividingCoord * DividingCoordValue));
 	UMinMaxBox* newB2 = NewObject<UMinMaxBox>()->InitBox((FVector(1, 1, 1) - DividingCoord) *  box->Min + (DividingCoord * DividingCoordValue), box->Max);
 
-
 	GetContainingObjects(newB1, outArray, ignoreElement, checkForCommonBoundaries);
 	GetContainingObjects(newB2, outArray, ignoreElement, checkForCommonBoundaries);
-
-
 }
 
 void UKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<UObject*>& outArray, const UObject* ignoreElement)
@@ -277,8 +269,6 @@ void UKDTree::GetContainingObjectsFromBottom(const UMinMaxBox* box, TArray<UObje
 	}
 
 	GetContainingObjects(box, outArray, ignoreElement, true);
-
-
 }
 
 void UKDTree::UpdateAfterChildDestroyed()
@@ -316,7 +306,6 @@ void UKDTree::updateAfterChildDestroyedInner()
 		parent->updateAfterChildDestroyedInner();
 }
 
-
 void UKDTree::RegisterWatchingBox(UObject* actor, UMinMaxBox* box)
 {
 	print(TEXT("register box"));
@@ -325,11 +314,9 @@ void UKDTree::RegisterWatchingBox(UObject* actor, UMinMaxBox* box)
 
 	watchedBoxes.Add(actor, box);
 
-
 	auto bcenter = (box->Max + box->Min) * 0.5;
 	auto bextend = (box->Max - bcenter);
 	DrawDebugBox(GetWorld(), bcenter, bextend, FColor::Red, false, 60, 0, 5);
-
 }
 
 void UKDTree::TryUnregisterWatchingBox(UObject* actor)

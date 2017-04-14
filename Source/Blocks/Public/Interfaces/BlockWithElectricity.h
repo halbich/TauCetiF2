@@ -19,7 +19,6 @@ public:
 
 	float WasHitByStorm(const float amount);
 
-
 	// Try to "catch" hit withing electricity buffer. Returns remaining hitpoints.
 	virtual UElectricityComponent* GetElectricityComponent() = 0;
 };

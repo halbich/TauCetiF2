@@ -296,4 +296,9 @@ UBlockInfo* GetBlockInfoFromParent(UElectricityComponent* source)
 	return bl->BlockInfo;
 }
 
+UTexture2D* ABlock::GetDefaultTexture()
+{
+	return Definition->GetDefaultObject<UBlockDefinition>()->BlockImage;
+}
+
 #pragma optimize("",on)

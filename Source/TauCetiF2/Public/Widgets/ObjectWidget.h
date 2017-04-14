@@ -34,7 +34,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | CustomWidgets | ObjectWidget")
 		FString WidgetID;
 
-
 	UPROPERTY(Transient)
 		ABlock* InitedForBlock;
 

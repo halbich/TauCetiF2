@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "UObject/NoExportTypes.h"
@@ -26,15 +24,12 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		bool IsInWeatherChange;
 
-
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		float CurrentWaitingTime;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		float TargetWaitingTime;
 
-
-	
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		float BaseWeatherIntensity;
 
@@ -53,11 +48,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		float TargetCloudOpacity;
 
-
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Weather")
 		void MakeTargetsCurrent();
-
-
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Weather")
 		bool CheckTimeExceeded(UPARAM(REF)FWeatherDefinition& definition, int32 newDefinitionID);
@@ -67,5 +59,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Weather")
 		bool CheckRunningWeather(UPARAM(REF)FWeatherDefinition& definition, int32 newDefinitionID);
-
 };

@@ -49,7 +49,7 @@ void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 	auto actorElectricity = Cast<UElectricityComponent>(actor->GetComponentByClass(UElectricityComponent::StaticClass()));
 	if (!actorElectricity)
 		return;
-	
+
 	auto i = ElectricityComponent->GetInfo();
 
 	if (FMath::IsNearlyZero(i->CurrentObjectEnergy))		// nemáme z čeho bychom brali
@@ -67,7 +67,6 @@ void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 
 void ATerminalBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 

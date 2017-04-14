@@ -39,7 +39,6 @@ public:
 #define WindowID 600
 #define DoorID 700
 
-
 #define LightSmallID 1000
 #define SwitcherID 1050
 #define GeneratorID 1100

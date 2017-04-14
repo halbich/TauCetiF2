@@ -32,7 +32,7 @@ void UWeatherTargetsKDTree::AddToTree(UWeatherTargetsKDTree* box)
 {
 	ensure(box != nullptr);
 
-	check(GtMin2(box->Min) && LtMax2(box->Max)); 
+	check(GtMin2(box->Min) && LtMax2(box->Max));
 
 	bool forceSplit = false;
 	if (((Max - Min) * FVector(1, 1, 0)) == FVector(1, 1, 0) * GameDefinitions::CubeMinSize)
@@ -137,7 +137,6 @@ void UWeatherTargetsKDTree::DEBUGDrawSurrondings(UWorld* world, FColor usedColor
 	DrawDebugBox(world, bcenter, bextend, usedColor, true);
 }
 
-
 void UWeatherTargetsKDTree::updateAfterChildDestroyedInner()
 {
 	if (!canBeDeleted())
@@ -179,7 +178,5 @@ void UWeatherTargetsKDTree::RemoveFromTree(UObject* obj)
 			parent->updateAfterChildDestroyedInner();
 	}
 }
-
-
 
 #pragma optimize("", on)

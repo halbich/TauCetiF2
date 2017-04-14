@@ -7,7 +7,6 @@
  */
 struct GAMESAVE_API FInventoryTagGroup
 {
-
 	FInventoryTagGroup();
 
 	FString GroupName;

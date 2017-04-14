@@ -17,7 +17,6 @@ USaveGameCarrier::USaveGameCarrier() {
 	inventoryBuildableBlocks = TArray<FInventoryBuildableItemBlockInfo>();
 
 	inventoryTags = FInventoryTags();
-
 }
 
 USaveGameCarrier::~USaveGameCarrier() {

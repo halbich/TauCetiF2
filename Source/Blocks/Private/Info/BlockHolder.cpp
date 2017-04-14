@@ -1,10 +1,5 @@
-
-
 #include "Blocks.h"
 #include "BlockHolder.h"
-
-
-
 
 void UBlockHolder::ReinitializeAviableBlocks()
 {
@@ -15,12 +10,11 @@ void UBlockHolder::ReinitializeAviableBlocks()
 	int32 loaded = lib->LoadBlueprintAssetDataFromPath("/Game/Blocks");
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::FromInt(loaded) + TEXT(" objects loaded for lib - "));
 
-
 	TArray<FAssetData> Assets;
 	lib->GetAssetDataList(Assets);
 	//for (int32 i = 0; i < Assets.Num(); ++i) {
 	//	FAssetData& assetData = Assets[i];
-	//	
+	//
 	//}
 
 	//FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>(AssetRegistryConstants::ModuleName);
@@ -35,8 +29,6 @@ void UBlockHolder::ReinitializeAviableBlocks()
 
 	for (auto& a : Assets)
 	{
-
-
 		/*auto loadedAsset = MyGetAsset(a);
 
 		if (!loadedAsset)
@@ -48,7 +40,6 @@ void UBlockHolder::ReinitializeAviableBlocks()
 		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Green, TEXT("INFO ObjectPath - ") + a.ObjectPath.ToString());*/
 		//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Green, TEXT("INFO IsAssetLoaded - ") + (a.IsAssetLoaded() ? FString("YES") : FString("NO")));
 		//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Green, TEXT("INFO IsValid - ") + (a.IsValid() ? FString("YES") : FString("NO")));
-
 
 		auto bp = Cast<UBlueprint>(a.GetAsset());
 		if (bp)
@@ -141,7 +132,6 @@ UBlockDefinition* UBlockHolder::GetDefinitionFor(int32 ID)
 
 	return NULL;
 }
-
 
 UBlockHolder* UBlockHolder::GetHolderInstance()
 {

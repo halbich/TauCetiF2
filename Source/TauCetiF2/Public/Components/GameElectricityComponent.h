@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Components/ActorComponent.h"
@@ -7,7 +5,6 @@
 #include "Blocks/Public/Components/Electricity/ElectricNetwork.h"
 #include "Commons/Public/Enums.h"
 #include "GameElectricityComponent.generated.h"
-
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TAUCETIF2_API UGameElectricityComponent : public UActorComponent
@@ -40,7 +37,6 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-
 	void AddToWorldNetwork(UElectricityComponent* comp);
 
 	void RemoveFromWorldNetwork(UElectricityComponent* comp);
@@ -50,7 +46,6 @@ private:
 	void processNetwork(UElectricNetwork* network);
 
 	static const double maxFloatingTime;
-
 
 	FORCEINLINE void enqueueItem(UElectricityComponent* comp) {
 		comp->ComponentNetworkState = EElectricNetworkState::InRecompute;
@@ -83,7 +78,6 @@ private:
 		smaller->MarkPendingKill();
 	}
 
-
 	void forceInvalidateNetwork(UElectricNetwork* net)
 	{
 		net->NetworkState = EElectricNetworkState::Invalid;
@@ -92,7 +86,6 @@ private:
 
 		net->ToRecompute.Empty();
 	}
-
 
 	FORCEINLINE void tickRecomputeNetwork(double time) {
 		do {
@@ -115,7 +108,6 @@ private:
 				networksToUpdate.Enqueue(toResolve);
 			else
 				toResolve->NetworkState = EElectricNetworkState::Valid;
-
 		} while (FPlatformTime::Seconds() <= time);
 
 		if (networksToUpdate.IsEmpty())
@@ -155,8 +147,5 @@ private:
 		}
 
 		n->EnergyConsumptionPerSec = consumedEnergy / (dayMultiplier * TimeSinceLastRecompute);
-
-	
 	}
-
 };

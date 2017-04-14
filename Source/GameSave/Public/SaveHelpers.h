@@ -3,7 +3,6 @@
 #include "Object.h"
 #include "BlockSaveInfo.h"
 
-
 #include "SaveHelpers.generated.h"
 
 /**
@@ -26,6 +25,4 @@ public:
 
 		return FString::Printf(TEXT("%s_%s"), *name, *date);
 	}
-
-
 };

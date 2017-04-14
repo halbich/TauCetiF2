@@ -21,8 +21,6 @@ namespace WeatherSavingHelpers {
 		currentState->BaseCloudOpacity = weatherState.BaseCloudOpacity;
 		currentState->CurrentCloudOpacity = weatherState.CurrentCloudOpacity;
 		currentState->TargetCloudOpacity = weatherState.TargetCloudOpacity;
-
-
 	}
 
 	static void GetAdditionals(const FWeatherState& weatherState, float& hitpointsCounter, float& easeIn, float& easeOut, uint8& stormState)
@@ -46,7 +44,6 @@ namespace WeatherSavingHelpers {
 		weatherState.BaseCloudOpacity = currentState->BaseCloudOpacity;
 		weatherState.CurrentCloudOpacity = currentState->CurrentCloudOpacity;
 		weatherState.TargetCloudOpacity = currentState->TargetCloudOpacity;
-
 	}
 
 	static void SetAdditionals(FWeatherState& weatherState, const float hitpointsCounter, const float easeIn, const float easeOut, const uint8 stormState)
@@ -56,5 +53,4 @@ namespace WeatherSavingHelpers {
 		weatherState.EaseOut = easeOut;
 		weatherState.StormState = stormState;
 	}
-
 }

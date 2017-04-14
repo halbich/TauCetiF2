@@ -1,9 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "CurrentWeatherState.h"
-
-
 
 UCurrentWeatherState::UCurrentWeatherState()
 {
@@ -14,9 +10,7 @@ void UCurrentWeatherState::MakeTargetsCurrent()
 {
 	CurrentWeatherIntensity = BaseWeatherIntensity = TargetWeatherIntensity;
 	CurrentCloudOpacity = BaseCloudOpacity = TargetCloudOpacity;
-
 }
-
 
 bool UCurrentWeatherState::CheckTimeExceeded(UPARAM(REF)FWeatherDefinition& definition, int32 newDefinitionID)
 {
@@ -32,7 +26,6 @@ bool UCurrentWeatherState::CheckTimeExceeded(UPARAM(REF)FWeatherDefinition& defi
 
 bool UCurrentWeatherState::CheckChangingWeather(UPARAM(REF)FWeatherDefinition& definition)
 {
-
 	CurrentWaitingTime = 0;
 	IsInWeatherChange = false;
 

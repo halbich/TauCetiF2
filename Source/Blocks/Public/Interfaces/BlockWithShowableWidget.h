@@ -17,7 +17,6 @@ class BLOCKS_API IBlockWithShowableWidget
 {
 	GENERATED_IINTERFACE_BODY()
 
-
 public:
 
 	IBlockWithShowableWidget()

@@ -50,7 +50,6 @@ void ADoorBlock::SetBlockInfo(UBlockInfo* info)
 
 	auto openingConstant = doorOpening == EDoorOpening::Left ? 1 : -1;
 
-
 	auto state = info->BlockSpecificData.FindOrAdd(DoorBlockConstants::DoorState);
 	if (state.IsEmpty())
 	{
@@ -69,9 +68,8 @@ void ADoorBlock::SetBlockInfo(UBlockInfo* info)
 	else
 		setYaw = FCString::Atof(*yaw);
 
-
 	auto transf = DoorBlockMesh->GetRelativeTransform();
-	transf.SetRotation(transf.Rotator().Add(0,setYaw, 0).Quaternion());
+	transf.SetRotation(transf.Rotator().Add(0, setYaw, 0).Quaternion());
 	updateDoorState(transf, openingConstant);
 }
 

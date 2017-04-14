@@ -35,8 +35,6 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 
 	object->OnDestroyRequestedEvent.RemoveDynamic(this, &AWorldController::DestroyRequestEventHandler);
 
-
-
 	if (object->Definition.GetDefaultObject()->UsingInPatterns)
 		RootBox->TryUnregisterWatchingBox(object);
 
@@ -182,7 +180,6 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			print(TEXT("AddDynamicShow"));
 		}
 
-
 		actor->OnDestroyRequestedEvent.AddDynamic(this, &AWorldController::DestroyRequestEventHandler);
 
 		//MinMax->DEBUGDrawContainingBox(GetWorld());
@@ -238,7 +235,6 @@ void AWorldController::DEBUGHideMinMaxBoxes() {
 	else
 		print(TEXT("NO Root!"));
 }
-
 
 void AWorldController::BeginPlay() {
 	RootBox = NewObject<UKDTree>(GetTransientPackage(), TEXT("RootBox"));
@@ -347,14 +343,11 @@ void AWorldController::onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidge
 	defW->AddToPlayerScreen();
 }
 
-
 void AWorldController::DestroyRequestEventHandler(ABlock* block)
 {
 	// TODO
 	//print(TEXT("Block Destroy requested"));
 	//DestroyWorldObject(block);
 }
-
-
 
 #pragma optimize("", on)

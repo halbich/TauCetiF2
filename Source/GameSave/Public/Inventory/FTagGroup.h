@@ -5,7 +5,6 @@
  */
 struct GAMESAVE_API FTagGroup
 {
-
 	FTagGroup();
 
 	FString GroupName;
@@ -13,5 +12,4 @@ struct GAMESAVE_API FTagGroup
 	bool LetVisibleAll;
 
 	void Empty();
-	
 };

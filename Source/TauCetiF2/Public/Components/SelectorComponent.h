@@ -76,8 +76,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | TargetSelector")
 		void TryUse(bool isSpecialUse = false);
 
-
-
 	UPROPERTY(Transient)
 		bool IsValidBuildingLocation;
 

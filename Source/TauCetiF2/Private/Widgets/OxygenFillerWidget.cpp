@@ -1,10 +1,5 @@
-
-
 #include "TauCetiF2.h"
 #include "OxygenFillerWidget.h"
-
-
-
 
 void UOxygenFillerWidget::InitForBlock_Implementation(ABlock* block)
 {
@@ -21,5 +16,4 @@ void UOxygenFillerWidget::InitForBlock_Implementation(ABlock* block)
 	CurrentBlock = Cast<AOxygenTankFillerBlock>(block);
 
 	ensure(CurrentBlock);
-
 }

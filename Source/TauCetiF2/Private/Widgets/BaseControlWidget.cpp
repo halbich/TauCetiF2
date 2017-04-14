@@ -20,7 +20,6 @@ UBaseControlWidget::UBaseControlWidget(const FObjectInitializer& ObjectInitializ
 void UBaseControlWidget::InitForBlock_Implementation(ABlock* block)
 {
 	Super::InitForBlock_Implementation(block);
-
 }
 
 void UBaseControlWidget::LateInit()
@@ -29,5 +28,4 @@ void UBaseControlWidget::LateInit()
 	{
 		term->InitForBlock(InitedForBlock);
 	}
-
 }

@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Block.h"
@@ -24,7 +22,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | SwitcherBlock")
 		UStaticMeshComponent* SwitcherMesh;
 
-
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | SwitcherBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 
@@ -43,11 +40,9 @@ public:
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
-
 	virtual bool BindControl_Implementation(ABlock* controllableBlock) override;
 
 	virtual bool UnbindControl_Implementation(ABlock* controllableBlock) override;
-
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
@@ -74,6 +69,4 @@ private:
 		mat->SetScalarParameterValue(TEXT("IsConnected"), controlledBlocks.Num());
 		mat->SetScalarParameterValue(TEXT("IsOn"), IsOn);
 	}
-
-
 };

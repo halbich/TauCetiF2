@@ -15,12 +15,10 @@ UNewGameSaveHolder::~UNewGameSaveHolder()
 	systemSaves.Empty();
 }
 
-
 UNewGameSaveHolder* UNewGameSaveHolder::Instance()
 {
 	return NewObject<UNewGameSaveHolder>();
 }
-
 
 TArray<USaveGameCarrier*> UNewGameSaveHolder::GetNewSaveGamesList()
 {
@@ -69,7 +67,6 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	c->buildableBlocks.Add(makeBuildable(EmptyHandID, FVector(1, 1, 1)));
 	c->inventoryBuildableBlocks.Add(makeInventoryBuildable(EmptyHandID, FVector(1, 1, 1)));
 	c->buildableBlocks.Add(makeBuildable(DeleteID, FVector(1, 1, 1)));
-
 
 	c->buildableBlocks.Add(makeBuildable(CubeBaseID, FVector(20, 20, 4)));
 	c->buildableBlocks.Add(makeBuildable(CubePolycarbonateID, FVector(4, 4, 1)));
@@ -314,7 +311,6 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave(bool full)
 	UsedBlocks->Add(make(2, FVector(20, -11, 17), FVector(2, 7, 1), FRotator(0, -90, 0), 139.000000));
 	UsedBlocks->Add(make(1, FVector(3, -31, 9), FVector(1, 1, 11), FRotator(0, 0, 0), 110.000000));
 	UsedBlocks->Add(make(1, FVector(16, -23, 9), FVector(1, 1, 11), FRotator(0, 0, 0), 110.000000));
-
 
 	return c;
 }

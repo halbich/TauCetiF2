@@ -27,7 +27,6 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 	Subscriber.BindUObject(this, &UInventoryComponent::InventoryTagsSelectionChanged);
 	ListeningHandle = InventoryTags->AddEventListener(Subscriber);
 
-
 	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	ensure(inst);
 	auto blockRef = Cast<UBlockHolder>(inst->BlockHolder);
@@ -78,7 +77,6 @@ void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 	InventoryHelpers::SetInventoryTags(carrier, InventoryTags);
 	InventoryHelpers::SetBuildableBlocks(carrier, BuildableItems);
 	InventoryHelpers::SetInventoryBuildableBlocks(carrier, InventoryItems);
-
 }
 
 void UInventoryComponent::SelectNextBank()

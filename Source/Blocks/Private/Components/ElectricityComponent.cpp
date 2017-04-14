@@ -175,8 +175,6 @@ void UElectricityComponent::UpdateHealthSeverity()
 {
 	if (!Network || !Network->IsValidLowLevel())
 		return;
-
-
 }
 
 UBlockInfo* UElectricityComponent::GetBlockInfo()

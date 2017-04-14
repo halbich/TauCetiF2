@@ -7,4 +7,3 @@ ACubeBlock::ACubeBlock()
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
 }
-

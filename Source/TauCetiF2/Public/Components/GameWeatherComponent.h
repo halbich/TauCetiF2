@@ -97,8 +97,6 @@ private:
 #pragma optimize("", off)
 
 	void doDamage(int32 currentHitPoints) {
-
-
 		for (auto i = 0; i < currentHitPoints; i++)
 		{
 			auto targNum = Targets.Num();

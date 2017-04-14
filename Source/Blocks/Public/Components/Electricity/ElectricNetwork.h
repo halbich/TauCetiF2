@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "UObject/NoExportTypes.h"
@@ -9,15 +7,14 @@
 #include "../ElectricityComponent.h"
 #include "ElectricNetwork.generated.h"
 
-
 /**
- * 
+ *
  */
 UCLASS(BlueprintType, Blueprintable)
 class BLOCKS_API UElectricNetwork : public UObject
 {
 	GENERATED_BODY()
-	
+
 public:
 	UElectricNetwork();
 
@@ -49,8 +46,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float TotalHealth;
 
-
-
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float TotalStorableElectricity;
 
@@ -60,8 +55,6 @@ public:
 	// Percentage of Electricity aviable
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float TotalElectricityStorableFilling;
-
-
 
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> Entities;
@@ -80,22 +73,19 @@ public:
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> CriticalRepairEntities;
 
-
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> ElectricityProducers;
 
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> ElectricityConsumers;
 
-	
-	FORCEINLINE void RegisterEntity(UElectricityComponent* comp )
+	FORCEINLINE void RegisterEntity(UElectricityComponent* comp)
 	{
 		Entities.Add(comp);
 		EntitiesCount = Entities.Num();
 
 		auto def = comp->GetDefinition();
 		ensure(def);
-		
 
 		if (def->IsProducer)
 		{
@@ -115,7 +105,6 @@ public:
 
 		TotalHealth += info->MaxHealth;
 	}
-
 
 	FORCEINLINE int32 UnregisterEntity(UElectricityComponent* comp)
 	{
@@ -144,13 +133,10 @@ public:
 		TotalHealth -= info->MaxHealth;
 		check(TotalHealth >= 0);
 
-
 		return r;
 	}
 
 	FORCEINLINE void RegisterEntitySeverity(UElectricityComponent* comp, EHealthSeverity newSeverity)
 	{
-
 	}
-	
 };

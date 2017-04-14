@@ -5,8 +5,6 @@
 #include "Commons/Public/GameDefinitions.h"
 #include "KDTree.generated.h"
 
-
-
 /**
  *
  */

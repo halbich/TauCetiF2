@@ -1,10 +1,7 @@
-
-
 #include "TauCetiF2.h"
 #include "GameWeatherComponent.h"
 
 #pragma optimize("", off)
-
 
 const float UGameWeatherComponent::EasingBorderValue = 1.0f / 10.0f;
 
@@ -15,7 +12,6 @@ UGameWeatherComponent::UGameWeatherComponent()
 
 	WeatherRootTree = CreateDefaultSubobject<UWeatherTargetsKDTree>(TEXT("WeatherRootBox"));
 }
-
 
 void UGameWeatherComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FText>& validationErrors)
 {
@@ -29,7 +25,6 @@ void UGameWeatherComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FT
 	uint8 stormState;
 	WeatherSavingHelpers::GetAdditionals(carrier->weatherState, hitpointsCounter, currentEaseInTime, currentEaseOutTime, stormState);
 	StormState = (EStormState)stormState;
-
 }
 
 void UGameWeatherComponent::SaveToCarrier(USaveGameCarrier* carrier)
@@ -38,8 +33,6 @@ void UGameWeatherComponent::SaveToCarrier(USaveGameCarrier* carrier)
 	WeatherSavingHelpers::ToWeatherState(carrier->weatherState, currentWeatherState);
 	WeatherSavingHelpers::SetAdditionals(carrier->weatherState, hitpointsCounter, currentEaseInTime, currentEaseOutTime, (uint8)StormState);
 }
-
-
 
 void UGameWeatherComponent::DEBUGShowMinMaxBoxes() {
 	if (WeatherRootTree)
@@ -67,7 +60,6 @@ void UGameWeatherComponent::ObjectsChanged() {
 		FlushPersistentDebugLines(GetWorld());
 		WeatherRootTree->DEBUGDrawContainingBox(GetWorld());
 	}
-
 }
 
 void UGameWeatherComponent::OnStormBegin()
@@ -89,7 +81,6 @@ void UGameWeatherComponent::OnStormEnd()
 	auto remainingTargets = FMath::FloorToInt(hitpointsCounter);
 	if (remainingTargets > 0)
 		doDamage(remainingTargets);
-
 
 	StormState = EStormState::NoStorm;
 
@@ -113,10 +104,7 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	currentEasingTime += DeltaTime;
 	switch (StormState)
 	{
-
 	case EStormState::EaseIn: {
-
-
 		auto lerpedIntensity = FMath::Lerp(0.0f, CurrentHitIntensity, currentWeatherState->CurrentWaitingTime / currentEaseInTime);
 
 		hitpointsCounter += lerpedIntensity * DeltaTime * currentSurface;
@@ -128,7 +116,6 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	}
 
 	case EStormState::Running: {
-
 		hitpointsCounter += CurrentHitIntensity * DeltaTime * currentSurface;
 
 		if (currentWeatherState->CurrentWaitingTime > currentEaseOutTime)
@@ -138,7 +125,6 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	}
 
 	case EStormState::EaseOut: {
-
 		auto lerpedIntensity = FMath::Max(FMath::Lerp(CurrentHitIntensity, 0.0f, (currentWeatherState->CurrentWaitingTime - currentEaseOutTime) / (currentWeatherState->TargetWaitingTime - currentEaseOutTime)), .0f);
 
 		hitpointsCounter += lerpedIntensity * DeltaTime * currentSurface;
@@ -155,7 +141,6 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 		doDamage(remainingTargets);
 		hitpointsCounter -= remainingTargets;
 	}
-
 }
 
 void UGameWeatherComponent::OnTargetElementsChanged(UWeatherTargetsKDTree* target, bool isAdding)
@@ -173,7 +158,6 @@ void UGameWeatherComponent::InitComp()
 {
 	WeatherRootTree->rootNode = WeatherRootTree->GetRoot();
 	WeatherRootTree->OnWeatherTargetsChanged.AddDynamic(this, &UGameWeatherComponent::OnTargetElementsChanged);
-
 }
 
 #pragma optimize("", on)

@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Widgets/ObjectWidget.h"
@@ -24,5 +22,4 @@ public:
 		AOxygenTankFillerBlock* CurrentBlock;
 
 	virtual void InitForBlock_Implementation(ABlock* block) override;
-
 };

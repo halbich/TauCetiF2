@@ -1,13 +1,10 @@
-
-
 #include "Blocks.h"
 #include "ElectricityBindableAreaInfo.h"
 
 #pragma optimize("", off)
 
-void UElectricityBindableAreaInfo::InitArea(TArray<FVector> usedPoints, FElectricityBindableArea& definedPlane, FVector& blockScale, FRotator& blockRotation,  FVector worldLocation)
+void UElectricityBindableAreaInfo::InitArea(TArray<FVector> usedPoints, FElectricityBindableArea& definedPlane, FVector& blockScale, FRotator& blockRotation, FVector worldLocation)
 {
-
 	auto scaleMultipl = blockScale * GameDefinitions::CubeMinSizeHalf;
 
 	auto dominantPlane = FVector(1, 1, 1);
@@ -29,22 +26,17 @@ void UElectricityBindableAreaInfo::InitArea(TArray<FVector> usedPoints, FElectri
 			auto diff = AreaPoints[AreaPoints.Num() - 1] - AreaPoints[AreaPoints.Num() - 2];
 			dominantPlane *= FVector(diff.X == 0 ? 1 : 0, diff.Y == 0 ? 1 : 0, diff.Z == 0 ? 1 : 0);
 		}
-
-
 	}
 
 	DominantPlane = dominantPlane * AreaPoints[0];
-
 }
 
 void UElectricityBindableAreaInfo::DEBUG_DrawPoints(UWorld* world)
 {
-
 	return;
 
 	for (auto p : AreaPoints)
 		DrawDebugSphere(world, p, 5, 10, FColor::Green, false, 60);
-
 
 	for (int32 i = 0; i < AreaPoints.Num(); i++)
 	{
@@ -52,7 +44,6 @@ void UElectricityBindableAreaInfo::DEBUG_DrawPoints(UWorld* world)
 		auto p2 = AreaPoints[(i + 1) % AreaPoints.Num()];
 
 		DrawDebugLine(world, p1, p2, FColor::Green, false, 60, 0, 3);
-
 	}
 	TArray<int> indices;
 	indices.Add(0); indices.Add(1); indices.Add(2);
@@ -67,7 +58,7 @@ void UElectricityBindableAreaInfo::DEBUG_DrawPoints(UWorld* world)
 
 FBox UElectricityBindableAreaInfo::GetBox()
 {
-	FVector min = FVector(1,1,1) * GameDefinitions::WorldBorders;
+	FVector min = FVector(1, 1, 1) * GameDefinitions::WorldBorders;
 	FVector max = (-1)* FVector(1, 1, 1) * GameDefinitions::WorldBorders;
 
 	for (auto p : AreaPoints)
@@ -92,7 +83,6 @@ FBox UElectricityBindableAreaInfo::GetBox()
 	}
 
 	return FBox(min, max);
-
 }
 
 #pragma optimize("", on)

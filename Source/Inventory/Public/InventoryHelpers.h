@@ -136,11 +136,6 @@ namespace InventoryHelpers {
 		return result;
 	}
 
-
-
-
-
-
 	static void SetInventoryBuildableBlocks(USaveGameCarrier* carrier, TArray<UInventoryBuildableBlockInfo*>& InventoryBlocks)
 	{
 		carrier->inventoryBuildableBlocks.Empty();

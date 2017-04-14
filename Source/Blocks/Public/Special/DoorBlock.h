@@ -21,12 +21,9 @@ enum class EDoorOpening : uint8
 };
 
 namespace DoorBlockConstants {
-
 	static FString DoorState = TEXT("DoorState");
 	static FString DoorYaw = TEXT("DoorYaw");
-
 }
-
 
 /**
  *

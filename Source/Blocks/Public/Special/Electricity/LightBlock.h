@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Block.h"
+#include "Interfaces/BlockWithShowableWidget.h"
 #include "Components/ElectricityComponent.h"
 #include "BlockWithElectricity.h"
 #include "Commons/Public/TCF2GameInstance.h"
@@ -11,7 +12,7 @@
  *
  */
 UCLASS()
-class BLOCKS_API ALightBlock : public ABlock, public IBlockWithElectricity, public IControllableBlock
+class BLOCKS_API ALightBlock : public ABlock, public IBlockWithShowableWidget, public IBlockWithElectricity, public IControllableBlock
 {
 	GENERATED_BODY()
 
@@ -36,6 +37,9 @@ public:
 	UPROPERTY(Transient)
 		float isDaytime;
 
+	UPROPERTY(Transient)
+		UUserWidget* shownWidget;
+
 	virtual void Tick(float DeltaSeconds) override;
 
 	virtual void BeginPlay() override;
@@ -46,12 +50,14 @@ public:
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
-
 	virtual void SetControlState_Implementation(bool isOn) override;
 	virtual void SetOutputPowerPercentage_Implementation(float percentage) override;
 	virtual void SetController_Implementation(ABlock* controller) override;
 	virtual ABlock* GetController_Implementation() override;
 
+	virtual void SetDisplayedWidget(UUserWidget* widget) override;
+
+	virtual UUserWidget* GetShownWidget() override;
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{

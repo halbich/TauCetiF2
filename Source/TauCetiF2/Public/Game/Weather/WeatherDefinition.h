@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "WeatherDefinition.generated.h"
@@ -11,7 +9,6 @@
 USTRUCT(BlueprintType)
 struct TAUCETIF2_API FWeatherDefinition
 {
-
 	GENERATED_BODY();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | Weather")

@@ -1,5 +1,3 @@
-
-
 #include "Blocks.h"
 #include "Creator.h"
 
@@ -7,14 +5,12 @@
 ACreator::ACreator()
 	: Super()
 {
-
 	CreatorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CreatorMesh"));
 	CreatorMesh->SetupAttachment(GetRootComponent());
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
 }
-
 
 UStaticMeshComponent* ACreator::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {
@@ -73,7 +69,6 @@ void ACreator::CheckWatchingBox()
 
 	watchingBox->DEBUGDrawBorder(GetWorld(), FColor::Orange, 30.0f);
 
-
 	TArray<UObject*> objectsToCast;
 
 	WorldObjectComponent->RootBox->GetContainingObjects(watchingBox, objectsToCast, this);
@@ -91,7 +86,6 @@ void ACreator::CheckWatchingBox()
 
 		bl->WorldObjectComponent->DefiningBox->DEBUGDrawBorder(GetWorld(), FColor::White, 30.0f);
 	}
-
 
 	auto emptyBox = NewObject<UMinMaxBox>();
 
@@ -113,7 +107,6 @@ void ACreator::CheckWatchingBox()
 		if (obj.Value.Intersect(fbox) && IntersectExcl(obj.Value, fbox))
 			return;
 	}
-
 
 	auto left = NewObject<UMinMaxBox>();
 	left->InitBoxChecked(FVector(emptyBox->Min.X, watchingBox->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Max.Z));

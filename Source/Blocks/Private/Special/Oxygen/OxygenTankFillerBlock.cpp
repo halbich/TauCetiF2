@@ -96,7 +96,6 @@ void AOxygenTankFillerBlock::ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* 
 */
 }
 
-
 void AOxygenTankFillerBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
@@ -114,7 +113,6 @@ void AOxygenTankFillerBlock::SetDisplayedWidget(UUserWidget* widget)
 }
 
 UUserWidget* AOxygenTankFillerBlock::GetShownWidget() { return shownWidget; }
-
 
 void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) {}
 void AOxygenTankFillerBlock::SetOutputPowerPercentage_Implementation(float percentage) {}

@@ -18,9 +18,7 @@ struct FHittedSpot
 
 	UPROPERTY(Transient)
 		float ActualTime;
-
 };
-
 
 /**
  *
@@ -76,5 +74,4 @@ private:
 	void UpdateCustomTexture();
 
 	int32 pixelsPerBaseBlock;
-
 };

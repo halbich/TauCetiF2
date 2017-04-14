@@ -21,5 +21,4 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | ControllerBlock")
 		bool UnbindControl(ABlock* controllableBlock);
-
 };

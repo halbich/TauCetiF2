@@ -123,9 +123,6 @@ void ATauCetiF2PlayerController::ShowWidget(const EShownWidget widget)
 	CurrentShownWidget = widget;
 	updateState(focus);
 	focus->WidgetShown();
-
-
-
 }
 
 void ATauCetiF2PlayerController::ToggleInventory()
@@ -188,5 +185,4 @@ void ATauCetiF2PlayerController::ShowRegisteredWidget(const FString widgetID, AB
 	}
 
 	ShowWidget(EShownWidget::Registered);
-
 }

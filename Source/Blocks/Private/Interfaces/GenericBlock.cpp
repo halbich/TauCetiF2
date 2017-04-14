@@ -5,4 +5,3 @@ UGenericBlock::UGenericBlock(const class FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 }
-

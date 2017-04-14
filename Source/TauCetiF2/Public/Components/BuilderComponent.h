@@ -63,7 +63,6 @@ public:
 	UPROPERTY(Transient)
 		bool IsInCreative;
 
-
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuilderComponent")
 		UBlockHolder* blockHolder;
 

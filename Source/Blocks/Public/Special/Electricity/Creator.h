@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Block.h"
@@ -7,7 +5,6 @@
 #include "BlockWithElectricity.h"
 #include "ControllableBlock.h"
 #include "Creator.generated.h"
-
 
 #pragma optimize("", off)
 
@@ -24,7 +21,6 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | CreatorBlock")
 		UStaticMeshComponent* CreatorMesh;
-
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | CreatorBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
@@ -53,11 +49,9 @@ public:
 		return ElectricityComponent;
 	}
 
-
 private:
 	bool IntersectExcl(const FBox& box, const FBox& other) const
 	{
-
 		auto tmin = FVector(FMath::Max(box.Min.X, other.Min.X), FMath::Max(box.Min.Y, other.Min.Y), FMath::Max(box.Min.Z, other.Min.Z));
 		auto tmax = FVector(FMath::Min(box.Max.X, other.Max.X), FMath::Min(box.Max.Y, other.Max.Y), FMath::Min(box.Max.Z, other.Max.Z));
 
@@ -69,7 +63,6 @@ private:
 		auto volume = bx.GetVolume();
 
 		return volume == FMath::Pow(GameDefinitions::CubeMinSize, 3);
-
 	}
 
 	TArray<UMinMaxBox*> getAllContaining(const UMinMaxBox* source)
@@ -87,14 +80,11 @@ private:
 					result.Add(toAdd);
 				}
 
-
 		return result;
-
 	}
 
 	bool checkForBlock(const UMinMaxBox* source, const TMap<ABlock*, FBox>& objectBoxes)
 	{
-
 		auto checkContaining = getAllContaining(source);
 
 		// wee need to ensure validity for all blocks in defined region
@@ -113,12 +103,9 @@ private:
 
 			if (!hasValidBlock)
 				return false;
-
 		}
 		return true;
 	}
-
 };
-
 
 #pragma optimize("", on)

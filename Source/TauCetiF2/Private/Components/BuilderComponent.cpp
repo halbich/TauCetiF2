@@ -46,7 +46,6 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		return;  // if spawn was successful, we have actual data (spawn point etc)
 	}
 
-
 	if (!selector->IsValidBuildingLocation)
 	{
 		toggleHiddenCurrentSpawned();
@@ -88,9 +87,6 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 					auto testSpawnBlock = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 					if (worldController->IsValidSpawnPoint(testSpawnBlock))
 						tempSuccesses.Add(offsetVect, FVector::DistSquared(newTestLocation, newLocation));	// we do not need to do sqrt on results;
-
-
-
 				}
 			}
 		}
@@ -115,7 +111,6 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 			spawnBlock = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 			break;
 		}
-
 	}
 
 	auto box = spawnBlock->GetBox();

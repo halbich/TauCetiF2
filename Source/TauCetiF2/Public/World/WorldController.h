@@ -21,7 +21,6 @@
 
 #include "WorldController.generated.h"
 
-
 UCLASS()
 class TAUCETIF2_API AWorldController : public AActor
 {
@@ -43,7 +42,6 @@ public:
 
 	UPROPERTY(Transient)
 		UGameElectricityComponent* electricityComponent;
-
 
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
@@ -87,6 +85,4 @@ private:
 	void onPickupItem(ABlock* pickingItem);
 
 	void onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidget> widget);
-
 };
-

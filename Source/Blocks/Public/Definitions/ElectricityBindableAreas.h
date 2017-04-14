@@ -1,25 +1,19 @@
-
-
 #pragma once
 
 #include "ElectricityBindableAreas.generated.h"
-
 
 USTRUCT(BlueprintType)
 struct FElectricityBindableArea
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityBindableAreasDefinitionPlanes")
+		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityBindableAreasDefinitionPlanes")
 		TArray<int32> Plane;
 
 	FElectricityBindableArea()
 	{
-
 	};
-
 };
-
 
 /**
  *
@@ -37,10 +31,5 @@ struct FElectricityBindableAreas
 
 	FElectricityBindableAreas()
 	{
-
 	};
-
 };
-
-
-

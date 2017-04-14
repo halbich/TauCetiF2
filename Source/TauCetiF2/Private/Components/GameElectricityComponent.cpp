@@ -84,9 +84,7 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 
 			// TODO remaining energy fill to consumers
 
-
 			if (n->ElectricityConsumers.Num() > 0 && totalElectricityAviable > 0) {
-
 				auto electricityConsumed = 0.0f;
 
 				auto totalRequired = 0.0f;
@@ -110,7 +108,6 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 					totalElectricityAviable -= electricityConsumed;
 					// todo do smthing with the rest
 				}
-
 			}
 		}
 

@@ -49,8 +49,6 @@ public:
 
 	UBuildableBlockInfo* GetCopy();
 
-
-
 	FORCEINLINE float buildingCoeficient()
 	{
 		switch (BlockDefinition->ShapeType)

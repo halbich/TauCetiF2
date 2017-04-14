@@ -11,6 +11,6 @@ public class TauCetiF2 : ModuleRules
 
         PublicIncludePaths.AddRange(new string[] { "TauCetiF2/Public" });
 
-        PrivateIncludePaths.AddRange(new string[] { "TauCetiF2/Private"});
+        PrivateIncludePaths.AddRange(new string[] { "TauCetiF2/Private" });
     }
 }

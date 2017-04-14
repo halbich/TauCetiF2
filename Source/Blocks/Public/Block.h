@@ -39,8 +39,6 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "TCF2 | Block")
 		FDestroyRequestDelegate OnDestroyRequestedEvent;
 
-
-
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
 		UStaticMeshComponent* GetMeshStructureComponent(int32 BlockMeshStructureDefIndex);
 
@@ -49,6 +47,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "TCF2 | Block")
 		void UpdateBlockOnConstruction(UBlockDefinition* BlockDef);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Block")
+		UTexture2D* GetDefaultTexture();
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
@@ -112,5 +113,3 @@ private:
 		}
 	}
 };
-
-

@@ -30,7 +30,7 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo& block)
 	Ar << block.Rotation;
 	Ar << block.Health;
 	Ar << block.BlockSpecificData;
-	
+
 	return Ar;
 }
 

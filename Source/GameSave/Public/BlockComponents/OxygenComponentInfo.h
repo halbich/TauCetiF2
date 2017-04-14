@@ -8,7 +8,7 @@ struct FOxygenComponentInfo {
 	/*
 	Default constructor
 	*/
-	FOxygenComponentInfo() 
+	FOxygenComponentInfo()
 	{
 		CurrentFillingValue = 0;
 	};

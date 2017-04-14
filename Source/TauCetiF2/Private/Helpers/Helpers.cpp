@@ -141,7 +141,6 @@ bool UHelpers::GetSoundClassVolume(USoundClass* TargetClass, float& resultValue)
 
 bool UHelpers::SetSoundClassVolume(USoundClass* TargetClass, float targetValue)
 {
-
 	if (!TargetClass || !TargetClass->IsValidLowLevel())
 		return false;
 
@@ -163,7 +162,6 @@ bool UHelpers::GetSettingsValueFloat(EGameUserSettingsVariable settings, float& 
 		value,
 		GGameIni
 	);
-
 }
 
 bool UHelpers::SetSettingsValueFloat(EGameUserSettingsVariable settings, float value)
@@ -185,7 +183,6 @@ bool UHelpers::SetSettingsValueFloat(EGameUserSettingsVariable settings, float v
 	return true;
 }
 
-
 FString UHelpers::getConfigVariableNameFor(EGameUserSettingsVariable settings)
 {
 	switch (settings)
@@ -197,10 +194,7 @@ FString UHelpers::getConfigVariableNameFor(EGameUserSettingsVariable settings)
 		checkNoEntry();
 		return TEXT("");
 	}
-
 }
-
-
 
 FWeatherDefinition UHelpers::GetRandomDefinition(UPARAM(ref)TArray<FWeatherDefinition>& aviableDefinitions, int32& outIndex)
 {

@@ -31,9 +31,7 @@
 #include "GameSave/Public/Inventory/FInventoryTagGroup.h"
 #include "GameSave/Public/Inventory/FInventoryTags.h"
 
-
 #include "InventoryComponent.generated.h"
-
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHudBuildableItemsChanged, bool, ShowGroupName);
 

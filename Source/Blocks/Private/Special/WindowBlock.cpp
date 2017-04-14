@@ -1,8 +1,5 @@
-
-
 #include "Blocks.h"
 #include "WindowBlock.h"
-
 
 AWindowBlock::AWindowBlock()
 	:Super()
@@ -12,4 +9,3 @@ AWindowBlock::AWindowBlock()
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
 }
-

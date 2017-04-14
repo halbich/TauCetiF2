@@ -61,13 +61,10 @@ public:
 	FDelegateHandle ListeningHandle;
 	FDelegateHandle OxygenDataChangedHandle;
 
-
-
 private:
 	void ListeningOnUse(AActor* actor, bool isSpecial);
 
 protected:
 	UFUNCTION()
 		void ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source);
-
 };

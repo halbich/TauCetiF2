@@ -7,7 +7,6 @@
 #include "Components/ElectricityComponent.h"
 #include "WorldObjectComponent.generated.h"
 
-
 UCLASS(Blueprintable, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API UWorldObjectComponent : public UActorComponent
 {
@@ -17,7 +16,6 @@ public:
 	// Sets default values for this component's properties
 	UWorldObjectComponent();
 
-	
 	// Elements taken in WorldTree. This collection could be changes as WorldTree Changes
 	UPROPERTY(Transient)
 		TArray<UKDTree*> TreeElements;

@@ -8,7 +8,6 @@
 #include "Commons/Public/Enums.h"
 #include "ElectricityComponent.generated.h"
 
-
 class UElectricNetwork;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FElectricityComponentDataChangedDelegate, UBlockWithElectricityInfo*, info);
@@ -33,7 +32,6 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
 		TArray<UElectricityBindableAreaInfo*> ElectricityBindableAreas;
-
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
 		TArray<UElectricityComponent*> ConnectedComponents;
@@ -102,9 +100,8 @@ private:
 
 	static bool isValidConnection(UElectricityBindableAreaInfo* area, UElectricityBindableAreaInfo* otherArea);
 
-	static float IntersectVolume(const FBox& box, const FBox& other) 
+	static float IntersectVolume(const FBox& box, const FBox& other)
 	{
-
 		auto tmin = FVector(FMath::Max(box.Min.X, other.Min.X), FMath::Max(box.Min.Y, other.Min.Y), FMath::Max(box.Min.Z, other.Min.Z));
 		auto tmax = FVector(FMath::Min(box.Max.X, other.Max.X), FMath::Min(box.Max.Y, other.Max.Y), FMath::Min(box.Max.Z, other.Max.Z));
 
@@ -114,6 +111,5 @@ private:
 			return 0;
 
 		return bx.GetVolume();
-
 	}
 };

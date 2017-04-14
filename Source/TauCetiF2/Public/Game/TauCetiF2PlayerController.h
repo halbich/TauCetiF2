@@ -12,9 +12,7 @@
 #include "Blocks/Public/Interfaces/BlockWithShowableWidget.h"
 #include "TauCetiF2PlayerController.generated.h"
 
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameShouldBePaused, bool, NewPaused);
-
 
 /**
  *

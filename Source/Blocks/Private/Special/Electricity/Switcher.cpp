@@ -1,21 +1,15 @@
-
-
 #include "Blocks.h"
 #include "Switcher.h"
-
-
 
 ASwitcher::ASwitcher()
 	: Super()
 {
-
 	SwitcherMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SwitcherMesh"));
 	SwitcherMesh->SetupAttachment(GetRootComponent());
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
 }
-
 
 UStaticMeshComponent* ASwitcher::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {
@@ -42,7 +36,6 @@ void  ASwitcher::OnConstruction(const FTransform& Transform) {
 	Subscriber.BindUObject(this, &ASwitcher::ListeningOnUse);
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 
-
 	updateDynamicColor();
 }
 
@@ -65,9 +58,7 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 	IsOn = !IsOn;
 
 	updateDynamicColor();
-
 }
-
 
 void ASwitcher::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
@@ -83,7 +74,6 @@ void ASwitcher::SetDisplayedWidget(UUserWidget* widget)
 }
 
 UUserWidget* ASwitcher::GetShownWidget() { return shownWidget; }
-
 
 bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 {

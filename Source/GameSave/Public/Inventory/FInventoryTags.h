@@ -7,7 +7,6 @@
  */
 struct GAMESAVE_API FInventoryTags
 {
-
 	FInventoryTags();
 
 	int32 CurrentActiveIndex;

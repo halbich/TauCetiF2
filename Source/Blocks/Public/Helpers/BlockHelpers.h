@@ -157,7 +157,6 @@ namespace BlockSavingHelpers {
 		}
 	}
 
-
 	static TArray<UBlockInfo*> GetBlockData(USaveGameCarrier* carrier)
 	{
 		TArray<UBlockInfo*> result;

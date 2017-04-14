@@ -24,8 +24,6 @@ void UWorldObjectComponent::BeginPlay()
 
 	if (Element->BlockInfo->UnderConstruction)
 		return;*/
-
-
 }
 
 #pragma optimize("",on)

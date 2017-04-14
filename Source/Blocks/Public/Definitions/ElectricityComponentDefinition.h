@@ -35,7 +35,6 @@ struct FElectricityComponentDefinition
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition", meta = (EditCondition = IsControlBlock))
 		bool IsControllable;
 
-
 	FElectricityComponentDefinition()
 	{
 	};

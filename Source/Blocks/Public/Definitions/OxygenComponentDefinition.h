@@ -10,7 +10,7 @@ struct FOxygenComponentDefinition
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | OxygenDefinition")
+		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | OxygenDefinition")
 		float TotalObjectVolume;
 
 	FOxygenComponentDefinition()

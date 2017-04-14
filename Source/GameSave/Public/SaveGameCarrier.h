@@ -150,7 +150,7 @@ private:
 				FMath::RoundToInt(info.Scale.X), FMath::RoundToInt(info.Scale.Y), FMath::RoundToInt(info.Scale.Z),
 				FMath::RoundToInt(info.Rotation.Pitch), FMath::RoundToInt(info.Rotation.Yaw), FMath::RoundToInt(info.Rotation.Roll),
 				info.Health
-				);
+			);
 		}
 
 		UE_LOG(LogTemp, Log, TEXT("c->PlayerPosition = FVector(%d, %d, %d);"),
@@ -165,7 +165,4 @@ private:
 
 #endif
 	}
-
-
-
 };

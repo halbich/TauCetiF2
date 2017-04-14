@@ -70,9 +70,7 @@ public:
 
 private:
 
-
 	void addToTreeByCoord(UWeatherTargetsKDTree* box);
-
 
 	void updateAfterChildDestroyedInner();
 

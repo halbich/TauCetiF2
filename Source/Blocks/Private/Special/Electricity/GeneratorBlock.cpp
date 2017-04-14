@@ -18,7 +18,6 @@ AGeneratorBlock::AGeneratorBlock()
 	dynamicColorsFloat = nullptr;
 	updateTextureRegion = nullptr;
 
-
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
 }
@@ -94,7 +93,6 @@ void  AGeneratorBlock::OnConstruction(const FTransform& Transform) {
 	if (dynamicColorsFloat) { delete[] dynamicColorsFloat; dynamicColorsFloat = nullptr; }
 	if (updateTextureRegion) { delete updateTextureRegion; updateTextureRegion = nullptr; }
 
-
 	pixelsPerBaseBlock = 64;
 
 	auto currentScale = GetBlockScale();
@@ -134,7 +132,6 @@ void  AGeneratorBlock::OnConstruction(const FTransform& Transform) {
 
 	for (uint32 i = 0; i < dataSize; ++i)
 		dynamicColors[i] = 0;
-
 }
 
 #pragma optimize("", off)
@@ -158,7 +155,6 @@ void AGeneratorBlock::Tick(float DeltaTime)
 		uint8 setValue = (uint8)FMath::Lerp(256, 0, FMath::Min(1.0f, elem->ActualTime));
 		for (int32 kx = 0; kx < pixelsPerBaseBlock; kx++)
 		{
-
 			for (int32 ky = 0; ky < pixelsPerBaseBlock; ky++)
 			{
 				uint32 baseIndex = ((elem->X * pixelsPerBaseBlock + kx) + (elem->Y * pixelsPerBaseBlock + ky) * rowSize) * 4;
@@ -169,10 +165,7 @@ void AGeneratorBlock::Tick(float DeltaTime)
 
 				dynamicColors[baseIndex + RED] = dynamicColors[baseIndex + GREEN] = dynamicColors[baseIndex + BLUE] = setValue;
 			}
-
 		}
-
-
 
 		if (setValue == 0)
 			toDel.Push(i);
@@ -198,12 +191,8 @@ UStaticMeshComponent* AGeneratorBlock::GetMeshStructureComponent_Implementation(
 	return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
 }
 
-
-
 void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 {
-
-
 	FHittedSpot hitted;
 
 	auto currentScale = GetBlockScale();
@@ -225,7 +214,6 @@ void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float
 	else
 		spots.Insert(hitted, 0);
 
-
 	auto energyToPut = amount;
 	float actuallyPutted = 0;
 	if (ElectricityComponent->PutAmount(energyToPut, actuallyPutted))
@@ -238,8 +226,6 @@ void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float
 
 	if (!FMath::IsNearlyZero(energyToPut))
 		Super::WasHitByStorm(blockHitLocation, energyToPut);
-
 }
-
 
 #pragma optimize("", on)

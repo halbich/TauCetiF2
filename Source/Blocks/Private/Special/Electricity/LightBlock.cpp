@@ -35,7 +35,7 @@ UPrimitiveComponent* ALightBlock::GetComponentForObjectOutline_Implementation() 
 
 void ALightBlock::BeginPlay() {
 	Super::BeginPlay();
-	
+
 	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	ensure(inst);
 	inst->OnDaytimeChangedEvent.AddDynamic(this, &ALightBlock::OnNightChanged);
@@ -71,14 +71,13 @@ void ALightBlock::Tick(float DeltaSeconds)
 	updateLightByConsumption(actuallyObtained / elapsedSeconds, max);
 }
 
-void ALightBlock::OnNightChanged(bool isNight)
-{
-	isDaytime = !isNight;
-	print(TEXT("Night changed"));
-}
-
+void ALightBlock::OnNightChanged(bool isNight) { isDaytime = !isNight; }
 
 void ALightBlock::SetControlState_Implementation(bool isOn) {}
 void ALightBlock::SetOutputPowerPercentage_Implementation(float percentage) {}
 void ALightBlock::SetController_Implementation(ABlock* controller) {}
 ABlock* ALightBlock::GetController_Implementation() { return NULL; }
+
+void ALightBlock::SetDisplayedWidget(UUserWidget* widget) { shownWidget = widget; }
+
+UUserWidget* ALightBlock::GetShownWidget() { return shownWidget; }

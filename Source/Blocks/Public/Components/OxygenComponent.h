@@ -39,7 +39,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenComponent")
 		bool PutAmount(float aviable, float& actuallyPutted);
 
-
 	void ToggleIsInCreative(bool newInCreative);
 
 public:
