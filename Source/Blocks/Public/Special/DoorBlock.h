@@ -20,6 +20,14 @@ enum class EDoorOpening : uint8
 	Right
 };
 
+namespace DoorBlockConstants {
+
+	static FString DoorState = TEXT("DoorState");
+	static FString DoorYaw = TEXT("DoorYaw");
+
+}
+
+
 /**
  *
  */
@@ -65,6 +73,9 @@ private:
 
 	void updateDoorState(FTransform& currentTrans, int32 openingConstant)
 	{
+		BlockInfo->BlockSpecificData[DoorBlockConstants::DoorState] = FString::FromInt((uint8)doorState);
+		BlockInfo->BlockSpecificData[DoorBlockConstants::DoorYaw] = FString::SanitizeFloat(currentTrans.Rotator().Yaw);
+
 		switch (doorState)
 		{
 		case EDoorState::Closed:

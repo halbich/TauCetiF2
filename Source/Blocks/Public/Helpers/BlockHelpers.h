@@ -134,6 +134,7 @@ namespace BlockSavingHelpers {
 		info->Location = block.Location;
 		info->Rotation = block.Rotation;
 		info->Health = block.Health;
+		info->BlockSpecificData = block.BlockSpecificData;
 	}
 
 	static void ToContainer(FBlockInfo& block, UBlockInfo* info) {
@@ -141,6 +142,7 @@ namespace BlockSavingHelpers {
 		block.Location = info->Location;
 		block.Rotation = info->Rotation;
 		block.Health = info->Health;
+		block.BlockSpecificData = info->BlockSpecificData;
 	}
 
 	static void SetBlockData(USaveGameCarrier* carrier, TArray<UBlockInfo*>& UsedBlocks)

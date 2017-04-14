@@ -136,5 +136,27 @@ private:
 		}
 	}
 
+	FORCEINLINE void updateStatistics(UElectricNetwork* n)
+	{
+		float producedEnergy = 0.0f;
+		for (auto producer : n->ElectricityProducers)
+		{
+			producedEnergy += producer->EnergyProduced;
+			producer->EnergyProduced = 0;
+		}
+
+		n->EnergyProductionPerSec = producedEnergy / (dayMultiplier * TimeSinceLastRecompute);
+
+		float consumedEnergy = 0.0f;
+		for (auto consumer : n->ElectricityConsumers)
+		{
+			consumedEnergy += consumer->EnergyConsumed;
+			consumer->EnergyConsumed = 0;
+		}
+
+		n->EnergyConsumptionPerSec = consumedEnergy / (dayMultiplier * TimeSinceLastRecompute);
+
+	
+	}
 
 };

@@ -1,5 +1,3 @@
-
-
 #include "TauCetiF2.h"
 #include "GameElectricityComponent.h"
 
@@ -18,9 +16,7 @@ UGameElectricityComponent::UGameElectricityComponent() : Super(), networksToUpda
 	// ...
 
 	dayMultiplier = 86400.0f / GameDefinitions::GameDayLength;
-
 }
-
 
 // Called when the game starts
 void UGameElectricityComponent::BeginPlay()
@@ -28,9 +24,7 @@ void UGameElectricityComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-
 }
-
 
 // Called every frame
 void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -56,74 +50,81 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 		if (FMath::IsNearlyZero(totalElectricityAviable))	// we do net have enough power
 		{
 			n->TotalElectricityAviableFilling = 0;
-			continue;
 		}
-
-		n->TotalElectricityAviableFilling = n->TotalElectricityAviable / n->MaxElectricityAviable;
-
-
-		float criticalAviable = 0.5f * totalElectricityAviable;
-		// TODO
-		float totalCriticalRequired = 0.0f;
-		for (auto critical : n->CriticalRepairEntities)
+		else
 		{
-			auto owner = Cast<ABlock>(critical->GetOwner());
-			ensure(owner);
+			n->TotalElectricityAviableFilling = n->TotalElectricityAviable / n->MaxElectricityAviable;
 
-			// TODO get (required, divide it by totalCritical required) and multiply by aviable
-			//owner->Heal(...);
+			float criticalAviable = 0.5f * totalElectricityAviable;
+
+			totalElectricityAviable -= criticalAviable;
+			// TODO
+			float totalCriticalRequired = 0.0f;
+			for (auto critical : n->CriticalRepairEntities)
+			{
+				auto owner = Cast<ABlock>(critical->GetOwner());
+				ensure(owner);
+
+				// TODO get (required, divide it by totalCritical required) and multiply by aviable
+				//owner->Heal(...);
+			}
+
+			// TODO badly, to reapir
+
+			for (auto critical : n->CriticalRepairEntities)
+			{
+				auto owner = Cast<ABlock>(critical->GetOwner());
+				ensure(owner);
+
+				// TODO get (required, divide it by totalCritical required) and multiply by aviable
+			//	owner->HealthUpdated()
+			}
+
+			// TODO badly, to repair
+
+			// TODO remaining energy fill to consumers
+
+
+			if (n->ElectricityConsumers.Num() > 0 && totalElectricityAviable > 0) {
+
+				auto electricityConsumed = 0.0f;
+
+				auto totalRequired = 0.0f;
+				//auto ration = totalElectricityAviable / n->ElectricityConsumers.Num();
+
+				for (auto consumer : n->ElectricityConsumers)
+					totalRequired += consumer->ElectricityInfo->CurrentObjectMaximumEnergy - consumer->ElectricityInfo->CurrentObjectEnergy;
+
+				if (totalRequired > 0)
+				{
+					for (auto consumer : n->ElectricityConsumers)
+					{
+						auto ration = (consumer->ElectricityInfo->CurrentObjectMaximumEnergy - consumer->ElectricityInfo->CurrentObjectEnergy) / totalRequired;
+						auto aviable = totalElectricityAviable * ration;
+
+						auto actuallyPutted = 0.0f;
+						if (consumer->PutAmount(aviable, actuallyPutted))
+							electricityConsumed += actuallyPutted;
+					}
+
+					totalElectricityAviable -= electricityConsumed;
+					// todo do smthing with the rest
+				}
+
+			}
 		}
-
-		// TODO badly, to reapir
-
-
-		for (auto critical : n->CriticalRepairEntities)
-		{
-			auto owner = Cast<ABlock>(critical->GetOwner());
-			ensure(owner);
-
-			// TODO get (required, divide it by totalCritical required) and multiply by aviable
-		//	owner->HealthUpdated()
-		}
-
-		// TODO badly, to repair
-
-
-		// TODO remaining energy fill to consumers
-
 
 		if (TimeSinceLastRecompute >= 0.5f)
-		{
-
-			float producedEnergy = 0.0f;
-			for (auto producer : n->ElectricityProducers)
-			{
-				producedEnergy += producer->EnergyProduced;
-				producer->EnergyProduced = 0;
-			}
-
-			n->EnergyProductionPerSec = producedEnergy / (dayMultiplier * TimeSinceLastRecompute);
-
-			float consumedEnergy = 0.0f;
-			for (auto consumer : n->ElectricityConsumers)
-			{
-				consumedEnergy += consumer->EnergyConsumed;
-				consumer->EnergyConsumed = 0;
-			}
-
-			n->EnergyConsumptionPerSec = consumedEnergy / (dayMultiplier * TimeSinceLastRecompute);
-
-			TimeSinceLastRecompute = 0.0f;
-		}
-
+			updateStatistics(n);
 	}
 
+	if (TimeSinceLastRecompute >= 0.5f)
+		TimeSinceLastRecompute = 0.0f;
 
 	if (networksToUpdate.IsEmpty())
 		return;
 
 	tickRecomputeNetwork(time);
-
 }
 
 void UGameElectricityComponent::AddToWorldNetwork(UElectricityComponent* comp)
@@ -135,7 +136,6 @@ void UGameElectricityComponent::AddToWorldNetwork(UElectricityComponent* comp)
 	enqueueItem(comp);
 
 	networksToUpdate.Enqueue(n);
-
 }
 
 void UGameElectricityComponent::processNetwork(UElectricNetwork* network)
@@ -166,12 +166,9 @@ void UGameElectricityComponent::processNetwork(UElectricNetwork* network)
 	//		-	to be processed		->	nothing - will be processed
 	//		-	valid				->	merge networks, leaving one to be destroyed
 
-
-
 	for (auto connected : part->ConnectedComponents)
 	{
 		auto areDifferent = connected->Network != part->Network;
-
 
 		switch (connected->ComponentNetworkState)
 		{
@@ -210,7 +207,6 @@ void UGameElectricityComponent::RemoveFromWorldNetwork(UElectricityComponent* co
 
 	forceInvalidateNetwork(comp->Network);
 	comp->Network->UnregisterEntity(comp);
-
 
 	for (auto connected : comp->ConnectedComponents)
 	{

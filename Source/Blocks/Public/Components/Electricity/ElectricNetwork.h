@@ -39,6 +39,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float MaxElectricityAviable;
 
+	// Percentage of Electricity aviable
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float TotalElectricityAviableFilling;
 
@@ -49,7 +50,18 @@ public:
 		float TotalHealth;
 
 
-	
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float TotalStorableElectricity;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float MaxStorableElectricity;
+
+	// Percentage of Electricity aviable
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float TotalElectricityStorableFilling;
+
+
 
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> Entities;
