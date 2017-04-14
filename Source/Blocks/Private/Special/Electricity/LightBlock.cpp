@@ -19,6 +19,8 @@ ALightBlock::ALightBlock()
 	AddOwnedComponent(ElectricityComponent);
 
 	dayMultiplier = 86400.0f / GameDefinitions::GameDayLength;
+
+	
 }
 
 UStaticMeshComponent* ALightBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -31,6 +33,25 @@ UStaticMeshComponent* ALightBlock::GetMeshStructureComponent_Implementation(int3
 
 UPrimitiveComponent* ALightBlock::GetComponentForObjectOutline_Implementation() {
 	return LightBlockMesh;
+}
+
+void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	inst->OnDaytimeChangedEvent.RemoveDynamic(this, &ALightBlock::OnNightChanged);
+
+	Super::EndPlay(EndPlayReason);
+}
+
+void ALightBlock::OnConstruction(const FTransform& Transform) {
+
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	inst->OnDaytimeChangedEvent.RemoveDynamic(this, &ALightBlock::OnNightChanged);
+
+
+	Super::OnConstruction(Transform);
 }
 
 void ALightBlock::Tick(float DeltaSeconds)
@@ -54,4 +75,11 @@ void ALightBlock::Tick(float DeltaSeconds)
 
 	updateLightByConsumption(actuallyObtained / elapsedSeconds, max);
 
+}
+
+
+void ALightBlock::OnNightChanged(bool isNight)
+{
+	isDaytime = !isNight;
+	print(TEXT("Night changed"));
 }

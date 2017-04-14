@@ -3,6 +3,7 @@
 #include "Block.h"
 #include "Components/ElectricityComponent.h"
 #include "BlockWithElectricity.h"
+#include "Commons/Public/TCF2GameInstance.h"
 #include "LightBlock.generated.h"
 
 /**
@@ -28,7 +29,17 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "TCF2 | LightBlock")
 		bool AutoregulatePowerOutput;
 
+	UPROPERTY(Transient)
+		float dayMultiplier;
+
+	UPROPERTY(Transient)
+		float isDaytime;
+
 	virtual void Tick(float DeltaSeconds) override;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
@@ -39,12 +50,14 @@ public:
 		return ElectricityComponent;
 	}
 
-	UPROPERTY(Transient)
-		float dayMultiplier;
+	void OnNightChanged(bool isNight);
 
 private:
 	FORCEINLINE float getAutoregulatedPower(const float p, const float max)
 	{
+		if (isDaytime)
+			return 0.0f;
+
 		if (p >= 50.0f)
 			return max;
 

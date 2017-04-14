@@ -167,6 +167,8 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	UsedBlocks->Add(make(1100, FVector(31, 58, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 0.000000));
 	UsedBlocks->Add(make(1100, FVector(11, 59, 0), FVector(20, 20, 2), FRotator(0, -90, 0), 0.000000));
 	UsedBlocks->Add(make(1100, FVector(-9, 59, 0), FVector(20, 20, 2), FRotator(0, -90, 0), 0.000000));
+	UsedBlocks->Add(make(1050, FVector(-3, -9, 4), FVector(1, 1, 1), FRotator(0, 90, 0), 0.000000));
+
 	c->PlayerPosition = FVector(-214, -227, 163);
 	c->PlayerRotation = FRotator(0, -32, 0);
 
