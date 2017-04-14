@@ -55,12 +55,6 @@ public:
 		void DEBUGHideMinMaxBoxes();
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
-		void DEBUGSpawnPatterns(const FVector & startingPoint);
-
-	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
-		void DEBUGUsedPatternElements(const FVector & startingPoint);
-
-	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
 		void LoadDataFromCarrier(USaveGameCarrier* carrier);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")

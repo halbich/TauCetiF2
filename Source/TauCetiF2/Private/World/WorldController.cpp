@@ -84,7 +84,6 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 	return true;
 }
 
-// TODO inline!
 ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot)
 {
 	if (!block)
@@ -240,27 +239,6 @@ void AWorldController::DEBUGHideMinMaxBoxes() {
 		print(TEXT("NO Root!"));
 }
 
-void AWorldController::DEBUGSpawnPatterns(const FVector & startingPoint)
-{
-	print(TEXT("DEBUGSpawnPatterns"));
-
-	auto blocks = UPatternDefinitionsHolder::Instance()->DEBUGSpawnPatterns(startingPoint);
-	for (auto block : blocks)
-	{
-		SpawnWorldObject(GetWorld(), block, true);
-	}
-}
-
-void AWorldController::DEBUGUsedPatternElements(const FVector & startingPoint)
-{
-	print(TEXT("DEBUGUsedPatternElements"));
-
-	auto blocks = UPatternDefinitionsHolder::Instance()->DEBUGUsedPatternElements(startingPoint);
-	for (auto block : blocks)
-	{
-		SpawnWorldObject(GetWorld(), block, true);
-	}
-}
 
 void AWorldController::BeginPlay() {
 	RootBox = NewObject<UKDTree>(GetTransientPackage(), TEXT("RootBox"));

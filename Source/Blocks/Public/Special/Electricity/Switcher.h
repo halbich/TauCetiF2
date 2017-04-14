@@ -34,6 +34,9 @@ public:
 	UPROPERTY(Transient)
 		TArray<ABlock*> controlledBlocks;
 
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | SwitcherBlock")
+		bool IsOn;
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
@@ -62,6 +65,15 @@ public:
 private:
 	void ListeningOnUse(AActor* actor, bool isSpecial);
 
+	void updateDynamicColor()
+	{
+		auto mat = Cast<UMaterialInstanceDynamic>(SwitcherMesh->GetMaterial(2));
+		if (!mat)
+			return;
+
+		mat->SetScalarParameterValue(TEXT("IsConnected"), controlledBlocks.Num());
+		mat->SetScalarParameterValue(TEXT("IsOn"), IsOn);
+	}
 
 
 };

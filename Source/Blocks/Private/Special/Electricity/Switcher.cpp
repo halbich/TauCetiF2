@@ -42,6 +42,8 @@ void  ASwitcher::OnConstruction(const FTransform& Transform) {
 	Subscriber.BindUObject(this, &ASwitcher::ListeningOnUse);
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 
+
+	updateDynamicColor();
 }
 
 void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
@@ -51,29 +53,21 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 
 	if (!isSpecial)
 	{
-		print(TEXT("not special use"));
 		auto def = Definition->GetDefaultObject<UBlockDefinition>();
 		check(def);
 		IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
 		return;
 	}
 
-	// TODO if connected, switch state
+	if (controlledBlocks.Num() == 0)
+		return;
+
+	IsOn = !IsOn;
+
+	updateDynamicColor();
 
 }
 
-//void Switcher::ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source)
-//{
-//	auto mat = Cast<UMaterialInstanceDynamic>(OxygenTankMesh->GetMaterial(0));
-//	if (!mat)
-//		return;
-//
-//	auto def = OxygenComponent->GetDefinition();
-//	if (!def)
-//		return;
-//
-//	mat->SetScalarParameterValue(TEXT("Filling"), def->TotalObjectVolume > 0 ? source->CurrentFillingValue / def->TotalObjectVolume : 0.0f);
-//}
 
 void ASwitcher::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
@@ -98,7 +92,7 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 		return false;
 
 	controlledBlocks.AddUnique(controllableBlock);
-
+	updateDynamicColor();
 	return true;
 }
 
@@ -108,5 +102,9 @@ bool ASwitcher::UnbindControl_Implementation(ABlock* controllableBlock)
 	if (!interf)
 		return false;
 
-	return 	controlledBlocks.Remove(controllableBlock) != 0;
+	auto res = controlledBlocks.Remove(controllableBlock) != 0;
+
+	updateDynamicColor();
+
+	return res;
 }
