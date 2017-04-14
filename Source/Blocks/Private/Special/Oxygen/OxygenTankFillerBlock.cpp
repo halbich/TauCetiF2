@@ -114,3 +114,9 @@ void AOxygenTankFillerBlock::SetDisplayedWidget(UUserWidget* widget)
 }
 
 UUserWidget* AOxygenTankFillerBlock::GetShownWidget() { return shownWidget; }
+
+
+void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) {}
+void AOxygenTankFillerBlock::SetOutputPowerPercentage_Implementation(float percentage) {}
+void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {}
+ABlock* AOxygenTankFillerBlock::GetController_Implementation() { return NULL; }

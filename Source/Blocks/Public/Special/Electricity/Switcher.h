@@ -6,16 +6,18 @@
 #include "Interfaces/BlockWithShowableWidget.h"
 #include "Components/ElectricityComponent.h"
 #include "BlockWithElectricity.h"
+#include "ControllerBlock.h"
+#include "ControllableBlock.h"
 #include "Switcher.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
-class BLOCKS_API ASwitcher : public ABlock, public IBlockWithShowableWidget, public IBlockWithElectricity
+class BLOCKS_API ASwitcher : public ABlock, public IBlockWithShowableWidget, public IBlockWithElectricity, public IControllerBlock
 {
 	GENERATED_BODY()
-	
+
 public:
 	ASwitcher();
 
@@ -29,12 +31,21 @@ public:
 	UPROPERTY(Transient)
 		UUserWidget* shownWidget;
 
+	UPROPERTY(Transient)
+		TArray<ABlock*> controlledBlocks;
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
-	
+
+
+	virtual bool BindControl_Implementation(ABlock* controllableBlock) override;
+
+	virtual bool UnbindControl_Implementation(ABlock* controllableBlock) override;
+
+
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
@@ -51,6 +62,6 @@ public:
 private:
 	void ListeningOnUse(AActor* actor, bool isSpecial);
 
-	
+
 
 };

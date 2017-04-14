@@ -76,3 +76,9 @@ void ALightBlock::OnNightChanged(bool isNight)
 	isDaytime = !isNight;
 	print(TEXT("Night changed"));
 }
+
+
+void ALightBlock::SetControlState_Implementation(bool isOn) {}
+void ALightBlock::SetOutputPowerPercentage_Implementation(float percentage) {}
+void ALightBlock::SetController_Implementation(ABlock* controller) {}
+ABlock* ALightBlock::GetController_Implementation() { return NULL; }

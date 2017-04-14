@@ -5,6 +5,7 @@
 #include "Block.h"
 #include "Components/ElectricityComponent.h"
 #include "BlockWithElectricity.h"
+#include "ControllableBlock.h"
 #include "Creator.generated.h"
 
 
@@ -14,7 +15,7 @@
  *
  */
 UCLASS()
-class BLOCKS_API ACreator : public ABlock, public IBlockWithElectricity
+class BLOCKS_API ACreator : public ABlock, public IBlockWithElectricity, public IControllableBlock
 {
 	GENERATED_BODY()
 
@@ -41,6 +42,11 @@ public:
 	virtual UMinMaxBox* GetWatchingBox() override;
 
 	virtual void CheckWatchingBox() override;
+
+	virtual void SetControlState_Implementation(bool isOn) override;
+	virtual void SetOutputPowerPercentage_Implementation(float percentage) override;
+	virtual void SetController_Implementation(ABlock* controller) override;
+	virtual ABlock* GetController_Implementation() override;
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{

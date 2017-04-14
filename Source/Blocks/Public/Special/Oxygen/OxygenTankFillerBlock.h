@@ -6,13 +6,14 @@
 #include "BlockWithOxygen.h"
 #include "BlockWithElectricity.h"
 #include "BlockWithShowableWidget.h"
+#include "ControllableBlock.h"
 #include "OxygenTankFillerBlock.generated.h"
 
 /**
  *
  */
 UCLASS()
-class BLOCKS_API AOxygenTankFillerBlock : public ABlock, public IBlockWithOxygen, public IBlockWithElectricity, public IBlockWithShowableWidget
+class BLOCKS_API AOxygenTankFillerBlock : public ABlock, public IBlockWithOxygen, public IBlockWithElectricity, public IBlockWithShowableWidget, public IControllableBlock
 {
 	GENERATED_BODY()
 
@@ -46,6 +47,11 @@ public:
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
 
 	virtual UUserWidget* GetShownWidget() override;
+
+	virtual void SetControlState_Implementation(bool isOn) override;
+	virtual void SetOutputPowerPercentage_Implementation(float percentage) override;
+	virtual void SetController_Implementation(ABlock* controller) override;
+	virtual ABlock* GetController_Implementation() override;
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{

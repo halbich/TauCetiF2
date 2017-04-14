@@ -4,13 +4,14 @@
 #include "Components/ElectricityComponent.h"
 #include "BlockWithElectricity.h"
 #include "Commons/Public/TCF2GameInstance.h"
+#include "ControllableBlock.h"
 #include "LightBlock.generated.h"
 
 /**
  *
  */
 UCLASS()
-class BLOCKS_API ALightBlock : public ABlock, public IBlockWithElectricity
+class BLOCKS_API ALightBlock : public ABlock, public IBlockWithElectricity, public IControllableBlock
 {
 	GENERATED_BODY()
 
@@ -44,6 +45,13 @@ public:
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
+
+
+	virtual void SetControlState_Implementation(bool isOn) override;
+	virtual void SetOutputPowerPercentage_Implementation(float percentage) override;
+	virtual void SetController_Implementation(ABlock* controller) override;
+	virtual ABlock* GetController_Implementation() override;
+
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{

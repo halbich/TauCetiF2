@@ -59,7 +59,7 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 	}
 
 	// TODO if connected, switch state
-	
+
 }
 
 //void Switcher::ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source)
@@ -89,3 +89,24 @@ void ASwitcher::SetDisplayedWidget(UUserWidget* widget)
 }
 
 UUserWidget* ASwitcher::GetShownWidget() { return shownWidget; }
+
+
+bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
+{
+	auto interf = Cast<IControllableBlock>(controllableBlock);
+	if (!interf)
+		return false;
+
+	controlledBlocks.AddUnique(controllableBlock);
+
+	return true;
+}
+
+bool ASwitcher::UnbindControl_Implementation(ABlock* controllableBlock)
+{
+	auto interf = Cast<IControllableBlock>(controllableBlock);
+	if (!interf)
+		return false;
+
+	return 	controlledBlocks.Remove(controllableBlock) != 0;
+}
