@@ -37,9 +37,9 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	virtual void BeginPlay() override;
 
-	virtual void OnConstruction(const FTransform& Transform) override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
@@ -50,7 +50,8 @@ public:
 		return ElectricityComponent;
 	}
 
-	void OnNightChanged(bool isNight);
+	UFUNCTION()
+		void OnNightChanged(bool isNight);
 
 private:
 	FORCEINLINE float getAutoregulatedPower(const float p, const float max)

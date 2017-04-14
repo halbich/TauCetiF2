@@ -26,6 +26,16 @@ struct FElectricityComponentDefinition
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
 		float MaxConsumedEnergyPerGameSecond;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
+		bool IsControlBlock;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition", meta = (EditCondition = IsControlBlock))
+		bool IsController;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition", meta = (EditCondition = IsControlBlock))
+		bool IsControllable;
+
+
 	FElectricityComponentDefinition()
 	{
 	};

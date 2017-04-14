@@ -29,4 +29,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameInstance")
 		void DaytimeChanged(bool isNight);
+
+	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | GameInstance")
+		bool IsNightInGame;
 };

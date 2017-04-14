@@ -19,8 +19,6 @@ ALightBlock::ALightBlock()
 	AddOwnedComponent(ElectricityComponent);
 
 	dayMultiplier = 86400.0f / GameDefinitions::GameDayLength;
-
-	
 }
 
 UStaticMeshComponent* ALightBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -35,6 +33,15 @@ UPrimitiveComponent* ALightBlock::GetComponentForObjectOutline_Implementation() 
 	return LightBlockMesh;
 }
 
+void ALightBlock::BeginPlay() {
+	Super::BeginPlay();
+	
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	inst->OnDaytimeChangedEvent.AddDynamic(this, &ALightBlock::OnNightChanged);
+	OnNightChanged(inst->IsNightInGame);
+}
+
 void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
@@ -44,19 +51,8 @@ void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 }
 
-void ALightBlock::OnConstruction(const FTransform& Transform) {
-
-	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	ensure(inst);
-	inst->OnDaytimeChangedEvent.RemoveDynamic(this, &ALightBlock::OnNightChanged);
-
-
-	Super::OnConstruction(Transform);
-}
-
 void ALightBlock::Tick(float DeltaSeconds)
 {
-
 	auto elapsedSeconds = DeltaSeconds * dayMultiplier;
 
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
@@ -72,11 +68,8 @@ void ALightBlock::Tick(float DeltaSeconds)
 
 	ElectricityComponent->EnergyConsumed += actuallyObtained;
 
-
 	updateLightByConsumption(actuallyObtained / elapsedSeconds, max);
-
 }
-
 
 void ALightBlock::OnNightChanged(bool isNight)
 {

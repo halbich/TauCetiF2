@@ -14,5 +14,6 @@ void UTCF2GameInstance::SetHolderInstance(UObject* holder)
 
 void UTCF2GameInstance::DaytimeChanged(bool isNight)
 {
+	IsNightInGame = isNight;
 	OnDaytimeChangedEvent.Broadcast(isNight);
 }
