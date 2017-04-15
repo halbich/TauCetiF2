@@ -70,6 +70,18 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 
 	genBlock->Execute_UpdateBlockOnConstruction(this, def);
 
+
+
+	if (def->ElectricityComponentDef.IsControlBlock)
+	{
+		if (!BlockInfo->RelationsInfo || !BlockInfo->RelationsInfo->IsValidLowLevel())
+			BlockInfo->RelationsInfo = NewObject<UBlockWithRelationsInfo>();
+	}
+	else {
+		check(!BlockInfo->RelationsInfo);
+	}
+
+
 	Super::OnConstruction(Transform);
 }
 

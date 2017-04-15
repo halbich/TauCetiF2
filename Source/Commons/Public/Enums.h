@@ -98,3 +98,10 @@ enum class EHealthSeverity : uint8
 	Critical		UMETA(DisplayName = "Critical"),
 	Dead			UMETA(DisplayName = "Dead")
 };
+
+UENUM(BlueprintType)
+enum class ESwitherRelationship : uint8
+{
+	IsControlledByTarget	 	UMETA(DisplayName = "IsControlledByTarget"),
+	IsControllingTarget			UMETA(DisplayName = "IsControllingTarget")
+};

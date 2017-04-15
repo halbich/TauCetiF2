@@ -23,4 +23,5 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithRelationsInfo")
 		TArray<URelationshipInfo*> Relationships;
 	
+	int32 RemoveRelationshipsByTargetID(const FGuid& targetID);
 };

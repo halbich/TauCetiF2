@@ -79,6 +79,17 @@ public:
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> ElectricityConsumers;
 
+
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ControllerBlocks;
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ControllableBlocks;
+
+
+
+
 	FORCEINLINE void RegisterEntity(UElectricityComponent* comp)
 	{
 		Entities.Add(comp);
@@ -98,6 +109,19 @@ public:
 		{
 			ElectricityConsumers.Add(comp);
 			ConsumersCount = ElectricityConsumers.Num();
+		}
+
+		if (def->IsControlBlock)
+		{
+			if (def->IsControllable)
+			{
+				ControllableBlocks.Add(comp);
+			}
+
+			if (def->IsController)
+			{
+				ControllerBlocks.Add(comp);
+			}
 		}
 
 		auto info = comp->GetBlockInfo();
@@ -125,6 +149,19 @@ public:
 		{
 			ElectricityConsumers.Remove(comp);
 			ConsumersCount = ElectricityConsumers.Num();
+		}
+
+		if (def->IsControlBlock)
+		{
+			if (def->IsControllable)
+			{
+				ControllableBlocks.Remove(comp);
+			}
+
+			if (def->IsController)
+			{
+				ControllerBlocks.Remove(comp);
+			}
 		}
 
 		auto info = comp->GetBlockInfo();

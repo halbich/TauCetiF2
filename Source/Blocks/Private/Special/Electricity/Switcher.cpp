@@ -81,6 +81,25 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 	if (!interf)
 		return false;
 
+	auto my = BlockInfo->RelationsInfo;
+	ensure(my);
+
+	auto other = controllableBlock->BlockInfo->RelationsInfo;
+	ensure(other && other->IsValidLowLevel());
+
+	auto controlledRel = NewObject<URelationshipInfo>();
+	controlledRel->TargetID = my->ID;
+	controlledRel->RelationshipType = (uint8)ESwitherRelationship::IsControlledByTarget;
+	other->Relationships.Add(controlledRel);
+
+
+	auto controllingRel = NewObject<URelationshipInfo>();
+	controllingRel->TargetID = other->ID;
+	controllingRel->RelationshipType = (uint8)ESwitherRelationship::IsControllingTarget;
+	my->Relationships.Add(controllingRel);
+
+
+	interf->SetController(this);
 	controlledBlocks.AddUnique(controllableBlock);
 	updateDynamicColor();
 	return true;
@@ -92,9 +111,20 @@ bool ASwitcher::UnbindControl_Implementation(ABlock* controllableBlock)
 	if (!interf)
 		return false;
 
+	auto my = BlockInfo->RelationsInfo;
+	ensure(my);
+
+	auto other = controllableBlock->BlockInfo->RelationsInfo;
+	ensure(other && other->IsValidLowLevel());
+
 	auto res = controlledBlocks.Remove(controllableBlock) != 0;
 
 	updateDynamicColor();
+	interf->SetController(NULL);
+
+	other->RemoveRelationshipsByTargetID(my->ID);
+	my->RemoveRelationshipsByTargetID(other->ID);
+
 
 	return res;
 }

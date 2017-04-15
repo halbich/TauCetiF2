@@ -47,10 +47,7 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 
 		auto ref = showableWidgetDelegates.Find(object);
 		if (ref && ref->IsValid())
-		{
 			usableWithWidget->RemoveShowWidgetForBlockEventListener(*ref);
-			print(TEXT("RemoveDynamicShow"));
-		}
 	}
 
 	auto pickable = Cast<IPickableBlock>(object);
@@ -176,11 +173,14 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			auto ListeningHandle = usableWithWidget->AddShowWidgetForBlockEventListener(Subscriber);
 
 			showableWidgetDelegates.Add(actor, ListeningHandle);
-
-			print(TEXT("AddDynamicShow"));
 		}
 
 		actor->OnDestroyRequestedEvent.AddDynamic(this, &AWorldController::DestroyRequestEventHandler);
+
+
+
+		//auto controller = Cast<IControllerBlock>(actor);
+
 
 		//MinMax->DEBUGDrawContainingBox(GetWorld());
 	}

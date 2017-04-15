@@ -6,7 +6,11 @@
 #include "BlockWithElectricity.h"
 #include "ControllerBlock.h"
 #include "ControllableBlock.h"
+#include "Commons/Public/Enums.h"
 #include "Switcher.generated.h"
+
+
+
 
 /**
  *
