@@ -18,4 +18,7 @@ public:
 		ASwitcher* CurrentBlock;
 
 	virtual void InitForBlock_Implementation(ABlock* block) override;
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherWidget")
+		void GetControllables(TArray<ABlock*>& aviables, TArray<ABlock*>& controlled);
 };
