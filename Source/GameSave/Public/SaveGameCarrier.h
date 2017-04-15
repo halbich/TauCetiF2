@@ -145,20 +145,36 @@ private:
 		int32 count = 0;
 		for (auto info : usedBlocks)
 		{
-			UE_LOG(LogTemp, Log, TEXT("auto b_%d = make(%d, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d), %f, %s); "),
-				count,
-				info.ID,
-				FMath::RoundToInt(info.Location.X), FMath::RoundToInt(info.Location.Y), FMath::RoundToInt(info.Location.Z),
-				FMath::RoundToInt(info.Scale.X), FMath::RoundToInt(info.Scale.Y), FMath::RoundToInt(info.Scale.Z),
-				FMath::RoundToInt(info.Rotation.Pitch), FMath::RoundToInt(info.Rotation.Yaw), FMath::RoundToInt(info.Rotation.Roll),
-				info.Health,
-				*info.Name
-			);
+			TArray<FStringFormatArg> args;
+			args.Add(FStringFormatArg(count));
+			args.Add(FStringFormatArg(info.ID));
+			args.Add(FStringFormatArg(FMath::RoundToInt(info.Location.X))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Location.Y))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Location.Z)));
+			args.Add(FStringFormatArg(FMath::RoundToInt(info.Scale.X))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Scale.Y))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Scale.Z)));
+			args.Add(FStringFormatArg(FMath::RoundToInt(info.Rotation.Pitch))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Rotation.Yaw))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Rotation.Roll)));
+			args.Add(FStringFormatArg(info.Health));
+			args.Add(FStringFormatArg(*info.Name));
+			auto baseStr = FString::Format(TEXT("auto b_{0} = make({1}, FVector({2}, {3}, {4}), FVector({5}, {6}, {7}), FRotator({8}, {9}, {10}), {1}, \"{12}\"); "), args);
 
 
-			UE_LOG(LogTemp, Log, TEXT("UsedBlocks->Add(b_%d);"), count);
+			if (info.HasElectricityData)
+			{
+				TArray<FStringFormatArg> elArgs;
+				elArgs.Add(FStringFormatArg(count));
+				elArgs.Add(FStringFormatArg(info.ElectricityInfo.CurrentObjectEnergy));
+				baseStr += FString::Format(TEXT("b_{0}.HasElectricityData = true; b_{0}.ElectricityInfo.CurrentObjectEnergy = {1}; "), elArgs);
 
-			++count;
+			}
+
+			if (info.HasOxygenData)
+			{
+				TArray<FStringFormatArg> oxArgs;
+				oxArgs.Add(FStringFormatArg(count));
+				oxArgs.Add(FStringFormatArg(info.OxygenInfo.CurrentFillingValue));
+				baseStr += FString::Format(TEXT("b_{0}.HasOxygenData = true; b_{0}.OxygenInfo.CurrentFillingValue = {1}; "), oxArgs);
+			}
+
+			UE_LOG(LogTemp, Log, TEXT("%s UsedBlocks->Add(b_%d);"), *baseStr, count++);
+
 		}
 
 		UE_LOG(LogTemp, Log, TEXT("c->PlayerPosition = FVector(%d, %d, %d);"),

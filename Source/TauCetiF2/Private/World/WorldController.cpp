@@ -138,7 +138,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	if (addToRoot) {
 		auto MinMax = NewObject<UKDTree>()->Init(box);
 		MinMax->ContainingObject = actor;
-		UE_LOG(LogTemp, Log, TEXT("---   Přidávám do světa objekt  %s"), *actor->GetName());
+		//UE_LOG(LogTemp, Log, TEXT("---   Přidávám do světa objekt  %s"), *actor->GetName());
 
 		auto woc = actor->WorldObjectComponent;
 		woc->UpdateDefiningBox(MinMax);

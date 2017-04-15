@@ -134,11 +134,14 @@ void  AGeneratorBlock::OnConstruction(const FTransform& Transform) {
 		dynamicColors[i] = 0;
 }
 
-#pragma optimize("", off)
+
 
 void AGeneratorBlock::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	// TODO
+	return;
 
 	int32 sec;
 	float partSec;
@@ -176,6 +179,8 @@ void AGeneratorBlock::Tick(float DeltaTime)
 
 	UpdateCustomTexture();
 }
+
+#pragma optimize("", off)
 
 void AGeneratorBlock::UpdateCustomTexture()
 {

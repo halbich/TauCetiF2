@@ -24,7 +24,7 @@ class BLOCKS_API ABlock : public AActor, public IGenericBlock
 public:
 	ABlock();
 
-	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | Block")
 		TSubclassOf<UBlockDefinition> Definition;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Block")
