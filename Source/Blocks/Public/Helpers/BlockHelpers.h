@@ -15,6 +15,9 @@
 #include "GameSave/Public/BlockComponents/OxygenComponentInfo.h"
 #include "GameSave/Public/BlockComponents/ElectricityComponentInfo.h"
 
+#include "../Info/BlockWithRelationsInfo.h"
+#include "../Info/RelationshipInfo.h"
+
 #include "GameSave/Public/SaveGameCarrier.h"
 
 /**
@@ -91,6 +94,33 @@ namespace BlockSavingHelpers {
 		block.CurrentObjectEnergy = info->CurrentObjectEnergy;
 	}
 
+	static void FromRelationsContainer(UBlockWithRelationsInfo* info, FBlockWithRelationshipInfo& block)
+	{
+		info->ID = block.ID;
+
+		for (auto rel : block.Relationships)
+		{
+			auto NewItem = NewObject<URelationshipInfo>();
+			NewItem->TargetID = rel.TargetID;
+			NewItem->RelationshipType = rel.RelationshipType;
+			info->Relationships.Add(NewItem);
+		}
+	}
+
+	static void ToRelationsContainer(FBlockWithRelationshipInfo& block, UBlockWithRelationsInfo* info)
+	{
+		block.ID = info->ID;
+		block.Relationships.Empty();
+
+		for (auto rel : info->Relationships)
+		{
+			FRelationshipInfo NewItem;
+			NewItem.TargetID = rel->TargetID;
+			NewItem.RelationshipType = rel->RelationshipType;
+			block.Relationships.Add(NewItem);
+		}
+	}
+
 	static void FromBaseContainer(UBlockBaseInfo* info, FBlockBaseInfo& block) {
 		info->ID = block.ID;
 		info->Scale = block.Scale;
@@ -135,6 +165,12 @@ namespace BlockSavingHelpers {
 		info->Rotation = block.Rotation;
 		info->Health = block.Health;
 		info->BlockSpecificData = block.BlockSpecificData;
+
+		if (block.HasRelationshipData)
+		{
+			info->RelationsInfo = NewObject<UBlockWithRelationsInfo>();
+			FromRelationsContainer(info->RelationsInfo, block.RelationshipInfo);
+		}
 	}
 
 	static void ToContainer(FBlockInfo& block, UBlockInfo* info) {
@@ -143,6 +179,12 @@ namespace BlockSavingHelpers {
 		block.Rotation = info->Rotation;
 		block.Health = info->Health;
 		block.BlockSpecificData = info->BlockSpecificData;
+
+		if (info->RelationsInfo && info->RelationsInfo->IsValidLowLevel())
+		{
+			block.HasRelationshipData = true;
+			ToRelationsContainer(block.RelationshipInfo, info->RelationsInfo);
+		}
 	}
 
 	static void SetBlockData(USaveGameCarrier* carrier, TArray<UBlockInfo*>& UsedBlocks)

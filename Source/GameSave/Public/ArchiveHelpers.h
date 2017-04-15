@@ -1,9 +1,9 @@
 ﻿#pragma once
 
 #include "BlockSaveInfo.h"
-
 #include "BlockComponents/BlockComponentsArchiveHelpers.h"
 #include "Inventory/InventoryArchiveHelpers.h"
+#include "Relations/RelationsArchiveHelpers.h"
 
 FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockBaseInfo& block)
 {
@@ -30,6 +30,10 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FBlockInfo& block)
 	Ar << block.Rotation;
 	Ar << block.Health;
 	Ar << block.BlockSpecificData;
+
+	Ar << block.HasRelationshipData;
+	if (block.HasRelationshipData)
+		Ar << block.RelationshipInfo;
 
 	return Ar;
 }

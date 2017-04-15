@@ -18,4 +18,6 @@ public:
 		ALightBlock* CurrentBlock;
 
 	virtual void InitForBlock_Implementation(ABlock* block) override;
+
+
 };

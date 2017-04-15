@@ -2,6 +2,7 @@
 
 #include "BlockComponents/OxygenComponentInfo.h"
 #include "BlockComponents/ElectricityComponentInfo.h"
+#include "Relations/FBlockWithRelationshipInfo.h"
 
 // Help class to save / load data as saveGame
 
@@ -37,9 +38,17 @@ struct FBlockInfo : FBlockBaseInfo
 	float Health;
 	TMap<FString, FString> BlockSpecificData;
 
-	FBlockInfo() : FBlockBaseInfo(), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), Health(0), BlockSpecificData()
+	bool HasRelationshipData;
+	FBlockWithRelationshipInfo RelationshipInfo;
+
+	FBlockInfo() : FBlockBaseInfo(),
+		Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), Health(0), BlockSpecificData(),
+		HasRelationshipData(false), RelationshipInfo()
 	{};
-	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base), Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), Health(0), BlockSpecificData()
+
+	FBlockInfo(const FBlockBaseInfo& base) : FBlockBaseInfo(base),
+		Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), Health(0), BlockSpecificData(),
+		HasRelationshipData(false), RelationshipInfo()
 	{};
 };
 

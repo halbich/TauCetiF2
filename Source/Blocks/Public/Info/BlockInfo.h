@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "BlockBaseInfo.h"
-
+#include "BlockWithRelationsInfo.h"
 #include "BlockInfo.generated.h"
 
 /*
@@ -30,4 +30,7 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		TMap<FString, FString> BlockSpecificData;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
+		UBlockWithRelationsInfo* RelationsInfo;
 };

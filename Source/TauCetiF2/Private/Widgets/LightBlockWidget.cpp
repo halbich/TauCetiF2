@@ -1,7 +1,7 @@
 #include "TauCetiF2.h"
 #include "LightBlockWidget.h"
 
-void USwitcherWidget::InitForBlock_Implementation(ABlock* block)
+void ULightBlockWidget::InitForBlock_Implementation(ABlock* block)
 {
 	Super::InitForBlock_Implementation(block);
 
