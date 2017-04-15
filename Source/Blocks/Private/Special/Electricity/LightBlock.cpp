@@ -33,6 +33,55 @@ UPrimitiveComponent* ALightBlock::GetComponentForObjectOutline_Implementation() 
 	return LightBlockMesh;
 }
 
+
+
+void ALightBlock::SetBlockInfo(UBlockInfo* info)
+{
+	Super::SetBlockInfo(info);
+
+	/*auto valueptr = info->AdditionalFlags.Find(TEXT("DoorOpening"));
+	if (valueptr)
+		doorOpening = (EDoorOpening)(*valueptr);
+
+	auto openingConstant = doorOpening == EDoorOpening::Left ? 1 : -1;
+
+	auto state = info->BlockSpecificData.FindOrAdd(DoorBlockConstants::DoorState);
+	if (state.IsEmpty())
+	{
+		doorState = EDoorState::Opened;
+		BlockInfo->BlockSpecificData[DoorBlockConstants::DoorState] = FString::FromInt((uint8)doorState);
+	}
+	else {
+		doorState = (EDoorState)FCString::Atoi(*state);
+	}
+
+	auto setYaw = 90 * openingConstant;
+
+	auto yaw = BlockInfo->BlockSpecificData.FindOrAdd(DoorBlockConstants::DoorYaw);
+	if (yaw.IsEmpty())
+		BlockInfo->BlockSpecificData[DoorBlockConstants::DoorYaw] = FString::SanitizeFloat(setYaw);
+	else
+		setYaw = FCString::Atof(*yaw);
+
+	auto transf = DoorBlockMesh->GetRelativeTransform();
+	transf.SetRotation(transf.Rotator().Add(0, setYaw, 0).Quaternion());
+	updateDoorState(transf, openingConstant);*/
+}
+
+void ALightBlock::ListeningOnUse(AActor* actor, bool isSpecial)
+{
+	/*if (doorState == EDoorState::Closed)
+	{
+		doorState = EDoorState::Opening;
+		return;
+	}
+	else if (doorState == EDoorState::Opened)
+		doorState = EDoorState::Closing;*/
+}
+
+
+
+
 void ALightBlock::BeginPlay() {
 	Super::BeginPlay();
 

@@ -10,3 +10,12 @@ const int32 GameDefinitions::CubeMaxSizeMultiplier(20);
 const int32 GameDefinitions::DefaultInventoryTagGroupsCount(10);
 const float GameDefinitions::CubeSurfaceInMetersSquared((GameDefinitions::CubeMinSize / 100.0f) * (GameDefinitions::CubeMinSize / 100.0f));
 const float GameDefinitions::GameDayLength(3600);
+
+const float GameDefinitions::RainHitpointToEnergy(1000);
+const float GameDefinitions::EnergyToRainHitpoint(1.0f / GameDefinitions::RainHitpointToEnergy);
+
+const float GameDefinitions::EnergyToOgygen(10);
+const float GameDefinitions::OxygenToEnergy(1.0f / GameDefinitions::EnergyToOgygen);
+
+const float GameDefinitions::EnergyToHealth(.002f);
+const float GameDefinitions::HealthToEnergy(1.0f / GameDefinitions::EnergyToHealth);

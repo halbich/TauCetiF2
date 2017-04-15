@@ -15,6 +15,15 @@ public:
 	static const int32 DefaultInventoryTagGroupsCount;
 	static const float CubeSurfaceInMetersSquared;
 	static const float GameDayLength;
+
+	static const float RainHitpointToEnergy;
+	static const float EnergyToRainHitpoint;
+	
+	static const float EnergyToOgygen;
+	static const float OxygenToEnergy;
+
+	static const float EnergyToHealth;
+	static const float HealthToEnergy;
 };
 
 /* Stencil index mapping to PP_OutlineColored  http://www.tomlooman.com/multi-color-outline-post-process-in-unreal-engine-4/ */

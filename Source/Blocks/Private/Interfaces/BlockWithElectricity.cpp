@@ -12,14 +12,15 @@ void IBlockWithElectricity::UpdateHealth(UElectricityComponent* comp, UBlockInfo
 
 float IBlockWithElectricity::WasHitByStorm(const float amount)
 {
-	float healthToRemove = amount;
+	float energyToRemove = amount *  GameDefinitions::RainHitpointToEnergy;
 
-	if (FMath::IsNearlyZero(healthToRemove))
-		return healthToRemove;
+	if (FMath::IsNearlyZero(energyToRemove))
+		return energyToRemove;
 
 	float actuallyObtained = 0;
-	if (GetElectricityComponent()->ObtainAmount(healthToRemove, actuallyObtained))
-		healthToRemove -= actuallyObtained;
+	if (GetElectricityComponent()->ObtainAmount(energyToRemove, actuallyObtained))
+		energyToRemove -= actuallyObtained;
 
-	return healthToRemove;
+
+	return energyToRemove * GameDefinitions::EnergyToRainHitpoint;	// we want to return remaining rain hitpoints
 }

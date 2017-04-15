@@ -64,10 +64,15 @@ public:
 		return ElectricityComponent;
 	}
 
+	virtual void SetBlockInfo(UBlockInfo* info);
+
 	UFUNCTION()
 		void OnNightChanged(bool isNight);
 
 private:
+
+	void ListeningOnUse(AActor* actor, bool isSpecial);
+
 	FORCEINLINE float getAutoregulatedPower(const float p, const float max)
 	{
 		if (isDaytime)

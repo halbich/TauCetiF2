@@ -219,12 +219,14 @@ void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float
 	else
 		spots.Insert(hitted, 0);
 
-	auto energyToPut = amount;
+	auto energyToPut = amount *  GameDefinitions::RainHitpointToEnergy;
 	float actuallyPutted = 0;
 	if (ElectricityComponent->PutAmount(energyToPut, actuallyPutted))
 	{
 		energyToPut -= actuallyPutted;
 		ElectricityComponent->EnergyProduced += actuallyPutted;
+
+		energyToPut *= GameDefinitions::EnergyToRainHitpoint;
 	}
 
 	ensure(energyToPut >= 0);
