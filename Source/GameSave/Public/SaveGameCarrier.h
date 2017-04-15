@@ -142,15 +142,23 @@ private:
 #if WITH_EDITOR
 		UE_LOG(LogTemp, Log, TEXT("~~~~~~~~~~~~~~~~~~  Save ~~~~~~~~~~~~~~~~~~~~~~~~"));
 
+		int32 count = 0;
 		for (auto info : usedBlocks)
 		{
-			UE_LOG(LogTemp, Log, TEXT("UsedBlocks->Add(make(%d, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d), %f));"),
+			UE_LOG(LogTemp, Log, TEXT("auto b_%d = make(%d, FVector(%d, %d, %d), FVector(%d, %d, %d), FRotator(%d, %d, %d), %f, %s); "),
+				count,
 				info.ID,
 				FMath::RoundToInt(info.Location.X), FMath::RoundToInt(info.Location.Y), FMath::RoundToInt(info.Location.Z),
 				FMath::RoundToInt(info.Scale.X), FMath::RoundToInt(info.Scale.Y), FMath::RoundToInt(info.Scale.Z),
 				FMath::RoundToInt(info.Rotation.Pitch), FMath::RoundToInt(info.Rotation.Yaw), FMath::RoundToInt(info.Rotation.Roll),
-				info.Health
+				info.Health,
+				*info.Name
 			);
+
+
+			UE_LOG(LogTemp, Log, TEXT("UsedBlocks->Add(b_%d);"), count);
+
+			++count;
 		}
 
 		UE_LOG(LogTemp, Log, TEXT("c->PlayerPosition = FVector(%d, %d, %d);"),
