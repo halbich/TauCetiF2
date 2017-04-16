@@ -82,79 +82,23 @@ void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 void UInventoryComponent::SelectNextBank()
 {
 	InventoryTags->NextBank();
+	selectItem(0);
 }
 
 void UInventoryComponent::SelectPrevBank()
 {
 	InventoryTags->PrevBank();
+	selectItem(0);
 }
 
 void UInventoryComponent::SelectNextItem()
 {
-	auto filterGroup = InventoryTags->GetCurrentActiveTagGroup();
-	switch (filterGroup->GroupType)
-	{
-	case EInventoryGroupType::Building: {
-		if (!filterGroup->IsBuildableCacheValid) rebuildBuildableCache(filterGroup);
-		auto count = filterGroup->BuildableCache.Num();
-		if (count > 0)
-		{
-			CurrentSelectedIndex = (CurrentSelectedIndex + 1) % count;
-			ensure(filterGroup->BuildableCache.IsValidIndex(CurrentSelectedIndex));
-			OnCurrentSelectedIndexChanged.Broadcast(CurrentSelectedIndex, filterGroup->BuildableCache[CurrentSelectedIndex]);
-		}
-		break;
-
-	}
-	case EInventoryGroupType::Inventory: {
-		if (!filterGroup->IsInventoryCacheValid) rebuildInventoryCache(filterGroup);
-		auto count = filterGroup->InventoryCache.Num();
-		if (count > 0)
-		{
-			CurrentSelectedIndex = (CurrentSelectedIndex + 1) % count;
-			ensure(filterGroup->BuildableCache.IsValidIndex(CurrentSelectedIndex));
-			OnCurrentSelectedIndexChanged.Broadcast(CurrentSelectedIndex, filterGroup->BuildableCache[CurrentSelectedIndex]);
-		}
-		break;
-	}
-	default:
-		checkNoEntry();
-		break;
-	}
+	selectItem(1);
 }
 
 void UInventoryComponent::SelectPrevItem()
 {
-	auto filterGroup = InventoryTags->GetCurrentActiveTagGroup();
-	switch (filterGroup->GroupType)
-	{
-	case EInventoryGroupType::Building: {
-		if (!filterGroup->IsBuildableCacheValid) rebuildBuildableCache(filterGroup);
-		auto count = filterGroup->BuildableCache.Num();
-		if (count > 0)
-		{
-			CurrentSelectedIndex = (CurrentSelectedIndex + count  - 1) % count;
-			ensure(filterGroup->BuildableCache.IsValidIndex(CurrentSelectedIndex));
-			OnCurrentSelectedIndexChanged.Broadcast(CurrentSelectedIndex, filterGroup->BuildableCache[CurrentSelectedIndex]);
-		}
-		break;
-
-	}
-	case EInventoryGroupType::Inventory: {
-		if (!filterGroup->IsInventoryCacheValid) rebuildInventoryCache(filterGroup);
-		auto count = filterGroup->InventoryCache.Num();
-		if (count > 0)
-		{
-			CurrentSelectedIndex = (CurrentSelectedIndex + count  - 1) % count;
-			ensure(filterGroup->BuildableCache.IsValidIndex(CurrentSelectedIndex));
-			OnCurrentSelectedIndexChanged.Broadcast(CurrentSelectedIndex, filterGroup->BuildableCache[CurrentSelectedIndex]);
-		}
-		break;
-	}
-	default:
-		checkNoEntry();
-		break;
-	}
+	selectItem(-1);
 }
 
 void UInventoryComponent::EmptyHand()

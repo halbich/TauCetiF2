@@ -91,13 +91,13 @@ public:
 	void SelectPrevBank();
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
-	void SelectNextItem();
+		void SelectNextItem();
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
-	void SelectPrevItem();
+		void SelectPrevItem();
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
-	void EmptyHand();
+		void EmptyHand();
 
 	void AddItem(UBuildableBlockInfo* block);
 
@@ -126,5 +126,49 @@ private:
 				filterGroup->InventoryCache.Add(b);
 		}
 		filterGroup->IsInventoryCacheValid = true;
+	}
+
+	FORCEINLINE void selectItem(int32 offset)
+	{
+		UBuildableBlockInfo* infoToSend = NULL;
+		auto filterGroup = InventoryTags->GetCurrentActiveTagGroup();
+		switch (filterGroup->GroupType)
+		{
+		case EInventoryGroupType::Building: {
+			if (!filterGroup->IsBuildableCacheValid) rebuildBuildableCache(filterGroup);
+			auto count = filterGroup->BuildableCache.Num();
+			if (count > 0)
+			{
+
+				CurrentSelectedIndex = offset == 0 && CurrentSelectedIndex >= 0 && CurrentSelectedIndex >= count ? -1 : (CurrentSelectedIndex + count + offset) % count;
+				if (filterGroup->BuildableCache.IsValidIndex(CurrentSelectedIndex))
+					infoToSend = filterGroup->BuildableCache[CurrentSelectedIndex];
+			}
+			else
+				CurrentSelectedIndex = -1;
+
+			break;
+
+		}
+		case EInventoryGroupType::Inventory: {
+			if (!filterGroup->IsInventoryCacheValid) rebuildInventoryCache(filterGroup);
+			auto count = filterGroup->InventoryCache.Num();
+			if (count > 0)
+			{
+				CurrentSelectedIndex = offset == 0 && CurrentSelectedIndex >= 0 && CurrentSelectedIndex >= count ? -1 : (CurrentSelectedIndex + count + offset) % count;
+				if (filterGroup->InventoryCache.IsValidIndex(CurrentSelectedIndex))
+					infoToSend = filterGroup->InventoryCache[CurrentSelectedIndex];
+			}
+			else
+				CurrentSelectedIndex = -1;
+
+			break;
+		}
+		default:
+			checkNoEntry();
+			break;
+		}
+
+		OnCurrentSelectedIndexChanged.Broadcast(CurrentSelectedIndex, infoToSend);
 	}
 };
