@@ -51,8 +51,8 @@ public:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
-
 	virtual UUserWidget* GetShownWidget() override;
+	virtual void ShowWidget_Implementation() override;
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{

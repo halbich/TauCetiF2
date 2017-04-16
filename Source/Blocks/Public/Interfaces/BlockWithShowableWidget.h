@@ -33,6 +33,11 @@ public:
 
 	virtual UUserWidget* GetShownWidget() = 0;
 
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "TCF2 | BlockWithShowableWidget")
+		void ShowWidget();
+
+	virtual void ShowWidget_Implementation();
+
 protected:
 	FShowWidgetForBlockEvent MyShowWidgetForBlockEvent;
 };

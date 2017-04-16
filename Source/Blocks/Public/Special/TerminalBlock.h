@@ -35,7 +35,6 @@ public:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
-
 	virtual UUserWidget* GetShownWidget() override;
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override

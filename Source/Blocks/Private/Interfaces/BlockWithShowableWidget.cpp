@@ -20,3 +20,8 @@ void IBlockWithShowableWidget::RemoveShowWidgetForBlockEventListener(FDelegateHa
 {
 	MyShowWidgetForBlockEvent.Remove(DelegateHandle);
 }
+
+void IBlockWithShowableWidget::ShowWidget_Implementation()
+{
+
+}

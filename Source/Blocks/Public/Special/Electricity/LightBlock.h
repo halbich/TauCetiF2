@@ -37,6 +37,11 @@ public:
 	UPROPERTY(Transient)
 		UUserWidget* shownWidget;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | LightBlock")
+		ABlock* usedController;
+
+
+	virtual void OnConstruction(const FTransform& Transform) override;
 	virtual void Tick(float DeltaSeconds) override;
 
 	virtual void BeginPlay() override;
@@ -53,8 +58,8 @@ public:
 	virtual ABlock* GetController_Implementation() override;
 
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
-
 	virtual UUserWidget* GetShownWidget() override;
+	virtual void ShowWidget_Implementation() override;
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{
@@ -67,6 +72,8 @@ public:
 		void OnNightChanged(bool isNight);
 
 private:
+
+	FDelegateHandle ListeningHandle;
 
 	void ListeningOnUse(AActor* actor, bool isSpecial);
 

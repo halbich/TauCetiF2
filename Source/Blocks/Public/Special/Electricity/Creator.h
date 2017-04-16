@@ -31,6 +31,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | CreatorBlock")
 		bool IsValidCreator;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | CreatorBlock")
+		ABlock* usedController;
+
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;

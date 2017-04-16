@@ -75,6 +75,14 @@ void ASwitcher::SetDisplayedWidget(UUserWidget* widget)
 
 UUserWidget* ASwitcher::GetShownWidget() { return shownWidget; }
 
+void ASwitcher::ShowWidget_Implementation()
+{
+	auto def = Definition->GetDefaultObject<UBlockDefinition>();
+	check(def);
+	IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
+}
+
+
 bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 {
 	auto interf = Cast<IControllableBlock>(controllableBlock);

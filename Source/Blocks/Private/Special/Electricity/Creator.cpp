@@ -141,6 +141,7 @@ void ACreator::CheckWatchingBox()
 
 void ACreator::SetControlState_Implementation(bool isOn) {}
 void ACreator::SetOutputPowerPercentage_Implementation(float percentage) {}
-void ACreator::SetController_Implementation(ABlock* controller) {}
-ABlock* ACreator::GetController_Implementation() { return NULL; }
+
+void ACreator::SetController_Implementation(ABlock* controller) { usedController = controller; }
+ABlock* ACreator::GetController_Implementation() { return usedController; }
 #pragma optimize("", on)

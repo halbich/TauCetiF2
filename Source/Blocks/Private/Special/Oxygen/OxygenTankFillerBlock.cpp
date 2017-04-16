@@ -57,7 +57,6 @@ void AOxygenTankFillerBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 
 	if (!isSpecial)
 	{
-		print(TEXT("not special use"));
 		auto def = Definition->GetDefaultObject<UBlockDefinition>();
 		check(def);
 		IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
@@ -114,7 +113,16 @@ void AOxygenTankFillerBlock::SetDisplayedWidget(UUserWidget* widget)
 
 UUserWidget* AOxygenTankFillerBlock::GetShownWidget() { return shownWidget; }
 
+void AOxygenTankFillerBlock::ShowWidget_Implementation()
+{
+	auto def = Definition->GetDefaultObject<UBlockDefinition>();
+	check(def);
+	IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
+}
+
+
 void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) {}
 void AOxygenTankFillerBlock::SetOutputPowerPercentage_Implementation(float percentage) {}
-void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {}
-ABlock* AOxygenTankFillerBlock::GetController_Implementation() { return NULL; }
+
+void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) { usedController = controller; }
+ABlock* AOxygenTankFillerBlock::GetController_Implementation() { return usedController; }

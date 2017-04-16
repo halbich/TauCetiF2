@@ -9,3 +9,32 @@ void UTerminalBaseWidget::InitForBlock_Implementation(ABlock* block)
 	if (terminal && terminal->IsValidLowLevel() && terminal->ElectricityComponent && terminal->ElectricityComponent->IsValidLowLevel())
 		Network = terminal->ElectricityComponent->Network;
 }
+
+void UTerminalBaseWidget::GetControllables(TArray<ABlock*>& aviable)
+{
+
+
+	for (auto con : Network->ElectricityProducers)
+	{
+		auto c = Cast<ABlock>(con->GetOwner());
+		if (!c || !c->IsValidLowLevel() || c->IsPendingKill())
+			continue;
+
+		aviable.AddUnique(c);
+	}
+
+	for (auto con : Network->ElectricityConsumers)
+	{
+		auto c = Cast<ABlock>(con->GetOwner());
+		if (!c || !c->IsValidLowLevel() || c->IsPendingKill())
+			continue;
+
+		aviable.AddUnique(c);
+	}
+
+	
+
+
+		
+
+}

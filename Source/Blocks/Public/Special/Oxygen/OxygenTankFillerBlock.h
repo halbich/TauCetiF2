@@ -36,6 +36,9 @@ public:
 	UPROPERTY(Transient)
 		UUserWidget* shownWidget;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenTankFiller")
+		ABlock* usedController;
+
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
@@ -45,8 +48,8 @@ public:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
-
 	virtual UUserWidget* GetShownWidget() override;
+	virtual void ShowWidget_Implementation() override;
 
 	virtual void SetControlState_Implementation(bool isOn) override;
 	virtual void SetOutputPowerPercentage_Implementation(float percentage) override;
