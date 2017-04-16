@@ -15,7 +15,7 @@ UGameElectricityComponent::UGameElectricityComponent() : Super(), networksToUpda
 
 	// ...
 
-	dayMultiplier = 86400.0f / GameDefinitions::GameDayLength;
+
 }
 
 // Called when the game starts

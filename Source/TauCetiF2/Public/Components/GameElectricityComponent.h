@@ -30,8 +30,6 @@ protected:
 	UPROPERTY(Transient)
 		float TimeSinceLastRecompute;
 
-	UPROPERTY(Transient)
-		float dayMultiplier;
 
 public:
 	// Called every frame
@@ -137,7 +135,7 @@ private:
 			producer->EnergyProduced = 0;
 		}
 
-		n->EnergyProductionPerSec = producedEnergy / (dayMultiplier * TimeSinceLastRecompute);
+		n->EnergyProductionPerSec = producedEnergy / (GameDefinitions::GameDayMultiplier * TimeSinceLastRecompute);
 
 		float consumedEnergy = 0.0f;
 		for (auto consumer : n->ElectricityConsumers)
@@ -146,6 +144,6 @@ private:
 			consumer->EnergyConsumed = 0;
 		}
 
-		n->EnergyConsumptionPerSec = consumedEnergy / (dayMultiplier * TimeSinceLastRecompute);
+		n->EnergyConsumptionPerSec = consumedEnergy / (GameDefinitions::GameDayMultiplier * TimeSinceLastRecompute);
 	}
 };

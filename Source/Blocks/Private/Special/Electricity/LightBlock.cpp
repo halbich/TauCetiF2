@@ -18,7 +18,7 @@ ALightBlock::ALightBlock()
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
 
-	dayMultiplier = 86400.0f / GameDefinitions::GameDayLength;
+	AutoregulatePowerOutput = true;
 }
 
 UStaticMeshComponent* ALightBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -39,13 +39,9 @@ void ALightBlock::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-	/*auto valueptr = info->AdditionalFlags.Find(TEXT("DoorOpening"));
-	if (valueptr)
-		doorOpening = (EDoorOpening)(*valueptr);
 
-	auto openingConstant = doorOpening == EDoorOpening::Left ? 1 : -1;
 
-	auto state = info->BlockSpecificData.FindOrAdd(DoorBlockConstants::DoorState);
+	/*auto state = info->BlockSpecificData.FindOrAdd(DoorBlockConstants::DoorState);
 	if (state.IsEmpty())
 	{
 		doorState = EDoorState::Opened;
@@ -102,7 +98,7 @@ void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 void ALightBlock::Tick(float DeltaSeconds)
 {
-	auto elapsedSeconds = DeltaSeconds * dayMultiplier;
+	auto elapsedSeconds = DeltaSeconds * GameDefinitions::GameDayMultiplier;
 
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
 	auto i = ElectricityComponent->GetInfo();

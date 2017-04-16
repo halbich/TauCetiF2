@@ -19,6 +19,9 @@
 
 #include "Blocks/Public/Components/ElectricityComponent.h"
 
+#include "Blocks/Public/Interfaces/ControllerBlock.h"
+#include "Blocks/Public/Interfaces/ControllableBlock.h"
+
 #include "WorldController.generated.h"
 
 UCLASS()
@@ -45,6 +48,19 @@ public:
 
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
+
+
+
+	UPROPERTY(Transient)
+		bool resolveRelationships;
+
+	UPROPERTY(Transient)
+		TArray<ABlock*> relControllers;
+
+	UPROPERTY(Transient)
+		TArray<ABlock*> relControllable;
+
+
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
 		void DEBUGShowMinMaxBoxes();

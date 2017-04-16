@@ -32,9 +32,6 @@ public:
 		bool AutoregulatePowerOutput;
 
 	UPROPERTY(Transient)
-		float dayMultiplier;
-
-	UPROPERTY(Transient)
 		float isDaytime;
 
 	UPROPERTY(Transient)

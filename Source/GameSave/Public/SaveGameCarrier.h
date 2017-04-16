@@ -173,6 +173,51 @@ private:
 				baseStr += FString::Format(TEXT("b_{0}.HasOxygenData = true; b_{0}.OxygenInfo.CurrentFillingValue = {1}; "), oxArgs);
 			}
 
+			if (info.HasRelationshipData)
+			{
+
+				UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
+				baseStr.Empty();
+
+				TArray<FStringFormatArg> relArgs;
+				relArgs.Add(FStringFormatArg(count));
+				relArgs.Add(FStringFormatArg(info.RelationshipInfo.ID.ToString()));
+				baseStr += FString::Format(TEXT("b_{0}.HasRelationshipData = true; FGuid b_{0}_rel_id; FGuid::Parse(\"{1}\", b_{0}_rel_id); b_{0}.RelationshipInfo.ID = b_{0}_rel_id;"), relArgs);
+
+
+				int32 relCount = 0;
+				for (auto relation : info.RelationshipInfo.Relationships)
+				{
+
+					UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
+					baseStr.Empty();
+
+					TArray<FStringFormatArg> relItemArgs;
+					relItemArgs.Add(FStringFormatArg(count));
+					relItemArgs.Add(FStringFormatArg(relCount));
+					relItemArgs.Add(FStringFormatArg(relation.TargetID.ToString()));
+					relItemArgs.Add(FStringFormatArg(relation.RelationshipType));
+
+					auto commands = TEXT("FRelationshipInfo b_{0}_rel{1}; FGuid b_{0}_rel{1}_id; FGuid::Parse(\"{2}\", b_{0}_rel{1}_id); b_{0}_rel{1}.TargetID = b_{0}_rel{1}_id; b_{0}_rel{1}.RelationshipType = {3};");
+					baseStr += FString::Format(commands, relItemArgs);
+
+					UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
+					baseStr.Empty();
+
+					TArray<FStringFormatArg> relItemArgs1;
+					relItemArgs1.Add(FStringFormatArg(count));
+					relItemArgs1.Add(FStringFormatArg(relCount));
+
+					auto commands1 = TEXT("b_{0}.RelationshipInfo.Relationships.Add(b_{0}_rel{1});");
+					baseStr += FString::Format(commands1, relItemArgs1);
+
+
+					++relCount;
+				}
+
+			}
+
+
 			UE_LOG(LogTemp, Log, TEXT("%s UsedBlocks->Add(b_%d);"), *baseStr, count++);
 
 		}

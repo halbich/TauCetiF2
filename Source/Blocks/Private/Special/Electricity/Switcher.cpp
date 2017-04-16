@@ -90,16 +90,28 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 	auto controlledRel = NewObject<URelationshipInfo>();
 	controlledRel->TargetID = my->ID;
 	controlledRel->RelationshipType = (uint8)ESwitherRelationship::IsControlledByTarget;
-	other->Relationships.Add(controlledRel);
+
+	auto c = other->Relationships.FindByPredicate([controlledRel](URelationshipInfo* info) {
+		return info->TargetID == controlledRel->TargetID && info->RelationshipType == controlledRel->RelationshipType;
+	});
+
+	if (!c)
+		other->Relationships.Add(controlledRel);
 
 
 	auto controllingRel = NewObject<URelationshipInfo>();
 	controllingRel->TargetID = other->ID;
 	controllingRel->RelationshipType = (uint8)ESwitherRelationship::IsControllingTarget;
-	my->Relationships.Add(controllingRel);
+
+	auto c1 = my->Relationships.FindByPredicate([controllingRel](URelationshipInfo* info) {
+		return info->TargetID == controllingRel->TargetID && info->RelationshipType == controllingRel->RelationshipType;
+	});
+
+	if (!c1)
+		my->Relationships.Add(controllingRel);
 
 
-	interf->SetController(this);
+	interf->Execute_SetController(controllableBlock, this);
 	controlledBlocks.AddUnique(controllableBlock);
 	updateDynamicColor();
 	return true;
@@ -120,7 +132,7 @@ bool ASwitcher::UnbindControl_Implementation(ABlock* controllableBlock)
 	auto res = controlledBlocks.Remove(controllableBlock) != 0;
 
 	updateDynamicColor();
-	interf->SetController(NULL);
+	interf->Execute_SetController(controllableBlock, NULL);
 
 	other->RemoveRelationshipsByTargetID(my->ID);
 	my->RemoveRelationshipsByTargetID(other->ID);

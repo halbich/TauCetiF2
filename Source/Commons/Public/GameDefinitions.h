@@ -14,7 +14,9 @@ public:
 	static const int32 CubeMaxSizeMultiplier;
 	static const int32 DefaultInventoryTagGroupsCount;
 	static const float CubeSurfaceInMetersSquared;
+
 	static const float GameDayLength;
+	static const float GameDayMultiplier;
 
 	static const float RainHitpointToEnergy;
 	static const float EnergyToRainHitpoint;
