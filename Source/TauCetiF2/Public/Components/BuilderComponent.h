@@ -54,8 +54,6 @@ public:
 	UPROPERTY(Transient)
 		ACharacter* character;
 
-	UFUNCTION(BlueprintCallable, Category = "TCF2 | BuilderComponent")
-		void SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | BuilderComponent")
 		void SetWorldController(AWorldController* controller);
@@ -74,6 +72,9 @@ public:
 	void RotatePitch(float Value);
 	void RotateRoll(float Value);
 	void RotateYaw(float Value);
+
+	UFUNCTION()
+		void InventorySelectedChangedEvent(int32 NewIndex, UBuildableBlockInfo* BlockInfo);
 
 	// TODO FORCEINLINE
 	void DoAction() {
@@ -190,4 +191,7 @@ public:
 		blockHolder = Cast<UBlockHolder>(inst->BlockHolder);
 		ensure(blockHolder);
 	}
+
+private:
+	void setCurrentBuildingItem(UBuildableBlockInfo* blockInfo);
 };

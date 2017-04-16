@@ -91,15 +91,76 @@ void UInventoryComponent::SelectPrevBank()
 
 void UInventoryComponent::SelectNextItem()
 {
+	auto filterGroup = InventoryTags->GetCurrentActiveTagGroup();
+	switch (filterGroup->GroupType)
+	{
+	case EInventoryGroupType::Building: {
+		if (!filterGroup->IsBuildableCacheValid) rebuildBuildableCache(filterGroup);
+		auto count = filterGroup->BuildableCache.Num();
+		if (count > 0)
+		{
+			CurrentSelectedIndex = (CurrentSelectedIndex + 1) % count;
+			ensure(filterGroup->BuildableCache.IsValidIndex(CurrentSelectedIndex));
+			OnCurrentSelectedIndexChanged.Broadcast(CurrentSelectedIndex, filterGroup->BuildableCache[CurrentSelectedIndex]);
+		}
+		break;
+
+	}
+	case EInventoryGroupType::Inventory: {
+		if (!filterGroup->IsInventoryCacheValid) rebuildInventoryCache(filterGroup);
+		auto count = filterGroup->InventoryCache.Num();
+		if (count > 0)
+		{
+			CurrentSelectedIndex = (CurrentSelectedIndex + 1) % count;
+			ensure(filterGroup->BuildableCache.IsValidIndex(CurrentSelectedIndex));
+			OnCurrentSelectedIndexChanged.Broadcast(CurrentSelectedIndex, filterGroup->BuildableCache[CurrentSelectedIndex]);
+		}
+		break;
+	}
+	default:
+		checkNoEntry();
+		break;
+	}
 }
 
 void UInventoryComponent::SelectPrevItem()
 {
+	auto filterGroup = InventoryTags->GetCurrentActiveTagGroup();
+	switch (filterGroup->GroupType)
+	{
+	case EInventoryGroupType::Building: {
+		if (!filterGroup->IsBuildableCacheValid) rebuildBuildableCache(filterGroup);
+		auto count = filterGroup->BuildableCache.Num();
+		if (count > 0)
+		{
+			CurrentSelectedIndex = (CurrentSelectedIndex + count  - 1) % count;
+			ensure(filterGroup->BuildableCache.IsValidIndex(CurrentSelectedIndex));
+			OnCurrentSelectedIndexChanged.Broadcast(CurrentSelectedIndex, filterGroup->BuildableCache[CurrentSelectedIndex]);
+		}
+		break;
+
+	}
+	case EInventoryGroupType::Inventory: {
+		if (!filterGroup->IsInventoryCacheValid) rebuildInventoryCache(filterGroup);
+		auto count = filterGroup->InventoryCache.Num();
+		if (count > 0)
+		{
+			CurrentSelectedIndex = (CurrentSelectedIndex + count  - 1) % count;
+			ensure(filterGroup->BuildableCache.IsValidIndex(CurrentSelectedIndex));
+			OnCurrentSelectedIndexChanged.Broadcast(CurrentSelectedIndex, filterGroup->BuildableCache[CurrentSelectedIndex]);
+		}
+		break;
+	}
+	default:
+		checkNoEntry();
+		break;
+	}
 }
 
 void UInventoryComponent::EmptyHand()
 {
-
+	CurrentSelectedIndex = -1;
+	OnCurrentSelectedIndexChanged.Broadcast(CurrentSelectedIndex, NULL);
 }
 
 TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForCurrentBank()
@@ -118,19 +179,24 @@ TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForBank(UInventoryTagG
 	switch (filterGroup->GroupType)
 	{
 	case EInventoryGroupType::Building:
-		for (auto b : BuildableItems)
-		{
-			if (b->BlockDefinition->IsPlaceable && filterGroup->IsSatisfied(b->Tags))
-				result.Add(b);
-		}
+
+		if (filterGroup->IsBuildableCacheValid)
+			return filterGroup->BuildableCache;
+
+
+		rebuildBuildableCache(filterGroup);
+		return filterGroup->BuildableCache;
+
 		break;
 
 	case EInventoryGroupType::Inventory:
-		for (auto b : InventoryItems)
-		{
-			if (b->BlockDefinition->IsInventoryObject && filterGroup->IsSatisfied(b->Tags))
-				result.Add(b);
-		}
+
+		if (filterGroup->IsInventoryCacheValid)
+			return filterGroup->InventoryCache;
+
+		rebuildInventoryCache(filterGroup);
+		return filterGroup->InventoryCache;
+
 		break;
 	default:
 		checkNoEntry();
@@ -157,6 +223,10 @@ void UInventoryComponent::AddItem(UBuildableBlockInfo* block)
 {
 	block->DefinitionSet();
 	BuildableItems.Add(block);
+
+	for (auto grp : InventoryTags->InventoryGroupList)
+		grp->IsBuildableCacheValid = false;
+
 	ForceItemsChanged(false);
 }
 
@@ -164,6 +234,10 @@ void UInventoryComponent::AddItem(UInventoryBuildableBlockInfo* block)
 {
 	block->DefinitionSet();
 	InventoryItems.AddUnique(block);
+
+	for (auto grp : InventoryTags->InventoryGroupList)
+		grp->IsInventoryCacheValid = false;
+
 	ForceItemsChanged(false);
 }
 
@@ -171,5 +245,9 @@ void UInventoryComponent::ItemBuilt(UInventoryBuildableBlockInfo* block)
 {
 	auto removed = InventoryItems.Remove(block);
 	check(removed == 1);
+
+	for (auto grp : InventoryTags->InventoryGroupList)
+		grp->IsInventoryCacheValid = false;
+
 	ForceItemsChanged(false);
 }

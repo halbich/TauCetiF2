@@ -34,6 +34,7 @@
 #include "InventoryComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHudBuildableItemsChanged, bool, ShowGroupName);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCurrentSelectedIndexChanged, int32, NewIndex, UBuildableBlockInfo*, BlockInfo);
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class INVENTORY_API UInventoryComponent : public UActorComponent
@@ -53,8 +54,16 @@ public:
 	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | InventoryComponent")
 		FHudBuildableItemsChanged OnHudBuildableItemsChanged;
 
+	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | InventoryComponent")
+		FCurrentSelectedIndexChanged OnCurrentSelectedIndexChanged;
+
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryComponent")
 		UInventoryTags* InventoryTags;
+
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | InventoryComponent")
+		int32 CurrentSelectedIndex;
+
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
 		void ForceItemsChanged(bool showGroupName);
@@ -81,9 +90,13 @@ public:
 	void SelectNextBank();
 	void SelectPrevBank();
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
 	void SelectNextItem();
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
 	void SelectPrevItem();
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
 	void EmptyHand();
 
 	void AddItem(UBuildableBlockInfo* block);
@@ -91,4 +104,27 @@ public:
 	void AddItem(UInventoryBuildableBlockInfo* block);
 
 	void ItemBuilt(UInventoryBuildableBlockInfo* block);
+
+private:
+	FORCEINLINE void rebuildBuildableCache(UInventoryTagGroup* filterGroup)
+	{
+		filterGroup->BuildableCache.Empty();
+		for (auto b : BuildableItems)
+		{
+			if (b->BlockDefinition->IsPlaceable && filterGroup->IsSatisfied(b->Tags))
+				filterGroup->BuildableCache.Add(b);
+		}
+		filterGroup->IsBuildableCacheValid = true;
+	}
+
+	FORCEINLINE void rebuildInventoryCache(UInventoryTagGroup* filterGroup)
+	{
+		filterGroup->InventoryCache.Empty();
+		for (auto b : InventoryItems)
+		{
+			if (b->BlockDefinition->IsInventoryObject && filterGroup->IsSatisfied(b->Tags))
+				filterGroup->InventoryCache.Add(b);
+		}
+		filterGroup->IsInventoryCacheValid = true;
+	}
 };

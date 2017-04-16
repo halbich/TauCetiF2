@@ -6,6 +6,8 @@
 #include "Commons/Public/Enums.h"
 #include "InventoryTagGroup.generated.h"
 
+class UBuildableBlockInfo;
+
 /**
  *
  */
@@ -26,6 +28,20 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryTagGroup")
 		EInventoryGroupType GroupType;
+
+
+	UPROPERTY(Transient)
+		bool IsBuildableCacheValid;
+
+	UPROPERTY(Transient)
+		TArray<UBuildableBlockInfo*> BuildableCache;
+
+	UPROPERTY(Transient)
+		bool IsInventoryCacheValid;
+
+	UPROPERTY(Transient)
+		TArray<UBuildableBlockInfo*> InventoryCache;
+
 
 	bool IsSatisfied(TArray<FString>& tags)
 	{

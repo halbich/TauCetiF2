@@ -25,6 +25,8 @@ void UBuilderComponent::BeginPlay()
 
 	character = Cast<ACharacter>(owner);
 	ensure(character);
+
+	inventory->OnCurrentSelectedIndexChanged.AddDynamic(this, &UBuilderComponent::InventorySelectedChangedEvent);
 }
 
 #pragma optimize("", off)
@@ -42,7 +44,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	if (!currentSpawnedObject)
 	{
-		SetCurrentBuildingItem(currentBuildableBlockInfo);
+		setCurrentBuildingItem(currentBuildableBlockInfo);
 		return;  // if spawn was successful, we have actual data (spawn point etc)
 	}
 
@@ -131,7 +133,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	currentSpawnedObject->SetActorTransform(BlockHelpers::GetSpawnTransform(currentDefinitionForBlock, currentBlockInfo));
 }
 
-void UBuilderComponent::SetCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
+void UBuilderComponent::setCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 {
 	if (currentSpawnedObject)
 	{
@@ -242,6 +244,11 @@ void UBuilderComponent::RotateYaw(float Value)
 		return;
 
 	AddRotation(0, Value * 90, 0);
+}
+
+void UBuilderComponent::InventorySelectedChangedEvent(int32 NewIndex, UBuildableBlockInfo* BlockInfo)
+{
+	setCurrentBuildingItem(BlockInfo);
 }
 
 #pragma optimize("", on)
