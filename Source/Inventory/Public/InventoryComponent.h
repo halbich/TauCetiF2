@@ -140,7 +140,7 @@ private:
 			if (count > 0)
 			{
 
-				CurrentSelectedIndex = offset == 0 && CurrentSelectedIndex >= 0 && CurrentSelectedIndex >= count ? -1 : (CurrentSelectedIndex + count + offset) % count;
+				CurrentSelectedIndex = offset == 0 && (CurrentSelectedIndex < 0 || CurrentSelectedIndex >= count) ? -1 : (CurrentSelectedIndex + count + offset) % count;
 				if (filterGroup->BuildableCache.IsValidIndex(CurrentSelectedIndex))
 					infoToSend = filterGroup->BuildableCache[CurrentSelectedIndex];
 			}
@@ -155,7 +155,7 @@ private:
 			auto count = filterGroup->InventoryCache.Num();
 			if (count > 0)
 			{
-				CurrentSelectedIndex = offset == 0 && CurrentSelectedIndex >= 0 && CurrentSelectedIndex >= count ? -1 : (CurrentSelectedIndex + count + offset) % count;
+				CurrentSelectedIndex = offset == 0 && (CurrentSelectedIndex < 0 || CurrentSelectedIndex >= count) ? -1 : (CurrentSelectedIndex + count + offset) % count;
 				if (filterGroup->InventoryCache.IsValidIndex(CurrentSelectedIndex))
 					infoToSend = filterGroup->InventoryCache[CurrentSelectedIndex];
 			}

@@ -22,6 +22,8 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 	check(carrier != nullptr);
 
 	InventoryTags = InventoryHelpers::GetInventoryTags(carrier);
+	CurrentSelectedIndex = carrier->InventoryCurrentIndex;
+
 
 	FSelectionChanged Subscriber;
 	Subscriber.BindUObject(this, &UInventoryComponent::InventoryTagsSelectionChanged);
@@ -51,23 +53,25 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 		}
 	}
 
-	for (auto buildable : InventoryHelpers::GetInventoryBuildableBlocks(carrier))
+	for (auto inventory : InventoryHelpers::GetInventoryBuildableBlocks(carrier))
 	{
-		if (aviable.Contains(buildable->ID))
+		if (aviable.Contains(inventory->ID))
 		{
-			buildable->BlockDefinition = blockRef->GetDefinitionFor(buildable->ID);
-			buildable->DefinitionSet();
+			inventory->BlockDefinition = blockRef->GetDefinitionFor(inventory->ID);
+			inventory->DefinitionSet();
 
-			if (buildable->ValidateObject(validationErrors, blockRef))
-				InventoryItems.Add(buildable);
+			if (inventory->ValidateObject(validationErrors, blockRef))
+				InventoryItems.Add(inventory);
 		}
 		else
 		{
-			validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "Nepodařilo se nahrát blok! ID bloku: {0} "), buildable->ID));
+			validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.InventoryComp.FailedToLoadBlock", "Nepodařilo se nahrát blok! ID bloku: {0} "), inventory->ID));
 		}
 	}
 
 	ForceItemsChanged(false);
+
+	selectItem(0);
 }
 
 void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
@@ -77,6 +81,8 @@ void UInventoryComponent::SaveToCarrier(USaveGameCarrier* carrier)
 	InventoryHelpers::SetInventoryTags(carrier, InventoryTags);
 	InventoryHelpers::SetBuildableBlocks(carrier, BuildableItems);
 	InventoryHelpers::SetInventoryBuildableBlocks(carrier, InventoryItems);
+
+	carrier->InventoryCurrentIndex = CurrentSelectedIndex;
 }
 
 void UInventoryComponent::SelectNextBank()
@@ -93,12 +99,12 @@ void UInventoryComponent::SelectPrevBank()
 
 void UInventoryComponent::SelectNextItem()
 {
-	selectItem(1);
+	selectItem(-1);
 }
 
 void UInventoryComponent::SelectPrevItem()
 {
-	selectItem(-1);
+	selectItem(1);
 }
 
 void UInventoryComponent::EmptyHand()
@@ -194,4 +200,6 @@ void UInventoryComponent::ItemBuilt(UInventoryBuildableBlockInfo* block)
 		grp->IsInventoryCacheValid = false;
 
 	ForceItemsChanged(false);
+
+	selectItem(0);
 }

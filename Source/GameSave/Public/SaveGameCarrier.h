@@ -86,6 +86,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
 		bool IsCreativeMode;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
+		int32 InventoryCurrentIndex;
+
 	// Serializable item
 	FElectricityComponentInfo PlayerElectricityComponent;
 

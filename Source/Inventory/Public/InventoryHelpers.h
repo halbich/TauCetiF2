@@ -143,7 +143,7 @@ namespace InventoryHelpers {
 		{
 			FInventoryBuildableItemBlockInfo  block;
 			ToInvBuildableContainer(block, usedBlock);
-			carrier->buildableBlocks.Add(block);
+			carrier->inventoryBuildableBlocks.Add(block);
 		}
 	}
 
