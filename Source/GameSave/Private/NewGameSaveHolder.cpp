@@ -64,8 +64,6 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 
 	c->inventoryTags = makeDefault();
 
-	c->buildableBlocks.Add(makeBuildable(EmptyHandID, FVector(1, 1, 1)));
-	c->inventoryBuildableBlocks.Add(makeInventoryBuildable(EmptyHandID, FVector(1, 1, 1)));
 	c->buildableBlocks.Add(makeBuildable(DeleteID, FVector(1, 1, 1)));
 
 	c->buildableBlocks.Add(makeBuildable(CubeBaseID, FVector(20, 20, 4)));

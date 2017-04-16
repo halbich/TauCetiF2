@@ -9,11 +9,11 @@ void UBuildableBlockInfo::DefinitionSet()
 {
 	switch (ID)
 	{
-	case EmptyHandID: {
+	/*case EmptyHandID: {
 		Action = EBuildableObjectAction::None;
 		AllowOutlineOnSelected = false;
 		break;
-	}
+	}*/
 	case DeleteID: {
 		StencilOverride = STENCIL_DELETE_OUTLINE;
 		Action = EBuildableObjectAction::DeleteObject;

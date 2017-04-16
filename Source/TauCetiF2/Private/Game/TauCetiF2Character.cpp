@@ -95,6 +95,8 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* input
 	inputComponent->BindAction("SelectNextInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnNextInventoryBank);
 	inputComponent->BindAction("SelectPrevInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnPrevInventoryBank);
 
+	inputComponent->BindAction("EmptyHand", IE_Pressed, this, &ATauCetiF2Character::OnEmptyHand);
+
 	inputComponent->BindAction("OnToggleCreativeMode", IE_Pressed, this, &ATauCetiF2Character::OnToggleCreativeMode);
 }
 
@@ -252,6 +254,15 @@ void ATauCetiF2Character::OnPrevInventoryBank()
 {
 	Inventory->SelectPrevBank();
 }
+
+void ATauCetiF2Character::OnEmptyHand()
+{
+	if (GetCharacterMovement()->IsMoveInputIgnored())
+		return;
+
+	Inventory->EmptyHand();
+}
+
 
 void ATauCetiF2Character::BeginPlay()
 {

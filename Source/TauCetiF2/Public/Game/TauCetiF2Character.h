@@ -107,6 +107,7 @@ protected:
 
 	void OnNextInventoryBank();
 	void OnPrevInventoryBank();
+	void OnEmptyHand();
 
 	void toogleCreative(bool isCreative);
 	void OnToggleCreativeMode();

@@ -89,6 +89,19 @@ void UInventoryComponent::SelectPrevBank()
 	InventoryTags->PrevBank();
 }
 
+void UInventoryComponent::SelectNextItem()
+{
+}
+
+void UInventoryComponent::SelectPrevItem()
+{
+}
+
+void UInventoryComponent::EmptyHand()
+{
+
+}
+
 TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForCurrentBank()
 {
 	auto currentFilter = InventoryTags->GetCurrentActiveTagGroup();

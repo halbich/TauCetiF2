@@ -196,6 +196,11 @@ UStaticMeshComponent* AGeneratorBlock::GetMeshStructureComponent_Implementation(
 	return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
 }
 
+
+UPrimitiveComponent* AGeneratorBlock::GetComponentForObjectOutline_Implementation() {
+	return GeneratorMesh;
+}
+
 void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 {
 	FHittedSpot hitted;

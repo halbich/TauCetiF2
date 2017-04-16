@@ -35,7 +35,6 @@ public:
 #define STENCIL_ITEM_HIGHLIGHT 255
 
 /* BlockIDs*/
-#define EmptyHandID -10
 #define DeleteID -5
 #define ElectricToolID -4
 

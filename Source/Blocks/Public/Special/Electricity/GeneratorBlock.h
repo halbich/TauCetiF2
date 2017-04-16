@@ -47,6 +47,8 @@ public:
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
+	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
+
 	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount) override;
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override

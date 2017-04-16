@@ -81,6 +81,11 @@ public:
 	void SelectNextBank();
 	void SelectPrevBank();
 
+	void SelectNextItem();
+	void SelectPrevItem();
+
+	void EmptyHand();
+
 	void AddItem(UBuildableBlockInfo* block);
 
 	void AddItem(UInventoryBuildableBlockInfo* block);
