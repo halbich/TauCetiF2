@@ -25,6 +25,16 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenComponent")
 		bool IsInCreative;
 
+
+	UPROPERTY(Transient)
+		float OxygenProduced;
+
+	UPROPERTY(Transient)
+		float OxygenConsumed;
+
+	UPROPERTY(Transient)
+		UBlockInfo* BlockInfo;
+
 	void onComponentDataChanged();
 
 public:
@@ -32,6 +42,8 @@ public:
 	UBlockWithOxygenInfo* SetInfo(UBlockWithOxygenInfo* info);
 
 	void SetDefinition(FOxygenComponentDefinition def);
+
+	void SetDefinition(FOxygenComponentDefinition def, FVector& blockScale, FRotator& blockRotation);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenComponent")
 		bool ObtainAmount(float requested, float& actuallyObtained, bool requireExact = false);
@@ -41,10 +53,21 @@ public:
 
 	void ToggleIsInCreative(bool newInCreative);
 
+
+	friend UBlockInfo* GetBlockInfoFromParent(UActorComponent* source);
+
+	UBlockInfo* GetBlockInfo();
+
+
 public:
 	FORCEINLINE const FOxygenComponentDefinition* GetDefinition()
 	{
 		return &OxygenComponentDef;
+	}
+
+	FORCEINLINE const UBlockWithOxygenInfo* GetInfo()
+	{
+		return OxygenInfo;
 	}
 
 	UPROPERTY(BlueprintAssignable, Category = "TCF2 | OxygenComponent")

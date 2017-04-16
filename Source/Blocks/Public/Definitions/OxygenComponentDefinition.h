@@ -13,6 +13,9 @@ struct FOxygenComponentDefinition
 		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | OxygenDefinition")
 		float TotalObjectVolume;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | OxygenDefinition")
+		float MaxConsumedOxygenPerGameSecond;
+
 	FOxygenComponentDefinition()
 	{
 	};

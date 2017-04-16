@@ -67,13 +67,15 @@ void AOxygenTankFillerBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 	if (!actorOxygen)
 		return;
 
-	if (FMath::IsNearlyZero(OxygenComponent->OxygenInfo->CurrentFillingValue))		// nemáme z čeho bychom brali
+	auto i = OxygenComponent->GetInfo();
+
+	if (FMath::IsNearlyZero(i->CurrentObjectOxygen))		// nemáme z čeho bychom brali
 		return;
 
 	float actuallyPutted = 0.0f;
 	float actuallyObtained = 0.0f;
 	bool obtainResult = false;
-	if (actorOxygen->PutAmount(OxygenComponent->OxygenInfo->CurrentFillingValue, actuallyPutted))
+	if (actorOxygen->PutAmount(i->CurrentObjectOxygen, actuallyPutted))
 	{
 		obtainResult = OxygenComponent->ObtainAmount(actuallyPutted, actuallyObtained);
 		check(obtainResult && FMath::IsNearlyZero(actuallyObtained - actuallyPutted));
@@ -82,17 +84,6 @@ void AOxygenTankFillerBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 
 void AOxygenTankFillerBlock::ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source)
 {
-	// TODO
-	/*auto mat = Cast<UMaterialInstanceDynamic>(OxygenTankMesh->GetMaterial(0));
-	if (!mat)
-		return;
-
-	auto def = OxygenComponent->GetDefinition();
-	if (!def)
-		return;
-
-	mat->SetScalarParameterValue(TEXT("Filling"), def->TotalObjectVolume > 0 ? source->CurrentFillingValue / def->TotalObjectVolume : 0.0f);
-*/
 }
 
 void AOxygenTankFillerBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)

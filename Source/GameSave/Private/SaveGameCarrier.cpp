@@ -3,7 +3,7 @@
 #include "ArchiveHelpers.h"
 #include "SaveHelpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 27;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 28;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;

@@ -27,8 +27,17 @@ public:
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{
 		return ElectricityComponent;
 	}
+
+
+protected:
+	UFUNCTION()
+		void ListeningOnElectricityCompChanged(UBlockWithElectricityInfo* source);
 };

@@ -10,7 +10,7 @@ void UInventoryBuildableBlockInfo::UpdateDisplayValue()
 {
 	if (OxygenInfo)
 	{
-		DisplayValue = CustomFormat(OxygenInfo->CurrentFillingValue);
+		DisplayValue = CustomFormat(OxygenInfo->CurrentObjectOxygen);
 		DisplayValueName = NSLOCTEXT("TCF2LocSpace", "LC.UInventoryBuildableBlockInfo.OxygenDisplayName", "Obsah kyslíku:");
 	}
 

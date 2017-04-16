@@ -1,13 +1,11 @@
 ﻿#include "Blocks.h"
 #include "OxygenComponent.h"
 
-// Sets default values for this component's properties
+#pragma optimize("", off)
+
 UOxygenComponent::UOxygenComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-	// ...
 }
 
 UBlockWithOxygenInfo* UOxygenComponent::SetInfo(UBlockWithOxygenInfo* info)
@@ -25,6 +23,27 @@ void UOxygenComponent::SetDefinition(FOxygenComponentDefinition def)
 	OxygenComponentDef = def;
 }
 
+void UOxygenComponent::SetDefinition(FOxygenComponentDefinition def, FVector& blockScale, FRotator& blockRotation)
+{
+	SetDefinition(def);
+
+	auto oxygen = OxygenComponentDef.TotalObjectVolume; // *blockScale.X * blockScale.Y * blockScale.Z;
+
+	OxygenInfo->CurrentObjectMaximumOxygen = oxygen;
+
+	if (OxygenInfo->CurrentObjectOxygen > oxygen)
+	{
+		print(TEXT("over!"));
+	}
+	if (OxygenInfo->CurrentObjectOxygen < 0.0f)
+	{
+		print(TEXT("under!"));
+	}
+
+
+	OxygenInfo->CurrentObjectOxygen = FMath::Clamp(OxygenInfo->CurrentObjectOxygen, 0.0f, oxygen);
+}
+
 void UOxygenComponent::onComponentDataChanged()
 {
 	if (OxygenInfo)
@@ -39,15 +58,25 @@ bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained, bo
 		return true;
 	}
 
-	check(OxygenInfo->CurrentFillingValue >= 0);
-
-	if (FMath::IsNearlyZero(OxygenInfo->CurrentFillingValue))
+	if (!OxygenInfo || !OxygenInfo->IsValidLowLevel() || OxygenInfo->IsPendingKill())
 	{
 		actuallyObtained = 0;
 		return false;
 	}
 
-	actuallyObtained = FMath::Min(requested, OxygenInfo->CurrentFillingValue);
+	auto aviable = OxygenInfo->CurrentObjectOxygen;
+
+	check(aviable >= 0);
+
+	if (FMath::IsNearlyZero(aviable))
+	{
+		actuallyObtained = 0;
+		return false;
+	}
+
+	ensure(requested >= 0.0f);
+
+	actuallyObtained = FMath::Min(requested, aviable);
 
 	if (requireExact && !FMath::IsNearlyZero(requested - actuallyObtained))
 	{
@@ -55,7 +84,11 @@ bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained, bo
 		return false;
 	}
 
-	OxygenInfo->CurrentFillingValue -= actuallyObtained;
+	OxygenInfo->CurrentObjectOxygen -= actuallyObtained;
+
+	ensure(OxygenInfo->CurrentObjectOxygen >= 0.0f);
+	ensure(OxygenInfo->CurrentObjectOxygen <= OxygenInfo->CurrentObjectMaximumOxygen);
+
 	onComponentDataChanged();
 	return true;
 }
@@ -68,7 +101,7 @@ bool UOxygenComponent::PutAmount(float aviable, float& actuallyPutted)
 		return true;
 	}
 
-	auto aviableToFill = OxygenComponentDef.TotalObjectVolume - OxygenInfo->CurrentFillingValue;
+	auto aviableToFill = OxygenInfo->CurrentObjectMaximumOxygen - OxygenInfo->CurrentObjectOxygen;
 	check(aviableToFill >= 0);
 
 	if (FMath::IsNearlyZero(aviableToFill))
@@ -79,7 +112,11 @@ bool UOxygenComponent::PutAmount(float aviable, float& actuallyPutted)
 
 	actuallyPutted = FMath::Min(aviable, aviableToFill);
 
-	OxygenInfo->CurrentFillingValue += actuallyPutted;
+	OxygenInfo->CurrentObjectOxygen += actuallyPutted;
+
+	ensure(OxygenInfo->CurrentObjectOxygen >= 0.0f);
+	ensure(OxygenInfo->CurrentObjectOxygen <= OxygenInfo->CurrentObjectMaximumOxygen);
+
 	onComponentDataChanged();
 	return true;
 }
@@ -89,3 +126,13 @@ void UOxygenComponent::ToggleIsInCreative(bool newInCreative)
 	IsInCreative = newInCreative;
 	onComponentDataChanged();
 }
+
+UBlockInfo* UOxygenComponent::GetBlockInfo()
+{
+	if (!BlockInfo || !BlockInfo->IsValidLowLevel())
+		BlockInfo = GetBlockInfoFromParent(this);
+
+	return BlockInfo;
+}
+
+#pragma optimize("", on)

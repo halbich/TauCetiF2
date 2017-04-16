@@ -59,7 +59,7 @@ private:
 	FORCEINLINE void makeOxygen(FBlockBaseInfo& blockInfo, float currentFilling)
 	{
 		blockInfo.HasOxygenData = true;
-		blockInfo.OxygenInfo.CurrentFillingValue = currentFilling;
+		blockInfo.OxygenInfo.CurrentObjectOxygen = currentFilling;
 	}
 
 	FORCEINLINE FInventoryBuildableBlockInfo makeBuildable(int32 blockID, FVector blockScale)

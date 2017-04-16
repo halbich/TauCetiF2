@@ -78,7 +78,10 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 			BlockInfo->RelationsInfo = NewObject<UBlockWithRelationsInfo>();
 	}
 	else {
-		check(!BlockInfo->RelationsInfo);
+		if (BlockInfo->RelationsInfo)
+		{
+			print(TEXT("tohle bychom neměli mít"));
+		}
 	}
 
 
@@ -107,7 +110,8 @@ void ABlock::UpdateBlockOnConstruction_Implementation(UBlockDefinition* BlockDef
 	if (oxygenBlock)
 	{
 		check(BlockDef->HasOxygenComponent);	// musíme mít definici
-		oxygenBlock->SetDefinition(BlockDef->OxygenComponentDef);
+		auto scaleVect = BlockDef->HasCustomScaling ? FVector(1, 1, 1) : BlockInfo->Scale;
+		oxygenBlock->SetDefinition(BlockDef->OxygenComponentDef, scaleVect, BlockInfo->Rotation);
 	}
 	else
 	{
@@ -301,7 +305,7 @@ void WatchingRegionChanged(UObject* obj)
 	b->CheckWatchingBox();
 }
 
-UBlockInfo* GetBlockInfoFromParent(UElectricityComponent* source)
+UBlockInfo* GetBlockInfoFromParent(UActorComponent* source)
 {
 	check(source);
 	auto bl = Cast<ABlock>(source->GetOwner());
@@ -309,6 +313,7 @@ UBlockInfo* GetBlockInfoFromParent(UElectricityComponent* source)
 
 	return bl->BlockInfo;
 }
+
 
 UTexture2D* ABlock::GetDefaultTexture()
 {

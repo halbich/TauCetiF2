@@ -1,6 +1,9 @@
 ﻿#include "Blocks.h"
 #include "BatteryBlock.h"
 
+
+#pragma optimize("", off)
+
 ABatteryBlock::ABatteryBlock()
 	: Super()
 {
@@ -27,3 +30,26 @@ UStaticMeshComponent* ABatteryBlock::GetMeshStructureComponent_Implementation(in
 UPrimitiveComponent* ABatteryBlock::GetComponentForObjectOutline_Implementation() {
 	return BatteryBlockMesh;
 }
+
+void  ABatteryBlock::OnConstruction(const FTransform& Transform) {
+	Super::OnConstruction(Transform);
+
+	ElectricityComponent->OnComponentDataChangedEvent.AddDynamic(this, &ABatteryBlock::ListeningOnElectricityCompChanged);
+	ElectricityComponent->onComponentDataChanged();
+}
+
+void ABatteryBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+
+	if (ElectricityComponent)
+		ElectricityComponent->OnComponentDataChangedEvent.RemoveDynamic(this, &ABatteryBlock::ListeningOnElectricityCompChanged);
+
+	Super::EndPlay(EndPlayReason);
+}
+
+
+void ABatteryBlock::ListeningOnElectricityCompChanged(UBlockWithElectricityInfo* source)
+{
+}
+
+#pragma optimize("", on)

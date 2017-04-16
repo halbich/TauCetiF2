@@ -3,13 +3,9 @@
 
 #pragma optimize("", off)
 
-// Sets default values for this component's properties
 UElectricityComponent::UElectricityComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-	// ...
 }
 
 UBlockWithElectricityInfo* UElectricityComponent::SetInfo(UBlockWithElectricityInfo* info)
@@ -31,7 +27,21 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, F
 {
 	SetDefinition(def);
 
-	ElectricityInfo->CurrentObjectMaximumEnergy = ElectricityComponentDef.TotalObjectEnergy * blockScale.X * blockScale.Y * blockScale.Z;
+	auto energy = ElectricityComponentDef.TotalObjectEnergy * blockScale.X * blockScale.Y * blockScale.Z;
+
+	ElectricityInfo->CurrentObjectMaximumEnergy = energy;
+
+	if (ElectricityInfo->CurrentObjectEnergy > energy)
+	{
+		print(TEXT("over!"));
+	}
+	if (ElectricityInfo->CurrentObjectEnergy < 0.0f)
+	{
+		print(TEXT("under!"));
+	}
+
+
+	ElectricityInfo->CurrentObjectEnergy = FMath::Clamp(ElectricityInfo->CurrentObjectEnergy, 0.0f, energy);
 
 	auto worldLocation = GetOwner()->GetActorLocation();
 
@@ -63,10 +73,6 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, F
 		}
 	}
 
-	//if (ConnectedComponents.Num() > 0) {
-	//	print(TEXT("Valid connections:"));
-	//	print(*FText::AsNumber(ConnectedComponents.Num()).ToString());
-	//}
 }
 
 void UElectricityComponent::onComponentDataChanged()
@@ -89,15 +95,19 @@ bool UElectricityComponent::ObtainAmount(float requested, float& actuallyObtaine
 		return false;
 	}
 
-	check(ElectricityInfo->CurrentObjectEnergy >= 0);
+	auto aviable = ElectricityInfo->CurrentObjectEnergy;
 
-	if (FMath::IsNearlyZero(ElectricityInfo->CurrentObjectEnergy))
+	check(aviable >= 0);
+
+	if (FMath::IsNearlyZero(aviable))
 	{
 		actuallyObtained = 0;
 		return false;
 	}
 
-	actuallyObtained = FMath::Min(requested, ElectricityInfo->CurrentObjectEnergy);
+	ensure(requested >= 0.0f);
+
+	actuallyObtained = FMath::Min(requested,aviable);
 
 	if (requireExact && !FMath::IsNearlyZero(requested - actuallyObtained))
 	{
@@ -106,6 +116,10 @@ bool UElectricityComponent::ObtainAmount(float requested, float& actuallyObtaine
 	}
 
 	ElectricityInfo->CurrentObjectEnergy -= actuallyObtained;
+
+	ensure(ElectricityInfo->CurrentObjectEnergy >= 0.0f);
+	ensure(ElectricityInfo->CurrentObjectEnergy <= ElectricityInfo->CurrentObjectMaximumEnergy);
+
 	onComponentDataChanged();
 	return true;
 }
@@ -130,6 +144,11 @@ bool UElectricityComponent::PutAmount(float aviable, float& actuallyPutted)
 	actuallyPutted = FMath::Min(aviable, aviableToFill);
 
 	ElectricityInfo->CurrentObjectEnergy += actuallyPutted;
+
+	ensure(ElectricityInfo->CurrentObjectEnergy >= 0.0f);
+	ensure(ElectricityInfo->CurrentObjectEnergy <= ElectricityInfo->CurrentObjectMaximumEnergy);
+
+
 	onComponentDataChanged();
 	return true;
 }

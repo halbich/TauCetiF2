@@ -79,11 +79,11 @@ namespace BlockHelpers
 
 namespace BlockSavingHelpers {
 	static void FromOxygenContainer(UBlockWithOxygenInfo* info, FOxygenComponentInfo& block) {
-		info->CurrentFillingValue = block.CurrentFillingValue;
+		info->CurrentObjectOxygen = block.CurrentObjectOxygen;
 	}
 
 	static void ToOxygenContainer(FOxygenComponentInfo& block, UBlockWithOxygenInfo* info) {
-		block.CurrentFillingValue = info->CurrentFillingValue;
+		block.CurrentObjectOxygen = info->CurrentObjectOxygen;
 	}
 
 	static void FromElectricityContainer(UBlockWithElectricityInfo* info, FElectricityComponentInfo& block) {

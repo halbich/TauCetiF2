@@ -97,7 +97,11 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 				{
 					for (auto consumer : n->ElectricityConsumers)
 					{
+						ensure(consumer->ElectricityInfo->CurrentObjectEnergy >= 0 && consumer->ElectricityInfo->CurrentObjectEnergy <= consumer->ElectricityInfo->CurrentObjectMaximumEnergy);
+
 						auto ration = (consumer->ElectricityInfo->CurrentObjectMaximumEnergy - consumer->ElectricityInfo->CurrentObjectEnergy) / totalRequired;
+						ensure(ration >= 0 && ration <= 1);
+						
 						auto aviable = totalElectricityAviable * ration;
 
 						auto actuallyPutted = 0.0f;

@@ -14,5 +14,21 @@ class BLOCKS_API UBlockWithOxygenInfo : public UObject
 public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithOxygenInfo")
-		float CurrentFillingValue;
+		float CurrentObjectOxygen;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithOxygenInfo")
+		float CurrentObjectMaximumOxygen;
+
+
+	FORCEINLINE const float GetRemainingPercentageUnit() const
+	{
+		return FMath::IsNearlyZero(CurrentObjectMaximumOxygen) 
+			? 0.0f 
+			: (CurrentObjectOxygen / CurrentObjectMaximumOxygen);
+	}
+
+	FORCEINLINE const float GetRemainingPercentage() const
+	{
+		return GetRemainingPercentageUnit() * 100.0f;
+	}
 };

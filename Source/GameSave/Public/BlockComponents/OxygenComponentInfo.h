@@ -4,12 +4,12 @@
  * Saving structure for Oxygen component
  */
 struct FOxygenComponentInfo {
-	float CurrentFillingValue;
+	float CurrentObjectOxygen;
 	/*
 	Default constructor
 	*/
 	FOxygenComponentInfo()
 	{
-		CurrentFillingValue = 0;
+		CurrentObjectOxygen = 0;
 	};
 };

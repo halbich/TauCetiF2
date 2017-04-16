@@ -169,8 +169,8 @@ private:
 			{
 				TArray<FStringFormatArg> oxArgs;
 				oxArgs.Add(FStringFormatArg(count));
-				oxArgs.Add(FStringFormatArg(info.OxygenInfo.CurrentFillingValue));
-				baseStr += FString::Format(TEXT("b_{0}.HasOxygenData = true; b_{0}.OxygenInfo.CurrentFillingValue = {1}; "), oxArgs);
+				oxArgs.Add(FStringFormatArg(info.OxygenInfo.CurrentObjectOxygen));
+				baseStr += FString::Format(TEXT("b_{0}.HasOxygenData = true; b_{0}.OxygenInfo.CurrentObjectOxygen = {1}; "), oxArgs);
 			}
 
 			if (info.HasRelationshipData)

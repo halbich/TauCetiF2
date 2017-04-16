@@ -5,7 +5,7 @@
 
 FORCEINLINE FArchive& operator<<(FArchive &Ar, FOxygenComponentInfo& componentInfo)
 {
-	Ar << componentInfo.CurrentFillingValue;
+	Ar << componentInfo.CurrentObjectOxygen;
 	return Ar;
 }
 

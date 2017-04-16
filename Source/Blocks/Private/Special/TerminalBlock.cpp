@@ -39,7 +39,6 @@ void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 
 	if (!isSpecial)
 	{
-		print(TEXT("not special use"));
 		auto def = Definition->GetDefaultObject<UBlockDefinition>();
 		check(def);
 		IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);

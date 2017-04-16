@@ -4,7 +4,6 @@
 #include "Info/Components/BlockWithElectricityInfo.h"
 #include "Definitions/ElectricityComponentDefinition.h"
 #include "Info/ElectricityBindableAreaInfo.h"
-//#include "Electricity/ElectricNetwork.h"
 #include "Commons/Public/Enums.h"
 #include "ElectricityComponent.generated.h"
 
@@ -58,7 +57,7 @@ public:
 
 	friend TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source);
 
-	friend UBlockInfo* GetBlockInfoFromParent(UElectricityComponent* source);
+	friend UBlockInfo* GetBlockInfoFromParent(UActorComponent* source);
 
 public:
 
