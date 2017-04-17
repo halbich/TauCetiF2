@@ -23,7 +23,7 @@ ATauCetiF2Character::ATauCetiF2Character()
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f); // ...at this rotation rate
-	GetCharacterMovement()->JumpZVelocity = 600.f;
+	GetCharacterMovement()->JumpZVelocity = 400.f;
 	GetCharacterMovement()->AirControl = 0.2f;
 
 	// Create a camera boom (pulls in towards the player if there is a collision)
@@ -295,10 +295,9 @@ void ATauCetiF2Character::doCharacterHit(float intensity)
 
 	auto damage = intensity;
 
-	if (FMath::IsNearlyZero(damage))
+	if (FMath::IsNearlyZero(damage) || FMath::IsNearlyZero(Health))
 		return;
 
-	print(TEXT("actorHit!"));
 
 	float energyToRemove = damage *  GameDefinitions::RainHitpointToEnergy;
 
@@ -334,5 +333,29 @@ void tryDoCharacterHit(AActor* actor, float intensity)
 	auto ch = Cast<ATauCetiF2Character>(actor);
 	if (ch)
 		ch->doCharacterHit(intensity);
+
+}
+
+void ATauCetiF2Character::Tick(float DeltaSeconds)
+{
+	auto diff = MaxHealth - Health;
+
+	if (FMath::IsNearlyZero(diff) || FMath::IsNearlyZero(ElectricityComponent->ElectricityInfo->CurrentObjectEnergy))
+	{
+		Super::Tick(DeltaSeconds);
+		return;
+	}
+
+	auto elapsedSeconds = DeltaSeconds * GameDefinitions::GameDayMultiplier;
+	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
+	auto possibleEnergy = elapsedSeconds * max;	// now we can withdraw only this amount;
+
+	auto toWithdraw = FMath::Min(diff *  GameDefinitions::HealthToEnergy, possibleEnergy);
+
+	float actuallyObtained = 0;
+	if (ElectricityComponent->ObtainAmount(toWithdraw, actuallyObtained))
+		Health = FMath::Clamp(Health + actuallyObtained * GameDefinitions::EnergyToHealth, 0.0f, MaxHealth);
+
+	Super::Tick(DeltaSeconds);
 
 }

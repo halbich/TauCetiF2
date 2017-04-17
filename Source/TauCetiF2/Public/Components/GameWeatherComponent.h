@@ -172,19 +172,12 @@ private:
 		ensurePC();
 		auto w = GetWorld();
 
-		const FName TraceTag("MyTraceTag");
-
-		w->DebugDrawTraceTag = TraceTag;
-
 		FHitResult result;
 		FCollisionObjectQueryParams params;
 
 		params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldStatic);
 		params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldDynamic);
 		params.AddObjectTypesToQuery(ECollisionChannel::ECC_Pawn);
-
-		FCollisionQueryParams CollisionParams;
-		CollisionParams.TraceTag = TraceTag;
 
 
 		for (auto i = 0; i < currentHitPoints; i++)
@@ -198,7 +191,7 @@ private:
 			start.Z += startPointZ;
 
 
-			if (w->LineTraceSingleByObjectType(result, start, target, params, CollisionParams))
+			if (w->LineTraceSingleByObjectType(result, start, target, params))
 			{
 				auto act = Cast<ABlock>(result.GetActor());
 				if (act)
