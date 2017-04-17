@@ -73,4 +73,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
 		static float GetGameDayLength();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
+		static float GetGameDayMultiplier();
+	
 };

@@ -132,6 +132,8 @@ void  AGeneratorBlock::OnConstruction(const FTransform& Transform) {
 
 	for (uint32 i = 0; i < dataSize; ++i)
 		dynamicColors[i] = 0;
+
+	UpdateCustomTexture();
 }
 
 
@@ -140,7 +142,7 @@ void AGeneratorBlock::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// TODO
+	// TODO optimize or change approach
 	return;
 
 	int32 sec;
@@ -203,26 +205,26 @@ UPrimitiveComponent* AGeneratorBlock::GetComponentForObjectOutline_Implementatio
 
 void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 {
-	FHittedSpot hitted;
+	//FHittedSpot hitted;
 
-	auto currentScale = GetBlockScale();
+	//auto currentScale = GetBlockScale();
 
-	hitted.X = blockHitLocation.X;
-	ensure(hitted.X >= 0 && hitted.X < currentScale.X);
+	//hitted.X = blockHitLocation.X;
+	//ensure(hitted.X >= 0 && hitted.X < currentScale.X);
 
-	hitted.Y = blockHitLocation.Y;
-	ensure(hitted.Y >= 0 && hitted.Y < currentScale.Y);
+	//hitted.Y = blockHitLocation.Y;
+	//ensure(hitted.Y >= 0 && hitted.Y < currentScale.Y);
 
-	hitted.ActualTime = 0;
+	//hitted.ActualTime = 0;
 
-	auto existing = spots.IndexOfByPredicate([hitted](const FHittedSpot& spot) {
-		return hitted.X == spot.X && hitted.Y == spot.Y;
-	});
+	//auto existing = spots.IndexOfByPredicate([hitted](const FHittedSpot& spot) {
+	//	return hitted.X == spot.X && hitted.Y == spot.Y;
+	//});
 
-	if (existing != INDEX_NONE)
-		spots[existing].ActualTime = 0;
-	else
-		spots.Insert(hitted, 0);
+	//if (existing != INDEX_NONE)
+	//	spots[existing].ActualTime = 0;
+	//else
+	//	spots.Insert(hitted, 0);
 
 	auto energyToPut = amount *  GameDefinitions::RainHitpointToEnergy;
 	float actuallyPutted = 0;

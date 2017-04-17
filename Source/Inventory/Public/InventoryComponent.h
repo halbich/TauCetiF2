@@ -101,8 +101,10 @@ public:
 
 	void AddItem(UBuildableBlockInfo* block);
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
 	void AddItem(UInventoryBuildableBlockInfo* block);
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
 	void ItemBuilt(UInventoryBuildableBlockInfo* block);
 
 private:

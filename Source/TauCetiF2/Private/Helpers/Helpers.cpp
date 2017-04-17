@@ -209,3 +209,8 @@ float UHelpers::GetGameDayLength()
 {
 	return GameDefinitions::GameDayLength;
 }
+
+float UHelpers::GetGameDayMultiplier()
+{
+	return GameDefinitions::GameDayMultiplier;
+}

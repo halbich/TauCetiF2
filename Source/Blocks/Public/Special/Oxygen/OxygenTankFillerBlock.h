@@ -44,7 +44,7 @@ public:
 		UInventoryBuildableBlockInfo* currentFillingItem;
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenTankFiller")
-		UInventoryBuildableBlockInfo* TakeCurrentFillingItem(UPARAM(REF)bool& success);
+		UInventoryBuildableBlockInfo* TakeCurrentFillingItem(bool& success);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenTankFiller")
 		bool SetCurrentFillingItem(UInventoryBuildableBlockInfo* info);
@@ -89,12 +89,34 @@ private:
 		if (currentFillingItem && currentFillingItem->IsValidLowLevelFast())
 		{
 			auto diff = currentFillingItem->OxygenInfo->CurrentObjectMaximumOxygen - currentFillingItem->OxygenInfo->CurrentObjectOxygen;
+			ensure(diff >= 0.0f);
 
 			if (FMath::IsNearlyZero(diff) || FMath::IsNearlyZero(OxygenComponent->OxygenInfo->CurrentObjectOxygen))
 			{
 				FillingItemCritical.Unlock();
 				return;
 			}
+
+			auto elapsedSeconds = DeltaSeconds * GameDefinitions::GameDayMultiplier;
+			auto max = OxygenComponent->GetDefinition()->MaxConsumedOxygenPerGameSecond;
+			auto possibleOxygen = elapsedSeconds * max;	// now we can withdraw only this amount;
+
+			auto toWithdraw = FMath::Min(diff, possibleOxygen);
+
+			float actuallyObtained = 0;
+			float actuallyPutted = 0;
+			float acuallyReturned = 0;
+			if (OxygenComponent->ObtainAmount(toWithdraw, actuallyObtained)) {
+				currentFillingItem->OxygenInfo->CurrentObjectOxygen += actuallyObtained;
+				
+
+				// todo update mesh
+
+				auto returnOxygen = actuallyObtained - toWithdraw;
+				if (returnOxygen >= 0.0f)
+					OxygenComponent->PutAmount(returnOxygen, actuallyPutted);
+			}
+
 		}
 
 		FillingItemCritical.Unlock();

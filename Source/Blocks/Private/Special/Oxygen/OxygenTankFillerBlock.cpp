@@ -158,8 +158,6 @@ void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 	float actuallyPutted = 0;
 	float acuallyReturned = 0;
 	if (ElectricityComponent->ObtainAmount(toWithdraw, actuallyObtained)) {
-
-
 		float toReturn = actuallyObtained;
 		if (OxygenComponent->PutAmount(actuallyObtained * GameDefinitions::EnergyToOxygen, actuallyPutted))
 			toReturn -= actuallyPutted * GameDefinitions::OxygenToEnergy;
@@ -175,14 +173,17 @@ void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 
 }
 
-UInventoryBuildableBlockInfo* AOxygenTankFillerBlock::TakeCurrentFillingItem(UPARAM(REF)bool& success)
+UInventoryBuildableBlockInfo* AOxygenTankFillerBlock::TakeCurrentFillingItem(bool& success)
 {
 	FillingItemCritical.Lock();
 
 	success = currentFillingItem != NULL;
 	auto ret = currentFillingItem;
-	
+	currentFillingItem = NULL;
 	FillingItemCritical.Unlock();
+
+	if(ret)
+		ret->UpdateDisplayValue();
 
 	return ret;
 }

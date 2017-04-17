@@ -51,5 +51,5 @@ UInventoryBuildableBlockInfo* UOxygenFillerWidget::GetItemsToBeFilled(TArray<UIn
 		return A.OxygenInfo->CurrentObjectOxygen < B.OxygenInfo->CurrentObjectOxygen;
 	});
 
-	return NULL;
+	return CurrentBlock->currentFillingItem;
 }
