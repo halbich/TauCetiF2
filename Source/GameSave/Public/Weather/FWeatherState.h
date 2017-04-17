@@ -22,6 +22,7 @@ public:
 	float TargetCloudOpacity;
 
 	float HitpointsCounter;
+	float PlayerHitpointCounter;
 	float EaseIn;
 	float EaseOut;
 	uint8 StormState;

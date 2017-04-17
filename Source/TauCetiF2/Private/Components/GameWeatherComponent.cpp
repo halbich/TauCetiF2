@@ -11,6 +11,7 @@ UGameWeatherComponent::UGameWeatherComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	WeatherRootTree = CreateDefaultSubobject<UWeatherTargetsKDTree>(TEXT("WeatherRootBox"));
+	startPointZ = 1000; // ((GameDefinitions::WorldBorders + FVector(0, 0, 25)) *  GameDefinitions::CubeMinSize).Z;
 }
 
 void UGameWeatherComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FText>& validationErrors)
@@ -23,7 +24,7 @@ void UGameWeatherComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FT
 	WeatherSavingHelpers::FromWeatherState(currentWeatherState, carrier->weatherState);
 
 	uint8 stormState;
-	WeatherSavingHelpers::GetAdditionals(carrier->weatherState, hitpointsCounter, currentEaseInTime, currentEaseOutTime, stormState);
+	WeatherSavingHelpers::GetAdditionals(carrier->weatherState, hitpointsCounter, playerHitpointCounter, currentEaseInTime, currentEaseOutTime, stormState);
 	StormState = (EStormState)stormState;
 }
 
@@ -31,7 +32,7 @@ void UGameWeatherComponent::SaveToCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != NULL);
 	WeatherSavingHelpers::ToWeatherState(carrier->weatherState, currentWeatherState);
-	WeatherSavingHelpers::SetAdditionals(carrier->weatherState, hitpointsCounter, currentEaseInTime, currentEaseOutTime, (uint8)StormState);
+	WeatherSavingHelpers::SetAdditionals(carrier->weatherState, hitpointsCounter, playerHitpointCounter, currentEaseInTime, currentEaseOutTime, (uint8)StormState);
 }
 
 void UGameWeatherComponent::DEBUGShowMinMaxBoxes() {
@@ -69,6 +70,7 @@ void UGameWeatherComponent::OnStormBegin()
 
 	CurrentHitIntensity = IntensityCurve->GetFloatValue(currentWeatherState->CurrentWeatherIntensity);
 	hitpointsCounter = 0;
+	playerHitpointCounter = 0;
 
 	currentEaseInTime = FMath::RandRange(1.0f, EasingBorderValue *currentWeatherState->TargetWaitingTime);	// we start at 1sec, so we don't divide by zero in a tickComp.
 	currentEaseOutTime = FMath::RandRange((1.0f - EasingBorderValue)*currentWeatherState->TargetWaitingTime, currentWeatherState->TargetWaitingTime - 1.0f);		// again we need to avoid dividing by zero
@@ -82,6 +84,10 @@ void UGameWeatherComponent::OnStormEnd()
 	if (remainingTargets > 0)
 		doDamage(remainingTargets);
 
+	auto remainingPlayerTargets = FMath::FloorToInt(playerHitpointCounter);
+	if (remainingPlayerTargets > 0)
+		doPlayerDamage(remainingPlayerTargets);
+
 	StormState = EStormState::NoStorm;
 
 	CurrentHitIntensity = 0;
@@ -90,6 +96,7 @@ void UGameWeatherComponent::OnStormEnd()
 	currentEaseOutTime = 0;
 
 	hitpointsCounter = 0;
+	playerHitpointCounter = 0;
 }
 
 void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -107,7 +114,9 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	case EStormState::EaseIn: {
 		auto lerpedIntensity = FMath::Lerp(0.0f, CurrentHitIntensity, currentWeatherState->CurrentWaitingTime / currentEaseInTime);
 
-		hitpointsCounter += lerpedIntensity * DeltaTime * currentSurface;
+		auto hp = lerpedIntensity * DeltaTime;
+		hitpointsCounter += hp * currentSurface;
+		playerHitpointCounter += hp;
 
 		if (currentWeatherState->CurrentWaitingTime > currentEaseInTime)
 			StormState = EStormState::Running;
@@ -116,7 +125,9 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	}
 
 	case EStormState::Running: {
-		hitpointsCounter += CurrentHitIntensity * DeltaTime * currentSurface;
+		auto hp = CurrentHitIntensity * DeltaTime;
+		hitpointsCounter += hp * currentSurface;
+		playerHitpointCounter += hp;
 
 		if (currentWeatherState->CurrentWaitingTime > currentEaseOutTime)
 			StormState = EStormState::EaseOut;
@@ -127,7 +138,9 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	case EStormState::EaseOut: {
 		auto lerpedIntensity = FMath::Max(FMath::Lerp(CurrentHitIntensity, 0.0f, (currentWeatherState->CurrentWaitingTime - currentEaseOutTime) / (currentWeatherState->TargetWaitingTime - currentEaseOutTime)), .0f);
 
-		hitpointsCounter += lerpedIntensity * DeltaTime * currentSurface;
+		auto hp = lerpedIntensity * DeltaTime;
+		hitpointsCounter += hp * currentSurface;
+		playerHitpointCounter += hp;
 
 		break;
 	}
@@ -140,6 +153,13 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	{
 		doDamage(remainingTargets);
 		hitpointsCounter -= remainingTargets;
+	}
+
+	auto remainingPlayerTargets = FMath::FloorToInt(playerHitpointCounter);
+	if (remainingPlayerTargets > 0)
+	{
+		doPlayerDamage(remainingPlayerTargets);
+		playerHitpointCounter -= remainingPlayerTargets;
 	}
 }
 

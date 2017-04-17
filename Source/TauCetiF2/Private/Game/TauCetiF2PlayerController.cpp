@@ -173,6 +173,13 @@ void ATauCetiF2PlayerController::ShowRegisteredWidget(const FString widgetID, AB
 	auto w = registeredWidgets.Find(widgetID);
 	ensure(w);
 
+	if (currentShownRegisteredWidget)
+	{
+		(*w)->InitForBlock(block);
+		currentShownRegisteredWidget->AddToStackAndScreen(*w, currentShownRegisteredWidget->ItemsStack.Num() + 1);
+		return;
+	}
+
 	currentShownRegisteredWidget = *w;
 
 	if (block)

@@ -281,3 +281,20 @@ void ATauCetiF2Character::OnToggleCreativeMode()
 {
 	toogleCreative(!IsInCreativeMode);
 }
+
+void ATauCetiF2Character::doCharacterHit(float intensity)
+{
+	print(TEXT("actorHit!"));
+}
+
+
+void tryDoCharacterHit(AActor* actor,float intensity)
+{
+	auto ch = Cast<ATauCetiF2Character>(actor);
+	if (ch)
+		ch->doCharacterHit(intensity);
+
+
+	print(TEXT("actorHit!"));
+
+}

@@ -82,3 +82,8 @@ void ATerminalBlock::SetDisplayedWidget(UUserWidget* widget)
 }
 
 UUserWidget* ATerminalBlock::GetShownWidget() { return shownWidget; }
+void ATerminalBlock::ShowWidget_Implementation() {
+	auto def = Definition->GetDefaultObject<UBlockDefinition>();
+	check(def);
+	IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
+}

@@ -39,6 +39,12 @@ public:
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
 
+	UPROPERTY(Transient)
+		ACharacter* playerCharacter;
+
+	UPROPERTY(Transient)
+		float startPointZ;
+
 #pragma region StormMechanics
 
 	UPROPERTY(EditDefaultsOnly, Category = Curve)
@@ -50,6 +56,9 @@ public:
 
 	UPROPERTY(Transient)
 		float hitpointsCounter;
+
+	UPROPERTY(Transient)
+		float playerHitpointCounter;
 
 	UPROPERTY(Transient)
 		float currentEasingTime;
@@ -89,6 +98,8 @@ public:
 		void OnTargetElementsChanged(UWeatherTargetsKDTree* target, bool isAdding);
 
 	void InitComp();
+
+	friend void tryDoCharacterHit(AActor* actor, float intensity);
 
 private:
 
@@ -144,6 +155,58 @@ private:
 
 			// TODO value
 			bl->WasHitByStorm(hitStorm, 1);
+		}
+	}
+
+	void ensurePC()
+	{
+		if (playerCharacter && playerCharacter->IsValidLowLevel())
+			return;
+
+		playerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+		check(playerCharacter);
+	}
+
+	void doPlayerDamage(int32 currentHitPoints) {
+
+		ensurePC();
+		auto w = GetWorld();
+
+		const FName TraceTag("MyTraceTag");
+
+		w->DebugDrawTraceTag = TraceTag;
+
+		FHitResult result;
+		FCollisionObjectQueryParams params;
+
+		params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldStatic);
+		params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldDynamic);
+		params.AddObjectTypesToQuery(ECollisionChannel::ECC_Pawn);
+
+		FCollisionQueryParams CollisionParams;
+		CollisionParams.TraceTag = TraceTag;
+
+
+		for (auto i = 0; i < currentHitPoints; i++)
+		{
+			auto origLoc = playerCharacter->GetActorLocation();
+			FBox b(origLoc - FVector(40, 40, 5), origLoc + FVector(40, 40, 5));
+
+			auto loc = FMath::RandPointInBox(b) / GameDefinitions::CubeMinSize;
+			auto target = FVector(FMath::FloorToInt(loc.X), FMath::FloorToInt(loc.Y), FMath::FloorToInt(loc.Z)) * GameDefinitions::CubeMinSize;
+			auto start = FVector(target);
+			start.Z += startPointZ;
+
+
+			if (w->LineTraceSingleByObjectType(result, start, target, params, CollisionParams))
+			{
+				auto act = Cast<ABlock>(result.GetActor());
+				if (act)
+					continue;
+
+				tryDoCharacterHit(act, 1);
+			}
+
 		}
 	}
 

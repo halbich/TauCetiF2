@@ -62,6 +62,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | GameMode")
 		bool IsInCreativeMode;
+
+	void doCharacterHit(float intensity);
+
 protected:
 
 	void BeginPlay();

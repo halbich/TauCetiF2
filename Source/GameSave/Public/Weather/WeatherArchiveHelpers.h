@@ -18,6 +18,7 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FWeatherState& state)
 	Ar << state.TargetCloudOpacity;
 
 	Ar << state.HitpointsCounter;
+	Ar << state.PlayerHitpointCounter;
 	Ar << state.EaseIn;
 	Ar << state.EaseOut;
 	Ar << state.StormState;

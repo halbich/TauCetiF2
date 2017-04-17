@@ -3,7 +3,7 @@
 #include "ArchiveHelpers.h"
 #include "SaveHelpers.h"
 
-const uint8 USaveGameCarrier::CURRENT_VERSION = 29;
+const uint8 USaveGameCarrier::CURRENT_VERSION = 30;
 
 USaveGameCarrier::USaveGameCarrier() {
 	SaveFileVersion = CURRENT_VERSION;
@@ -18,7 +18,7 @@ USaveGameCarrier::USaveGameCarrier() {
 
 	inventoryTags = FInventoryTags();
 
-	InventoryCurrentIndex = -1; // Empty Hand
+	InventoryCurrentIndex = -1; // ~ Empty Hand
 }
 
 USaveGameCarrier::~USaveGameCarrier() {
