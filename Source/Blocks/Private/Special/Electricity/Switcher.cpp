@@ -39,6 +39,25 @@ void  ASwitcher::OnConstruction(const FTransform& Transform) {
 	updateDynamicColor();
 }
 
+void ASwitcher::SetBlockInfo(UBlockInfo* info)
+{
+	Super::SetBlockInfo(info);
+
+
+	auto state = info->BlockSpecificData.FindOrAdd(SwitcherBlockConstants::IsOn);
+	if (state.IsEmpty())
+	{
+		IsOn = false;
+		BlockInfo->BlockSpecificData[SwitcherBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
+	}
+	else {
+		IsOn = FCString::Atoi(*state) > 0? true : false;
+	}
+
+	updateDynamicColor();
+
+}
+
 void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 {
 	if (!actor || !actor->IsValidLowLevel())
@@ -56,6 +75,7 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 		return;
 
 	IsOn = !IsOn;
+	BlockInfo->BlockSpecificData[SwitcherBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
 
 	updateDynamicColor();
 }
@@ -148,3 +168,4 @@ bool ASwitcher::UnbindControl_Implementation(ABlock* controllableBlock)
 
 	return res;
 }
+

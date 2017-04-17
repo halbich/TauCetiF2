@@ -58,7 +58,7 @@ public:
 		return ElectricityComponent;
 	}
 
-	virtual void SetBlockInfo(UBlockInfo* info);
+	virtual void SetBlockInfo(UBlockInfo* info) override;
 
 	FDelegateHandle ListeningHandle;
 

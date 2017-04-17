@@ -5,11 +5,13 @@
 */
 struct FElectricityComponentInfo {
 	float CurrentObjectEnergy;
+	float PowerConsumptionPercent;
 	/*
 	Default constructor
 	*/
 	FElectricityComponentInfo()
 	{
 		CurrentObjectEnergy = 0;
+		PowerConsumptionPercent = 1;
 	};
 };

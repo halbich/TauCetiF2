@@ -10,7 +10,10 @@
 #include "Switcher.generated.h"
 
 
-
+namespace SwitcherBlockConstants
+{
+	static FString IsOn = TEXT("IsON");
+}
 
 /**
  *
@@ -53,6 +56,8 @@ public:
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
 	virtual UUserWidget* GetShownWidget() override;
 	virtual void ShowWidget_Implementation() override;
+
+	virtual void SetBlockInfo(UBlockInfo* info) override;
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{

@@ -130,7 +130,7 @@ public:
 		TotalHealth += info->MaxHealth;
 	}
 
-	FORCEINLINE int32 UnregisterEntity(UElectricityComponent* comp)
+	int32 UnregisterEntity(UElectricityComponent* comp)
 	{
 		auto r = Entities.Remove(comp);
 		EntitiesCount = Entities.Num();

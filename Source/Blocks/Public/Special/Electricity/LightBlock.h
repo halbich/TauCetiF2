@@ -8,6 +8,12 @@
 #include "ControllableBlock.h"
 #include "LightBlock.generated.h"
 
+
+namespace LightBlockConstants
+{
+	static FString IsAutoregulated = TEXT("IsAutoregulated");
+}
+
 /**
  *
  */
@@ -28,7 +34,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | LightBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 
-	UPROPERTY(BlueprintReadWrite, Category = "TCF2 | LightBlock")
+	UPROPERTY(BlueprintReadonly, Category = "TCF2 | LightBlock")
 		bool AutoregulatePowerOutput;
 
 	UPROPERTY(Transient)
@@ -66,10 +72,13 @@ public:
 		return ElectricityComponent;
 	}
 
-	virtual void SetBlockInfo(UBlockInfo* info);
+	virtual void SetBlockInfo(UBlockInfo* info) override;
 
 	UFUNCTION()
 		void OnNightChanged(bool isNight);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | LightBlock")
+		void UpdateAutoregulate(bool newAutoregulate);
 
 private:
 
@@ -77,18 +86,18 @@ private:
 
 	void ListeningOnUse(AActor* actor, bool isSpecial);
 
-	FORCEINLINE float getAutoregulatedPower(const float p, const float max)
+	FORCEINLINE float getAutoregulatedPower(const float p)
 	{
 		if (isDaytime)
 			return 0.0f;
 
 		if (p >= 50.0f)
-			return max;
+			return 1.0f;
 
 		if (p >= 25)
-			return max / 2.0f;
+			return .5f;
 
-		return max / 10.0f;
+		return 0.1f;
 	}
 
 	void updateLightByConsumption(float consumption, float max)

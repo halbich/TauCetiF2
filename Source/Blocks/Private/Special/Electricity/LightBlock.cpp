@@ -39,7 +39,11 @@ void ALightBlock::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-
+	auto state = info->BlockSpecificData.FindOrAdd(LightBlockConstants::IsAutoregulated);
+	if (state.IsEmpty())
+		BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
+	else
+		AutoregulatePowerOutput = FCString::Atoi(*state) > 0 ? true : false;
 }
 
 void ALightBlock::ListeningOnUse(AActor* actor, bool isSpecial)
@@ -98,9 +102,9 @@ void ALightBlock::Tick(float DeltaSeconds)
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
 	auto i = ElectricityComponent->GetInfo();
 
-	auto powerConsumption = AutoregulatePowerOutput ? getAutoregulatedPower(i->GetRemainingPercentage(), max) : i->CurrentPowerConsumptionPerSec;
+	auto powerConsumption = AutoregulatePowerOutput ? getAutoregulatedPower(i->GetRemainingPercentage()) : i->PowerConsumptionPercent;
 
-	auto toObtain = elapsedSeconds * powerConsumption;
+	auto toObtain = elapsedSeconds * powerConsumption  * max;
 
 	float actuallyObtained = 0;
 	if (ElectricityComponent->ObtainAmount(toObtain, actuallyObtained))
@@ -127,4 +131,11 @@ void ALightBlock::ShowWidget_Implementation()
 	auto def = Definition->GetDefaultObject<UBlockDefinition>();
 	check(def);
 	IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
+}
+
+void ALightBlock::UpdateAutoregulate(bool newAutoregulate)
+{
+	AutoregulatePowerOutput = newAutoregulate;
+
+	BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
 }

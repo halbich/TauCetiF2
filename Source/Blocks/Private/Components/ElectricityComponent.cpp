@@ -31,17 +31,6 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, F
 	auto energy = ElectricityComponentDef.TotalObjectEnergy * blockScale.X * blockScale.Y * blockScale.Z;
 
 	ElectricityInfo->CurrentObjectMaximumEnergy = energy;
-
-	if (ElectricityInfo->CurrentObjectEnergy > energy)
-	{
-		print(TEXT("over!"));
-	}
-	if (ElectricityInfo->CurrentObjectEnergy < 0.0f)
-	{
-		print(TEXT("under!"));
-	}
-
-
 	ElectricityInfo->CurrentObjectEnergy = FMath::Clamp(ElectricityInfo->CurrentObjectEnergy, 0.0f, energy);
 
 	auto worldLocation = GetOwner()->GetActorLocation();

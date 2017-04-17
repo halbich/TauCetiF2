@@ -31,17 +31,6 @@ void UOxygenComponent::SetDefinition(FOxygenComponentDefinition def, FVector& bl
 	auto oxygen = OxygenComponentDef.TotalObjectVolume; // *blockScale.X * blockScale.Y * blockScale.Z;
 
 	OxygenInfo->CurrentObjectMaximumOxygen = oxygen;
-
-	if (OxygenInfo->CurrentObjectOxygen > oxygen)
-	{
-		print(TEXT("over!"));
-	}
-	if (OxygenInfo->CurrentObjectOxygen < 0.0f)
-	{
-		print(TEXT("under!"));
-	}
-
-
 	OxygenInfo->CurrentObjectOxygen = FMath::Clamp(OxygenInfo->CurrentObjectOxygen, 0.0f, oxygen);
 }
 

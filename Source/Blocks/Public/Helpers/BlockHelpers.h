@@ -111,18 +111,22 @@ namespace BlockHelpers
 namespace BlockSavingHelpers {
 	static void FromOxygenContainer(UBlockWithOxygenInfo* info, FOxygenComponentInfo& block) {
 		info->CurrentObjectOxygen = block.CurrentObjectOxygen;
+		info->OxygenConsumptionPercent = block.OxygenConsumptionPercent;
 	}
 
 	static void ToOxygenContainer(FOxygenComponentInfo& block, UBlockWithOxygenInfo* info) {
 		block.CurrentObjectOxygen = info->CurrentObjectOxygen;
+		block.OxygenConsumptionPercent = info->OxygenConsumptionPercent;
 	}
 
 	static void FromElectricityContainer(UBlockWithElectricityInfo* info, FElectricityComponentInfo& block) {
 		info->CurrentObjectEnergy = block.CurrentObjectEnergy;
+		info->PowerConsumptionPercent = block.PowerConsumptionPercent;
 	}
 
 	static void ToElectricityContainer(FElectricityComponentInfo& block, UBlockWithElectricityInfo* info) {
 		block.CurrentObjectEnergy = info->CurrentObjectEnergy;
+		block.PowerConsumptionPercent = info->PowerConsumptionPercent;
 	}
 
 	static void FromRelationsContainer(UBlockWithRelationsInfo* info, FBlockWithRelationshipInfo& block)

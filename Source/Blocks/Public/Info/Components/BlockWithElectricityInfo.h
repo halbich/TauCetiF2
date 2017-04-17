@@ -20,7 +20,7 @@ public:
 		float CurrentObjectMaximumEnergy;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithElectricityInfo")
-		float CurrentPowerConsumptionPerSec;
+		float PowerConsumptionPercent;
 
 	FORCEINLINE const float GetRemainingPercentageUnit() const
 	{
