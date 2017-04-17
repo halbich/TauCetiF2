@@ -17,3 +17,23 @@ void UOxygenFillerWidget::InitForBlock_Implementation(ABlock* block)
 
 	ensure(CurrentBlock);
 }
+
+ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
+{
+	auto n = CurrentBlock->ElectricityComponent->Network;
+
+	for (auto con : n->ControllableBlocks)
+	{
+		auto c = Cast<ABlock>(con->GetOwner());
+		if (!c || !c->IsValidLowLevel() || c->IsPendingKill())
+			continue;
+
+		if (CurrentBlock->usedController == c)
+			continue;
+
+		aviables.Add(c);
+	}
+
+	return CurrentBlock->usedController;
+
+}

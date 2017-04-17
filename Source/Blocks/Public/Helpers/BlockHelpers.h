@@ -25,8 +25,15 @@
 */
 namespace BlockHelpers
 {
-	static bool CheckBlockValidity(const UBlockDefinition* definition, const UBlockInfo* blockInfo, FString& reason)
+	static bool CheckBlockValidity(const UBlockDefinition* definition, UBlockInfo* blockInfo, FString& reason)
 	{
+
+		if (blockInfo->ElectricityInfo && !definition->HasElectricityComponent)
+			blockInfo->ElectricityInfo = NULL;
+
+		if (blockInfo->OxygenInfo && !definition->HasOxygenComponent)
+			blockInfo->OxygenInfo = NULL;
+
 		// TODO
 		return true;
 	}

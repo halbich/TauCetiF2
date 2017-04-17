@@ -320,4 +320,12 @@ UTexture2D* ABlock::GetDefaultTexture()
 	return Definition->GetDefaultObject<UBlockDefinition>()->BlockImage;
 }
 
+bool ABlock::GetIsController()
+{
+	auto d = Definition->GetDefaultObject<UBlockDefinition>();
+
+	return d->HasElectricityComponent && d->ElectricityComponentDef.IsControlBlock && d->ElectricityComponentDef.IsController;
+}
+
+
 #pragma optimize("",on)

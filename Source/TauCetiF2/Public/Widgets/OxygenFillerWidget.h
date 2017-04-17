@@ -22,4 +22,7 @@ public:
 		AOxygenTankFillerBlock* CurrentBlock;
 
 	virtual void InitForBlock_Implementation(ABlock* block) override;
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherWidget")
+		ABlock* GetControllables(TArray<ABlock*>& aviables);
 };

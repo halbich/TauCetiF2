@@ -51,6 +51,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Block")
 		UTexture2D* GetDefaultTexture();
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Block")
+		bool GetIsController();
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual void BeginPlay() override;
