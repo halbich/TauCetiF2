@@ -104,14 +104,16 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	b_14.HasRelationshipData = true; FGuid b_14_rel_id; FGuid::Parse("2EC04B3D4081FD6E3E1AB98141F4AD19", b_14_rel_id); b_14.RelationshipInfo.ID = b_14_rel_id; UsedBlocks->Add(b_14);
 	auto b_15 = make(1000, FVector(-16, -10, 2), FVector(1, 1, 1), FRotator(0, -90, -90), 1000, ""); b_15.HasElectricityData = true; b_15.ElectricityInfo.CurrentObjectEnergy = 200.000000;
 	b_15.HasRelationshipData = true; FGuid b_15_rel_id; FGuid::Parse("4C5484244F03C6E7F8402D8363064A80", b_15_rel_id); b_15.RelationshipInfo.ID = b_15_rel_id; UsedBlocks->Add(b_15);
-	auto b_16 = make(1000, FVector(4, -6, 4), FVector(1, 1, 1), FRotator(0, 90, 0), 1000, ""); b_16.HasElectricityData = true; b_16.ElectricityInfo.CurrentObjectEnergy = 200.000000;
+	auto b_16 = make(1000, FVector(4, -6, 4), FVector(1, 1, 1), FRotator(0, 90, 0), 1000, "na zemi"); b_16.HasElectricityData = true; b_16.ElectricityInfo.CurrentObjectEnergy = 200.000000;
 	b_16.HasRelationshipData = true; FGuid b_16_rel_id; FGuid::Parse("BAEA1C8045E0E3FAD809B593D9495942", b_16_rel_id); b_16.RelationshipInfo.ID = b_16_rel_id;
 	FRelationshipInfo b_16_rel0; FGuid b_16_rel0_id; FGuid::Parse("797CEC8E499C456A5E1C46B8312736AB", b_16_rel0_id); b_16_rel0.TargetID = b_16_rel0_id; b_16_rel0.RelationshipType = 0;
 	b_16.RelationshipInfo.Relationships.Add(b_16_rel0); UsedBlocks->Add(b_16);
-	auto b_17 = make(1000, FVector(-11, -19, 4), FVector(1, 1, 1), FRotator(0, 90, 0), 1000, ""); b_17.HasElectricityData = true; b_17.ElectricityInfo.CurrentObjectEnergy = 200.000000;
+	auto b_17 = make(1000, FVector(-11, -19, 4), FVector(1, 1, 1), FRotator(0, 90, 0), 1000, "Skoro venku"); b_17.HasElectricityData = true; b_17.ElectricityInfo.CurrentObjectEnergy = 200.000000;
 	b_17.HasRelationshipData = true; FGuid b_17_rel_id; FGuid::Parse("A1257C2E414F1607AB4F99A2E04D6E94", b_17_rel_id); b_17.RelationshipInfo.ID = b_17_rel_id;
 	FRelationshipInfo b_17_rel0; FGuid b_17_rel0_id; FGuid::Parse("797CEC8E499C456A5E1C46B8312736AB", b_17_rel0_id); b_17_rel0.TargetID = b_17_rel0_id; b_17_rel0.RelationshipType = 0;
-	b_17.RelationshipInfo.Relationships.Add(b_17_rel0); UsedBlocks->Add(b_17);
+	b_17.RelationshipInfo.Relationships.Add(b_17_rel0);
+	FRelationshipInfo b_17_rel1; FGuid b_17_rel1_id; FGuid::Parse("6EEA645949C55B8F90F421AB704204C1", b_17_rel1_id); b_17_rel1.TargetID = b_17_rel1_id; b_17_rel1.RelationshipType = 0;
+	b_17.RelationshipInfo.Relationships.Add(b_17_rel1); UsedBlocks->Add(b_17);
 	auto b_18 = make(0, FVector(-6, -35, 1), FVector(19, 8, 4), FRotator(0, 180, 0), 0, ""); b_18.HasElectricityData = true; b_18.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_18);
 	auto b_19 = make(700, FVector(0, -35, 9), FVector(7, 7, 11), FRotator(0, 90, 0), 700, ""); b_19.AdditionalFlags.Add(TEXT("DoorOpening"), 0);
 	b_19.HasElectricityData = true; b_19.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_19);
@@ -141,15 +143,15 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	auto b_43 = make(1, FVector(3, -31, 9), FVector(1, 1, 11), FRotator(0, 0, 0), 1, ""); b_43.HasElectricityData = true; b_43.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_43);
 	auto b_44 = make(1, FVector(16, -23, 9), FVector(1, 1, 11), FRotator(0, 0, 0), 1, ""); b_44.HasElectricityData = true; b_44.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_44);
 	auto b_45 = make(1100, FVector(11, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_45.HasElectricityData = true; b_45.ElectricityInfo.CurrentObjectEnergy = 159405.000000;  UsedBlocks->Add(b_45);
-	auto b_46 = make(1100, FVector(-9, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_46.HasElectricityData = true; b_46.ElectricityInfo.CurrentObjectEnergy = 159709.000000;  UsedBlocks->Add(b_46);
+	auto b_46 = make(1100, FVector(-9, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_46.HasElectricityData = true; b_46.ElectricityInfo.CurrentObjectEnergy = 159291.000000;  UsedBlocks->Add(b_46);
 	auto b_47 = make(1100, FVector(-9, 38, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_47.HasElectricityData = true; b_47.ElectricityInfo.CurrentObjectEnergy = 159647.000000;  UsedBlocks->Add(b_47);
 	auto b_48 = make(1100, FVector(11, 38, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_48.HasElectricityData = true; b_48.ElectricityInfo.CurrentObjectEnergy = 159328.000000;  UsedBlocks->Add(b_48);
 	auto b_49 = make(1100, FVector(31, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_49.HasElectricityData = true; b_49.ElectricityInfo.CurrentObjectEnergy = 159338.000000;  UsedBlocks->Add(b_49);
-	auto b_50 = make(1100, FVector(31, 38, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_50.HasElectricityData = true; b_50.ElectricityInfo.CurrentObjectEnergy = 159708.000000;  UsedBlocks->Add(b_50);
+	auto b_50 = make(1100, FVector(31, 38, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_50.HasElectricityData = true; b_50.ElectricityInfo.CurrentObjectEnergy = 159292.000000;  UsedBlocks->Add(b_50);
 	auto b_51 = make(1100, FVector(31, 58, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_51.HasElectricityData = true; b_51.ElectricityInfo.CurrentObjectEnergy = 159627.000000;  UsedBlocks->Add(b_51);
 	auto b_52 = make(1100, FVector(11, 59, 0), FVector(20, 20, 2), FRotator(0, -90, 0), 1100, ""); b_52.HasElectricityData = true; b_52.ElectricityInfo.CurrentObjectEnergy = 159335.000000;  UsedBlocks->Add(b_52);
 	auto b_53 = make(1100, FVector(-9, 59, 0), FVector(20, 20, 2), FRotator(0, -90, 0), 1100, ""); b_53.HasElectricityData = true; b_53.ElectricityInfo.CurrentObjectEnergy = 159719.000000;  UsedBlocks->Add(b_53);
-	auto b_54 = make(1050, FVector(-3, -9, 4), FVector(1, 1, 1), FRotator(0, 90, 0), 1050, "Tlacitko"); b_54.HasElectricityData = true; b_54.ElectricityInfo.CurrentObjectEnergy = 0.000000;
+	auto b_54 = make(1050, FVector(-3, -9, 4), FVector(1, 1, 1), FRotator(0, 90, 0), 1050, "Tlacitko na zemi"); b_54.HasElectricityData = true; b_54.ElectricityInfo.CurrentObjectEnergy = 0.000000;
 	b_54.HasRelationshipData = true; FGuid b_54_rel_id; FGuid::Parse("797CEC8E499C456A5E1C46B8312736AB", b_54_rel_id); b_54.RelationshipInfo.ID = b_54_rel_id;
 	FRelationshipInfo b_54_rel0; FGuid b_54_rel0_id; FGuid::Parse("BAEA1C8045E0E3FAD809B593D9495942", b_54_rel0_id); b_54_rel0.TargetID = b_54_rel0_id; b_54_rel0.RelationshipType = 1;
 	b_54.RelationshipInfo.Relationships.Add(b_54_rel0);
@@ -166,14 +168,10 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	auto b_61 = make(600, FVector(24, 3, 15), FVector(5, 1, 4), FRotator(0, 90, 0), 600, ""); b_61.HasElectricityData = true; b_61.ElectricityInfo.CurrentObjectEnergy = 8000.000000;  UsedBlocks->Add(b_61);
 	auto b_62 = make(1000, FVector(23, -20, 12), FVector(1, 1, 1), FRotator(0, 90, 90), 1000, ""); b_62.HasElectricityData = true; b_62.ElectricityInfo.CurrentObjectEnergy = 200.000000;
 	b_62.HasRelationshipData = true; FGuid b_62_rel_id; FGuid::Parse("053D69F542E0BAEAD45D9D9ED75F3844", b_62_rel_id); b_62.RelationshipInfo.ID = b_62_rel_id; UsedBlocks->Add(b_62);
-	auto b_63 = make(1150, FVector(-12, 2, 4), FVector(3, 3, 2), FRotator(0, 0, 0), 1150, ""); b_63.HasElectricityData = true; b_63.ElectricityInfo.CurrentObjectEnergy = 18000.000000;
-	b_63.HasRelationshipData = true; FGuid b_63_rel_id; FGuid::Parse("F26AD3854CEC7BCC30043DB8B94ECD9E", b_63_rel_id); b_63.RelationshipInfo.ID = b_63_rel_id; UsedBlocks->Add(b_63);
-	auto b_64 = make(1150, FVector(-12, -1, 4), FVector(3, 3, 2), FRotator(0, 0, 0), 1150, ""); b_64.HasElectricityData = true; b_64.ElectricityInfo.CurrentObjectEnergy = 18000.000000;
-	b_64.HasRelationshipData = true; FGuid b_64_rel_id; FGuid::Parse("F26AD3854CEC7BCC30043DB8B94ECD9E", b_64_rel_id); b_64.RelationshipInfo.ID = b_64_rel_id; UsedBlocks->Add(b_64);
-	auto b_65 = make(1150, FVector(-9, 2, 4), FVector(3, 3, 2), FRotator(0, 0, 0), 1150, ""); b_65.HasElectricityData = true; b_65.ElectricityInfo.CurrentObjectEnergy = 18000.000000;
-	b_65.HasRelationshipData = true; FGuid b_65_rel_id; FGuid::Parse("F26AD3854CEC7BCC30043DB8B94ECD9E", b_65_rel_id); b_65.RelationshipInfo.ID = b_65_rel_id; UsedBlocks->Add(b_65);
-	auto b_66 = make(1150, FVector(-9, -1, 4), FVector(3, 3, 2), FRotator(0, 0, 0), 1150, ""); b_66.HasElectricityData = true; b_66.ElectricityInfo.CurrentObjectEnergy = 18000.000000;
-	b_66.HasRelationshipData = true; FGuid b_66_rel_id; FGuid::Parse("F26AD3854CEC7BCC30043DB8B94ECD9E", b_66_rel_id); b_66.RelationshipInfo.ID = b_66_rel_id; UsedBlocks->Add(b_66);
+	auto b_63 = make(1150, FVector(-12, 2, 4), FVector(3, 3, 2), FRotator(0, 0, 0), 1150, ""); b_63.HasElectricityData = true; b_63.ElectricityInfo.CurrentObjectEnergy = 18000.000000;  UsedBlocks->Add(b_63);
+	auto b_64 = make(1150, FVector(-12, -1, 4), FVector(3, 3, 2), FRotator(0, 0, 0), 1150, ""); b_64.HasElectricityData = true; b_64.ElectricityInfo.CurrentObjectEnergy = 18000.000000;  UsedBlocks->Add(b_64);
+	auto b_65 = make(1150, FVector(-9, 2, 4), FVector(3, 3, 2), FRotator(0, 0, 0), 1150, ""); b_65.HasElectricityData = true; b_65.ElectricityInfo.CurrentObjectEnergy = 18000.000000;  UsedBlocks->Add(b_65);
+	auto b_66 = make(1150, FVector(-9, -1, 4), FVector(3, 3, 2), FRotator(0, 0, 0), 1150, ""); b_66.HasElectricityData = true; b_66.ElectricityInfo.CurrentObjectEnergy = 18000.000000;  UsedBlocks->Add(b_66);
 	auto b_67 = make(1200, FVector(-10, -29, 5), FVector(3, 3, 3), FRotator(0, -90, 0), 1200, ""); b_67.HasElectricityData = true; b_67.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_67);
 	auto b_68 = make(1200, FVector(-5, -27, 5), FVector(3, 3, 3), FRotator(0, -90, 0), 1200, ""); b_68.HasElectricityData = true; b_68.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_68);
 	auto b_69 = make(101, FVector(21, -5, 4), FVector(1, 4, 1), FRotator(0, 0, 0), 101, ""); b_69.HasElectricityData = true; b_69.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_69);
@@ -199,9 +197,11 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	auto b_86 = make(1050, FVector(23, -11, 11), FVector(1, 1, 1), FRotator(0, 90, 90), 1050, "Vypinac plnicka"); b_86.HasElectricityData = true; b_86.ElectricityInfo.CurrentObjectEnergy = 0.000000;
 	b_86.HasRelationshipData = true; FGuid b_86_rel_id; FGuid::Parse("6EEA645949C55B8F90F421AB704204C1", b_86_rel_id); b_86.RelationshipInfo.ID = b_86_rel_id;
 	FRelationshipInfo b_86_rel0; FGuid b_86_rel0_id; FGuid::Parse("A9F299C54AB0F2B6ABEBC280C23BF218", b_86_rel0_id); b_86_rel0.TargetID = b_86_rel0_id; b_86_rel0.RelationshipType = 1;
-	b_86.RelationshipInfo.Relationships.Add(b_86_rel0); UsedBlocks->Add(b_86);
-	c->PlayerPosition = FVector(190, -198, 163);
-	c->PlayerRotation = FRotator(0, 26, 0);
+	b_86.RelationshipInfo.Relationships.Add(b_86_rel0);
+	FRelationshipInfo b_86_rel1; FGuid b_86_rel1_id; FGuid::Parse("A1257C2E414F1607AB4F99A2E04D6E94", b_86_rel1_id); b_86_rel1.TargetID = b_86_rel1_id; b_86_rel1.RelationshipType = 1;
+	b_86.RelationshipInfo.Relationships.Add(b_86_rel1); UsedBlocks->Add(b_86);
+	c->PlayerPosition = FVector(253, -195, 163);
+	c->PlayerRotation = FRotator(0, -25, 0);
 
 
 

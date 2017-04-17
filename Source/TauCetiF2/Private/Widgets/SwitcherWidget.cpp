@@ -17,6 +17,10 @@ void USwitcherWidget::InitForBlock_Implementation(ABlock* block)
 
 void USwitcherWidget::GetControllables(TArray<ABlock*>& aviables, TArray<ABlock*>& controlled)
 {
+
+	if (!CurrentBlock)
+		return;
+
 	auto n = CurrentBlock->ElectricityComponent->Network;
 
 	for (auto con : n->ControllableBlocks)

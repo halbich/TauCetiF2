@@ -181,11 +181,11 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 		if (resolveRelationships)
 		{
 			auto controller = Cast<IControllerBlock>(actor);
-			if (controller && actor->BlockInfo->RelationsInfo->Relationships.Num() > 0)
+			if (controller && actor->BlockInfo->RelationsInfo && actor->BlockInfo->RelationsInfo->Relationships.Num() > 0)
 				relControllers.Add(actor);
 
 			auto controllable = Cast<IControllableBlock>(actor);
-			if (controllable && actor->BlockInfo->RelationsInfo->Relationships.Num() > 0)
+			if (controllable && actor->BlockInfo->RelationsInfo && actor->BlockInfo->RelationsInfo->Relationships.Num() > 0)
 				relControllable.Add(actor);
 
 		}

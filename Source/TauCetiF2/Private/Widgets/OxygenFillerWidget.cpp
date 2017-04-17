@@ -20,6 +20,9 @@ void UOxygenFillerWidget::InitForBlock_Implementation(ABlock* block)
 
 ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
 {
+	if (!CurrentBlock)
+		return NULL;
+
 	auto n = CurrentBlock->ElectricityComponent->Network;
 
 	for (auto con : n->ControllerBlocks)
@@ -40,6 +43,9 @@ ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
 
 UInventoryBuildableBlockInfo* UOxygenFillerWidget::GetItemsToBeFilled(TArray<UInventoryBuildableBlockInfo*>& aviables)
 {
+
+	if (!CurrentBlock)
+		return NULL;
 
 	for (auto con : InventoryComponent->InventoryItems)
 	{
