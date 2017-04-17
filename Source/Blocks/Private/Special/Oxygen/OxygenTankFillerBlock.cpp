@@ -2,7 +2,7 @@
 #include "OxygenTankFillerBlock.h"
 
 AOxygenTankFillerBlock::AOxygenTankFillerBlock()
-	: Super()
+	: Super(), FillingItemCritical()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -135,6 +135,9 @@ ABlock* AOxygenTankFillerBlock::GetController_Implementation() { return usedCont
 
 void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 {
+
+	processCurrentFillingItem(DeltaSeconds);
+
 	auto status = OxygenComponent->OxygenInfo;
 
 	auto diff = status->CurrentObjectMaximumOxygen - status->CurrentObjectOxygen;
@@ -171,3 +174,29 @@ void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 
 
 }
+
+UInventoryBuildableBlockInfo* AOxygenTankFillerBlock::TakeCurrentFillingItem(UPARAM(REF)bool& success)
+{
+	FillingItemCritical.Lock();
+
+	success = currentFillingItem != NULL;
+	auto ret = currentFillingItem;
+	
+	FillingItemCritical.Unlock();
+
+	return ret;
+}
+
+bool AOxygenTankFillerBlock::SetCurrentFillingItem(UInventoryBuildableBlockInfo* info)
+{
+	FillingItemCritical.Lock();
+	if (currentFillingItem)
+		return false;
+
+	currentFillingItem = info;
+
+	FillingItemCritical.Unlock();
+
+	return true;
+}
+

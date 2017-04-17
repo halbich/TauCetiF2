@@ -27,5 +27,5 @@ public:
 		ABlock* GetControllables(TArray<ABlock*>& aviables);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherWidget")
-		void GetItemsToBeFilled(TArray<UInventoryBuildableBlockInfo*>& aviables);
+		UInventoryBuildableBlockInfo* GetItemsToBeFilled(TArray<UInventoryBuildableBlockInfo*>& aviables);
 };

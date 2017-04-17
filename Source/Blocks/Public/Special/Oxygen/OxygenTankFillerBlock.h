@@ -7,6 +7,7 @@
 #include "BlockWithElectricity.h"
 #include "BlockWithShowableWidget.h"
 #include "ControllableBlock.h"
+#include "Info/InventoryBuildableBlockInfo.h"
 #include "OxygenTankFillerBlock.generated.h"
 
 /**
@@ -39,6 +40,16 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenTankFiller")
 		ABlock* usedController;
 
+	UPROPERTY(Transient)
+		UInventoryBuildableBlockInfo* currentFillingItem;
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenTankFiller")
+		UInventoryBuildableBlockInfo* TakeCurrentFillingItem(UPARAM(REF)bool& success);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenTankFiller")
+		bool SetCurrentFillingItem(UInventoryBuildableBlockInfo* info);
+
+
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
@@ -68,7 +79,29 @@ public:
 private:
 	void ListeningOnUse(AActor* actor, bool isSpecial);
 
+	FCriticalSection FillingItemCritical;
+
+
+	void processCurrentFillingItem(float DeltaSeconds)
+	{
+		FillingItemCritical.Lock();
+
+		if (currentFillingItem && currentFillingItem->IsValidLowLevelFast())
+		{
+			auto diff = currentFillingItem->OxygenInfo->CurrentObjectMaximumOxygen - currentFillingItem->OxygenInfo->CurrentObjectOxygen;
+
+			if (FMath::IsNearlyZero(diff) || FMath::IsNearlyZero(OxygenComponent->OxygenInfo->CurrentObjectOxygen))
+			{
+				FillingItemCritical.Unlock();
+				return;
+			}
+		}
+
+		FillingItemCritical.Unlock();
+	}
+
 protected:
 	UFUNCTION()
 		void ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source);
+
 };

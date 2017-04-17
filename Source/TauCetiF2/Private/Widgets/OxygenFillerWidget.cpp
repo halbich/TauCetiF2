@@ -38,7 +38,7 @@ ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
 
 }
 
-void UOxygenFillerWidget::GetItemsToBeFilled(TArray<UInventoryBuildableBlockInfo*>& aviables)
+UInventoryBuildableBlockInfo* UOxygenFillerWidget::GetItemsToBeFilled(TArray<UInventoryBuildableBlockInfo*>& aviables)
 {
 
 	for (auto con : InventoryComponent->InventoryItems)
@@ -51,5 +51,5 @@ void UOxygenFillerWidget::GetItemsToBeFilled(TArray<UInventoryBuildableBlockInfo
 		return A.OxygenInfo->CurrentObjectOxygen < B.OxygenInfo->CurrentObjectOxygen;
 	});
 
-
+	return NULL;
 }

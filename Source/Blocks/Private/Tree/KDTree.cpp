@@ -308,8 +308,6 @@ void UKDTree::updateAfterChildDestroyedInner()
 
 void UKDTree::RegisterWatchingBox(UObject* actor, UMinMaxBox* box)
 {
-	print(TEXT("register box"));
-
 	TryUnregisterWatchingBox(actor);
 
 	watchedBoxes.Add(actor, box);
@@ -325,6 +323,5 @@ void UKDTree::TryUnregisterWatchingBox(UObject* actor)
 	if (!existing)
 		return;
 
-	print(TEXT("unregister box"));
 	watchedBoxes.Remove(actor);
 }

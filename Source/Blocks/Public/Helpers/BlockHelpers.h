@@ -34,6 +34,9 @@ namespace BlockHelpers
 		if (blockInfo->OxygenInfo && !definition->HasOxygenComponent)
 			blockInfo->OxygenInfo = NULL;
 
+		if (blockInfo->RelationsInfo && !definition->ElectricityComponentDef.IsControlBlock)
+			blockInfo->RelationsInfo = NULL;
+
 
 		if (!definition->IsInLimits(blockInfo->Scale))
 		{

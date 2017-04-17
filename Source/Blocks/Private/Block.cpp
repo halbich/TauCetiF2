@@ -78,10 +78,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 			BlockInfo->RelationsInfo = NewObject<UBlockWithRelationsInfo>();
 	}
 	else {
-		if (BlockInfo->RelationsInfo)
-		{
-			print(TEXT("tohle bychom neměli mít"));
-		}
+		ensure(!BlockInfo->RelationsInfo);
 	}
 
 
