@@ -223,6 +223,7 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, TAr
 	Ar << carrier.PlayerOxygenComponent;
 	Ar << carrier.PlayerElectricityComponent;
 
+	Ar << carrier.PlayerHealth;
 	Ar << carrier.IsCreativeMode;
 
 	Ar << carrier.weatherState;

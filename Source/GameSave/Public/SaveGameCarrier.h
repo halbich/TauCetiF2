@@ -83,6 +83,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		bool PlayerUseFPSCamera;
 
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
+		float PlayerHealth;
+
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
 		bool IsCreativeMode;
 

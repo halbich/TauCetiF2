@@ -21,6 +21,7 @@ UBlockWithOxygenInfo* UOxygenComponent::SetInfo(UBlockWithOxygenInfo* info)
 void UOxygenComponent::SetDefinition(FOxygenComponentDefinition def)
 {
 	OxygenComponentDef = def;
+	OxygenInfo->CurrentObjectMaximumOxygen = def.TotalObjectVolume;
 }
 
 void UOxygenComponent::SetDefinition(FOxygenComponentDefinition def, FVector& blockScale, FRotator& blockRotation)

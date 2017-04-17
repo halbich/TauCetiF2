@@ -204,7 +204,7 @@ private:
 				if (act)
 					continue;
 
-				tryDoCharacterHit(act, 1);
+				tryDoCharacterHit(result.GetActor(), 5);
 			}
 
 		}

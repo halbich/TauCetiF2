@@ -13,6 +13,9 @@
 #include "Blocks/Public/Helpers/BlockHelpers.h"
 #include "TauCetiF2Character.generated.h"
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerDied);
+
 UCLASS(config = Game)
 class ATauCetiF2Character : public ACharacter
 {
@@ -54,16 +57,29 @@ public:
 
 	virtual void BecomeViewTarget(APlayerController* pc) override;
 
-	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | OxygenComponent", meta = (ShowOnlyInnerProperties))
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | TCF2Character | OxygenComponent", meta = (ShowOnlyInnerProperties))
 		FOxygenComponentDefinition OxygenDef;
 
-	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | ElectricityComponent", meta = (ShowOnlyInnerProperties))
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | TCF2Character | ElectricityComponent", meta = (ShowOnlyInnerProperties))
 		FElectricityComponentDefinition ElectricityDef;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | GameMode")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | TCF2Character")
 		bool IsInCreativeMode;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Transient, Category = "TCF2 | TCF2Character")
+		float Health;
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Transient, Category = "TCF2 | TCF2Character")
+		float MaxHealth;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "TCF2 | TCF2Character")
+		FPlayerDied OnPlayerDied;
+
 	void doCharacterHit(float intensity);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | TCF2Character")
+		void DoHealthDamage(float healthDamage);
+
 
 protected:
 

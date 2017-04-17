@@ -21,6 +21,7 @@ UBlockWithElectricityInfo* UElectricityComponent::SetInfo(UBlockWithElectricityI
 void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def)
 {
 	ElectricityComponentDef = def;
+	ElectricityInfo->CurrentObjectMaximumEnergy = def.TotalObjectEnergy;
 }
 
 void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, FVector& blockScale, FRotator& blockRotation)

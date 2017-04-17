@@ -215,13 +215,15 @@ void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 {
 	Inventory->LoadFromCarrier(carrier, validationErrors);
 
-	OxygenComponent->SetDefinition(OxygenDef);
 	OxygenComponent->SetInfo(BlockSavingHelpers::GetOxygenInfo(carrier));
+	OxygenComponent->SetDefinition(OxygenDef);
 
-	ElectricityComponent->SetDefinition(ElectricityDef);
 	ElectricityComponent->SetInfo(BlockSavingHelpers::GetElectricityInfo(carrier));
+	ElectricityComponent->SetDefinition(ElectricityDef);
 
 	PC->Inventory->InventoryComponent = Inventory;
+
+	Health = FMath::Clamp(carrier->PlayerHealth, 0.0f, MaxHealth);
 
 	toogleCreative(carrier->IsCreativeMode);
 }
@@ -234,6 +236,8 @@ void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)
 	BlockSavingHelpers::SetElectricityInfo(carrier, ElectricityComponent->ElectricityInfo);
 
 	carrier->IsCreativeMode = IsInCreativeMode;
+
+	carrier->PlayerHealth = FMath::Clamp(Health, 0.0f, MaxHealth);
 }
 
 void ATauCetiF2Character::BecomeViewTarget(APlayerController* pc)
@@ -267,6 +271,8 @@ void ATauCetiF2Character::OnEmptyHand()
 void ATauCetiF2Character::BeginPlay()
 {
 	Super::BeginPlay();
+
+
 }
 
 void ATauCetiF2Character::toogleCreative(bool isCreative)
@@ -284,17 +290,49 @@ void ATauCetiF2Character::OnToggleCreativeMode()
 
 void ATauCetiF2Character::doCharacterHit(float intensity)
 {
+	if (IsInCreativeMode)
+		return;
+
+	auto damage = intensity;
+
+	if (FMath::IsNearlyZero(damage))
+		return;
+
 	print(TEXT("actorHit!"));
+
+	float energyToRemove = damage *  GameDefinitions::RainHitpointToEnergy;
+
+	float actuallyObtained = 0;
+	if (ElectricityComponent->ObtainAmount(energyToRemove, actuallyObtained))
+		energyToRemove -= actuallyObtained;
+
+
+	damage = energyToRemove * GameDefinitions::EnergyToRainHitpoint;
+
+
+	if (FMath::IsNearlyZero(damage))		//	we successfully blocked the damage
+		return;
+
+	DoHealthDamage(damage * GameDefinitions::RainHitpointToEnergy * GameDefinitions::EnergyToHealth);
+
+}
+
+void ATauCetiF2Character::DoHealthDamage(float healthDamage)
+{
+	if (IsInCreativeMode)
+		return;
+
+	Health = FMath::Clamp(Health - healthDamage, 0.0f, MaxHealth);
+
+	if (Health <= 0)
+		OnPlayerDied.Broadcast();
 }
 
 
-void tryDoCharacterHit(AActor* actor,float intensity)
+void tryDoCharacterHit(AActor* actor, float intensity)
 {
 	auto ch = Cast<ATauCetiF2Character>(actor);
 	if (ch)
 		ch->doCharacterHit(intensity);
-
-
-	print(TEXT("actorHit!"));
 
 }
