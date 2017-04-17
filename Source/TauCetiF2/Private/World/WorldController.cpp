@@ -114,7 +114,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	if (!isValid)
 	{
 		// TODO Localization!
-		UE_LOG(LogTemp, Error, TEXT("Blok není validní. Důvod: %s. nechávám"), *invalidReason);
+		UE_LOG(LogTemp, Error, TEXT("Blok není validní. Důvod: %s. Vynechávám."), *invalidReason);
 		return nullptr;
 	}
 

@@ -105,9 +105,7 @@ private:
 
 	FDelegateHandle ListeningHandle;
 
-#pragma optimize("", off)
-
-	void doDamage(int32 currentHitPoints) {
+	FORCEINLINE void doDamage(int32 currentHitPoints) {
 		for (auto i = 0; i < currentHitPoints; i++)
 		{
 			auto targNum = Targets.Num();
@@ -158,18 +156,19 @@ private:
 		}
 	}
 
-	void ensurePC()
+	FORCEINLINE bool ensurePC()
 	{
 		if (playerCharacter && playerCharacter->IsValidLowLevel())
-			return;
+			return true;
 
 		playerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-		check(playerCharacter);
+		return playerCharacter != NULL;
 	}
 
-	void doPlayerDamage(int32 currentHitPoints) {
+	FORCEINLINE void doPlayerDamage(int32 currentHitPoints) {
+		if (!ensurePC())
+			return;
 
-		ensurePC();
 		auto w = GetWorld();
 
 		FHitResult result;
@@ -178,7 +177,6 @@ private:
 		params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldStatic);
 		params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldDynamic);
 		params.AddObjectTypesToQuery(ECollisionChannel::ECC_Pawn);
-
 
 		for (auto i = 0; i < currentHitPoints; i++)
 		{
@@ -190,7 +188,6 @@ private:
 			auto start = FVector(target);
 			start.Z += startPointZ;
 
-
 			if (w->LineTraceSingleByObjectType(result, start, target, params))
 			{
 				auto act = Cast<ABlock>(result.GetActor());
@@ -199,11 +196,8 @@ private:
 
 				tryDoCharacterHit(result.GetActor(), 5);
 			}
-
 		}
 	}
-
-#pragma optimize("", on)
 
 	static const float EasingBorderValue;
 };

@@ -161,6 +161,20 @@ private:
 			args.Add(FStringFormatArg(*info.Name));
 			auto baseStr = FString::Format(TEXT("auto b_{0} = make({1}, FVector({2}, {3}, {4}), FVector({5}, {6}, {7}), FRotator({8}, {9}, {10}), {1}, \"{12}\"); "), args);
 
+			for (auto fl : info.AdditionalFlags)
+			{
+				TArray<FStringFormatArg> elArgs;
+				elArgs.Add(FStringFormatArg(count));
+				elArgs.Add(FStringFormatArg(fl.Key));
+				elArgs.Add(FStringFormatArg(fl.Value));
+				baseStr += FString::Format(TEXT("b_{0}.AdditionalFlags.Add(TEXT(\"{1}\"), {2}); "), elArgs);
+			}
+
+			if (info.AdditionalFlags.Num() > 0)
+			{
+				UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
+				baseStr.Empty();
+			}
 
 			if (info.HasElectricityData)
 			{

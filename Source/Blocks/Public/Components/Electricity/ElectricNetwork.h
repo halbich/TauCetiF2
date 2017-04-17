@@ -90,7 +90,7 @@ public:
 
 
 
-	FORCEINLINE void RegisterEntity(UElectricityComponent* comp)
+	void RegisterEntity(UElectricityComponent* comp)
 	{
 		Entities.Add(comp);
 		EntitiesCount = Entities.Num();

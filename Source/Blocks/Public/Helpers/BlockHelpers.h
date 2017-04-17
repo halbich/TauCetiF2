@@ -34,6 +34,27 @@ namespace BlockHelpers
 		if (blockInfo->OxygenInfo && !definition->HasOxygenComponent)
 			blockInfo->OxygenInfo = NULL;
 
+
+		if (!definition->IsInLimits(blockInfo->Scale))
+		{
+			reason = FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockInfo.Invalid_Dimensions", "Blok s ID {0} není v rozmezí platné velikosti. (Min: {1}, Max: {2}, Scale: {3})"), FText::AsNumber(blockInfo->ID), definition->MinBlockScale.ToText(), definition->MaxBlockScale.ToText(), (definition->HasCustomScaling ? definition->CustomBlockScale : blockInfo->Scale).ToText()).ToString();
+			return false;
+		}
+
+		TArray<FText> validationErrors;
+		if (!definition->ValidateFlags(blockInfo->AdditionalFlags, validationErrors))
+		{
+			FString result = validationErrors[0].ToString();
+
+			for (auto i = 1; i < validationErrors.Num(); i++)
+				result += TEXT(", %s") + validationErrors[i].ToString();
+
+			reason = result;
+
+			return false;
+		}
+
+
 		// TODO
 		return true;
 	}
