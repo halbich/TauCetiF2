@@ -37,6 +37,9 @@ public:
 	UPROPERTY(BlueprintReadonly, Category = "TCF2 | LightBlock")
 		bool AutoregulatePowerOutput;
 
+	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | LightBlock")
+		bool IsOn;
+
 	UPROPERTY(Transient)
 		float isDaytime;
 

@@ -102,7 +102,7 @@ void ALightBlock::Tick(float DeltaSeconds)
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
 	auto i = ElectricityComponent->GetInfo();
 
-	auto powerConsumption = AutoregulatePowerOutput ? getAutoregulatedPower(i->GetRemainingPercentage()) : i->PowerConsumptionPercent;
+	auto powerConsumption = IsOn ? AutoregulatePowerOutput ? getAutoregulatedPower(i->GetRemainingPercentage()) : i->PowerConsumptionPercent : 0;
 
 	auto toObtain = elapsedSeconds * powerConsumption  * max;
 
@@ -117,10 +117,34 @@ void ALightBlock::Tick(float DeltaSeconds)
 
 void ALightBlock::OnNightChanged(bool isNight) { isDaytime = !isNight; }
 
-void ALightBlock::SetControlState_Implementation(bool isOn) {}
-void ALightBlock::SetOutputPowerPercentage_Implementation(float percentage) {}
+void ALightBlock::SetControlState_Implementation(bool isOn) { IsOn = isOn; }
+void ALightBlock::SetOutputPowerPercentage_Implementation(float percentage) { BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage; }
 
-void ALightBlock::SetController_Implementation(ABlock* controller) { usedController = controller; AutoregulatePowerOutput = !controller; }
+void ALightBlock::SetController_Implementation(ABlock* controller) {
+	
+	if (usedController && usedController->IsValidLowLevel())
+	{
+		auto usedContTemp = usedController;
+		usedController = NULL;
+		auto controllable = Cast<IControllerBlock>(usedContTemp);
+		ensure(controllable);
+
+		controllable->Execute_UnbindControl(usedContTemp, this);
+	}
+
+	
+	usedController = controller;
+	AutoregulatePowerOutput = !controller;
+
+	if (usedController)
+	{
+		auto interf = Cast<IControllerBlock>(usedController);
+		if (interf)
+			this->Execute_SetControlState(this, interf->Execute_GetControlState(usedController));
+	}
+	else
+		IsOn = true;
+}
 ABlock* ALightBlock::GetController_Implementation() { return usedController; }
 
 void ALightBlock::SetDisplayedWidget(UUserWidget* widget) { shownWidget = widget; }

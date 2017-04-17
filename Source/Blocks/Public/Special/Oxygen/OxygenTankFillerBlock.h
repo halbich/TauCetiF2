@@ -37,6 +37,9 @@ public:
 	UPROPERTY(Transient)
 		UUserWidget* shownWidget;
 
+	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | LightBlock")
+		bool IsOn;
+
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenTankFiller")
 		ABlock* usedController;
 

@@ -112,8 +112,8 @@ void AOxygenTankFillerBlock::ShowWidget_Implementation()
 }
 
 
-void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) {}
-void AOxygenTankFillerBlock::SetOutputPowerPercentage_Implementation(float percentage) {}
+void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) { IsOn = isOn; }
+void AOxygenTankFillerBlock::SetOutputPowerPercentage_Implementation(float percentage) { BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage; }
 
 void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {
 
@@ -129,6 +129,15 @@ void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {
 
 
 	usedController = controller;
+
+	if (usedController)
+	{
+		auto interf = Cast<IControllerBlock>(usedController);
+		if (interf)
+			this->Execute_SetControlState(this, interf->Execute_GetControlState(usedController));
+	}
+	else
+		IsOn = true;
 
 }
 ABlock* AOxygenTankFillerBlock::GetController_Implementation() { return usedController; }
@@ -149,8 +158,12 @@ void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 	}
 
 	auto elapsedSeconds = DeltaSeconds * GameDefinitions::GameDayMultiplier;
+
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
-	auto possibleEnergy = elapsedSeconds * max;	// now we can withdraw only this amount;
+	auto powerConsumption = IsOn ? ElectricityComponent->GetInfo()->PowerConsumptionPercent : 0;
+
+
+	auto possibleEnergy = elapsedSeconds * powerConsumption  * max; // now we can withdraw only this amount;
 
 	auto toWithdraw = FMath::Min(diff *  GameDefinitions::OxygenToEnergy, possibleEnergy);
 

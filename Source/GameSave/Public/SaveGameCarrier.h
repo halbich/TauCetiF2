@@ -170,7 +170,24 @@ private:
 				baseStr += FString::Format(TEXT("b_{0}.AdditionalFlags.Add(TEXT(\"{1}\"), {2}); "), elArgs);
 			}
 
+
 			if (info.AdditionalFlags.Num() > 0)
+			{
+				UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
+				baseStr.Empty();
+			}
+
+			for (auto fl : info.BlockSpecificData)
+			{
+				TArray<FStringFormatArg> elArgs;
+				elArgs.Add(FStringFormatArg(count));
+				elArgs.Add(FStringFormatArg(fl.Key));
+				elArgs.Add(FStringFormatArg(fl.Value));
+				baseStr += FString::Format(TEXT("b_{0}.BlockSpecificData.Add(TEXT(\"{1}\"), TEXT(\"{2}\")); "), elArgs);
+			}
+
+
+			if (info.BlockSpecificData.Num() > 0)
 			{
 				UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
 				baseStr.Empty();

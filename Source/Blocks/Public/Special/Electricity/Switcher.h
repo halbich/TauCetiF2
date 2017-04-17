@@ -51,6 +51,8 @@ public:
 
 	virtual bool UnbindControl_Implementation(ABlock* controllableBlock) override;
 
+	virtual bool GetControlState_Implementation() override;
+
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;

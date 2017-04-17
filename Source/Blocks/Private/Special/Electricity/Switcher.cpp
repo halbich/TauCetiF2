@@ -77,6 +77,13 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 	IsOn = !IsOn;
 	BlockInfo->BlockSpecificData[SwitcherBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
 
+	for (auto controlled : controlledBlocks)
+	{
+		auto interf = Cast<IControllableBlock>(controlled);
+		if (interf)
+			interf->Execute_SetControlState(controlled, IsOn);
+	}
+
 	updateDynamicColor();
 }
 
@@ -167,5 +174,11 @@ bool ASwitcher::UnbindControl_Implementation(ABlock* controllableBlock)
 
 
 	return res;
+}
+
+
+bool ASwitcher::GetControlState_Implementation()
+{
+	return IsOn;
 }
 

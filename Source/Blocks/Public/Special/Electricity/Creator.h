@@ -12,7 +12,7 @@
  *
  */
 UCLASS()
-class BLOCKS_API ACreator : public ABlock, public IBlockWithElectricity, public IControllableBlock
+class BLOCKS_API ACreator : public ABlock, public IBlockWithElectricity
 {
 	GENERATED_BODY()
 
@@ -31,9 +31,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | CreatorBlock")
 		bool IsValidCreator;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | CreatorBlock")
-		ABlock* usedController;
-
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
@@ -42,10 +39,6 @@ public:
 
 	virtual void CheckWatchingBox() override;
 
-	virtual void SetControlState_Implementation(bool isOn) override;
-	virtual void SetOutputPowerPercentage_Implementation(float percentage) override;
-	virtual void SetController_Implementation(ABlock* controller) override;
-	virtual ABlock* GetController_Implementation() override;
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{
