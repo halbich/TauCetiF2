@@ -17,8 +17,8 @@ const float GameDefinitions::GameDayMultiplier(86400.0f / GameDefinitions::GameD
 const float GameDefinitions::RainHitpointToEnergy(1000);
 const float GameDefinitions::EnergyToRainHitpoint(1.0f / GameDefinitions::RainHitpointToEnergy);
 
-const float GameDefinitions::EnergyToOgygen(10);
-const float GameDefinitions::OxygenToEnergy(1.0f / GameDefinitions::EnergyToOgygen);
+const float GameDefinitions::EnergyToOxygen(10);
+const float GameDefinitions::OxygenToEnergy(1.0f / GameDefinitions::EnergyToOxygen);
 
 const float GameDefinitions::EnergyToHealth(.002f);
 const float GameDefinitions::HealthToEnergy(1.0f / GameDefinitions::EnergyToHealth);

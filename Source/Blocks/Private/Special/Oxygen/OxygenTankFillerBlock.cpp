@@ -4,7 +4,7 @@
 AOxygenTankFillerBlock::AOxygenTankFillerBlock()
 	: Super()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 	OxygenTankFillerBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerBodyMesh"));
 	OxygenTankFillerBodyMesh->SetupAttachment(GetRootComponent());
@@ -115,5 +115,59 @@ void AOxygenTankFillerBlock::ShowWidget_Implementation()
 void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) {}
 void AOxygenTankFillerBlock::SetOutputPowerPercentage_Implementation(float percentage) {}
 
-void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) { usedController = controller; }
+void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {
+
+	if (usedController && usedController->IsValidLowLevel())
+	{
+		auto usedContTemp = usedController;
+		usedController = NULL;
+		auto controllable = Cast<IControllerBlock>(usedContTemp);
+		ensure(controllable);
+
+		controllable->Execute_UnbindControl(usedContTemp, this);
+	}
+
+
+	usedController = controller;
+
+}
 ABlock* AOxygenTankFillerBlock::GetController_Implementation() { return usedController; }
+
+void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
+{
+	auto status = OxygenComponent->OxygenInfo;
+
+	auto diff = status->CurrentObjectMaximumOxygen - status->CurrentObjectOxygen;
+
+	if (FMath::IsNearlyZero(diff) || FMath::IsNearlyZero(ElectricityComponent->ElectricityInfo->CurrentObjectEnergy))
+	{
+		Super::Tick(DeltaSeconds);
+		return;
+	}
+
+	auto elapsedSeconds = DeltaSeconds * GameDefinitions::GameDayMultiplier;
+	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
+	auto possibleEnergy = elapsedSeconds * max;	// now we can withdraw only this amount;
+
+	auto toWithdraw = FMath::Min(diff *  GameDefinitions::OxygenToEnergy, possibleEnergy);
+
+	float actuallyObtained = 0;
+	float actuallyPutted = 0;
+	float acuallyReturned = 0;
+	if (ElectricityComponent->ObtainAmount(toWithdraw, actuallyObtained)) {
+
+
+		float toReturn = actuallyObtained;
+		if (OxygenComponent->PutAmount(actuallyObtained * GameDefinitions::EnergyToOxygen, actuallyPutted))
+			toReturn -= actuallyPutted * GameDefinitions::OxygenToEnergy;
+
+		ensure(toReturn >= 0);
+
+		ElectricityComponent->PutAmount(toReturn, acuallyReturned);
+	}
+
+
+	Super::Tick(DeltaSeconds);
+
+
+}

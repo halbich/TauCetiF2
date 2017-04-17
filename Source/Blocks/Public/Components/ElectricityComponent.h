@@ -111,4 +111,6 @@ private:
 
 		return bx.GetVolume();
 	}
+
+	FCriticalSection InOutCritical;
 };

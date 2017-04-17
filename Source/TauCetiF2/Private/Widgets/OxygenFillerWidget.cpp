@@ -22,7 +22,7 @@ ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
 {
 	auto n = CurrentBlock->ElectricityComponent->Network;
 
-	for (auto con : n->ControllableBlocks)
+	for (auto con : n->ControllerBlocks)
 	{
 		auto c = Cast<ABlock>(con->GetOwner());
 		if (!c || !c->IsValidLowLevel() || c->IsPendingKill())
@@ -35,5 +35,21 @@ ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
 	}
 
 	return CurrentBlock->usedController;
+
+}
+
+void UOxygenFillerWidget::GetItemsToBeFilled(TArray<UInventoryBuildableBlockInfo*>& aviables)
+{
+
+	for (auto con : InventoryComponent->InventoryItems)
+	{
+		aviables.Add(con);
+	}
+
+
+	aviables.Sort([](const UInventoryBuildableBlockInfo& A, const UInventoryBuildableBlockInfo& B) {
+		return A.OxygenInfo->CurrentObjectOxygen < B.OxygenInfo->CurrentObjectOxygen;
+	});
+
 
 }

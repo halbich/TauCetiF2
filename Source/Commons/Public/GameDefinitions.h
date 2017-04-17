@@ -21,7 +21,7 @@ public:
 	static const float RainHitpointToEnergy;
 	static const float EnergyToRainHitpoint;
 	
-	static const float EnergyToOgygen;
+	static const float EnergyToOxygen;
 	static const float OxygenToEnergy;
 
 	static const float EnergyToHealth;

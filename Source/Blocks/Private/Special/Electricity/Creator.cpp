@@ -57,17 +57,12 @@ UMinMaxBox* ACreator::GetWatchingBox()
 
 void ACreator::CheckWatchingBox()
 {
-	print(TEXT("Checking region"));
-
 	ensure(watchingBox);
 
 	IsValidCreator = false;
 
 	auto world = GetWorld();
 
-	FlushPersistentDebugLines(world);
-
-	watchingBox->DEBUGDrawBorder(GetWorld(), FColor::Orange, 30.0f);
 
 	TArray<UObject*> objectsToCast;
 
@@ -84,7 +79,6 @@ void ACreator::CheckWatchingBox()
 		if (bl->Definition.GetDefaultObject()->BlockID == CubePolycarbonateID)
 			objectBoxes.Add(bl, bl->WorldObjectComponent->DefiningBox->GetBox());
 
-		bl->WorldObjectComponent->DefiningBox->DEBUGDrawBorder(GetWorld(), FColor::White, 30.0f);
 	}
 
 	auto emptyBox = NewObject<UMinMaxBox>();
@@ -100,8 +94,6 @@ void ACreator::CheckWatchingBox()
 	emptyBox->InitBox(min, max);
 	auto fbox = emptyBox->GetBox();
 
-	emptyBox->DEBUGDrawBorder(GetWorld(), FColor::Magenta, 30.0f);
-
 	for (auto obj : objectBoxes)
 	{
 		if (obj.Value.Intersect(fbox) && IntersectExcl(obj.Value, fbox))
@@ -110,7 +102,6 @@ void ACreator::CheckWatchingBox()
 
 	auto left = NewObject<UMinMaxBox>();
 	left->InitBoxChecked(FVector(emptyBox->Min.X, watchingBox->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Max.Z));
-	left->DEBUGDrawBorder(GetWorld(), FColor::Red, 30.0f);
 	if (!checkForBlock(left, objectBoxes))
 		return;
 
@@ -136,7 +127,6 @@ void ACreator::CheckWatchingBox()
 
 	IsValidCreator = true;
 
-	print(TEXT("NoInnerIntersection"));
 };
 
 void ACreator::SetControlState_Implementation(bool isOn) {}

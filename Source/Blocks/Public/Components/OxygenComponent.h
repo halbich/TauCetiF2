@@ -72,4 +72,6 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "TCF2 | OxygenComponent")
 		FOxygenComponentDataChangedDelegate OnComponentDataChangedEvent;
+
+	FCriticalSection InOutCritical;
 };

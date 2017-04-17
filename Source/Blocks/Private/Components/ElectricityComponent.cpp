@@ -3,7 +3,7 @@
 
 #pragma optimize("", off)
 
-UElectricityComponent::UElectricityComponent()
+UElectricityComponent::UElectricityComponent() : InOutCritical()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 }
@@ -96,13 +96,15 @@ bool UElectricityComponent::ObtainAmount(float requested, float& actuallyObtaine
 		return false;
 	}
 
-	auto aviable = ElectricityInfo->CurrentObjectEnergy;
+	InOutCritical.Lock();
 
+	auto aviable = ElectricityInfo->CurrentObjectEnergy;
 	check(aviable >= 0);
 
 	if (FMath::IsNearlyZero(aviable))
 	{
 		actuallyObtained = 0;
+		InOutCritical.Unlock();
 		return false;
 	}
 
@@ -113,6 +115,7 @@ bool UElectricityComponent::ObtainAmount(float requested, float& actuallyObtaine
 	if (requireExact && !FMath::IsNearlyZero(requested - actuallyObtained))
 	{
 		actuallyObtained = 0;
+		InOutCritical.Unlock();
 		return false;
 	}
 
@@ -121,6 +124,7 @@ bool UElectricityComponent::ObtainAmount(float requested, float& actuallyObtaine
 	ensure(ElectricityInfo->CurrentObjectEnergy >= 0.0f);
 	ensure(ElectricityInfo->CurrentObjectEnergy <= ElectricityInfo->CurrentObjectMaximumEnergy);
 
+	InOutCritical.Unlock();
 	onComponentDataChanged();
 	return true;
 }
@@ -133,12 +137,15 @@ bool UElectricityComponent::PutAmount(float aviable, float& actuallyPutted)
 		return true;
 	}
 
+	InOutCritical.Lock();
+
 	auto aviableToFill = ElectricityInfo->CurrentObjectMaximumEnergy - ElectricityInfo->CurrentObjectEnergy;
 	check(aviableToFill >= 0);
 
 	if (FMath::IsNearlyZero(aviableToFill))
 	{
 		actuallyPutted = 0;
+		InOutCritical.Unlock();
 		return false;
 	}
 
@@ -149,7 +156,7 @@ bool UElectricityComponent::PutAmount(float aviable, float& actuallyPutted)
 	ensure(ElectricityInfo->CurrentObjectEnergy >= 0.0f);
 	ensure(ElectricityInfo->CurrentObjectEnergy <= ElectricityInfo->CurrentObjectMaximumEnergy);
 
-
+	InOutCritical.Unlock();
 	onComponentDataChanged();
 	return true;
 }

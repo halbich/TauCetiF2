@@ -3,7 +3,7 @@
 
 #pragma optimize("", off)
 
-UOxygenComponent::UOxygenComponent()
+UOxygenComponent::UOxygenComponent() : InOutCritical()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 }
@@ -65,13 +65,16 @@ bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained, bo
 		return false;
 	}
 
-	auto aviable = OxygenInfo->CurrentObjectOxygen;
+	InOutCritical.Lock();
 
+	auto aviable = OxygenInfo->CurrentObjectOxygen;
 	check(aviable >= 0);
+
 
 	if (FMath::IsNearlyZero(aviable))
 	{
 		actuallyObtained = 0;
+		InOutCritical.Unlock();
 		return false;
 	}
 
@@ -82,6 +85,7 @@ bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained, bo
 	if (requireExact && !FMath::IsNearlyZero(requested - actuallyObtained))
 	{
 		actuallyObtained = 0;
+		InOutCritical.Unlock();
 		return false;
 	}
 
@@ -90,6 +94,7 @@ bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained, bo
 	ensure(OxygenInfo->CurrentObjectOxygen >= 0.0f);
 	ensure(OxygenInfo->CurrentObjectOxygen <= OxygenInfo->CurrentObjectMaximumOxygen);
 
+	InOutCritical.Unlock();
 	onComponentDataChanged();
 	return true;
 }
@@ -102,12 +107,15 @@ bool UOxygenComponent::PutAmount(float aviable, float& actuallyPutted)
 		return true;
 	}
 
+	InOutCritical.Lock();
+
 	auto aviableToFill = OxygenInfo->CurrentObjectMaximumOxygen - OxygenInfo->CurrentObjectOxygen;
 	check(aviableToFill >= 0);
 
 	if (FMath::IsNearlyZero(aviableToFill))
 	{
 		actuallyPutted = 0;
+		InOutCritical.Unlock();
 		return false;
 	}
 
@@ -118,6 +126,7 @@ bool UOxygenComponent::PutAmount(float aviable, float& actuallyPutted)
 	ensure(OxygenInfo->CurrentObjectOxygen >= 0.0f);
 	ensure(OxygenInfo->CurrentObjectOxygen <= OxygenInfo->CurrentObjectMaximumOxygen);
 
+	InOutCritical.Unlock();
 	onComponentDataChanged();
 	return true;
 }
