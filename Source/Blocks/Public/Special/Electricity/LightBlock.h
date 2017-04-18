@@ -12,7 +12,14 @@
 namespace LightBlockConstants
 {
 	static FString IsAutoregulated = TEXT("IsAutoregulated");
+	static FString IsOn = TEXT("IsOn");
 }
+
+#define LIGHT_TURN_ON NSLOCTEXT("TCF2LocSpace", "LC.LightBlock.TurnOn", "Zapnout / Nastavit")
+
+#define LIGHT_TURN_OFF NSLOCTEXT("TCF2LocSpace", "LC.LightBlock.TurnOff", "Vypnout / Nastavit")
+
+#define LIGHT_TURN_USE NSLOCTEXT("TCF2LocSpace", "LC.LightBlock.TurnOff", " --- / Nastavit")
 
 /**
  *
@@ -107,5 +114,10 @@ private:
 	{
 		if (LightComp && LightComp->IsValidLowLevelFast())
 			LightComp->SetIntensity(FMath::IsNearlyZero(max) ? 0 : ((consumption / max) * 5000.0f));
+	}
+
+	FORCEINLINE void updateUsingMessage()
+	{
+		SelectTargetComponent->CustomUsingMessage = usedController ? LIGHT_TURN_USE : (IsOn ? LIGHT_TURN_OFF : LIGHT_TURN_ON);
 	}
 };

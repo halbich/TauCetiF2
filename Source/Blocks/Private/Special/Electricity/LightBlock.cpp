@@ -44,6 +44,14 @@ void ALightBlock::SetBlockInfo(UBlockInfo* info)
 		BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
 	else
 		AutoregulatePowerOutput = FCString::Atoi(*state) > 0 ? true : false;
+
+
+	auto state1 = info->BlockSpecificData.FindOrAdd(LightBlockConstants::IsOn);
+	if (state1.IsEmpty())
+		BlockInfo->BlockSpecificData[LightBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
+	else
+		IsOn = FCString::Atoi(*state1) > 0 ? true : false;
+
 }
 
 void ALightBlock::ListeningOnUse(AActor* actor, bool isSpecial)
@@ -58,13 +66,16 @@ void ALightBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 		IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
 		return;
 	}
+
+	if (!usedController)
+		this->Execute_SetControlState(this, !IsOn);
 }
 
 void  ALightBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(500);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.LightBlock.Use", "Ovládat / Nastavit");
+	updateUsingMessage();
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ALightBlock::ListeningOnUse);
@@ -102,7 +113,11 @@ void ALightBlock::Tick(float DeltaSeconds)
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
 	auto i = ElectricityComponent->GetInfo();
 
-	auto powerConsumption = IsOn ? AutoregulatePowerOutput ? getAutoregulatedPower(i->GetRemainingPercentage()) : i->PowerConsumptionPercent : 0;
+	auto powerConsumption = IsOn 
+		? (AutoregulatePowerOutput 
+			? getAutoregulatedPower(i->GetRemainingPercentage()) 
+			: i->PowerConsumptionPercent) 
+		: 0;
 
 	auto toObtain = elapsedSeconds * powerConsumption  * max;
 
@@ -117,11 +132,11 @@ void ALightBlock::Tick(float DeltaSeconds)
 
 void ALightBlock::OnNightChanged(bool isNight) { isDaytime = !isNight; }
 
-void ALightBlock::SetControlState_Implementation(bool isOn) { IsOn = isOn; }
+void ALightBlock::SetControlState_Implementation(bool isOn) { IsOn = isOn; updateUsingMessage(); }
 void ALightBlock::SetOutputPowerPercentage_Implementation(float percentage) { BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage; }
 
 void ALightBlock::SetController_Implementation(ABlock* controller) {
-	
+
 	if (usedController && usedController->IsValidLowLevel())
 	{
 		auto usedContTemp = usedController;
@@ -132,9 +147,8 @@ void ALightBlock::SetController_Implementation(ABlock* controller) {
 		controllable->Execute_UnbindControl(usedContTemp, this);
 	}
 
-	
+
 	usedController = controller;
-	AutoregulatePowerOutput = !controller;
 
 	if (usedController)
 	{
@@ -142,8 +156,8 @@ void ALightBlock::SetController_Implementation(ABlock* controller) {
 		if (interf)
 			this->Execute_SetControlState(this, interf->Execute_GetControlState(usedController));
 	}
-	else
-		IsOn = true;
+
+	updateUsingMessage();
 }
 ABlock* ALightBlock::GetController_Implementation() { return usedController; }
 
