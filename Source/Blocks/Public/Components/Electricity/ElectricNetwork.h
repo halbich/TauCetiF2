@@ -167,7 +167,7 @@ public:
 		auto info = comp->GetBlockInfo();
 		ensure(info);
 
-		TotalHealth = FMath::Max(0.0f, TotalHealth - info->MaxHealth);
+		TotalHealth = FMath::Max(0.0f, TotalHealth - info->MaxHealth);		// due to rounding errors, we could get under zero
 
 		return r;
 	}
@@ -175,4 +175,29 @@ public:
 	FORCEINLINE void RegisterEntitySeverity(UElectricityComponent* comp, EHealthSeverity newSeverity)
 	{
 	}
+
+	FORCEINLINE void EmptyNetwork()
+	{
+		Entities.Empty();
+		ToRepairEntities.Empty();
+		ImportantRepairEntities.Empty();
+		CriticalRepairEntities.Empty();
+		ElectricityProducers.Empty();
+		ElectricityConsumers.Empty();
+		ControllerBlocks.Empty();
+		ControllableBlocks.Empty();
+	}
+
+#pragma optimize("", off)
+
+	void CheckControlBlocks()
+	{
+		for (auto c : ControllableBlocks)
+		{
+
+		}
+
+	}
+
+#pragma optimize("", on)
 };

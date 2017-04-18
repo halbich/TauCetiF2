@@ -313,6 +313,8 @@ void AWorldController::LoadDataFromCarrier(USaveGameCarrier* carrier)
 	{
 		for (auto searchedController : controllable->BlockInfo->RelationsInfo->Relationships)
 		{
+			ensure(searchedController->RelationshipType == (uint8)ESwitherRelationship::IsControlledByTarget);
+
 			auto scID = searchedController->TargetID;
 
 			auto c = relControllers.FindByPredicate([scID](ABlock* block) {

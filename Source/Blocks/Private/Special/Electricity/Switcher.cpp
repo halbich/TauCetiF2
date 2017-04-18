@@ -125,7 +125,7 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 		return false;
 
 	auto my = BlockInfo->RelationsInfo;
-	ensure(my);
+	ensure(my && my->IsValidLowLevel());
 
 	auto other = controllableBlock->BlockInfo->RelationsInfo;
 	ensure(other && other->IsValidLowLevel());
@@ -167,7 +167,7 @@ bool ASwitcher::UnbindControl_Implementation(ABlock* controllableBlock)
 		return false;
 
 	auto my = BlockInfo->RelationsInfo;
-	ensure(my);
+	ensure(my && my->IsValidLowLevel());
 
 	auto other = controllableBlock->BlockInfo->RelationsInfo;
 	ensure(other && other->IsValidLowLevel());
