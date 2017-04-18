@@ -65,8 +65,7 @@ void UGameWeatherComponent::ObjectsChanged() {
 
 void UGameWeatherComponent::OnStormBegin()
 {
-	// we want to be sure that the weather changing simulation is done and completed
-	check(currentWeatherState->TargetWeatherIntensity == currentWeatherState->CurrentWeatherIntensity);
+	currentWeatherState->CurrentWeatherIntensity = currentWeatherState->TargetWeatherIntensity;
 
 	CurrentHitIntensity = IntensityCurve->GetFloatValue(currentWeatherState->CurrentWeatherIntensity);
 	hitpointsCounter = 0;
