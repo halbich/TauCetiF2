@@ -94,6 +94,8 @@ void AOxygenTankFillerBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (OxygenComponent)
 		OxygenComponent->OnComponentDataChangedEvent.RemoveDynamic(this, &AOxygenTankFillerBlock::ListeningOnOxygenCompChanged);
 
+	this->Execute_SetController(this, NULL);
+
 	Super::EndPlay(EndPlayReason);
 }
 

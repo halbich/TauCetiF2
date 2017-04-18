@@ -33,9 +33,7 @@ void UElectricityBindableAreaInfo::InitArea(TArray<FVector> usedPoints, FElectri
 
 void UElectricityBindableAreaInfo::DEBUG_DrawPoints(UWorld* world)
 {
-	return;
-
-	for (auto p : AreaPoints)
+	/*for (auto p : AreaPoints)
 		DrawDebugSphere(world, p, 5, 10, FColor::Green, false, 60);
 
 	for (int32 i = 0; i < AreaPoints.Num(); i++)
@@ -53,7 +51,7 @@ void UElectricityBindableAreaInfo::DEBUG_DrawPoints(UWorld* world)
 		indices.Add(0); indices.Add(2); indices.Add(3);
 	}
 
-	DrawDebugMesh(world, AreaPoints, indices, FColor::Green, false, 30);
+	DrawDebugMesh(world, AreaPoints, indices, FColor::Green, false, 30);*/
 }
 
 FBox UElectricityBindableAreaInfo::GetBox()

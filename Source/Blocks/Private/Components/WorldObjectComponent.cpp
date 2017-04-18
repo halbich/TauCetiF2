@@ -89,8 +89,8 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 		if (parent)
 		{
 			parent->ChildrenDeleted();
-			FlushPersistentDebugLines(GetWorld());
-			parent->GetRoot()->DEBUGDrawBorder(GetWorld());
+			//FlushPersistentDebugLines(GetWorld());
+			//parent->GetRoot()->DEBUGDrawBorder(GetWorld());
 		}
 	}
 }

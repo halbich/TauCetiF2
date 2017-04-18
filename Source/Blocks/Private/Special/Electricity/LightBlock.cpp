@@ -103,6 +103,8 @@ void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 
+	this->Execute_SetController(this, NULL);
+
 	Super::EndPlay(EndPlayReason);
 }
 

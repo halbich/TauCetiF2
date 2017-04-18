@@ -92,6 +92,14 @@ void ASwitcher::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 
+
+	for (auto controlled : controlledBlocks)
+	{
+		auto interf = Cast<IControllableBlock>(controlled);
+		if (interf)
+			interf->Execute_SetController(controlled, NULL);
+	}
+
 	Super::EndPlay(EndPlayReason);
 }
 

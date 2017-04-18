@@ -40,7 +40,7 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, F
 		auto bindArea = NewObject<UElectricityBindableAreaInfo>();
 		bindArea->InitArea(ElectricityComponentDef.BindableAreas.UsedPoints, areaDef, blockScale, blockRotation, worldLocation);
 		ElectricityBindableAreas.Add(bindArea);
-		bindArea->DEBUG_DrawPoints(GetWorld());
+		//bindArea->DEBUG_DrawPoints(GetWorld());
 	}
 
 	auto surroundings = GetSurroundingComponents(this);

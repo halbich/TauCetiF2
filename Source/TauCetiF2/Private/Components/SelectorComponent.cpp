@@ -29,10 +29,6 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	auto rot = playerPawn->GetControlRotation();
 	auto hitEnd = FRotationMatrix(rot).GetScaledAxis(EAxis::X) * 1000 + cameraLoc;
 
-	const FName TraceTag("MyTraceTag");
-
-	GetWorld()->DebugDrawTraceTag = TraceTag;
-
 	FHitResult result;
 	FCollisionObjectQueryParams params;
 
@@ -40,7 +36,6 @@ void USelectorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldDynamic);
 
 	FCollisionQueryParams CollisionParams;
-	//CollisionParams.TraceTag = TraceTag;
 	CollisionParams.AddIgnoredActor(traceIgnoreActor);
 
 	if (!GetWorld()->LineTraceSingleByObjectType(result, cameraLoc, hitEnd, params, CollisionParams))
@@ -94,11 +89,7 @@ void USelectorComponent::ShowPlane()
 	}
 
 	if (!spawnedPlane)
-	{
 		return;
-	}
-
-	DrawDebugDirectionalArrow(GetWorld(), ImpactPointWithSnap, ImpactPointWithSnap + (ImpactNormal * 100), 300, FColor::Red, false, 10);
 
 	auto rotator = ImpactNormal.Rotation() + FRotator(-90, 0, 0);
 

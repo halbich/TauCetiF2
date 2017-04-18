@@ -277,8 +277,6 @@ void AWorldController::BeginPlay() {
 	weatherComponent->WeatherRootTree->Init(min, max, 0);
 	weatherComponent->InitComp();
 
-	UPatternDefinitionsHolder::Instance();
-
 	Super::BeginPlay();
 }
 

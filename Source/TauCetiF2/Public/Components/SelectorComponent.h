@@ -40,7 +40,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient)
 		AActor* traceIgnoreActor;
 
-	UPROPERTY(BlueprintReadWrite, Transient, EditAnywhere)
+	UPROPERTY(BlueprintReadonly, EditDefaultsOnly)
 		UBlueprint* LockingPlane;
 
 	UPROPERTY(BlueprintReadOnly, Transient)

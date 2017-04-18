@@ -167,8 +167,7 @@ public:
 		auto info = comp->GetBlockInfo();
 		ensure(info);
 
-		TotalHealth -= info->MaxHealth;
-		check(TotalHealth >= 0);
+		TotalHealth = FMath::Max(0.0f, TotalHealth - info->MaxHealth);
 
 		return r;
 	}

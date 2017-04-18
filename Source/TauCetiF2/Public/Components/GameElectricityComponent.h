@@ -45,13 +45,13 @@ private:
 
 	static const double maxFloatingTime;
 
-	FORCEINLINE void enqueueItem(UElectricityComponent* comp) {
+	/*FORCEINLINE*/ void enqueueItem(UElectricityComponent* comp) {
 		comp->ComponentNetworkState = EElectricNetworkState::InRecompute;
 		comp->Network->ToRecompute.Enqueue(comp);
 		comp->Network->NetworkState = EElectricNetworkState::InRecompute;
 	}
 
-	FORCEINLINE UElectricNetwork* addToNetwork(UElectricityComponent* comp, UElectricNetwork* network)
+	/*FORCEINLINE*/ UElectricNetwork* addToNetwork(UElectricityComponent* comp, UElectricNetwork* network)
 	{
 		networks.AddUnique(network);
 		auto r = comp->Network = network;
@@ -85,7 +85,7 @@ private:
 		net->ToRecompute.Empty();
 	}
 
-	FORCEINLINE void tickRecomputeNetwork(double time) {
+	/*FORCEINLINE*/ void tickRecomputeNetwork(double time) {
 		do {
 			UElectricNetwork* toResolve;
 			if (!networksToUpdate.Dequeue(toResolve))
@@ -126,7 +126,7 @@ private:
 		}
 	}
 
-	FORCEINLINE void updateStatistics(UElectricNetwork* n)
+	/*FORCEINLINE*/ void updateStatistics(UElectricNetwork* n)
 	{
 		float producedEnergy = 0.0f;
 		for (auto producer : n->ElectricityProducers)
