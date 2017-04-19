@@ -23,9 +23,8 @@ void USwitcherWidget::GetControllables(TArray<ABlock*>& aviables, TArray<ABlock*
 
 	auto n = CurrentBlock->ElectricityComponent->Network;
 
-	for (auto con : n->ControllableBlocks)
+	for (auto c : n->ControllableBlocks)
 	{
-			auto c = Cast<ABlock>(con->GetOwner());
 			if (!c || !c->IsValidLowLevel() || c->IsPendingKill())
 				continue;
 

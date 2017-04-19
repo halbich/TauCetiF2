@@ -5,6 +5,7 @@
 #include "Info/BlockInfo.h"
 #include "Definitions/ElectricityComponentDefinition.h"
 #include "../ElectricityComponent.h"
+#include "Interfaces/ControllerBlock.h"
 #include "ElectricNetwork.generated.h"
 
 /**
@@ -82,10 +83,10 @@ public:
 
 
 	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> ControllerBlocks;
+		TArray<ABlock*> ControllerBlocks;
 
 	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> ControllableBlocks;
+		TArray<ABlock*> ControllableBlocks;
 
 
 
@@ -115,12 +116,16 @@ public:
 		{
 			if (def->IsControllable)
 			{
-				ControllableBlocks.Add(comp);
+				auto c = Cast<ABlock>(comp->GetOwner());
+				check(c);
+				ControllableBlocks.Add(c);
 			}
 
 			if (def->IsController)
 			{
-				ControllerBlocks.Add(comp);
+				auto c = Cast<ABlock>(comp->GetOwner());
+				check(c);
+				ControllerBlocks.Add(c);
 			}
 		}
 
@@ -155,12 +160,16 @@ public:
 		{
 			if (def->IsControllable)
 			{
-				ControllableBlocks.Remove(comp);
+				auto c = Cast<ABlock>(comp->GetOwner());
+				check(c);
+				ControllableBlocks.Remove(c);
 			}
 
 			if (def->IsController)
 			{
-				ControllerBlocks.Remove(comp);
+				auto c = Cast<ABlock>(comp->GetOwner());
+				check(c);
+				ControllerBlocks.Remove(c);
 			}
 		}
 
@@ -192,8 +201,30 @@ public:
 
 	void CheckControlBlocks()
 	{
-		for (auto c : ControllableBlocks)
+		for (auto c : ControllerBlocks)
 		{
+			auto cEl = c->TryGetElectricityComp();
+			check(cEl && cEl->Network == this);
+
+			auto icontroller = Cast<IControllerBlock>(c);
+			check(icontroller);
+
+			auto controlled = icontroller->Execute_GetControlledBlocks(c);
+
+			TQueue<ABlock*> unbind;
+
+			for (auto con : controlled)
+			{
+				auto conEl = con->TryGetElectricityComp();
+				check(conEl);
+
+				if (conEl->Network != this)		// our contrlolled item's network has changed, we need to unbind this
+					unbind.Enqueue(con);
+			}
+
+			ABlock* toUnbind = NULL;
+			while (unbind.Dequeue(toUnbind))
+				icontroller->Execute_UnbindControl(c, toUnbind);
 
 		}
 

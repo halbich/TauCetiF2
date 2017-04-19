@@ -115,10 +115,10 @@ void ALightBlock::Tick(float DeltaSeconds)
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
 	auto i = ElectricityComponent->GetInfo();
 
-	auto powerConsumption = IsOn 
-		? (AutoregulatePowerOutput 
-			? getAutoregulatedPower(i->GetRemainingPercentage()) 
-			: i->PowerConsumptionPercent) 
+	auto powerConsumption = IsOn
+		? (AutoregulatePowerOutput
+			? getAutoregulatedPower(i->GetRemainingPercentage())
+			: i->PowerConsumptionPercent)
 		: 0;
 
 	auto toObtain = elapsedSeconds * powerConsumption  * max;
@@ -134,7 +134,11 @@ void ALightBlock::Tick(float DeltaSeconds)
 
 void ALightBlock::OnNightChanged(bool isNight) { isDaytime = !isNight; }
 
-void ALightBlock::SetControlState_Implementation(bool isOn) { IsOn = isOn; updateUsingMessage(); }
+void ALightBlock::SetControlState_Implementation(bool isOn) {
+	IsOn = isOn;
+	BlockInfo->BlockSpecificData[LightBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
+	updateUsingMessage();
+}
 void ALightBlock::SetOutputPowerPercentage_Implementation(float percentage) { BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage; }
 
 void ALightBlock::SetController_Implementation(ABlock* controller) {

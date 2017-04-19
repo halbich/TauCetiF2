@@ -25,9 +25,8 @@ ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
 
 	auto n = CurrentBlock->ElectricityComponent->Network;
 
-	for (auto con : n->ControllerBlocks)
+	for (auto c : n->ControllerBlocks)
 	{
-		auto c = Cast<ABlock>(con->GetOwner());
 		if (!c || !c->IsValidLowLevel() || c->IsPendingKill())
 			continue;
 

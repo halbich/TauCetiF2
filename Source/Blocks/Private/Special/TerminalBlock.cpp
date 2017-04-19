@@ -9,6 +9,10 @@ ATerminalBlock::ATerminalBlock()
 	TerminalBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TerminalBlockMesh"));
 	TerminalBlockMesh->SetupAttachment(GetRootComponent());
 
+	TerminalBlockMeshOutline = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TerminalBlockMeshOutline"));
+	TerminalBlockMeshOutline->SetupAttachment(TerminalBlockMesh);
+	TerminalBlockMeshOutline->SetRenderInMainPass(false);
+
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
 }
@@ -73,7 +77,10 @@ void ATerminalBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 }
 
 UPrimitiveComponent* ATerminalBlock::GetComponentForObjectOutline_Implementation() {
-	return TerminalBlockMesh;
+	TerminalBlockMeshOutline->StaticMesh = TerminalBlockMesh->StaticMesh;
+	TerminalBlockMeshOutline->SetMaterial(1, TerminalBlockMeshOutline->GetMaterial(0));
+
+	return TerminalBlockMeshOutline;
 }
 
 void ATerminalBlock::SetDisplayedWidget(UUserWidget* widget)

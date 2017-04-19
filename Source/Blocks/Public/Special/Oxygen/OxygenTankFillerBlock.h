@@ -87,6 +87,7 @@ private:
 
 	void processCurrentFillingItem(float DeltaSeconds)
 	{
+	
 		FillingItemCritical.Lock();
 
 		if (currentFillingItem && currentFillingItem->IsValidLowLevelFast())
@@ -111,7 +112,7 @@ private:
 			float acuallyReturned = 0;
 			if (OxygenComponent->ObtainAmount(toWithdraw, actuallyObtained)) {
 				currentFillingItem->OxygenInfo->CurrentObjectOxygen += actuallyObtained;
-				
+
 
 				// todo update mesh
 

@@ -6,6 +6,9 @@
 #include "Commons/Public/Enums.h"
 #include "GameElectricityComponent.generated.h"
 
+
+#pragma optimize("", off)
+
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TAUCETIF2_API UGameElectricityComponent : public UActorComponent
 {
@@ -284,3 +287,7 @@ private:
 		n->EnergyConsumptionPerSec = consumedEnergy / t;
 	}
 };
+
+
+
+#pragma optimize("", on)

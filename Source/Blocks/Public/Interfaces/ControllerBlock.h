@@ -24,4 +24,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | ControllerBlock")
 		bool GetControlState();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | ControllerBlock")
+		TArray<ABlock*> GetControlledBlocks();
 };

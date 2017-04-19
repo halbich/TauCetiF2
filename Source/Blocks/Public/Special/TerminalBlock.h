@@ -20,6 +20,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | TerminalBlock")
 		UStaticMeshComponent* TerminalBlockMesh;
 
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | TerminalBlock")
+		UStaticMeshComponent* TerminalBlockMeshOutline;
+
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | TerminalBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 

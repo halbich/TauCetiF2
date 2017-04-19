@@ -17,6 +17,8 @@ AOxygenTankFillerBlock::AOxygenTankFillerBlock()
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
+
+	IsOn = true;
 }
 
 UStaticMeshComponent* AOxygenTankFillerBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -146,6 +148,11 @@ ABlock* AOxygenTankFillerBlock::GetController_Implementation() { return usedCont
 
 void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 {
+	if (!IsOn)
+	{
+		Super::Tick(DeltaSeconds);
+		return;
+	}
 
 	processCurrentFillingItem(DeltaSeconds);
 

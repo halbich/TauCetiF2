@@ -48,10 +48,9 @@ public:
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual bool BindControl_Implementation(ABlock* controllableBlock) override;
-
 	virtual bool UnbindControl_Implementation(ABlock* controllableBlock) override;
-
 	virtual bool GetControlState_Implementation() override;
+	virtual TArray<ABlock*> GetControlledBlocks_Implementation() override;
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 

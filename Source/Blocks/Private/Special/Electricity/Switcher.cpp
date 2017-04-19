@@ -124,6 +124,12 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 	if (!interf)
 		return false;
 
+	auto electr = Cast<IBlockWithElectricity>(controllableBlock);
+	check(electr);
+
+	if (electr->GetElectricityComponent()->Network != ElectricityComponent->Network)
+		return false;
+
 	auto my = BlockInfo->RelationsInfo;
 	ensure(my && my->IsValidLowLevel());
 
@@ -190,3 +196,8 @@ bool ASwitcher::GetControlState_Implementation()
 	return IsOn;
 }
 
+
+TArray<ABlock*> ASwitcher::GetControlledBlocks_Implementation()
+{
+	return controlledBlocks;
+}

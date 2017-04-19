@@ -85,6 +85,14 @@ public:
 
 	virtual void HealthUpdated(float newHealth, float maxHealth);
 
+	FORCEINLINE UElectricityComponent* TryGetElectricityComp()
+	{
+		auto _t = Cast<IBlockWithElectricity>(this);
+		if (!_t)
+			return NULL;
+		return _t->GetElectricityComponent();
+	}
+
 private:
 
 	FORCEINLINE void setMaterial(UPrimitiveComponent* mesh, UMaterial* material, int32 index, float scaleX, float scaleY) {
