@@ -39,9 +39,9 @@ bool UBlockConstructor::AddItemToInventory(UBuildableBlockInfo* buildable, TArra
 
 TArray<UBuildableBlockInfo*> UBlockConstructor::GetAllBuildableBlocks()
 {
-	ensureHolder();
 	TArray<UBuildableBlockInfo*> result;
-	if (!blockHolder)
+	
+	if (!ensureHolder())
 		return result;
 
 	for (auto buildable : blockHolder->GetAviableItems())

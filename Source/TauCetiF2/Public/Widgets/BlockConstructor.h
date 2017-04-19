@@ -29,15 +29,17 @@ public:
 
 private:
 
-	FORCEINLINE void ensureHolder()
+	FORCEINLINE bool ensureHolder()
 	{
 		if (blockHolder && blockHolder->IsValidLowLevel())
-			return;
+			return true;
 
 		auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-		ensure(inst);
+		if (!inst)
+			return false;
+
 		blockHolder = Cast<UBlockHolder>(inst->BlockHolder);
-		ensure(blockHolder);
+		return blockHolder != NULL;
 	}
 
 	FORCEINLINE void AddImplicitTags(UBuildableBlockInfo* block)
