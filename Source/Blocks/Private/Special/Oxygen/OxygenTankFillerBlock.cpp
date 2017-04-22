@@ -38,6 +38,61 @@ UPrimitiveComponent* AOxygenTankFillerBlock::GetComponentForObjectOutline_Implem
 	return OxygenTankFillerBodyMesh;
 }
 
+void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
+{
+	Super::SetBlockInfo(info);
+
+
+	auto currentF = 0.0f;
+	auto filling = info->BlockSpecificData.FindOrAdd(OxygenFillerBlockConstants::CurrentFilling);
+	if (filling.IsEmpty())
+		BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::CurrentFilling] = FString::SanitizeFloat(currentF);
+	else
+		currentF = FCString::Atof(*filling);
+
+	auto hasItem = false;
+	auto item = info->BlockSpecificData.FindOrAdd(OxygenFillerBlockConstants::HasItem);
+	if (item.IsEmpty())
+		BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)hasItem);
+	else
+		hasItem = FCString::Atoi(*item) > 0 ? true : false;
+
+
+	if (hasItem)
+	{
+		ensure(currentFillingItem == NULL);
+
+		auto newItm = NewObject<UInventoryBuildableBlockInfo>();
+
+		newItm->ID = OxygenTankID;
+
+		auto gameInstance = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+		ensure(gameInstance);
+
+		auto holder = Cast<UBlockHolder>(gameInstance->BlockHolder);
+
+		ensure(holder);
+
+		newItm->BlockDefinition = holder->GetDefinitionFor(newItm->ID);
+		newItm->Scale = newItm->BlockDefinition->CustomBlockScale;
+
+
+		newItm->OxygenInfo = NewObject<UBlockWithOxygenInfo>();
+		newItm->OxygenInfo->CurrentObjectOxygen = currentF;
+		//newItm->OxygenInfo->CurrentObjectMaximumOxygen = newItm->BlockDefinition->OxygenComponentDef.TotalObjectVolume;
+		//newItm->OxygenInfo->Max = newItm->BlockDefinition->OxygenComponentDef.MaxConsumedOxygenPerGameSecond;
+
+		newItm->DefinitionSet();
+		newItm->UpdateDisplayValue();
+
+		currentFillingItem = newItm;
+
+
+	}
+
+}
+
+
 void  AOxygenTankFillerBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
@@ -184,7 +239,7 @@ void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 		if (OxygenComponent->PutAmount(actuallyObtained * GameDefinitions::EnergyToOxygen, actuallyPutted))
 			toReturn -= actuallyPutted * GameDefinitions::OxygenToEnergy;
 
-		ensure(toReturn >= 0);
+		toReturn = FMath::Max(0.0f, toReturn);
 
 		ElectricityComponent->PutAmount(toReturn, acuallyReturned);
 	}
@@ -202,9 +257,10 @@ UInventoryBuildableBlockInfo* AOxygenTankFillerBlock::TakeCurrentFillingItem(boo
 	success = currentFillingItem != NULL;
 	auto ret = currentFillingItem;
 	currentFillingItem = NULL;
+	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)(currentFillingItem != NULL));
 	FillingItemCritical.Unlock();
 
-	if(ret)
+	if (ret)
 		ret->UpdateDisplayValue();
 
 	return ret;
@@ -216,6 +272,7 @@ bool AOxygenTankFillerBlock::SetCurrentFillingItem(UInventoryBuildableBlockInfo*
 	if (currentFillingItem)
 		return false;
 
+	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)(info != NULL));
 	currentFillingItem = info;
 
 	FillingItemCritical.Unlock();

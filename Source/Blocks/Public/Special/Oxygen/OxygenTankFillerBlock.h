@@ -10,6 +10,13 @@
 #include "Info/InventoryBuildableBlockInfo.h"
 #include "OxygenTankFillerBlock.generated.h"
 
+
+namespace OxygenFillerBlockConstants
+{
+	static FString CurrentFilling = TEXT("CurrentFilling");
+	static FString HasItem = TEXT("HasItem");
+}
+
 /**
  *
  */
@@ -56,6 +63,8 @@ public:
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
+
+	virtual void SetBlockInfo(UBlockInfo* info) override;
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
@@ -113,6 +122,8 @@ private:
 			if (OxygenComponent->ObtainAmount(toWithdraw, actuallyObtained)) {
 				currentFillingItem->OxygenInfo->CurrentObjectOxygen += actuallyObtained;
 
+
+				BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::CurrentFilling] = FString::SanitizeFloat(currentFillingItem->OxygenInfo->CurrentObjectOxygen);
 
 				// todo update mesh
 

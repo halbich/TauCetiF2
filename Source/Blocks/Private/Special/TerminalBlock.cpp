@@ -77,7 +77,7 @@ void ATerminalBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 }
 
 UPrimitiveComponent* ATerminalBlock::GetComponentForObjectOutline_Implementation() {
-	TerminalBlockMeshOutline->StaticMesh = TerminalBlockMesh->StaticMesh;
+	TerminalBlockMeshOutline->SetStaticMesh(TerminalBlockMesh->GetStaticMesh());
 	TerminalBlockMeshOutline->SetMaterial(1, TerminalBlockMeshOutline->GetMaterial(0));
 
 	return TerminalBlockMeshOutline;

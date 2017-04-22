@@ -25,6 +25,11 @@ void UInventoryBuildableBlockInfo::DefinitionSet()
 {
 	Super::DefinitionSet();
 	BuildingEnergyRequired = 0.0f;
+
+	if (BlockDefinition->HasOxygenComponent)
+	{
+		OxygenInfo->CurrentObjectMaximumOxygen = BlockDefinition->OxygenComponentDef.TotalObjectVolume;
+	}
 }
 
 UInventoryBuildableBlockInfo* UInventoryBuildableBlockInfo::GetInventoryBuildable(UBlockBaseInfo* info, UBlockDefinition* def)
