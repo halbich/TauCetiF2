@@ -35,6 +35,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTankFiller")
 		UStaticMeshComponent* OxygenTankFillerHeadMesh;
 
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTankFiller")
+		UStaticMeshComponent* OxygenTankFillerMesh;
+
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTankFiller", meta = (AllowPrivateAcces = "true"))
 		UOxygenComponent* OxygenComponent;
 
@@ -52,6 +55,9 @@ public:
 
 	UPROPERTY(Transient)
 		UInventoryBuildableBlockInfo* currentFillingItem;
+
+	UPROPERTY(Transient)
+		UMaterialInstanceDynamic* dynInfoMat;
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenTankFiller")
 		UInventoryBuildableBlockInfo* TakeCurrentFillingItem(bool& success);
@@ -93,10 +99,20 @@ private:
 
 	FCriticalSection FillingItemCritical;
 
+	/*FORCEINLINE*/ void updateDisplayedMesh() {
 
-	void processCurrentFillingItem(float DeltaSeconds)
+		if (!currentFillingItem || !currentFillingItem->IsValidLowLevel())
+			return;
+
+		if (!dynInfoMat)
+			return;
+
+		dynInfoMat->SetScalarParameterValue(TEXT("Filling"), currentFillingItem->OxygenInfo->GetRemainingPercentageUnit());
+	}
+
+	FORCEINLINE void processCurrentFillingItem(float DeltaSeconds)
 	{
-	
+
 		FillingItemCritical.Lock();
 
 		if (currentFillingItem && currentFillingItem->IsValidLowLevelFast())
@@ -125,7 +141,7 @@ private:
 
 				BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::CurrentFilling] = FString::SanitizeFloat(currentFillingItem->OxygenInfo->CurrentObjectOxygen);
 
-				// todo update mesh
+				updateDisplayedMesh();
 
 				auto returnOxygen = actuallyObtained - toWithdraw;
 				if (returnOxygen >= 0.0f)
@@ -136,6 +152,8 @@ private:
 
 		FillingItemCritical.Unlock();
 	}
+
+
 
 protected:
 	UFUNCTION()

@@ -12,6 +12,11 @@ AOxygenTankFillerBlock::AOxygenTankFillerBlock()
 	OxygenTankFillerHeadMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerHeadMesh"));
 	OxygenTankFillerHeadMesh->SetupAttachment(OxygenTankFillerBodyMesh);
 
+	OxygenTankFillerMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerMesh"));
+	OxygenTankFillerMesh->SetupAttachment(OxygenTankFillerBodyMesh);
+
+	OxygenTankFillerMesh->SetVisibility(false);
+
 	OxygenComponent = CreateDefaultSubobject<UOxygenComponent>(TEXT("OxygenComponent"));
 	AddOwnedComponent(OxygenComponent);
 
@@ -90,6 +95,7 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 
 	}
 
+	OxygenTankFillerMesh->SetVisibility(currentFillingItem != NULL);
 }
 
 
@@ -105,6 +111,11 @@ void  AOxygenTankFillerBlock::OnConstruction(const FTransform& Transform) {
 
 	OxygenComponent->OnComponentDataChangedEvent.AddDynamic(this, &AOxygenTankFillerBlock::ListeningOnOxygenCompChanged);
 	OxygenComponent->onComponentDataChanged();
+
+
+	dynInfoMat = UMaterialInstanceDynamic::Create(OxygenTankFillerMesh->GetMaterial(0), this);
+	OxygenTankFillerMesh->SetMaterial(0, dynInfoMat);
+	OxygenTankFillerMesh->SetVisibility(currentFillingItem != NULL);
 }
 
 void AOxygenTankFillerBlock::ListeningOnUse(AActor* actor, bool isSpecial)
@@ -257,6 +268,7 @@ UInventoryBuildableBlockInfo* AOxygenTankFillerBlock::TakeCurrentFillingItem(boo
 	success = currentFillingItem != NULL;
 	auto ret = currentFillingItem;
 	currentFillingItem = NULL;
+	OxygenTankFillerMesh->SetVisibility(false);
 	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)(currentFillingItem != NULL));
 	FillingItemCritical.Unlock();
 
@@ -270,11 +282,16 @@ bool AOxygenTankFillerBlock::SetCurrentFillingItem(UInventoryBuildableBlockInfo*
 {
 	FillingItemCritical.Lock();
 	if (currentFillingItem)
+	{
+		FillingItemCritical.Unlock();
 		return false;
+	}
 
 	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)(info != NULL));
 	currentFillingItem = info;
 
+	OxygenTankFillerMesh->SetVisibility(info != NULL);
+	updateDisplayedMesh();
 	FillingItemCritical.Unlock();
 
 	return true;
