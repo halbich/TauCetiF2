@@ -78,7 +78,8 @@ enum class EGameUserSettingsVariable : uint8
 	None	 			UMETA(DisplayName = "None"),
 	MasterVolume		UMETA(DisplayName = "MasterVolume"),
 	MusicVolume			UMETA(DisplayName = "MusicVolume"),
-	OtherVolume			UMETA(DisplayName = "OtherVolume")
+	OtherVolume			UMETA(DisplayName = "OtherVolume"),
+	GeneratorVisualizationEnabled		UMETA(DisplayeName = "GeneratorVisualizationEnabled")
 };
 
 UENUM(BlueprintType)

@@ -19,10 +19,7 @@ class TAUCETIF2_API UHelpers : public UObject
 {
 	GENERATED_BODY()
 
-private:
-	static const FString customSectionName;
 
-	static FString getConfigVariableNameFor(EGameUserSettingsVariable settings);
 
 public:
 
@@ -62,11 +59,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Sound")
 		static bool SetSoundClassVolume(USoundClass* TargetClass, float targetValue);
 
-	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
-		static bool GetSettingsValueFloat(EGameUserSettingsVariable settings, float& value);
-
-	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
-		static bool SetSettingsValueFloat(EGameUserSettingsVariable settings, float value);
+	
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
 		static FWeatherDefinition GetRandomDefinition(UPARAM(ref)TArray<FWeatherDefinition>& aviableDefinitions, int32& outIndex);

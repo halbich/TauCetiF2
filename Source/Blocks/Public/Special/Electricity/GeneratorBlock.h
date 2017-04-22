@@ -3,6 +3,7 @@
 #include "Block.h"
 #include "Components/ElectricityComponent.h"
 #include "BlockWithElectricity.h"
+#include "Commons/Public/CommonHelpers.h"
 #include "GeneratorBlock.generated.h"
 
 USTRUCT()
@@ -18,6 +19,7 @@ struct FHittedSpot
 
 	UPROPERTY(Transient)
 		float ActualTime;
+
 };
 
 /**
@@ -39,6 +41,16 @@ public:
 
 	UPROPERTY(Transient)
 		UTexture2D* DynamicTexture;
+
+
+	UPROPERTY(Transient)
+		bool AnimationEnabled;
+
+	UPROPERTY(Transient)
+		float UpdateInterval;
+
+	UPROPERTY(Transient)
+		float TimeSinceLastUpdate;
 
 	virtual void Tick(float DeltaTime) override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;

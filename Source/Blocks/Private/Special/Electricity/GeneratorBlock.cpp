@@ -20,6 +20,8 @@ AGeneratorBlock::AGeneratorBlock()
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
+
+	UpdateInterval = 1.0f / 30.0f;
 }
 
 void AGeneratorBlock::UpdateTextureRegions(UTexture2D* Texture, int32 MipIndex, uint32 NumRegions, FUpdateTextureRegion2D* Regions, uint32 SrcPitch, uint32 SrcBpp, uint8* SrcData, bool bFreeData)
@@ -89,6 +91,14 @@ void AGeneratorBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 void  AGeneratorBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
+	bool anEn = false;
+	if (UCommonHelpers::GetSettingsValueBool(EGameUserSettingsVariable::GeneratorVisualizationEnabled, anEn))
+	{
+		AnimationEnabled = anEn;
+	}
+	else
+		AnimationEnabled = false;
+
 	if (dynamicColors) { delete[] dynamicColors; dynamicColors = nullptr; }
 	if (dynamicColorsFloat) { delete[] dynamicColorsFloat; dynamicColorsFloat = nullptr; }
 	if (updateTextureRegion) { delete updateTextureRegion; updateTextureRegion = nullptr; }
@@ -136,18 +146,17 @@ void  AGeneratorBlock::OnConstruction(const FTransform& Transform) {
 	UpdateCustomTexture();
 }
 
-
-
 void AGeneratorBlock::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// TODO optimize or change approach
-	return;
+	if (!AnimationEnabled)
+		return;
 
-	int32 sec;
-	float partSec;
-	UGameplayStatics::GetAccurateRealTime(GetWorld(), sec, partSec);
+	TimeSinceLastUpdate += DeltaTime;
+
+	if (TimeSinceLastUpdate < UpdateInterval)
+		return;
 
 	TArray<int32> toDel;
 
@@ -155,7 +164,7 @@ void AGeneratorBlock::Tick(float DeltaTime)
 	{
 		auto elem = &spots[i];
 
-		elem->ActualTime += DeltaTime;
+		elem->ActualTime += TimeSinceLastUpdate;
 
 		uint8 setValue = (uint8)FMath::Lerp(256, 0, FMath::Min(1.0f, elem->ActualTime));
 		for (int32 kx = 0; kx < pixelsPerBaseBlock; kx++)
@@ -179,10 +188,10 @@ void AGeneratorBlock::Tick(float DeltaTime)
 	while (toDel.Num() > 0)
 		spots.RemoveAt(toDel.Pop());
 
+	TimeSinceLastUpdate = 0;
+
 	UpdateCustomTexture();
 }
-
-#pragma optimize("", off)
 
 void AGeneratorBlock::UpdateCustomTexture()
 {
@@ -198,33 +207,33 @@ UStaticMeshComponent* AGeneratorBlock::GetMeshStructureComponent_Implementation(
 	return Super::GetMeshStructureComponent_Implementation(BlockMeshStructureDefIndex);
 }
 
-
 UPrimitiveComponent* AGeneratorBlock::GetComponentForObjectOutline_Implementation() {
 	return GeneratorMesh;
 }
 
 void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 {
-	//FHittedSpot hitted;
+	if (AnimationEnabled) {
+		FHittedSpot hitted;
 
-	//auto currentScale = GetBlockScale();
+		auto currentScale = GetBlockScale();
+		hitted.X = blockHitLocation.X;
+		ensure(hitted.X >= 0 && hitted.X < currentScale.X);
 
-	//hitted.X = blockHitLocation.X;
-	//ensure(hitted.X >= 0 && hitted.X < currentScale.X);
+		hitted.Y = blockHitLocation.Y;
+		ensure(hitted.Y >= 0 && hitted.Y < currentScale.Y);
 
-	//hitted.Y = blockHitLocation.Y;
-	//ensure(hitted.Y >= 0 && hitted.Y < currentScale.Y);
+		hitted.ActualTime = 0;
 
-	//hitted.ActualTime = 0;
+		auto existing = spots.IndexOfByPredicate([hitted](const FHittedSpot& spot) {
+			return hitted.X == spot.X && hitted.Y == spot.Y;
+		});
 
-	//auto existing = spots.IndexOfByPredicate([hitted](const FHittedSpot& spot) {
-	//	return hitted.X == spot.X && hitted.Y == spot.Y;
-	//});
-
-	//if (existing != INDEX_NONE)
-	//	spots[existing].ActualTime = 0;
-	//else
-	//	spots.Insert(hitted, 0);
+		if (existing != INDEX_NONE)
+			spots[existing].ActualTime = 0;
+		else
+			spots.Insert(hitted, 0);
+	}
 
 	auto energyToPut = amount *  GameDefinitions::RainHitpointToEnergy;
 	float actuallyPutted = 0;
@@ -241,5 +250,3 @@ void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float
 	if (!FMath::IsNearlyZero(energyToPut))
 		Super::WasHitByStorm(blockHitLocation, energyToPut);
 }
-
-#pragma optimize("", on)
