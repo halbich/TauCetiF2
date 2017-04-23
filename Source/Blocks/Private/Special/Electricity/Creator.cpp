@@ -126,7 +126,7 @@ void ACreator::CheckWatchingBox()
 		return;
 
 	IsValidCreator = true;
-
+	print(TEXT("ValidCreator"));
 };
 
 

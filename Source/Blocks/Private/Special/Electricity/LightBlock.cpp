@@ -132,7 +132,12 @@ void ALightBlock::Tick(float DeltaSeconds)
 	updateLightByConsumption(actuallyObtained / elapsedSeconds, max);
 }
 
-void ALightBlock::OnNightChanged(bool isNight) { isDaytime = !isNight; }
+void ALightBlock::OnNightChanged(bool isNight) {
+	isDaytime = !isNight;
+	if (usedController == NULL) {
+		this->Execute_SetControlState(this, isNight);
+	}
+}
 
 void ALightBlock::SetControlState_Implementation(bool isOn) {
 	IsOn = isOn;
