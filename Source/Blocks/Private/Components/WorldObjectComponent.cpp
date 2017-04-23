@@ -74,12 +74,7 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 			continue;
 
 		object->RemoveFromTree(GetOwner());
-
-		/*	auto par = object->GetParent();
-			object->MarkPendingKill();
-
-			if (par && par->IsValidLowLevelFast())
-				par->UpdateAfterChildDestroyed();*/
+	
 	}
 
 	if (BuildingTree && BuildingTree->IsValidLowLevel() && !BuildingTree->IsPendingKill())
@@ -89,8 +84,6 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 		if (parent)
 		{
 			parent->ChildrenDeleted();
-			//FlushPersistentDebugLines(GetWorld());
-			//parent->GetRoot()->DEBUGDrawBorder(GetWorld());
 		}
 	}
 }

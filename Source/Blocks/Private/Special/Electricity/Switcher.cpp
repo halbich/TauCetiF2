@@ -51,7 +51,7 @@ void ASwitcher::SetBlockInfo(UBlockInfo* info)
 		BlockInfo->BlockSpecificData[SwitcherBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
 	}
 	else {
-		IsOn = FCString::Atoi(*state) > 0? true : false;
+		IsOn = FCString::Atoi(*state) > 0 ? true : false;
 	}
 
 	updateDynamicColor();
@@ -130,15 +130,19 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 	if (electr->GetElectricityComponent()->Network != ElectricityComponent->Network)
 		return false;
 
-	auto my = BlockInfo->RelationsInfo;
+	auto my = this->BlockInfo->RelationsInfo;
 	ensure(my && my->IsValidLowLevel());
 
 	auto other = controllableBlock->BlockInfo->RelationsInfo;
 	ensure(other && other->IsValidLowLevel());
 
+	if (my->ID == other->ID)
+		return false;
+
+
 	auto controlledRel = NewObject<URelationshipInfo>();
 	controlledRel->TargetID = my->ID;
-	controlledRel->RelationshipType = (uint8)ESwitherRelationship::IsControlledByTarget;
+	controlledRel->RelationshipType = (uint8)EControlRelationship::IsControlledByTarget;
 
 	auto c = other->Relationships.FindByPredicate([controlledRel](URelationshipInfo* info) {
 		return info->TargetID == controlledRel->TargetID && info->RelationshipType == controlledRel->RelationshipType;
@@ -150,7 +154,7 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 
 	auto controllingRel = NewObject<URelationshipInfo>();
 	controllingRel->TargetID = other->ID;
-	controllingRel->RelationshipType = (uint8)ESwitherRelationship::IsControllingTarget;
+	controllingRel->RelationshipType = (uint8)EControlRelationship::IsControllingTarget;
 
 	auto c1 = my->Relationships.FindByPredicate([controllingRel](URelationshipInfo* info) {
 		return info->TargetID == controllingRel->TargetID && info->RelationshipType == controllingRel->RelationshipType;

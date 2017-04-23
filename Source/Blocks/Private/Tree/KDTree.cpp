@@ -314,7 +314,7 @@ void UKDTree::RegisterWatchingBox(UObject* actor, UMinMaxBox* box)
 
 	auto bcenter = (box->Max + box->Min) * 0.5;
 	auto bextend = (box->Max - bcenter);
-	DrawDebugBox(GetWorld(), bcenter, bextend, FColor::Red, false, 60, 0, 5);
+	DrawDebugBox(GetWorld(), bcenter, bextend, FColor::Red, true, 60, 0, 5);
 }
 
 void UKDTree::TryUnregisterWatchingBox(UObject* actor)

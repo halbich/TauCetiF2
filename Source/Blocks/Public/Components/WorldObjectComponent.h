@@ -34,6 +34,7 @@ public:
 	UPROPERTY(Transient)
 		TArray<UWeatherTargetsKDTree*> WeatherTreeElements;
 
+	// this is temporary holder for binding electric blocks into grid
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> SurroundingElectricityComponent;
 

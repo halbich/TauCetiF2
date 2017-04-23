@@ -177,7 +177,7 @@ void ABlock::InitWorldObjectComponent()
 	TArray<UObject*> items;
 	woc->TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items, this);
 
-	TArray<UMinMaxTree*> usedTrees;
+	//TArray<UMinMaxTree*> usedTrees;
 
 	for (auto obj : items)
 	{
@@ -194,16 +194,16 @@ void ABlock::InitWorldObjectComponent()
 
 		if (def->UsingInPatterns && object->BlockInfo->ID == BlockInfo->ID) {
 			ensure(object->WorldObjectComponent->BuildingTree);
-			usedTrees.AddUnique(object->WorldObjectComponent->BuildingTree->GetRoot());
+			//usedTrees.AddUnique(object->WorldObjectComponent->BuildingTree->GetRoot());
 			print(*object->WorldObjectComponent->DefiningBox->ContainingObject->GetName());
 		}
 	}
-	for (auto rootObj : usedTrees)
+	/*for (auto rootObj : usedTrees)
 	{
 		rootObj->Insert(woc->BuildingTree);
-	}
+	}*/
 
-	//woc->BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
+	woc->BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
 }
 
 void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)

@@ -101,7 +101,7 @@ enum class EHealthSeverity : uint8
 };
 
 UENUM(BlueprintType)
-enum class ESwitherRelationship : uint8
+enum class EControlRelationship : uint8
 {
 	IsControlledByTarget	 	UMETA(DisplayName = "IsControlledByTarget"),
 	IsControllingTarget			UMETA(DisplayName = "IsControllingTarget")

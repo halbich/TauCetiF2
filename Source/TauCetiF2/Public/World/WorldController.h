@@ -48,18 +48,6 @@ public:
 		bool debugBoxesShown;
 
 
-
-	UPROPERTY(Transient)
-		bool resolveRelationships;
-
-	UPROPERTY(Transient)
-		TArray<ABlock*> relControllers;
-
-	UPROPERTY(Transient)
-		TArray<ABlock*> relControllable;
-
-
-
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
 		void DEBUGShowMinMaxBoxes();
 

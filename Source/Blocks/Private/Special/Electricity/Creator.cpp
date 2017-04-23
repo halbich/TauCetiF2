@@ -60,6 +60,7 @@ void ACreator::CheckWatchingBox()
 	ensure(watchingBox);
 
 	IsValidCreator = false;
+	print(TEXT("Check box"));
 
 	auto world = GetWorld();
 
@@ -100,7 +101,7 @@ void ACreator::CheckWatchingBox()
 			return;
 	}
 
-	auto left = NewObject<UMinMaxBox>();
+	/*auto left = NewObject<UMinMaxBox>();
 	left->InitBoxChecked(FVector(emptyBox->Min.X, watchingBox->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Max.Z));
 	if (!checkForBlock(left, objectBoxes))
 		return;
@@ -123,7 +124,7 @@ void ACreator::CheckWatchingBox()
 	auto top = NewObject<UMinMaxBox>();
 	top->InitBoxChecked(FVector(emptyBox->Min.X, emptyBox->Min.Y, emptyBox->Max.Z), FVector(emptyBox->Max.X, emptyBox->Max.Y, watchingBox->Max.Z));
 	if (!checkForBlock(top, objectBoxes))
-		return;
+		return;*/
 
 	IsValidCreator = true;
 	print(TEXT("ValidCreator"));

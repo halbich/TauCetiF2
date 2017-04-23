@@ -201,6 +201,8 @@ public:
 
 	void CheckControlBlocks()
 	{
+		TMap<FGuid, TArray<FGuid>> controller_controlledMap;
+
 		for (auto c : ControllerBlocks)
 		{
 			auto cEl = c->TryGetElectricityComp();
@@ -209,24 +211,93 @@ public:
 			auto icontroller = Cast<IControllerBlock>(c);
 			check(icontroller);
 
+			auto controllerRelInfo = c->BlockInfo->RelationsInfo;
+			ensure(controllerRelInfo);
+
+			auto arr = &controller_controlledMap.FindOrAdd(controllerRelInfo->ID);
+
 			auto controlled = icontroller->Execute_GetControlledBlocks(c);
 
 			TQueue<ABlock*> unbind;
 
+			// we need to check currently binded. Network could change so out items could be inaccessible
 			for (auto con : controlled)
 			{
 				auto conEl = con->TryGetElectricityComp();
 				check(conEl);
 
-				if (conEl->Network != this)		// our contrlolled item's network has changed, we need to unbind this
+				auto controlledID = con->BlockInfo->RelationsInfo->ID;
+
+				auto hasRel = controllerRelInfo->Relationships.FindByPredicate([controlledID](URelationshipInfo* info) {
+					return info->TargetID == controlledID && info->RelationshipType == (uint8)EControlRelationship::IsControllingTarget;
+				});
+
+				if (conEl->Network != this || !hasRel)		// our controlled item's network has changed, we need to unbind this
 					unbind.Enqueue(con);
+				else
+					arr->Add(controlledID);
 			}
 
+			// and we need to update it after checking so we do not mess with iterated arrays
 			ABlock* toUnbind = NULL;
 			while (unbind.Dequeue(toUnbind))
 				icontroller->Execute_UnbindControl(c, toUnbind);
 
+			TQueue<FGuid> removeRel;
+
+			// now we need to bind items, this is usually after loading level
+			for (auto cRel : controllerRelInfo->Relationships)
+			{
+				ensure(cRel->RelationshipType == (uint8)EControlRelationship::IsControllingTarget);
+				auto targetID = cRel->TargetID;
+
+				auto controllable = ControllableBlocks.FindByPredicate([targetID](ABlock* block) {
+					return block->BlockInfo->RelationsInfo->ID == targetID;
+				});
+
+				if (!controllable)
+					removeRel.Enqueue(targetID);
+				else
+				{
+					if (!icontroller->Execute_BindControl(c, *controllable))
+						removeRel.Enqueue(targetID);
+					else
+						arr->Add(targetID);
+				}
+			}
+
+			// and we need to update it after checking so we do not mess with iterated arrays
+			FGuid toRemoveGuid;
+			while (removeRel.Dequeue(toRemoveGuid))
+				controllerRelInfo->RemoveRelationshipsByTargetID(toRemoveGuid);
 		}
+
+#if WITH_EDITOR
+
+		for (auto c : ControllableBlocks)
+		{
+			auto controllableRelInfo = c->BlockInfo->RelationsInfo;
+			ensure(controllableRelInfo);
+			for (auto cRel : controllableRelInfo->Relationships)
+			{
+				ensure(cRel->RelationshipType == (uint8)EControlRelationship::IsControlledByTarget);
+				auto targetID = cRel->TargetID;
+
+				auto controller = &controller_controlledMap.FindChecked(targetID);
+
+				auto removed = controller->Remove(controllableRelInfo->ID);
+
+				ensure(removed == 1);
+			}
+
+		}
+
+		for (auto t : controller_controlledMap)
+		{
+			ensure(t.Value.Num() == 0);
+		}
+
+#endif
 
 	}
 

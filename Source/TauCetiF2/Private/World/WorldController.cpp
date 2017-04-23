@@ -177,23 +177,6 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 
 		actor->OnDestroyRequestedEvent.AddDynamic(this, &AWorldController::DestroyRequestEventHandler);
 
-
-		if (resolveRelationships)
-		{
-			auto controller = Cast<IControllerBlock>(actor);
-			if (controller && actor->BlockInfo->RelationsInfo && actor->BlockInfo->RelationsInfo->Relationships.Num() > 0)
-				relControllers.Add(actor);
-
-			auto controllable = Cast<IControllableBlock>(actor);
-			if (controllable && actor->BlockInfo->RelationsInfo && actor->BlockInfo->RelationsInfo->Relationships.Num() > 0)
-				relControllable.Add(actor);
-
-		}
-
-
-		//auto controller = Cast<IControllerBlock>(actor);
-
-
 		//MinMax->DEBUGDrawContainingBox(GetWorld());
 	}
 
@@ -305,36 +288,7 @@ void AWorldController::LoadDataFromCarrier(USaveGameCarrier* carrier)
 
 	auto usedBlocks = BlockSavingHelpers::GetBlockData(carrier);
 
-	resolveRelationships = true;
-
 	loadBlocksArray(usedBlocks);
-
-	for (auto controllable : relControllable)
-	{
-		for (auto searchedController : controllable->BlockInfo->RelationsInfo->Relationships)
-		{
-			ensure(searchedController->RelationshipType == (uint8)ESwitherRelationship::IsControlledByTarget);
-
-			auto scID = searchedController->TargetID;
-
-			auto c = relControllers.FindByPredicate([scID](ABlock* block) {
-				return block->BlockInfo->RelationsInfo->ID == scID;
-			});
-
-			ensure(c);
-
-			auto cCasted = Cast<IControllerBlock>(*c);
-			ensure(cCasted);
-
-			cCasted->Execute_BindControl(*c, controllable);
-
-		}
-	}
-
-	relControllers.Empty();
-	relControllable.Empty();
-
-	resolveRelationships = false;
 }
 
 void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
