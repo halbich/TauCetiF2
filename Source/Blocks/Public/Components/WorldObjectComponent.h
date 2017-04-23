@@ -5,7 +5,10 @@
 #include "Tree/MinMaxTree.h"
 #include "Tree/WeatherTargetsKDTree.h"
 #include "Components/ElectricityComponent.h"
+#include "Info/PatternGroupInfo.h"
 #include "WorldObjectComponent.generated.h"
+
+class UPatternGroupInfo;
 
 UCLASS(Blueprintable, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLOCKS_API UWorldObjectComponent : public UActorComponent
@@ -26,10 +29,6 @@ public:
 	UPROPERTY(Transient)
 		UKDTree* DefiningBox;
 
-	// Tree for shapes recognition
-	UPROPERTY(Transient)
-		UMinMaxTree* BuildingTree;
-
 	// Elements taken in Weather. This collection could be changes as WeatherTree Changes
 	UPROPERTY(Transient)
 		TArray<UWeatherTargetsKDTree*> WeatherTreeElements;
@@ -38,6 +37,11 @@ public:
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> SurroundingElectricityComponent;
 
+
+
+	UPROPERTY(Transient)
+		UPatternGroupInfo* PatternGroupInfo;
+
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
@@ -45,7 +49,9 @@ public:
 
 	void UpdateDefiningBox(UKDTree* definingBox);
 
-	void OnTreeElementsChanged();
+	//void OnTreeElementsChanged();
 
-	void OnWeatherTreeElementsChanged();
+	//void OnWeatherTreeElementsChanged();
+
+
 };

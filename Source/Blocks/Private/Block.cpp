@@ -150,23 +150,15 @@ void ABlock::InitWorldObjectComponent()
 {
 	auto woc = WorldObjectComponent;
 
-	ensure(woc->BuildingTree);
-
-	FlushPersistentDebugLines(GetWorld());
 
 	ensure(woc->DefiningBox);
 	ensure(woc->TreeElements.Num() > 0);
 
-	woc->RootBox = woc->TreeElements[0]->GetRootNode<UKDTree>(true);
+	if (!woc->RootBox || !woc->RootBox->IsValidLowLevel())
+		woc->RootBox = woc->TreeElements[0]->GetRootNode<UKDTree>(true);
+
 	ensure(woc->RootBox != nullptr);
 
-	auto surroundings = NewObject<UKDTree>()->Init(woc->DefiningBox, woc->RootBox);
-
-	//surroundings->DEBUGDrawSurrondings(GetWorld());
-
-	// TODO
-
-	//woc->TreeElements[0]->DEBUGDrawSurrondings(GetWorld(), FColor::Black);
 
 	auto def = Definition->GetDefaultObject<UBlockDefinition>();
 
@@ -174,10 +166,10 @@ void ABlock::InitWorldObjectComponent()
 	if (!def->HasElectricityComponent && !def->UsingInPatterns)
 		return;
 
+	auto surroundings = NewObject<UKDTree>()->Init(woc->DefiningBox, woc->RootBox);
+
 	TArray<UObject*> items;
 	woc->TreeElements[0]->GetContainingObjectsFromBottom(surroundings, items, this);
-
-	//TArray<UMinMaxTree*> usedTrees;
 
 	for (auto obj : items)
 	{
@@ -193,17 +185,51 @@ void ABlock::InitWorldObjectComponent()
 		}
 
 		if (def->UsingInPatterns && object->BlockInfo->ID == BlockInfo->ID) {
-			ensure(object->WorldObjectComponent->BuildingTree);
-			//usedTrees.AddUnique(object->WorldObjectComponent->BuildingTree->GetRoot());
-			print(*object->WorldObjectComponent->DefiningBox->ContainingObject->GetName());
+			auto pi = object->WorldObjectComponent->PatternGroupInfo;
+			ensure(pi && pi->IsValidLowLevel());
+
+			if (!woc->PatternGroupInfo) {
+				// we don't have group yet, we can join it
+				pi->RegisterBlock(this);
+				woc->PatternGroupInfo = pi;
+			}
+			else
+			{
+				if (pi != woc->PatternGroupInfo) {
+					// we need to merge groups
+					for (auto i : pi->BlocksInGroup)
+					{
+						i->WorldObjectComponent->PatternGroupInfo = woc->PatternGroupInfo;
+
+						woc->PatternGroupInfo->RegisterBlock(i);
+					}
+
+					pi->BlocksInGroup.Empty();
+					woc->RootBox->TryUnregisterWatchingGroup(pi);
+					pi->MarkPendingKill();
+				}
+
+			}
+
 		}
 	}
-	/*for (auto rootObj : usedTrees)
-	{
-		rootObj->Insert(woc->BuildingTree);
-	}*/
 
-	woc->BuildingTree->GetRoot()->DEBUGDrawBorder(GetWorld());
+	if (def->UsingInPatterns && !woc->PatternGroupInfo)
+	{
+		auto pi = woc->PatternGroupInfo = GetPatternGroupImpl();
+		pi->RegisterBlock(this);
+	}
+
+}
+
+
+UPatternGroupInfo* ABlock::GetPatternGroupImpl() {
+	return NewObject<UPatternGroupInfo>();
+}
+
+void ABlock::RenewPatternInfo()
+{
+	InitWorldObjectComponent();
 }
 
 void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
@@ -230,14 +256,7 @@ void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 		OnDestroyRequestedEvent.Broadcast(this);
 }
 
-UMinMaxBox* ABlock::GetWatchingBox()
-{
-	return nullptr;
-}
 
-void ABlock::CheckWatchingBox()
-{
-}
 
 void ABlock::HealthUpdated(float newHealth, float maxHealth)
 {
@@ -261,8 +280,8 @@ void AddToTreeElements(UObject* obj, UKDTree* box)
 	auto b = Cast<ABlock>(obj);
 	ensure(b);
 
-	b->WorldObjectComponent->TreeElements.Add(box);
-	b->WorldObjectComponent->OnTreeElementsChanged();
+	b->WorldObjectComponent->TreeElements.AddUnique(box);
+	//b->WorldObjectComponent->OnTreeElementsChanged();
 }
 
 void RemoveFromTreeElements(UObject* obj, UKDTree* box)
@@ -270,8 +289,9 @@ void RemoveFromTreeElements(UObject* obj, UKDTree* box)
 	auto b = Cast<ABlock>(obj);
 	ensure(b);
 
-	b->WorldObjectComponent->TreeElements.Remove(box);
-	b->WorldObjectComponent->OnTreeElementsChanged();
+	auto rem = b->WorldObjectComponent->TreeElements.Remove(box);
+	ensure(rem > 0);
+	//b->WorldObjectComponent->OnTreeElementsChanged();
 }
 
 void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
@@ -279,8 +299,8 @@ void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
 	auto b = Cast<ABlock>(obj);
 	ensure(b);
 
-	b->WorldObjectComponent->WeatherTreeElements.Add(box);
-	b->WorldObjectComponent->OnWeatherTreeElementsChanged();
+	b->WorldObjectComponent->WeatherTreeElements.AddUnique(box);
+	//b->WorldObjectComponent->OnWeatherTreeElementsChanged();
 }
 
 TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source)
@@ -294,13 +314,6 @@ TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* s
 	return result;
 }
 
-void WatchingRegionChanged(UObject* obj)
-{
-	auto b = Cast<ABlock>(obj);
-	ensure(b);
-
-	b->CheckWatchingBox();
-}
 
 UBlockInfo* GetBlockInfoFromParent(UActorComponent* source)
 {
@@ -311,6 +324,10 @@ UBlockInfo* GetBlockInfoFromParent(UActorComponent* source)
 	return bl->BlockInfo;
 }
 
+UMinMaxBox* GetDefiningBox(ABlock* block)
+{
+	return block->WorldObjectComponent->DefiningBox;
+}
 
 UTexture2D* ABlock::GetDefaultTexture()
 {
@@ -323,6 +340,7 @@ bool ABlock::GetIsController()
 
 	return d->HasElectricityComponent && d->ElectricityComponentDef.IsControlBlock && d->ElectricityComponentDef.IsController;
 }
+
 
 
 #pragma optimize("",on)

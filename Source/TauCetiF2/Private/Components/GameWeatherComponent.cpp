@@ -36,23 +36,19 @@ void UGameWeatherComponent::SaveToCarrier(USaveGameCarrier* carrier)
 }
 
 void UGameWeatherComponent::DEBUGShowMinMaxBoxes() {
-	if (WeatherRootTree)
+	if (WeatherRootTree && !debugBoxesShown)
 	{
 		debugBoxesShown = true;
 		WeatherRootTree->DEBUGDrawContainingBox(GetWorld());
 	}
-	else
-		print(TEXT("NO Root!"));
 }
 
 void UGameWeatherComponent::DEBUGHideMinMaxBoxes() {
-	if (WeatherRootTree)
+	if (WeatherRootTree && debugBoxesShown)
 	{
 		FlushPersistentDebugLines(GetWorld());
 		debugBoxesShown = false;
 	}
-	else
-		print(TEXT("NO Root!"));
 }
 
 void UGameWeatherComponent::ObjectsChanged() {
@@ -169,7 +165,7 @@ void UGameWeatherComponent::OnTargetElementsChanged(UWeatherTargetsKDTree* targe
 	else
 	{
 		auto cnt = Targets.Remove(target);
-		check(cnt == 1);
+		ensure(cnt == 1);
 	}
 }
 

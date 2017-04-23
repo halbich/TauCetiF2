@@ -92,12 +92,18 @@ void ASwitcher::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 
+	TQueue<ABlock*> toRemove;
+
 
 	for (auto controlled : controlledBlocks)
+		toRemove.Enqueue(controlled);
+
+	ABlock* rem;
+	while (toRemove.Dequeue(rem))
 	{
-		auto interf = Cast<IControllableBlock>(controlled);
+		auto interf = Cast<IControllableBlock>(rem);
 		if (interf)
-			interf->Execute_SetController(controlled, NULL);
+			interf->Execute_SetController(rem, NULL);
 	}
 
 	Super::EndPlay(EndPlayReason);

@@ -6,6 +6,7 @@
 #include "Definitions/ElectricityComponentDefinition.h"
 #include "../ElectricityComponent.h"
 #include "Interfaces/ControllerBlock.h"
+#include "Interfaces/ControllableBlock.h"
 #include "ElectricNetwork.generated.h"
 
 /**
@@ -88,7 +89,8 @@ public:
 	UPROPERTY(Transient)
 		TArray<ABlock*> ControllableBlocks;
 
-
+	UPROPERTY(Transient)
+		bool NetworkChecked;
 
 
 	void RegisterEntity(UElectricityComponent* comp)
@@ -133,11 +135,15 @@ public:
 		ensure(info);
 
 		TotalHealth += info->MaxHealth;
+
+		NetworkChecked = false;
 	}
 
 	int32 UnregisterEntity(UElectricityComponent* comp)
 	{
 		auto r = Entities.Remove(comp);
+		ensure(r > 0);
+
 		EntitiesCount = Entities.Num();
 
 		auto def = comp->GetDefinition();
@@ -145,14 +151,16 @@ public:
 
 		if (def->IsProducer)
 		{
-			ElectricityProducers.Remove(comp);
+			auto rem = ElectricityProducers.Remove(comp);
+			ensure(rem > 0);
 			ProducersCount = ElectricityProducers.Num();
 			MaxElectricityAviable -= comp->ElectricityInfo->CurrentObjectMaximumEnergy;
 		}
 
 		if (def->IsConsument)
 		{
-			ElectricityConsumers.Remove(comp);
+			auto rem = ElectricityConsumers.Remove(comp);
+			ensure(rem > 0);
 			ConsumersCount = ElectricityConsumers.Num();
 		}
 
@@ -162,14 +170,16 @@ public:
 			{
 				auto c = Cast<ABlock>(comp->GetOwner());
 				check(c);
-				ControllableBlocks.Remove(c);
+				auto rem = ControllableBlocks.Remove(c);
+				ensure(rem > 0);
 			}
 
 			if (def->IsController)
 			{
 				auto c = Cast<ABlock>(comp->GetOwner());
 				check(c);
-				ControllerBlocks.Remove(c);
+				auto rem = ControllerBlocks.Remove(c);
+				ensure(rem > 0);
 			}
 		}
 
@@ -177,6 +187,8 @@ public:
 		ensure(info);
 
 		TotalHealth = FMath::Max(0.0f, TotalHealth - info->MaxHealth);		// due to rounding errors, we could get under zero
+
+		NetworkChecked = false;
 
 		return r;
 	}
@@ -195,12 +207,16 @@ public:
 		ElectricityConsumers.Empty();
 		ControllerBlocks.Empty();
 		ControllableBlocks.Empty();
+		NetworkChecked = false;
 	}
 
 #pragma optimize("", off)
 
 	void CheckControlBlocks()
 	{
+		if (NetworkChecked)
+			return;
+
 		TMap<FGuid, TArray<FGuid>> controller_controlledMap;
 
 		for (auto c : ControllerBlocks)
@@ -235,15 +251,19 @@ public:
 				if (conEl->Network != this || !hasRel)		// our controlled item's network has changed, we need to unbind this
 					unbind.Enqueue(con);
 				else
-					arr->Add(controlledID);
+					arr->AddUnique(controlledID);
 			}
 
 			// and we need to update it after checking so we do not mess with iterated arrays
 			ABlock* toUnbind = NULL;
 			while (unbind.Dequeue(toUnbind))
-				icontroller->Execute_UnbindControl(c, toUnbind);
+			{
+				auto _u = icontroller->Execute_UnbindControl(c, toUnbind);
+				ensure(_u);
+			}
 
 			TQueue<FGuid> removeRel;
+			TQueue<ABlock*> bind;
 
 			// now we need to bind items, this is usually after loading level
 			for (auto cRel : controllerRelInfo->Relationships)
@@ -259,11 +279,22 @@ public:
 					removeRel.Enqueue(targetID);
 				else
 				{
-					if (!icontroller->Execute_BindControl(c, *controllable))
-						removeRel.Enqueue(targetID);
-					else
-						arr->Add(targetID);
+					bind.Enqueue(*controllable);
 				}
+			}
+
+			ABlock* toBind = NULL;
+			while (bind.Dequeue(toBind))
+			{
+				auto currentBindedC = Cast<IControllableBlock>(toBind)->Execute_GetController(toBind);
+
+				arr->AddUnique(toBind->BlockInfo->RelationsInfo->ID);
+				if (c == currentBindedC)
+					continue;
+
+				auto _b = icontroller->Execute_BindControl(c, toBind);
+				ensure(_b);
+
 			}
 
 			// and we need to update it after checking so we do not mess with iterated arrays
@@ -272,11 +303,10 @@ public:
 				controllerRelInfo->RemoveRelationshipsByTargetID(toRemoveGuid);
 		}
 
-#if WITH_EDITOR
 
-		for (auto c : ControllableBlocks)
+		/*for (auto controllable : ControllableBlocks)
 		{
-			auto controllableRelInfo = c->BlockInfo->RelationsInfo;
+			auto controllableRelInfo = controllable->BlockInfo->RelationsInfo;
 			ensure(controllableRelInfo);
 			for (auto cRel : controllableRelInfo->Relationships)
 			{
@@ -296,8 +326,9 @@ public:
 		{
 			ensure(t.Value.Num() == 0);
 		}
+*/
 
-#endif
+		NetworkChecked = true;
 
 	}
 

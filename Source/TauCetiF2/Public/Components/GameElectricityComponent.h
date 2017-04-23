@@ -70,7 +70,8 @@ private:
 
 		smaller->EmptyNetwork();
 
-		networks.Remove(smaller);
+		auto rem = networks.Remove(smaller);
+		ensure(rem > 0);
 		smaller->MarkPendingKill();
 	}
 
@@ -251,7 +252,8 @@ private:
 		{
 			for (auto toDel : networksTodelete)
 			{
-				networks.Remove(toDel);
+				auto rem = networks.Remove(toDel);
+				ensure(rem > 0);
 				ensure(toDel->Entities.Num() == 0);
 				ensure(toDel->ToRecompute.IsEmpty());
 

@@ -71,18 +71,18 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	c->buildableBlocks.Add(makeBuildable(OxygenTankID, FVector(2, 2, 2)));
 	c->buildableBlocks.Add(makeBuildable(SwitcherID, FVector(1, 1, 1)));
 	c->buildableBlocks.Add(makeBuildable(LightSmallID, FVector(1, 1, 1)));
-
+	c->buildableBlocks.Add(makeBuildable(CreatorID, FVector(3, 3, 2)));
 
 	auto UsedBlocks = &c->usedBlocks;
 
-	//auto b_0 = make(0, FVector(14, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_0.HasElectricityData = true; b_0.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_0);
-	//auto b_1 = make(0, FVector(14, -22, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_1.HasElectricityData = true; b_1.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_1);
-	//auto b_2 = make(1100, FVector(11, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_2.HasElectricityData = true; b_2.ElectricityInfo.CurrentObjectEnergy = 159595.000000;  UsedBlocks->Add(b_2);
-	//auto b_3 = make(1200, FVector(22, -29, 5), FVector(3, 3, 3), FRotator(0, -90, 0), 1200, ""); b_3.HasElectricityData = true; b_3.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_3);
-	//auto b_4 = make(1200, FVector(22, -23, 5), FVector(3, 3, 3), FRotator(0, -90, 0), 1200, ""); b_4.HasElectricityData = true; b_4.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_4);
-	//auto b_5 = make(500, FVector(8, -21, 6), FVector(1, 1, 1), FRotator(0, 0, 0), 500, ""); b_5.HasElectricityData = true; b_5.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_5);
-	//c->PlayerPosition = FVector(316, -129, 163);
-	//c->PlayerRotation = FRotator(0, 115, 0);
+	/*auto b_0 = make(0, FVector(14, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_0.HasElectricityData = true; b_0.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_0);
+	auto b_1 = make(0, FVector(14, -22, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_1.HasElectricityData = true; b_1.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_1);
+	auto b_2 = make(1100, FVector(11, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_2.HasElectricityData = true; b_2.ElectricityInfo.CurrentObjectEnergy = 159595.000000;  UsedBlocks->Add(b_2);
+	auto b_3 = make(1200, FVector(22, -29, 5), FVector(3, 3, 3), FRotator(0, -90, 0), 1200, ""); b_3.HasElectricityData = true; b_3.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_3);
+	auto b_4 = make(1200, FVector(22, -23, 5), FVector(3, 3, 3), FRotator(0, -90, 0), 1200, ""); b_4.HasElectricityData = true; b_4.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_4);
+	auto b_5 = make(500, FVector(8, -21, 6), FVector(1, 1, 1), FRotator(0, 0, 0), 500, ""); b_5.HasElectricityData = true; b_5.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_5);
+	c->PlayerPosition = FVector(316, -129, 163);
+	c->PlayerRotation = FRotator(0, 115, 0);*/
 
 	auto b_0 = make(0, FVector(-6, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_0.HasElectricityData = true; b_0.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_0);
 	auto b_1 = make(0, FVector(14, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_1.HasElectricityData = true; b_1.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_1);

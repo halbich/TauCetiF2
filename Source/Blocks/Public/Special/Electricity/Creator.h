@@ -4,6 +4,7 @@
 #include "Components/ElectricityComponent.h"
 #include "BlockWithElectricity.h"
 #include "ControllableBlock.h"
+#include "Info/PatternImplementation/CreatorPatternGroupInfo.h"
 #include "Creator.generated.h"
 
 #pragma optimize("", off)
@@ -28,16 +29,15 @@ public:
 	UPROPERTY(Transient)
 		UMinMaxBox* watchingBox;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | CreatorBlock")
-		bool IsValidCreator;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
-	virtual UMinMaxBox* GetWatchingBox() override;
 
-	virtual void CheckWatchingBox() override;
+	 void ComputeCreator();
+
+	virtual UPatternGroupInfo* GetPatternGroupImpl() override;
 
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override

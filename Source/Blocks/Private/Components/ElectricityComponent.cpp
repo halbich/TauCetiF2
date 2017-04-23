@@ -99,7 +99,7 @@ bool UElectricityComponent::ObtainAmount(float requested, float& actuallyObtaine
 
 	ensure(requested >= 0.0f);
 
-	actuallyObtained = FMath::Min(requested,aviable);
+	actuallyObtained = FMath::Min(requested, aviable);
 
 	if (requireExact && !FMath::IsNearlyZero(requested - actuallyObtained))
 	{
@@ -182,7 +182,8 @@ void UElectricityComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 	for (auto connected : ConnectedComponents)
 	{
-		connected->ConnectedComponents.Remove(this);
+		auto rem = connected->ConnectedComponents.Remove(this);
+		ensure(rem > 0);
 	}
 	ConnectedComponents.Empty();
 }

@@ -27,65 +27,61 @@ UPrimitiveComponent* ACreator::GetComponentForObjectOutline_Implementation() {
 	return CreatorMesh;
 }
 
-UMinMaxBox* ACreator::GetWatchingBox()
-{
-	if (BlockInfo->Scale.X != BlockInfo->Scale.Y)
-		return nullptr;
-
-	if (watchingBox && watchingBox->IsValidLowLevel())
-		return watchingBox;
-
-	auto result = NewObject<UMinMaxBox>();
-
-	auto db = WorldObjectComponent->DefiningBox;
-
-	FVector min = db->Min;
-	FVector max = db->Max;
-
-	max.Z += (BlockInfo->Scale.X + 1) * GameDefinitions::CubeMinSize;
-
-	auto mult = FVector(1, 1, 0) * GameDefinitions::CubeMinSize;
-
-	min -= mult;
-	max += mult;
-
-	result->InitBox(min, max);
-
-	watchingBox = result;
-	return watchingBox;
+UPatternGroupInfo* ACreator::GetPatternGroupImpl() {
+	return NewObject<UCreatorPatternGroupInfo>();
 }
 
-void ACreator::CheckWatchingBox()
+void ACreator::ComputeCreator()
 {
-	ensure(watchingBox);
+	auto pi = Cast<UCreatorPatternGroupInfo>(WorldObjectComponent->PatternGroupInfo);
+	ensure(pi);
 
-	IsValidCreator = false;
-	print(TEXT("Check box"));
+	auto wb = pi->WatchingBox;
+	ensure(wb);
+
+	auto twb = pi->TreeWatchingBox;
+	ensure(twb);
+
+
+	pi->IsValidCreator = false;
+	print(TEXT("recompute creator"));
 
 	auto world = GetWorld();
 
 
+	auto wholeBox = NewObject<UMinMaxBox>();
+	wholeBox->InitBox(wb->Min, twb->Max);
+
 	TArray<UObject*> objectsToCast;
 
-	WorldObjectComponent->RootBox->GetContainingObjects(watchingBox, objectsToCast, this);
+	WorldObjectComponent->RootBox->GetContainingObjects(wholeBox, objectsToCast);
 
 	TMap<ABlock*, FBox> objectBoxes;
+
+	TMap<ABlock*, FBox> creatorBoxes;
 
 	for (auto obj : objectsToCast)
 	{
 		auto bl = Cast<ABlock>(obj);
 		ensure(bl);
 
-		// we are interrested only in polycarbonate blocks
-		if (bl->Definition.GetDefaultObject()->BlockID == CubePolycarbonateID)
+		// we are interrested only in polycarbonate blocks or creators
+		if (bl->BlockInfo->ID == CubePolycarbonateID)
 			objectBoxes.Add(bl, bl->WorldObjectComponent->DefiningBox->GetBox());
+
+		if (bl->BlockInfo->ID == CreatorID)
+			creatorBoxes.Add(bl, bl->WorldObjectComponent->DefiningBox->GetBox());
 
 	}
 
+	// check base for blocks
+	if (!checkForBlock(wb, creatorBoxes))
+		return;
+
 	auto emptyBox = NewObject<UMinMaxBox>();
 
-	FVector min = watchingBox->Min;
-	FVector max = watchingBox->Max;
+	FVector min = twb->Min;
+	FVector max = twb->Max;
 
 	auto mult = FVector(1, 1, 1) * GameDefinitions::CubeMinSize;
 
@@ -101,34 +97,44 @@ void ACreator::CheckWatchingBox()
 			return;
 	}
 
-	/*auto left = NewObject<UMinMaxBox>();
-	left->InitBoxChecked(FVector(emptyBox->Min.X, watchingBox->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Max.Z));
+
+	/*
+
+	auto left = NewObject<UMinMaxBox>();
+	left->InitBoxChecked(FVector(emptyBox->Min.X, twb->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Max.Z));
 	if (!checkForBlock(left, objectBoxes))
 		return;
 
 	auto right = NewObject<UMinMaxBox>();
-	right->InitBoxChecked(FVector(emptyBox->Min.X, emptyBox->Max.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, watchingBox->Max.Y, emptyBox->Max.Z));
+	right->InitBoxChecked(FVector(emptyBox->Min.X, emptyBox->Max.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, twb->Max.Y, emptyBox->Max.Z));
 	if (!checkForBlock(right, objectBoxes))
 		return;
 
 	auto front = NewObject<UMinMaxBox>();
-	front->InitBoxChecked(FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Min.Z), FVector(watchingBox->Max.X, emptyBox->Max.Y, emptyBox->Max.Z));
+	front->InitBoxChecked(FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Min.Z), FVector(twb->Max.X, emptyBox->Max.Y, emptyBox->Max.Z));
 	if (!checkForBlock(front, objectBoxes))
 		return;
 
 	auto back = NewObject<UMinMaxBox>();
-	back->InitBoxChecked(FVector(watchingBox->Min.X, emptyBox->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Min.X, emptyBox->Max.Y, emptyBox->Max.Z));
+	back->InitBoxChecked(FVector(twb->Min.X, emptyBox->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Min.X, emptyBox->Max.Y, emptyBox->Max.Z));
 	if (!checkForBlock(back, objectBoxes))
 		return;
 
 	auto top = NewObject<UMinMaxBox>();
-	top->InitBoxChecked(FVector(emptyBox->Min.X, emptyBox->Min.Y, emptyBox->Max.Z), FVector(emptyBox->Max.X, emptyBox->Max.Y, watchingBox->Max.Z));
+	top->InitBoxChecked(FVector(emptyBox->Min.X, emptyBox->Min.Y, emptyBox->Max.Z), FVector(emptyBox->Max.X, emptyBox->Max.Y, twb->Max.Z));
 	if (!checkForBlock(top, objectBoxes))
 		return;*/
 
-	IsValidCreator = true;
-	print(TEXT("ValidCreator"));
+	pi->IsValidCreator = true;
+	print(TEXT("valid creator"));
 };
 
+
+void ComputeCreator(ABlock* block)
+{
+	auto c = Cast<ACreator>(block);
+	ensure(c);
+	c->ComputeCreator();
+}
 
 #pragma optimize("", on)

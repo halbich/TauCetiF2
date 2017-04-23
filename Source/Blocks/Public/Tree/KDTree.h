@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "MinMaxBox.h"
 #include "Commons/Public/GameDefinitions.h"
+#include "info/PatternGroupInfo.h"
 #include "KDTree.generated.h"
 
 /**
@@ -41,7 +42,7 @@ public:
 		float DividingCoordValue;
 
 	UPROPERTY(Transient)
-		TMap<UObject*, UMinMaxBox*> watchedBoxes;
+		TArray<UPatternGroupInfo*> watchedGroups;
 
 	void DEBUGDrawContainingBox(UWorld* world);
 	void DEBUGDrawSurrondings(UWorld* world, FColor usedColor = FColor::Magenta);
@@ -61,11 +62,10 @@ public:
 	friend bool CheckCommonBoundaries(UObject* o1, const UObject* o2);
 	friend void AddToTreeElements(UObject* obj, UKDTree* box);
 	friend void RemoveFromTreeElements(UObject* obj, UKDTree* box);
-	friend void WatchingRegionChanged(UObject* obj);
 
 	void NotifyRegionChanged(UMinMaxBox* box);
-	void RegisterWatchingBox(UObject* actor, UMinMaxBox* box);
-	void TryUnregisterWatchingBox(UObject* actor);
+	void RegisterWatchingGroup(UPatternGroupInfo* group);
+	void TryUnregisterWatchingGroup(UPatternGroupInfo* group);
 
 private:
 
@@ -105,7 +105,11 @@ private:
 			if (!elem->IsPendingKill())
 				hasElem = true;
 			else
-				elem = nullptr;
+				elem = NULL;
+		}
+		else
+		{
+			elem = NULL;
 		}
 		return hasElem;
 	}

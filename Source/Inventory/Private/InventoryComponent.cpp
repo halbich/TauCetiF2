@@ -194,7 +194,7 @@ void UInventoryComponent::AddItem(UInventoryBuildableBlockInfo* block)
 void UInventoryComponent::ItemBuilt(UInventoryBuildableBlockInfo* block)
 {
 	auto removed = InventoryItems.Remove(block);
-	check(removed == 1);
+	ensure(removed == 1);
 
 	for (auto grp : InventoryTags->InventoryGroupList)
 		grp->IsInventoryCacheValid = false;

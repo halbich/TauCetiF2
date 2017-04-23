@@ -1,29 +1,16 @@
 ﻿#include "Blocks.h"
 #include "WorldObjectComponent.h"
 
-// Sets default values for this component's properties
 UWorldObjectComponent::UWorldObjectComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-
-	// ...
 }
 
 #pragma optimize("",off)
 
-// Called when the game starts
 void UWorldObjectComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	/*auto Element = Cast<ABlock>(GetOwner);
-
-	ensure(Element);
-
-	if (Element->BlockInfo->UnderConstruction)
-		return;*/
 }
 
 #pragma optimize("",on)
@@ -33,18 +20,17 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 	DefiningBox = definingBox;
 	ensure(DefiningBox != nullptr);
 
-	BuildingTree = NewObject<UMinMaxTree>()->Init(DefiningBox);
 }
 
-void UWorldObjectComponent::OnTreeElementsChanged()
-{
-	// TODO impl?
-}
+//void UWorldObjectComponent::OnTreeElementsChanged()
+//{
+//	// TODO impl?
+//}
 
-void UWorldObjectComponent::OnWeatherTreeElementsChanged()
-{
-	// TODO impl?
-}
+//void UWorldObjectComponent::OnWeatherTreeElementsChanged()
+//{
+//	// TODO impl?
+//}
 
 #pragma optimize("", off)
 
@@ -65,6 +51,8 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 			par->UpdateAfterChildDestroyed();
 	}
 
+	TreeElements.Empty();
+
 	if (DefiningBox && DefiningBox->IsValidLowLevel())
 		RootBox->NotifyRegionChanged(DefiningBox);
 
@@ -77,14 +65,8 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	
 	}
 
-	if (BuildingTree && BuildingTree->IsValidLowLevel() && !BuildingTree->IsPendingKill())
-	{
-		auto parent = BuildingTree->GetParent();
-		BuildingTree->MarkPendingKill();
-		if (parent)
-		{
-			parent->ChildrenDeleted();
-		}
-	}
+	WeatherTreeElements.Empty();
+
+	
 }
 #pragma optimize("", on)

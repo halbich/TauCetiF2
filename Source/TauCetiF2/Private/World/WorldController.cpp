@@ -1,7 +1,6 @@
 ﻿#include "TauCetiF2.h"
 #include "EngineUtils.h"
 #include "Blocks/Public/Block.h"
-
 #include "WorldController.h"
 
 #pragma optimize("", off)
@@ -35,8 +34,25 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 
 	object->OnDestroyRequestedEvent.RemoveDynamic(this, &AWorldController::DestroyRequestEventHandler);
 
-	if (object->Definition.GetDefaultObject()->UsingInPatterns)
-		RootBox->TryUnregisterWatchingBox(object);
+	TQueue<ABlock*> patternRecompute;
+
+	auto pi = object->WorldObjectComponent->PatternGroupInfo;
+	if (object->Definition.GetDefaultObject()->UsingInPatterns && pi && pi->IsValidLowLevel())
+	{
+		pi->UnregisterBlock(object);
+
+		for (auto pr : pi->BlocksInGroup)
+		{
+			auto pim = pr->GetPatternGroupImpl();
+			pim->RegisterBlock(pr);
+			pr->WorldObjectComponent->PatternGroupInfo = pim;
+			patternRecompute.Enqueue(pr);
+		}
+
+		pi->BlocksInGroup.Empty();
+		RootBox->TryUnregisterWatchingGroup(pi);
+		pi->MarkPendingKill();
+	}
 
 	auto usableWithWidget = Cast<IBlockWithShowableWidget>(object);
 	if (usableWithWidget)
@@ -70,6 +86,28 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 		DEBUGHideMinMaxBoxes();
 		DEBUGShowMinMaxBoxes();
 	}
+
+	TArray<UPatternGroupInfo*> refreshPatterns;
+	ABlock* toRenew;
+	while (patternRecompute.Dequeue(toRenew))
+	{
+		toRenew->RenewPatternInfo();
+		if (toRenew->WorldObjectComponent->PatternGroupInfo)
+		{
+			RootBox->RegisterWatchingGroup(toRenew->WorldObjectComponent->PatternGroupInfo);
+			refreshPatterns.AddUnique(toRenew->WorldObjectComponent->PatternGroupInfo);
+		}
+	}
+
+	for (auto rp : refreshPatterns)
+	{
+		if (rp && rp->IsValidLowLevel() && !rp->IsPendingKill())
+			rp->WatchingRegionChanged();
+	}
+
+	refreshPatterns.Empty();
+
+	DEBUG_observable();
 
 	weatherComponent->ObjectsChanged();
 	check(RootBox);
@@ -193,12 +231,15 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 
 		weatherComponent->ObjectsChanged();
 
-		if (definition->UsingInPatterns)
+		auto pi = actor->WorldObjectComponent->PatternGroupInfo;
+		if (definition->UsingInPatterns && pi)
 		{
-			auto watchingBox = actor->GetWatchingBox();
-			if (watchingBox)
-				RootBox->RegisterWatchingBox(actor, watchingBox);
+			RootBox->RegisterWatchingGroup(pi);
+			pi->WatchingRegionChanged();
+
+			DEBUG_observable();
 		}
+
 
 		if (definition->HasElectricityComponent) {
 			auto electricityComp = Cast<UElectricityComponent>(actor->GetComponentByClass(UElectricityComponent::StaticClass()));
@@ -211,24 +252,21 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 }
 
 void AWorldController::DEBUGShowMinMaxBoxes() {
-	if (RootBox)
+	if (RootBox && !debugBoxesShown)
 	{
 		debugBoxesShown = true;
 		RootBox->DEBUGDrawContainingBox(GetWorld());
 	}
-	else
-		print(TEXT("NO Root!"));
 }
 
 void AWorldController::DEBUGHideMinMaxBoxes() {
-	if (RootBox)
+	if (RootBox && debugBoxesShown)
 	{
 		FlushPersistentDebugLines(GetWorld());
 		debugBoxesShown = false;
-		//
 	}
-	else
-		print(TEXT("NO Root!"));
+
+	DEBUG_observable();
 }
 
 void AWorldController::BeginPlay() {
@@ -275,9 +313,6 @@ void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReasonType)
 		}
 	}
 
-	for (auto block : UsedBlocks)
-	{
-	}
 
 	Super::EndPlay(EndPlayReasonType);
 }

@@ -32,25 +32,24 @@ void UKDTree::AddToTree(UKDTree* box)
 
 	addToTree(box);
 
-	for (auto checkedRegion : watchedBoxes)
-	{
-		auto reg = checkedRegion.Value;
 
-		if (box->GetBox().Intersect(reg->GetBox()))
-			WatchingRegionChanged(checkedRegion.Key);
+	for (auto checkedGroup : watchedGroups)
+	{
+		if (checkedGroup->IsValidForObserve && box->GetBox().Intersect(checkedGroup->TreeWatchingBox->GetBox()))
+			checkedGroup->WatchingRegionChanged();
 	}
+
+
 }
 
 void UKDTree::NotifyRegionChanged(UMinMaxBox* box)
 {
 	ensure(box != nullptr);
 
-	for (auto checkedRegion : watchedBoxes)
+	for (auto checkedGroup : watchedGroups)
 	{
-		auto reg = checkedRegion.Value;
-
-		if (box->GetBox().Intersect(reg->GetBox()))
-			WatchingRegionChanged(checkedRegion.Key);
+		if (checkedGroup->IsValidForObserve && box->GetBox().Intersect(checkedGroup->WatchingBox->GetBox()))
+			checkedGroup->WatchingRegionChanged();
 	}
 }
 
@@ -73,7 +72,7 @@ void UKDTree::addToTree(UKDTree* box, bool forceInsert)
 	{
 		SingleChild->SetParent(nullptr);
 
-		RemoveFromTreeElements(SingleChild->ContainingObject, box);
+		RemoveFromTreeElements(SingleChild->ContainingObject, SingleChild);
 
 		addToTree(SingleChild, true); // forcing to insert
 
@@ -157,9 +156,9 @@ void UKDTree::DEBUGDrawContainingBox(UWorld* world)
 
 	if (!GetParent())
 	{
-		for (auto i : watchedBoxes)
+		for (auto i : watchedGroups)
 		{
-			auto box = i.Value;
+			auto box = i->TreeWatchingBox;
 			auto bcenter = (box->Max + box->Min) * 0.5;
 			auto bextend = (box->Max - bcenter);
 			DrawDebugBox(world, bcenter, bextend, FColor::Orange, true);
@@ -280,9 +279,11 @@ void UKDTree::UpdateAfterChildDestroyed()
 	SingleChild = NULL;
 
 	if (parent)
+	{
 		MarkPendingKill();
+	}
 
-	if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
+	if (parent && parent->IsValidLowLevel() && !parent->IsPendingKill() && parent->canBeDeleted())
 		parent->updateAfterChildDestroyedInner();
 }
 
@@ -302,26 +303,31 @@ void UKDTree::updateAfterChildDestroyedInner()
 
 	auto parent = GetParent();
 	MarkPendingKill();
-	if (parent && parent->IsValidLowLevel() && parent->canBeDeleted())
+	if (parent && parent->IsValidLowLevel() && !parent->IsPendingKill() && parent->canBeDeleted())
 		parent->updateAfterChildDestroyedInner();
 }
 
-void UKDTree::RegisterWatchingBox(UObject* actor, UMinMaxBox* box)
+void UKDTree::RegisterWatchingGroup(UPatternGroupInfo* group)
 {
-	TryUnregisterWatchingBox(actor);
+	if (!group || !group->IsValidLowLevel())
+		return;
 
-	watchedBoxes.Add(actor, box);
+	watchedGroups.AddUnique(group);
+
+	auto box = group->WatchingBox;
 
 	auto bcenter = (box->Max + box->Min) * 0.5;
 	auto bextend = (box->Max - bcenter);
 	DrawDebugBox(GetWorld(), bcenter, bextend, FColor::Red, true, 60, 0, 5);
+
 }
 
-void UKDTree::TryUnregisterWatchingBox(UObject* actor)
+void UKDTree::TryUnregisterWatchingGroup(UPatternGroupInfo* group)
 {
-	auto existing = watchedBoxes.Find(actor);
-	if (!existing)
+
+	if (!group || !group->IsValidLowLevel())
 		return;
 
-	watchedBoxes.Remove(actor);
+	auto rem = watchedGroups.Remove(group);
+	ensure(rem > 0);
 }

@@ -167,6 +167,8 @@ void ALightBlock::SetController_Implementation(ABlock* controller) {
 		if (interf)
 			this->Execute_SetControlState(this, interf->Execute_GetControlState(usedController));
 	}
+	else
+		IsOn = true;
 
 	updateUsingMessage();
 }

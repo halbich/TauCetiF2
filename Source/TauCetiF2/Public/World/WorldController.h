@@ -20,6 +20,9 @@
 #include "Blocks/Public/Interfaces/ControllerBlock.h"
 #include "Blocks/Public/Interfaces/ControllableBlock.h"
 
+#include "Blocks/Public/Info/PatternImplementation/CreatorPatternGroupInfo.h"
+
+
 #include "WorldController.generated.h"
 
 UCLASS()
@@ -87,4 +90,22 @@ private:
 	void onPickupItem(ABlock* pickingItem);
 
 	void onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidget> widget);
+
+	void DEBUG_observable()
+	{
+		return;
+
+		auto w = GetWorld();
+		FlushPersistentDebugLines(w);
+		for (auto ch : RootBox->watchedGroups)
+		{
+			if (!ch || !ch->IsValidLowLevel() || ch->IsPendingKill())
+				continue;
+
+			auto _C = Cast<UCreatorPatternGroupInfo>(ch);
+
+			ch->WatchingBox->DEBUGDrawBorder(w, _C->IsValidCreator ? FColor::Yellow : FColor::Magenta);
+			ch->TreeWatchingBox->DEBUGDrawBorder(w, ch->IsValidForObserve ? FColor::Green : FColor::Red);
+		}
+	}
 };
