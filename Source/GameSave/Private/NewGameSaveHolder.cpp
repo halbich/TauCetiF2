@@ -75,15 +75,6 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 
 	auto UsedBlocks = &c->usedBlocks;
 
-	/*auto b_0 = make(0, FVector(14, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_0.HasElectricityData = true; b_0.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_0);
-	auto b_1 = make(0, FVector(14, -22, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_1.HasElectricityData = true; b_1.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_1);
-	auto b_2 = make(1100, FVector(11, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_2.HasElectricityData = true; b_2.ElectricityInfo.CurrentObjectEnergy = 159595.000000;  UsedBlocks->Add(b_2);
-	auto b_3 = make(1200, FVector(22, -29, 5), FVector(3, 3, 3), FRotator(0, -90, 0), 1200, ""); b_3.HasElectricityData = true; b_3.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_3);
-	auto b_4 = make(1200, FVector(22, -23, 5), FVector(3, 3, 3), FRotator(0, -90, 0), 1200, ""); b_4.HasElectricityData = true; b_4.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_4);
-	auto b_5 = make(500, FVector(8, -21, 6), FVector(1, 1, 1), FRotator(0, 0, 0), 500, ""); b_5.HasElectricityData = true; b_5.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_5);
-	c->PlayerPosition = FVector(316, -129, 163);
-	c->PlayerRotation = FRotator(0, 115, 0);*/
-
 	auto b_0 = make(0, FVector(-6, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_0.HasElectricityData = true; b_0.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_0);
 	auto b_1 = make(0, FVector(14, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_1.HasElectricityData = true; b_1.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_1);
 	auto b_2 = make(0, FVector(14, -22, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_2.HasElectricityData = true; b_2.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_2);
@@ -96,17 +87,17 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	auto b_9 = make(1, FVector(-15, -1, 6), FVector(20, 1, 6), FRotator(0, -90, 0), 1, ""); b_9.HasElectricityData = true; b_9.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_9);
 	auto b_10 = make(600, FVector(-12, -39, 9), FVector(6, 1, 11), FRotator(0, 0, 0), 600, ""); b_10.HasElectricityData = true; b_10.ElectricityInfo.CurrentObjectEnergy = 26400.000000;  UsedBlocks->Add(b_10);
 	auto b_11 = make(100, FVector(10, -35, 1), FVector(8, 14, 4), FRotator(0, -90, 0), 100, ""); b_11.HasElectricityData = true; b_11.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_11);
-	auto b_12 = make(1000, FVector(25, -13, 8), FVector(1, 1, 1), FRotator(0, 90, -90), 1000, ""); b_12.BlockSpecificData.Add(TEXT("IsAutoregulated"), TEXT("1")); b_12.BlockSpecificData.Add(TEXT("IsOn"), TEXT("0"));
+	auto b_12 = make(1000, FVector(25, -13, 8), FVector(1, 1, 1), FRotator(0, 90, -90), 1000, ""); b_12.BlockSpecificData.Add(TEXT("IsAutoregulated"), TEXT("1")); b_12.BlockSpecificData.Add(TEXT("IsOn"), TEXT("1"));
 	b_12.HasElectricityData = true; b_12.ElectricityInfo.CurrentObjectEnergy = 200.000000;
 	b_12.HasRelationshipData = true; FGuid b_12_rel_id; FGuid::Parse("703EFD1844A5E576A5932288A38E20B9", b_12_rel_id); b_12.RelationshipInfo.ID = b_12_rel_id;
 	FRelationshipInfo b_12_rel0; FGuid b_12_rel0_id; FGuid::Parse("5CCE09794A8BA7EDD12133AFE8BA3E40", b_12_rel0_id); b_12_rel0.TargetID = b_12_rel0_id; b_12_rel0.RelationshipType = 0;
 	b_12.RelationshipInfo.Relationships.Add(b_12_rel0); UsedBlocks->Add(b_12);
-	auto b_13 = make(1000, FVector(13, 9, 3), FVector(1, 1, 1), FRotator(0, -180, -90), 1000, ""); b_13.BlockSpecificData.Add(TEXT("IsAutoregulated"), TEXT("1")); b_13.BlockSpecificData.Add(TEXT("IsOn"), TEXT("0"));
+	auto b_13 = make(1000, FVector(13, 9, 3), FVector(1, 1, 1), FRotator(0, -180, -90), 1000, ""); b_13.BlockSpecificData.Add(TEXT("IsAutoregulated"), TEXT("1")); b_13.BlockSpecificData.Add(TEXT("IsOn"), TEXT("1"));
 	b_13.HasElectricityData = true; b_13.ElectricityInfo.CurrentObjectEnergy = 200.000000;
 	b_13.HasRelationshipData = true; FGuid b_13_rel_id; FGuid::Parse("2EC04B3D4081FD6E3E1AB98141F4AD19", b_13_rel_id); b_13.RelationshipInfo.ID = b_13_rel_id;
 	FRelationshipInfo b_13_rel0; FGuid b_13_rel0_id; FGuid::Parse("5CCE09794A8BA7EDD12133AFE8BA3E40", b_13_rel0_id); b_13_rel0.TargetID = b_13_rel0_id; b_13_rel0.RelationshipType = 0;
 	b_13.RelationshipInfo.Relationships.Add(b_13_rel0); UsedBlocks->Add(b_13);
-	auto b_14 = make(1000, FVector(-16, -10, 2), FVector(1, 1, 1), FRotator(0, -90, -90), 1000, ""); b_14.BlockSpecificData.Add(TEXT("IsAutoregulated"), TEXT("1")); b_14.BlockSpecificData.Add(TEXT("IsOn"), TEXT("0"));
+	auto b_14 = make(1000, FVector(-16, -10, 2), FVector(1, 1, 1), FRotator(0, -90, -90), 1000, ""); b_14.BlockSpecificData.Add(TEXT("IsAutoregulated"), TEXT("1")); b_14.BlockSpecificData.Add(TEXT("IsOn"), TEXT("1"));
 	b_14.HasElectricityData = true; b_14.ElectricityInfo.CurrentObjectEnergy = 200.000000;
 	b_14.HasRelationshipData = true; FGuid b_14_rel_id; FGuid::Parse("4C5484244F03C6E7F8402D8363064A80", b_14_rel_id); b_14.RelationshipInfo.ID = b_14_rel_id;
 	FRelationshipInfo b_14_rel0; FGuid b_14_rel0_id; FGuid::Parse("5CCE09794A8BA7EDD12133AFE8BA3E40", b_14_rel0_id); b_14_rel0.TargetID = b_14_rel0_id; b_14_rel0.RelationshipType = 0;
@@ -140,14 +131,14 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	auto b_39 = make(2, FVector(20, -11, 17), FVector(2, 7, 1), FRotator(0, -90, 0), 2, "");  UsedBlocks->Add(b_39);
 	auto b_40 = make(1, FVector(3, -31, 9), FVector(1, 1, 11), FRotator(0, 0, 0), 1, ""); b_40.HasElectricityData = true; b_40.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_40);
 	auto b_41 = make(1, FVector(16, -23, 9), FVector(1, 1, 11), FRotator(0, 0, 0), 1, ""); b_41.HasElectricityData = true; b_41.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_41);
-	auto b_42 = make(1100, FVector(11, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_42.HasElectricityData = true; b_42.ElectricityInfo.CurrentObjectEnergy = 159405.000000;  UsedBlocks->Add(b_42);
-	auto b_43 = make(1100, FVector(-9, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_43.HasElectricityData = true; b_43.ElectricityInfo.CurrentObjectEnergy = 159291.000000;  UsedBlocks->Add(b_43);
-	auto b_44 = make(1100, FVector(-9, 38, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_44.HasElectricityData = true; b_44.ElectricityInfo.CurrentObjectEnergy = 159647.000000;  UsedBlocks->Add(b_44);
-	auto b_45 = make(1100, FVector(11, 38, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_45.HasElectricityData = true; b_45.ElectricityInfo.CurrentObjectEnergy = 159328.000000;  UsedBlocks->Add(b_45);
-	auto b_46 = make(1100, FVector(31, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_46.HasElectricityData = true; b_46.ElectricityInfo.CurrentObjectEnergy = 159662.000000;  UsedBlocks->Add(b_46);
-	auto b_47 = make(1100, FVector(31, 38, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_47.HasElectricityData = true; b_47.ElectricityInfo.CurrentObjectEnergy = 159708.000000;  UsedBlocks->Add(b_47);
-	auto b_48 = make(1100, FVector(31, 58, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_48.HasElectricityData = true; b_48.ElectricityInfo.CurrentObjectEnergy = 159373.000000;  UsedBlocks->Add(b_48);
-	auto b_49 = make(1100, FVector(11, 59, 0), FVector(20, 20, 2), FRotator(0, -90, 0), 1100, ""); b_49.HasElectricityData = true; b_49.ElectricityInfo.CurrentObjectEnergy = 159665.000000;  UsedBlocks->Add(b_49);
+	auto b_42 = make(1100, FVector(11, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_42.HasElectricityData = true; b_42.ElectricityInfo.CurrentObjectEnergy = 159595.000000;  UsedBlocks->Add(b_42);
+	auto b_43 = make(1100, FVector(-9, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_43.HasElectricityData = true; b_43.ElectricityInfo.CurrentObjectEnergy = 159709.000000;  UsedBlocks->Add(b_43);
+	auto b_44 = make(1100, FVector(-9, 38, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_44.HasElectricityData = true; b_44.ElectricityInfo.CurrentObjectEnergy = 159353.000000;  UsedBlocks->Add(b_44);
+	auto b_45 = make(1100, FVector(11, 38, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_45.HasElectricityData = true; b_45.ElectricityInfo.CurrentObjectEnergy = 159672.000000;  UsedBlocks->Add(b_45);
+	auto b_46 = make(1100, FVector(31, 18, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_46.HasElectricityData = true; b_46.ElectricityInfo.CurrentObjectEnergy = 159338.000000;  UsedBlocks->Add(b_46);
+	auto b_47 = make(1100, FVector(31, 38, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_47.HasElectricityData = true; b_47.ElectricityInfo.CurrentObjectEnergy = 159292.000000;  UsedBlocks->Add(b_47);
+	auto b_48 = make(1100, FVector(31, 58, 0), FVector(20, 20, 2), FRotator(0, 0, 0), 1100, ""); b_48.HasElectricityData = true; b_48.ElectricityInfo.CurrentObjectEnergy = 159627.000000;  UsedBlocks->Add(b_48);
+	auto b_49 = make(1100, FVector(11, 59, 0), FVector(20, 20, 2), FRotator(0, -90, 0), 1100, ""); b_49.HasElectricityData = true; b_49.ElectricityInfo.CurrentObjectEnergy = 159335.000000;  UsedBlocks->Add(b_49);
 	auto b_50 = make(1100, FVector(-9, 59, 0), FVector(20, 20, 2), FRotator(0, -90, 0), 1100, ""); b_50.HasElectricityData = true; b_50.ElectricityInfo.CurrentObjectEnergy = 159281.000000;  UsedBlocks->Add(b_50);
 	auto b_51 = make(1050, FVector(-3, -9, 4), FVector(1, 1, 1), FRotator(0, 90, 0), 1050, "Tlacitko na zemi"); b_51.BlockSpecificData.Add(TEXT("IsON"), TEXT("0"));
 	b_51.HasElectricityData = true; b_51.ElectricityInfo.CurrentObjectEnergy = 0.000000;
@@ -158,7 +149,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	auto b_55 = make(600, FVector(24, -2, 15), FVector(5, 1, 4), FRotator(0, 90, 0), 600, ""); b_55.HasElectricityData = true; b_55.ElectricityInfo.CurrentObjectEnergy = 8000.000000;  UsedBlocks->Add(b_55);
 	auto b_56 = make(600, FVector(24, 3, 11), FVector(5, 1, 4), FRotator(0, 90, 0), 600, ""); b_56.HasElectricityData = true; b_56.ElectricityInfo.CurrentObjectEnergy = 8000.000000;  UsedBlocks->Add(b_56);
 	auto b_57 = make(600, FVector(24, 3, 15), FVector(5, 1, 4), FRotator(0, 90, 0), 600, ""); b_57.HasElectricityData = true; b_57.ElectricityInfo.CurrentObjectEnergy = 8000.000000;  UsedBlocks->Add(b_57);
-	auto b_58 = make(1000, FVector(23, -20, 12), FVector(1, 1, 1), FRotator(0, 90, 90), 1000, "stena"); b_58.BlockSpecificData.Add(TEXT("IsAutoregulated"), TEXT("1")); b_58.BlockSpecificData.Add(TEXT("IsOn"), TEXT("0"));
+	auto b_58 = make(1000, FVector(23, -20, 12), FVector(1, 1, 1), FRotator(0, 90, 90), 1000, "stena"); b_58.BlockSpecificData.Add(TEXT("IsAutoregulated"), TEXT("1")); b_58.BlockSpecificData.Add(TEXT("IsOn"), TEXT("1"));
 	b_58.HasElectricityData = true; b_58.ElectricityInfo.CurrentObjectEnergy = 200.000000;
 	b_58.HasRelationshipData = true; FGuid b_58_rel_id; FGuid::Parse("053D69F542E0BAEAD45D9D9ED75F3844", b_58_rel_id); b_58.RelationshipInfo.ID = b_58_rel_id;
 	FRelationshipInfo b_58_rel0; FGuid b_58_rel0_id; FGuid::Parse("5CCE09794A8BA7EDD12133AFE8BA3E40", b_58_rel0_id); b_58_rel0.TargetID = b_58_rel0_id; b_58_rel0.RelationshipType = 0;
@@ -204,7 +195,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	auto b_93 = make(201, FVector(27, 23, 16), FVector(5, 5, 3), FRotator(0, 0, 0), 201, ""); b_93.HasElectricityData = true; b_93.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_93);
 	auto b_94 = make(1, FVector(4, -31, 12), FVector(5, 1, 1), FRotator(90, 0, 0), 1, ""); b_94.HasElectricityData = true; b_94.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_94);
 	auto b_95 = make(600, FVector(7, -31, 13), FVector(8, 1, 6), FRotator(90, 0, -180), 600, ""); b_95.HasElectricityData = true; b_95.ElectricityInfo.CurrentObjectEnergy = 19200.000000;  UsedBlocks->Add(b_95);
-	auto b_96 = make(1050, FVector(11, -32, 10), FVector(1, 1, 1), FRotator(0, -180, 90), 1050, ""); b_96.BlockSpecificData.Add(TEXT("IsON"), TEXT("0"));
+	auto b_96 = make(1050, FVector(11, -32, 10), FVector(1, 1, 1), FRotator(0, -180, 90), 1050, ""); b_96.BlockSpecificData.Add(TEXT("IsON"), TEXT("1"));
 	b_96.HasElectricityData = true; b_96.ElectricityInfo.CurrentObjectEnergy = 0.000000;
 	b_96.HasRelationshipData = true; FGuid b_96_rel_id; FGuid::Parse("5CCE09794A8BA7EDD12133AFE8BA3E40", b_96_rel_id); b_96.RelationshipInfo.ID = b_96_rel_id;
 	FRelationshipInfo b_96_rel0; FGuid b_96_rel0_id; FGuid::Parse("703EFD1844A5E576A5932288A38E20B9", b_96_rel0_id); b_96_rel0.TargetID = b_96_rel0_id; b_96_rel0.RelationshipType = 1;
@@ -218,8 +209,8 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	auto b_97 = make(1000, FVector(32, -24, 0), FVector(1, 1, 1), FRotator(0, 90, 0), 1000, ""); b_97.BlockSpecificData.Add(TEXT("IsAutoregulated"), TEXT("1")); b_97.BlockSpecificData.Add(TEXT("IsOn"), TEXT("1"));
 	b_97.HasElectricityData = true; b_97.ElectricityInfo.CurrentObjectEnergy = 0.000000;
 	b_97.HasRelationshipData = true; FGuid b_97_rel_id; FGuid::Parse("99A46CF04D56857AC88CA19EF91110B7", b_97_rel_id); b_97.RelationshipInfo.ID = b_97_rel_id; UsedBlocks->Add(b_97);
-	c->PlayerPosition = FVector(284, -739, 103);
-	c->PlayerRotation = FRotator(0, 126, 0);
+	c->PlayerPosition = FVector(-181, -476, 163);
+	c->PlayerRotation = FRotator(0, 31, 0);
 
 	/*c->PlayerPosition = FVector(-214, -227, 163);
 	c->PlayerRotation = FRotator(0, -32, 0);

@@ -22,6 +22,11 @@ public:
 
 	virtual void InitForBlock_Implementation(ABlock* block) override;
 
-	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherWidget")
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | TerminalBaseWidget")
 		void GetControllables(TArray<ABlock*>& aviable);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | TerminalBaseWidget")
+		FText GetDisplayTextExtended();
+
+	virtual FText GetDisplayTextExtended_Implementation();
 };

@@ -4,28 +4,50 @@
 UBaseControlWidget::UBaseControlWidget(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	if (wTerminalBase)
-	{
-		/*TerminalBase = CreateWidget<UTerminalBaseWidget>(this, wTerminalBase);
-		ContainingTerminalWidgets.Add(TerminalBase);*/
-	}
 
-	if (wBlockConstructor)
-	{
-		/*BlockConstructor = CreateWidget<UBlockConstructor>(this, wBlockConstructor);
-		ContainingTerminalWidgets.Add(BlockConstructor);*/
-	}
 }
 
 void UBaseControlWidget::InitForBlock_Implementation(ABlock* block)
 {
 	Super::InitForBlock_Implementation(block);
+
+	auto terminal = Cast<ATerminalBlock>(block);
+	if (terminal && terminal->IsValidLowLevel() && terminal->ElectricityComponent && terminal->ElectricityComponent->IsValidLowLevel())
+		Network = terminal->ElectricityComponent->Network;
+
+	ensure(Network);
+
+	ContainingTerminalWidgets.Empty();
+
+	ensure(wTerminalBase);
+	ensure(wBlockConstructor);
+
+	auto w = GetWorld();
+
+	if (!w)
+		return;
+
+	auto TerminalBase = CreateWidget<UTerminalBaseWidget>(w, wTerminalBase);
+	TerminalBase->InitForBlock(block);
+	ContainingTerminalWidgets.Add(TerminalBase);
+
+
+	TArray<UCreatorPatternGroupInfo*> creators;
+
+	for (auto constrPat : Network->PatternBlocks)
+	{
+		auto pi = Cast<UCreatorPatternGroupInfo>(constrPat->WorldObjectComponent->PatternGroupInfo);
+		if (pi && pi->IsValidLowLevel())
+			creators.AddUnique(pi);
+	}
+
+	for (auto cr : creators)
+	{
+		auto crWidg = CreateWidget<UBlockConstructor>(w, wBlockConstructor);
+		crWidg->RelatedToPatternGroup = cr;
+		crWidg->InitForBlock(block);
+		ContainingTerminalWidgets.Add(crWidg);
+	}
+
 }
 
-void UBaseControlWidget::LateInit()
-{
-	for (auto term : ContainingTerminalWidgets)
-	{
-		term->InitForBlock(InitedForBlock);
-	}
-}

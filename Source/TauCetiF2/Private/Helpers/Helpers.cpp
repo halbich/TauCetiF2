@@ -95,7 +95,7 @@ TArray<UInventoryFlagItem*> UHelpers::GetBlockFlags(UObject* WorldContextObject,
 	return result;
 }
 
-void UHelpers::GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, bool IsSaveEnabled, FVector& Min, FVector& Max)
+void UHelpers::GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, FVector Limit, bool IsSaveEnabled, FVector& Min, FVector& Max)
 {
 	auto bd = buildableInfo->BlockDefinition;
 	if (!IsSaveEnabled)
@@ -106,8 +106,13 @@ void UHelpers::GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, bool
 		return;
 	}
 
-	Min = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MinBlockScale;
-	Max = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MaxBlockScale;
+	auto sM = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MaxBlockScale;
+
+	Max = FVector(FMath::Min(sM.X, Limit.X), FMath::Min(sM.Y, Limit.Y), FMath::Min(sM.Z, Limit.Z));
+
+	auto sm = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MinBlockScale;
+	Min = FVector(FMath::Min(sm.X, Max.X), FMath::Min(sm.Y, Max.Y), FMath::Min(sm.Z, Max.Z));
+
 }
 
 FDateTime UHelpers::GetTimeFromSeconds(float seconds)

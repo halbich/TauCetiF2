@@ -89,6 +89,11 @@ public:
 	UPROPERTY(Transient)
 		TArray<ABlock*> ControllableBlocks;
 
+
+	UPROPERTY(Transient)
+		TArray<ABlock*> PatternBlocks;
+
+
 	UPROPERTY(Transient)
 		bool NetworkChecked;
 
@@ -114,27 +119,28 @@ public:
 			ConsumersCount = ElectricityConsumers.Num();
 		}
 
+		auto c = Cast<ABlock>(comp->GetOwner());
+		check(c);
+
+
 		if (def->IsControlBlock)
 		{
 			if (def->IsControllable)
-			{
-				auto c = Cast<ABlock>(comp->GetOwner());
-				check(c);
 				ControllableBlocks.Add(c);
-			}
 
 			if (def->IsController)
-			{
-				auto c = Cast<ABlock>(comp->GetOwner());
-				check(c);
 				ControllerBlocks.Add(c);
-			}
 		}
 
 		auto info = comp->GetBlockInfo();
 		ensure(info);
 
 		TotalHealth += info->MaxHealth;
+
+
+		if (c->Definition.GetDefaultObject()->UsingInPatterns)
+			auto rem = PatternBlocks.Add(c);
+
 
 		NetworkChecked = false;
 	}
@@ -164,20 +170,19 @@ public:
 			ConsumersCount = ElectricityConsumers.Num();
 		}
 
+		auto c = Cast<ABlock>(comp->GetOwner());
+		check(c);
+
 		if (def->IsControlBlock)
 		{
 			if (def->IsControllable)
 			{
-				auto c = Cast<ABlock>(comp->GetOwner());
-				check(c);
 				auto rem = ControllableBlocks.Remove(c);
 				ensure(rem > 0);
 			}
 
 			if (def->IsController)
 			{
-				auto c = Cast<ABlock>(comp->GetOwner());
-				check(c);
 				auto rem = ControllerBlocks.Remove(c);
 				ensure(rem > 0);
 			}
@@ -187,6 +192,13 @@ public:
 		ensure(info);
 
 		TotalHealth = FMath::Max(0.0f, TotalHealth - info->MaxHealth);		// due to rounding errors, we could get under zero
+
+		
+		if(c->Definition.GetDefaultObject()->UsingInPatterns)
+		{
+			auto rem = PatternBlocks.Remove(c);
+			ensure(rem > 0);
+		}
 
 		NetworkChecked = false;
 

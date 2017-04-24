@@ -12,8 +12,6 @@ void UTerminalBaseWidget::InitForBlock_Implementation(ABlock* block)
 
 void UTerminalBaseWidget::GetControllables(TArray<ABlock*>& aviable)
 {
-
-
 	for (auto con : Network->ElectricityProducers)
 	{
 		auto c = Cast<ABlock>(con->GetOwner());
@@ -31,10 +29,10 @@ void UTerminalBaseWidget::GetControllables(TArray<ABlock*>& aviable)
 
 		aviable.AddUnique(c);
 	}
+}
 
-	
 
-
-		
-
+FText UTerminalBaseWidget::GetDisplayTextExtended_Implementation()
+{
+	return BaseControlDisplayName;
 }

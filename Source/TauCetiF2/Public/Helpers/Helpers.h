@@ -51,7 +51,7 @@ public:
 		static FDateTime GetTimeFromSeconds(float seconds);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers")
-		static void GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, bool IsSaveEnabled, FVector& Min, FVector& Max);
+		static void GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, FVector Limit, bool IsSaveEnabled, FVector& Min, FVector& Max);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Sound")
 		static bool GetSoundClassVolume(USoundClass* TargetClass, float& resultValue);

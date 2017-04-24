@@ -40,7 +40,7 @@ bool UBlockConstructor::AddItemToInventory(UBuildableBlockInfo* buildable, TArra
 TArray<UBuildableBlockInfo*> UBlockConstructor::GetAllBuildableBlocks()
 {
 	TArray<UBuildableBlockInfo*> result;
-	
+
 	if (!ensureHolder())
 		return result;
 
@@ -53,4 +53,34 @@ TArray<UBuildableBlockInfo*> UBlockConstructor::GetAllBuildableBlocks()
 	}
 
 	return result;
+}
+
+void UBlockConstructor::InitForBlock_Implementation(ABlock* block)
+{
+	Super::InitForBlock_Implementation(block);
+
+	ensure(RelatedToPatternGroup);
+
+	auto wb = RelatedToPatternGroup->WatchingBox;
+
+	ensure(wb);
+
+	ScaleLimit = ((wb->Max - wb->Min) / GameDefinitions::CubeMinSize).GridSnap(1);
+}
+
+FText UBlockConstructor::GetDisplayTextExtended_Implementation()
+{
+	auto val = NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.CtorValid", "Online");
+	auto inval = NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.CtorInvalid", "Offline");
+
+
+	FNumberFormattingOptions op;
+	op.SetMinimumFractionalDigits(0);
+	op.SetMaximumFractionalDigits(0);
+
+	FFormatOrderedArguments Arguments;
+	Arguments.Add(BaseControlDisplayName);
+	Arguments.Add(FText::AsNumber(FMath::Max( ScaleLimit.X, ScaleLimit.Y), &op));
+	Arguments.Add(RelatedToPatternGroup->IsValidCreator ? val : inval);
+	return FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.ExtendedText", "{0}    |    Velikost: {1}    |    Stav: {2}"), Arguments);
 }

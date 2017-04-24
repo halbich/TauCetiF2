@@ -4,6 +4,7 @@
 #include "Game/TauCetiF2Character.h"
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
 #include "Blocks/Public/Info/BlockHolder.h"
+#include "Blocks/Public/Info/PatternImplementation/CreatorPatternGroupInfo.h"
 #include "BlockConstructor.generated.h"
 
 /**
@@ -21,11 +22,21 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockConstructorSelector")
 		UBlockHolder* blockHolder;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockConstructorSelector")
+		FVector ScaleLimit;
+
+	UPROPERTY(Transient)
+		UCreatorPatternGroupInfo* RelatedToPatternGroup;
+
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | BlockConstructorSelector")
 		bool AddItemToInventory(UBuildableBlockInfo* buildable, TArray<FText>& validationErrors);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | BlockConstructorSelector")
 		TArray<UBuildableBlockInfo*> GetAllBuildableBlocks();
+
+	virtual void InitForBlock_Implementation(ABlock* block) override;
+
+	virtual FText GetDisplayTextExtended_Implementation() override;
 
 private:
 

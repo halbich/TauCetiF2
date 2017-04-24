@@ -3,6 +3,9 @@
 #include "Widgets/ObjectWidget.h"
 #include "Widgets/TerminalBaseWidget.h"
 #include "Widgets/BlockConstructor.h"
+#include "Blocks/Public/Special/TerminalBlock.h"
+#include "Blocks/Public/Components/Electricity/ElectricNetwork.h"
+#include "Blocks/Public/Info/PatternImplementation/CreatorPatternGroupInfo.h"
 #include "BaseControlWidget.generated.h"
 
 /**
@@ -20,17 +23,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TCF2 | BaseControlWidget")
 		TSubclassOf<class UTerminalBaseWidget> wTerminalBase;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BaseControlWidget")
-		UTerminalBaseWidget* TerminalBase;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TCF2 | BaseControlWidget")
 		TSubclassOf<class UBlockConstructor> wBlockConstructor;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BaseControlWidget")
-		UBlockConstructor* BlockConstructor;
+		UElectricNetwork* Network;
 
 	virtual void InitForBlock_Implementation(ABlock* block) override;
 
-	UFUNCTION(BlueprintCallable, Category = "TCF2 | BaseControlWidget")
-		void LateInit();
 };
