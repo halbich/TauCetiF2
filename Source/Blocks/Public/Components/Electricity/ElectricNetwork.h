@@ -29,12 +29,17 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		int32 ConsumersCount;
 
+
+
+	// updated in updateStatistics()
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float EnergyProductionPerSec;
 
+	// updated in tick()
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float TotalElectricityAviable;
 
+	// updated in network maintenance
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float MaxElectricityAviable;
 
@@ -42,21 +47,28 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float TotalElectricityAviableFilling;
 
+
+	// updated in updateStatistics()
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float EnergyConsumptionPerSec;
+
+	// updated in tick()
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float TotalElectricityRequired;
+
+	/*UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float MaxStorableElectricity;*/
+
+	// Percentage of +/-, updated in tick
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float TotalElectricityPlusMinus;
+
+
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float TotalHealth;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		float TotalStorableElectricity;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		float MaxStorableElectricity;
-
-	// Percentage of Electricity aviable
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		float TotalElectricityStorableFilling;
 
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> Entities;
@@ -82,6 +94,9 @@ public:
 		TArray<UElectricityComponent*> ElectricityConsumers;
 
 	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ElectricityStorages;
+
+	UPROPERTY(Transient)
 		TArray<ABlock*> ControllerBlocks;
 
 	UPROPERTY(Transient)
@@ -92,6 +107,40 @@ public:
 
 	UPROPERTY(Transient)
 		bool NetworkChecked;
+private:
+
+	FORCEINLINE TArray<UElectricityComponent*>& getArrayBySeverity(UElectricityComponent* comp)
+	{
+		//switch (comp->HealthSeverity)
+		//{
+		//case EHealthSeverity::OK: {
+		//	//return false;
+		//	break;
+		//}
+		//case EHealthSeverity::ToRepair: {
+		return ToRepairEntities;
+		//	break;
+		//}
+		//default: {
+		//	checkNoEntry();
+		//	break;
+		//}
+
+		//}
+
+	//	return NULL;
+	}
+
+public:
+
+	FORCEINLINE void ForceInvalidateNetwork()
+	{
+		NetworkState = EElectricNetworkState::Invalid;
+		for (auto netEnt : Entities)
+			netEnt->ComponentNetworkState = EElectricNetworkState::Invalid;
+
+		ToRecompute.Empty();
+	}
 
 	void RegisterEntity(UElectricityComponent* comp)
 	{
@@ -112,6 +161,11 @@ public:
 		{
 			ElectricityConsumers.Add(comp);
 			ConsumersCount = ElectricityConsumers.Num();
+		}
+
+		if (def->IsProducer && def->IsConsument)
+		{
+			ElectricityStorages.Add(comp);
 		}
 
 		auto c = Cast<ABlock>(comp->GetOwner());
@@ -160,6 +214,12 @@ public:
 			auto rem = ElectricityConsumers.Remove(comp);
 			ensure(rem > 0);
 			ConsumersCount = ElectricityConsumers.Num();
+		}
+
+		if (def->IsProducer && def->IsConsument)
+		{
+			auto rem = ElectricityStorages.Remove(comp);
+			ensure(rem > 0);
 		}
 
 		auto c = Cast<ABlock>(comp->GetOwner());
@@ -220,8 +280,6 @@ public:
 		if (NetworkChecked)
 			return;
 
-		TMap<FGuid, TArray<FGuid>> controller_controlledMap;
-
 		for (auto c : ControllerBlocks)
 		{
 			auto cEl = c->TryGetElectricityComp();
@@ -232,8 +290,6 @@ public:
 
 			auto controllerRelInfo = c->BlockInfo->RelationsInfo;
 			ensure(controllerRelInfo);
-
-			auto arr = &controller_controlledMap.FindOrAdd(controllerRelInfo->ID);
 
 			auto controlled = icontroller->Execute_GetControlledBlocks(c);
 
@@ -253,8 +309,6 @@ public:
 
 				if (conEl->Network != this || !hasRel)		// our controlled item's network has changed, we need to unbind this
 					unbind.Enqueue(con);
-				else
-					arr->AddUnique(controlledID);
 			}
 
 			// and we need to update it after checking so we do not mess with iterated arrays
@@ -291,7 +345,6 @@ public:
 			{
 				auto currentBindedC = Cast<IControllableBlock>(toBind)->Execute_GetController(toBind);
 
-				arr->AddUnique(toBind->BlockInfo->RelationsInfo->ID);
 				if (c == currentBindedC)
 					continue;
 
@@ -304,29 +357,6 @@ public:
 			while (removeRel.Dequeue(toRemoveGuid))
 				controllerRelInfo->RemoveRelationshipsByTargetID(toRemoveGuid);
 		}
-
-		/*for (auto controllable : ControllableBlocks)
-		{
-			auto controllableRelInfo = controllable->BlockInfo->RelationsInfo;
-			ensure(controllableRelInfo);
-			for (auto cRel : controllableRelInfo->Relationships)
-			{
-				ensure(cRel->RelationshipType == (uint8)EControlRelationship::IsControlledByTarget);
-				auto targetID = cRel->TargetID;
-
-				auto controller = &controller_controlledMap.FindChecked(targetID);
-
-				auto removed = controller->Remove(controllableRelInfo->ID);
-
-				ensure(removed == 1);
-			}
-		}
-
-		for (auto t : controller_controlledMap)
-		{
-			ensure(t.Value.Num() == 0);
-		}
-*/
 
 		NetworkChecked = true;
 	}

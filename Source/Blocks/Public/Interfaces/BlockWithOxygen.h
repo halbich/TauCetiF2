@@ -16,5 +16,4 @@ class BLOCKS_API IBlockWithOxygen
 
 public:
 
-	//void SetupComponentData();
 };

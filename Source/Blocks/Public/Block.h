@@ -79,8 +79,6 @@ public:
 
 	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount);
 
-	virtual void HealthUpdated(float newHealth, float maxHealth);
-
 	virtual UPatternGroupInfo* GetPatternGroupImpl();
 
 	void RenewPatternInfo();
@@ -121,6 +119,20 @@ private:
 		case EShapeType::CubeSide: return (1.0f / 3.0f);
 
 		default: return 1.0f;
+		}
+	}
+
+	FORCEINLINE void HealthUpdated()
+	{
+		auto electricity = Cast<IBlockWithElectricity>(this);
+		if (electricity)
+		{
+			auto elComp = electricity->GetElectricityComponent();
+			ensure(elComp);
+
+			/*if (!elComp->Network || !elComp->Network->IsValidLowLevel())
+				return;*/
+			// TODO
 		}
 	}
 };

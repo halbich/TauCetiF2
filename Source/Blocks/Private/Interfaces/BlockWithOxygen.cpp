@@ -6,12 +6,3 @@ UBlockWithOxygen::UBlockWithOxygen(const class FObjectInitializer& ObjectInitial
 {
 }
 
-//void IBlockWithOxygen::SetupComponentData()
-//{
-//	/*auto oxygenComponent = FindComponent GetComponentByClass() GetComponent<UOxygenComponent>();
-//
-//	if (oxygenComponent)
-//	{
-//
-//	}*/
-//}

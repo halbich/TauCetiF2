@@ -93,7 +93,9 @@ void ACreator::ComputeCreator()
 			return;
 	}
 
-	auto left = NewObject<UMinMaxBox>();
+	// TODO
+
+	/*auto left = NewObject<UMinMaxBox>();
 	left->InitBoxChecked(FVector(emptyBox->Min.X, twb->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Max.Z));
 	if (!checkForBlock(left, objectBoxes))
 		return;
@@ -116,7 +118,7 @@ void ACreator::ComputeCreator()
 	auto top = NewObject<UMinMaxBox>();
 	top->InitBoxChecked(FVector(emptyBox->Min.X, emptyBox->Min.Y, emptyBox->Max.Z), FVector(emptyBox->Max.X, emptyBox->Max.Y, twb->Max.Z));
 	if (!checkForBlock(top, objectBoxes))
-		return;
+		return;*/
 
 	pi->IsValidCreator = true;
 };

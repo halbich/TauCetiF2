@@ -16,7 +16,7 @@ ABlock::ABlock()
 
 #pragma optimize("", off)
 
-void  ABlock::OnConstruction(const FTransform& Transform)
+void ABlock::OnConstruction(const FTransform& Transform)
 {
 	if (!Definition)
 	{
@@ -38,7 +38,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 	auto dimensions = def->GetMeshScale(currentScale);
 	BlockInfo->MaxHealth = baseHealth * dimensions.X * dimensions.Y * dimensions.Z;
 	BlockInfo->Health = FMath::Clamp(BlockInfo->Health, 0.0f, BlockInfo->MaxHealth);
-	HealthUpdated(BlockInfo->Health, BlockInfo->MaxHealth);
+	HealthUpdated();
 
 	int32 index = 0;
 
@@ -239,14 +239,10 @@ void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 
 	BlockInfo->Health = FMath::Clamp(BlockInfo->Health - healthDamage, 0.0f, BlockInfo->MaxHealth);
 
-	HealthUpdated(BlockInfo->Health, BlockInfo->MaxHealth);
+	HealthUpdated();
 
 	if (BlockInfo->Health <= 0)
 		OnDestroyRequestedEvent.Broadcast(this);
-}
-
-void ABlock::HealthUpdated(float newHealth, float maxHealth)
-{
 }
 
 // *********** friend methods ********
@@ -268,7 +264,6 @@ void AddToTreeElements(UObject* obj, UKDTree* box)
 	ensure(b);
 
 	b->WorldObjectComponent->TreeElements.AddUnique(box);
-	//b->WorldObjectComponent->OnTreeElementsChanged();
 }
 
 void RemoveFromTreeElements(UObject* obj, UKDTree* box)
@@ -278,7 +273,6 @@ void RemoveFromTreeElements(UObject* obj, UKDTree* box)
 
 	auto rem = b->WorldObjectComponent->TreeElements.Remove(box);
 	ensure(rem > 0);
-	//b->WorldObjectComponent->OnTreeElementsChanged();
 }
 
 void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
@@ -287,7 +281,6 @@ void AddToWeatherTreeElements(UObject* obj, UWeatherTargetsKDTree* box)
 	ensure(b);
 
 	b->WorldObjectComponent->WeatherTreeElements.AddUnique(box);
-	//b->WorldObjectComponent->OnWeatherTreeElementsChanged();
 }
 
 TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* source)

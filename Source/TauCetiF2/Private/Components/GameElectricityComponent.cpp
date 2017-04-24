@@ -55,7 +55,7 @@ void UGameElectricityComponent::RemoveFromWorldNetwork(UElectricityComponent* co
 {
 	ensure(comp && comp->Network);
 
-	forceInvalidateNetwork(comp->Network);
+	comp->Network->ForceInvalidateNetwork();
 	comp->Network->UnregisterEntity(comp);
 
 	for (auto connected : comp->ConnectedComponents)

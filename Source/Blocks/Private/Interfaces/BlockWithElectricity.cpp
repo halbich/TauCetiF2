@@ -6,10 +6,6 @@ UBlockWithElectricity::UBlockWithElectricity(const class FObjectInitializer& Obj
 {
 }
 
-void IBlockWithElectricity::UpdateHealth(UElectricityComponent* comp, UBlockInfo* info)
-{
-}
-
 float IBlockWithElectricity::WasHitByStorm(const float amount)
 {
 	float energyToRemove = amount *  GameDefinitions::RainHitpointToEnergy;

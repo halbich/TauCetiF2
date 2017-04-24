@@ -35,7 +35,7 @@ void UBaseControlWidget::InitForBlock_Implementation(ABlock* block)
 	for (auto constrPat : Network->PatternBlocks)
 	{
 		auto pi = Cast<UCreatorPatternGroupInfo>(constrPat->WorldObjectComponent->PatternGroupInfo);
-		if (pi && pi->IsValidLowLevel())
+		if (pi && pi->IsValidLowLevel() && !pi->IsPendingKill())
 			creators.AddUnique(pi);
 	}
 

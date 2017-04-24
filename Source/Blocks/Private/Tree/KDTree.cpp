@@ -323,6 +323,5 @@ void UKDTree::TryUnregisterWatchingGroup(UPatternGroupInfo* group)
 	if (!group || !group->IsValidLowLevel())
 		return;
 
-	auto rem = watchedGroups.Remove(group);
-	ensure(rem > 0);
+	watchedGroups.Remove(group);
 }

@@ -72,91 +72,99 @@ private:
 		smaller->MarkPendingKill();
 	}
 
-	FORCEINLINE void forceInvalidateNetwork(UElectricNetwork* net)
+	/*FORCEINLINE*/ void doHealing(UElectricNetwork* n)
 	{
-		net->NetworkState = EElectricNetworkState::Invalid;
-		for (auto netEnt : net->Entities)
-			netEnt->ComponentNetworkState = EElectricNetworkState::Invalid;
+		float totalElectricityAviable = n->TotalElectricityAviable;
 
-		net->ToRecompute.Empty();
+		float criticalAviable = 0.5f * totalElectricityAviable;
+
+		totalElectricityAviable -= criticalAviable;
+		// TODO
+		float totalCriticalRequired = 0.0f;
+		for (auto critical : n->CriticalRepairEntities)
+		{
+			auto owner = Cast<ABlock>(critical->GetOwner());
+			ensure(owner);
+
+			// TODO get (required, divide it by totalCritical required) and multiply by aviable
+			//owner->Heal(...);
+		}
+
+		// TODO badly, to reapir
+
+		for (auto important : n->ImportantRepairEntities)
+		{
+			auto owner = Cast<ABlock>(important->GetOwner());
+			ensure(owner);
+
+			// TODO get (required, divide it by totalCritical required) and multiply by aviable
+			//	owner->HealthUpdated()
+		}
+
+		for (auto toRepair : n->ToRepairEntities)
+		{
+			auto owner = Cast<ABlock>(toRepair->GetOwner());
+			ensure(owner);
+
+			// TODO get (required, divide it by totalCritical required) and multiply by aviable
+			//	owner->HealthUpdated()
+		}
+
+
+
+		// TODO badly, to repair
+
+		// TODO remaining energy fill to consumers
 	}
+
+
 
 	/*FORCEINLINE*/ void tickUpdateNetwork(UElectricNetwork* n)
 	{
 		float totalElectricityAviable = 0.0f;
-
 		for (auto producer : n->ElectricityProducers)
 			totalElectricityAviable += producer->ElectricityInfo->CurrentObjectEnergy;
 
 		n->TotalElectricityAviable = totalElectricityAviable;
+		n->TotalElectricityAviableFilling = FMath::IsNearlyZero(n->MaxElectricityAviable) ? 0 : totalElectricityAviable / n->MaxElectricityAviable;
 
-		if (FMath::IsNearlyZero(totalElectricityAviable))	// we do net have enough power
+		//TODO
+		//doHealing(n);
+
+
+
+		auto totalElectricityRequired = 0.0f;
+
+		for (auto consumer : n->ElectricityConsumers)
+			totalElectricityRequired += consumer->ElectricityInfo->CurrentObjectMaximumEnergy - consumer->ElectricityInfo->CurrentObjectEnergy;
+
+		totalElectricityRequired = FMath::Max(0.0f, totalElectricityRequired);
+
+		n->TotalElectricityRequired = totalElectricityRequired;
+		n->TotalElectricityPlusMinus = totalElectricityAviable - totalElectricityRequired;
+
+		//auto ration = totalElectricityAviable / n->ElectricityConsumers.Num();
+
+		if (FMath::IsNearlyZero(totalElectricityRequired))
+			return;
+
+		auto electricityConsumed = 0.0f;
+		for (auto consumer : n->ElectricityConsumers)
 		{
-			n->TotalElectricityAviableFilling = 0;
+			ensure(consumer->ElectricityInfo->CurrentObjectEnergy >= 0 && consumer->ElectricityInfo->CurrentObjectEnergy <= consumer->ElectricityInfo->CurrentObjectMaximumEnergy);
+
+			auto ration = (consumer->ElectricityInfo->CurrentObjectMaximumEnergy - consumer->ElectricityInfo->CurrentObjectEnergy) / totalElectricityRequired;
+			ensure(ration >= 0 && ration <= 1);
+
+			auto aviable = totalElectricityAviable * ration;
+
+			auto actuallyPutted = 0.0f;
+			if (consumer->PutAmount(aviable, actuallyPutted))
+				electricityConsumed += actuallyPutted;
 		}
-		else
-		{
-			n->TotalElectricityAviableFilling = n->TotalElectricityAviable / n->MaxElectricityAviable;
 
-			float criticalAviable = 0.5f * totalElectricityAviable;
-
-			totalElectricityAviable -= criticalAviable;
-			// TODO
-			float totalCriticalRequired = 0.0f;
-			for (auto critical : n->CriticalRepairEntities)
-			{
-				auto owner = Cast<ABlock>(critical->GetOwner());
-				ensure(owner);
-
-				// TODO get (required, divide it by totalCritical required) and multiply by aviable
-				//owner->Heal(...);
-			}
-
-			// TODO badly, to reapir
-
-			for (auto critical : n->CriticalRepairEntities)
-			{
-				auto owner = Cast<ABlock>(critical->GetOwner());
-				ensure(owner);
-
-				// TODO get (required, divide it by totalCritical required) and multiply by aviable
-				//	owner->HealthUpdated()
-			}
-
-			// TODO badly, to repair
-
-			// TODO remaining energy fill to consumers
-
-			if (n->ElectricityConsumers.Num() > 0 && totalElectricityAviable > 0) {
-				auto electricityConsumed = 0.0f;
-
-				auto totalRequired = 0.0f;
-				//auto ration = totalElectricityAviable / n->ElectricityConsumers.Num();
-
-				for (auto consumer : n->ElectricityConsumers)
-					totalRequired += consumer->ElectricityInfo->CurrentObjectMaximumEnergy - consumer->ElectricityInfo->CurrentObjectEnergy;
-
-				if (totalRequired > 0)
-				{
-					for (auto consumer : n->ElectricityConsumers)
-					{
-						ensure(consumer->ElectricityInfo->CurrentObjectEnergy >= 0 && consumer->ElectricityInfo->CurrentObjectEnergy <= consumer->ElectricityInfo->CurrentObjectMaximumEnergy);
-
-						auto ration = (consumer->ElectricityInfo->CurrentObjectMaximumEnergy - consumer->ElectricityInfo->CurrentObjectEnergy) / totalRequired;
-						ensure(ration >= 0 && ration <= 1);
-
-						auto aviable = totalElectricityAviable * ration;
-
-						auto actuallyPutted = 0.0f;
-						if (consumer->PutAmount(aviable, actuallyPutted))
-							electricityConsumed += actuallyPutted;
-					}
-
-					totalElectricityAviable -= electricityConsumed;
-					// todo do smthing with the rest
-				}
-			}
-		}
+		totalElectricityAviable -= electricityConsumed;
+		// todo do smthing with the rest
 	}
 
 	FORCEINLINE void processNetwork(UElectricNetwork* network)
@@ -261,7 +269,7 @@ private:
 		}
 	}
 
-	FORCEINLINE void updateStatistics(UElectricNetwork* n)
+	void updateStatistics(UElectricNetwork* n)
 	{
 		float producedEnergy = 0.0f;
 		for (auto producer : n->ElectricityProducers)

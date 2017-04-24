@@ -15,8 +15,6 @@ class BLOCKS_API IBlockWithElectricity
 
 public:
 
-	void UpdateHealth(UElectricityComponent* comp, UBlockInfo* info);
-
 	float WasHitByStorm(const float amount);
 
 	// Try to "catch" hit withing electricity buffer. Returns remaining hitpoints.

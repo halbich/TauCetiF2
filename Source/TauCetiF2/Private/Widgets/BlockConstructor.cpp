@@ -41,7 +41,7 @@ TArray<UBuildableBlockInfo*> UBlockConstructor::GetAllBuildableBlocks()
 {
 	TArray<UBuildableBlockInfo*> result;
 
-	if (!ensureHolder())
+	if (!ensureHolder() || !RelatedToPatternGroup || !RelatedToPatternGroup->IsValidLowLevel())
 		return result;
 
 	auto v = RelatedToPatternGroup->IsValidCreator;
