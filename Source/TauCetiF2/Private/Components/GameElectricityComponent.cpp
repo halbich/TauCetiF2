@@ -10,6 +10,8 @@ const double UGameElectricityComponent::maxFloatingTime(1.0 / 30.0);		// we want
 UGameElectricityComponent::UGameElectricityComponent() : Super(), networksToUpdate()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+
+	UpdateInterval = 1.0f / 10.0f;
 }
 
 void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -19,13 +21,15 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 	auto time = FPlatformTime::Seconds() + maxFloatingTime;
 
 	TimeSinceLastRecompute += DeltaTime;
+	TimeSinceLastUpdate += DeltaTime;
 
 	for (auto n : networks)
 	{
 		if (n->NetworkState == EElectricNetworkState::Invalid)
 			continue;
 
-		tickUpdateNetwork(n);
+		if (TimeSinceLastUpdate >= UpdateInterval)
+			tickUpdateNetwork(n);
 
 		if (TimeSinceLastRecompute >= 0.5f)
 			updateStatistics(n);
@@ -33,6 +37,9 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 
 	if (TimeSinceLastRecompute >= 0.5f)
 		TimeSinceLastRecompute = 0.0f;
+
+	if (TimeSinceLastUpdate >= UpdateInterval)
+		TimeSinceLastUpdate -= UpdateInterval;
 
 	if (networksToUpdate.IsEmpty())
 		return;

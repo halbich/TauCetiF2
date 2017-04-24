@@ -29,6 +29,12 @@ protected:
 	UPROPERTY(Transient)
 		float TimeSinceLastRecompute;
 
+	UPROPERTY(Transient)
+		float UpdateInterval;
+
+	UPROPERTY(Transient)
+		float TimeSinceLastUpdate;
+
 public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -148,6 +154,14 @@ private:
 		n->ConsumersEnergyAviable = consumersEnergyAviable;
 		n->ConsumersEnergyAviableFilling = FMath::IsNearlyZero(n->ConsumersEnergyMaxAviable) ? 0 : consumersEnergyAviable / n->ConsumersEnergyMaxAviable;
 
+		// total health
+		auto totalHealth = 0.0f;
+		for (auto ent : n->Entities)
+			if (ent->ComponentNetworkState == EElectricNetworkState::Valid)
+				totalHealth += ent->BlockInfo->Health;
+
+		n->NetworkHealth = totalHealth;
+		n->NetworkHealthPercentage = FMath::IsNearlyZero(n->NetworkMaxHealth) ? 0 : totalHealth / n->NetworkMaxHealth;
 
 
 		auto maxAviable = producersEnergyAviable + storagesEnergyAviable;
