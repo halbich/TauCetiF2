@@ -3,8 +3,6 @@
 
 void UPatternGroupInfo::RegisterBlock(ABlock* block)
 {
-	// TODO borders
-
 	BlocksInGroup.AddUnique(block);
 
 	auto defBox = GetDefiningBox(block);
@@ -50,5 +48,4 @@ void UPatternGroupInfo::WatchingRegionChanged()
 	if (!IsValidForObserve)
 		return;
 
-	print(TEXT("Region changed"));
 }

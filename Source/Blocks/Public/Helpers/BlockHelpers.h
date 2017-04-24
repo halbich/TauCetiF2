@@ -55,7 +55,6 @@ namespace BlockHelpers
 			return false;
 		}
 
-		// TODO
 		return true;
 	}
 

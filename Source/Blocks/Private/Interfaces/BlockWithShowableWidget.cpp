@@ -23,5 +23,4 @@ void IBlockWithShowableWidget::RemoveShowWidgetForBlockEventListener(FDelegateHa
 
 void IBlockWithShowableWidget::ShowWidget_Implementation()
 {
-	print(TEXT("Show_IMpl"));
 }

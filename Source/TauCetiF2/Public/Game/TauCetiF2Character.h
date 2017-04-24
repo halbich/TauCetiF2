@@ -131,8 +131,8 @@ protected:
 	void toogleCreative(bool isCreative);
 	void OnToggleCreativeMode();
 
-	UPROPERTY()
-		ATauCetiF2PlayerController* PC;   // todo přesunout?
+	UPROPERTY(Transient)
+		ATauCetiF2PlayerController* PC;
 
 	void OnUse();
 

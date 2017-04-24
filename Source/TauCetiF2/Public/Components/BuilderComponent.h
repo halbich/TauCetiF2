@@ -75,8 +75,7 @@ public:
 	UFUNCTION()
 		void InventorySelectedChangedEvent(int32 NewIndex, UBuildableBlockInfo* BlockInfo);
 
-	// TODO FORCEINLINE
-	void DoAction() {
+	FORCEINLINE void DoAction() {
 		if (!currentBuildableBlockInfo && selector->SelectedBlock)
 		{
 			selector->TryUse(true);
@@ -137,7 +136,7 @@ public:
 				spawnBlock->OxygenInfo = invBuildable->OxygenInfo;
 			}
 
-			// kontrola, zda opravdu můžeme postavit
+			// check if we can really build this block
 			if (!BuilderElectricityComponent || !BuilderElectricityComponent->IsValidLowLevel())
 				BuilderElectricityComponent = Cast<UElectricityComponent>(character->GetComponentByClass(UElectricityComponent::StaticClass()));
 

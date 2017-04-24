@@ -20,9 +20,7 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 {
 	if (!Definition)
 	{
-		// TODO Localization!
-		auto errorText = TEXT("No definition used for block ") + GetFullName();
-		error(*errorText);
+		error(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.Block.NoDefinition", "Blok {0} nemá zadanou žádnou definici!."), FText::FromString(GetFullName())).ToString());
 		return;
 	}
 

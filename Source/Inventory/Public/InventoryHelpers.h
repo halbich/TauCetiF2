@@ -91,12 +91,10 @@ namespace InventoryHelpers {
 
 	static void FromInvBuildableContainer(UInventoryBuildableBlockInfo* info, FInventoryBuildableItemBlockInfo& block) {
 		FromBuildableContainer(info, block);
-		info->Tags = block.Tags;
 	}
 
 	static void ToInvBuildableContainer(FInventoryBuildableItemBlockInfo& block, UInventoryBuildableBlockInfo* info) {
 		ToBuildableContainer(block, info);
-		block.Tags = info->Tags;
 	}
 
 	static void SetInventoryTags(USaveGameCarrier* carrier, UInventoryTags* InventoryTags)

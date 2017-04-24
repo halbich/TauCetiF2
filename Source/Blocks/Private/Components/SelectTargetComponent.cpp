@@ -14,8 +14,7 @@ void USelectTargetComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	owner = GetOwner();
-	if (!owner)
-		print(TEXT("No Owner! "));
+	ensure(owner);
 }
 
 void USelectTargetComponent::SelectObject(int32 stencilValue)

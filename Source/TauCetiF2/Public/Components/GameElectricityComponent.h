@@ -46,7 +46,7 @@ private:
 		comp->Network->NetworkState = EElectricNetworkState::InRecompute;
 	}
 
-	/*FORCEINLINE*/ UElectricNetwork* addToNetwork(UElectricityComponent* comp, UElectricNetwork* network)
+	FORCEINLINE UElectricNetwork* addToNetwork(UElectricityComponent* comp, UElectricNetwork* network)
 	{
 		networks.AddUnique(network);
 		auto r = comp->Network = network;

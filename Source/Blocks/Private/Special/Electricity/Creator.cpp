@@ -43,7 +43,6 @@ void ACreator::ComputeCreator()
 	ensure(twb);
 
 	pi->IsValidCreator = false;
-	print(TEXT("recompute creator"));
 
 	auto world = GetWorld();
 
@@ -94,8 +93,6 @@ void ACreator::ComputeCreator()
 			return;
 	}
 
-	/*
-
 	auto left = NewObject<UMinMaxBox>();
 	left->InitBoxChecked(FVector(emptyBox->Min.X, twb->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Max.Z));
 	if (!checkForBlock(left, objectBoxes))
@@ -119,10 +116,9 @@ void ACreator::ComputeCreator()
 	auto top = NewObject<UMinMaxBox>();
 	top->InitBoxChecked(FVector(emptyBox->Min.X, emptyBox->Min.Y, emptyBox->Max.Z), FVector(emptyBox->Max.X, emptyBox->Max.Y, twb->Max.Z));
 	if (!checkForBlock(top, objectBoxes))
-		return;*/
+		return;
 
 	pi->IsValidCreator = true;
-	print(TEXT("valid creator"));
 };
 
 void ComputeCreator(ABlock* block)

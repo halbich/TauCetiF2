@@ -6,14 +6,6 @@ UWorldObjectComponent::UWorldObjectComponent()
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
-#pragma optimize("",off)
-
-void UWorldObjectComponent::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
-#pragma optimize("",on)
 
 void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 {
@@ -21,15 +13,6 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 	ensure(DefiningBox != nullptr);
 }
 
-//void UWorldObjectComponent::OnTreeElementsChanged()
-//{
-//	// TODO impl?
-//}
-
-//void UWorldObjectComponent::OnWeatherTreeElementsChanged()
-//{
-//	// TODO impl?
-//}
 
 #pragma optimize("", off)
 
