@@ -55,7 +55,8 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	if (!full)
 		return c;
 
-	c->CurrentTime = 14400.0f; //34920.0f;
+	//c->CurrentTime = 14400.0f; 
+	c->CurrentTime = 34920.0f;
 	c->PlayerUseFPSCamera = true;
 	c->IsCreativeMode = true;
 	c->PlayerHealth = 1000;
