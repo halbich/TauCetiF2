@@ -1,15 +1,10 @@
-
-
 #include "Blocks.h"
 #include "BlockWithRelationsInfo.h"
-
 
 UBlockWithRelationsInfo::UBlockWithRelationsInfo()
 {
 	ID = FGuid::NewGuid();
 }
-
-
 
 int32 UBlockWithRelationsInfo::RemoveRelationshipsByTargetID(const FGuid& targetID)
 {
@@ -24,7 +19,6 @@ int32 UBlockWithRelationsInfo::RemoveRelationshipsByTargetID(const FGuid& target
 		Relationships.RemoveAt(index);
 		removed++;
 	}
-
 
 	return removed;
 }

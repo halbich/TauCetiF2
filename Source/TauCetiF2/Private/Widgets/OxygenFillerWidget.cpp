@@ -37,12 +37,10 @@ ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
 	}
 
 	return CurrentBlock->usedController;
-
 }
 
 UInventoryBuildableBlockInfo* UOxygenFillerWidget::GetItemsToBeFilled(TArray<UInventoryBuildableBlockInfo*>& aviables)
 {
-
 	if (!CurrentBlock)
 		return NULL;
 
@@ -50,7 +48,6 @@ UInventoryBuildableBlockInfo* UOxygenFillerWidget::GetItemsToBeFilled(TArray<UIn
 	{
 		aviables.Add(con);
 	}
-
 
 	aviables.Sort([](const UInventoryBuildableBlockInfo& A, const UInventoryBuildableBlockInfo& B) {
 		return A.OxygenInfo->CurrentObjectOxygen < B.OxygenInfo->CurrentObjectOxygen;

@@ -1,8 +1,5 @@
-
-
 #include "Blocks.h"
 #include "CreatorPatternGroupInfo.h"
-
 
 #pragma optimize("", off)
 
@@ -30,8 +27,6 @@ void UCreatorPatternGroupInfo::WatchingRegionChanged()
 	}
 
 	ComputeCreator(BlocksInGroup[0]);
-
 }
-
 
 #pragma optimize("", on)

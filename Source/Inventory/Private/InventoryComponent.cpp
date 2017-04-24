@@ -24,7 +24,6 @@ void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 	InventoryTags = InventoryHelpers::GetInventoryTags(carrier);
 	CurrentSelectedIndex = carrier->InventoryCurrentIndex;
 
-
 	FSelectionChanged Subscriber;
 	Subscriber.BindUObject(this, &UInventoryComponent::InventoryTagsSelectionChanged);
 	ListeningHandle = InventoryTags->AddEventListener(Subscriber);
@@ -132,7 +131,6 @@ TArray<UBuildableBlockInfo*> UInventoryComponent::GetItemsForBank(UInventoryTagG
 
 		if (filterGroup->IsBuildableCacheValid)
 			return filterGroup->BuildableCache;
-
 
 		rebuildBuildableCache(filterGroup);
 		return filterGroup->BuildableCache;

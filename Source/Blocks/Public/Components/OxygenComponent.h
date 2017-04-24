@@ -25,7 +25,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenComponent")
 		bool IsInCreative;
 
-
 	UPROPERTY(Transient)
 		float OxygenProduced;
 
@@ -53,11 +52,9 @@ public:
 
 	void ToggleIsInCreative(bool newInCreative);
 
-
 	friend UBlockInfo* GetBlockInfoFromParent(UActorComponent* source);
 
 	UBlockInfo* GetBlockInfo();
-
 
 public:
 	FORCEINLINE const FOxygenComponentDefinition* GetDefinition()

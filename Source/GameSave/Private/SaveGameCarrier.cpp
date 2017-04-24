@@ -227,7 +227,6 @@ void USaveGameCarrier::SaveLoadData(FArchive& Ar, USaveGameCarrier& carrier, TAr
 	Ar << carrier.IsCreativeMode;
 
 	Ar << carrier.weatherState;
-
 }
 
 bool USaveGameCarrier::IsSaveNameValid()

@@ -81,22 +81,17 @@ public:
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> ElectricityConsumers;
 
-
-
 	UPROPERTY(Transient)
 		TArray<ABlock*> ControllerBlocks;
 
 	UPROPERTY(Transient)
 		TArray<ABlock*> ControllableBlocks;
 
-
 	UPROPERTY(Transient)
 		TArray<ABlock*> PatternBlocks;
 
-
 	UPROPERTY(Transient)
 		bool NetworkChecked;
-
 
 	void RegisterEntity(UElectricityComponent* comp)
 	{
@@ -122,7 +117,6 @@ public:
 		auto c = Cast<ABlock>(comp->GetOwner());
 		check(c);
 
-
 		if (def->IsControlBlock)
 		{
 			if (def->IsControllable)
@@ -137,10 +131,8 @@ public:
 
 		TotalHealth += info->MaxHealth;
 
-
 		if (c->Definition.GetDefaultObject()->UsingInPatterns)
 			auto rem = PatternBlocks.Add(c);
-
 
 		NetworkChecked = false;
 	}
@@ -193,8 +185,7 @@ public:
 
 		TotalHealth = FMath::Max(0.0f, TotalHealth - info->MaxHealth);		// due to rounding errors, we could get under zero
 
-		
-		if(c->Definition.GetDefaultObject()->UsingInPatterns)
+		if (c->Definition.GetDefaultObject()->UsingInPatterns)
 		{
 			auto rem = PatternBlocks.Remove(c);
 			ensure(rem > 0);
@@ -306,7 +297,6 @@ public:
 
 				auto _b = icontroller->Execute_BindControl(c, toBind);
 				ensure(_b);
-
 			}
 
 			// and we need to update it after checking so we do not mess with iterated arrays
@@ -314,7 +304,6 @@ public:
 			while (removeRel.Dequeue(toRemoveGuid))
 				controllerRelInfo->RemoveRelationshipsByTargetID(toRemoveGuid);
 		}
-
 
 		/*for (auto controllable : ControllableBlocks)
 		{
@@ -331,7 +320,6 @@ public:
 
 				ensure(removed == 1);
 			}
-
 		}
 
 		for (auto t : controller_controlledMap)
@@ -341,7 +329,6 @@ public:
 */
 
 		NetworkChecked = true;
-
 	}
 
 #pragma optimize("", on)

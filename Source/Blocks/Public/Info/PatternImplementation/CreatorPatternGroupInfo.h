@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "Info/PatternGroupInfo.h"

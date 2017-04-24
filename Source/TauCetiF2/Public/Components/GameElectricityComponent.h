@@ -6,7 +6,6 @@
 #include "Commons/Public/Enums.h"
 #include "GameElectricityComponent.generated.h"
 
-
 #pragma optimize("", off)
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
@@ -29,7 +28,6 @@ protected:
 
 	UPROPERTY(Transient)
 		float TimeSinceLastRecompute;
-
 
 public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -63,7 +61,6 @@ private:
 		for (auto smEnt : smaller->Entities)
 			addToNetwork(smEnt, bigger);
 
-
 		UElectricityComponent* deq;
 		while (smaller->ToRecompute.Dequeue(deq))
 			enqueueItem(deq);
@@ -86,7 +83,6 @@ private:
 
 	/*FORCEINLINE*/ void tickUpdateNetwork(UElectricNetwork* n)
 	{
-
 		float totalElectricityAviable = 0.0f;
 
 		for (auto producer : n->ElectricityProducers)
@@ -245,7 +241,6 @@ private:
 				networksToUpdate.Enqueue(toResolve);
 			else
 				toResolve->NetworkState = EElectricNetworkState::Valid;
-
 		} while (FPlatformTime::Seconds() <= time);
 
 		if (networksToUpdate.IsEmpty())
@@ -289,7 +284,5 @@ private:
 		n->EnergyConsumptionPerSec = consumedEnergy / t;
 	}
 };
-
-
 
 #pragma optimize("", on)

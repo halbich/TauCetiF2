@@ -31,6 +31,4 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		UBlockWithElectricityInfo* ElectricityInfo;
-
-
 };

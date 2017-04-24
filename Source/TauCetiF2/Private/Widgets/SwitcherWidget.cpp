@@ -1,8 +1,6 @@
 #include "TauCetiF2.h"
 #include "SwitcherWidget.h"
 
-
-
 #pragma optimize("", off)
 
 void USwitcherWidget::InitForBlock_Implementation(ABlock* block)
@@ -14,10 +12,8 @@ void USwitcherWidget::InitForBlock_Implementation(ABlock* block)
 	ensure(CurrentBlock);
 }
 
-
 void USwitcherWidget::GetControllables(TArray<ABlock*>& aviables, TArray<ABlock*>& controlled)
 {
-
 	if (!CurrentBlock)
 		return;
 
@@ -25,15 +21,14 @@ void USwitcherWidget::GetControllables(TArray<ABlock*>& aviables, TArray<ABlock*
 
 	for (auto c : n->ControllableBlocks)
 	{
-			if (!c || !c->IsValidLowLevel() || c->IsPendingKill())
-				continue;
+		if (!c || !c->IsValidLowLevel() || c->IsPendingKill())
+			continue;
 
-			if (CurrentBlock->controlledBlocks.Contains(c))
-				continue;
+		if (CurrentBlock->controlledBlocks.Contains(c))
+			continue;
 
-			aviables.Add(c);
+		aviables.Add(c);
 	}
-
 
 	for (auto con : CurrentBlock->controlledBlocks)
 	{

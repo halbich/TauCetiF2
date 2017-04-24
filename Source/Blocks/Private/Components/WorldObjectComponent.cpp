@@ -19,7 +19,6 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 {
 	DefiningBox = definingBox;
 	ensure(DefiningBox != nullptr);
-
 }
 
 //void UWorldObjectComponent::OnTreeElementsChanged()
@@ -62,11 +61,8 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 			continue;
 
 		object->RemoveFromTree(GetOwner());
-	
 	}
 
 	WeatherTreeElements.Empty();
-
-	
 }
 #pragma optimize("", on)

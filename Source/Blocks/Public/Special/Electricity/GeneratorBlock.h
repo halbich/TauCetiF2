@@ -19,7 +19,6 @@ struct FHittedSpot
 
 	UPROPERTY(Transient)
 		float ActualTime;
-
 };
 
 /**
@@ -41,7 +40,6 @@ public:
 
 	UPROPERTY(Transient)
 		UTexture2D* DynamicTexture;
-
 
 	UPROPERTY(Transient)
 		bool AnimationEnabled;

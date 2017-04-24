@@ -240,8 +240,6 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave(bool full)
 
 	auto UsedBlocks = &c->usedBlocks;
 
-
-
 	c->PlayerOxygenComponent.CurrentObjectOxygen = 150.0f;
 	c->PlayerElectricityComponent.CurrentObjectEnergy = 1000.0f;
 
@@ -273,7 +271,6 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave(bool full)
 	auto UsedBlocks = &c->usedBlocks;
 
 	// TODO
-
 
 	auto b_0 = make(0, FVector(-6, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_0.HasElectricityData = true; b_0.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_0);
 	auto b_1 = make(0, FVector(14, -2, 1), FVector(20, 20, 4), FRotator(0, 0, 0), 0, ""); b_1.HasElectricityData = true; b_1.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_1);

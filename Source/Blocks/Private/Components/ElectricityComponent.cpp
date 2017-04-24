@@ -62,7 +62,6 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, F
 			}
 		}
 	}
-
 }
 
 void UElectricityComponent::onComponentDataChanged()

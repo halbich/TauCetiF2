@@ -12,7 +12,6 @@ UGameElectricityComponent::UGameElectricityComponent() : Super(), networksToUpda
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
-
 void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
@@ -51,8 +50,6 @@ void UGameElectricityComponent::AddToWorldNetwork(UElectricityComponent* comp)
 
 	networksToUpdate.Enqueue(n);
 }
-
-
 
 void UGameElectricityComponent::RemoveFromWorldNetwork(UElectricityComponent* comp)
 {

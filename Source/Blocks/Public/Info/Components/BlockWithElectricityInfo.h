@@ -24,8 +24,8 @@ public:
 
 	FORCEINLINE const float GetRemainingPercentageUnit() const
 	{
-		return FMath::IsNearlyZero(CurrentObjectMaximumEnergy) 
-			? 0.0f 
+		return FMath::IsNearlyZero(CurrentObjectMaximumEnergy)
+			? 0.0f
 			: (CurrentObjectEnergy / CurrentObjectMaximumEnergy);
 	}
 

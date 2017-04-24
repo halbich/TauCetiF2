@@ -36,7 +36,6 @@ public:
 		return ElectricityComponent;
 	}
 
-
 protected:
 	UFUNCTION()
 		void ListeningOnElectricityCompChanged(UBlockWithElectricityInfo* source);

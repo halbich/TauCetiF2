@@ -13,7 +13,6 @@ const float GameDefinitions::CubeSurfaceInMetersSquared((GameDefinitions::CubeMi
 const float GameDefinitions::GameDayLength(3600);
 const float GameDefinitions::GameDayMultiplier(86400.0f / GameDefinitions::GameDayLength);
 
-
 const float GameDefinitions::RainHitpointToEnergy(1000);
 const float GameDefinitions::EnergyToRainHitpoint(1.0f / GameDefinitions::RainHitpointToEnergy);
 

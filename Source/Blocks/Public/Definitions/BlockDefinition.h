@@ -41,7 +41,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
 		int32 BlockID;
 
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | BuildDefinition")
 		FText BlockDisplayName;
 

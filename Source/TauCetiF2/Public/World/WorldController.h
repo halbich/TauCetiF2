@@ -22,7 +22,6 @@
 
 #include "Blocks/Public/Info/PatternImplementation/CreatorPatternGroupInfo.h"
 
-
 #include "WorldController.generated.h"
 
 UCLASS()
@@ -49,7 +48,6 @@ public:
 
 	UPROPERTY(Transient)
 		bool debugBoxesShown;
-
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | WorldController")
 		void DEBUGShowMinMaxBoxes();

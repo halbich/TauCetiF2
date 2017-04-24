@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "UObject/NoExportTypes.h"
@@ -30,8 +28,6 @@ public:
 	UPROPERTY(Transient)
 		bool IsValidForObserve;
 
-
-
 	void RegisterBlock(ABlock* block);
 
 	void UnregisterBlock(ABlock* block);
@@ -56,5 +52,4 @@ private:
 
 		TreeWatchingBox->InitBox(min, max);
 	}
-
 };

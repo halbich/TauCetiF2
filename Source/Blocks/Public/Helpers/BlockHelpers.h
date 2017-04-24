@@ -27,7 +27,6 @@ namespace BlockHelpers
 {
 	static bool CheckBlockValidity(const UBlockDefinition* definition, UBlockInfo* blockInfo, FString& reason)
 	{
-
 		if (blockInfo->ElectricityInfo && !definition->HasElectricityComponent)
 			blockInfo->ElectricityInfo = NULL;
 
@@ -36,7 +35,6 @@ namespace BlockHelpers
 
 		if (blockInfo->RelationsInfo && !definition->ElectricityComponentDef.IsControlBlock)
 			blockInfo->RelationsInfo = NULL;
-
 
 		if (!definition->IsInLimits(blockInfo->Scale))
 		{
@@ -56,7 +54,6 @@ namespace BlockHelpers
 
 			return false;
 		}
-
 
 		// TODO
 		return true;

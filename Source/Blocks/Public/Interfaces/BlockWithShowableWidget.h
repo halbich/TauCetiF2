@@ -36,7 +36,6 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | BlockWithShowableWidget")
 		void ShowWidget();
 
-
 protected:
 	FShowWidgetForBlockEvent MyShowWidgetForBlockEvent;
 };

@@ -29,7 +29,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryTagGroup")
 		EInventoryGroupType GroupType;
 
-
 	UPROPERTY(Transient)
 		bool IsBuildableCacheValid;
 
@@ -41,7 +40,6 @@ public:
 
 	UPROPERTY(Transient)
 		TArray<UBuildableBlockInfo*> InventoryCache;
-
 
 	bool IsSatisfied(TArray<FString>& tags)
 	{

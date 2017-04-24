@@ -19,8 +19,6 @@ public:
 
 	virtual void InitForBlock_Implementation(ABlock* block) override;
 
-
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | LightBlockWidget")
 		ABlock* GetControllables(TArray<ABlock*>& aviables);
-
 };

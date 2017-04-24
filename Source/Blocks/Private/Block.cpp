@@ -70,8 +70,6 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 
 	genBlock->Execute_UpdateBlockOnConstruction(this, def);
 
-
-
 	if (def->ElectricityComponentDef.IsControlBlock)
 	{
 		if (!BlockInfo->RelationsInfo || !BlockInfo->RelationsInfo->IsValidLowLevel())
@@ -80,7 +78,6 @@ void  ABlock::OnConstruction(const FTransform& Transform)
 	else {
 		ensure(!BlockInfo->RelationsInfo);
 	}
-
 
 	Super::OnConstruction(Transform);
 }
@@ -150,7 +147,6 @@ void ABlock::InitWorldObjectComponent()
 {
 	auto woc = WorldObjectComponent;
 
-
 	ensure(woc->DefiningBox);
 	ensure(woc->TreeElements.Num() > 0);
 
@@ -158,7 +154,6 @@ void ABlock::InitWorldObjectComponent()
 		woc->RootBox = woc->TreeElements[0]->GetRootNode<UKDTree>(true);
 
 	ensure(woc->RootBox != nullptr);
-
 
 	auto def = Definition->GetDefaultObject<UBlockDefinition>();
 
@@ -208,9 +203,7 @@ void ABlock::InitWorldObjectComponent()
 					woc->RootBox->TryUnregisterWatchingGroup(pi);
 					pi->MarkPendingKill();
 				}
-
 			}
-
 		}
 	}
 
@@ -219,9 +212,7 @@ void ABlock::InitWorldObjectComponent()
 		auto pi = woc->PatternGroupInfo = GetPatternGroupImpl();
 		pi->RegisterBlock(this);
 	}
-
 }
-
 
 UPatternGroupInfo* ABlock::GetPatternGroupImpl() {
 	return NewObject<UPatternGroupInfo>();
@@ -255,8 +246,6 @@ void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 	if (BlockInfo->Health <= 0)
 		OnDestroyRequestedEvent.Broadcast(this);
 }
-
-
 
 void ABlock::HealthUpdated(float newHealth, float maxHealth)
 {
@@ -314,7 +303,6 @@ TArray<UElectricityComponent*> GetSurroundingComponents(UElectricityComponent* s
 	return result;
 }
 
-
 UBlockInfo* GetBlockInfoFromParent(UActorComponent* source)
 {
 	check(source);
@@ -340,7 +328,5 @@ bool ABlock::GetIsController()
 
 	return d->HasElectricityComponent && d->ElectricityComponentDef.IsControlBlock && d->ElectricityComponentDef.IsController;
 }
-
-
 
 #pragma optimize("",on)

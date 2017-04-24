@@ -85,7 +85,6 @@ FText UBlockConstructor::GetDisplayTextExtended_Implementation()
 	auto val = NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.CtorValid", "Online");
 	auto inval = NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.CtorInvalid", "Offline");
 
-
 	FNumberFormattingOptions op;
 	op.SetMinimumFractionalDigits(0);
 	op.SetMaximumFractionalDigits(0);

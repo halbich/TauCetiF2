@@ -29,16 +29,13 @@ public:
 	UPROPERTY(Transient)
 		UMinMaxBox* watchingBox;
 
-
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
-
-	 void ComputeCreator();
+	void ComputeCreator();
 
 	virtual UPatternGroupInfo* GetPatternGroupImpl() override;
-
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{

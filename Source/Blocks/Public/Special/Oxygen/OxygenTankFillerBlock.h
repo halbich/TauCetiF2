@@ -10,7 +10,6 @@
 #include "Info/InventoryBuildableBlockInfo.h"
 #include "OxygenTankFillerBlock.generated.h"
 
-
 namespace OxygenFillerBlockConstants
 {
 	static FString CurrentFilling = TEXT("CurrentFilling");
@@ -65,7 +64,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenTankFiller")
 		bool SetCurrentFillingItem(UInventoryBuildableBlockInfo* info);
 
-
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
@@ -100,7 +98,6 @@ private:
 	FCriticalSection FillingItemCritical;
 
 	/*FORCEINLINE*/ void updateDisplayedMesh() {
-
 		if (!currentFillingItem || !currentFillingItem->IsValidLowLevel())
 			return;
 
@@ -112,7 +109,6 @@ private:
 
 	FORCEINLINE void processCurrentFillingItem(float DeltaSeconds)
 	{
-
 		FillingItemCritical.Lock();
 
 		if (currentFillingItem && currentFillingItem->IsValidLowLevelFast())
@@ -138,7 +134,6 @@ private:
 			if (OxygenComponent->ObtainAmount(toWithdraw, actuallyObtained)) {
 				currentFillingItem->OxygenInfo->CurrentObjectOxygen += actuallyObtained;
 
-
 				BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::CurrentFilling] = FString::SanitizeFloat(currentFillingItem->OxygenInfo->CurrentObjectOxygen);
 
 				updateDisplayedMesh();
@@ -147,16 +142,12 @@ private:
 				if (returnOxygen >= 0.0f)
 					OxygenComponent->PutAmount(returnOxygen, actuallyPutted);
 			}
-
 		}
 
 		FillingItemCritical.Unlock();
 	}
 
-
-
 protected:
 	UFUNCTION()
 		void ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source);
-
 };

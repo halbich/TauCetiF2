@@ -21,6 +21,5 @@ float IBlockWithElectricity::WasHitByStorm(const float amount)
 	if (GetElectricityComponent()->ObtainAmount(energyToRemove, actuallyObtained))
 		energyToRemove -= actuallyObtained;
 
-
 	return energyToRemove * GameDefinitions::EnergyToRainHitpoint;	// we want to return remaining rain hitpoints
 }

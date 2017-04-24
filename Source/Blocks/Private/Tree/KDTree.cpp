@@ -32,14 +32,11 @@ void UKDTree::AddToTree(UKDTree* box)
 
 	addToTree(box);
 
-
 	for (auto checkedGroup : watchedGroups)
 	{
 		if (checkedGroup->IsValidForObserve && box->GetBox().Intersect(checkedGroup->TreeWatchingBox->GetBox()))
 			checkedGroup->WatchingRegionChanged();
 	}
-
-
 }
 
 void UKDTree::NotifyRegionChanged(UMinMaxBox* box)
@@ -319,12 +316,10 @@ void UKDTree::RegisterWatchingGroup(UPatternGroupInfo* group)
 	auto bcenter = (box->Max + box->Min) * 0.5;
 	auto bextend = (box->Max - bcenter);
 	DrawDebugBox(GetWorld(), bcenter, bextend, FColor::Red, true, 60, 0, 5);
-
 }
 
 void UKDTree::TryUnregisterWatchingGroup(UPatternGroupInfo* group)
 {
-
 	if (!group || !group->IsValidLowLevel())
 		return;
 

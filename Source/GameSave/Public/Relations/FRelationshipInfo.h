@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 /**
@@ -12,5 +10,4 @@ public:
 
 	FGuid TargetID;
 	uint8 RelationshipType;
-
 };

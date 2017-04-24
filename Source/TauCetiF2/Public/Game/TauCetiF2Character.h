@@ -13,7 +13,6 @@
 #include "Blocks/Public/Helpers/BlockHelpers.h"
 #include "TauCetiF2Character.generated.h"
 
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerDied);
 
 UCLASS(config = Game)
@@ -79,7 +78,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | TCF2Character")
 		void DoHealthDamage(float healthDamage);
-
 
 protected:
 

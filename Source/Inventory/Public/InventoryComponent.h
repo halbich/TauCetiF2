@@ -60,10 +60,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | InventoryComponent")
 		UInventoryTags* InventoryTags;
 
-
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | InventoryComponent")
 		int32 CurrentSelectedIndex;
-
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
 		void ForceItemsChanged(bool showGroupName);
@@ -102,10 +100,10 @@ public:
 	void AddItem(UBuildableBlockInfo* block);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
-	void AddItem(UInventoryBuildableBlockInfo* block);
+		void AddItem(UInventoryBuildableBlockInfo* block);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
-	void ItemBuilt(UInventoryBuildableBlockInfo* block);
+		void ItemBuilt(UInventoryBuildableBlockInfo* block);
 
 private:
 	FORCEINLINE void rebuildBuildableCache(UInventoryTagGroup* filterGroup)
@@ -141,7 +139,6 @@ private:
 			auto count = filterGroup->BuildableCache.Num();
 			if (count > 0)
 			{
-
 				if (CurrentSelectedIndex == -1 && offset < 0)
 					CurrentSelectedIndex = 0;
 
@@ -153,7 +150,6 @@ private:
 				CurrentSelectedIndex = -1;
 
 			break;
-
 		}
 		case EInventoryGroupType::Inventory: {
 			if (!filterGroup->IsInventoryCacheValid) rebuildInventoryCache(filterGroup);

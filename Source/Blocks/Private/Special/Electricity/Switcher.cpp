@@ -43,7 +43,6 @@ void ASwitcher::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-
 	auto state = info->BlockSpecificData.FindOrAdd(SwitcherBlockConstants::IsOn);
 	if (state.IsEmpty())
 	{
@@ -55,7 +54,6 @@ void ASwitcher::SetBlockInfo(UBlockInfo* info)
 	}
 
 	updateDynamicColor();
-
 }
 
 void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
@@ -94,7 +92,6 @@ void ASwitcher::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 	TQueue<ABlock*> toRemove;
 
-
 	for (auto controlled : controlledBlocks)
 		toRemove.Enqueue(controlled);
 
@@ -123,7 +120,6 @@ void ASwitcher::ShowWidget_Implementation()
 	IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
 }
 
-
 bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 {
 	auto interf = Cast<IControllableBlock>(controllableBlock);
@@ -145,7 +141,6 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 	if (my->ID == other->ID)
 		return false;
 
-
 	auto controlledRel = NewObject<URelationshipInfo>();
 	controlledRel->TargetID = my->ID;
 	controlledRel->RelationshipType = (uint8)EControlRelationship::IsControlledByTarget;
@@ -157,7 +152,6 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 	if (!c)
 		other->Relationships.Add(controlledRel);
 
-
 	auto controllingRel = NewObject<URelationshipInfo>();
 	controllingRel->TargetID = other->ID;
 	controllingRel->RelationshipType = (uint8)EControlRelationship::IsControllingTarget;
@@ -168,7 +162,6 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 
 	if (!c1)
 		my->Relationships.Add(controllingRel);
-
 
 	interf->Execute_SetController(controllableBlock, this);
 	controlledBlocks.AddUnique(controllableBlock);
@@ -196,16 +189,13 @@ bool ASwitcher::UnbindControl_Implementation(ABlock* controllableBlock)
 	other->RemoveRelationshipsByTargetID(my->ID);
 	my->RemoveRelationshipsByTargetID(other->ID);
 
-
 	return res;
 }
-
 
 bool ASwitcher::GetControlState_Implementation()
 {
 	return IsOn;
 }
-
 
 TArray<ABlock*> ASwitcher::GetControlledBlocks_Implementation()
 {

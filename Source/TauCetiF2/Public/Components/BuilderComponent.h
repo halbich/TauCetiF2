@@ -54,7 +54,6 @@ public:
 	UPROPERTY(Transient)
 		ACharacter* character;
 
-
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | BuilderComponent")
 		void SetWorldController(AWorldController* controller);
 

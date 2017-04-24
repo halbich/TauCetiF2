@@ -1,7 +1,6 @@
 ﻿#include "Blocks.h"
 #include "BatteryBlock.h"
 
-
 #pragma optimize("", off)
 
 ABatteryBlock::ABatteryBlock()
@@ -40,13 +39,11 @@ void  ABatteryBlock::OnConstruction(const FTransform& Transform) {
 
 void ABatteryBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-
 	if (ElectricityComponent)
 		ElectricityComponent->OnComponentDataChangedEvent.RemoveDynamic(this, &ABatteryBlock::ListeningOnElectricityCompChanged);
 
 	Super::EndPlay(EndPlayReason);
 }
-
 
 void ABatteryBlock::ListeningOnElectricityCompChanged(UBlockWithElectricityInfo* source)
 {

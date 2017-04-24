@@ -59,7 +59,6 @@ bool UOxygenComponent::ObtainAmount(float requested, float& actuallyObtained, bo
 	auto aviable = OxygenInfo->CurrentObjectOxygen;
 	check(aviable >= 0);
 
-
 	if (FMath::IsNearlyZero(aviable))
 	{
 		actuallyObtained = 0;

@@ -30,5 +30,4 @@ public:
 		UElectricNetwork* Network;
 
 	virtual void InitForBlock_Implementation(ABlock* block) override;
-
 };

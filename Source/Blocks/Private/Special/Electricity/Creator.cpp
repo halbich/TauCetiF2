@@ -42,12 +42,10 @@ void ACreator::ComputeCreator()
 	auto twb = pi->TreeWatchingBox;
 	ensure(twb);
 
-
 	pi->IsValidCreator = false;
 	print(TEXT("recompute creator"));
 
 	auto world = GetWorld();
-
 
 	auto wholeBox = NewObject<UMinMaxBox>();
 	wholeBox->InitBox(wb->Min, twb->Max);
@@ -71,7 +69,6 @@ void ACreator::ComputeCreator()
 
 		if (bl->BlockInfo->ID == CreatorID)
 			creatorBoxes.Add(bl, bl->WorldObjectComponent->DefiningBox->GetBox());
-
 	}
 
 	// check base for blocks
@@ -96,7 +93,6 @@ void ACreator::ComputeCreator()
 		if (obj.Value.Intersect(fbox) && IntersectExcl(obj.Value, fbox))
 			return;
 	}
-
 
 	/*
 
@@ -128,7 +124,6 @@ void ACreator::ComputeCreator()
 	pi->IsValidCreator = true;
 	print(TEXT("valid creator"));
 };
-
 
 void ComputeCreator(ABlock* block)
 {

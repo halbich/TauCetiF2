@@ -1,8 +1,5 @@
-
-
 #include "Commons.h"
 #include "CommonHelpers.h"
-
 
 const FString UCommonHelpers::customSectionName = TEXT("TCF2.CustomSettings");
 

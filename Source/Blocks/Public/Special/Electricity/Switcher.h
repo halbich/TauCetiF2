@@ -9,7 +9,6 @@
 #include "Commons/Public/Enums.h"
 #include "Switcher.generated.h"
 
-
 namespace SwitcherBlockConstants
 {
 	static FString IsOn = TEXT("IsON");

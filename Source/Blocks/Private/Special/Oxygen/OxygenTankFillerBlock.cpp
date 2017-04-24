@@ -47,7 +47,6 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-
 	auto currentF = 0.0f;
 	auto filling = info->BlockSpecificData.FindOrAdd(OxygenFillerBlockConstants::CurrentFilling);
 	if (filling.IsEmpty())
@@ -61,7 +60,6 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 		BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)hasItem);
 	else
 		hasItem = FCString::Atoi(*item) > 0 ? true : false;
-
 
 	if (hasItem)
 	{
@@ -81,7 +79,6 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 		newItm->BlockDefinition = holder->GetDefinitionFor(newItm->ID);
 		newItm->Scale = newItm->BlockDefinition->CustomBlockScale;
 
-
 		newItm->OxygenInfo = NewObject<UBlockWithOxygenInfo>();
 		newItm->OxygenInfo->CurrentObjectOxygen = currentF;
 		//newItm->OxygenInfo->CurrentObjectMaximumOxygen = newItm->BlockDefinition->OxygenComponentDef.TotalObjectVolume;
@@ -91,13 +88,10 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 		newItm->UpdateDisplayValue();
 
 		currentFillingItem = newItm;
-
-
 	}
 
 	OxygenTankFillerMesh->SetVisibility(currentFillingItem != NULL);
 }
-
 
 void  AOxygenTankFillerBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
@@ -111,7 +105,6 @@ void  AOxygenTankFillerBlock::OnConstruction(const FTransform& Transform) {
 
 	OxygenComponent->OnComponentDataChangedEvent.AddDynamic(this, &AOxygenTankFillerBlock::ListeningOnOxygenCompChanged);
 	OxygenComponent->onComponentDataChanged();
-
 
 	dynInfoMat = UMaterialInstanceDynamic::Create(OxygenTankFillerMesh->GetMaterial(0), this);
 	OxygenTankFillerMesh->SetMaterial(0, dynInfoMat);
@@ -181,12 +174,10 @@ void AOxygenTankFillerBlock::ShowWidget_Implementation()
 	IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
 }
 
-
 void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) { IsOn = isOn; }
 void AOxygenTankFillerBlock::SetOutputPowerPercentage_Implementation(float percentage) { BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage; }
 
 void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {
-
 	if (usedController && usedController->IsValidLowLevel())
 	{
 		auto usedContTemp = usedController;
@@ -196,7 +187,6 @@ void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {
 
 		controllable->Execute_UnbindControl(usedContTemp, this);
 	}
-
 
 	usedController = controller;
 
@@ -208,7 +198,6 @@ void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {
 	}
 	else
 		IsOn = true;
-
 }
 ABlock* AOxygenTankFillerBlock::GetController_Implementation() { return usedController; }
 
@@ -237,7 +226,6 @@ void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
 	auto powerConsumption = IsOn ? ElectricityComponent->GetInfo()->PowerConsumptionPercent : 0;
 
-
 	auto possibleEnergy = elapsedSeconds * powerConsumption  * max; // now we can withdraw only this amount;
 
 	auto toWithdraw = FMath::Min(diff *  GameDefinitions::OxygenToEnergy, possibleEnergy);
@@ -255,10 +243,7 @@ void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 		ElectricityComponent->PutAmount(toReturn, acuallyReturned);
 	}
 
-
 	Super::Tick(DeltaSeconds);
-
-
 }
 
 UInventoryBuildableBlockInfo* AOxygenTankFillerBlock::TakeCurrentFillingItem(bool& success)
@@ -296,4 +281,3 @@ bool AOxygenTankFillerBlock::SetCurrentFillingItem(UInventoryBuildableBlockInfo*
 
 	return true;
 }
-

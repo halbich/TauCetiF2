@@ -170,7 +170,6 @@ private:
 				baseStr += FString::Format(TEXT("b_{0}.AdditionalFlags.Add(TEXT(\"{1}\"), {2}); "), elArgs);
 			}
 
-
 			if (info.AdditionalFlags.Num() > 0)
 			{
 				UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
@@ -186,7 +185,6 @@ private:
 				baseStr += FString::Format(TEXT("b_{0}.BlockSpecificData.Add(TEXT(\"{1}\"), TEXT(\"{2}\")); "), elArgs);
 			}
 
-
 			if (info.BlockSpecificData.Num() > 0)
 			{
 				UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
@@ -199,7 +197,6 @@ private:
 				elArgs.Add(FStringFormatArg(count));
 				elArgs.Add(FStringFormatArg(info.ElectricityInfo.CurrentObjectEnergy));
 				baseStr += FString::Format(TEXT("b_{0}.HasElectricityData = true; b_{0}.ElectricityInfo.CurrentObjectEnergy = {1}; "), elArgs);
-
 			}
 
 			if (info.HasOxygenData)
@@ -212,7 +209,6 @@ private:
 
 			if (info.HasRelationshipData)
 			{
-
 				UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
 				baseStr.Empty();
 
@@ -221,11 +217,9 @@ private:
 				relArgs.Add(FStringFormatArg(info.RelationshipInfo.ID.ToString()));
 				baseStr += FString::Format(TEXT("b_{0}.HasRelationshipData = true; FGuid b_{0}_rel_id; FGuid::Parse(\"{1}\", b_{0}_rel_id); b_{0}.RelationshipInfo.ID = b_{0}_rel_id;"), relArgs);
 
-
 				int32 relCount = 0;
 				for (auto relation : info.RelationshipInfo.Relationships)
 				{
-
 					UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
 					baseStr.Empty();
 
@@ -248,15 +242,11 @@ private:
 					auto commands1 = TEXT("b_{0}.RelationshipInfo.Relationships.Add(b_{0}_rel{1});");
 					baseStr += FString::Format(commands1, relItemArgs1);
 
-
 					++relCount;
 				}
-
 			}
 
-
 			UE_LOG(LogTemp, Log, TEXT("%s UsedBlocks->Add(b_%d);"), *baseStr, count++);
-
 		}
 
 		UE_LOG(LogTemp, Log, TEXT("c->PlayerPosition = FVector(%d, %d, %d);"),

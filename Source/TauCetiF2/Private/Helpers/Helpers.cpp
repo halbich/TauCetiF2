@@ -4,8 +4,6 @@
 #include "FFileVisitor.h"
 #include "Helpers.h"
 
-
-
 bool UHelpers::ChangeLocalization(FString target)
 {
 	return FInternationalization::Get().SetCurrentCulture(target);
@@ -112,7 +110,6 @@ void UHelpers::GetSliderValuesForObject(UBuildableBlockInfo* buildableInfo, FVec
 
 	auto sm = bd->HasCustomScaling ? bd->CustomBlockScale : bd->MinBlockScale;
 	Min = FVector(FMath::Min(sm.X, Max.X), FMath::Min(sm.Y, Max.Y), FMath::Min(sm.Z, Max.Z));
-
 }
 
 FDateTime UHelpers::GetTimeFromSeconds(float seconds)
@@ -152,10 +149,6 @@ bool UHelpers::SetSoundClassVolume(USoundClass* TargetClass, float targetValue)
 	TargetClass->Properties.Volume = targetValue;
 	return true;
 }
-
-
-
-
 
 FWeatherDefinition UHelpers::GetRandomDefinition(UPARAM(ref)TArray<FWeatherDefinition>& aviableDefinitions, int32& outIndex)
 {

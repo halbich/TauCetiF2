@@ -240,7 +240,6 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 			DEBUG_observable();
 		}
 
-
 		if (definition->HasElectricityComponent) {
 			auto electricityComp = Cast<UElectricityComponent>(actor->GetComponentByClass(UElectricityComponent::StaticClass()));
 			if (electricityComp)
@@ -312,7 +311,6 @@ void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReasonType)
 				pickable->RemovePickupItemEventListener(del.Value);
 		}
 	}
-
 
 	Super::EndPlay(EndPlayReasonType);
 }

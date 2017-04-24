@@ -8,12 +8,10 @@ void ULightBlockWidget::InitForBlock_Implementation(ABlock* block)
 	CurrentBlock = Cast<ALightBlock>(block);
 
 	ensure(CurrentBlock);
-
 }
 
 ABlock* ULightBlockWidget::GetControllables(TArray<ABlock*>& aviables)
 {
-
 	if (!CurrentBlock)
 		return NULL;
 
@@ -31,5 +29,4 @@ ABlock* ULightBlockWidget::GetControllables(TArray<ABlock*>& aviables)
 	}
 
 	return CurrentBlock->usedController;
-
 }

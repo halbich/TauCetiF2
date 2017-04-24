@@ -1,11 +1,5 @@
-
-
 #include "Blocks.h"
 #include "PatternGroupInfo.h"
-
-
-
-
 
 void UPatternGroupInfo::RegisterBlock(ABlock* block)
 {
@@ -19,7 +13,6 @@ void UPatternGroupInfo::RegisterBlock(ABlock* block)
 	{
 		WatchingBox = NewObject<UMinMaxBox>();
 		WatchingBox->InitBox(defBox->Min, defBox->Max);
-
 	}
 
 	if (!TreeWatchingBox || !TreeWatchingBox->IsValidLowLevel())
@@ -46,7 +39,6 @@ void UPatternGroupInfo::UnregisterBlock(ABlock* block)
 
 	IsValidForObserve = false;
 }
-
 
 void UPatternGroupInfo::UpdateValidForObserve()
 {

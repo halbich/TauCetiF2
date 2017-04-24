@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "UObject/NoExportTypes.h"
@@ -13,7 +11,6 @@ UCLASS()
 class COMMONS_API UCommonHelpers : public UObject
 {
 	GENERATED_BODY()
-
 
 private:
 	static const FString customSectionName;

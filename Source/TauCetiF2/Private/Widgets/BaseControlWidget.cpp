@@ -4,7 +4,6 @@
 UBaseControlWidget::UBaseControlWidget(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-
 }
 
 void UBaseControlWidget::InitForBlock_Implementation(ABlock* block)
@@ -31,7 +30,6 @@ void UBaseControlWidget::InitForBlock_Implementation(ABlock* block)
 	TerminalBase->InitForBlock(block);
 	ContainingTerminalWidgets.Add(TerminalBase);
 
-
 	TArray<UCreatorPatternGroupInfo*> creators;
 
 	for (auto constrPat : Network->PatternBlocks)
@@ -48,6 +46,4 @@ void UBaseControlWidget::InitForBlock_Implementation(ABlock* block)
 		crWidg->InitForBlock(block);
 		ContainingTerminalWidgets.Add(crWidg);
 	}
-
 }
-

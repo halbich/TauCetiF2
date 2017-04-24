@@ -267,12 +267,9 @@ void ATauCetiF2Character::OnEmptyHand()
 	Inventory->EmptyHand();
 }
 
-
 void ATauCetiF2Character::BeginPlay()
 {
 	Super::BeginPlay();
-
-
 }
 
 void ATauCetiF2Character::toogleCreative(bool isCreative)
@@ -298,22 +295,18 @@ void ATauCetiF2Character::doCharacterHit(float intensity)
 	if (FMath::IsNearlyZero(damage) || FMath::IsNearlyZero(Health))
 		return;
 
-
 	float energyToRemove = damage *  GameDefinitions::RainHitpointToEnergy;
 
 	float actuallyObtained = 0;
 	if (ElectricityComponent->ObtainAmount(energyToRemove, actuallyObtained))
 		energyToRemove -= actuallyObtained;
 
-
 	damage = energyToRemove * GameDefinitions::EnergyToRainHitpoint;
-
 
 	if (FMath::IsNearlyZero(damage))		//	we successfully blocked the damage
 		return;
 
 	DoHealthDamage(damage * GameDefinitions::RainHitpointToEnergy * GameDefinitions::EnergyToHealth);
-
 }
 
 void ATauCetiF2Character::DoHealthDamage(float healthDamage)
@@ -327,13 +320,11 @@ void ATauCetiF2Character::DoHealthDamage(float healthDamage)
 		OnPlayerDied.Broadcast();
 }
 
-
 void tryDoCharacterHit(AActor* actor, float intensity)
 {
 	auto ch = Cast<ATauCetiF2Character>(actor);
 	if (ch)
 		ch->doCharacterHit(intensity);
-
 }
 
 void ATauCetiF2Character::Tick(float DeltaSeconds)
@@ -357,5 +348,4 @@ void ATauCetiF2Character::Tick(float DeltaSeconds)
 		Health = FMath::Clamp(Health + actuallyObtained * GameDefinitions::EnergyToHealth, 0.0f, MaxHealth);
 
 	Super::Tick(DeltaSeconds);
-
 }

@@ -19,8 +19,6 @@ class TAUCETIF2_API UHelpers : public UObject
 {
 	GENERATED_BODY()
 
-
-
 public:
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Change Localization"), Category = "Locale")
@@ -59,8 +57,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Sound")
 		static bool SetSoundClassVolume(USoundClass* TargetClass, float targetValue);
 
-	
-
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
 		static FWeatherDefinition GetRandomDefinition(UPARAM(ref)TArray<FWeatherDefinition>& aviableDefinitions, int32& outIndex);
 
@@ -69,5 +65,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
 		static float GetGameDayMultiplier();
-	
 };

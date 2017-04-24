@@ -8,7 +8,6 @@
 #include "ControllableBlock.h"
 #include "LightBlock.generated.h"
 
-
 namespace LightBlockConstants
 {
 	static FString IsAutoregulated = TEXT("IsAutoregulated");
@@ -55,7 +54,6 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | LightBlock")
 		ABlock* usedController;
-
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 	virtual void Tick(float DeltaSeconds) override;

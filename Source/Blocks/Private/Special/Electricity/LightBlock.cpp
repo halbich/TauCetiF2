@@ -33,8 +33,6 @@ UPrimitiveComponent* ALightBlock::GetComponentForObjectOutline_Implementation() 
 	return LightBlockMesh;
 }
 
-
-
 void ALightBlock::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
@@ -45,13 +43,11 @@ void ALightBlock::SetBlockInfo(UBlockInfo* info)
 	else
 		AutoregulatePowerOutput = FCString::Atoi(*state) > 0 ? true : false;
 
-
 	auto state1 = info->BlockSpecificData.FindOrAdd(LightBlockConstants::IsOn);
 	if (state1.IsEmpty())
 		BlockInfo->BlockSpecificData[LightBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
 	else
 		IsOn = FCString::Atoi(*state1) > 0 ? true : false;
-
 }
 
 void ALightBlock::ListeningOnUse(AActor* actor, bool isSpecial)
@@ -80,10 +76,7 @@ void  ALightBlock::OnConstruction(const FTransform& Transform) {
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ALightBlock::ListeningOnUse);
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
-
 }
-
-
 
 void ALightBlock::BeginPlay() {
 	Super::BeginPlay();
@@ -147,7 +140,6 @@ void ALightBlock::SetControlState_Implementation(bool isOn) {
 void ALightBlock::SetOutputPowerPercentage_Implementation(float percentage) { BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage; }
 
 void ALightBlock::SetController_Implementation(ABlock* controller) {
-
 	if (usedController && usedController->IsValidLowLevel())
 	{
 		auto usedContTemp = usedController;
@@ -157,7 +149,6 @@ void ALightBlock::SetController_Implementation(ABlock* controller) {
 
 		controllable->Execute_UnbindControl(usedContTemp, this);
 	}
-
 
 	usedController = controller;
 

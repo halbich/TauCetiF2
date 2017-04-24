@@ -79,7 +79,6 @@ public:
 
 	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount);
 
-
 	virtual void HealthUpdated(float newHealth, float maxHealth);
 
 	virtual UPatternGroupInfo* GetPatternGroupImpl();

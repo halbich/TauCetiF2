@@ -37,8 +37,6 @@ public:
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> SurroundingElectricityComponent;
 
-
-
 	UPROPERTY(Transient)
 		UPatternGroupInfo* PatternGroupInfo;
 
@@ -52,6 +50,4 @@ public:
 	//void OnTreeElementsChanged();
 
 	//void OnWeatherTreeElementsChanged();
-
-
 };
