@@ -99,9 +99,64 @@ public:
 
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		float TotalHealth;
+		float NetworkMaxHealth;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float NetworkHealth;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float NetworkHealthPercentage;
 
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 ToRepairHealthCount;
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ToRepairEntities;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float ToRepairMaxHealth;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float ToRepairHealth;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float ToRepairHealthPercentage;
+
+
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 ImportantRepairHealthCount;
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ImportantRepairEntities;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float ImportantRepairMaxHealth;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float ImportantRepairHealth;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float ImportantRepairHealthPercentage;
+
+
+
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 CriticalRepairHealthCount;
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> CriticalRepairEntities;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float CriticalRepairMaxHealth;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float CriticalRepairHealth;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float CriticalRepairHealthPercentage;
 
 
 
@@ -109,19 +164,6 @@ public:
 
 	UPROPERTY(Transient)
 		EElectricNetworkState NetworkState;
-
-
-	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> ToRepairEntities;
-
-	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> ImportantRepairEntities;
-
-	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> CriticalRepairEntities;
-
-
-
 
 	UPROPERTY(Transient)
 		TArray<ABlock*> ControllerBlocks;
@@ -137,26 +179,61 @@ public:
 		bool NetworkChecked;
 private:
 
-	FORCEINLINE TArray<UElectricityComponent*>& getArrayBySeverity(UElectricityComponent* comp)
+	FORCEINLINE void tryUpdateArrayBySeverity(UElectricityComponent* comp)
 	{
-		//switch (comp->HealthSeverity)
-		//{
-		//case EHealthSeverity::OK: {
-		//	//return false;
-		//	break;
-		//}
-		//case EHealthSeverity::ToRepair: {
-		return ToRepairEntities;
-		//	break;
-		//}
-		//default: {
-		//	checkNoEntry();
-		//	break;
-		//}
+		switch (comp->HealthSeverity)
+		{
+		case EHealthSeverity::ToRepair: {
+			ToRepairEntities.Add(comp);
+			ToRepairHealthCount = ToRepairEntities.Num();
+			ToRepairMaxHealth += comp->BlockInfo->MaxHealth;
+			break;
+		}
+		case EHealthSeverity::Important: {
+			ImportantRepairEntities.Add(comp);
+			ImportantRepairHealthCount = ImportantRepairEntities.Num();
+			ImportantRepairMaxHealth += comp->BlockInfo->MaxHealth;
+			break;
+		}
+		case EHealthSeverity::Critical: {
+			CriticalRepairEntities.Add(comp);
+			CriticalRepairHealthCount = CriticalRepairEntities.Num();
+			CriticalRepairMaxHealth += comp->BlockInfo->MaxHealth;
+			break;
+		}
+		}
 
-		//}
 
-	//	return NULL;
+	}
+
+	FORCEINLINE void tryUpdateArrayBySeverityRem(UElectricityComponent* comp)
+	{
+		switch (comp->HealthSeverity)
+		{
+		case EHealthSeverity::ToRepair: {
+			auto rem = ToRepairEntities.Remove(comp);
+			ensure(rem > 0);
+			ToRepairHealthCount = ToRepairEntities.Num();
+			ToRepairMaxHealth = FMath::Max(0.0f, ToRepairMaxHealth - comp->BlockInfo->MaxHealth);
+			break;
+		}
+		case EHealthSeverity::Important: {
+			auto rem = ImportantRepairEntities.Remove(comp);
+			ensure(rem > 0);
+			ImportantRepairHealthCount = ImportantRepairEntities.Num();
+			ImportantRepairMaxHealth = FMath::Max(0.0f, ImportantRepairMaxHealth - comp->BlockInfo->MaxHealth);
+			break;
+		}
+		case EHealthSeverity::Critical: {
+			auto rem = CriticalRepairEntities.Remove(comp);
+			ensure(rem > 0);
+			CriticalRepairHealthCount = CriticalRepairEntities.Num();
+			CriticalRepairMaxHealth = FMath::Max(0.0f, CriticalRepairMaxHealth - comp->BlockInfo->MaxHealth);
+			break;
+		}
+		}
+
+
 	}
 
 public:
@@ -214,7 +291,9 @@ public:
 		auto info = comp->GetBlockInfo();
 		ensure(info);
 
-		TotalHealth += info->MaxHealth;
+		NetworkMaxHealth += info->MaxHealth;
+
+		tryUpdateArrayBySeverity(comp);
 
 		if (c->Definition.GetDefaultObject()->UsingInPatterns)
 			auto rem = PatternBlocks.Add(c);
@@ -278,7 +357,10 @@ public:
 		auto info = comp->GetBlockInfo();
 		ensure(info);
 
-		TotalHealth = FMath::Max(0.0f, TotalHealth - info->MaxHealth);		// due to rounding errors, we could get under zero
+		NetworkMaxHealth = FMath::Max(0.0f, NetworkMaxHealth - info->MaxHealth);		// due to rounding errors, we could get under zero
+
+
+		tryUpdateArrayBySeverityRem(comp);
 
 		if (c->Definition.GetDefaultObject()->UsingInPatterns)
 		{
