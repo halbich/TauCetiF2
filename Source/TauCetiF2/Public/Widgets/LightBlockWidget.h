@@ -2,6 +2,7 @@
 
 #include "Widgets/ObjectWidget.h"
 #include "Blocks/Public/Special/Electricity/LightBlock.h"
+#include "Blocks/Public/Components/Electricity/ElectricNetwork.h"
 #include "LightBlockWidget.generated.h"
 
 /**

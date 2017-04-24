@@ -2,6 +2,7 @@
 
 #include "Widgets/ObjectWidget.h"
 #include "Blocks/Public/Special/Electricity/Switcher.h"
+#include "Blocks/Public/Components/Electricity/ElectricNetwork.h"
 #include "SwitcherWidget.generated.h"
 
 /**

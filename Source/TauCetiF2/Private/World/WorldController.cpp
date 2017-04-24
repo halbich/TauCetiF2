@@ -8,8 +8,6 @@
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	BaseControl = ObjectInitializer.CreateDefaultSubobject<UBaseControlComponent>(this, TEXT("Base Control"));
-
 	pickableDelegates = TMap<ABlock*, FDelegateHandle>();
 	showableWidgetDelegates = TMap<ABlock*, FDelegateHandle>();
 }
@@ -309,6 +307,16 @@ void AWorldController::EndPlay(const EEndPlayReason::Type EndPlayReasonType)
 			auto pickable = Cast<IPickableBlock>(del.Key);
 			if (pickable)
 				pickable->RemovePickupItemEventListener(del.Value);
+		}
+	}
+
+	for (auto del : showableWidgetDelegates)
+	{
+		if (del.Key && del.Key->IsValidLowLevel() && del.Value.IsValid())
+		{
+			auto showable = Cast<IBlockWithShowableWidget>(del.Key);
+			if (showable)
+				showable->RemoveShowWidgetForBlockEventListener(del.Value);
 		}
 	}
 

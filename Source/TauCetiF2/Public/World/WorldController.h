@@ -8,7 +8,6 @@
 #include "Helpers/WorldHelpers.h"
 #include "MinMaxBox.h"
 #include "KDTree.h"
-#include "Components/BaseControlComponent.h"
 #include "Inventory/Public/InventoryComponent.h"
 #include "Blocks/Public/Info/BlockInfo.h"
 #include "Components/GameWeatherComponent.h"
@@ -36,9 +35,6 @@ public:
 
 	UPROPERTY(Transient)
 		UKDTree* RootBox;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TCF2 | WorldController", meta = (AllowPrivateAccess = "true"))
-		UBaseControlComponent* BaseControl;
 
 	UPROPERTY(Transient)
 		UGameWeatherComponent* weatherComponent;
