@@ -47,6 +47,11 @@ void ABatteryBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 void ABatteryBlock::ListeningOnElectricityCompChanged(UBlockWithElectricityInfo* source)
 {
+	auto mat = Cast<UMaterialInstanceDynamic>(BatteryBlockMesh->GetMaterial(0));
+	if (!mat)
+		return;
+
+	mat->SetScalarParameterValue(TEXT("Filling"), source->GetRemainingPercentageUnit());
 }
 
 #pragma optimize("", on)

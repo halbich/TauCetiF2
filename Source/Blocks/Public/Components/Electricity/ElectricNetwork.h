@@ -20,16 +20,19 @@ class BLOCKS_API UElectricNetwork : public UObject
 public:
 	UElectricNetwork();
 
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> Entities;
+
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		int32 EntitiesCount;
 
+
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ElectricityProducers;
+
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		int32 ProducersCount;
-
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		int32 ConsumersCount;
-
-
 
 	// updated in updateStatistics()
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
@@ -37,16 +40,23 @@ public:
 
 	// updated in tick()
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		float TotalElectricityAviable;
+		float ProducersEnergyAviable;
 
 	// updated in network maintenance
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		float MaxElectricityAviable;
+		float ProducersEnergyMaxAviable;
 
 	// Percentage of Electricity aviable
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		float TotalElectricityAviableFilling;
+		float ProducersEnergyAviableFilling;
 
+
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ElectricityConsumers;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 ConsumersCount;
 
 	// updated in updateStatistics()
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
@@ -54,14 +64,37 @@ public:
 
 	// updated in tick()
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		float TotalElectricityRequired;
+		float ConsumersEnergyAviable;
 
-	/*UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		float MaxStorableElectricity;*/
-
-	// Percentage of +/-, updated in tick
+	// updated in network maintenance
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
-		float TotalElectricityPlusMinus;
+		float ConsumersEnergyMaxAviable;
+
+	// Percentage of Electricity aviable
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float ConsumersEnergyAviableFilling;
+
+
+
+	UPROPERTY(Transient)
+		TArray<UElectricityComponent*> ElectricityStorages;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		int32 StoragesCount;
+
+	// updated in tick()
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float StoragesEnergyAviable;
+
+	// updated in network maintenance
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float StoragesEnergyMaxAviable;
+
+	// Percentage of Electricity aviable
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float StoragesEnergyAviableFilling;
+
+
 
 
 
@@ -70,13 +103,13 @@ public:
 
 
 
-	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> Entities;
+
 
 	TQueue<UElectricityComponent*> ToRecompute;
 
 	UPROPERTY(Transient)
 		EElectricNetworkState NetworkState;
+
 
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> ToRepairEntities;
@@ -87,14 +120,8 @@ public:
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> CriticalRepairEntities;
 
-	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> ElectricityProducers;
 
-	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> ElectricityConsumers;
 
-	UPROPERTY(Transient)
-		TArray<UElectricityComponent*> ElectricityStorages;
 
 	UPROPERTY(Transient)
 		TArray<ABlock*> ControllerBlocks;
@@ -104,6 +131,7 @@ public:
 
 	UPROPERTY(Transient)
 		TArray<ABlock*> PatternBlocks;
+
 
 	UPROPERTY(Transient)
 		bool NetworkChecked;
@@ -150,22 +178,25 @@ public:
 		auto def = comp->GetDefinition();
 		ensure(def);
 
-		if (def->IsProducer)
+		if (def->IsProducer && !def->IsConsument)
 		{
 			ElectricityProducers.Add(comp);
 			ProducersCount = ElectricityProducers.Num();
-			MaxElectricityAviable += comp->ElectricityInfo->CurrentObjectMaximumEnergy;
+			ProducersEnergyMaxAviable += comp->ElectricityInfo->CurrentObjectMaximumEnergy;
 		}
 
-		if (def->IsConsument)
+		if (def->IsConsument && !def->IsProducer)
 		{
 			ElectricityConsumers.Add(comp);
 			ConsumersCount = ElectricityConsumers.Num();
+			ConsumersEnergyMaxAviable += comp->ElectricityInfo->CurrentObjectMaximumEnergy;
 		}
 
 		if (def->IsProducer && def->IsConsument)
 		{
 			ElectricityStorages.Add(comp);
+			StoragesCount = ElectricityStorages.Num();
+			StoragesEnergyMaxAviable += comp->ElectricityInfo->CurrentObjectMaximumEnergy;
 		}
 
 		auto c = Cast<ABlock>(comp->GetOwner());
@@ -201,25 +232,29 @@ public:
 		auto def = comp->GetDefinition();
 		ensure(def);
 
-		if (def->IsProducer)
+		if (def->IsProducer && !def->IsConsument)
 		{
 			auto rem = ElectricityProducers.Remove(comp);
 			ensure(rem > 0);
 			ProducersCount = ElectricityProducers.Num();
-			MaxElectricityAviable -= comp->ElectricityInfo->CurrentObjectMaximumEnergy;
+			ProducersEnergyMaxAviable = FMath::Max(0.0f, ProducersEnergyMaxAviable - comp->ElectricityInfo->CurrentObjectMaximumEnergy);
 		}
 
-		if (def->IsConsument)
+		if (def->IsConsument && !def->IsProducer)
 		{
 			auto rem = ElectricityConsumers.Remove(comp);
 			ensure(rem > 0);
 			ConsumersCount = ElectricityConsumers.Num();
+			ConsumersEnergyMaxAviable = FMath::Max(0.0f, ConsumersEnergyMaxAviable - comp->ElectricityInfo->CurrentObjectMaximumEnergy);
 		}
 
 		if (def->IsProducer && def->IsConsument)
 		{
 			auto rem = ElectricityStorages.Remove(comp);
 			ensure(rem > 0);
+			StoragesCount = ElectricityStorages.Num();
+			StoragesEnergyMaxAviable = FMath::Max(0.0f, StoragesEnergyMaxAviable - comp->ElectricityInfo->CurrentObjectMaximumEnergy);
+
 		}
 
 		auto c = Cast<ABlock>(comp->GetOwner());
@@ -263,13 +298,20 @@ public:
 	FORCEINLINE void EmptyNetwork()
 	{
 		Entities.Empty();
+
 		ToRepairEntities.Empty();
 		ImportantRepairEntities.Empty();
 		CriticalRepairEntities.Empty();
+
 		ElectricityProducers.Empty();
 		ElectricityConsumers.Empty();
+		ElectricityStorages.Empty();
+
 		ControllerBlocks.Empty();
 		ControllableBlocks.Empty();
+		PatternBlocks.Empty();
+
+
 		NetworkChecked = false;
 	}
 

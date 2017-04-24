@@ -72,9 +72,9 @@ private:
 		smaller->MarkPendingKill();
 	}
 
-	/*FORCEINLINE*/ void doHealing(UElectricNetwork* n)
+	/*FORCEINLINE*/ void doHealing(UElectricNetwork* n, float& maxAviable)
 	{
-		float totalElectricityAviable = n->TotalElectricityAviable;
+		float totalElectricityAviable = maxAviable;
 
 		float criticalAviable = 0.5f * totalElectricityAviable;
 
@@ -121,50 +121,101 @@ private:
 
 	/*FORCEINLINE*/ void tickUpdateNetwork(UElectricNetwork* n)
 	{
-		float totalElectricityAviable = 0.0f;
+		// aviable from generators
+		float producersEnergyAviable = 0.0f;
 		for (auto producer : n->ElectricityProducers)
-			totalElectricityAviable += producer->ElectricityInfo->CurrentObjectEnergy;
+			if (producer->ComponentNetworkState == EElectricNetworkState::Valid)
+				producersEnergyAviable += producer->ElectricityInfo->CurrentObjectEnergy;
 
-		n->TotalElectricityAviable = totalElectricityAviable;
-		n->TotalElectricityAviableFilling = FMath::IsNearlyZero(n->MaxElectricityAviable) ? 0 : totalElectricityAviable / n->MaxElectricityAviable;
+		n->ProducersEnergyAviable = producersEnergyAviable;
+		n->ProducersEnergyAviableFilling = FMath::IsNearlyZero(n->ProducersEnergyMaxAviable) ? 0 : producersEnergyAviable / n->ProducersEnergyMaxAviable;
 
-		//TODO
-		//doHealing(n);
+		// aviable from batteries
+		float storagesEnergyAviable = 0.0f;
+		for (auto storage : n->ElectricityStorages)
+			if (storage->ComponentNetworkState == EElectricNetworkState::Valid)
+				storagesEnergyAviable += storage->ElectricityInfo->CurrentObjectEnergy;
 
+		n->StoragesEnergyAviable = storagesEnergyAviable;
+		n->StoragesEnergyAviableFilling = FMath::IsNearlyZero(n->StoragesEnergyMaxAviable) ? 0 : storagesEnergyAviable / n->StoragesEnergyMaxAviable;
 
-
-		auto totalElectricityRequired = 0.0f;
-
+		// aviable from consumers
+		auto consumersEnergyAviable = 0.0f;
 		for (auto consumer : n->ElectricityConsumers)
-			totalElectricityRequired += consumer->ElectricityInfo->CurrentObjectMaximumEnergy - consumer->ElectricityInfo->CurrentObjectEnergy;
+			if (consumer->ComponentNetworkState == EElectricNetworkState::Valid)
+				consumersEnergyAviable += consumer->ElectricityInfo->CurrentObjectEnergy;
 
-		totalElectricityRequired = FMath::Max(0.0f, totalElectricityRequired);
+		n->ConsumersEnergyAviable = consumersEnergyAviable;
+		n->ConsumersEnergyAviableFilling = FMath::IsNearlyZero(n->ConsumersEnergyMaxAviable) ? 0 : consumersEnergyAviable / n->ConsumersEnergyMaxAviable;
 
-		n->TotalElectricityRequired = totalElectricityRequired;
-		n->TotalElectricityPlusMinus = totalElectricityAviable - totalElectricityRequired;
 
-		//auto ration = totalElectricityAviable / n->ElectricityConsumers.Num();
 
-		if (FMath::IsNearlyZero(totalElectricityRequired))
-			return;
+		auto maxAviable = producersEnergyAviable + storagesEnergyAviable;
 
-		auto electricityConsumed = 0.0f;
-		for (auto consumer : n->ElectricityConsumers)
+
+
+		//doHealing(n, maxAviable);
+
+		auto inRec = n->NetworkState == EElectricNetworkState::InRecompute;
+
+		auto p = n->ProducersCount;
+
+		auto pc = p + n->StoragesCount;
+		auto cc = n->ConsumersCount;
+		if (cc > 0 && pc > 0 && maxAviable > 0)
 		{
-			ensure(consumer->ElectricityInfo->CurrentObjectEnergy >= 0 && consumer->ElectricityInfo->CurrentObjectEnergy <= consumer->ElectricityInfo->CurrentObjectMaximumEnergy);
+			for (int32 i = 0; i < cc; i++)
+			{
+				auto ind = FMath::RandHelper(cc);
+				if (!n->ElectricityConsumers.IsValidIndex(ind))
+					continue;
 
-			auto ration = (consumer->ElectricityInfo->CurrentObjectMaximumEnergy - consumer->ElectricityInfo->CurrentObjectEnergy) / totalElectricityRequired;
-			ensure(ration >= 0 && ration <= 1);
+				auto consElem = n->ElectricityConsumers[ind];
+				if (inRec && consElem->ComponentNetworkState != EElectricNetworkState::Valid)
+					continue;
 
-			auto aviable = totalElectricityAviable * ration;
+				auto required = FMath::Max(0.0f, consElem->ElectricityInfo->CurrentObjectMaximumEnergy - consElem->ElectricityInfo->CurrentObjectEnergy);
 
-			auto actuallyPutted = 0.0f;
-			if (consumer->PutAmount(aviable, actuallyPutted))
-				electricityConsumed += actuallyPutted;
+				if (FMath::IsNearlyZero(required))
+					continue;
+
+				auto producerSelect = FMath::RandHelper(pc);
+
+				UElectricityComponent* elem;
+				if (producerSelect < p)
+				{
+					// we are in producers part
+					if (!n->ElectricityProducers.IsValidIndex(producerSelect))
+						continue;
+
+					elem = n->ElectricityProducers[producerSelect];
+					if (inRec && elem->ComponentNetworkState != EElectricNetworkState::Valid)
+						continue;
+				}
+				else
+				{
+					producerSelect -= p;
+
+					// we are in storage part
+					if (!n->ElectricityStorages.IsValidIndex(producerSelect))
+						continue;
+
+					elem = n->ElectricityStorages[producerSelect];
+					if (inRec && elem->ComponentNetworkState != EElectricNetworkState::Valid)
+						continue;
+
+				}
+
+				float actuallyPutted = 0;
+				float actuallyObtained = 0;
+				if (elem->ObtainAmount(required, actuallyObtained))
+					consElem->PutAmount(actuallyObtained, actuallyPutted);
+
+			}
+
+
 		}
-
-		totalElectricityAviable -= electricityConsumed;
-		// todo do smthing with the rest
+		
 	}
 
 	FORCEINLINE void processNetwork(UElectricNetwork* network)
