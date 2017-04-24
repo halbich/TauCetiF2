@@ -44,12 +44,24 @@ TArray<UBuildableBlockInfo*> UBlockConstructor::GetAllBuildableBlocks()
 	if (!ensureHolder())
 		return result;
 
+	auto v = RelatedToPatternGroup->IsValidCreator;
+
 	for (auto buildable : blockHolder->GetAviableItems())
 	{
 		auto def = blockHolder->GetDefinitionFor(buildable);
 
 		if (!def->IsSystemAction && def->IsBuildable)
-			result.Add(UBuildableBlockInfo::GetBuildable(def));
+		{
+			auto b = UBuildableBlockInfo::GetBuildable(def);
+
+			auto max = def->HasCustomScaling ? def->CustomBlockScale : def->MinBlockScale;
+
+			auto limit = FMath::Max(ScaleLimit.X, ScaleLimit.Y);
+
+			b->BlockConstructorDisabled = !v || max.X > limit || max.Y > limit || max.Z > limit;
+
+			result.Add(b);
+		}
 	}
 
 	return result;
@@ -80,7 +92,7 @@ FText UBlockConstructor::GetDisplayTextExtended_Implementation()
 
 	FFormatOrderedArguments Arguments;
 	Arguments.Add(BaseControlDisplayName);
-	Arguments.Add(FText::AsNumber(FMath::Max( ScaleLimit.X, ScaleLimit.Y), &op));
+	Arguments.Add(FText::AsNumber(FMath::Max(ScaleLimit.X, ScaleLimit.Y), &op));
 	Arguments.Add(RelatedToPatternGroup->IsValidCreator ? val : inval);
 	return FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.ExtendedText", "{0}    |    Velikost: {1}    |    Stav: {2}"), Arguments);
 }

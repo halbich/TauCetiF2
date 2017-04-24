@@ -41,6 +41,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		float BuildingEnergyRequired;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
+		bool BlockConstructorDisabled;
+
 	bool ValidateObject(TArray<FText>& validationErrors, UBlockHolder* holder);
 
 	virtual void DefinitionSet();
