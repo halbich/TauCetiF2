@@ -26,14 +26,12 @@ protected:
 	UPROPERTY(Transient)
 		TArray<UElectricNetwork*> networks;
 
-	UPROPERTY(Transient)
-		float TimeSinceLastRecompute;
 
-	UPROPERTY(Transient)
-		float UpdateInterval;
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | GameElectricityComponent")
+		float CustomTickInterval;
 
-	UPROPERTY(Transient)
-		float TimeSinceLastUpdate;
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | GameElectricityComponent")
+		float Max;
 
 public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -125,16 +123,25 @@ private:
 
 
 
-	/*FORCEINLINE*/ void tickUpdateNetwork(UElectricNetwork* n)
+	/*FORCEINLINE*/ void tickUpdateNetwork(UElectricNetwork* n, float deltaTime)
 	{
+		auto t = GameDefinitions::GameDayMultiplier * deltaTime;
+
+		float producedEnergy = 0.0f;
 		// aviable from generators
 		float producersEnergyAviable = 0.0f;
 		for (auto producer : n->ElectricityProducers)
+		{
 			if (producer->ComponentNetworkState == EElectricNetworkState::Valid)
 				producersEnergyAviable += producer->ElectricityInfo->CurrentObjectEnergy;
 
+			producedEnergy += producer->EnergyProduced;
+			producer->EnergyProduced = 0;
+		}
+
 		n->ProducersEnergyAviable = producersEnergyAviable;
 		n->ProducersEnergyAviableFilling = FMath::IsNearlyZero(n->ProducersEnergyMaxAviable) ? 0 : producersEnergyAviable / n->ProducersEnergyMaxAviable;
+		n->EnergyProductionPerSec = producedEnergy / t;
 
 		// aviable from batteries
 		float storagesEnergyAviable = 0.0f;
@@ -145,14 +152,21 @@ private:
 		n->StoragesEnergyAviable = storagesEnergyAviable;
 		n->StoragesEnergyAviableFilling = FMath::IsNearlyZero(n->StoragesEnergyMaxAviable) ? 0 : storagesEnergyAviable / n->StoragesEnergyMaxAviable;
 
+
+		float consumedEnergy = 0.0f;
 		// aviable from consumers
 		auto consumersEnergyAviable = 0.0f;
 		for (auto consumer : n->ElectricityConsumers)
+		{
 			if (consumer->ComponentNetworkState == EElectricNetworkState::Valid)
 				consumersEnergyAviable += consumer->ElectricityInfo->CurrentObjectEnergy;
 
+			consumedEnergy += consumer->EnergyConsumed;
+			consumer->EnergyConsumed = 0;
+		}
 		n->ConsumersEnergyAviable = consumersEnergyAviable;
 		n->ConsumersEnergyAviableFilling = FMath::IsNearlyZero(n->ConsumersEnergyMaxAviable) ? 0 : consumersEnergyAviable / n->ConsumersEnergyMaxAviable;
+		n->EnergyConsumptionPerSec = consumedEnergy / t;
 
 		// total health
 		auto totalHealth = 0.0f;
@@ -229,7 +243,7 @@ private:
 
 
 		}
-		
+
 	}
 
 	FORCEINLINE void processNetwork(UElectricNetwork* network)
@@ -331,31 +345,11 @@ private:
 
 			for (auto n : networks)
 				n->CheckControlBlocks();
+
+			SetComponentTickInterval(CustomTickInterval);	// revert to base ticking
 		}
 	}
 
-	void updateStatistics(UElectricNetwork* n)
-	{
-		float producedEnergy = 0.0f;
-		for (auto producer : n->ElectricityProducers)
-		{
-			producedEnergy += producer->EnergyProduced;
-			producer->EnergyProduced = 0;
-		}
-
-		auto t = GameDefinitions::GameDayMultiplier * TimeSinceLastRecompute;
-
-		n->EnergyProductionPerSec = producedEnergy / t;
-
-		float consumedEnergy = 0.0f;
-		for (auto consumer : n->ElectricityConsumers)
-		{
-			consumedEnergy += consumer->EnergyConsumed;
-			consumer->EnergyConsumed = 0;
-		}
-
-		n->EnergyConsumptionPerSec = consumedEnergy / t;
-	}
 };
 
 #pragma optimize("", on)
