@@ -17,6 +17,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | CubeBlock")
 		UStaticMeshComponent* CubeMesh;
 
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | TerminalBlock")
+		UStaticMeshComponent* CubeMeshOutline;
+
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;

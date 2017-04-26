@@ -18,6 +18,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SwitcherWidget")
 		ASwitcher* CurrentBlock;
 
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SwitcherWidget")
+		UElectricNetwork* Network;
+
 	virtual void InitForBlock_Implementation(ABlock* block) override;
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherWidget")

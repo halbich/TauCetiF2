@@ -187,11 +187,6 @@ void UElectricityComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	ConnectedComponents.Empty();
 }
 
-void UElectricityComponent::UpdateHealthSeverity()
-{
-	if (!Network || !Network->IsValidLowLevel())
-		return;
-}
 
 UBlockInfo* UElectricityComponent::GetBlockInfo()
 {

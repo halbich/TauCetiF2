@@ -179,26 +179,27 @@ public:
 		bool NetworkChecked;
 private:
 
-	FORCEINLINE void tryUpdateArrayBySeverity(UElectricityComponent* comp)
+	/*FORCEINLINE*/ void tryUpdateArrayBySeverity(UElectricityComponent* comp)
 	{
-		switch (comp->HealthSeverity)
+		auto b = comp->BlockInfo;
+		switch (b->HealthSeverity)
 		{
 		case EHealthSeverity::ToRepair: {
 			ToRepairEntities.Add(comp);
 			ToRepairHealthCount = ToRepairEntities.Num();
-			ToRepairMaxHealth += comp->BlockInfo->MaxHealth;
+			ToRepairMaxHealth += b->MaxHealth;
 			break;
 		}
 		case EHealthSeverity::Important: {
 			ImportantRepairEntities.Add(comp);
 			ImportantRepairHealthCount = ImportantRepairEntities.Num();
-			ImportantRepairMaxHealth += comp->BlockInfo->MaxHealth;
+			ImportantRepairMaxHealth += b->MaxHealth;
 			break;
 		}
 		case EHealthSeverity::Critical: {
 			CriticalRepairEntities.Add(comp);
 			CriticalRepairHealthCount = CriticalRepairEntities.Num();
-			CriticalRepairMaxHealth += comp->BlockInfo->MaxHealth;
+			CriticalRepairMaxHealth += b->MaxHealth;
 			break;
 		}
 		}
@@ -206,29 +207,30 @@ private:
 
 	}
 
-	FORCEINLINE void tryUpdateArrayBySeverityRem(UElectricityComponent* comp)
+	/*FORCEINLINE*/ void tryUpdateArrayBySeverityRem(UElectricityComponent* comp, EHealthSeverity oldSeverity)
 	{
-		switch (comp->HealthSeverity)
+		auto b = comp->BlockInfo;
+		switch (oldSeverity)
 		{
 		case EHealthSeverity::ToRepair: {
 			auto rem = ToRepairEntities.Remove(comp);
 			ensure(rem > 0);
 			ToRepairHealthCount = ToRepairEntities.Num();
-			ToRepairMaxHealth = FMath::Max(0.0f, ToRepairMaxHealth - comp->BlockInfo->MaxHealth);
+			ToRepairMaxHealth = FMath::Max(0.0f, ToRepairMaxHealth - b->MaxHealth);
 			break;
 		}
 		case EHealthSeverity::Important: {
 			auto rem = ImportantRepairEntities.Remove(comp);
 			ensure(rem > 0);
 			ImportantRepairHealthCount = ImportantRepairEntities.Num();
-			ImportantRepairMaxHealth = FMath::Max(0.0f, ImportantRepairMaxHealth - comp->BlockInfo->MaxHealth);
+			ImportantRepairMaxHealth = FMath::Max(0.0f, ImportantRepairMaxHealth - b->MaxHealth);
 			break;
 		}
 		case EHealthSeverity::Critical: {
 			auto rem = CriticalRepairEntities.Remove(comp);
 			ensure(rem > 0);
 			CriticalRepairHealthCount = CriticalRepairEntities.Num();
-			CriticalRepairMaxHealth = FMath::Max(0.0f, CriticalRepairMaxHealth - comp->BlockInfo->MaxHealth);
+			CriticalRepairMaxHealth = FMath::Max(0.0f, CriticalRepairMaxHealth - b->MaxHealth);
 			break;
 		}
 		}
@@ -360,7 +362,7 @@ public:
 		NetworkMaxHealth = FMath::Max(0.0f, NetworkMaxHealth - info->MaxHealth);		// due to rounding errors, we could get under zero
 
 
-		tryUpdateArrayBySeverityRem(comp);
+		tryUpdateArrayBySeverityRem(comp, comp->BlockInfo->HealthSeverity);
 
 		if (c->Definition.GetDefaultObject()->UsingInPatterns)
 		{
@@ -373,9 +375,6 @@ public:
 		return r;
 	}
 
-	FORCEINLINE void RegisterEntitySeverity(UElectricityComponent* comp, EHealthSeverity newSeverity)
-	{
-	}
 
 	FORCEINLINE void EmptyNetwork()
 	{
@@ -483,6 +482,16 @@ public:
 		}
 
 		NetworkChecked = true;
+	}
+
+
+
+
+
+	/*FORCEINLINE*/ void RefreshHealthSeverity(UElectricityComponent* comp, EHealthSeverity oldSeverity)
+	{
+		tryUpdateArrayBySeverityRem(comp, oldSeverity);
+		tryUpdateArrayBySeverity(comp);
 	}
 
 #pragma optimize("", on)

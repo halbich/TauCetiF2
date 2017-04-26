@@ -218,7 +218,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 
 	UGameplayStatics::FinishSpawningActor(actor, trans);
 
-	if (addToRoot)
+	if (addToRoot && actor->BlockInfo->HealthSeverity != EHealthSeverity::Dead)
 	{
 		UsedBlocks.Add(block);
 
@@ -381,7 +381,7 @@ void AWorldController::DestroyRequestEventHandler(ABlock* block)
 {
 	// TODO
 	//print(TEXT("Block Destroy requested"));
-	//DestroyWorldObject(block);
+	DestroyWorldObject(block);
 }
 
 #pragma optimize("", on)

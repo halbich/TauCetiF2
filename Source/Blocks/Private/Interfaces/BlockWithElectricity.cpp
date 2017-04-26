@@ -19,3 +19,20 @@ float IBlockWithElectricity::WasHitByStorm(const float amount)
 
 	return energyToRemove * GameDefinitions::EnergyToRainHitpoint;	// we want to return remaining rain hitpoints
 }
+
+void IBlockWithElectricity::RefreshHealthSeverity(EHealthSeverity oldSeverity)
+{
+	auto c = GetElectricityComponent();
+
+	if (!c || !c->IsValidLowLevel() || !c->Network || !c->Network->IsValidLowLevel())
+		return;
+
+	c->Network->RefreshHealthSeverity(c, oldSeverity);
+}
+
+
+
+void IBlockWithElectricity::NetworkChanged()
+{
+
+}

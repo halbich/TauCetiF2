@@ -21,6 +21,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenFillerWidget")
 		AOxygenTankFillerBlock* CurrentBlock;
 
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | OxygenFillerWidget")
+		UElectricNetwork* Network;
+
 	virtual void InitForBlock_Implementation(ABlock* block) override;
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherWidget")

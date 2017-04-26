@@ -5,9 +5,11 @@ void UTerminalBaseWidget::InitForBlock_Implementation(ABlock* block)
 {
 	Super::InitForBlock_Implementation(block);
 
-	auto terminal = Cast<ATerminalBlock>(block);
-	if (terminal && terminal->IsValidLowLevel() && terminal->ElectricityComponent && terminal->ElectricityComponent->IsValidLowLevel())
-		Network = terminal->ElectricityComponent->Network;
+	auto CurrentBlock = Cast<ATerminalBlock>(block);
+	ensure(CurrentBlock);
+
+	if (CurrentBlock && CurrentBlock->IsValidLowLevel() && CurrentBlock->ElectricityComponent && CurrentBlock->ElectricityComponent->IsValidLowLevel())
+		Network = CurrentBlock->ElectricityComponent->Network;
 }
 
 void UTerminalBaseWidget::GetControllables(TArray<ABlock*>& aviable)

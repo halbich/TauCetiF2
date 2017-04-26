@@ -7,8 +7,11 @@ ACubeBlockWithoutElectricity::ACubeBlockWithoutElectricity()
 	PrimaryActorTick.bCanEverTick = false;
 
 	CubeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeMesh"));
-
 	CubeMesh->SetupAttachment(GetRootComponent());
+
+	CubeMeshOutline = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeMeshOutline"));
+	CubeMeshOutline->SetupAttachment(CubeMesh);
+	CubeMeshOutline->SetRenderInMainPass(false);
 }
 
 UStaticMeshComponent* ACubeBlockWithoutElectricity::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -20,5 +23,6 @@ UStaticMeshComponent* ACubeBlockWithoutElectricity::GetMeshStructureComponent_Im
 }
 
 UPrimitiveComponent* ACubeBlockWithoutElectricity::GetComponentForObjectOutline_Implementation() {
-	return CubeMesh;
+	CubeMeshOutline->SetStaticMesh(CubeMesh->GetStaticMesh());
+	return CubeMeshOutline;
 }

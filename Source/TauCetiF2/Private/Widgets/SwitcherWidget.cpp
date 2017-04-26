@@ -8,8 +8,10 @@ void USwitcherWidget::InitForBlock_Implementation(ABlock* block)
 	Super::InitForBlock_Implementation(block);
 
 	CurrentBlock = Cast<ASwitcher>(block);
-
 	ensure(CurrentBlock);
+
+	if (CurrentBlock && CurrentBlock->IsValidLowLevel() && CurrentBlock->ElectricityComponent && CurrentBlock->ElectricityComponent->IsValidLowLevel())
+		Network = CurrentBlock->ElectricityComponent->Network;
 }
 
 void USwitcherWidget::GetControllables(TArray<ABlock*>& aviables, TArray<ABlock*>& controlled)
@@ -17,9 +19,8 @@ void USwitcherWidget::GetControllables(TArray<ABlock*>& aviables, TArray<ABlock*
 	if (!CurrentBlock)
 		return;
 
-	auto n = CurrentBlock->ElectricityComponent->Network;
 
-	for (auto c : n->ControllableBlocks)
+	for (auto c : Network->ControllableBlocks)
 	{
 		if (!c || !c->IsValidLowLevel() || c->IsPendingKill())
 			continue;

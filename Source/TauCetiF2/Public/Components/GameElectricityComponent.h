@@ -58,7 +58,7 @@ private:
 		return r;
 	}
 
-	FORCEINLINE void mergeNetworks(UElectricNetwork* bigger, UElectricNetwork* smaller)
+	/*FORCEINLINE*/ void mergeNetworks(UElectricNetwork* bigger, UElectricNetwork* smaller)
 	{
 		ensure(!networksTodelete.Contains(bigger));
 
@@ -83,42 +83,59 @@ private:
 		float criticalAviable = 0.5f * totalElectricityAviable;
 
 		totalElectricityAviable -= criticalAviable;
+
 		// TODO
-		float totalCriticalRequired = 0.0f;
+		float criticalHealth = 0.0f;
 		for (auto critical : n->CriticalRepairEntities)
 		{
-			auto owner = Cast<ABlock>(critical->GetOwner());
+			if (critical->ComponentNetworkState == EElectricNetworkState::Valid)
+				criticalHealth += critical->BlockInfo->Health;
+			/*auto owner = Cast<ABlock>(critical->GetOwner());
 			ensure(owner);
-
-			// TODO get (required, divide it by totalCritical required) and multiply by aviable
-			//owner->Heal(...);
+*/
+// TODO get (required, divide it by totalCritical required) and multiply by aviable
+//owner->Heal(...);
 		}
+
+		n->CriticalRepairHealth = criticalHealth;
+		n->CriticalRepairHealthPercentage = FMath::IsNearlyZero(n->CriticalRepairMaxHealth) ? 0 : criticalHealth / n->CriticalRepairMaxHealth;
 
 		// TODO badly, to reapir
 
+		float importantHealth = 0.0f;
 		for (auto important : n->ImportantRepairEntities)
 		{
+			if (important->ComponentNetworkState == EElectricNetworkState::Valid)
+				importantHealth += important->BlockInfo->Health;
+
 			auto owner = Cast<ABlock>(important->GetOwner());
 			ensure(owner);
 
+
 			// TODO get (required, divide it by totalCritical required) and multiply by aviable
 			//	owner->HealthUpdated()
 		}
 
+		n->ImportantRepairHealth = importantHealth;
+		n->ImportantRepairHealthPercentage = FMath::IsNearlyZero(n->ImportantRepairMaxHealth) ? 0 : importantHealth / n->ImportantRepairMaxHealth;
+
+
+		float repairHealth = 0.0f;
 		for (auto toRepair : n->ToRepairEntities)
 		{
-			auto owner = Cast<ABlock>(toRepair->GetOwner());
-			ensure(owner);
+			if (toRepair->ComponentNetworkState == EElectricNetworkState::Valid)
+				repairHealth += toRepair->BlockInfo->Health;
+
+			/*auto owner = Cast<ABlock>(toRepair->GetOwner());
+			ensure(owner);*/
 
 			// TODO get (required, divide it by totalCritical required) and multiply by aviable
 			//	owner->HealthUpdated()
 		}
 
+		n->ToRepairHealth = repairHealth;
+		n->ToRepairHealthPercentage = FMath::IsNearlyZero(n->ToRepairMaxHealth) ? 0 : repairHealth / n->ToRepairMaxHealth;
 
-
-		// TODO badly, to repair
-
-		// TODO remaining energy fill to consumers
 	}
 
 
@@ -181,22 +198,21 @@ private:
 		auto maxAviable = producersEnergyAviable + storagesEnergyAviable;
 
 
-
-		//doHealing(n, maxAviable);
+		if (maxAviable > 0)
+			doHealing(n, maxAviable);
 
 		auto inRec = n->NetworkState == EElectricNetworkState::InRecompute;
 
 		auto p = n->ProducersCount;
-
 		auto pc = p + n->StoragesCount;
+
 		auto cc = n->ConsumersCount;
 		if (cc > 0 && pc > 0 && maxAviable > 0)
 		{
 			for (int32 i = 0; i < cc; i++)
 			{
 				auto ind = FMath::RandHelper(cc);
-				if (!n->ElectricityConsumers.IsValidIndex(ind))
-					continue;
+				ensure(n->ElectricityConsumers.IsValidIndex(ind));
 
 				auto consElem = n->ElectricityConsumers[ind];
 				if (inRec && consElem->ComponentNetworkState != EElectricNetworkState::Valid)
@@ -213,8 +229,7 @@ private:
 				if (producerSelect < p)
 				{
 					// we are in producers part
-					if (!n->ElectricityProducers.IsValidIndex(producerSelect))
-						continue;
+					ensure(n->ElectricityProducers.IsValidIndex(producerSelect));
 
 					elem = n->ElectricityProducers[producerSelect];
 					if (inRec && elem->ComponentNetworkState != EElectricNetworkState::Valid)
@@ -225,8 +240,7 @@ private:
 					producerSelect -= p;
 
 					// we are in storage part
-					if (!n->ElectricityStorages.IsValidIndex(producerSelect))
-						continue;
+					ensure(n->ElectricityStorages.IsValidIndex(producerSelect));
 
 					elem = n->ElectricityStorages[producerSelect];
 					if (inRec && elem->ComponentNetworkState != EElectricNetworkState::Valid)
@@ -236,8 +250,18 @@ private:
 
 				float actuallyPutted = 0;
 				float actuallyObtained = 0;
+				float actuallyReturned = 0;
 				if (elem->ObtainAmount(required, actuallyObtained))
-					consElem->PutAmount(actuallyObtained, actuallyPutted);
+				{
+					if (consElem->PutAmount(actuallyObtained, actuallyPutted))
+					{
+						actuallyObtained -= actuallyPutted;
+						maxAviable = FMath::Max(0.0f, maxAviable - actuallyPutted);
+					}
+
+					elem->PutAmount(actuallyObtained, actuallyReturned);
+				}
+
 
 			}
 
@@ -246,7 +270,7 @@ private:
 
 	}
 
-	FORCEINLINE void processNetwork(UElectricNetwork* network)
+	/*FORCEINLINE*/ void processNetwork(UElectricNetwork* network)
 	{
 		UElectricityComponent* part;
 		auto deq = network->ToRecompute.Dequeue(part);

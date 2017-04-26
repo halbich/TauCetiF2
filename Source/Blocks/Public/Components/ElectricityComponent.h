@@ -35,14 +35,13 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
 		TArray<UElectricityComponent*> ConnectedComponents;
 
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
 		UElectricNetwork* Network;
 
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
 		EElectricNetworkState ComponentNetworkState;
 
-	UPROPERTY(Transient)
-		EHealthSeverity HealthSeverity;
+
 
 	UPROPERTY(Transient)
 		float EnergyProduced;
@@ -76,8 +75,6 @@ public:
 	void ToggleIsInCreative(bool newInCreative);
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
-
-	void UpdateHealthSeverity();
 
 	UBlockInfo* GetBlockInfo();
 

@@ -15,8 +15,13 @@ class BLOCKS_API IBlockWithElectricity
 
 public:
 
+	// Try to "catch" hit withing electricity buffer. Returns remaining hitpoints.
 	float WasHitByStorm(const float amount);
 
-	// Try to "catch" hit withing electricity buffer. Returns remaining hitpoints.
 	virtual UElectricityComponent* GetElectricityComponent() = 0;
+
+
+	void RefreshHealthSeverity(EHealthSeverity oldSeverity);
+
+	virtual void NetworkChanged();
 };

@@ -41,6 +41,8 @@ public:
 	virtual UUserWidget* GetShownWidget() override;
 	virtual void ShowWidget_Implementation() override;
 
+	virtual void NetworkChanged() override;
+
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{
 		return ElectricityComponent;

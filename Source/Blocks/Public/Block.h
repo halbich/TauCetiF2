@@ -124,15 +124,12 @@ private:
 
 	FORCEINLINE void HealthUpdated()
 	{
+		auto lastSev = BlockInfo->HealthSeverity;
+		if (!BlockInfo->UpdateHealthSeverity())
+			return;	// severity has not changed
+
 		auto electricity = Cast<IBlockWithElectricity>(this);
 		if (electricity)
-		{
-			auto elComp = electricity->GetElectricityComponent();
-			ensure(elComp);
-
-			/*if (!elComp->Network || !elComp->Network->IsValidLowLevel())
-				return;*/
-			// TODO
-		}
+			electricity->RefreshHealthSeverity(lastSev);
 	}
 };

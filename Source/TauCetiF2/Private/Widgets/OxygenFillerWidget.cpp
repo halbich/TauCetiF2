@@ -6,16 +6,16 @@ void UOxygenFillerWidget::InitForBlock_Implementation(ABlock* block)
 	Super::InitForBlock_Implementation(block);
 
 	auto pc = Cast<ATauCetiF2Character>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-
 	ensure(pc);
 
 	InventoryComponent = Cast<UInventoryComponent>(pc->GetComponentByClass(UInventoryComponent::StaticClass()));
-
 	ensure(InventoryComponent);
 
 	CurrentBlock = Cast<AOxygenTankFillerBlock>(block);
-
 	ensure(CurrentBlock);
+
+	if (CurrentBlock && CurrentBlock->IsValidLowLevel() && CurrentBlock->ElectricityComponent && CurrentBlock->ElectricityComponent->IsValidLowLevel())
+		Network = CurrentBlock->ElectricityComponent->Network;
 }
 
 ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
@@ -23,9 +23,8 @@ ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
 	if (!CurrentBlock)
 		return NULL;
 
-	auto n = CurrentBlock->ElectricityComponent->Network;
 
-	for (auto c : n->ControllerBlocks)
+	for (auto c : Network->ControllerBlocks)
 	{
 		if (!c || !c->IsValidLowLevel() || c->IsPendingKill())
 			continue;

@@ -2,6 +2,7 @@
 
 #include "BlockBaseInfo.h"
 #include "BlockWithRelationsInfo.h"
+#include "Commons/Public/Enums.h"
 #include "BlockInfo.generated.h"
 
 /*
@@ -33,4 +34,40 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		UBlockWithRelationsInfo* RelationsInfo;
+
+	UPROPERTY(Transient)
+		EHealthSeverity HealthSeverity;
+
+
+	// updates severity of this block. Returns if severity has changed.
+	FORCEINLINE bool UpdateHealthSeverity()
+	{
+		auto old = HealthSeverity;
+
+		EHealthSeverity newSev;
+		ensure(MaxHealth > 0);
+		ensure(Health <= MaxHealth);
+
+		auto ratio = Health / MaxHealth;
+
+		if (ratio == 1.0f)
+			newSev = EHealthSeverity::OK;
+		else if (ratio >= 0.5f)
+			newSev = EHealthSeverity::ToRepair;
+		else if (ratio >= 0.25f)
+			newSev = EHealthSeverity::Important;
+		else if (ratio > 0)
+			newSev = EHealthSeverity::Critical;
+		else
+			newSev = EHealthSeverity::Dead;
+
+
+		if (old != newSev)
+		{
+			HealthSeverity = newSev;
+			return true;
+		}
+
+		return false;
+	}
 };

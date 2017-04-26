@@ -29,17 +29,29 @@ void ABlock::OnConstruction(const FTransform& Transform)
 		return;
 	}
 
-	auto genBlock = Cast<IGenericBlock>(this);
 	auto def = Definition->GetDefaultObject<UBlockDefinition>();
 
 	auto currentScale = GetBlockScale();
 
-	auto baseHealth = def->HealthSize * buildingCoeficient(def);
-	auto dimensions = def->GetMeshScale(currentScale);
-	BlockInfo->MaxHealth = baseHealth * dimensions.X * dimensions.Y * dimensions.Z;
-	BlockInfo->Health = FMath::Clamp(BlockInfo->Health, 0.0f, BlockInfo->MaxHealth);
-	HealthUpdated();
+	if (!BlockInfo->UnderConstruction) {
 
+		auto baseHealth = def->HealthSize * buildingCoeficient(def);
+		auto dimensions = def->GetMeshScale(currentScale);
+		BlockInfo->MaxHealth = baseHealth * dimensions.X * dimensions.Y * dimensions.Z;
+
+#if WITH_EDITOR
+
+		if (BlockInfo->Health <= 0)
+			BlockInfo->Health = BlockInfo->MaxHealth;
+
+#endif
+
+		BlockInfo->Health = FMath::Clamp(BlockInfo->Health, 0.0f, BlockInfo->MaxHealth);
+		HealthUpdated();
+	}
+
+
+	auto genBlock = Cast<IGenericBlock>(this);
 	int32 index = 0;
 
 	for (auto structureDef : def->MeshStructure)
@@ -68,13 +80,15 @@ void ABlock::OnConstruction(const FTransform& Transform)
 
 	genBlock->Execute_UpdateBlockOnConstruction(this, def);
 
-	if (def->ElectricityComponentDef.IsControlBlock)
-	{
-		if (!BlockInfo->RelationsInfo || !BlockInfo->RelationsInfo->IsValidLowLevel())
-			BlockInfo->RelationsInfo = NewObject<UBlockWithRelationsInfo>();
-	}
-	else {
-		ensure(!BlockInfo->RelationsInfo);
+	if (!BlockInfo->UnderConstruction) {
+		if (def->ElectricityComponentDef.IsControlBlock)
+		{
+			if (!BlockInfo->RelationsInfo || !BlockInfo->RelationsInfo->IsValidLowLevel())
+				BlockInfo->RelationsInfo = NewObject<UBlockWithRelationsInfo>();
+		}
+		else {
+			ensure(!BlockInfo->RelationsInfo);
+		}
 	}
 
 	Super::OnConstruction(Transform);
