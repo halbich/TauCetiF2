@@ -195,14 +195,14 @@ void AGeneratorBlock::Tick(float DeltaTime)
 
 void AGeneratorBlock::UpdateCustomTexture()
 {
-	try {
+	//try {
 
-		UpdateTextureRegions(DynamicTexture, 0, 1, updateTextureRegion, dataSqrtSize, (uint32)4, dynamicColors, false);
-	}
+	UpdateTextureRegions(DynamicTexture, 0, 1, updateTextureRegion, dataSqrtSize, (uint32)4, dynamicColors, false);
+	/*}
 	catch (...)
 	{
 
-	}
+	}*/
 	dynamicMaterials[0]->SetTextureParameterValue("DynamicTextureParam", DynamicTexture);
 }
 

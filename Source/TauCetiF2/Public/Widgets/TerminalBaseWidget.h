@@ -16,10 +16,10 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, EditAnywhere, Category = "TCF2 | TerminalBaseWidget")
 		FText BaseControlDisplayName;
-
+	
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | TerminalBaseWidget")
-		ATerminalBlock* CurrentBlock;
+		ATerminalBlock* Terminal;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | TerminalBaseWidget")
 		UElectricNetwork* Network;
