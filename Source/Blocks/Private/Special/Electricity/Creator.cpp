@@ -1,7 +1,6 @@
 #include "Blocks.h"
 #include "Creator.h"
 
-#pragma optimize("", off)
 ACreator::ACreator()
 	: Super()
 {
@@ -93,9 +92,7 @@ void ACreator::ComputeCreator()
 			return;
 	}
 
-	// TODO
-
-	/*auto left = NewObject<UMinMaxBox>();
+	auto left = NewObject<UMinMaxBox>();
 	left->InitBoxChecked(FVector(emptyBox->Min.X, twb->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Max.Z));
 	if (!checkForBlock(left, objectBoxes))
 		return;
@@ -118,7 +115,7 @@ void ACreator::ComputeCreator()
 	auto top = NewObject<UMinMaxBox>();
 	top->InitBoxChecked(FVector(emptyBox->Min.X, emptyBox->Min.Y, emptyBox->Max.Z), FVector(emptyBox->Max.X, emptyBox->Max.Y, twb->Max.Z));
 	if (!checkForBlock(top, objectBoxes))
-		return;*/
+		return;
 
 	pi->IsValidCreator = true;
 };
@@ -130,4 +127,3 @@ void ComputeCreator(ABlock* block)
 	c->ComputeCreator();
 }
 
-#pragma optimize("", on)

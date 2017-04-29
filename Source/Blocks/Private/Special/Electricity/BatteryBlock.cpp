@@ -1,7 +1,6 @@
 ﻿#include "Blocks.h"
 #include "BatteryBlock.h"
 
-#pragma optimize("", off)
 
 ABatteryBlock::ABatteryBlock()
 	: Super()
@@ -54,4 +53,3 @@ void ABatteryBlock::ListeningOnElectricityCompChanged(UBlockWithElectricityInfo*
 	mat->SetScalarParameterValue(TEXT("Filling"), source->GetRemainingPercentageUnit());
 }
 
-#pragma optimize("", on)

@@ -14,12 +14,11 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 }
 
 
-#pragma optimize("", off)
 
 void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	if (EndPlayReason == EEndPlayReason::Type::Quit)
-		return;
+	/*if (EndPlayReason == EEndPlayReason::Type::Quit)
+		return;*/
 
 	for (auto object : TreeElements)
 	{
@@ -48,4 +47,3 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 	WeatherTreeElements.Empty();
 }
-#pragma optimize("", on)

@@ -1,7 +1,6 @@
 #include "TauCetiF2.h"
 #include "GameWeatherComponent.h"
 
-#pragma optimize("", off)
 
 const float UGameWeatherComponent::EasingBorderValue = 1.0f / 10.0f;
 
@@ -175,4 +174,3 @@ void UGameWeatherComponent::InitComp()
 	WeatherRootTree->OnWeatherTargetsChanged.AddDynamic(this, &UGameWeatherComponent::OnTargetElementsChanged);
 }
 
-#pragma optimize("", on)

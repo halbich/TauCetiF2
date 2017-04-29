@@ -3,7 +3,6 @@
 #include "Object.h"
 #include "MinMaxBox.generated.h"
 
-#pragma optimize("", off)
 /**
  *
  */
@@ -105,4 +104,3 @@ protected:
 	}
 };
 
-#pragma optimize("", on)

@@ -1,8 +1,6 @@
 ﻿#include "Blocks.h"
 #include "OxygenComponent.h"
 
-#pragma optimize("", off)
-
 UOxygenComponent::UOxygenComponent() : InOutCritical()
 {
 	PrimaryComponentTick.bCanEverTick = false;
@@ -133,4 +131,3 @@ UBlockInfo* UOxygenComponent::GetBlockInfo()
 	return BlockInfo;
 }
 
-#pragma optimize("", on)

@@ -1,7 +1,6 @@
 ﻿#include "Blocks.h"
 #include "WeatherTargetsKDTree.h"
 
-#pragma optimize("", off)
 
 UWeatherTargetsKDTree* UWeatherTargetsKDTree::Init(FVector min, FVector max, int8 dividingIndex)
 {
@@ -179,4 +178,3 @@ void UWeatherTargetsKDTree::RemoveFromTree(UObject* obj)
 	}
 }
 
-#pragma optimize("", on)

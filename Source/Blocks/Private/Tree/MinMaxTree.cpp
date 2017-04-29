@@ -1,7 +1,6 @@
 ﻿#include "Blocks.h"
 #include "MinMaxTree.h"
 
-#pragma optimize("", off)
 
 UMinMaxTree* UMinMaxTree::Init(FVector min, FVector max)
 {
@@ -85,4 +84,3 @@ void UMinMaxTree::ChildrenDeleted()
 		parent->ChildrenDeleted();
 }
 
-#pragma optimize("", on)

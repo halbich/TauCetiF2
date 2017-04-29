@@ -3,7 +3,6 @@
 #include "Blocks/Public/Block.h"
 #include "WorldController.h"
 
-#pragma optimize("", off)
 
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -384,4 +383,3 @@ void AWorldController::DestroyRequestEventHandler(ABlock* block)
 	//DestroyWorldObject(block);
 }
 
-#pragma optimize("", on)

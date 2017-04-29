@@ -1,7 +1,6 @@
 #include "Blocks.h"
 #include "ElectricityBindableAreaInfo.h"
 
-#pragma optimize("", off)
 
 void UElectricityBindableAreaInfo::InitArea(TArray<FVector> usedPoints, FElectricityBindableArea& definedPlane, FVector& blockScale, FRotator& blockRotation, FVector worldLocation)
 {
@@ -82,5 +81,3 @@ FBox UElectricityBindableAreaInfo::GetBox()
 
 	return FBox(min, max);
 }
-
-#pragma optimize("", on)

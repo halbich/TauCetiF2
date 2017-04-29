@@ -1,8 +1,6 @@
 ﻿#include "Blocks.h"
 #include "ElectricityComponent.h"
 
-#pragma optimize("", off)
-
 UElectricityComponent::UElectricityComponent() : InOutCritical()
 {
 	PrimaryComponentTick.bCanEverTick = false;
@@ -196,4 +194,3 @@ UBlockInfo* UElectricityComponent::GetBlockInfo()
 	return BlockInfo;
 }
 
-#pragma optimize("", on)

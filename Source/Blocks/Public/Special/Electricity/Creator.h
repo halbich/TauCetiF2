@@ -7,7 +7,6 @@
 #include "Info/PatternImplementation/CreatorPatternGroupInfo.h"
 #include "Creator.generated.h"
 
-#pragma optimize("", off)
 
 /**
  *
@@ -101,4 +100,3 @@ private:
 	}
 };
 
-#pragma optimize("", on)

@@ -1,7 +1,6 @@
 #include "TauCetiF2.h"
 #include "GameElectricityComponent.h"
 
-#pragma optimize("", off)
 
 const double UGameElectricityComponent::maxFloatingTime(1.0 / 30.0);		// we want to have at least 30 FPS
 
@@ -89,4 +88,3 @@ void UGameElectricityComponent::RemoveFromWorldNetwork(UElectricityComponent* co
 	SectionLock.Unlock();
 }
 
-#pragma optimize("", on)

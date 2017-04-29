@@ -14,7 +14,6 @@ ABlock::ABlock()
 	WorldObjectComponent = CreateDefaultSubobject<UWorldObjectComponent>(TEXT("WorldObjectComponent"));
 }
 
-#pragma optimize("", off)
 
 void ABlock::OnConstruction(const FTransform& Transform)
 {
@@ -335,4 +334,3 @@ bool ABlock::GetIsController()
 	return d->HasElectricityComponent && d->ElectricityComponentDef.IsControlBlock && d->ElectricityComponentDef.IsController;
 }
 
-#pragma optimize("",on)

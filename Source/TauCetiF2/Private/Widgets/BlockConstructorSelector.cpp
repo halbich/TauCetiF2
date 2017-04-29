@@ -38,7 +38,6 @@ void UBlockConstructorSelector::SynchronizeProperties()
 	Super::SynchronizeProperties();
 }
 
-#pragma optimize("", off)
 TArray<UInventoryFlagItem*> UBlockConstructorSelector::GetAdditionalParams()
 {
 	TArray<UInventoryFlagItem*> result;
@@ -79,4 +78,3 @@ UTexture2D* UBlockConstructorSelector::GetBlockTexture()
 	return BlockDefinition->BlockImage;
 }
 
-#pragma optimize("", on)

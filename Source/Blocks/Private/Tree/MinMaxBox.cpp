@@ -23,7 +23,6 @@ UMinMaxBox* UMinMaxBox::InitBoxChecked(FVector min, FVector max)
 	return InitBox(tmin, tmax);
 }
 
-#pragma optimize("", off)
 bool UMinMaxBox::HasCommonBoundaries(const UMinMaxBox* box1, const UMinMaxBox* box2)
 {
 	ensure(box1 != nullptr && box1->IsValidLowLevel());
@@ -47,4 +46,3 @@ bool UMinMaxBox::HasCommonBoundaries(const UMinMaxBox* box1, const UMinMaxBox* b
 
 	return sX || sY || sZ;
 }
-#pragma optimize("", on)

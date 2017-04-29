@@ -9,11 +9,16 @@ void UBlockHolder::ReinitializeAviableBlocks()
 	lib->AddToRoot();
 	int32 loaded = lib->LoadBlueprintAssetDataFromPath("/Game/Blocks");
 
+	UE_LOG(LogTemp, Log, TEXT("Found assets: %d"), loaded)
+
 	TArray<FAssetData> Assets;
 	lib->GetAssetDataList(Assets);
 
 	for (auto& a : Assets)
 	{
+
+		UE_LOG(LogTemp, Log, TEXT("Found asset: %s"), *a.AssetName.ToString())
+
 		auto bp = Cast<UBlueprint>(a.GetAsset());
 		if (bp)
 		{
@@ -26,7 +31,6 @@ void UBlockHolder::ReinitializeAviableBlocks()
 		}
 
 		auto generatedClassName = (a.AssetName.ToString() + "_C");
-
 		UClass* genClass = FindObject<UClass>(a.GetPackage(), *generatedClassName);
 		if (genClass && genClass->IsChildOf(ABlock::StaticClass()))
 		{
@@ -48,6 +52,8 @@ void UBlockHolder::ReinitializeAviableBlocks()
 	AviableBlocks.KeySort([](int32 A, int32 B) {
 		return A < B; // sort keys in reverse
 	});
+
+	UE_LOG(LogTemp, Log, TEXT("Aviable assets: %d"), AviableBlocks.Num())
 }
 
 void UBlockHolder::tryAddBlockToAviables(UClass* blockClass)

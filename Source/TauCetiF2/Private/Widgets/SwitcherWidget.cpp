@@ -1,7 +1,6 @@
 #include "TauCetiF2.h"
 #include "SwitcherWidget.h"
 
-#pragma optimize("", off)
 
 void USwitcherWidget::InitForBlock_Implementation(ABlock* block)
 {
@@ -37,4 +36,3 @@ void USwitcherWidget::GetControllables(TArray<ABlock*>& aviables, TArray<ABlock*
 	}
 }
 
-#pragma optimize("", on)
