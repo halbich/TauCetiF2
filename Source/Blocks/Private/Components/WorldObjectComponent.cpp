@@ -17,8 +17,10 @@ void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 
 void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	/*if (EndPlayReason == EEndPlayReason::Type::Quit)
-		return;*/
+	auto isFinalEndGame = EndPlayReason == EEndPlayReason::Type::Quit || EndPlayReason == EEndPlayReason::Type::EndPlayInEditor;
+
+	if (isFinalEndGame)
+		RootBox->watchedGroups.Empty();
 
 	for (auto object : TreeElements)
 	{
