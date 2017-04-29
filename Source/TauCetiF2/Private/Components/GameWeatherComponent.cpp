@@ -97,6 +97,9 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (!TickingEnabled)
+		return;
+
 	if (StormState == EStormState::NoStorm)
 		return;
 

@@ -32,6 +32,10 @@ protected:
 		float Max;
 
 public:
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | GameElectricityComponent")
+		bool TickingEnabled;
+
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void AddToWorldNetwork(UElectricityComponent* comp);

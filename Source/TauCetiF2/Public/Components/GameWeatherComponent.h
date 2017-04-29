@@ -24,6 +24,9 @@ public:
 	// Sets default values for this component's properties
 	UGameWeatherComponent();
 
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | GameElectricityComponent")
+		bool TickingEnabled;
+
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | GameWeatherComponent")
 		UCurrentWeatherState* currentWeatherState;
 

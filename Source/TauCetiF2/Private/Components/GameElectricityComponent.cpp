@@ -19,7 +19,9 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	return;
+	if (!TickingEnabled)
+		return;
+
 
 	auto time = FPlatformTime::Seconds() + maxFloatingTime;
 
