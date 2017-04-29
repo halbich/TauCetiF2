@@ -131,12 +131,4 @@ void ADoorBlock::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 }
 
-void ADoorBlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
-{
 
-	auto bcenter = FVector(blockHitLocation);
-	auto bextend = FVector(10,10,10);
-	DrawDebugBox(GetWorld(), bcenter, bextend, FColor::Yellow, true);
-
-	Super::WasHitByStorm(blockHitLocation, amount);
-}

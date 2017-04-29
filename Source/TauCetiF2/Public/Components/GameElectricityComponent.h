@@ -56,7 +56,7 @@ private:
 	FORCEINLINE UElectricNetwork* addToNetwork(UElectricityComponent* comp, UElectricNetwork* network)
 	{
 		ensure(comp->Network != network);
-		
+
 		auto r = comp->Network = network;
 		r->RegisterEntity(comp);
 		return r;
@@ -82,13 +82,86 @@ private:
 		smaller->MarkPendingKill();
 	}
 
+	/*FORCEINLINE*/ void healGroup(UElectricNetwork* n, float& maxAviable, const float maxAviableLimit, TArray<UElectricityComponent*> & healItems, TQueue<UElectricityComponent*>& checkStatus)
+	{
+		auto inRec = n->NetworkState == EElectricNetworkState::InRecompute;
+
+		auto p = n->ElectricityProducers.Num();
+		auto pc = p + n->ElectricityStorages.Num();
+
+		auto cc = healItems.Num();
+		if (cc > 0 && pc > 0 && maxAviable > 0)
+		{
+			for (int32 i = 0; i < cc; i++)
+			{
+				if (FMath::IsNearlyZero(maxAviable))
+					return;
+
+				auto ind = FMath::RandHelper(cc);	ensure(healItems.IsValidIndex(ind));
+
+				auto consElem = healItems[ind];
+				if (inRec && consElem->ComponentNetworkState != EElectricNetworkState::Valid)
+					continue;
+
+				auto missingHealthEnergy = FMath::Max(0.0f, consElem->BlockInfo->MaxHealth - consElem->BlockInfo->Health) * GameDefinitions::HealthToEnergy;
+
+				// TODO take only percentage
+
+				auto missingPercentage = FMath::Min(missingHealthEnergy, maxAviable);
+
+				if (FMath::IsNearlyZero(missingPercentage))
+					continue;
+
+				auto producerSelect = FMath::RandHelper(pc);
+
+				UElectricityComponent* elemProducer;
+				if (producerSelect < p)
+				{
+					// we are in producers part
+					ensure(n->ElectricityProducers.IsValidIndex(producerSelect));
+
+					elemProducer = n->ElectricityProducers[producerSelect];
+					if (inRec && elemProducer->ComponentNetworkState != EElectricNetworkState::Valid)
+						continue;
+				}
+				else
+				{
+					producerSelect -= p;
+
+					// we are in storage part
+					ensure(n->ElectricityStorages.IsValidIndex(producerSelect));
+
+					elemProducer = n->ElectricityStorages[producerSelect];
+					if (inRec && elemProducer->ComponentNetworkState != EElectricNetworkState::Valid)
+						continue;
+				}
+
+				float actuallyPutted = 0;
+				float actuallyObtained = 0;
+				float actuallyReturned = 0;
+				if (elemProducer->ObtainAmount(missingPercentage, actuallyObtained))
+				{
+					// TODO actually heal
+					consElem->BlockInfo->Health = FMath::Clamp(actuallyObtained*GameDefinitions::EnergyToHealth + consElem->BlockInfo->Health, 0.0f, consElem->BlockInfo->MaxHealth);
+
+					maxAviable -= actuallyObtained;
+
+					checkStatus.Enqueue(consElem);
+				}
+			}
+		}
+	}
+
+
 	/*FORCEINLINE*/ void doHealing(UElectricNetwork* n, float& maxAviable)
 	{
 		float totalElectricityAviable = maxAviable;
 
+		TQueue<UElectricityComponent*> checkStatus;
 		float criticalAviable = 0.5f * totalElectricityAviable;
+		float importantAviable = 0.5f * criticalAviable;
+		float repairAviable = importantAviable;
 
-		totalElectricityAviable -= criticalAviable;
 
 		// TODO
 		float criticalHealth = 0.0f;
@@ -96,50 +169,48 @@ private:
 		{
 			if (critical->ComponentNetworkState == EElectricNetworkState::Valid)
 				criticalHealth += critical->BlockInfo->Health;
-			/*auto owner = Cast<ABlock>(critical->GetOwner());
-			ensure(owner);
-*/
-// TODO get (required, divide it by totalCritical required) and multiply by aviable
-//owner->Heal(...);
 		}
 
 		n->CriticalRepairHealth = criticalHealth;
 		n->CriticalRepairHealthPercentage = FMath::IsNearlyZero(n->CriticalRepairMaxHealth) ? 0 : criticalHealth / n->CriticalRepairMaxHealth;
-
-		// TODO badly, to reapir
+		healGroup(n, maxAviable, criticalAviable, n->CriticalRepairEntities, checkStatus);
 
 		float importantHealth = 0.0f;
 		for (auto important : n->ImportantRepairEntities)
 		{
 			if (important->ComponentNetworkState == EElectricNetworkState::Valid)
 				importantHealth += important->BlockInfo->Health;
-
-			auto owner = Cast<ABlock>(important->GetOwner());
-			ensure(owner);
-
-			// TODO get (required, divide it by totalCritical required) and multiply by aviable
-			//	owner->HealthUpdated()
 		}
 
 		n->ImportantRepairHealth = importantHealth;
 		n->ImportantRepairHealthPercentage = FMath::IsNearlyZero(n->ImportantRepairMaxHealth) ? 0 : importantHealth / n->ImportantRepairMaxHealth;
+		healGroup(n, maxAviable, importantAviable, n->ImportantRepairEntities, checkStatus);
 
 		float repairHealth = 0.0f;
 		for (auto toRepair : n->ToRepairEntities)
 		{
 			if (toRepair->ComponentNetworkState == EElectricNetworkState::Valid)
 				repairHealth += toRepair->BlockInfo->Health;
-
-			/*auto owner = Cast<ABlock>(toRepair->GetOwner());
-			ensure(owner);*/
-
-			// TODO get (required, divide it by totalCritical required) and multiply by aviable
-			//	owner->HealthUpdated()
 		}
 
 		n->ToRepairHealth = repairHealth;
 		n->ToRepairHealthPercentage = FMath::IsNearlyZero(n->ToRepairMaxHealth) ? 0 : repairHealth / n->ToRepairMaxHealth;
+		healGroup(n, maxAviable, repairAviable, n->ToRepairEntities, checkStatus);
+
+
+		UElectricityComponent* c;
+		while (checkStatus.Dequeue(c))
+		{
+			auto lastSev = c->BlockInfo->HealthSeverity;
+			if (!c->BlockInfo->UpdateHealthSeverity())
+				continue;	// severity has not changed
+
+			n->RefreshHealthSeverity(c, lastSev);
+		}
 	}
+
+
+
 
 	/*FORCEINLINE*/ void tickUpdateNetwork(UElectricNetwork* n, float deltaTime)
 	{
@@ -201,16 +272,15 @@ private:
 
 		auto inRec = n->NetworkState == EElectricNetworkState::InRecompute;
 
-		auto p = n->ProducersCount;
-		auto pc = p + n->StoragesCount;
+		auto p = n->ElectricityProducers.Num();
+		auto pc = p + n->ElectricityStorages.Num();
 
-		auto cc = n->ConsumersCount;
+		auto cc = n->ElectricityConsumers.Num();
 		if (cc > 0 && pc > 0 && maxAviable > 0)
 		{
 			for (int32 i = 0; i < cc; i++)
 			{
-				auto ind = FMath::RandHelper(cc);
-				ensure(n->ElectricityConsumers.IsValidIndex(ind));
+				auto ind = FMath::RandHelper(cc);	ensure(n->ElectricityConsumers.IsValidIndex(ind));
 
 				auto consElem = n->ElectricityConsumers[ind];
 				if (inRec && consElem->ComponentNetworkState != EElectricNetworkState::Valid)
@@ -376,7 +446,7 @@ private:
 			}
 			networksTodelete.Empty();
 
-		
+
 		}
 	}
 };

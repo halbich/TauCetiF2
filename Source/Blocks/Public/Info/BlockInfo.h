@@ -54,7 +54,7 @@ public:
 			newSev = EHealthSeverity::OK;
 		else if (ratio >= 0.5f)
 			newSev = EHealthSeverity::ToRepair;
-		else if (ratio >= 0.25f)
+		else if (ratio >= 0.20f)
 			newSev = EHealthSeverity::Important;
 		else if (ratio > 0)
 			newSev = EHealthSeverity::Critical;
