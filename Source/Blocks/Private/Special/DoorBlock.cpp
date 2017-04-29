@@ -104,7 +104,7 @@ void ADoorBlock::Tick(float DeltaSeconds)
 	auto currentYaw = DoorBlockMesh->GetRelativeTransform().Rotator().Yaw;
 	auto openingConstant = (doorOpening == EDoorOpening::Left && doorState == EDoorState::Closing) ||
 		(doorOpening == EDoorOpening::Right && doorState == EDoorState::Opening) ? -1 : 1;
-	auto rotAdd = DeltaSeconds * openingConstant * 180;
+	auto rotAdd = DeltaSeconds * openingConstant * 180 * 0.1;		// TODO remove last constant
 
 	auto newRot = currentYaw + rotAdd;
 	if (doorState == EDoorState::Opening)
@@ -129,4 +129,14 @@ void ADoorBlock::Tick(float DeltaSeconds)
 	updateDoorState(currentTrans, openingConstant);
 
 	Super::Tick(DeltaSeconds);
+}
+
+void ADoorBlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
+{
+
+	auto bcenter = FVector(blockHitLocation);
+	auto bextend = FVector(10,10,10);
+	DrawDebugBox(GetWorld(), bcenter, bextend, FColor::Yellow, true);
+
+	Super::WasHitByStorm(blockHitLocation, amount);
 }

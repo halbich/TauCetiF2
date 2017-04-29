@@ -7,7 +7,7 @@ const double UGameElectricityComponent::maxFloatingTime(1.0 / 30.0);		// we want
 
 // Sets default values for this component's properties
 
-UGameElectricityComponent::UGameElectricityComponent() : Super(), networksToUpdate()
+UGameElectricityComponent::UGameElectricityComponent() : Super(), networksToUpdate(), SectionLock()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 
@@ -31,41 +31,62 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 
 	}
 
+	SectionLock.Lock();
 
-	if (networksToUpdate.IsEmpty())
-		return;
+	if (!networksToUpdate.IsEmpty())
+		tickRecomputeNetwork(time);
 
-	tickRecomputeNetwork(time);
+	SectionLock.Unlock();
 }
 
 void UGameElectricityComponent::AddToWorldNetwork(UElectricityComponent* comp)
 {
+	SectionLock.Lock();
+
 	ensure(!comp->Network);
 
 	auto n = addToNetwork(comp, NewObject<UElectricNetwork>());
+	networks.AddUnique(n);
 
 	enqueueItem(comp);
 
 	networksToUpdate.Enqueue(n);
+
+	SectionLock.Unlock();
 }
 
 void UGameElectricityComponent::RemoveFromWorldNetwork(UElectricityComponent* comp)
 {
+	SectionLock.Lock();
 	ensure(comp && comp->Network);
+
+	FString w;
+	switch (comp->ComponentNetworkState)
+	{
+	case EElectricNetworkState::Invalid: w = TEXT("Invalid"); break;
+	case EElectricNetworkState::InRecompute:  w = TEXT("InRecompute"); break;
+	case EElectricNetworkState::Valid:  w = TEXT("Valid"); break;
+
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("Removing for %s from %s, state: %s"), *comp->BlockInfo->GetName(), *comp->Network->GetName(), *w);
 
 	comp->Network->ForceInvalidateNetwork();
 	comp->Network->UnregisterEntity(comp);
+	networksTodelete.AddUnique(comp->Network);
 
 	for (auto connected : comp->ConnectedComponents)
 	{
 		connected->Network->UnregisterEntity(connected);
 
 		auto n = addToNetwork(connected, NewObject<UElectricNetwork>());
+		networks.AddUnique(n);
 		enqueueItem(connected);
 		networksToUpdate.Enqueue(n);
 	}
 
-	networksTodelete.AddUnique(comp->Network);
+
+	SectionLock.Unlock();
 }
 
 #pragma optimize("", on)

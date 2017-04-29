@@ -53,13 +53,9 @@ TArray<UBuildableBlockInfo*> UBlockConstructor::GetAllBuildableBlocks()
 		if (!def->IsSystemAction && def->IsBuildable)
 		{
 			auto b = UBuildableBlockInfo::GetBuildable(def);
-
 			auto max = def->HasCustomScaling ? def->CustomBlockScale : def->MinBlockScale;
-
 			auto limit = FMath::Max(ScaleLimit.X, ScaleLimit.Y);
-
 			b->BlockConstructorDisabled = !v || max.X > limit || max.Y > limit || max.Z > limit;
-
 			result.Add(b);
 		}
 	}
@@ -78,6 +74,7 @@ void UBlockConstructor::InitForBlock_Implementation(ABlock* block)
 	ensure(wb);
 
 	ScaleLimit = ((wb->Max - wb->Min) / GameDefinitions::CubeMinSize).GridSnap(1);
+	ScaleLimit.Z = FMath::Max(ScaleLimit.X, ScaleLimit.Y);
 }
 
 FText UBlockConstructor::GetDisplayTextExtended_Implementation()

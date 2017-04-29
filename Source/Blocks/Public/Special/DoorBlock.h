@@ -60,6 +60,8 @@ public:
 
 	virtual void SetBlockInfo(UBlockInfo* info) override;
 
+	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount) override;
+
 	FDelegateHandle ListeningHandle;
 
 private:

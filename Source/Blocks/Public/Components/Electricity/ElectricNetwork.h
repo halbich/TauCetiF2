@@ -244,8 +244,11 @@ public:
 	{
 		NetworkState = EElectricNetworkState::Invalid;
 		for (auto netEnt : Entities)
+		{
 			netEnt->ComponentNetworkState = EElectricNetworkState::Invalid;
 
+			UE_LOG(LogTemp, Log , TEXT("Invalidationg for part: %s in network %s"), *netEnt->GetName(), *netEnt->Network->GetName());
+		}
 		ToRecompute.Empty();
 	}
 

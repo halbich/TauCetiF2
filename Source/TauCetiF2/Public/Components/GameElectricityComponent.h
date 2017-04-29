@@ -26,7 +26,6 @@ protected:
 	UPROPERTY(Transient)
 		TArray<UElectricNetwork*> networks;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | GameElectricityComponent")
 		float CustomTickInterval;
 
@@ -43,16 +42,21 @@ public:
 private:
 
 	static const double maxFloatingTime;
+	FCriticalSection SectionLock;
 
 	FORCEINLINE void enqueueItem(UElectricityComponent* comp) {
 		comp->ComponentNetworkState = EElectricNetworkState::InRecompute;
+
+		UE_LOG(LogTemp, Log, TEXT("InRecompute for part: %s in network %s"), *comp->BlockInfo->GetName(), *comp->Network->GetName());
+
 		comp->Network->ToRecompute.Enqueue(comp);
 		comp->Network->NetworkState = EElectricNetworkState::InRecompute;
 	}
 
 	FORCEINLINE UElectricNetwork* addToNetwork(UElectricityComponent* comp, UElectricNetwork* network)
 	{
-		networks.AddUnique(network);
+		ensure(comp->Network != network);
+		
 		auto r = comp->Network = network;
 		r->RegisterEntity(comp);
 		return r;
@@ -61,6 +65,8 @@ private:
 	/*FORCEINLINE*/ void mergeNetworks(UElectricNetwork* bigger, UElectricNetwork* smaller)
 	{
 		ensure(!networksTodelete.Contains(bigger));
+
+		UE_LOG(LogTemp, Log, TEXT("Merging nets: bigger %s, smaller: %s"), *bigger->GetName(), *smaller->GetName());
 
 		for (auto smEnt : smaller->Entities)
 			addToNetwork(smEnt, bigger);
@@ -111,14 +117,12 @@ private:
 			auto owner = Cast<ABlock>(important->GetOwner());
 			ensure(owner);
 
-
 			// TODO get (required, divide it by totalCritical required) and multiply by aviable
 			//	owner->HealthUpdated()
 		}
 
 		n->ImportantRepairHealth = importantHealth;
 		n->ImportantRepairHealthPercentage = FMath::IsNearlyZero(n->ImportantRepairMaxHealth) ? 0 : importantHealth / n->ImportantRepairMaxHealth;
-
 
 		float repairHealth = 0.0f;
 		for (auto toRepair : n->ToRepairEntities)
@@ -135,10 +139,7 @@ private:
 
 		n->ToRepairHealth = repairHealth;
 		n->ToRepairHealthPercentage = FMath::IsNearlyZero(n->ToRepairMaxHealth) ? 0 : repairHealth / n->ToRepairMaxHealth;
-
 	}
-
-
 
 	/*FORCEINLINE*/ void tickUpdateNetwork(UElectricNetwork* n, float deltaTime)
 	{
@@ -169,7 +170,6 @@ private:
 		n->StoragesEnergyAviable = storagesEnergyAviable;
 		n->StoragesEnergyAviableFilling = FMath::IsNearlyZero(n->StoragesEnergyMaxAviable) ? 0 : storagesEnergyAviable / n->StoragesEnergyMaxAviable;
 
-
 		float consumedEnergy = 0.0f;
 		// aviable from consumers
 		auto consumersEnergyAviable = 0.0f;
@@ -194,9 +194,7 @@ private:
 		n->NetworkHealth = totalHealth;
 		n->NetworkHealthPercentage = FMath::IsNearlyZero(n->NetworkMaxHealth) ? 0 : totalHealth / n->NetworkMaxHealth;
 
-
 		auto maxAviable = producersEnergyAviable + storagesEnergyAviable;
-
 
 		if (maxAviable > 0)
 			doHealing(n, maxAviable);
@@ -245,7 +243,6 @@ private:
 					elem = n->ElectricityStorages[producerSelect];
 					if (inRec && elem->ComponentNetworkState != EElectricNetworkState::Valid)
 						continue;
-
 				}
 
 				float actuallyPutted = 0;
@@ -261,13 +258,8 @@ private:
 
 					elem->PutAmount(actuallyObtained, actuallyReturned);
 				}
-
-
 			}
-
-
 		}
-
 	}
 
 	/*FORCEINLINE*/ void processNetwork(UElectricNetwork* network)
@@ -275,12 +267,14 @@ private:
 		UElectricityComponent* part;
 		auto deq = network->ToRecompute.Dequeue(part);
 
-		if (!deq || !part || !part->IsValidLowLevel() || part->IsPendingKill())
+		if (!deq || !part || !part->IsValidLowLevel() || part->IsPendingKill() || part->Network != network)
 			return;
 
+		UE_LOG(LogTemp, Log, TEXT("Valid for part: %s in network %s"), *part->BlockInfo->GetName(), *part->Network->GetName());
 		ensure(part->ComponentNetworkState == EElectricNetworkState::InRecompute);
 
 		part->ComponentNetworkState = EElectricNetworkState::Valid;
+
 
 		// new block without connections
 		if (part->ConnectedComponents.Num() == 0)
@@ -356,6 +350,21 @@ private:
 
 		if (networksToUpdate.IsEmpty())
 		{
+			for (auto n : networks)
+			{
+				if (networksTodelete.Contains(n))
+					continue;
+
+				if (n->Entities.Num() == 0)
+				{
+					networksTodelete.AddUnique(n);
+					continue;
+				}
+
+				n->CheckControlBlocks();
+			}
+
+
 			for (auto toDel : networksTodelete)
 			{
 				auto rem = networks.Remove(toDel);
@@ -367,13 +376,9 @@ private:
 			}
 			networksTodelete.Empty();
 
-			for (auto n : networks)
-				n->CheckControlBlocks();
-
-			SetComponentTickInterval(CustomTickInterval);	// revert to base ticking
+		
 		}
 	}
-
 };
 
 #pragma optimize("", on)
