@@ -59,6 +59,7 @@ enum class ENamedHardcodedLevel : uint8
 {
 	MainMenu,
 	DefaultLevel,
+	MiniLevel,
 	EmptyLevel,
 	HardcodedLevelsMax
 };

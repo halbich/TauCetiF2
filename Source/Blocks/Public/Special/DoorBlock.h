@@ -70,6 +70,8 @@ private:
 
 	void updateDoorState(FTransform& currentTrans, int32 openingConstant)
 	{
+		ensure(BlockInfo->ID == DoorID);
+
 		BlockInfo->BlockSpecificData[DoorBlockConstants::DoorState] = FString::FromInt((uint8)doorState);
 		BlockInfo->BlockSpecificData[DoorBlockConstants::DoorYaw] = FString::SanitizeFloat(currentTrans.Rotator().Yaw);
 

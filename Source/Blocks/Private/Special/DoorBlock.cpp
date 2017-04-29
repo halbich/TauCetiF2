@@ -44,13 +44,16 @@ void ADoorBlock::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-	auto valueptr = info->AdditionalFlags.Find(TEXT("DoorOpening"));
+
+	ensure(BlockInfo->ID == DoorID);
+
+	auto valueptr = BlockInfo->AdditionalFlags.Find(TEXT("DoorOpening"));
 	if (valueptr)
 		doorOpening = (EDoorOpening)(*valueptr);
 
 	auto openingConstant = doorOpening == EDoorOpening::Left ? 1 : -1;
 
-	auto state = info->BlockSpecificData.FindOrAdd(DoorBlockConstants::DoorState);
+	auto state = BlockInfo->BlockSpecificData.FindOrAdd(DoorBlockConstants::DoorState);
 	if (state.IsEmpty())
 	{
 		doorState = EDoorState::Opened;

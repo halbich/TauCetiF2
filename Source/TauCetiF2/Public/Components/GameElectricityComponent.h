@@ -6,7 +6,6 @@
 #include "Commons/Public/Enums.h"
 #include "GameElectricityComponent.generated.h"
 
-#pragma optimize("", off)
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TAUCETIF2_API UGameElectricityComponent : public UActorComponent
@@ -46,9 +45,6 @@ private:
 
 	FORCEINLINE void enqueueItem(UElectricityComponent* comp) {
 		comp->ComponentNetworkState = EElectricNetworkState::InRecompute;
-
-		UE_LOG(LogTemp, Log, TEXT("InRecompute for part: %s in network %s"), *comp->BlockInfo->GetName(), *comp->Network->GetName());
-
 		comp->Network->ToRecompute.Enqueue(comp);
 		comp->Network->NetworkState = EElectricNetworkState::InRecompute;
 	}
@@ -62,11 +58,9 @@ private:
 		return r;
 	}
 
-	/*FORCEINLINE*/ void mergeNetworks(UElectricNetwork* bigger, UElectricNetwork* smaller)
+	FORCEINLINE void mergeNetworks(UElectricNetwork* bigger, UElectricNetwork* smaller)
 	{
 		ensure(!networksTodelete.Contains(bigger));
-
-		UE_LOG(LogTemp, Log, TEXT("Merging nets: bigger %s, smaller: %s"), *bigger->GetName(), *smaller->GetName());
 
 		for (auto smEnt : smaller->Entities)
 			addToNetwork(smEnt, bigger);
@@ -82,7 +76,7 @@ private:
 		smaller->MarkPendingKill();
 	}
 
-	/*FORCEINLINE*/ void healGroup(UElectricNetwork* n, float& maxAviable, const float maxAviableLimit, TArray<UElectricityComponent*> & healItems, TQueue<UElectricityComponent*>& checkStatus)
+	FORCEINLINE void healGroup(UElectricNetwork* n, float& maxAviable, const float maxAviableLimit, TArray<UElectricityComponent*> & healItems, TQueue<UElectricityComponent*>& checkStatus)
 	{
 		auto inRec = n->NetworkState == EElectricNetworkState::InRecompute;
 
@@ -154,7 +148,7 @@ private:
 		}
 	}
 
-	/*FORCEINLINE*/ void doHealing(UElectricNetwork* n, float& maxAviable)
+	FORCEINLINE void doHealing(UElectricNetwork* n, float& maxAviable)
 	{
 		float totalElectricityAviable = maxAviable;
 
@@ -208,7 +202,7 @@ private:
 		}
 	}
 
-	/*FORCEINLINE*/ void tickUpdateNetwork(UElectricNetwork* n, float deltaTime)
+	FORCEINLINE void tickUpdateNetwork(UElectricNetwork* n, float deltaTime)
 	{
 		auto t = GameDefinitions::GameDayMultiplier * deltaTime;
 
@@ -350,7 +344,6 @@ private:
 		if (!deq || !part || !part->IsValidLowLevel() || part->IsPendingKill() || part->Network != network)
 			return;
 
-		UE_LOG(LogTemp, Log, TEXT("Valid for part: %s in network %s"), *part->BlockInfo->GetName(), *part->Network->GetName());
 		ensure(part->ComponentNetworkState == EElectricNetworkState::InRecompute);
 
 		part->ComponentNetworkState = EElectricNetworkState::Valid;
@@ -457,4 +450,3 @@ private:
 	}
 };
 
-#pragma optimize("", on)

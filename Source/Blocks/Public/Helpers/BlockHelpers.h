@@ -156,7 +156,7 @@ namespace BlockSavingHelpers {
 		info->ID = block.ID;
 		info->Scale = block.Scale;
 		info->Name = block.Name;
-		info->AdditionalFlags = block.AdditionalFlags;
+		info->AdditionalFlags = TMap<FString, int32>(block.AdditionalFlags);
 
 		if (block.HasOxygenData)
 		{
@@ -175,7 +175,7 @@ namespace BlockSavingHelpers {
 		block.ID = info->ID;
 		block.Scale = info->Scale;
 		block.Name = info->Name;
-		block.AdditionalFlags = info->AdditionalFlags;
+		block.AdditionalFlags = TMap<FString, int32>(info->AdditionalFlags);
 
 		if (info->OxygenInfo && info->OxygenInfo->IsValidLowLevel())
 		{
@@ -195,7 +195,7 @@ namespace BlockSavingHelpers {
 		info->Location = block.Location;
 		info->Rotation = block.Rotation;
 		info->Health = block.Health;
-		info->BlockSpecificData = block.BlockSpecificData;
+		info->BlockSpecificData = TMap<FString, FString>(block.BlockSpecificData);
 
 		if (block.HasRelationshipData)
 		{
@@ -209,7 +209,7 @@ namespace BlockSavingHelpers {
 		block.Location = info->Location;
 		block.Rotation = info->Rotation;
 		block.Health = info->Health;
-		block.BlockSpecificData = info->BlockSpecificData;
+		block.BlockSpecificData = TMap<FString, FString>(info->BlockSpecificData);
 
 		if (info->RelationsInfo && info->RelationsInfo->IsValidLowLevel())
 		{

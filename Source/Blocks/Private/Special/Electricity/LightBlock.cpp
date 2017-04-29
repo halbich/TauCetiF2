@@ -37,13 +37,15 @@ void ALightBlock::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-	auto state = info->BlockSpecificData.FindOrAdd(LightBlockConstants::IsAutoregulated);
+	ensure(BlockInfo->ID == LightSmallID);
+
+	auto state = BlockInfo->BlockSpecificData.FindOrAdd(LightBlockConstants::IsAutoregulated);
 	if (state.IsEmpty())
 		BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
 	else
 		AutoregulatePowerOutput = FCString::Atoi(*state) > 0 ? true : false;
 
-	auto state1 = info->BlockSpecificData.FindOrAdd(LightBlockConstants::IsOn);
+	auto state1 = BlockInfo->BlockSpecificData.FindOrAdd(LightBlockConstants::IsOn);
 	if (state1.IsEmpty())
 		BlockInfo->BlockSpecificData[LightBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
 	else
@@ -134,6 +136,8 @@ void ALightBlock::OnNightChanged(bool isNight) {
 
 void ALightBlock::SetControlState_Implementation(bool isOn) {
 	IsOn = isOn;
+
+	ensure(BlockInfo->ID == LightSmallID);
 	BlockInfo->BlockSpecificData[LightBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
 	updateUsingMessage();
 }
@@ -179,5 +183,7 @@ void ALightBlock::UpdateAutoregulate(bool newAutoregulate)
 {
 	AutoregulatePowerOutput = newAutoregulate;
 
+
+	ensure(BlockInfo->ID == LightSmallID);
 	BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
 }

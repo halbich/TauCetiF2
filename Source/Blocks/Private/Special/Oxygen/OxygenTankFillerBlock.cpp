@@ -47,15 +47,17 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
+
+	ensure(BlockInfo->ID == OxygenTankFillerID);
 	auto currentF = 0.0f;
-	auto filling = info->BlockSpecificData.FindOrAdd(OxygenFillerBlockConstants::CurrentFilling);
+	auto filling = BlockInfo->BlockSpecificData.FindOrAdd(OxygenFillerBlockConstants::CurrentFilling);
 	if (filling.IsEmpty())
 		BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::CurrentFilling] = FString::SanitizeFloat(currentF);
 	else
 		currentF = FCString::Atof(*filling);
 
 	auto hasItem = false;
-	auto item = info->BlockSpecificData.FindOrAdd(OxygenFillerBlockConstants::HasItem);
+	auto item = BlockInfo->BlockSpecificData.FindOrAdd(OxygenFillerBlockConstants::HasItem);
 	if (item.IsEmpty())
 		BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)hasItem);
 	else
@@ -81,9 +83,7 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 
 		newItm->OxygenInfo = NewObject<UBlockWithOxygenInfo>();
 		newItm->OxygenInfo->CurrentObjectOxygen = currentF;
-		//newItm->OxygenInfo->CurrentObjectMaximumOxygen = newItm->BlockDefinition->OxygenComponentDef.TotalObjectVolume;
-		//newItm->OxygenInfo->Max = newItm->BlockDefinition->OxygenComponentDef.MaxConsumedOxygenPerGameSecond;
-
+		
 		newItm->DefinitionSet();
 		newItm->UpdateDisplayValue();
 
@@ -254,6 +254,8 @@ UInventoryBuildableBlockInfo* AOxygenTankFillerBlock::TakeCurrentFillingItem(boo
 	auto ret = currentFillingItem;
 	currentFillingItem = NULL;
 	OxygenTankFillerMesh->SetVisibility(false);
+
+	ensure(BlockInfo->ID == OxygenTankFillerID);
 	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)(currentFillingItem != NULL));
 	FillingItemCritical.Unlock();
 
@@ -272,6 +274,7 @@ bool AOxygenTankFillerBlock::SetCurrentFillingItem(UInventoryBuildableBlockInfo*
 		return false;
 	}
 
+	ensure(BlockInfo->ID == OxygenTankFillerID);
 	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)(info != NULL));
 	currentFillingItem = info;
 

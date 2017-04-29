@@ -43,7 +43,9 @@ void ASwitcher::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-	auto state = info->BlockSpecificData.FindOrAdd(SwitcherBlockConstants::IsOn);
+
+	ensure(BlockInfo->ID == SwitcherID);
+	auto state = BlockInfo->BlockSpecificData.FindOrAdd(SwitcherBlockConstants::IsOn);
 	if (state.IsEmpty())
 	{
 		IsOn = false;
@@ -73,6 +75,8 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 		return;
 
 	IsOn = !IsOn;
+
+	ensure(BlockInfo->ID == SwitcherID);
 	BlockInfo->BlockSpecificData[SwitcherBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
 
 	for (auto controlled : controlledBlocks)
