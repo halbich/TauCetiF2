@@ -157,9 +157,10 @@ private:
 			args.Add(FStringFormatArg(FMath::RoundToInt(info.Location.X))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Location.Y))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Location.Z)));
 			args.Add(FStringFormatArg(FMath::RoundToInt(info.Scale.X))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Scale.Y))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Scale.Z)));
 			args.Add(FStringFormatArg(FMath::RoundToInt(info.Rotation.Pitch))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Rotation.Yaw))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Rotation.Roll)));
-			args.Add(FStringFormatArg(info.Health));
+			//args.Add(FStringFormatArg(info.Health));
+			args.Add(FStringFormatArg(-1));
 			args.Add(FStringFormatArg(*info.Name));
-			auto baseStr = FString::Format(TEXT("auto b_{0} = make({1}, FVector({2}, {3}, {4}), FVector({5}, {6}, {7}), FRotator({8}, {9}, {10}), {1}, \"{12}\"); "), args);
+			auto baseStr = FString::Format(TEXT("auto b_{0} = make({1}, FVector({2}, {3}, {4}), FVector({5}, {6}, {7}), FRotator({8}, {9}, {10}), {11}, \"{12}\"); "), args);
 
 			for (auto fl : info.AdditionalFlags)
 			{

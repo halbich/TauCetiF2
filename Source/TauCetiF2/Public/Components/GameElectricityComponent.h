@@ -141,8 +141,10 @@ private:
 				float actuallyReturned = 0;
 				if (elemProducer->ObtainAmount(missingPercentage, actuallyObtained))
 				{
-					// TODO actually heal
-					consElem->BlockInfo->Health = FMath::Clamp(actuallyObtained*GameDefinitions::EnergyToHealth + consElem->BlockInfo->Health, 0.0f, consElem->BlockInfo->MaxHealth);
+					auto healed = actuallyObtained*GameDefinitions::EnergyToHealth;
+
+					consElem->BlockInfo->Health = FMath::Clamp(healed + consElem->BlockInfo->Health, 0.0f, consElem->BlockInfo->MaxHealth);
+					consElem->BlockInfo->HealthDamageHealed += healed;
 
 					maxAviable -= actuallyObtained;
 
@@ -152,7 +154,6 @@ private:
 		}
 	}
 
-
 	/*FORCEINLINE*/ void doHealing(UElectricNetwork* n, float& maxAviable)
 	{
 		float totalElectricityAviable = maxAviable;
@@ -161,7 +162,6 @@ private:
 		float criticalAviable = 0.5f * totalElectricityAviable;
 		float importantAviable = 0.5f * criticalAviable;
 		float repairAviable = importantAviable;
-
 
 		// TODO
 		float criticalHealth = 0.0f;
@@ -197,7 +197,6 @@ private:
 		n->ToRepairHealthPercentage = FMath::IsNearlyZero(n->ToRepairMaxHealth) ? 0 : repairHealth / n->ToRepairMaxHealth;
 		healGroup(n, maxAviable, repairAviable, n->ToRepairEntities, checkStatus);
 
-
 		UElectricityComponent* c;
 		while (checkStatus.Dequeue(c))
 		{
@@ -208,9 +207,6 @@ private:
 			n->RefreshHealthSeverity(c, lastSev);
 		}
 	}
-
-
-
 
 	/*FORCEINLINE*/ void tickUpdateNetwork(UElectricNetwork* n, float deltaTime)
 	{
@@ -330,9 +326,23 @@ private:
 				}
 			}
 		}
+
+
+		float damageInfo = 0.0f;
+		float healedInfo = 0.0f;
+		for (auto block : n->Entities)
+		{
+			damageInfo += block->BlockInfo->HealthDamageTaken;
+			block->BlockInfo->HealthDamageTaken = 0;
+			healedInfo += block->BlockInfo->HealthDamageHealed;
+			block->BlockInfo->HealthDamageHealed = 0;
+		}
+
+		n->HealthDamageTaken = damageInfo;
+		n->HealthDamageHealed = healedInfo;
 	}
 
-	/*FORCEINLINE*/ void processNetwork(UElectricNetwork* network)
+	FORCEINLINE void processNetwork(UElectricNetwork* network)
 	{
 		UElectricityComponent* part;
 		auto deq = network->ToRecompute.Dequeue(part);
@@ -344,7 +354,6 @@ private:
 		ensure(part->ComponentNetworkState == EElectricNetworkState::InRecompute);
 
 		part->ComponentNetworkState = EElectricNetworkState::Valid;
-
 
 		// new block without connections
 		if (part->ConnectedComponents.Num() == 0)
@@ -395,7 +404,7 @@ private:
 		}
 	}
 
-	/*FORCEINLINE*/ void tickRecomputeNetwork(double time) {
+	FORCEINLINE void tickRecomputeNetwork(double time) {
 		do {
 			UElectricNetwork* toResolve;
 			if (!networksToUpdate.Dequeue(toResolve))
@@ -434,7 +443,6 @@ private:
 				n->CheckControlBlocks();
 			}
 
-
 			for (auto toDel : networksTodelete)
 			{
 				auto rem = networks.Remove(toDel);
@@ -445,8 +453,6 @@ private:
 				toDel->MarkPendingKill();
 			}
 			networksTodelete.Empty();
-
-
 		}
 	}
 };

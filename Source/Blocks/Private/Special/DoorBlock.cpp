@@ -104,7 +104,7 @@ void ADoorBlock::Tick(float DeltaSeconds)
 	auto currentYaw = DoorBlockMesh->GetRelativeTransform().Rotator().Yaw;
 	auto openingConstant = (doorOpening == EDoorOpening::Left && doorState == EDoorState::Closing) ||
 		(doorOpening == EDoorOpening::Right && doorState == EDoorState::Opening) ? -1 : 1;
-	auto rotAdd = DeltaSeconds * openingConstant * 180 * 0.1;		// TODO remove last constant
+	auto rotAdd = DeltaSeconds * openingConstant * 180;
 
 	auto newRot = currentYaw + rotAdd;
 	if (doorState == EDoorState::Opening)

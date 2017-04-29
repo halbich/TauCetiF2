@@ -381,7 +381,7 @@ void AWorldController::DestroyRequestEventHandler(ABlock* block)
 {
 	// TODO
 	//print(TEXT("Block Destroy requested"));
-	DestroyWorldObject(block);
+	//DestroyWorldObject(block);
 }
 
 #pragma optimize("", on)

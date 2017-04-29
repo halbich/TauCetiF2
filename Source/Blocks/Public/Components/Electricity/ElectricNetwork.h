@@ -26,8 +26,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		int32 EntitiesCount;
 
-
-
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> ElectricityProducers;
 
@@ -49,8 +47,6 @@ public:
 	// Percentage of Electricity aviable
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float ProducersEnergyAviableFilling;
-
-
 
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> ElectricityConsumers;
@@ -74,8 +70,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float ConsumersEnergyAviableFilling;
 
-
-
 	UPROPERTY(Transient)
 		TArray<UElectricityComponent*> ElectricityStorages;
 
@@ -94,10 +88,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float StoragesEnergyAviableFilling;
 
-
-
-
-
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float NetworkMaxHealth;
 
@@ -107,6 +97,11 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float NetworkHealthPercentage;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float HealthDamageTaken;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
+		float HealthDamageHealed;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		int32 ToRepairHealthCount;
@@ -123,8 +118,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float ToRepairHealthPercentage;
 
-
-
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		int32 ImportantRepairHealthCount;
 
@@ -139,9 +132,6 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float ImportantRepairHealthPercentage;
-
-
-
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		int32 CriticalRepairHealthCount;
@@ -158,8 +148,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Electric Network")
 		float CriticalRepairHealthPercentage;
 
-
-
 	TQueue<UElectricityComponent*> ToRecompute;
 
 	UPROPERTY(Transient)
@@ -173,7 +161,6 @@ public:
 
 	UPROPERTY(Transient)
 		TArray<ABlock*> PatternBlocks;
-
 
 	UPROPERTY(Transient)
 		bool NetworkChecked;
@@ -203,8 +190,6 @@ private:
 			break;
 		}
 		}
-
-
 	}
 
 	/*FORCEINLINE*/ void tryUpdateArrayBySeverityRem(UElectricityComponent* comp, EHealthSeverity oldSeverity)
@@ -234,8 +219,6 @@ private:
 			break;
 		}
 		}
-
-
 	}
 
 public:
@@ -247,7 +230,7 @@ public:
 		{
 			netEnt->ComponentNetworkState = EElectricNetworkState::Invalid;
 
-			UE_LOG(LogTemp, Log , TEXT("Invalidationg for part: %s in network %s"), *netEnt->GetName(), *netEnt->Network->GetName());
+			UE_LOG(LogTemp, Log, TEXT("Invalidationg for part: %s in network %s"), *netEnt->GetName(), *netEnt->Network->GetName());
 		}
 		ToRecompute.Empty();
 	}
@@ -338,7 +321,6 @@ public:
 			ensure(rem > 0);
 			StoragesCount = ElectricityStorages.Num();
 			StoragesEnergyMaxAviable = FMath::Max(0.0f, StoragesEnergyMaxAviable - comp->ElectricityInfo->CurrentObjectMaximumEnergy);
-
 		}
 
 		auto c = Cast<ABlock>(comp->GetOwner());
@@ -364,7 +346,6 @@ public:
 
 		NetworkMaxHealth = FMath::Max(0.0f, NetworkMaxHealth - info->MaxHealth);		// due to rounding errors, we could get under zero
 
-
 		tryUpdateArrayBySeverityRem(comp, comp->BlockInfo->HealthSeverity);
 
 		if (c->Definition.GetDefaultObject()->UsingInPatterns)
@@ -377,7 +358,6 @@ public:
 
 		return r;
 	}
-
 
 	FORCEINLINE void EmptyNetwork()
 	{
@@ -395,11 +375,8 @@ public:
 		ControllableBlocks.Empty();
 		PatternBlocks.Empty();
 
-
 		NetworkChecked = false;
 	}
-
-#pragma optimize("", off)
 
 	void CheckControlBlocks()
 	{
@@ -487,15 +464,9 @@ public:
 		NetworkChecked = true;
 	}
 
-
-
-
-
-	/*FORCEINLINE*/ void RefreshHealthSeverity(UElectricityComponent* comp, EHealthSeverity oldSeverity)
+	FORCEINLINE void RefreshHealthSeverity(UElectricityComponent* comp, EHealthSeverity oldSeverity)
 	{
 		tryUpdateArrayBySeverityRem(comp, oldSeverity);
 		tryUpdateArrayBySeverity(comp);
 	}
-
-#pragma optimize("", on)
 };

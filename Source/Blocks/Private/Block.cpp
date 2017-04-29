@@ -251,6 +251,7 @@ void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
 
 	auto healthDamage = damage * GameDefinitions::RainHitpointToEnergy * GameDefinitions::EnergyToHealth;
 
+	BlockInfo->HealthDamageTaken += healthDamage;
 	BlockInfo->Health = FMath::Clamp(BlockInfo->Health - healthDamage, 0.0f, BlockInfo->MaxHealth);
 
 	HealthUpdated();
