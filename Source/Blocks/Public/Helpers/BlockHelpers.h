@@ -112,6 +112,11 @@ namespace BlockSavingHelpers {
 
 	static void ToOxygenContainer(FOxygenComponentInfo& block, UBlockWithOxygenInfo* info) {
 		block.CurrentObjectOxygen = info->CurrentObjectOxygen;
+
+#if WITH_EDITOR
+		block.CurrentObjectOxygen = info->CurrentObjectMaximumOxygen;
+#endif
+
 		block.OxygenConsumptionPercent = info->OxygenConsumptionPercent;
 	}
 
@@ -122,6 +127,10 @@ namespace BlockSavingHelpers {
 
 	static void ToElectricityContainer(FElectricityComponentInfo& block, UBlockWithElectricityInfo* info) {
 		block.CurrentObjectEnergy = info->CurrentObjectEnergy;
+#if WITH_EDITOR
+		block.CurrentObjectEnergy = info->CurrentObjectMaximumEnergy;
+#endif
+
 		block.PowerConsumptionPercent = info->PowerConsumptionPercent;
 	}
 
@@ -209,6 +218,10 @@ namespace BlockSavingHelpers {
 		block.Location = info->Location;
 		block.Rotation = info->Rotation;
 		block.Health = info->Health;
+
+#if WITH_EDITOR
+		block.Health = info->MaxHealth;
+#endif
 		block.BlockSpecificData = TMap<FString, FString>(info->BlockSpecificData);
 
 		if (info->RelationsInfo && info->RelationsInfo->IsValidLowLevel())
