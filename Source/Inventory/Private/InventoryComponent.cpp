@@ -14,7 +14,7 @@ void UInventoryComponent::ForceItemsChanged(bool showGroupName)
 
 void UInventoryComponent::InventoryTagsSelectionChanged()
 {
-	ForceItemsChanged(false);
+	ForceItemsChanged(true);
 }
 
 void UInventoryComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FText>& validationErrors)
@@ -88,14 +88,12 @@ void UInventoryComponent::SelectNextBank()
 {
 	InventoryTags->NextBank();
 	selectItem(0);
-	ForceItemsChanged(true);
 }
 
 void UInventoryComponent::SelectPrevBank()
 {
 	InventoryTags->PrevBank();
 	selectItem(0);
-	ForceItemsChanged(true);
 }
 
 void UInventoryComponent::SelectNextItem()
