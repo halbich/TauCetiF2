@@ -17,6 +17,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		int32 CurrentDefinitionID;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | Weather")
+		bool ApplyDamage;
+
 	// This property is not serializable to the SaveGame
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | Weather")
 		float CurrentWorldTime;

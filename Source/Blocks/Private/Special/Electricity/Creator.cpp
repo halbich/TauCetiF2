@@ -81,6 +81,11 @@ void ACreator::ComputeCreator()
 			return;
 	}
 
+#if WITH_EDITOR
+	pi->IsValidCreator = true;
+	return;
+#endif
+
 	auto left = NewObject<UMinMaxBox>();
 	left->InitBoxChecked(FVector(twb->Min.X, wholeBox->Min.Y, twb->Min.Z), FVector(twb->Max.X, twb->Min.Y, twb->Max.Z));
 	if (!checkForBlock(left, objectBoxes))

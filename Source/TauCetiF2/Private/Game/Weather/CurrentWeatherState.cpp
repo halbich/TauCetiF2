@@ -16,6 +16,7 @@ bool UCurrentWeatherState::CheckTimeExceeded(UPARAM(REF)FWeatherDefinition& defi
 {
 	CurrentDefinitionID = newDefinitionID;
 	CurrentWaitingTime = 0;
+	ApplyDamage = definition.ApplyDamage;
 
 	TargetWaitingTime = FMath::RandRange(definition.MinChangeDuration, definition.MaxChangeDuration);
 	TargetWeatherIntensity = FMath::RandRange(definition.MinCloudsSpeed, definition.MaxCloudsSpeed);
@@ -39,6 +40,7 @@ bool UCurrentWeatherState::CheckChangingWeather(UPARAM(REF)FWeatherDefinition& d
 bool UCurrentWeatherState::CheckRunningWeather(UPARAM(REF)FWeatherDefinition& definition, int32 newDefinitionID)
 {
 	CurrentDefinitionID = newDefinitionID;
+	ApplyDamage = definition.ApplyDamage;
 
 	TargetWaitingTime = FMath::RandRange(definition.MinDuration, definition.MaxDuration);
 	TargetWeatherIntensity = FMath::RandRange(definition.MinCloudsSpeed, definition.MaxCloudsSpeed);

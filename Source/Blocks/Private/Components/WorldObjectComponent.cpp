@@ -19,7 +19,7 @@ void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	auto isFinalEndGame = EndPlayReason == EEndPlayReason::Type::Quit || EndPlayReason == EEndPlayReason::Type::EndPlayInEditor || EndPlayReason == EEndPlayReason::Type::LevelTransition;
 
-	if (isFinalEndGame)
+	if (isFinalEndGame && RootBox && RootBox->IsValidLowLevel())
 		RootBox->watchedGroups.Empty();
 
 	for (auto object : TreeElements)

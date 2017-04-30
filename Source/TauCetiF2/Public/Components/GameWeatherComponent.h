@@ -6,10 +6,13 @@
 #include "GameSave/Public/SaveGameCarrier.h"
 #include "GameWeatherComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FStormNotificationDelegate, EStormNotification, notificationType);
+
 UENUM(BlueprintType)
 enum class EStormState : uint8
 {
 	NoStorm	 	UMETA(DisplayName = "NoStorm"),
+	Comming		UMETA(DispleyName = "Comming"),
 	EaseIn		UMETA(DisplayName = "EaseIn"),
 	Running		UMETA(DisplayName = "Running"),
 	EaseOut		UMETA(DisplayName = "EaseOut")
@@ -84,10 +87,16 @@ public:
 		void DEBUGHideMinMaxBoxes();
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameWeatherComponent")
+		void OnStormComming();
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameWeatherComponent")
 		void OnStormBegin();
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameWeatherComponent")
-		void OnStormEnd();
+		void OnStormEnd(bool notifyEnd);
+
+	UPROPERTY(BlueprintAssignable, Category = "TCF2 | GameWeatherComponent")
+		FStormNotificationDelegate StormNotification;
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

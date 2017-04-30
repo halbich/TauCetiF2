@@ -58,21 +58,34 @@ void UGameWeatherComponent::ObjectsChanged() {
 	}
 }
 
-void UGameWeatherComponent::OnStormBegin()
+void UGameWeatherComponent::OnStormComming()
 {
-	currentWeatherState->CurrentWeatherIntensity = currentWeatherState->TargetWeatherIntensity;
+	StormState = EStormState::Comming;
 
-	CurrentHitIntensity = IntensityCurve->GetFloatValue(currentWeatherState->CurrentWeatherIntensity);
-	hitpointsCounter = 0;
-	playerHitpointCounter = 0;
 
-	currentEaseInTime = FMath::RandRange(1.0f, EasingBorderValue *currentWeatherState->TargetWaitingTime);	// we start at 1sec, so we don't divide by zero in a tickComp.
-	currentEaseOutTime = FMath::RandRange((1.0f - EasingBorderValue)*currentWeatherState->TargetWaitingTime, currentWeatherState->TargetWaitingTime - 1.0f);		// again we need to avoid dividing by zero
-
-	StormState = EStormState::EaseIn;
 }
 
-void UGameWeatherComponent::OnStormEnd()
+void UGameWeatherComponent::OnStormBegin()
+{
+	if (StormState == EStormState::NoStorm)
+	{
+		// we need to plan next storm, otherwise it is loaded and planned
+		currentWeatherState->CurrentWeatherIntensity = currentWeatherState->TargetWeatherIntensity;
+
+		CurrentHitIntensity = IntensityCurve->GetFloatValue(currentWeatherState->CurrentWeatherIntensity);
+		hitpointsCounter = 0;
+		playerHitpointCounter = 0;
+
+		currentEaseInTime = FMath::RandRange(1.0f, EasingBorderValue *currentWeatherState->TargetWaitingTime);	// we start at 1sec, so we don't divide by zero in a tickComp.
+		currentEaseOutTime = FMath::RandRange((1.0f - EasingBorderValue)*currentWeatherState->TargetWaitingTime, currentWeatherState->TargetWaitingTime - 1.0f);		// again we need to avoid dividing by zero
+
+		StormState = EStormState::EaseIn;
+	}
+
+	StormNotification.Broadcast(EStormNotification::StormBegin);
+}
+
+void UGameWeatherComponent::OnStormEnd(bool notifyEnd)
 {
 	auto remainingTargets = FMath::FloorToInt(hitpointsCounter);
 	if (remainingTargets > 0)
@@ -91,6 +104,9 @@ void UGameWeatherComponent::OnStormEnd()
 
 	hitpointsCounter = 0;
 	playerHitpointCounter = 0;
+
+	if (notifyEnd)
+		StormNotification.Broadcast(EStormNotification::StormEnd);
 }
 
 void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -102,6 +118,16 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 	if (StormState == EStormState::NoStorm)
 		return;
+
+	if (StormState == EStormState::Comming)
+	{
+		if (currentWeatherState->CurrentWaitingTime >= currentWeatherState->TargetWaitingTime * 0.5f)
+		{
+			StormNotification.Broadcast(EStormNotification::StormIsComming);
+			StormState = EStormState::NoStorm;
+		}
+		return;
+	}
 
 	auto currentSurface = Targets.Num() * GameDefinitions::CubeSurfaceInMetersSquared;
 

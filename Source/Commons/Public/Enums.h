@@ -107,3 +107,11 @@ enum class EControlRelationship : uint8
 	IsControlledByTarget	 	UMETA(DisplayName = "IsControlledByTarget"),
 	IsControllingTarget			UMETA(DisplayName = "IsControllingTarget")
 };
+
+UENUM(BlueprintType)
+enum class EStormNotification : uint8
+{
+	StormIsComming	 	UMETA(DisplayName = "StormIsComming"),
+	StormBegin			UMETA(DisplayName = "StormBegin"),
+	StormEnd			UMETA(DisplayName = "StormEnd")
+};

@@ -88,12 +88,14 @@ void UInventoryComponent::SelectNextBank()
 {
 	InventoryTags->NextBank();
 	selectItem(0);
+	ForceItemsChanged(true);
 }
 
 void UInventoryComponent::SelectPrevBank()
 {
 	InventoryTags->PrevBank();
 	selectItem(0);
+	ForceItemsChanged(true);
 }
 
 void UInventoryComponent::SelectNextItem()

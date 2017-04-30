@@ -555,8 +555,8 @@ USaveGameCarrier* UNewGameSaveHolder::getMiniLevelGameSave(bool full)
 	auto b_32 = make(1500, FVector(-142, 17, 6), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_32.HasOxygenData = true; b_32.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_32);
 	auto b_33 = make(1500, FVector(-140, 17, 8), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_33.HasOxygenData = true; b_33.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_33);
 	auto b_34 = make(1500, FVector(-142, 17, 8), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_34.HasOxygenData = true; b_34.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_34);
-	c->PlayerPosition = FVector(-2817, 182, 164);
-	c->PlayerRotation = FRotator(0, 156, 0);
+	c->PlayerPosition = FVector(-2925, 327, 163);
+	c->PlayerRotation = FRotator(0, -53, 0);
 
 
 	return c;

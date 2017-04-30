@@ -10,6 +10,7 @@ public:
 
 	int32 CurrentDefinitionID;
 	bool  IsInWeatherChange;
+	bool ApplyDamage;
 	float CurrentWaitingTime;
 	float TargetWaitingTime;
 

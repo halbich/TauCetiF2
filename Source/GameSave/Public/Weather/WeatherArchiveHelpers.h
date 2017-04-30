@@ -6,6 +6,7 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FWeatherState& state)
 {
 	Ar << state.CurrentDefinitionID;
 	Ar << state.IsInWeatherChange;
+	Ar << state.ApplyDamage;
 	Ar << state.CurrentWaitingTime;
 	Ar << state.TargetWaitingTime;
 

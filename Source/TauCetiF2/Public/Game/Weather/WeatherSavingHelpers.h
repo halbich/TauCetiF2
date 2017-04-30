@@ -13,6 +13,7 @@ namespace WeatherSavingHelpers {
 		currentState->CurrentWaitingTime = weatherState.CurrentWaitingTime;
 		currentState->TargetWaitingTime = weatherState.TargetWaitingTime;
 		currentState->IsInWeatherChange = weatherState.IsInWeatherChange;
+		currentState->ApplyDamage = weatherState.ApplyDamage;
 
 		currentState->BaseWeatherIntensity = weatherState.BaseWeatherIntensity;
 		currentState->CurrentWeatherIntensity = weatherState.CurrentWeatherIntensity;
@@ -37,6 +38,7 @@ namespace WeatherSavingHelpers {
 		weatherState.CurrentWaitingTime = currentState->CurrentWaitingTime;
 		weatherState.TargetWaitingTime = currentState->TargetWaitingTime;
 		weatherState.IsInWeatherChange = currentState->IsInWeatherChange;
+		weatherState.ApplyDamage = currentState->ApplyDamage;
 
 		weatherState.BaseWeatherIntensity = currentState->BaseWeatherIntensity;
 		weatherState.CurrentWeatherIntensity = currentState->CurrentWeatherIntensity;
