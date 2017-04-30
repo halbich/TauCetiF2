@@ -41,6 +41,15 @@ public:
 	UPROPERTY(Transient)
 		TArray<UBuildableBlockInfo*> InventoryCache;
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryTagGroup")
+		UTagGroup* AddTagGroup(UTagGroup* group);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryTagGroup")
+		bool RemoveTagGroup(UTagGroup* group);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryTagGroup")
+		void InvalidateGroup();
+
 	bool IsSatisfied(TArray<FString>& tags)
 	{
 		for (auto tagGroup : GroupList)
