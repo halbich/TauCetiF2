@@ -8,6 +8,7 @@ FORCEINLINE FArchive& operator<<(FArchive &Ar, FTagGroup& group)
 {
 	Ar << group.GroupName;
 	Ar << group.Tags;
+	Ar << group.LetVisibleAll;
 	return Ar;
 }
 

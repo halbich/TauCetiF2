@@ -3,6 +3,7 @@
 #include "BlockComponents/OxygenComponentInfo.h"
 #include "BlockComponents/ElectricityComponentInfo.h"
 #include "Relations/FBlockWithRelationshipInfo.h"
+#include "Commons/Public/GameDefinitions.h"
 
 // Help class to save / load data as saveGame
 
@@ -63,6 +64,12 @@ struct FInventoryBuildableBlockInfo : FBlockBaseInfo
 
 	FORCEINLINE void AddImplicitTags()
 	{
+		if (ID == DeleteID)
+		{
+			Tags.Add(NSLOCTEXT("TCF2LocSpace", "LC.DeleteAction.Tag", "smazat").ToString());
+			return;
+		}
+
 		Tags.Add(FString::Printf(TEXT("kX_%d"), (int32)Scale.X));
 		Tags.Add(FString::Printf(TEXT("kY_%d"), (int32)Scale.Y));
 		Tags.Add(FString::Printf(TEXT("kZ_%d"), (int32)Scale.Z));

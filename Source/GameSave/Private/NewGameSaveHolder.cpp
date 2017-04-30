@@ -489,7 +489,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMiniLevelGameSave(bool full)
 	c->inventoryTags = makeDefault();
 
 	c->buildableBlocks.Add(makeBuildable(DeleteID, FVector(1, 1, 1)));
-	c->buildableBlocks.Add(makeBuildable(TerminalID, FVector(1, 1, 1)));
+	c->buildableBlocks.Add(makeBuildable(TerminalID, FVector(1, 8, 5)));
 
 	c->buildableBlocks.Add(makeBuildable(OxygenTankID, FVector(2, 2, 2)));
 	c->buildableBlocks.Add(makeBuildable(SwitcherID, FVector(1, 1, 1)));
