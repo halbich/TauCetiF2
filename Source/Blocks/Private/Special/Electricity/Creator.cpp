@@ -46,7 +46,7 @@ void ACreator::ComputeCreator()
 	auto world = GetWorld();
 
 	auto wholeBox = NewObject<UMinMaxBox>();
-	wholeBox->InitBox(wb->Min, twb->Max);
+	wholeBox->InitBox(wb->Min - FVector(1,1,-1) * GameDefinitions::CubeMinSize, twb->Max + FVector(1, 1, 1) * GameDefinitions::CubeMinSize);
 
 	TArray<UObject*> objectsToCast;
 
@@ -73,18 +73,7 @@ void ACreator::ComputeCreator()
 	if (!checkForBlock(wb, creatorBoxes))
 		return;
 
-	auto emptyBox = NewObject<UMinMaxBox>();
-
-	FVector min = twb->Min;
-	FVector max = twb->Max;
-
-	auto mult = FVector(1, 1, 1) * GameDefinitions::CubeMinSize;
-
-	min += mult;
-	max -= mult;
-
-	emptyBox->InitBox(min, max);
-	auto fbox = emptyBox->GetBox();
+	auto fbox = twb->GetBox();
 
 	for (auto obj : objectBoxes)
 	{
@@ -93,27 +82,27 @@ void ACreator::ComputeCreator()
 	}
 
 	auto left = NewObject<UMinMaxBox>();
-	left->InitBoxChecked(FVector(emptyBox->Min.X, twb->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Max.Z));
+	left->InitBoxChecked(FVector(twb->Min.X, wholeBox->Min.Y, twb->Min.Z), FVector(twb->Max.X, twb->Min.Y, twb->Max.Z));
 	if (!checkForBlock(left, objectBoxes))
 		return;
 
 	auto right = NewObject<UMinMaxBox>();
-	right->InitBoxChecked(FVector(emptyBox->Min.X, emptyBox->Max.Y, emptyBox->Min.Z), FVector(emptyBox->Max.X, twb->Max.Y, emptyBox->Max.Z));
+	right->InitBoxChecked(FVector(twb->Min.X, twb->Max.Y, twb->Min.Z), FVector(twb->Max.X, wholeBox->Max.Y, twb->Max.Z));
 	if (!checkForBlock(right, objectBoxes))
 		return;
 
 	auto front = NewObject<UMinMaxBox>();
-	front->InitBoxChecked(FVector(emptyBox->Max.X, emptyBox->Min.Y, emptyBox->Min.Z), FVector(twb->Max.X, emptyBox->Max.Y, emptyBox->Max.Z));
+	front->InitBoxChecked(FVector(twb->Max.X, twb->Min.Y, twb->Min.Z), FVector(wholeBox->Max.X, twb->Max.Y, twb->Max.Z));
 	if (!checkForBlock(front, objectBoxes))
 		return;
 
 	auto back = NewObject<UMinMaxBox>();
-	back->InitBoxChecked(FVector(twb->Min.X, emptyBox->Min.Y, emptyBox->Min.Z), FVector(emptyBox->Min.X, emptyBox->Max.Y, emptyBox->Max.Z));
+	back->InitBoxChecked(FVector(wholeBox->Min.X, twb->Min.Y, twb->Min.Z), FVector(twb->Min.X, twb->Max.Y, twb->Max.Z));
 	if (!checkForBlock(back, objectBoxes))
 		return;
 
 	auto top = NewObject<UMinMaxBox>();
-	top->InitBoxChecked(FVector(emptyBox->Min.X, emptyBox->Min.Y, emptyBox->Max.Z), FVector(emptyBox->Max.X, emptyBox->Max.Y, twb->Max.Z));
+	top->InitBoxChecked(FVector(twb->Min.X, twb->Min.Y, twb->Max.Z), FVector(twb->Max.X, twb->Max.Y, wholeBox->Max.Z));
 	if (!checkForBlock(top, objectBoxes))
 		return;
 

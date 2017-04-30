@@ -45,6 +45,8 @@ USaveGameCarrier* UNewGameSaveHolder::GetSaveForMainMenu()
 
 USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 {
+	return getMiniLevelGameSave(full);
+
 	auto c = USaveGameCarrier::GetEmptyCarrier();
 
 	c->SaveName = NSLOCTEXT("TCF2LocSpace", "LC.SaveSystemDefault", "Výchozí hra").ToString();
@@ -62,8 +64,8 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	c->IsCreativeMode = true;
 	c->PlayerHealth = 1000;
 
-	c->PlayerOxygenComponent.CurrentObjectOxygen = 150.0f;
-	c->PlayerElectricityComponent.CurrentObjectEnergy = 500.0f;
+	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
+	c->PlayerElectricityComponent.CurrentObjectEnergy = 150000.0f;
 
 	c->inventoryTags = makeDefault();
 
@@ -242,8 +244,8 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave(bool full)
 
 	auto UsedBlocks = &c->usedBlocks;
 
-	c->PlayerOxygenComponent.CurrentObjectOxygen = 150.0f;
-	c->PlayerElectricityComponent.CurrentObjectEnergy = 1000.0f;
+	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
+	c->PlayerElectricityComponent.CurrentObjectEnergy = 150000.0f;
 
 	return c;
 }
@@ -481,8 +483,8 @@ USaveGameCarrier* UNewGameSaveHolder::getMiniLevelGameSave(bool full)
 	c->IsCreativeMode = true;
 	c->PlayerHealth = 1000;
 
-	c->PlayerOxygenComponent.CurrentObjectOxygen = 150.0f;
-	c->PlayerElectricityComponent.CurrentObjectEnergy = 500.0f;
+	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
+	c->PlayerElectricityComponent.CurrentObjectEnergy = 150000.0f;
 
 	c->inventoryTags = makeDefault();
 
@@ -498,7 +500,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMiniLevelGameSave(bool full)
 
 	auto b_0 = make(0, FVector(-146, 12, 1), FVector(15, 15, 4), FRotator(0, -180, 0), 9000.000000, ""); b_0.HasElectricityData = true; b_0.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_0);
 	auto b_1 = make(700, FVector(-142, 9, 9), FVector(7, 7, 11), FRotator(0, 90, 0), 10.000000, ""); b_1.AdditionalFlags.Add(TEXT("DoorOpening"), 0);
-	b_1.BlockSpecificData.Add(TEXT("DoorState"), TEXT("0")); b_1.BlockSpecificData.Add(TEXT("DoorYaw"), TEXT("0.0"));
+	b_1.BlockSpecificData.Add(TEXT("DoorState"), TEXT("2")); b_1.BlockSpecificData.Add(TEXT("DoorYaw"), TEXT("89.999992"));
 	b_1.HasElectricityData = true; b_1.ElectricityInfo.CurrentObjectEnergy = 0.000000;  UsedBlocks->Add(b_1);
 	auto b_2 = make(1150, FVector(-150, 8, 4), FVector(3, 3, 2), FRotator(0, -90, 0), 180.000000, ""); b_2.HasElectricityData = true; b_2.ElectricityInfo.CurrentObjectEnergy = 18000.000000;  UsedBlocks->Add(b_2);
 	auto b_3 = make(2, FVector(-150, 10, 6), FVector(5, 4, 1), FRotator(-90, 0, -90), 200.000000, "");  UsedBlocks->Add(b_3);
@@ -544,17 +546,17 @@ USaveGameCarrier* UNewGameSaveHolder::getMiniLevelGameSave(bool full)
 	auto b_23 = make(1200, FVector(-151, 14, 5), FVector(3, 3, 3), FRotator(0, 90, 0), 10.000000, ""); b_23.HasElectricityData = true; b_23.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_23);
 	auto b_24 = make(1200, FVector(-151, 17, 8), FVector(3, 3, 3), FRotator(0, 90, 0), 10.000000, ""); b_24.HasElectricityData = true; b_24.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_24);
 	auto b_25 = make(1200, FVector(-151, 14, 8), FVector(3, 3, 3), FRotator(0, 90, 0), 10.000000, ""); b_25.HasElectricityData = true; b_25.ElectricityInfo.CurrentObjectEnergy = 100000.000000;  UsedBlocks->Add(b_25);
-	auto b_26 = make(1500, FVector(-151, 12, 4), FVector(2, 2, 2), FRotator(0, -180, 0), 10.000000, ""); b_26.HasOxygenData = true; b_26.OxygenInfo.CurrentObjectOxygen = 10.000000;  UsedBlocks->Add(b_26);
-	auto b_27 = make(1500, FVector(-151, 12, 6), FVector(2, 2, 2), FRotator(0, 180, 0), 10.000000, ""); b_27.HasOxygenData = true; b_27.OxygenInfo.CurrentObjectOxygen = 10.000000;  UsedBlocks->Add(b_27);
-	auto b_28 = make(1500, FVector(-151, 12, 8), FVector(2, 2, 2), FRotator(0, 180, 0), 10.000000, ""); b_28.HasOxygenData = true; b_28.OxygenInfo.CurrentObjectOxygen = 10.000000;  UsedBlocks->Add(b_28);
-	auto b_29 = make(1500, FVector(-140, 17, 4), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_29.HasOxygenData = true; b_29.OxygenInfo.CurrentObjectOxygen = 10.000000;  UsedBlocks->Add(b_29);
-	auto b_30 = make(1500, FVector(-142, 17, 4), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_30.HasOxygenData = true; b_30.OxygenInfo.CurrentObjectOxygen = 10.000000;  UsedBlocks->Add(b_30);
-	auto b_31 = make(1500, FVector(-140, 17, 6), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_31.HasOxygenData = true; b_31.OxygenInfo.CurrentObjectOxygen = 10.000000;  UsedBlocks->Add(b_31);
-	auto b_32 = make(1500, FVector(-142, 17, 6), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_32.HasOxygenData = true; b_32.OxygenInfo.CurrentObjectOxygen = 10.000000;  UsedBlocks->Add(b_32);
-	auto b_33 = make(1500, FVector(-140, 17, 8), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_33.HasOxygenData = true; b_33.OxygenInfo.CurrentObjectOxygen = 10.000000;  UsedBlocks->Add(b_33);
-	auto b_34 = make(1500, FVector(-142, 17, 8), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_34.HasOxygenData = true; b_34.OxygenInfo.CurrentObjectOxygen = 10.000000;  UsedBlocks->Add(b_34);
-	c->PlayerPosition = FVector(-2830, 152, 163);
-	c->PlayerRotation = FRotator(0, 133, 0);
+	auto b_26 = make(1500, FVector(-151, 12, 4), FVector(2, 2, 2), FRotator(0, -180, 0), 10.000000, ""); b_26.HasOxygenData = true; b_26.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_26);
+	auto b_27 = make(1500, FVector(-151, 12, 6), FVector(2, 2, 2), FRotator(0, 180, 0), 10.000000, ""); b_27.HasOxygenData = true; b_27.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_27);
+	auto b_28 = make(1500, FVector(-151, 12, 8), FVector(2, 2, 2), FRotator(0, 180, 0), 10.000000, ""); b_28.HasOxygenData = true; b_28.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_28);
+	auto b_29 = make(1500, FVector(-140, 17, 4), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_29.HasOxygenData = true; b_29.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_29);
+	auto b_30 = make(1500, FVector(-142, 17, 4), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_30.HasOxygenData = true; b_30.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_30);
+	auto b_31 = make(1500, FVector(-140, 17, 6), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_31.HasOxygenData = true; b_31.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_31);
+	auto b_32 = make(1500, FVector(-142, 17, 6), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_32.HasOxygenData = true; b_32.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_32);
+	auto b_33 = make(1500, FVector(-140, 17, 8), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_33.HasOxygenData = true; b_33.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_33);
+	auto b_34 = make(1500, FVector(-142, 17, 8), FVector(2, 2, 2), FRotator(0, 90, 0), 10.000000, ""); b_34.HasOxygenData = true; b_34.OxygenInfo.CurrentObjectOxygen = 1000.000000;  UsedBlocks->Add(b_34);
+	c->PlayerPosition = FVector(-2817, 182, 164);
+	c->PlayerRotation = FRotator(0, 156, 0);
 
 
 	return c;
