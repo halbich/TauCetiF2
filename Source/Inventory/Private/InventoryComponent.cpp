@@ -218,3 +218,21 @@ bool UInventoryComponent::TryRemove(UBuildableBlockInfo* blockInfo)
 
 	return removed > 0;
 }
+
+bool UInventoryComponent::TryRemoveInventory(UInventoryBuildableBlockInfo* blockInfo)
+{
+	if (!blockInfo || !blockInfo->IsValidLowLevel() || blockInfo->ID < 0) // invalid or system action
+		return false;
+
+	auto removed = InventoryItems.Remove(blockInfo);
+
+	if (removed)
+		for (auto grp : InventoryTags->InventoryGroupList)
+			grp->IsInventoryCacheValid = false;
+
+	ForceItemsChanged(false);
+	selectItem(0);
+
+	return removed > 0;
+}
+
