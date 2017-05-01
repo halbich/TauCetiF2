@@ -260,6 +260,10 @@ private:
 			FMath::RoundToInt(PlayerRotation.Pitch), FMath::RoundToInt(PlayerRotation.Yaw), FMath::RoundToInt(PlayerRotation.Roll)
 		);
 
+		UE_LOG(LogTemp, Log, TEXT("c->PlayerCameraRotation = FRotator(%s, %s, %s);"),
+			*FString::SanitizeFloat(PlayerCameraRotation.Pitch), *FString::SanitizeFloat(PlayerCameraRotation.Yaw), *FString::SanitizeFloat(PlayerCameraRotation.Roll)
+		);
+
 		UE_LOG(LogTemp, Log, TEXT("~~~~~~~~~~~~~~~~~~  Save  ends ~~~~~~~~~~~~~~~~~~~~~~~~"));
 
 #endif

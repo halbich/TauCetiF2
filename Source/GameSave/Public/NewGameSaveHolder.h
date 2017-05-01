@@ -5,6 +5,7 @@
 #include "SaveGameCarrier.h"
 #include "Inventory/FInventoryTags.h"
 #include "Inventory/FInventoryTagGroup.h"
+
 #include "NewGameSaveHolder.generated.h"
 
 /**
