@@ -118,7 +118,7 @@ void UGameWeatherComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 	if (StormState == EStormState::Comming)
 	{
-		if (currentWeatherState->CurrentWaitingTime >= currentWeatherState->TargetWaitingTime * 0.5f)
+		if (currentWeatherState->CurrentWaitingTime >= currentWeatherState->TargetWaitingTime - 30 * 60)	// we want to know 30 minutes in game seconds before notify
 		{
 			StormNotification.Broadcast(EStormNotification::StormIsComming);
 			StormState = EStormState::NoStorm;

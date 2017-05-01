@@ -69,7 +69,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave(bool full)
 	auto UsedBlocks = &c->usedBlocks;
 
 	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
-	c->PlayerElectricityComponent.CurrentObjectEnergy = 150000.0f;
+	c->PlayerElectricityComponent.CurrentObjectEnergy = 500000.0f;
 
 	return c;
 }
@@ -119,14 +119,13 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	if (!full)
 		return c;
 
-	//c->CurrentTime = 14400.0f;
-	//c->CurrentTime = 34920.0f;
+	c->CurrentTime = 34920.0f;
 	c->PlayerUseFPSCamera = true;
-	c->IsCreativeMode = true;
+	//c->IsCreativeMode = true;
 	c->PlayerHealth = 1000;
 
 	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
-	c->PlayerElectricityComponent.CurrentObjectEnergy = 150000.0f;
+	c->PlayerElectricityComponent.CurrentObjectEnergy = 500000.0f;
 
 	c->inventoryTags = makeDefault();
 
@@ -594,14 +593,13 @@ USaveGameCarrier* UNewGameSaveHolder::getMiniLevelGameSave(bool full)
 	if (!full)
 		return c;
 
-	//c->CurrentTime = 14400.0f;
-	//c->CurrentTime = 34920.0f;
+	c->CurrentTime = 14400.0f;
 	c->PlayerUseFPSCamera = true;
-	c->IsCreativeMode = true;
+	//c->IsCreativeMode = true;
 	c->PlayerHealth = 1000;
 
 	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
-	c->PlayerElectricityComponent.CurrentObjectEnergy = 150000.0f;
+	c->PlayerElectricityComponent.CurrentObjectEnergy = 500000.0f;
 
 	c->inventoryTags = makeDefault();
 
@@ -691,7 +689,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave(bool full)
 
 	c->PlayerPosition = FVector(-600, 0, 90);
 	auto n = FDateTime::Now().GetTimeOfDay();
-	//	c->CurrentTime = (float)n.GetTotalSeconds();
+	c->CurrentTime = (float)n.GetTotalSeconds();
 	c->PlayerUseFPSCamera = true;
 
 	auto UsedBlocks = &c->usedBlocks;
@@ -725,13 +723,13 @@ USaveGameCarrier* UNewGameSaveHolder::getSuperSizeGameSave(bool full)
 	if (!full)
 		return c;
 
-	//c->CurrentTime = 34920.0f;
+	c->CurrentTime = 34920.0f;
 	c->PlayerUseFPSCamera = true;
-	c->IsCreativeMode = false;
+	//c->IsCreativeMode = false;
 	c->PlayerHealth = 1000;
 
 	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
-	c->PlayerElectricityComponent.CurrentObjectEnergy = 150000.0f;
+	c->PlayerElectricityComponent.CurrentObjectEnergy = 500000.0f;
 
 	c->inventoryTags = makeDefault();
 
