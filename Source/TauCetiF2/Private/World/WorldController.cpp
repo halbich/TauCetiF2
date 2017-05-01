@@ -19,6 +19,9 @@ void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
 	UsedBlocks.Reserve(blocks.Num());
 	for (auto block : blocks)
 	{
+		if (block->Health <= 0)
+			continue;
+
 		SpawnWorldObject(world, block, true);
 	}
 }
@@ -71,7 +74,7 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 	}
 
 	auto electricityComp = Cast<UElectricityComponent>(object->GetComponentByClass(UElectricityComponent::StaticClass()));
-	if (electricityComp)
+	if (electricityComp && electricityComp->Network && electricityComp->Network->IsValidLowLevel())
 		electricityComponent->RemoveFromWorldNetwork(electricityComp);
 
 	auto count = UsedBlocks.Remove(object->BlockInfo);
@@ -216,8 +219,14 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 
 	UGameplayStatics::FinishSpawningActor(actor, trans);
 
-	if (addToRoot && actor->BlockInfo->HealthSeverity != EHealthSeverity::Dead)
+	if (addToRoot)
 	{
+		if (actor->BlockInfo->HealthSeverity == EHealthSeverity::Dead)
+		{
+			actor->Destroy();
+			return NULL;
+		}
+
 		UsedBlocks.Add(block);
 
 		if (debugBoxesShown) {
@@ -333,7 +342,18 @@ void AWorldController::LoadDataFromCarrier(USaveGameCarrier* carrier)
 void AWorldController::SaveDataToCarrier(USaveGameCarrier* carrier)
 {
 	check(carrier != nullptr);
-	BlockSavingHelpers::SetBlockData(carrier, UsedBlocks);
+
+	TArray<UBlockInfo*> toSave;
+
+	for (auto bl : UsedBlocks)
+	{
+		if (bl->Health <= 0 || bl->HealthSeverity == EHealthSeverity::Dead)
+			continue;
+
+		toSave.Add(bl);
+	}
+
+	BlockSavingHelpers::SetBlockData(carrier, toSave);
 }
 
 void AWorldController::onPickupItem(ABlock* pickingItem)

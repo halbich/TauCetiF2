@@ -36,12 +36,8 @@ void ABlock::OnConstruction(const FTransform& Transform)
 		auto dimensions = def->GetMeshScale(currentScale);
 		BlockInfo->MaxHealth = baseHealth * dimensions.X * dimensions.Y * dimensions.Z;
 
-#if WITH_EDITOR
-
 		if (BlockInfo->Health <= 0)
 			BlockInfo->Health = BlockInfo->MaxHealth;
-
-#endif
 
 		BlockInfo->Health = FMath::Clamp(BlockInfo->Health, 0.0f, BlockInfo->MaxHealth);
 		HealthUpdated();

@@ -105,6 +105,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
 		void ItemBuilt(UInventoryBuildableBlockInfo* block);
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryComponent")
+		bool TryRemove(UBuildableBlockInfo* blockInfo);
+
 private:
 	FORCEINLINE void rebuildBuildableCache(UInventoryTagGroup* filterGroup)
 	{

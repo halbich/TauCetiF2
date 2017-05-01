@@ -170,7 +170,7 @@ void UInventoryComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 void UInventoryComponent::AddItem(UBuildableBlockInfo* block)
 {
 	block->DefinitionSet();
-	BuildableItems.Add(block);
+	BuildableItems.AddUnique(block);
 
 	for (auto grp : InventoryTags->InventoryGroupList)
 		grp->IsBuildableCacheValid = false;
@@ -200,4 +200,21 @@ void UInventoryComponent::ItemBuilt(UInventoryBuildableBlockInfo* block)
 	ForceItemsChanged(false);
 
 	selectItem(0);
+}
+
+bool UInventoryComponent::TryRemove(UBuildableBlockInfo* blockInfo)
+{
+	if (!blockInfo || !blockInfo->IsValidLowLevel() || blockInfo->ID < 0) // invalid or system action
+		return false;
+
+	auto removed = BuildableItems.Remove(blockInfo);
+
+	if (removed)
+		for (auto grp : InventoryTags->InventoryGroupList)
+			grp->IsBuildableCacheValid = false;
+
+	ForceItemsChanged(false);
+	selectItem(0);
+
+	return removed > 0;
 }
