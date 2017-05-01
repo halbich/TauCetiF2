@@ -11,6 +11,35 @@
 #include "Game/Weather/WeatherDefinition.h"
 #include "Helpers.generated.h"
 
+USTRUCT(BlueprintType)
+struct TAUCETIF2_API FControlsHelperStruct
+{
+	GENERATED_BODY();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = ControlsHelperStruct)
+		FText PrimaryControl;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = ControlsHelperStruct)
+		FText SecondaryControl;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = ControlsHelperStruct)
+		FText Description;
+};
+
+
+USTRUCT(BlueprintType)
+struct TAUCETIF2_API FControlsHelperStructGroup
+{
+
+	GENERATED_BODY();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = ControlsHelperStruct)
+		FText SectionName;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = ControlsHelperStruct)
+		TArray<FControlsHelperStruct> Controls;
+};
+
 /**
  *
  */
@@ -65,4 +94,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
 		static float GetGameDayMultiplier();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
+		static TArray<FControlsHelperStructGroup> GetControlsList();
 };

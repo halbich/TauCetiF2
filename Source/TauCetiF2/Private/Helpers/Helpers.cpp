@@ -168,3 +168,33 @@ float UHelpers::GetGameDayMultiplier()
 {
 	return GameDefinitions::GameDayMultiplier;
 }
+
+TArray<FControlsHelperStructGroup> UHelpers::GetControlsList()
+{
+	TArray<FControlsHelperStructGroup> res;
+
+	FControlsHelperStructGroup main;
+	main.SectionName = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Desc", "Ovládání");
+	
+	FControlsHelperStruct mainMove;
+	mainMove.PrimaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.MoveP", "W S A D");
+	mainMove.SecondaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.MoveS", "Nahoru dolů vlevo vpravo");
+	mainMove.Description = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.MoveD", "Pohyb postavy");
+	main.Controls.Add(mainMove);
+
+
+	res.Add(main);
+
+	FControlsHelperStructGroup building;
+	building.SectionName = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Building.Desc", "Stavění");
+
+	FControlsHelperStruct buildingChange;
+	buildingChange.PrimaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Building.BuildingChangeP", "Kolečko myši");
+	buildingChange.SecondaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Building.BuildingChangeS", "");
+	buildingChange.Description = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Building.BuildingChangeD", "Změnit stavitelný / umístitelný objekt");
+	building.Controls.Add(buildingChange);
+
+	res.Add(building);
+
+	return res;
+}

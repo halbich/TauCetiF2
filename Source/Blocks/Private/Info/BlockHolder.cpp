@@ -9,16 +9,12 @@ void UBlockHolder::ReinitializeAviableBlocks()
 	lib->AddToRoot();
 	int32 loaded = lib->LoadBlueprintAssetDataFromPath("/Game/Blocks");
 
-	UE_LOG(LogTemp, Log, TEXT("Found assets: %d"), loaded)
-
-		TArray<FAssetData> Assets;
+	TArray<FAssetData> Assets;
 	lib->GetAssetDataList(Assets);
 
 	for (auto& a : Assets)
 	{
-		UE_LOG(LogTemp, Log, TEXT("Found asset: %s"), *a.AssetName.ToString())
-
-			auto bp = Cast<UBlueprint>(a.GetAsset());
+		auto bp = Cast<UBlueprint>(a.GetAsset());
 		if (bp)
 		{
 			auto gen = bp->GeneratedClass;
@@ -52,7 +48,6 @@ void UBlockHolder::ReinitializeAviableBlocks()
 		return A < B; // sort keys in reverse
 	});
 
-	UE_LOG(LogTemp, Log, TEXT("Aviable assets: %d"), AviableBlocks.Num())
 }
 
 void UBlockHolder::tryAddBlockToAviables(UClass* blockClass)
@@ -71,11 +66,7 @@ void UBlockHolder::tryAddBlockToAviables(UClass* blockClass)
 	auto contains = AviableBlocks.Find(def->BlockID);
 	if (!contains)
 		AviableBlocks.Add(def->BlockID, b->GetClass());
-	else
-	{
-		// TODO better approach
-		print(NSLOCTEXT("TCF2LocSpace", "LC.BlockHoldeComp.Error_Key_Exist", "Key already existed! Skipping block").ToString());
-	}
+	
 }
 
 TArray<int32> UBlockHolder::GetAviableItems() {

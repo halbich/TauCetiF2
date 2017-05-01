@@ -377,7 +377,5 @@ void AWorldController::onShowWidgetRequest(ABlock* block, TSubclassOf<UUserWidge
 
 void AWorldController::DestroyRequestEventHandler(ABlock* block)
 {
-	// TODO
-	//print(TEXT("Block Destroy requested"));
-	//DestroyWorldObject(block);
+	DestroyWorldObject(block);
 }
