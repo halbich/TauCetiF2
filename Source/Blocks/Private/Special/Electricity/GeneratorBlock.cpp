@@ -21,7 +21,7 @@ AGeneratorBlock::AGeneratorBlock()
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
 
-	UpdateInterval = 1.0f / 30.0f;
+	SetActorTickInterval(1.0f / 20.0f);
 }
 
 void AGeneratorBlock::UpdateTextureRegions(UTexture2D* Texture, int32 MipIndex, uint32 NumRegions, FUpdateTextureRegion2D* Regions, uint32 SrcPitch, uint32 SrcBpp, uint8* SrcData, bool bFreeData)
@@ -153,18 +153,15 @@ void AGeneratorBlock::Tick(float DeltaTime)
 	if (!AnimationEnabled)
 		return;
 
-	TimeSinceLastUpdate += DeltaTime;
-
-	if (TimeSinceLastUpdate < UpdateInterval)
-		return;
-
 	TArray<int32> toDel;
+
+	bool anyUpdate = false;
 
 	for (int32 i = 0; i < spots.Num(); ++i)
 	{
 		auto elem = &spots[i];
 
-		elem->ActualTime += TimeSinceLastUpdate;
+		elem->ActualTime += DeltaTime;
 
 		uint8 setValue = (uint8)FMath::Lerp(256, 0, FMath::Min(1.0f, elem->ActualTime));
 		for (int32 kx = 0; kx < pixelsPerBaseBlock; kx++)
@@ -178,6 +175,7 @@ void AGeneratorBlock::Tick(float DeltaTime)
 				ensure(baseIndex + BLUE >= 0 && baseIndex + BLUE < dataSize);
 
 				dynamicColors[baseIndex + RED] = dynamicColors[baseIndex + GREEN] = dynamicColors[baseIndex + BLUE] = setValue;
+				anyUpdate = true;
 			}
 		}
 
@@ -188,9 +186,8 @@ void AGeneratorBlock::Tick(float DeltaTime)
 	while (toDel.Num() > 0)
 		spots.RemoveAt(toDel.Pop());
 
-	TimeSinceLastUpdate = 0;
-
-	UpdateCustomTexture();
+	if (anyUpdate)
+		UpdateCustomTexture();
 }
 
 void AGeneratorBlock::UpdateCustomTexture()
@@ -237,13 +234,37 @@ void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float
 
 	auto energyToPut = amount *  GameDefinitions::RainHitpointToEnergy;
 	float actuallyPutted = 0;
-	if (ElectricityComponent->PutAmount(energyToPut, actuallyPutted))
+	if (ElectricityComponent->PutAmount(energyToPut, actuallyPutted))	// first we try to fill internal buffer
 	{
-		energyToPut -= actuallyPutted;
+		energyToPut = FMath::Max(0.0f, energyToPut - actuallyPutted);
 		ElectricityComponent->EnergyProduced += actuallyPutted;
-
-		energyToPut *= GameDefinitions::EnergyToRainHitpoint;
 	}
+
+	// if we have left something, we to find appropriate storage randomly
+	if (energyToPut > 0 && ElectricityComponent->ComponentNetworkState == EElectricNetworkState::Valid)
+	{
+		auto n = ElectricityComponent->Network;
+		auto ns = n->ElectricityStorages.Num();
+		if (ns > 0)
+		{
+			auto random = FMath::RandHelper(ns);
+			ensure(n->ElectricityStorages.IsValidIndex(random));
+
+			auto stor = n->ElectricityStorages[random];
+
+			if (stor->ComponentNetworkState == EElectricNetworkState::Valid)
+			{
+				float storageActuallyPutted = 0;
+				if (stor->PutAmount(energyToPut, storageActuallyPutted))
+				{
+					energyToPut = FMath::Max(0.0f, energyToPut - storageActuallyPutted);
+					ElectricityComponent->EnergyProduced += storageActuallyPutted;
+				}
+			}
+		}
+	}
+
+	energyToPut *= GameDefinitions::EnergyToRainHitpoint;
 
 	ensure(energyToPut >= 0);
 

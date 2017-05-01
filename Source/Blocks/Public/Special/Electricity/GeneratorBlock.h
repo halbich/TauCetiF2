@@ -44,12 +44,6 @@ public:
 	UPROPERTY(Transient)
 		bool AnimationEnabled;
 
-	UPROPERTY(Transient)
-		float UpdateInterval;
-
-	UPROPERTY(Transient)
-		float TimeSinceLastUpdate;
-
 	virtual void Tick(float DeltaTime) override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
