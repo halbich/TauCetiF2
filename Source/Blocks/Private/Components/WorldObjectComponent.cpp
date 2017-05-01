@@ -6,14 +6,11 @@ UWorldObjectComponent::UWorldObjectComponent()
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
-
 void UWorldObjectComponent::UpdateDefiningBox(UKDTree* definingBox)
 {
 	DefiningBox = definingBox;
 	ensure(DefiningBox != nullptr);
 }
-
-
 
 void UWorldObjectComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {

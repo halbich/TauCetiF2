@@ -1,7 +1,6 @@
 #include "TauCetiF2.h"
 #include "GameWeatherComponent.h"
 
-
 const float UGameWeatherComponent::EasingBorderValue = 1.0f / 10.0f;
 
 // Sets default values for this component's properties
@@ -61,8 +60,6 @@ void UGameWeatherComponent::ObjectsChanged() {
 void UGameWeatherComponent::OnStormComming()
 {
 	StormState = EStormState::Comming;
-
-
 }
 
 void UGameWeatherComponent::OnStormBegin()
@@ -202,4 +199,3 @@ void UGameWeatherComponent::InitComp()
 	WeatherRootTree->rootNode = WeatherRootTree->GetRoot();
 	WeatherRootTree->OnWeatherTargetsChanged.AddDynamic(this, &UGameWeatherComponent::OnTargetElementsChanged);
 }
-

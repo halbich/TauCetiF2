@@ -95,10 +95,8 @@ void ATerminalBlock::ShowWidget_Implementation() {
 	IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
 }
 
-
 void ATerminalBlock::NetworkChanged()
 {
 	if (!shownWidget || !shownWidget->IsValidLowLevel())
 		return;
-
 }

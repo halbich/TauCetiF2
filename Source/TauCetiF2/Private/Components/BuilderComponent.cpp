@@ -29,7 +29,6 @@ void UBuilderComponent::BeginPlay()
 	inventory->OnCurrentSelectedIndexChanged.AddDynamic(this, &UBuilderComponent::InventorySelectedChangedEvent);
 }
 
-
 // Called every frame
 void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -249,4 +248,3 @@ void UBuilderComponent::InventorySelectedChangedEvent(int32 NewIndex, UBuildable
 {
 	setCurrentBuildingItem(BlockInfo);
 }
-

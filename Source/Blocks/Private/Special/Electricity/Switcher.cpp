@@ -43,7 +43,6 @@ void ASwitcher::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-
 	ensure(BlockInfo->ID == SwitcherID);
 	auto state = BlockInfo->BlockSpecificData.FindOrAdd(SwitcherBlockConstants::IsOn);
 	if (state.IsEmpty())

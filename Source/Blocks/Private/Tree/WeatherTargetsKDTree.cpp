@@ -1,7 +1,6 @@
 ﻿#include "Blocks.h"
 #include "WeatherTargetsKDTree.h"
 
-
 UWeatherTargetsKDTree* UWeatherTargetsKDTree::Init(FVector min, FVector max, int8 dividingIndex)
 {
 	InitBox(min, max);
@@ -177,4 +176,3 @@ void UWeatherTargetsKDTree::RemoveFromTree(UObject* obj)
 			parent->updateAfterChildDestroyedInner();
 	}
 }
-

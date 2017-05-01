@@ -1,7 +1,6 @@
 ﻿#include "Blocks.h"
 #include "BatteryBlock.h"
 
-
 ABatteryBlock::ABatteryBlock()
 	: Super()
 {
@@ -52,4 +51,3 @@ void ABatteryBlock::ListeningOnElectricityCompChanged(UBlockWithElectricityInfo*
 
 	mat->SetScalarParameterValue(TEXT("Filling"), source->GetRemainingPercentageUnit());
 }
-

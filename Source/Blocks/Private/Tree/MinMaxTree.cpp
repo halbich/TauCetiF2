@@ -1,7 +1,6 @@
 ﻿#include "Blocks.h"
 #include "MinMaxTree.h"
 
-
 UMinMaxTree* UMinMaxTree::Init(FVector min, FVector max)
 {
 	InitBox(min, max);
@@ -83,4 +82,3 @@ void UMinMaxTree::ChildrenDeleted()
 	if (parent)
 		parent->ChildrenDeleted();
 }
-

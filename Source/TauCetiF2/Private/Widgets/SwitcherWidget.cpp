@@ -1,7 +1,6 @@
 #include "TauCetiF2.h"
 #include "SwitcherWidget.h"
 
-
 void USwitcherWidget::InitForBlock_Implementation(ABlock* block)
 {
 	Super::InitForBlock_Implementation(block);
@@ -17,7 +16,6 @@ void USwitcherWidget::GetControllables(TArray<ABlock*>& aviables, TArray<ABlock*
 {
 	if (!CurrentBlock)
 		return;
-
 
 	for (auto c : Network->ControllableBlocks)
 	{
@@ -35,4 +33,3 @@ void USwitcherWidget::GetControllables(TArray<ABlock*>& aviables, TArray<ABlock*
 		controlled.Add(con);
 	}
 }
-

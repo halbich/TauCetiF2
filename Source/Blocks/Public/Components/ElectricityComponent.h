@@ -41,8 +41,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | ElectricityComponent")
 		EElectricNetworkState ComponentNetworkState;
 
-
-
 	UPROPERTY(Transient)
 		float EnergyProduced;
 

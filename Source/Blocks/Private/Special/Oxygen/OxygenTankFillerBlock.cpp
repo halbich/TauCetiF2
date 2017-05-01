@@ -47,7 +47,6 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-
 	ensure(BlockInfo->ID == OxygenTankFillerID);
 	auto currentF = 0.0f;
 	auto filling = BlockInfo->BlockSpecificData.FindOrAdd(OxygenFillerBlockConstants::CurrentFilling);

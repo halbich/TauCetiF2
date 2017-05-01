@@ -20,7 +20,6 @@ public:
 
 	virtual UElectricityComponent* GetElectricityComponent() = 0;
 
-
 	void RefreshHealthSeverity(EHealthSeverity oldSeverity);
 
 	virtual void NetworkChanged();

@@ -77,4 +77,3 @@ UTexture2D* UBlockConstructorSelector::GetBlockTexture()
 
 	return BlockDefinition->BlockImage;
 }
-

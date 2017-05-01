@@ -47,5 +47,4 @@ void UPatternGroupInfo::WatchingRegionChanged()
 {
 	if (!IsValidForObserve)
 		return;
-
 }

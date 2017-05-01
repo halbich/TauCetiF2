@@ -30,9 +30,6 @@ void IBlockWithElectricity::RefreshHealthSeverity(EHealthSeverity oldSeverity)
 	c->Network->RefreshHealthSeverity(c, oldSeverity);
 }
 
-
-
 void IBlockWithElectricity::NetworkChanged()
 {
-
 }

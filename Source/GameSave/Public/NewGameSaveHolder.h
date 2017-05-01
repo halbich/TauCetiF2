@@ -46,8 +46,6 @@ private:
 	USaveGameCarrier* getMainMenuSave(bool full = false);
 	USaveGameCarrier* getMiniLevelGameSave(bool full = false);
 	USaveGameCarrier* getSuperSizeGameSave(bool full = false);
-	
-
 
 	FORCEINLINE FBlockInfo make(int32 id, FVector location, FVector blockScale, FRotator blockRotation, float health, FString name = TEXT(""))
 	{

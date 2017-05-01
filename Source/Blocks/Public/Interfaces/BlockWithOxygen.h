@@ -15,5 +15,4 @@ class BLOCKS_API IBlockWithOxygen
 	GENERATED_IINTERFACE_BODY()
 
 public:
-
 };

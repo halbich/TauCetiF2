@@ -5,4 +5,3 @@ UBlockWithOxygen::UBlockWithOxygen(const class FObjectInitializer& ObjectInitial
 	: Super(ObjectInitializer)
 {
 }
-

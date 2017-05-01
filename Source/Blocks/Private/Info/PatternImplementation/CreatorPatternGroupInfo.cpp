@@ -1,7 +1,6 @@
 #include "Blocks.h"
 #include "CreatorPatternGroupInfo.h"
 
-
 void UCreatorPatternGroupInfo::UpdateValidForObserve()
 {
 	Super::UpdateValidForObserve();
@@ -27,4 +26,3 @@ void UCreatorPatternGroupInfo::WatchingRegionChanged()
 
 	ComputeCreator(BlocksInGroup[0]);
 }
-

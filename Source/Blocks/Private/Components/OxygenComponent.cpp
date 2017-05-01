@@ -130,4 +130,3 @@ UBlockInfo* UOxygenComponent::GetBlockInfo()
 
 	return BlockInfo;
 }
-

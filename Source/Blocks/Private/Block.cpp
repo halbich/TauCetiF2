@@ -14,7 +14,6 @@ ABlock::ABlock()
 	WorldObjectComponent = CreateDefaultSubobject<UWorldObjectComponent>(TEXT("WorldObjectComponent"));
 }
 
-
 void ABlock::OnConstruction(const FTransform& Transform)
 {
 	if (!Definition)
@@ -33,7 +32,6 @@ void ABlock::OnConstruction(const FTransform& Transform)
 	auto currentScale = GetBlockScale();
 
 	if (!BlockInfo->UnderConstruction) {
-
 		auto baseHealth = def->HealthSize * buildingCoeficient(def);
 		auto dimensions = def->GetMeshScale(currentScale);
 		BlockInfo->MaxHealth = baseHealth * dimensions.X * dimensions.Y * dimensions.Z;
@@ -48,7 +46,6 @@ void ABlock::OnConstruction(const FTransform& Transform)
 		BlockInfo->Health = FMath::Clamp(BlockInfo->Health, 0.0f, BlockInfo->MaxHealth);
 		HealthUpdated();
 	}
-
 
 	auto genBlock = Cast<IGenericBlock>(this);
 	int32 index = 0;
@@ -159,7 +156,7 @@ void ABlock::SetBlockInfo(UBlockInfo* info)
 	TArray<FString> toDelete;
 	for (auto kvp : BlockInfo->BlockSpecificData)
 	{
-		if(!allowedAdditionals.Contains(kvp.Key))
+		if (!allowedAdditionals.Contains(kvp.Key))
 			toDelete.Add(kvp.Key);
 	}
 
@@ -346,7 +343,6 @@ bool ABlock::GetIsController()
 
 	return d->HasElectricityComponent && d->ElectricityComponentDef.IsControlBlock && d->ElectricityComponentDef.IsController;
 }
-
 
 TArray<FString> ABlock::GetSupportedAdditionals()
 {

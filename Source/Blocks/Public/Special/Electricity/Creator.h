@@ -7,7 +7,6 @@
 #include "Info/PatternImplementation/CreatorPatternGroupInfo.h"
 #include "Creator.generated.h"
 
-
 /**
  *
  */
@@ -99,4 +98,3 @@ private:
 		return true;
 	}
 };
-

@@ -46,7 +46,7 @@ void ACreator::ComputeCreator()
 	auto world = GetWorld();
 
 	auto wholeBox = NewObject<UMinMaxBox>();
-	wholeBox->InitBox(wb->Min - FVector(1,1,-1) * GameDefinitions::CubeMinSize, twb->Max + FVector(1, 1, 1) * GameDefinitions::CubeMinSize);
+	wholeBox->InitBox(wb->Min - FVector(1, 1, -1) * GameDefinitions::CubeMinSize, twb->Max + FVector(1, 1, 1) * GameDefinitions::CubeMinSize);
 
 	TArray<UObject*> objectsToCast;
 
@@ -80,11 +80,6 @@ void ACreator::ComputeCreator()
 		if (obj.Value.Intersect(fbox) && IntersectExcl(obj.Value, fbox))
 			return;
 	}
-
-//#if WITH_EDITOR
-//	pi->IsValidCreator = true;
-//	return;
-//#endif
 
 	auto left = NewObject<UMinMaxBox>();
 	left->InitBoxChecked(FVector(twb->Min.X, wholeBox->Min.Y, twb->Min.Z), FVector(twb->Max.X, twb->Min.Y, twb->Max.Z));
@@ -120,4 +115,3 @@ void ComputeCreator(ABlock* block)
 	ensure(c);
 	c->ComputeCreator();
 }
-

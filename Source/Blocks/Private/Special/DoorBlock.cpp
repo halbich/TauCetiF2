@@ -44,7 +44,6 @@ void ADoorBlock::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-
 	ensure(BlockInfo->ID == DoorID);
 
 	auto valueptr = BlockInfo->AdditionalFlags.Find(TEXT("DoorOpening"));
@@ -133,7 +132,6 @@ void ADoorBlock::Tick(float DeltaSeconds)
 
 	Super::Tick(DeltaSeconds);
 }
-
 
 TArray<FString> ADoorBlock::GetSupportedAdditionals()
 {

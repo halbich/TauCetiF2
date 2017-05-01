@@ -23,7 +23,6 @@ ABlock* UOxygenFillerWidget::GetControllables(TArray<ABlock*>& aviables)
 	if (!CurrentBlock)
 		return NULL;
 
-
 	for (auto c : Network->ControllerBlocks)
 	{
 		if (!c || !c->IsValidLowLevel() || c->IsPendingKill())

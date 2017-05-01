@@ -11,15 +11,14 @@ void UBlockHolder::ReinitializeAviableBlocks()
 
 	UE_LOG(LogTemp, Log, TEXT("Found assets: %d"), loaded)
 
-	TArray<FAssetData> Assets;
+		TArray<FAssetData> Assets;
 	lib->GetAssetDataList(Assets);
 
 	for (auto& a : Assets)
 	{
-
 		UE_LOG(LogTemp, Log, TEXT("Found asset: %s"), *a.AssetName.ToString())
 
-		auto bp = Cast<UBlueprint>(a.GetAsset());
+			auto bp = Cast<UBlueprint>(a.GetAsset());
 		if (bp)
 		{
 			auto gen = bp->GeneratedClass;

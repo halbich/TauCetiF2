@@ -1,7 +1,6 @@
 #include "TauCetiF2.h"
 #include "GameElectricityComponent.h"
 
-
 const double UGameElectricityComponent::maxFloatingTime(1.0 / 30.0);		// we want to have at least 30 FPS
 
 // Sets default values for this component's properties
@@ -22,7 +21,6 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 	if (!TickingEnabled)
 		return;
 
-
 	auto time = FPlatformTime::Seconds() + maxFloatingTime;
 
 	for (auto n : networks)
@@ -31,7 +29,6 @@ void UGameElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 			continue;
 
 		tickUpdateNetwork(n, DeltaTime);
-
 	}
 
 	SectionLock.Lock();
@@ -69,7 +66,6 @@ void UGameElectricityComponent::RemoveFromWorldNetwork(UElectricityComponent* co
 	case EElectricNetworkState::Invalid: w = TEXT("Invalid"); break;
 	case EElectricNetworkState::InRecompute:  w = TEXT("InRecompute"); break;
 	case EElectricNetworkState::Valid:  w = TEXT("Valid"); break;
-
 	}
 
 	comp->Network->ForceInvalidateNetwork();
@@ -86,7 +82,5 @@ void UGameElectricityComponent::RemoveFromWorldNetwork(UElectricityComponent* co
 		networksToUpdate.Enqueue(n);
 	}
 
-
 	SectionLock.Unlock();
 }
-

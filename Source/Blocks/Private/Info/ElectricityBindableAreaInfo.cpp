@@ -1,7 +1,6 @@
 #include "Blocks.h"
 #include "ElectricityBindableAreaInfo.h"
 
-
 void UElectricityBindableAreaInfo::InitArea(TArray<FVector> usedPoints, FElectricityBindableArea& definedPlane, FVector& blockScale, FRotator& blockRotation, FVector worldLocation)
 {
 	auto scaleMultipl = blockScale * GameDefinitions::CubeMinSizeHalf;

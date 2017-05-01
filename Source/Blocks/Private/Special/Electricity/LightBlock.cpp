@@ -191,7 +191,6 @@ void ALightBlock::UpdateAutoregulate(bool newAutoregulate)
 {
 	AutoregulatePowerOutput = newAutoregulate;
 
-
 	ensure(BlockInfo->ID == LightSmallID);
 	BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
 }

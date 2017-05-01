@@ -3,7 +3,6 @@
 #include "Blocks/Public/Block.h"
 #include "WorldController.h"
 
-
 AWorldController::AWorldController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
@@ -382,4 +381,3 @@ void AWorldController::DestroyRequestEventHandler(ABlock* block)
 	//print(TEXT("Block Destroy requested"));
 	//DestroyWorldObject(block);
 }
-

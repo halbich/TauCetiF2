@@ -38,13 +38,11 @@ public:
 	UPROPERTY(Transient)
 		EHealthSeverity HealthSeverity;
 
-
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		float HealthDamageTaken;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockInfo")
 		float HealthDamageHealed;
-
 
 	// updates severity of this block. Returns if severity has changed.
 	FORCEINLINE bool UpdateHealthSeverity()
@@ -67,7 +65,6 @@ public:
 			newSev = EHealthSeverity::Critical;
 		else
 			newSev = EHealthSeverity::Dead;
-
 
 		if (old != newSev)
 		{

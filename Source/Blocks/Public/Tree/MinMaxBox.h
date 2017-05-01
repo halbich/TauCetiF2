@@ -103,4 +103,3 @@ protected:
 		return Max.X >= max.X && Max.Y >= max.Y;
 	}
 };
-

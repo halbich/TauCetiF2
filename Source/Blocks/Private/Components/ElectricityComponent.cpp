@@ -185,9 +185,7 @@ void UElectricityComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	ConnectedComponents.Empty();
 }
 
-
 UBlockInfo* UElectricityComponent::GetBlockInfo()
 {
 	return GetBlockInfoFromParent(this);
 }
-
