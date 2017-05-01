@@ -143,6 +143,7 @@ FVector ABlock::GetBlockScale()
 
 void ABlock::SetBlockInfo(UBlockInfo* info)
 {
+	ensure(BlockInfo == NULL);
 	BlockInfo = info;
 
 	auto oxygenBlock = Cast<UOxygenComponent>(GetComponentByClass(UOxygenComponent::StaticClass()));
@@ -152,6 +153,18 @@ void ABlock::SetBlockInfo(UBlockInfo* info)
 	auto electricityBlock = Cast<UElectricityComponent>(GetComponentByClass(UElectricityComponent::StaticClass()));
 	if (electricityBlock)
 		info->ElectricityInfo = electricityBlock->SetInfo(info->ElectricityInfo);
+
+	auto allowedAdditionals = GetSupportedAdditionals();
+
+	TArray<FString> toDelete;
+	for (auto kvp : BlockInfo->BlockSpecificData)
+	{
+		if(!allowedAdditionals.Contains(kvp.Key))
+			toDelete.Add(kvp.Key);
+	}
+
+	for (auto k : toDelete)
+		BlockInfo->BlockSpecificData.Remove(k);
 }
 
 void ABlock::InitWorldObjectComponent()
@@ -334,3 +347,9 @@ bool ABlock::GetIsController()
 	return d->HasElectricityComponent && d->ElectricityComponentDef.IsControlBlock && d->ElectricityComponentDef.IsController;
 }
 
+
+TArray<FString> ABlock::GetSupportedAdditionals()
+{
+	TArray<FString> result;
+	return result;
+}

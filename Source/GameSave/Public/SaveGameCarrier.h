@@ -55,6 +55,9 @@ public:
 		FString SaveName;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
+		FText SaveFullDescription;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
 		FDateTime SavedDate;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")

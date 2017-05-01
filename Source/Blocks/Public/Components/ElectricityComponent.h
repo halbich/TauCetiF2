@@ -49,8 +49,8 @@ public:
 	UPROPERTY(Transient)
 		float EnergyConsumed;
 
-	UPROPERTY(Transient)
-		UBlockInfo* BlockInfo;
+	//UPROPERTY(Transient)
+	//	UBlockInfo* BlockInfo;
 
 	void onComponentDataChanged();
 

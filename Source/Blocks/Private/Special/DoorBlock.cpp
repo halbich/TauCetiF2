@@ -135,3 +135,10 @@ void ADoorBlock::Tick(float DeltaSeconds)
 }
 
 
+TArray<FString> ADoorBlock::GetSupportedAdditionals()
+{
+	TArray<FString> result;
+	result.Add(DoorBlockConstants::DoorState);
+	result.Add(DoorBlockConstants::DoorYaw);
+	return result;
+}

@@ -72,8 +72,6 @@ void UGameElectricityComponent::RemoveFromWorldNetwork(UElectricityComponent* co
 
 	}
 
-	UE_LOG(LogTemp, Log, TEXT("Removing for %s from %s, state: %s"), *comp->BlockInfo->GetName(), *comp->Network->GetName(), *w);
-
 	comp->Network->ForceInvalidateNetwork();
 	comp->Network->UnregisterEntity(comp);
 	networksTodelete.AddUnique(comp->Network);

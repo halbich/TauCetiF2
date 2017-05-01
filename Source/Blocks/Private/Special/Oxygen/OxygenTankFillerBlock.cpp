@@ -83,7 +83,7 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 
 		newItm->OxygenInfo = NewObject<UBlockWithOxygenInfo>();
 		newItm->OxygenInfo->CurrentObjectOxygen = currentF;
-		
+
 		newItm->DefinitionSet();
 		newItm->UpdateDisplayValue();
 
@@ -175,7 +175,10 @@ void AOxygenTankFillerBlock::ShowWidget_Implementation()
 }
 
 void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) { IsOn = isOn; }
-void AOxygenTankFillerBlock::SetOutputPowerPercentage_Implementation(float percentage) { BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage; }
+void AOxygenTankFillerBlock::SetOutputPowerPercentage_Implementation(float percentage) {
+	ensure(BlockInfo->ID == OxygenTankFillerID);
+	BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage;
+}
 
 void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {
 	if (usedController && usedController->IsValidLowLevel())
@@ -283,4 +286,12 @@ bool AOxygenTankFillerBlock::SetCurrentFillingItem(UInventoryBuildableBlockInfo*
 	FillingItemCritical.Unlock();
 
 	return true;
+}
+
+TArray<FString> AOxygenTankFillerBlock::GetSupportedAdditionals()
+{
+	TArray<FString> result;
+	result.Add(OxygenFillerBlockConstants::CurrentFilling);
+	result.Add(OxygenFillerBlockConstants::HasItem);
+	return result;
 }

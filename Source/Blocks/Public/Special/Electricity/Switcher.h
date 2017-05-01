@@ -59,6 +59,8 @@ public:
 
 	virtual void SetBlockInfo(UBlockInfo* info) override;
 
+	virtual TArray<FString> GetSupportedAdditionals() override;
+
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{
 		return ElectricityComponent;

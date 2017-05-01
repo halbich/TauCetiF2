@@ -83,6 +83,8 @@ public:
 
 	void RenewPatternInfo();
 
+	virtual TArray<FString> GetSupportedAdditionals();
+
 	FORCEINLINE UElectricityComponent* TryGetElectricityComp()
 	{
 		auto _t = Cast<IBlockWithElectricity>(this);

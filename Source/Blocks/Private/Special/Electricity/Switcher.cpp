@@ -136,7 +136,8 @@ bool ASwitcher::BindControl_Implementation(ABlock* controllableBlock)
 	if (electr->GetElectricityComponent()->Network != ElectricityComponent->Network)
 		return false;
 
-	auto my = this->BlockInfo->RelationsInfo;
+	ensure(BlockInfo->ID == SwitcherID);
+	auto my = BlockInfo->RelationsInfo;
 	ensure(my && my->IsValidLowLevel());
 
 	auto other = controllableBlock->BlockInfo->RelationsInfo;
@@ -179,6 +180,7 @@ bool ASwitcher::UnbindControl_Implementation(ABlock* controllableBlock)
 	if (!interf)
 		return false;
 
+	ensure(BlockInfo->ID == SwitcherID);
 	auto my = BlockInfo->RelationsInfo;
 	ensure(my && my->IsValidLowLevel());
 
@@ -204,4 +206,11 @@ bool ASwitcher::GetControlState_Implementation()
 TArray<ABlock*> ASwitcher::GetControlledBlocks_Implementation()
 {
 	return controlledBlocks;
+}
+
+TArray<FString> ASwitcher::GetSupportedAdditionals()
+{
+	TArray<FString> result;
+	result.Add(SwitcherBlockConstants::IsOn);
+	return result;
 }

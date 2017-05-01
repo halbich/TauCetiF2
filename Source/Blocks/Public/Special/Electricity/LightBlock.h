@@ -88,6 +88,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | LightBlock")
 		void UpdateAutoregulate(bool newAutoregulate);
 
+	virtual TArray<FString> GetSupportedAdditionals() override;
+
 private:
 
 	FDelegateHandle ListeningHandle;

@@ -188,9 +188,6 @@ void UElectricityComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 UBlockInfo* UElectricityComponent::GetBlockInfo()
 {
-	if (!BlockInfo || !BlockInfo->IsValidLowLevel())
-		BlockInfo = GetBlockInfoFromParent(this);
-
-	return BlockInfo;
+	return GetBlockInfoFromParent(this);
 }
 

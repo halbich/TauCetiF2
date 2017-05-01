@@ -60,6 +60,8 @@ public:
 
 	virtual void SetBlockInfo(UBlockInfo* info) override;
 
+	virtual TArray<FString> GetSupportedAdditionals() override;
+
 	FDelegateHandle ListeningHandle;
 
 private:

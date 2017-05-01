@@ -84,6 +84,8 @@ public:
 	virtual void SetController_Implementation(ABlock* controller) override;
 	virtual ABlock* GetController_Implementation() override;
 
+	virtual TArray<FString> GetSupportedAdditionals() override;
+
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{
 		return ElectricityComponent;
@@ -134,6 +136,7 @@ private:
 			if (OxygenComponent->ObtainAmount(toWithdraw, actuallyObtained)) {
 				currentFillingItem->OxygenInfo->CurrentObjectOxygen += actuallyObtained;
 
+				ensure(BlockInfo->ID == OxygenTankFillerID);
 				BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::CurrentFilling] = FString::SanitizeFloat(currentFillingItem->OxygenInfo->CurrentObjectOxygen);
 
 				updateDisplayedMesh();

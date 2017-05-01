@@ -101,7 +101,8 @@ private:
 				if (inRec && consElem->ComponentNetworkState != EElectricNetworkState::Valid)
 					continue;
 
-				auto missingHealthEnergy = FMath::Max(0.0f, consElem->BlockInfo->MaxHealth - consElem->BlockInfo->Health) * GameDefinitions::HealthToEnergy;
+				auto bi = consElem->GetBlockInfo();
+				auto missingHealthEnergy = FMath::Max(0.0f, bi->MaxHealth - bi->Health) * GameDefinitions::HealthToEnergy;
 
 				// TODO take only percentage
 
@@ -141,8 +142,8 @@ private:
 				{
 					auto healed = actuallyObtained*GameDefinitions::EnergyToHealth;
 
-					consElem->BlockInfo->Health = FMath::Clamp(healed + consElem->BlockInfo->Health, 0.0f, consElem->BlockInfo->MaxHealth);
-					consElem->BlockInfo->HealthDamageHealed += healed;
+					bi->Health = FMath::Clamp(healed + bi->Health, 0.0f, bi->MaxHealth);
+					bi->HealthDamageHealed += healed;
 
 					maxAviable -= actuallyObtained;
 
@@ -166,7 +167,7 @@ private:
 		for (auto critical : n->CriticalRepairEntities)
 		{
 			if (critical->ComponentNetworkState == EElectricNetworkState::Valid)
-				criticalHealth += critical->BlockInfo->Health;
+				criticalHealth += critical->GetBlockInfo()->Health;
 		}
 
 		n->CriticalRepairHealth = criticalHealth;
@@ -177,7 +178,7 @@ private:
 		for (auto important : n->ImportantRepairEntities)
 		{
 			if (important->ComponentNetworkState == EElectricNetworkState::Valid)
-				importantHealth += important->BlockInfo->Health;
+				importantHealth += important->GetBlockInfo()->Health;
 		}
 
 		n->ImportantRepairHealth = importantHealth;
@@ -188,7 +189,7 @@ private:
 		for (auto toRepair : n->ToRepairEntities)
 		{
 			if (toRepair->ComponentNetworkState == EElectricNetworkState::Valid)
-				repairHealth += toRepair->BlockInfo->Health;
+				repairHealth += toRepair->GetBlockInfo()->Health;
 		}
 
 		n->ToRepairHealth = repairHealth;
@@ -198,8 +199,9 @@ private:
 		UElectricityComponent* c;
 		while (checkStatus.Dequeue(c))
 		{
-			auto lastSev = c->BlockInfo->HealthSeverity;
-			if (!c->BlockInfo->UpdateHealthSeverity())
+			auto bi = c->GetBlockInfo();
+			auto lastSev = bi->HealthSeverity;
+			if (!bi->UpdateHealthSeverity())
 				continue;	// severity has not changed
 
 			n->RefreshHealthSeverity(c, lastSev);
@@ -254,7 +256,7 @@ private:
 		auto totalHealth = 0.0f;
 		for (auto ent : n->Entities)
 			if (ent->ComponentNetworkState == EElectricNetworkState::Valid)
-				totalHealth += ent->BlockInfo->Health;
+				totalHealth += ent->GetBlockInfo()->Health;
 
 		n->NetworkHealth = totalHealth;
 		n->NetworkHealthPercentage = FMath::IsNearlyZero(n->NetworkMaxHealth) ? 0 : totalHealth / n->NetworkMaxHealth;
@@ -330,10 +332,11 @@ private:
 		float healedInfo = 0.0f;
 		for (auto block : n->Entities)
 		{
-			damageInfo += block->BlockInfo->HealthDamageTaken;
-			block->BlockInfo->HealthDamageTaken = 0;
-			healedInfo += block->BlockInfo->HealthDamageHealed;
-			block->BlockInfo->HealthDamageHealed = 0;
+			auto bi = block->GetBlockInfo();
+			damageInfo += bi->HealthDamageTaken;
+			bi->HealthDamageTaken = 0;
+			healedInfo += bi->HealthDamageHealed;
+			bi->HealthDamageHealed = 0;
 		}
 
 		n->HealthDamageTaken = damageInfo;

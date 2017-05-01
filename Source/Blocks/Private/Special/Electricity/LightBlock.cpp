@@ -50,6 +50,8 @@ void ALightBlock::SetBlockInfo(UBlockInfo* info)
 		BlockInfo->BlockSpecificData[LightBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
 	else
 		IsOn = FCString::Atoi(*state1) > 0 ? true : false;
+
+	updateUsingMessage();
 }
 
 void ALightBlock::ListeningOnUse(AActor* actor, bool isSpecial)
@@ -98,7 +100,7 @@ void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 
-	this->Execute_SetController(this, NULL);
+	//this->Execute_SetController(this, NULL);
 
 	Super::EndPlay(EndPlayReason);
 }
@@ -141,7 +143,10 @@ void ALightBlock::SetControlState_Implementation(bool isOn) {
 	BlockInfo->BlockSpecificData[LightBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
 	updateUsingMessage();
 }
-void ALightBlock::SetOutputPowerPercentage_Implementation(float percentage) { BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage; }
+void ALightBlock::SetOutputPowerPercentage_Implementation(float percentage) {
+	ensure(BlockInfo->ID == LightSmallID);
+	BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage;
+}
 
 void ALightBlock::SetController_Implementation(ABlock* controller) {
 	if (usedController && usedController->IsValidLowLevel())
@@ -165,6 +170,9 @@ void ALightBlock::SetController_Implementation(ABlock* controller) {
 	else
 		IsOn = true;
 
+	AutoregulatePowerOutput = usedController == NULL;
+	BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
+
 	updateUsingMessage();
 }
 ABlock* ALightBlock::GetController_Implementation() { return usedController; }
@@ -186,4 +194,12 @@ void ALightBlock::UpdateAutoregulate(bool newAutoregulate)
 
 	ensure(BlockInfo->ID == LightSmallID);
 	BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
+}
+
+TArray<FString> ALightBlock::GetSupportedAdditionals()
+{
+	TArray<FString> result;
+	result.Add(LightBlockConstants::IsAutoregulated);
+	result.Add(LightBlockConstants::IsOn);
+	return result;
 }

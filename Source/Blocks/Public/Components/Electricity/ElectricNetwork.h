@@ -168,7 +168,7 @@ private:
 
 	/*FORCEINLINE*/ void tryUpdateArrayBySeverity(UElectricityComponent* comp)
 	{
-		auto b = comp->BlockInfo;
+		auto b = comp->GetBlockInfo();
 		switch (b->HealthSeverity)
 		{
 		case EHealthSeverity::ToRepair: {
@@ -194,7 +194,7 @@ private:
 
 	/*FORCEINLINE*/ void tryUpdateArrayBySeverityRem(UElectricityComponent* comp, EHealthSeverity oldSeverity)
 	{
-		auto b = comp->BlockInfo;
+		auto b = comp->GetBlockInfo();
 		switch (oldSeverity)
 		{
 		case EHealthSeverity::ToRepair: {
@@ -346,7 +346,7 @@ public:
 
 		NetworkMaxHealth = FMath::Max(0.0f, NetworkMaxHealth - info->MaxHealth);		// due to rounding errors, we could get under zero
 
-		tryUpdateArrayBySeverityRem(comp, comp->BlockInfo->HealthSeverity);
+		tryUpdateArrayBySeverityRem(comp, comp->GetBlockInfo()->HealthSeverity);
 
 		if (c->Definition.GetDefaultObject()->UsingInPatterns)
 		{
