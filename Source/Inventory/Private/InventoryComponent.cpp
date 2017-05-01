@@ -98,12 +98,12 @@ void UInventoryComponent::SelectPrevBank()
 
 void UInventoryComponent::SelectNextItem()
 {
-	selectItem(-1);
+	selectItem(1);
 }
 
 void UInventoryComponent::SelectPrevItem()
 {
-	selectItem(1);
+	selectItem(-1);
 }
 
 void UInventoryComponent::EmptyHand()
