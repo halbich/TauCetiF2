@@ -29,4 +29,32 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | GameInstance")
 		bool IsNightInGame;
+
+
+
+	UPROPERTY(Transient)
+		TArray<FText> LoadingErrorMessages;
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameInstance")
+		void AddErrorMessages(TArray<FText> messages);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameInstance")
+		bool TakeErrorMessages(TArray<FText>& messages);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameInstance")
+		void ClearErrorMessages();
+
+	UPROPERTY(Transient)
+		TArray<FText> LoadingWarningMessages;
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameInstance")
+		void AddWarningMessages(TArray<FText> messages);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameInstance")
+		bool TakeWarningMessages(TArray<FText>& messages);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameInstance")
+		void ClearWarningMessages();
+
+
 };

@@ -15,6 +15,8 @@ void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
 	if (!world)
 		return;
 
+	TArray<FText> validationErrors;
+
 	UsedBlocks.Empty();
 	UsedBlocks.Reserve(blocks.Num());
 	for (auto block : blocks)
@@ -22,7 +24,14 @@ void AWorldController::loadBlocksArray(TArray<UBlockInfo*>& blocks) {
 		if (block->Health <= 0)
 			continue;
 
-		SpawnWorldObject(world, block, true);
+		SpawnWorldObject(world, block, validationErrors, true);
+	}
+
+	if (validationErrors.Num() > 0)
+	{
+		auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+		ensure(inst);
+		inst->AddWarningMessages(validationErrors);
 	}
 }
 
@@ -116,7 +125,7 @@ bool AWorldController::DestroyWorldObject(ABlock* object)
 	return true;
 }
 
-ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot)
+ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, TArray<FText>& validationErrors, bool addToRoot)
 {
 	if (!block)
 		return nullptr;
@@ -132,8 +141,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 
 	if (!definition)
 	{
-		// TODO Localization!
-		UE_LOG(LogTemp, Error, TEXT("Neznámé ID (%d) objektu. Vynechávám"), block->ID);
+		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.WorldController.UnknownID", "Neznámé ID ({0}). Blok nebude ve hře použit."), block->ID));
 		return nullptr;
 	}
 
@@ -141,8 +149,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	ensure(box != nullptr);
 	if (!IsValidSpawnPoint(box))
 	{
-		// TODO Localization!
-		UE_LOG(LogTemp, Error, TEXT("Objekt s ID %d nelze korektně přidat do stromu. Vynechávám."), block->ID);
+		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.WorldController.InvalidSpawnPoint", "Blok s ID {0} nelze korektně přidat. Blok nebude ve hře použit."), block->ID));
 		return nullptr;
 	}
 
@@ -150,8 +157,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	bool isValid = BlockHelpers::CheckBlockValidity(definition, block, invalidReason);
 	if (!isValid)
 	{
-		// TODO Localization!
-		UE_LOG(LogTemp, Error, TEXT("Blok není validní. Důvod: %s. Vynechávám."), *invalidReason);
+		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.WorldController.InvalidBlock", "Blok s ID {0} není validní. Důvod: {1}. Blok nebude ve hře použit."), FText::FromString( FString::FormatAsNumber(block->ID)), FText::FromString(invalidReason)));
 		return nullptr;
 	}
 
@@ -164,9 +170,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 
 	if (!actor)
 	{
-		// TODO Localization!
-		UE_LOG(LogTemp, Error, TEXT("Neznámé ID (%d) objektu. Vynechávám"), block->ID);
-		ensure(actor != nullptr);			// chceme vyhodit chybu
+		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.WorldController.InvalidActor", "Blok s ID {0} nemohl být korektně vytvořen. Blok nebude ve hře použit."), block->ID));
 		return nullptr;
 	}
 
@@ -175,7 +179,6 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, boo
 	if (addToRoot) {
 		auto MinMax = NewObject<UKDTree>()->Init(box);
 		MinMax->ContainingObject = actor;
-		//UE_LOG(LogTemp, Log, TEXT("---   Přidávám do světa objekt  %s"), *actor->GetName());
 
 		auto woc = actor->WorldObjectComponent;
 		woc->UpdateDefiningBox(MinMax);

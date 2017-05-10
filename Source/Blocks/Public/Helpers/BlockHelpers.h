@@ -38,7 +38,8 @@ namespace BlockHelpers
 
 		if (!definition->IsInLimits(blockInfo->Scale))
 		{
-			reason = FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockInfo.Invalid_Dimensions", "Blok s ID {0} není v rozmezí platné velikosti. (Min: {1}, Max: {2}, Scale: {3})"), FText::AsNumber(blockInfo->ID), definition->MinBlockScale.ToText(), definition->MaxBlockScale.ToText(), (definition->HasCustomScaling ? definition->CustomBlockScale : blockInfo->Scale).ToText()).ToString();
+			reason = FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockInfo.Invalid_Dimensions", "Blok s ID {0} není v rozmezí platné velikosti. (Min: {1}, Max: {2}, Velikost: {3})"), FText::AsNumber(blockInfo->ID), (definition->HasCustomScaling ? definition->CustomBlockScale : definition->MinBlockScale).ToText(), (definition->HasCustomScaling ? definition->CustomBlockScale : definition->MaxBlockScale).ToText(), blockInfo->Scale.ToText()).ToString();
+
 			return false;
 		}
 

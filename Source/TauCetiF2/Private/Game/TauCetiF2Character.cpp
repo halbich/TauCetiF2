@@ -211,8 +211,9 @@ void ATauCetiF2Character::OnUse()
 		Selector->TryUse();
 }
 
-void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FText>& validationErrors)
+void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier)
 {
+	TArray<FText> validationErrors;
 	Inventory->LoadFromCarrier(carrier, validationErrors);
 
 	OxygenComponent->SetInfo(BlockSavingHelpers::GetOxygenInfo(carrier));
@@ -226,6 +227,13 @@ void ATauCetiF2Character::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FTex
 	Health = FMath::Clamp(carrier->PlayerHealth, 0.0f, MaxHealth);
 
 	toogleCreative(carrier->IsCreativeMode);
+
+	if (validationErrors.Num() > 0)
+	{
+		auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+		ensure(inst);
+		inst->AddWarningMessages(validationErrors);
+	}
 }
 
 void ATauCetiF2Character::SaveToCarrier(USaveGameCarrier* carrier)

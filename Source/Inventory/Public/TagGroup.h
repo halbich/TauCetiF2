@@ -28,10 +28,16 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Tags")
 		static UTagGroup* GetFromTags(const TArray<FString>& tagList);
 
-	bool IsSatisfied(TArray<FString>& tags)
+	bool IsSatisfied(TArray<FString>& tags, TArray<FString>& implicitTags)
 	{
 		for (auto groupTag : Tags)
 		{
+			for (auto itag : implicitTags)
+			{
+				if (itag.Contains(groupTag))
+					return true;
+			}
+
 			for (auto tag : tags)
 			{
 				if (tag.Contains(groupTag))

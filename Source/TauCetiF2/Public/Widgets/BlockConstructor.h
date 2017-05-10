@@ -53,10 +53,4 @@ private:
 		return blockHolder != NULL;
 	}
 
-	FORCEINLINE void AddImplicitTags(UBuildableBlockInfo* block)
-	{
-		block->Tags.Add(FString::Printf(TEXT("kX_%d"), (int32)block->Scale.X));
-		block->Tags.Add(FString::Printf(TEXT("kY_%d"), (int32)block->Scale.Y));
-		block->Tags.Add(FString::Printf(TEXT("kZ_%d"), (int32)block->Scale.Z));
-	}
 };

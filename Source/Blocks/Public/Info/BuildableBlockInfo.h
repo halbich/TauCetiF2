@@ -21,6 +21,9 @@ public:
 		TArray<FString> Tags;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
+		TArray<FString> ImplicitTags;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		EBuildableObjectAction Action;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")

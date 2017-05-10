@@ -106,8 +106,6 @@ private:
 		FInventoryBuildableBlockInfo ret;
 		ret.ID = blockID;
 		ret.Scale = blockScale;
-
-		ret.AddImplicitTags();
 		return ret;
 	}
 
@@ -116,8 +114,6 @@ private:
 		FInventoryBuildableItemBlockInfo ret;
 		ret.ID = blockID;
 		ret.Scale = blockScale;
-
-		ret.AddImplicitTags();
 		return ret;
 	}
 

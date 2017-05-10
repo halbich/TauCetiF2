@@ -187,14 +187,21 @@ void UBuilderComponent::setCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 			currentBlockInfo->ElectricityInfo = temp->ElectricityInfo;
 			currentBlockInfo->OxygenInfo = temp->OxygenInfo;
 		}
-
-		used = worldController->SpawnWorldObject(GetWorld(), currentBlockInfo, false);
+		TArray<FText> validationErrors;
+		used = worldController->SpawnWorldObject(GetWorld(), currentBlockInfo, validationErrors, false);
 		if (!used)
 			return;
 
 		used->SetActorEnableCollision(false);
 		usedObjects.Add(currentBuildableBlockInfo, used);
 		return;
+	}
+
+	// after really fast scroll we could have "lost" few preview blocks on a screen and they would be visible
+	for (auto u : usedObjects)
+	{
+		u.Value->SetActorHiddenInGame(true);
+		u.Value->SetActorTickEnabled(true);
 	}
 
 	used->SetActorHiddenInGame(false);

@@ -61,7 +61,7 @@ public:
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReasonType) override;
 
-	ABlock* SpawnWorldObject(UWorld* world, UBlockInfo* block, bool addToRoot);
+	ABlock* SpawnWorldObject(UWorld* world, UBlockInfo* block, TArray<FText>& validationErrors, bool addToRoot);
 
 	bool DestroyWorldObject(ABlock* object);
 

@@ -145,8 +145,9 @@ public:
 			float actuallyObtainedEnergy = 0.0f;
 			if (IsInCreative || BuilderElectricityComponent->ObtainAmount(currentBuildableBlockInfo->BuildingEnergyRequired, actuallyObtainedEnergy, true))
 			{
+				TArray<FText> validationErrors;
 				float actuallyReturnedEnergy = 0.0f;
-				if (!worldController->SpawnWorldObject(GetWorld(), spawnBlock, true))
+				if (!worldController->SpawnWorldObject(GetWorld(), spawnBlock, validationErrors, true))
 					BuilderElectricityComponent->PutAmount(actuallyObtainedEnergy, actuallyReturnedEnergy);
 				else
 				{

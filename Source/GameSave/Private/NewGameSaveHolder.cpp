@@ -59,7 +59,7 @@ USaveGameCarrier* UNewGameSaveHolder::getEmptyGameSave(bool full)
 		return c;
 
 	c->CurrentTime = FMath::RandHelper(86400);
-	c->PlayerUseFPSCamera = false;
+	c->PlayerUseFPSCamera = true;
 	c->PlayerHealth = 1000;
 	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
 	c->PlayerElectricityComponent.CurrentObjectEnergy = 500000.0f;
@@ -118,7 +118,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 		return c;
 
 	c->CurrentTime = FMath::RandHelper(86400);
-	c->PlayerUseFPSCamera = false;
+	c->PlayerUseFPSCamera = true;
 	c->PlayerHealth = 1000;
 	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
 	c->PlayerElectricityComponent.CurrentObjectEnergy = 500000.0f;
@@ -408,7 +408,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMiniLevelGameSave(bool full)
 		return c;
 
 	c->CurrentTime = FMath::RandHelper(86400);
-	c->PlayerUseFPSCamera = false;
+	c->PlayerUseFPSCamera = true;
 	c->PlayerHealth = 1000;
 	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
 	c->PlayerElectricityComponent.CurrentObjectEnergy = 500000.0f;
@@ -483,7 +483,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMainMenuSave(bool full)
 		return c;
 
 	c->CurrentTime = FMath::RandHelper(86400);
-	c->PlayerUseFPSCamera = false;
+	c->PlayerUseFPSCamera = true;
 	c->PlayerHealth = 1000;
 	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
 	c->PlayerElectricityComponent.CurrentObjectEnergy = 500000.0f;
@@ -520,7 +520,7 @@ USaveGameCarrier* UNewGameSaveHolder::getSuperSizeGameSave(bool full)
 		return c;
 
 	c->CurrentTime = FMath::RandHelper(86400);
-	c->PlayerUseFPSCamera = false;
+	c->PlayerUseFPSCamera = true;
 	c->PlayerHealth = 1000;
 	c->PlayerOxygenComponent.CurrentObjectOxygen = 1000.0f;
 	c->PlayerElectricityComponent.CurrentObjectEnergy = 500000.0f;
@@ -531,7 +531,7 @@ USaveGameCarrier* UNewGameSaveHolder::getSuperSizeGameSave(bool full)
 
 	auto UsedBlocks = &c->usedBlocks;
 
-	auto b_0 = make1(0, -72, 21, 1, 20, 20, 4, 0, 90, 0, 16000.000000, ""); mE(b_0, 0.000000); UsedBlocks->Add(b_0);
+	/*auto b_0 = make1(0, -72, 21, 1, 20, 20, 4, 0, 90, 0, 16000.000000, ""); mE(b_0, 0.000000); UsedBlocks->Add(b_0);
 	auto b_1 = make1(1150, -72, 22, 4, 20, 20, 2, 0, -180, 0, 8000.000000, ""); mE(b_1, 800000.000000); UsedBlocks->Add(b_1);
 	auto b_2 = make1(0, -72, 1, 1, 20, 20, 4, 0, 90, 0, 16000.000000, ""); mE(b_2, 0.000000); UsedBlocks->Add(b_2);
 	auto b_3 = make1(0, -92, 1, 1, 20, 20, 4, 0, 90, 0, 16000.000000, ""); mE(b_3, 0.000000); UsedBlocks->Add(b_3);
@@ -1045,7 +1045,7 @@ USaveGameCarrier* UNewGameSaveHolder::getSuperSizeGameSave(bool full)
 	auto b_467 = make1(2, -76, -8, 9, 13, 1, 11, 0, 180, 0, 1430.000000, ""); UsedBlocks->Add(b_467);
 	auto b_468 = make1(2, -43, 25, 9, 13, 1, 11, 0, 90, 0, 1430.000000, ""); UsedBlocks->Add(b_468);
 	auto b_469 = make1(2, -69, 51, 9, 13, 1, 11, 0, 0, 0, 1430.000000, ""); UsedBlocks->Add(b_469);
-	auto b_470 = make1(2, -102, 18, 9, 13, 1, 11, 0, -90, 0, 1430.000000, ""); UsedBlocks->Add(b_470);
+	auto b_470 = make1(2, -102, 18, 9, 13, 1, 11, 0, -90, 0, 1430.000000, ""); UsedBlocks->Add(b_470);*/
 
 
 	c->PlayerPosition = FVector(-919, -108, 163);

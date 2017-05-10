@@ -50,11 +50,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryTagGroup")
 		void InvalidateGroup();
 
-	bool IsSatisfied(TArray<FString>& tags)
+	bool IsSatisfied(TArray<FString>& tags, TArray<FString>& implicitTags)
 	{
 		for (auto tagGroup : GroupList)
 		{
-			if (!tagGroup->IsSatisfied(tags))
+			if (!tagGroup->IsSatisfied(tags, implicitTags))
 				return false;
 		}
 

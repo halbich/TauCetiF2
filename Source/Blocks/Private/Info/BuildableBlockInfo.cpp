@@ -17,6 +17,7 @@ void UBuildableBlockInfo::DefinitionSet()
 	case DeleteID: {
 		StencilOverride = STENCIL_DELETE_OUTLINE;
 		Action = EBuildableObjectAction::DeleteObject;
+		ImplicitTags.Add(BlockDefinition->BlockDisplayName.ToString());
 		break;
 	}
 	default:
@@ -24,6 +25,12 @@ void UBuildableBlockInfo::DefinitionSet()
 		auto baseEnergyReq = BlockDefinition->EnergyReqiredToBuild * buildingCoeficient();
 		auto dimensions = BlockDefinition->HasCustomScaling ? FVector(1, 1, 1) : Scale;
 		BuildingEnergyRequired = baseEnergyReq * dimensions.X * dimensions.Y * dimensions.Z;
+
+		ImplicitTags.Add(BlockDefinition->BlockDisplayName.ToString());
+		ImplicitTags.Add(TEXT("X-") + FString::FormatAsNumber(FMath::Floor(Scale.X)));
+		ImplicitTags.Add(TEXT("Y-") + FString::FormatAsNumber(FMath::Floor(Scale.Y)));
+		ImplicitTags.Add(TEXT("Z-") + FString::FormatAsNumber(FMath::Floor(Scale.Z)));
+
 
 		break;
 	}
@@ -44,7 +51,7 @@ bool UBuildableBlockInfo::ValidateObject(TArray<FText>& validationErrors, UBlock
 
 	if (!definition->IsInLimits(Scale))
 	{
-		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BuildableBlockInfo.Invalid_Dimensions", "Blok s ID {0} není v rozmezí platné velikosti. (Min: {1}, Max: {2}, Scale: {3})"), FText::AsNumber(ID), definition->MinBlockScale.ToText(), definition->MaxBlockScale.ToText(), (definition->HasCustomScaling ? definition->CustomBlockScale : Scale).ToText()));
+		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BuildableBlockInfo.Invalid_Dimensions", "Blok inventáře s ID {0} není v rozmezí platné velikosti. (Min: {1}, Max: {2}, Velikost: {3})"), FText::AsNumber(ID), (definition->HasCustomScaling ? definition->CustomBlockScale : definition->MinBlockScale).ToText(), (definition->HasCustomScaling ? definition->CustomBlockScale : definition->MaxBlockScale).ToText(), Scale.ToText()));
 		return false;
 	}
 

@@ -117,7 +117,7 @@ private:
 		filterGroup->BuildableCache.Empty();
 		for (auto b : BuildableItems)
 		{
-			if (b->BlockDefinition->IsPlaceable && filterGroup->IsSatisfied(b->Tags))
+			if (b->BlockDefinition->IsPlaceable && filterGroup->IsSatisfied(b->Tags, b->ImplicitTags))
 				filterGroup->BuildableCache.Add(b);
 		}
 		filterGroup->IsBuildableCacheValid = true;
@@ -128,7 +128,7 @@ private:
 		filterGroup->InventoryCache.Empty();
 		for (auto b : InventoryItems)
 		{
-			if (b->BlockDefinition->IsInventoryObject && filterGroup->IsSatisfied(b->Tags))
+			if (b->BlockDefinition->IsInventoryObject && filterGroup->IsSatisfied(b->Tags, b->ImplicitTags))
 				filterGroup->InventoryCache.Add(b);
 		}
 		filterGroup->IsInventoryCacheValid = true;

@@ -131,9 +131,12 @@ public:
 		return FVector(HasCustomScaling ? CustomBlockScale : inScale);
 	}
 
-	FORCEINLINE bool IsInLimits(FVector dimensions) const
+	bool IsInLimits(FVector dimensions) const
 	{
 		auto scale = HasCustomScaling ? CustomBlockScale : dimensions;
+
+		if (HasCustomScaling && dimensions != scale)
+			return false;
 
 		auto minS = MinBlockScale;
 		auto maxS = MaxBlockScale;
@@ -143,7 +146,7 @@ public:
 		return min && max;
 	}
 
-	FORCEINLINE bool ValidateFlags(TMap<FString, int32> flags, TArray<FText>& validationErrors) const
+	bool ValidateFlags(TMap<FString, int32> flags, TArray<FText>& validationErrors) const
 	{
 		for (auto definedFlag : AdditionalFlags)
 		{
