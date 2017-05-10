@@ -300,7 +300,7 @@ USaveGameCarrier* UNewGameSaveHolder::getDefaultGameSave(bool full)
 	mr(b_145, "E833DB734847B828C2163B82A6FFC818"); mrc(b_145, "C70D1CEE4B62380C526D50BE6CB5F3F7", 0); UsedBlocks->Add(b_145);
 	auto b_146 = make1(1, 4, 6, 16, 17, 1, 3, 0, 180, 0, 510.000000, ""); mE(b_146, 0.000000); UsedBlocks->Add(b_146);
 	auto b_147 = make1(1, 24, 13, 16, 12, 1, 3, 0, 90, 0, 360.000000, ""); mE(b_147, 0.000000); UsedBlocks->Add(b_147);
-	auto b_148 = make1(500, -9, -7, 6, 1, 1, 1, 0, -90, 0, 10.000000, ""); mE(b_148, 100000.000000); UsedBlocks->Add(b_148);
+	auto b_148 = make1(500, -9, -7, 6, 1, 8, 5, 0, -90, 0, 10.000000, ""); mE(b_148, 100000.000000); UsedBlocks->Add(b_148);
 	auto b_149 = make1(1, 24, 8, 12, 1, 1, 5, 0, 0, 0, 50.000000, ""); mE(b_149, 0.000000); UsedBlocks->Add(b_149);
 	auto b_150 = make1(700, -12, -16, 9, 7, 7, 11, 0, -90, 0, 10.000000, ""); af(b_150, TEXT("DoorOpening"), 0); bd(b_150, TEXT("DoorState"), TEXT("0")); bd(b_150, TEXT("DoorYaw"), TEXT("0.0")); mE(b_150, 0.000000); UsedBlocks->Add(b_150);
 	auto b_151 = make1(1, -15, -12, 10, 1, 1, 14, 0, -180, 0, 140.000000, ""); mE(b_151, 0.000000); UsedBlocks->Add(b_151);
@@ -427,7 +427,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMiniLevelGameSave(bool full)
 	auto b_5 = make1(2, -150, 6, 6, 5, 4, 1, -90, 0, 90, 200.000000, ""); UsedBlocks->Add(b_5);
 	auto b_6 = make1(2, -152, 9, 6, 5, 4, 1, -90, 0, -180, 200.000000, ""); UsedBlocks->Add(b_6);
 	auto b_7 = make1(2, -150, 8, 9, 5, 5, 1, 0, -90, 0, 250.000000, ""); UsedBlocks->Add(b_7);
-	auto b_8 = make1(500, -152, 10, 12, 1, 1, 1, 0, -180, 0, 10.000000, ""); mE(b_8, 100000.000000); UsedBlocks->Add(b_8);
+	auto b_8 = make1(500, -152, 10, 12, 1, 8, 5, 0, -180, 0, 10.000000, ""); mE(b_8, 100000.000000); UsedBlocks->Add(b_8);
 	auto b_9 = make1(1, -153, 12, 9, 14, 1, 11, 0, 90, 0, 1540.000000, ""); mE(b_9, 0.000000); UsedBlocks->Add(b_9);
 	auto b_10 = make1(1, -139, 13, 9, 1, 1, 11, 0, 90, 0, 110.000000, ""); mE(b_10, 0.000000); UsedBlocks->Add(b_10);
 	auto b_11 = make1(1, -139, 19, 9, 1, 1, 11, 0, 90, 0, 110.000000, ""); mE(b_11, 0.000000); UsedBlocks->Add(b_11);
@@ -1002,7 +1002,7 @@ USaveGameCarrier* UNewGameSaveHolder::getSuperSizeGameSave(bool full)
 	auto b_424 = make1(1500, -90, 49, 6, 2, 2, 2, 0, 90, 0, 10.000000, ""); mO(b_424, 1000.000000); UsedBlocks->Add(b_424);
 	auto b_425 = make1(1500, -88, 49, 6, 2, 2, 2, 0, 90, 0, 10.000000, ""); mO(b_425, 1000.000000); UsedBlocks->Add(b_425);
 	auto b_426 = make1(1, -46, 4, 9, 8, 4, 1, 0, -90, 0, 320.000000, ""); mE(b_426, 0.000000); UsedBlocks->Add(b_426);
-	auto b_427 = make1(500, -46, 3, 12, 1, 1, 1, 0, 0, 0, 10.000000, ""); mE(b_427, 100000.000000); UsedBlocks->Add(b_427);
+	auto b_427 = make1(500, -46, 3, 12, 1, 8, 5, 0, 0, 0, 10.000000, ""); mE(b_427, 100000.000000); UsedBlocks->Add(b_427);
 	auto b_428 = make1(1, -47, 0, 6, 1, 1, 5, 0, 90, 0, 50.000000, ""); mE(b_428, 0.000000); UsedBlocks->Add(b_428);
 	auto b_429 = make1(1, -47, 7, 6, 1, 1, 5, 0, 90, 0, 50.000000, ""); mE(b_429, 0.000000); UsedBlocks->Add(b_429);
 	auto b_430 = make1(1, -94, 5, 25, 12, 1, 4, 0, 90, 0, 480.000000, ""); mE(b_430, 0.000000); UsedBlocks->Add(b_430);
