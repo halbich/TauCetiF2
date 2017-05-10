@@ -162,7 +162,7 @@ private:
 			args.Add(FStringFormatArg(FMath::RoundToInt(info.Rotation.Pitch))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Rotation.Yaw))); args.Add(FStringFormatArg(FMath::RoundToInt(info.Rotation.Roll)));
 			args.Add(FStringFormatArg(info.Health));
 			args.Add(FStringFormatArg(*info.Name));
-			auto baseStr = FString::Format(TEXT("auto b_{0} = make({1}, FVector({2}, {3}, {4}), FVector({5}, {6}, {7}), FRotator({8}, {9}, {10}), {11}, \"{12}\"); "), args);
+			auto baseStr = FString::Format(TEXT("auto b_{0} = make1({1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, \"{12}\");"), args);
 
 			for (auto fl : info.AdditionalFlags)
 			{
@@ -170,14 +170,14 @@ private:
 				elArgs.Add(FStringFormatArg(count));
 				elArgs.Add(FStringFormatArg(fl.Key));
 				elArgs.Add(FStringFormatArg(fl.Value));
-				baseStr += FString::Format(TEXT("b_{0}.AdditionalFlags.Add(TEXT(\"{1}\"), {2}); "), elArgs);
+				baseStr += FString::Format(TEXT("af(b_{0}, TEXT(\"{1}\"), {2});"), elArgs);
 			}
 
-			if (info.AdditionalFlags.Num() > 0)
-			{
-				UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
-				baseStr.Empty();
-			}
+			//if (info.AdditionalFlags.Num() > 0)
+			//{
+			//	UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
+			//	baseStr.Empty();
+			//}
 
 			for (auto fl : info.BlockSpecificData)
 			{
@@ -185,21 +185,21 @@ private:
 				elArgs.Add(FStringFormatArg(count));
 				elArgs.Add(FStringFormatArg(fl.Key));
 				elArgs.Add(FStringFormatArg(fl.Value));
-				baseStr += FString::Format(TEXT("b_{0}.BlockSpecificData.Add(TEXT(\"{1}\"), TEXT(\"{2}\")); "), elArgs);
+				baseStr += FString::Format(TEXT("bd(b_{0}, TEXT(\"{1}\"), TEXT(\"{2}\"));"), elArgs);
 			}
 
-			if (info.BlockSpecificData.Num() > 0)
-			{
-				UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
-				baseStr.Empty();
-			}
+			//if (info.BlockSpecificData.Num() > 0)
+			//{
+			//	UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
+			//	baseStr.Empty();
+			//}
 
 			if (info.HasElectricityData)
 			{
 				TArray<FStringFormatArg> elArgs;
 				elArgs.Add(FStringFormatArg(count));
 				elArgs.Add(FStringFormatArg(info.ElectricityInfo.CurrentObjectEnergy));
-				baseStr += FString::Format(TEXT("b_{0}.HasElectricityData = true; b_{0}.ElectricityInfo.CurrentObjectEnergy = {1}; "), elArgs);
+				baseStr += FString::Format(TEXT("mE(b_{0}, {1});"), elArgs);
 			}
 
 			if (info.HasOxygenData)
@@ -207,7 +207,7 @@ private:
 				TArray<FStringFormatArg> oxArgs;
 				oxArgs.Add(FStringFormatArg(count));
 				oxArgs.Add(FStringFormatArg(info.OxygenInfo.CurrentObjectOxygen));
-				baseStr += FString::Format(TEXT("b_{0}.HasOxygenData = true; b_{0}.OxygenInfo.CurrentObjectOxygen = {1}; "), oxArgs);
+				baseStr += FString::Format(TEXT("mO(b_{0}, {1});"), oxArgs);
 			}
 
 			if (info.HasRelationshipData)
@@ -218,34 +218,17 @@ private:
 				TArray<FStringFormatArg> relArgs;
 				relArgs.Add(FStringFormatArg(count));
 				relArgs.Add(FStringFormatArg(info.RelationshipInfo.ID.ToString()));
-				baseStr += FString::Format(TEXT("b_{0}.HasRelationshipData = true; FGuid b_{0}_rel_id; FGuid::Parse(\"{1}\", b_{0}_rel_id); b_{0}.RelationshipInfo.ID = b_{0}_rel_id;"), relArgs);
+				baseStr += FString::Format(TEXT("mr(b_{0}, \"{1}\");"), relArgs);
 
-				int32 relCount = 0;
 				for (auto relation : info.RelationshipInfo.Relationships)
 				{
-					UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
-					baseStr.Empty();
-
 					TArray<FStringFormatArg> relItemArgs;
 					relItemArgs.Add(FStringFormatArg(count));
-					relItemArgs.Add(FStringFormatArg(relCount));
 					relItemArgs.Add(FStringFormatArg(relation.TargetID.ToString()));
 					relItemArgs.Add(FStringFormatArg(relation.RelationshipType));
 
-					auto commands = TEXT("FRelationshipInfo b_{0}_rel{1}; FGuid b_{0}_rel{1}_id; FGuid::Parse(\"{2}\", b_{0}_rel{1}_id); b_{0}_rel{1}.TargetID = b_{0}_rel{1}_id; b_{0}_rel{1}.RelationshipType = {3};");
+					auto commands = TEXT("mrc(b_{0}, \"{1}\", {2});");
 					baseStr += FString::Format(commands, relItemArgs);
-
-					UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
-					baseStr.Empty();
-
-					TArray<FStringFormatArg> relItemArgs1;
-					relItemArgs1.Add(FStringFormatArg(count));
-					relItemArgs1.Add(FStringFormatArg(relCount));
-
-					auto commands1 = TEXT("b_{0}.RelationshipInfo.Relationships.Add(b_{0}_rel{1});");
-					baseStr += FString::Format(commands1, relItemArgs1);
-
-					++relCount;
 				}
 			}
 

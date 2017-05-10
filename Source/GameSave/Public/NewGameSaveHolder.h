@@ -59,13 +59,49 @@ private:
 		return ret;
 	}
 
-	FORCEINLINE void makeOxygen(FBlockBaseInfo& blockInfo, float currentFilling)
+	FBlockInfo make1(int32 id, float lx, float ly, float lz, float sx, float sy, float sz, float rx, float ry, float rz, float health, FString name = TEXT(""))
+	{
+		return make(id, FVector(lx, ly, lz), FVector(sx, sy, sz), FRotator(rx, ry, rz), health, name);
+	}
+
+
+	void mO(FBlockInfo& blockInfo, float currentFilling)
 	{
 		blockInfo.HasOxygenData = true;
 		blockInfo.OxygenInfo.CurrentObjectOxygen = currentFilling;
 	}
 
-	FORCEINLINE FInventoryBuildableBlockInfo makeBuildable(int32 blockID, FVector blockScale)
+	void mE(FBlockInfo& blockInfo, float currentFilling)
+	{
+		blockInfo.HasElectricityData = true;
+		blockInfo.ElectricityInfo.CurrentObjectEnergy = currentFilling;
+	}
+
+	void af(FBlockInfo& blockInfo, FString key, int32 value)
+	{
+		blockInfo.AdditionalFlags.Add(key, value);
+	}
+
+	void bd(FBlockInfo& blockInfo, FString key, FString value)
+	{
+		blockInfo.BlockSpecificData.Add(key, value);
+	}
+
+	void mr(FBlockInfo& blockInfo, FString guid)
+	{
+		blockInfo.HasRelationshipData = true; 
+		FGuid id; FGuid::Parse(guid, id); 
+		blockInfo.RelationshipInfo.ID = id;
+	}
+
+	void mrc(FBlockInfo& blockInfo, FString guid, uint8 type)
+	{
+		FRelationshipInfo rel; 
+		FGuid relID; FGuid::Parse(guid, relID); rel.TargetID = relID; rel.RelationshipType = type;
+		blockInfo.RelationshipInfo.Relationships.Add(rel);
+	}
+
+	FInventoryBuildableBlockInfo makeBuildable(int32 blockID, FVector blockScale)
 	{
 		FInventoryBuildableBlockInfo ret;
 		ret.ID = blockID;
@@ -75,7 +111,7 @@ private:
 		return ret;
 	}
 
-	FORCEINLINE FInventoryBuildableItemBlockInfo makeInventoryBuildable(int32 blockID, FVector blockScale)
+	FInventoryBuildableItemBlockInfo makeInventoryBuildable(int32 blockID, FVector blockScale)
 	{
 		FInventoryBuildableItemBlockInfo ret;
 		ret.ID = blockID;
@@ -85,7 +121,7 @@ private:
 		return ret;
 	}
 
-	FORCEINLINE FInventoryTags makeDefault()
+	FInventoryTags makeDefault()
 	{
 		FInventoryTags res;
 		for (int32 i = 0; i < GameDefinitions::DefaultInventoryTagGroupsCount; i++)
@@ -110,7 +146,7 @@ private:
 		return res;
 	}
 
-	FORCEINLINE FWeatherState makeRandomWeatherState()
+	FWeatherState makeRandomWeatherState()
 	{
 		FWeatherState res;
 
