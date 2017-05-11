@@ -7,6 +7,7 @@
 #include "BlockWithElectricity.h"
 #include "BlockWithShowableWidget.h"
 #include "ControllableBlock.h"
+#include "ControllerBlock.h"
 #include "Info/InventoryBuildableBlockInfo.h"
 #include "OxygenTankFillerBlock.generated.h"
 

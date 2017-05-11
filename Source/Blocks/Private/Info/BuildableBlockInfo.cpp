@@ -7,6 +7,8 @@ UBuildableBlockInfo::UBuildableBlockInfo() : UBlockBaseInfo(), Action(EBuildable
 
 void UBuildableBlockInfo::DefinitionSet()
 {
+	ImplicitTags.Empty();
+
 	switch (ID)
 	{
 		/*case EmptyHandID: {

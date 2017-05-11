@@ -6,12 +6,15 @@
 #include "BlockWithElectricity.h"
 #include "Commons/Public/TCF2GameInstance.h"
 #include "ControllableBlock.h"
+#include "ControllerBlock.h"
 #include "LightBlock.generated.h"
 
 namespace LightBlockConstants
 {
 	static FString IsAutoregulated = TEXT("IsAutoregulated");
 	static FString IsOn = TEXT("IsOn");
+
+	static FString ReactsToDayCycle = TEXT("ReactsToDayCycle");
 }
 
 #define LIGHT_TURN_ON NSLOCTEXT("TCF2LocSpace", "LC.LightBlock.TurnOn", "Zapnout / Nastavit")
@@ -45,6 +48,9 @@ public:
 
 	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | LightBlock")
 		bool IsOn;
+
+	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | LightBlock")
+		bool ReactsToDayCycle;
 
 	UPROPERTY(Transient)
 		float isDaytime;

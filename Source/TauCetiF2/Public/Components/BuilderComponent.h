@@ -75,7 +75,8 @@ public:
 	UFUNCTION()
 		void InventorySelectedChangedEvent(int32 NewIndex, UBuildableBlockInfo* BlockInfo);
 
-	FORCEINLINE void DoAction() {
+	// TODO
+	/*FORCEINLINE*/ void DoAction() {
 		if (!currentBuildableBlockInfo && selector->SelectedBlock)
 		{
 			selector->TryUse(true);

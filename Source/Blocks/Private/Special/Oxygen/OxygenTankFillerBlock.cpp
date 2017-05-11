@@ -154,7 +154,7 @@ void AOxygenTankFillerBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (OxygenComponent)
 		OxygenComponent->OnComponentDataChangedEvent.RemoveDynamic(this, &AOxygenTankFillerBlock::ListeningOnOxygenCompChanged);
 
-	this->Execute_SetController(this, NULL);
+	Cast<IControllableBlock>(this)->Execute_SetController(this, NULL);
 
 	Super::EndPlay(EndPlayReason);
 }
@@ -196,7 +196,7 @@ void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {
 	{
 		auto interf = Cast<IControllerBlock>(usedController);
 		if (interf)
-			this->Execute_SetControlState(this, interf->Execute_GetControlState(usedController));
+			Cast<IControllableBlock>(this)->Execute_SetControlState(this, interf->Execute_GetControlState(usedController));
 	}
 	else
 		IsOn = true;

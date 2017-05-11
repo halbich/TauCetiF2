@@ -51,6 +51,14 @@ void ALightBlock::SetBlockInfo(UBlockInfo* info)
 	else
 		IsOn = FCString::Atoi(*state1) > 0 ? true : false;
 
+	auto state2 = BlockInfo->BlockSpecificData.FindOrAdd(LightBlockConstants::ReactsToDayCycle);
+	if (state2.IsEmpty())
+		BlockInfo->BlockSpecificData[LightBlockConstants::ReactsToDayCycle] = FString::FromInt((uint8)ReactsToDayCycle);
+	else
+		ReactsToDayCycle = FCString::Atoi(*state2) > 0 ? true : false;
+
+	
+
 	updateUsingMessage();
 }
 
@@ -68,7 +76,7 @@ void ALightBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 	}
 
 	if (!usedController)
-		this->Execute_SetControlState(this, !IsOn);
+		Cast<IControllableBlock>(this)->Execute_SetControlState(this, !IsOn);
 }
 
 void  ALightBlock::OnConstruction(const FTransform& Transform) {
@@ -100,7 +108,6 @@ void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 
-	//this->Execute_SetController(this, NULL);
 
 	Super::EndPlay(EndPlayReason);
 }
@@ -132,11 +139,12 @@ void ALightBlock::Tick(float DeltaSeconds)
 void ALightBlock::OnNightChanged(bool isNight) {
 	isDaytime = !isNight;
 	if (usedController == NULL) {
-		this->Execute_SetControlState(this, isNight);
+		Cast<IControllableBlock>(this)->Execute_SetControlState(this, isNight);
 	}
 }
 
 void ALightBlock::SetControlState_Implementation(bool isOn) {
+	
 	IsOn = isOn;
 
 	ensure(BlockInfo->ID == LightSmallID);
@@ -165,7 +173,7 @@ void ALightBlock::SetController_Implementation(ABlock* controller) {
 	{
 		auto interf = Cast<IControllerBlock>(usedController);
 		if (interf)
-			this->Execute_SetControlState(this, interf->Execute_GetControlState(usedController));
+			Cast<IControllableBlock>(this)->Execute_SetControlState(this, interf->Execute_GetControlState(usedController));
 	}
 	else
 		IsOn = true;
