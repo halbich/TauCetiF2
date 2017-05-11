@@ -27,9 +27,9 @@ void UBuildableBlockInfo::DefinitionSet()
 		BuildingEnergyRequired = baseEnergyReq * dimensions.X * dimensions.Y * dimensions.Z;
 
 		ImplicitTags.Add(BlockDefinition->BlockDisplayName.ToString());
-		ImplicitTags.Add(TEXT("X-") + FString::FormatAsNumber(FMath::Floor(Scale.X)));
-		ImplicitTags.Add(TEXT("Y-") + FString::FormatAsNumber(FMath::Floor(Scale.Y)));
-		ImplicitTags.Add(TEXT("Z-") + FString::FormatAsNumber(FMath::Floor(Scale.Z)));
+		ImplicitTags.Add(TEXT("X-") + FString::FormatAsNumber(FMath::FloorToInt(Scale.X)));
+		ImplicitTags.Add(TEXT("Y-") + FString::FormatAsNumber(FMath::FloorToInt(Scale.Y)));
+		ImplicitTags.Add(TEXT("Z-") + FString::FormatAsNumber(FMath::FloorToInt(Scale.Z)));
 
 
 		break;
