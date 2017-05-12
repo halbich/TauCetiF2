@@ -33,6 +33,7 @@
 
 #include "InventoryComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCurrentGroupChanged);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHudBuildableItemsChanged, bool, ShowGroupName);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCurrentSelectedIndexChanged, int32, NewIndex, UBuildableBlockInfo*, BlockInfo);
 
@@ -53,6 +54,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | InventoryComponent")
 		FHudBuildableItemsChanged OnHudBuildableItemsChanged;
+
+	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | InventoryComponent")
+		FCurrentGroupChanged OnCurrentGroupChanged;
 
 	UPROPERTY(BlueprintAssignable, Transient, Category = "TCF2 | InventoryComponent")
 		FCurrentSelectedIndexChanged OnCurrentSelectedIndexChanged;
@@ -134,7 +138,7 @@ private:
 		filterGroup->IsInventoryCacheValid = true;
 	}
 
-	/*FORCEINLINE*/ void selectItem(int32 offset)
+	FORCEINLINE void selectItem(int32 offset)
 	{
 		UBuildableBlockInfo* infoToSend = NULL;
 		auto filterGroup = InventoryTags->GetCurrentActiveTagGroup();

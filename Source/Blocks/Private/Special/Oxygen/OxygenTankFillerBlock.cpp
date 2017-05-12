@@ -62,6 +62,8 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 	else
 		hasItem = FCString::Atoi(*item) > 0 ? true : false;
 
+	auto tags = BlockInfo->BlockSpecificData.FindOrAdd(OxygenFillerBlockConstants::ItemTags);
+
 	if (hasItem)
 	{
 		ensure(currentFillingItem == NULL);
@@ -82,6 +84,8 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 
 		newItm->OxygenInfo = NewObject<UBlockWithOxygenInfo>();
 		newItm->OxygenInfo->CurrentObjectOxygen = currentF;
+
+		newItm->SetTagsFlatlined(tags);
 
 		newItm->DefinitionSet();
 		newItm->UpdateDisplayValue();
@@ -259,6 +263,8 @@ UInventoryBuildableBlockInfo* AOxygenTankFillerBlock::TakeCurrentFillingItem(boo
 
 	ensure(BlockInfo->ID == OxygenTankFillerID);
 	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)(currentFillingItem != NULL));
+	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::ItemTags] = currentFillingItem ? currentFillingItem->GetTagsFlatlined() : TEXT("");
+
 	FillingItemCritical.Unlock();
 
 	if (ret)
@@ -278,6 +284,8 @@ bool AOxygenTankFillerBlock::SetCurrentFillingItem(UInventoryBuildableBlockInfo*
 
 	ensure(BlockInfo->ID == OxygenTankFillerID);
 	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)(info != NULL));
+	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::ItemTags] = info->GetTagsFlatlined();
+	
 	currentFillingItem = info;
 
 	OxygenTankFillerMesh->SetVisibility(info != NULL);
@@ -292,5 +300,6 @@ TArray<FString> AOxygenTankFillerBlock::GetSupportedAdditionals()
 	TArray<FString> result;
 	result.Add(OxygenFillerBlockConstants::CurrentFilling);
 	result.Add(OxygenFillerBlockConstants::HasItem);
+	result.Add(OxygenFillerBlockConstants::ItemTags);
 	return result;
 }

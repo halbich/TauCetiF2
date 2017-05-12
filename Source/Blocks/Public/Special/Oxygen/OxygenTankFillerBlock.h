@@ -15,6 +15,7 @@ namespace OxygenFillerBlockConstants
 {
 	static FString CurrentFilling = TEXT("CurrentFilling");
 	static FString HasItem = TEXT("HasItem");
+	static FString ItemTags = TEXT("ItemTags");
 }
 
 /**
@@ -100,7 +101,7 @@ private:
 
 	FCriticalSection FillingItemCritical;
 
-	/*FORCEINLINE*/ void updateDisplayedMesh() {
+	FORCEINLINE void updateDisplayedMesh() {
 		if (!currentFillingItem || !currentFillingItem->IsValidLowLevel())
 			return;
 
@@ -116,8 +117,7 @@ private:
 
 		if (currentFillingItem && currentFillingItem->IsValidLowLevelFast())
 		{
-			auto diff = currentFillingItem->OxygenInfo->CurrentObjectMaximumOxygen - currentFillingItem->OxygenInfo->CurrentObjectOxygen;
-			ensure(diff >= 0.0f);
+			auto diff = FMath::Max(currentFillingItem->OxygenInfo->CurrentObjectMaximumOxygen - currentFillingItem->OxygenInfo->CurrentObjectOxygen, 0.0f);
 
 			if (FMath::IsNearlyZero(diff) || FMath::IsNearlyZero(OxygenComponent->OxygenInfo->CurrentObjectOxygen))
 			{
@@ -135,9 +135,9 @@ private:
 			float actuallyPutted = 0;
 			float acuallyReturned = 0;
 			if (OxygenComponent->ObtainAmount(toWithdraw, actuallyObtained)) {
-				currentFillingItem->OxygenInfo->CurrentObjectOxygen += actuallyObtained;
-
 				ensure(BlockInfo->ID == OxygenTankFillerID);
+
+				currentFillingItem->OxygenInfo->CurrentObjectOxygen = FMath::Max(currentFillingItem->OxygenInfo->CurrentObjectOxygen + actuallyObtained, currentFillingItem->OxygenInfo->CurrentObjectMaximumOxygen);
 				BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::CurrentFilling] = FString::SanitizeFloat(currentFillingItem->OxygenInfo->CurrentObjectOxygen);
 
 				updateDisplayedMesh();

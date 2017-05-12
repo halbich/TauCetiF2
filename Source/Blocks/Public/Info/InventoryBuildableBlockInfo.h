@@ -20,6 +20,17 @@ public:
 	virtual void DefinitionSet() override;
 
 	static UInventoryBuildableBlockInfo* GetInventoryBuildable(UBlockBaseInfo* info, UBlockDefinition* def);
+	
+	FORCEINLINE FString GetTagsFlatlined()
+	{
+		return FString::Join(Tags, TEXT(";"));
+	}
+
+	FORCEINLINE void SetTagsFlatlined(FString flatlinedTags)
+	{
+		Tags.Empty();
+		flatlinedTags.ParseIntoArray(Tags, TEXT(";"));
+	}
 
 private:
 	FORCEINLINE FText CustomFormat(float Value)
@@ -34,4 +45,6 @@ private:
 
 		return FText::AsNumber(Value, &NumberFormatOptions);
 	}
+
+	
 };

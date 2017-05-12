@@ -88,12 +88,14 @@ void UInventoryComponent::SelectNextBank()
 {
 	InventoryTags->NextBank();
 	selectItem(0);
+	OnCurrentGroupChanged.Broadcast();
 }
 
 void UInventoryComponent::SelectPrevBank()
 {
 	InventoryTags->PrevBank();
 	selectItem(0);
+	OnCurrentGroupChanged.Broadcast();
 }
 
 void UInventoryComponent::SelectNextItem()
