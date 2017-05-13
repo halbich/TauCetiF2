@@ -105,6 +105,6 @@ private:
 
 	FORCEINLINE void updateUsingMessage()
 	{
-		SelectTargetComponent->CustomUsingMessage = usedController ? LIGHT_TURN_USE : (ElectricityComponent->ElectricityInfo->PoweredBlockInfo->IsOn ? LIGHT_TURN_OFF : LIGHT_TURN_ON);
+		SelectTargetComponent->CustomUsingMessage = usedController ? LIGHT_TURN_USE : (PoweredBlockInfo->IsOn ? LIGHT_TURN_OFF : LIGHT_TURN_ON);
 	}
 };

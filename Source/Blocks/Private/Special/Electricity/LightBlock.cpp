@@ -63,7 +63,7 @@ void ALightBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 	}
 
 	if (!usedController)
-		Cast<IControllableBlock>(this)->Execute_SetControlState(this, !ElectricityComponent->ElectricityInfo->PoweredBlockInfo->IsOn);
+		Cast<IControllableBlock>(this)->Execute_SetControlState(this, !PoweredBlockInfo->IsOn);
 }
 
 void  ALightBlock::OnConstruction(const FTransform& Transform) {

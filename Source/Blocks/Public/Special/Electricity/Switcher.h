@@ -37,6 +37,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SwitcherBlock")
 		UPoweredBlockInfo* PoweredBlockInfo;
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherBlock")
+		bool FlipCurrentOnState();
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
@@ -73,6 +76,6 @@ private:
 			return;
 
 		mat->SetScalarParameterValue(TEXT("IsConnected"), controlledBlocks.Num());
-		mat->SetScalarParameterValue(TEXT("IsOn"), ElectricityComponent->ElectricityInfo->PoweredBlockInfo->IsOn);
+		mat->SetScalarParameterValue(TEXT("IsOn"), PoweredBlockInfo->IsOn);
 	}
 };

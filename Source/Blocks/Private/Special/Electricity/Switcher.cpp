@@ -62,20 +62,7 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 		return;
 	}
 
-	if (controlledBlocks.Num() == 0)
-		return;
-
-	ensure(BlockInfo->ID == SwitcherID);
-	auto isOn = ElectricityComponent->ElectricityInfo->PoweredBlockInfo->IsOn = !ElectricityComponent->ElectricityInfo->PoweredBlockInfo->IsOn;
-
-	for (auto controlled : controlledBlocks)
-	{
-		auto interf = Cast<IControllableBlock>(controlled);
-		if (interf)
-			interf->Execute_SetControlState(controlled, isOn);
-	}
-
-	updateDynamicColor();
+	FlipCurrentOnState();
 }
 
 void ASwitcher::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -197,3 +184,21 @@ TArray<ABlock*> ASwitcher::GetControlledBlocks_Implementation()
 	return controlledBlocks;
 }
 
+bool ASwitcher::FlipCurrentOnState()
+{
+	if (controlledBlocks.Num() == 0)
+		return PoweredBlockInfo->IsOn;
+
+	ensure(BlockInfo->ID == SwitcherID);
+	auto isOn = PoweredBlockInfo->IsOn = !PoweredBlockInfo->IsOn;
+
+	for (auto controlled : controlledBlocks)
+	{
+		auto interf = Cast<IControllableBlock>(controlled);
+		if (interf)
+			interf->Execute_SetControlState(controlled, isOn);
+	}
+
+	updateDynamicColor();
+	return isOn;
+}
