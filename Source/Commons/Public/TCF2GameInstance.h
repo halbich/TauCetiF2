@@ -3,7 +3,7 @@
 #include "Engine/GameInstance.h"
 #include "TCF2GameInstance.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDaytimeChangedDelegate, bool, isNight);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FDaytimeChangedDelegate, bool, isNight, bool, calledByLevelLoad);
 
 /**
  *
@@ -25,7 +25,7 @@ public:
 		FDaytimeChangedDelegate OnDaytimeChangedEvent;
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameInstance")
-		void DaytimeChanged(bool isNight);
+		void DaytimeChanged(bool isNight, bool calledByLevelLoad);
 
 	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | GameInstance")
 		bool IsNightInGame;

@@ -7,10 +7,10 @@ void UTCF2GameInstance::SetHolderInstance(UObject* holder)
 	BlockHolder->AddToRoot();
 }
 
-void UTCF2GameInstance::DaytimeChanged(bool isNight)
+void UTCF2GameInstance::DaytimeChanged(bool isNight, bool calledByLevelLoad)
 {
 	IsNightInGame = isNight;
-	OnDaytimeChangedEvent.Broadcast(isNight);
+	OnDaytimeChangedEvent.Broadcast(isNight, calledByLevelLoad);
 }
 
 

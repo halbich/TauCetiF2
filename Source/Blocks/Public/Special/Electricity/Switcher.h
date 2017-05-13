@@ -60,7 +60,7 @@ public:
 
 
 	UFUNCTION()
-		void OnNightChanged(bool isNight);
+		void OnNightChanged(bool isNight, bool calledByLevelLoad);
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherBlock")
 		void SetReactsToDayCycle(bool newReactsToDayCycle);

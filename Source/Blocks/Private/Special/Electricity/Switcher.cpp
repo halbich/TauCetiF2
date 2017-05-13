@@ -65,10 +65,6 @@ void ASwitcher::SetBlockInfo(UBlockInfo* info)
 	PoweredBlockInfo = ElectricityComponent->ElectricityInfo->PoweredBlockInfo;
 	ensure(PoweredBlockInfo);
 
-	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	ensure(inst);
-	OnNightChanged(inst->IsNightInGame);
-
 
 	updateDynamicColor();
 }
@@ -92,10 +88,6 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 void ASwitcher::BeginPlay() {
 	Super::BeginPlay();
 
-	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	ensure(inst);
-	inst->OnDaytimeChangedEvent.AddDynamic(this, &ASwitcher::OnNightChanged);
-	OnNightChanged(inst->IsNightInGame);
 }
 
 
@@ -234,9 +226,6 @@ TArray<FString> ASwitcher::GetSupportedAdditionals()
 
 bool ASwitcher::FlipCurrentOnState()
 {
-	if (controlledBlocks.Num() == 0)
-		return PoweredBlockInfo->IsOn;
-
 	ensure(BlockInfo->ID == SwitcherID);
 	auto isOn = PoweredBlockInfo->IsOn = !PoweredBlockInfo->IsOn;
 
@@ -251,12 +240,18 @@ bool ASwitcher::FlipCurrentOnState()
 	return isOn;
 }
 
-void ASwitcher::OnNightChanged(bool isNight)
+void ASwitcher::OnNightChanged(bool isNight, bool calledByLevelLoad)
 {
 	if (!ReactsToDayCycle)
 		return;
 
+	auto oldValue = calledByLevelLoad ? PoweredBlockInfo->IsOn : false;
+
 	auto newIsON = isNight ? StateAtNight : StateAtDay;
+
+	if (calledByLevelLoad && oldValue != newIsON)	// we forced other value, thus we need to correct it
+		newIsON = oldValue;
+
 
 	PoweredBlockInfo->IsOn = newIsON;
 
@@ -278,7 +273,7 @@ void ASwitcher::SetReactsToDayCycle(bool newReactsToDayCycle)
 
 	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	ensure(inst);
-	OnNightChanged(inst->IsNightInGame);
+	OnNightChanged(inst->IsNightInGame, false);
 }
 
 void ASwitcher::SetStateAtDay(bool newStateAtDay)
@@ -289,7 +284,7 @@ void ASwitcher::SetStateAtDay(bool newStateAtDay)
 
 	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	ensure(inst);
-	OnNightChanged(inst->IsNightInGame);
+	OnNightChanged(inst->IsNightInGame, false);
 }
 
 void ASwitcher::SetStateAtNight(bool newStateAtNight)
@@ -300,5 +295,5 @@ void ASwitcher::SetStateAtNight(bool newStateAtNight)
 
 	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	ensure(inst);
-	OnNightChanged(inst->IsNightInGame);
+	OnNightChanged(inst->IsNightInGame, false);
 }
