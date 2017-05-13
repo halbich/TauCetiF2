@@ -22,8 +22,6 @@ AOxygenTankFillerBlock::AOxygenTankFillerBlock()
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
-
-	IsOn = true;
 }
 
 UStaticMeshComponent* AOxygenTankFillerBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -94,13 +92,17 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 	}
 
 	OxygenTankFillerMesh->SetVisibility(currentFillingItem != NULL);
+
+
+	PoweredBlockInfo = ElectricityComponent->ElectricityInfo->PoweredBlockInfo;
+	ensure(PoweredBlockInfo);
 }
 
 void  AOxygenTankFillerBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(500);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.OxygenTankFillerBlock.Pickup", "Použít / Otevřít konzoli");
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.OxygenTankFillerBlock.Pickup", "Doplnit kyslík / Otevřít konzoli");
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &AOxygenTankFillerBlock::ListeningOnUse);
@@ -177,10 +179,14 @@ void AOxygenTankFillerBlock::ShowWidget_Implementation()
 	IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
 }
 
-void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) { IsOn = isOn; }
+void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) {
+
+	ensure(BlockInfo->ID == OxygenTankFillerID);
+	PoweredBlockInfo->IsOn = isOn;
+}
 void AOxygenTankFillerBlock::SetOutputPowerPercentage_Implementation(float percentage) {
 	ensure(BlockInfo->ID == OxygenTankFillerID);
-	BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage;
+	PoweredBlockInfo->PowerConsumptionPercent = percentage;
 }
 
 void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {
@@ -202,14 +208,12 @@ void AOxygenTankFillerBlock::SetController_Implementation(ABlock* controller) {
 		if (interf)
 			Cast<IControllableBlock>(this)->Execute_SetControlState(this, interf->Execute_GetControlState(usedController));
 	}
-	else
-		IsOn = true;
 }
 ABlock* AOxygenTankFillerBlock::GetController_Implementation() { return usedController; }
 
 void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 {
-	if (!IsOn)
+	if (!PoweredBlockInfo->IsOn)
 	{
 		Super::Tick(DeltaSeconds);
 		return;
@@ -230,12 +234,13 @@ void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 	auto elapsedSeconds = DeltaSeconds * GameDefinitions::GameDayMultiplier;
 
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
-	auto powerConsumption = IsOn ? ElectricityComponent->GetInfo()->PowerConsumptionPercent : 0;
+	auto i = ElectricityComponent->GetInfo();
 
-	auto possibleEnergy = elapsedSeconds * powerConsumption  * max; // now we can withdraw only this amount;
+	auto toObtain = elapsedSeconds * i->GetPowerOutput()  * max;
 
-	auto toWithdraw = FMath::Min(diff *  GameDefinitions::OxygenToEnergy, possibleEnergy);
+	auto toWithdraw = FMath::Min(diff *  GameDefinitions::OxygenToEnergy, toObtain);
 
+	auto originalElectricity = i->CurrentObjectEnergy;
 	float actuallyObtained = 0;
 	float actuallyPutted = 0;
 	float acuallyReturned = 0;
@@ -247,7 +252,11 @@ void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 		toReturn = FMath::Max(0.0f, toReturn);
 
 		ElectricityComponent->PutAmount(toReturn, acuallyReturned);
+
+		ElectricityComponent->EnergyConsumed += FMath::Max(0.0f, originalElectricity - i->CurrentObjectEnergy);
 	}
+
+
 
 	Super::Tick(DeltaSeconds);
 }
@@ -285,7 +294,7 @@ bool AOxygenTankFillerBlock::SetCurrentFillingItem(UInventoryBuildableBlockInfo*
 	ensure(BlockInfo->ID == OxygenTankFillerID);
 	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::HasItem] = FString::FromInt((uint8)(info != NULL));
 	BlockInfo->BlockSpecificData[OxygenFillerBlockConstants::ItemTags] = info->GetTagsFlatlined();
-	
+
 	currentFillingItem = info;
 
 	OxygenTankFillerMesh->SetVisibility(info != NULL);

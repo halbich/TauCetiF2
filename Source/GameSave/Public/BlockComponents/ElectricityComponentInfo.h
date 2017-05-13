@@ -1,17 +1,19 @@
 ﻿#pragma once
 
+#include "PoweredBlockInfo.h"
+
 /**
 * Saving structure for Electricity component
 */
 struct FElectricityComponentInfo {
 	float CurrentObjectEnergy;
-	float PowerConsumptionPercent;
+	bool HasPoweredBlockInfo;
+
+	FPoweredBlockInfo PoweredBlockInfo;
 	/*
 	Default constructor
 	*/
-	FElectricityComponentInfo()
+	FElectricityComponentInfo() : PoweredBlockInfo(), CurrentObjectEnergy(0), HasPoweredBlockInfo(false)
 	{
-		CurrentObjectEnergy = 0;
-		PowerConsumptionPercent = 1;
 	};
 };

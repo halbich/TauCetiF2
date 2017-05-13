@@ -9,9 +9,9 @@
 USTRUCT(BlueprintType)
 struct FElectricityComponentDefinition
 {
-	GENERATED_BODY()
+	GENERATED_BODY();
 
-		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")
 		float TotalObjectEnergy;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityDefinition")

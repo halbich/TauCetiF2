@@ -173,11 +173,6 @@ private:
 				baseStr += FString::Format(TEXT("af(b_{0}, TEXT(\"{1}\"), {2});"), elArgs);
 			}
 
-			//if (info.AdditionalFlags.Num() > 0)
-			//{
-			//	UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
-			//	baseStr.Empty();
-			//}
 
 			for (auto fl : info.BlockSpecificData)
 			{
@@ -188,11 +183,6 @@ private:
 				baseStr += FString::Format(TEXT("bd(b_{0}, TEXT(\"{1}\"), TEXT(\"{2}\"));"), elArgs);
 			}
 
-			//if (info.BlockSpecificData.Num() > 0)
-			//{
-			//	UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
-			//	baseStr.Empty();
-			//}
 
 			if (info.HasElectricityData)
 			{

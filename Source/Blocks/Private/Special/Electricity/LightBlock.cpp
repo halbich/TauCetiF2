@@ -17,8 +17,6 @@ ALightBlock::ALightBlock()
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
-
-	AutoregulatePowerOutput = true;
 }
 
 UStaticMeshComponent* ALightBlock::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
@@ -39,25 +37,14 @@ void ALightBlock::SetBlockInfo(UBlockInfo* info)
 
 	ensure(BlockInfo->ID == LightSmallID);
 
-	auto state = BlockInfo->BlockSpecificData.FindOrAdd(LightBlockConstants::IsAutoregulated);
+	auto state = BlockInfo->BlockSpecificData.FindOrAdd(LightBlockConstants::ReactsToDayCycle);
 	if (state.IsEmpty())
-		BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
-	else
-		AutoregulatePowerOutput = FCString::Atoi(*state) > 0 ? true : false;
-
-	auto state1 = BlockInfo->BlockSpecificData.FindOrAdd(LightBlockConstants::IsOn);
-	if (state1.IsEmpty())
-		BlockInfo->BlockSpecificData[LightBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
-	else
-		IsOn = FCString::Atoi(*state1) > 0 ? true : false;
-
-	auto state2 = BlockInfo->BlockSpecificData.FindOrAdd(LightBlockConstants::ReactsToDayCycle);
-	if (state2.IsEmpty())
 		BlockInfo->BlockSpecificData[LightBlockConstants::ReactsToDayCycle] = FString::FromInt((uint8)ReactsToDayCycle);
 	else
-		ReactsToDayCycle = FCString::Atoi(*state2) > 0 ? true : false;
+		ReactsToDayCycle = FCString::Atoi(*state) > 0 ? true : false;
 
-	
+	PoweredBlockInfo = ElectricityComponent->ElectricityInfo->PoweredBlockInfo;
+	ensure(PoweredBlockInfo);
 
 	updateUsingMessage();
 }
@@ -76,7 +63,7 @@ void ALightBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 	}
 
 	if (!usedController)
-		Cast<IControllableBlock>(this)->Execute_SetControlState(this, !IsOn);
+		Cast<IControllableBlock>(this)->Execute_SetControlState(this, !ElectricityComponent->ElectricityInfo->PoweredBlockInfo->IsOn);
 }
 
 void  ALightBlock::OnConstruction(const FTransform& Transform) {
@@ -119,13 +106,7 @@ void ALightBlock::Tick(float DeltaSeconds)
 	auto max = ElectricityComponent->GetDefinition()->MaxConsumedEnergyPerGameSecond;
 	auto i = ElectricityComponent->GetInfo();
 
-	auto powerConsumption = IsOn
-		? (AutoregulatePowerOutput
-			? getAutoregulatedPower(i->GetRemainingPercentage())
-			: i->PowerConsumptionPercent)
-		: 0;
-
-	auto toObtain = elapsedSeconds * powerConsumption  * max;
+	auto toObtain = elapsedSeconds * i->GetPowerOutput()  * max;
 
 	float actuallyObtained = 0;
 	if (ElectricityComponent->ObtainAmount(toObtain, actuallyObtained))
@@ -145,15 +126,13 @@ void ALightBlock::OnNightChanged(bool isNight) {
 
 void ALightBlock::SetControlState_Implementation(bool isOn) {
 	
-	IsOn = isOn;
-
 	ensure(BlockInfo->ID == LightSmallID);
-	BlockInfo->BlockSpecificData[LightBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
+	PoweredBlockInfo->IsOn = isOn;
 	updateUsingMessage();
 }
 void ALightBlock::SetOutputPowerPercentage_Implementation(float percentage) {
 	ensure(BlockInfo->ID == LightSmallID);
-	BlockInfo->ElectricityInfo->PowerConsumptionPercent = percentage;
+	PoweredBlockInfo->PowerConsumptionPercent = percentage;
 }
 
 void ALightBlock::SetController_Implementation(ABlock* controller) {
@@ -175,11 +154,6 @@ void ALightBlock::SetController_Implementation(ABlock* controller) {
 		if (interf)
 			Cast<IControllableBlock>(this)->Execute_SetControlState(this, interf->Execute_GetControlState(usedController));
 	}
-	else
-		IsOn = true;
-
-	AutoregulatePowerOutput = usedController == NULL;
-	BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
 
 	updateUsingMessage();
 }
@@ -197,16 +171,14 @@ void ALightBlock::ShowWidget_Implementation()
 
 void ALightBlock::UpdateAutoregulate(bool newAutoregulate)
 {
-	AutoregulatePowerOutput = newAutoregulate;
 
 	ensure(BlockInfo->ID == LightSmallID);
-	BlockInfo->BlockSpecificData[LightBlockConstants::IsAutoregulated] = FString::FromInt((uint8)AutoregulatePowerOutput);
+	PoweredBlockInfo->AutoregulatePower = newAutoregulate;
 }
 
 TArray<FString> ALightBlock::GetSupportedAdditionals()
 {
 	TArray<FString> result;
-	result.Add(LightBlockConstants::IsAutoregulated);
-	result.Add(LightBlockConstants::IsOn);
+	result.Add(LightBlockConstants::ReactsToDayCycle);
 	return result;
 }

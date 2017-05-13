@@ -43,16 +43,8 @@ void ASwitcher::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
-	ensure(BlockInfo->ID == SwitcherID);
-	auto state = BlockInfo->BlockSpecificData.FindOrAdd(SwitcherBlockConstants::IsOn);
-	if (state.IsEmpty())
-	{
-		IsOn = false;
-		BlockInfo->BlockSpecificData[SwitcherBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
-	}
-	else {
-		IsOn = FCString::Atoi(*state) > 0 ? true : false;
-	}
+	PoweredBlockInfo = ElectricityComponent->ElectricityInfo->PoweredBlockInfo;
+	ensure(PoweredBlockInfo);
 
 	updateDynamicColor();
 }
@@ -73,16 +65,14 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 	if (controlledBlocks.Num() == 0)
 		return;
 
-	IsOn = !IsOn;
-
 	ensure(BlockInfo->ID == SwitcherID);
-	BlockInfo->BlockSpecificData[SwitcherBlockConstants::IsOn] = FString::FromInt((uint8)IsOn);
+	auto isOn = ElectricityComponent->ElectricityInfo->PoweredBlockInfo->IsOn = !ElectricityComponent->ElectricityInfo->PoweredBlockInfo->IsOn;
 
 	for (auto controlled : controlledBlocks)
 	{
 		auto interf = Cast<IControllableBlock>(controlled);
 		if (interf)
-			interf->Execute_SetControlState(controlled, IsOn);
+			interf->Execute_SetControlState(controlled, isOn);
 	}
 
 	updateDynamicColor();
@@ -199,7 +189,7 @@ bool ASwitcher::UnbindControl_Implementation(ABlock* controllableBlock)
 
 bool ASwitcher::GetControlState_Implementation()
 {
-	return IsOn;
+	return PoweredBlockInfo->IsOn;
 }
 
 TArray<ABlock*> ASwitcher::GetControlledBlocks_Implementation()
@@ -207,9 +197,3 @@ TArray<ABlock*> ASwitcher::GetControlledBlocks_Implementation()
 	return controlledBlocks;
 }
 
-TArray<FString> ASwitcher::GetSupportedAdditionals()
-{
-	TArray<FString> result;
-	result.Add(SwitcherBlockConstants::IsOn);
-	return result;
-}

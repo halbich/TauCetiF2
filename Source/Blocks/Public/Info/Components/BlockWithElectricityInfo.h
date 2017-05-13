@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "UObject/NoExportTypes.h"
+#include "PoweredBlockInfo.h"
 #include "BlockWithElectricityInfo.generated.h"
 
 /**
@@ -20,7 +21,7 @@ public:
 		float CurrentObjectMaximumEnergy;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithElectricityInfo")
-		float PowerConsumptionPercent;
+		UPoweredBlockInfo* PoweredBlockInfo;
 
 	FORCEINLINE const float GetRemainingPercentageUnit() const
 	{
@@ -33,4 +34,6 @@ public:
 	{
 		return GetRemainingPercentageUnit() * 100.0f;
 	}
+
+	float GetPowerOutput() const;
 };

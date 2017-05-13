@@ -29,7 +29,7 @@ void  ATerminalBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(400);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.UseTerminal", "Použít / Otevřít");
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.UseTerminal", "Doplnit energii / Otevřít");
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ATerminalBlock::ListeningOnUse);

@@ -7,12 +7,9 @@
 #include "ControllerBlock.h"
 #include "ControllableBlock.h"
 #include "Commons/Public/Enums.h"
-#include "Switcher.generated.h"
 
-namespace SwitcherBlockConstants
-{
-	static FString IsOn = TEXT("IsON");
-}
+#include "Info/Components/PoweredBlockInfo.h"
+#include "Switcher.generated.h"
 
 /**
  *
@@ -37,8 +34,8 @@ public:
 	UPROPERTY(Transient)
 		TArray<ABlock*> controlledBlocks;
 
-	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | SwitcherBlock")
-		bool IsOn;
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SwitcherBlock")
+		UPoweredBlockInfo* PoweredBlockInfo;
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
@@ -59,8 +56,6 @@ public:
 
 	virtual void SetBlockInfo(UBlockInfo* info) override;
 
-	virtual TArray<FString> GetSupportedAdditionals() override;
-
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{
 		return ElectricityComponent;
@@ -78,6 +73,6 @@ private:
 			return;
 
 		mat->SetScalarParameterValue(TEXT("IsConnected"), controlledBlocks.Num());
-		mat->SetScalarParameterValue(TEXT("IsOn"), IsOn);
+		mat->SetScalarParameterValue(TEXT("IsOn"), ElectricityComponent->ElectricityInfo->PoweredBlockInfo->IsOn);
 	}
 };

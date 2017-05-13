@@ -9,6 +9,7 @@
 #include "ControllableBlock.h"
 #include "ControllerBlock.h"
 #include "Info/InventoryBuildableBlockInfo.h"
+#include "Info/Components/PoweredBlockInfo.h"
 #include "OxygenTankFillerBlock.generated.h"
 
 namespace OxygenFillerBlockConstants
@@ -48,11 +49,12 @@ public:
 	UPROPERTY(Transient)
 		UUserWidget* shownWidget;
 
-	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | LightBlock")
-		bool IsOn;
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenTankFiller")
 		ABlock* usedController;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenTankFiller")
+		UPoweredBlockInfo* PoweredBlockInfo;
 
 	UPROPERTY(Transient)
 		UInventoryBuildableBlockInfo* currentFillingItem;

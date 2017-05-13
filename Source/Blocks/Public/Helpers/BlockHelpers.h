@@ -108,22 +108,36 @@ namespace BlockHelpers
 namespace BlockSavingHelpers {
 	static void FromOxygenContainer(UBlockWithOxygenInfo* info, FOxygenComponentInfo& block) {
 		info->CurrentObjectOxygen = block.CurrentObjectOxygen;
-		info->OxygenConsumptionPercent = block.OxygenConsumptionPercent;
 	}
 
 	static void ToOxygenContainer(FOxygenComponentInfo& block, UBlockWithOxygenInfo* info) {
 		block.CurrentObjectOxygen = info->CurrentObjectOxygen;
-
+		// TODO remove me
 #if WITH_EDITOR
 		block.CurrentObjectOxygen = info->CurrentObjectMaximumOxygen;
 #endif
+	}
 
-		block.OxygenConsumptionPercent = info->OxygenConsumptionPercent;
+	static void FromPoweredBlockContainer(UPoweredBlockInfo* info, FPoweredBlockInfo& block) {
+		info->IsOn = block.IsOn;
+		info->AutoregulatePower = block.AutoregulatePower;
+		info->PowerConsumptionPercent = block.PowerConsumptionPercent;
 	}
 
 	static void FromElectricityContainer(UBlockWithElectricityInfo* info, FElectricityComponentInfo& block) {
 		info->CurrentObjectEnergy = block.CurrentObjectEnergy;
-		info->PowerConsumptionPercent = block.PowerConsumptionPercent;
+		
+		if (block.HasPoweredBlockInfo)
+		{
+			info->PoweredBlockInfo = NewObject<UPoweredBlockInfo>();
+			FromPoweredBlockContainer(info->PoweredBlockInfo, block.PoweredBlockInfo);
+		}
+	}
+
+	static void ToPoweredBlockContainer(FPoweredBlockInfo& block, UPoweredBlockInfo* info) {
+		block.IsOn = info->IsOn;
+		block.AutoregulatePower = info->AutoregulatePower;
+		block.PowerConsumptionPercent = info->PowerConsumptionPercent;
 	}
 
 	static void ToElectricityContainer(FElectricityComponentInfo& block, UBlockWithElectricityInfo* info) {
@@ -132,7 +146,11 @@ namespace BlockSavingHelpers {
 		block.CurrentObjectEnergy = info->CurrentObjectMaximumEnergy;
 #endif
 
-		block.PowerConsumptionPercent = info->PowerConsumptionPercent;
+		if (info->PoweredBlockInfo && info->PoweredBlockInfo->IsValidLowLevel())
+		{
+			block.HasPoweredBlockInfo = true;
+			ToPoweredBlockContainer(block.PoweredBlockInfo, info->PoweredBlockInfo);
+		}
 	}
 
 	static void FromRelationsContainer(UBlockWithRelationsInfo* info, FBlockWithRelationshipInfo& block)
@@ -219,7 +237,7 @@ namespace BlockSavingHelpers {
 		block.Location = info->Location;
 		block.Rotation = info->Rotation;
 		block.Health = info->Health;
-
+// TODO remove me
 #if WITH_EDITOR
 		block.Health = info->MaxHealth;
 #endif

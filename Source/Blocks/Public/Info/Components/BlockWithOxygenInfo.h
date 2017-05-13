@@ -19,9 +19,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithOxygenInfo")
 		float CurrentObjectMaximumOxygen;
 
-	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockWithElectricityInfo")
-		float OxygenConsumptionPercent;
-
 	FORCEINLINE const float GetRemainingPercentageUnit() const
 	{
 		return FMath::IsNearlyZero(CurrentObjectMaximumOxygen)

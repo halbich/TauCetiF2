@@ -7,13 +7,11 @@
 #include "Commons/Public/TCF2GameInstance.h"
 #include "ControllableBlock.h"
 #include "ControllerBlock.h"
+#include "Info/Components/PoweredBlockInfo.h"
 #include "LightBlock.generated.h"
 
 namespace LightBlockConstants
 {
-	static FString IsAutoregulated = TEXT("IsAutoregulated");
-	static FString IsOn = TEXT("IsOn");
-
 	static FString ReactsToDayCycle = TEXT("ReactsToDayCycle");
 }
 
@@ -43,12 +41,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | LightBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 
-	UPROPERTY(BlueprintReadonly, Category = "TCF2 | LightBlock")
-		bool AutoregulatePowerOutput;
-
-	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | LightBlock")
-		bool IsOn;
-
 	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | LightBlock")
 		bool ReactsToDayCycle;
 
@@ -60,6 +52,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | LightBlock")
 		ABlock* usedController;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | LightBlock")
+		UPoweredBlockInfo* PoweredBlockInfo;
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 	virtual void Tick(float DeltaSeconds) override;
@@ -102,20 +97,6 @@ private:
 
 	void ListeningOnUse(AActor* actor, bool isSpecial);
 
-	FORCEINLINE float getAutoregulatedPower(const float p)
-	{
-		if (isDaytime)
-			return 0.0f;
-
-		if (p >= 50.0f)
-			return 1.0f;
-
-		if (p >= 25)
-			return .5f;
-
-		return 0.1f;
-	}
-
 	void updateLightByConsumption(float consumption, float max)
 	{
 		if (LightComp && LightComp->IsValidLowLevelFast())
@@ -124,6 +105,6 @@ private:
 
 	FORCEINLINE void updateUsingMessage()
 	{
-		SelectTargetComponent->CustomUsingMessage = usedController ? LIGHT_TURN_USE : (IsOn ? LIGHT_TURN_OFF : LIGHT_TURN_ON);
+		SelectTargetComponent->CustomUsingMessage = usedController ? LIGHT_TURN_USE : (ElectricityComponent->ElectricityInfo->PoweredBlockInfo->IsOn ? LIGHT_TURN_OFF : LIGHT_TURN_ON);
 	}
 };
