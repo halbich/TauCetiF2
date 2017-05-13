@@ -30,4 +30,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
 		static bool SetSettingsValueBool(EGameUserSettingsVariable settings, bool value);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
+		static bool GetSettingsValueString(EGameUserSettingsVariable settings, FString& value);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers | Settings")
+		static bool SetSettingsValueString(EGameUserSettingsVariable settings, FString value);
 };

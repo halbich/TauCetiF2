@@ -11,6 +11,8 @@ FString UCommonHelpers::getConfigVariableNameFor(EGameUserSettingsVariable setti
 	case EGameUserSettingsVariable::MusicVolume:	return TEXT("MusicVolume");
 	case EGameUserSettingsVariable::OtherVolume:	return TEXT("OtherVolume");
 	case EGameUserSettingsVariable::GeneratorVisualizationEnabled:		return TEXT("GeneratorVisualizationEnabled");
+	case EGameUserSettingsVariable::UseCulture:		return TEXT("UseCulture");
+
 	default:
 		checkNoEntry();
 		return TEXT("");
@@ -77,6 +79,42 @@ bool UCommonHelpers::SetSettingsValueBool(EGameUserSettingsVariable settings, bo
 		*UCommonHelpers::customSectionName,
 		*varName,
 		value,
+		GGameIni
+	);
+
+	GConfig->Flush(false, GGameIni);
+
+	return true;
+}
+
+
+bool UCommonHelpers::GetSettingsValueString(EGameUserSettingsVariable settings, FString& value)
+{
+	if (!GConfig)
+		return false;
+
+	auto varName = UCommonHelpers::getConfigVariableNameFor(settings);
+
+	return GConfig->GetString(
+		*UCommonHelpers::customSectionName,
+		*varName,
+		value,
+		GGameIni
+	);
+}
+
+
+bool UCommonHelpers::SetSettingsValueString(EGameUserSettingsVariable settings, FString value)
+{
+	if (!GConfig)
+		return false;
+
+	auto varName = UCommonHelpers::getConfigVariableNameFor(settings);
+
+	GConfig->SetString(
+		*UCommonHelpers::customSectionName,
+		*varName,
+		*value,
 		GGameIni
 	);
 
