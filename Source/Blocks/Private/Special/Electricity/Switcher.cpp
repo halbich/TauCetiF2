@@ -43,8 +43,32 @@ void ASwitcher::SetBlockInfo(UBlockInfo* info)
 {
 	Super::SetBlockInfo(info);
 
+	auto reacts = BlockInfo->BlockSpecificData.FindOrAdd(SwitcherBlockConstants::ReactsToDayCycle);
+	if (reacts.IsEmpty())
+		BlockInfo->BlockSpecificData[SwitcherBlockConstants::ReactsToDayCycle] = FString::FromInt((uint8)ReactsToDayCycle);
+	else
+		ReactsToDayCycle = FCString::Atoi(*reacts) > 0 ? true : false;
+
+	auto stateAtDay = BlockInfo->BlockSpecificData.FindOrAdd(SwitcherBlockConstants::StateAtDay);
+	if (stateAtDay.IsEmpty())
+		BlockInfo->BlockSpecificData[SwitcherBlockConstants::StateAtDay] = FString::FromInt((uint8)StateAtDay);
+	else
+		StateAtDay = FCString::Atoi(*stateAtDay) > 0 ? true : false;
+
+	auto stateAtNight = BlockInfo->BlockSpecificData.FindOrAdd(SwitcherBlockConstants::StateAtNight);
+	if (stateAtNight.IsEmpty())
+		BlockInfo->BlockSpecificData[SwitcherBlockConstants::StateAtNight] = FString::FromInt((uint8)StateAtNight);
+	else
+		StateAtNight = FCString::Atoi(*stateAtNight) > 0 ? true : false;
+
+
 	PoweredBlockInfo = ElectricityComponent->ElectricityInfo->PoweredBlockInfo;
 	ensure(PoweredBlockInfo);
+
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	OnNightChanged(inst->IsNightInGame);
+
 
 	updateDynamicColor();
 }
@@ -65,8 +89,23 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 	FlipCurrentOnState();
 }
 
+void ASwitcher::BeginPlay() {
+	Super::BeginPlay();
+
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	inst->OnDaytimeChangedEvent.AddDynamic(this, &ASwitcher::OnNightChanged);
+	OnNightChanged(inst->IsNightInGame);
+}
+
+
 void ASwitcher::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	inst->OnDaytimeChangedEvent.RemoveDynamic(this, &ASwitcher::OnNightChanged);
+
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 
@@ -184,6 +223,15 @@ TArray<ABlock*> ASwitcher::GetControlledBlocks_Implementation()
 	return controlledBlocks;
 }
 
+TArray<FString> ASwitcher::GetSupportedAdditionals()
+{
+	TArray<FString> result;
+	result.Add(SwitcherBlockConstants::ReactsToDayCycle);
+	result.Add(SwitcherBlockConstants::StateAtDay);
+	result.Add(SwitcherBlockConstants::StateAtNight);
+	return result;
+}
+
 bool ASwitcher::FlipCurrentOnState()
 {
 	if (controlledBlocks.Num() == 0)
@@ -201,4 +249,56 @@ bool ASwitcher::FlipCurrentOnState()
 
 	updateDynamicColor();
 	return isOn;
+}
+
+void ASwitcher::OnNightChanged(bool isNight)
+{
+	if (!ReactsToDayCycle)
+		return;
+
+	auto newIsON = isNight ? StateAtNight : StateAtDay;
+
+	PoweredBlockInfo->IsOn = newIsON;
+
+	for (auto controlled : controlledBlocks)
+	{
+		auto interf = Cast<IControllableBlock>(controlled);
+		if (interf)
+			interf->Execute_SetControlState(controlled, newIsON);
+	}
+
+	updateDynamicColor();
+}
+
+void ASwitcher::SetReactsToDayCycle(bool newReactsToDayCycle)
+{
+	ensure(BlockInfo->ID == SwitcherID);
+	ReactsToDayCycle = newReactsToDayCycle;
+	BlockInfo->BlockSpecificData[SwitcherBlockConstants::ReactsToDayCycle] = FString::FromInt((uint8)ReactsToDayCycle);
+
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	OnNightChanged(inst->IsNightInGame);
+}
+
+void ASwitcher::SetStateAtDay(bool newStateAtDay)
+{
+	ensure(BlockInfo->ID == SwitcherID);
+	StateAtDay = newStateAtDay;
+	BlockInfo->BlockSpecificData[SwitcherBlockConstants::StateAtDay] = FString::FromInt((uint8)StateAtDay);
+
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	OnNightChanged(inst->IsNightInGame);
+}
+
+void ASwitcher::SetStateAtNight(bool newStateAtNight)
+{
+	ensure(BlockInfo->ID == SwitcherID);
+	StateAtNight = newStateAtNight;
+	BlockInfo->BlockSpecificData[SwitcherBlockConstants::StateAtNight] = FString::FromInt((uint8)StateAtNight);
+
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	OnNightChanged(inst->IsNightInGame);
 }

@@ -4,16 +4,12 @@
 #include "Interfaces/BlockWithShowableWidget.h"
 #include "Components/ElectricityComponent.h"
 #include "BlockWithElectricity.h"
-#include "Commons/Public/TCF2GameInstance.h"
 #include "ControllableBlock.h"
 #include "ControllerBlock.h"
 #include "Info/Components/PoweredBlockInfo.h"
 #include "LightBlock.generated.h"
 
-namespace LightBlockConstants
-{
-	static FString ReactsToDayCycle = TEXT("ReactsToDayCycle");
-}
+
 
 #define LIGHT_TURN_ON NSLOCTEXT("TCF2LocSpace", "LC.LightBlock.TurnOn", "Zapnout / Nastavit")
 
@@ -41,12 +37,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | LightBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 
-	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | LightBlock")
-		bool ReactsToDayCycle;
-
-	UPROPERTY(Transient)
-		float isDaytime;
-
+	
 	UPROPERTY(Transient)
 		UUserWidget* shownWidget;
 
@@ -56,10 +47,13 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | LightBlock")
 		UPoweredBlockInfo* PoweredBlockInfo;
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | LightBlock")
+		void SetAutoregulatePower(bool newAutoregulatePower);
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 	virtual void Tick(float DeltaSeconds) override;
 
-	virtual void BeginPlay() override;
+	
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
@@ -83,13 +77,8 @@ public:
 
 	virtual void SetBlockInfo(UBlockInfo* info) override;
 
-	UFUNCTION()
-		void OnNightChanged(bool isNight);
+	
 
-	UFUNCTION(BlueprintCallable, Category = "TCF2 | LightBlock")
-		void UpdateAutoregulate(bool newAutoregulate);
-
-	virtual TArray<FString> GetSupportedAdditionals() override;
 
 private:
 
@@ -105,6 +94,6 @@ private:
 
 	FORCEINLINE void updateUsingMessage()
 	{
-		SelectTargetComponent->CustomUsingMessage = usedController ? LIGHT_TURN_USE : (PoweredBlockInfo->IsOn ? LIGHT_TURN_OFF : LIGHT_TURN_ON);
+		SelectTargetComponent->CustomUsingMessage = usedController != NULL ? LIGHT_TURN_USE : (PoweredBlockInfo->IsOn ? LIGHT_TURN_OFF : LIGHT_TURN_ON);
 	}
 };

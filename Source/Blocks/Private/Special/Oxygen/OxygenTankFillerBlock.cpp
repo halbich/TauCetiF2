@@ -312,3 +312,8 @@ TArray<FString> AOxygenTankFillerBlock::GetSupportedAdditionals()
 	result.Add(OxygenFillerBlockConstants::ItemTags);
 	return result;
 }
+
+void AOxygenTankFillerBlock::SetAutoregulatePower(bool newAutoregulatePower)
+{
+	PoweredBlockInfo->AutoregulatePower = newAutoregulatePower;
+}

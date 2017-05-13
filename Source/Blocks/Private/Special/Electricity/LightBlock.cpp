@@ -37,12 +37,6 @@ void ALightBlock::SetBlockInfo(UBlockInfo* info)
 
 	ensure(BlockInfo->ID == LightSmallID);
 
-	auto state = BlockInfo->BlockSpecificData.FindOrAdd(LightBlockConstants::ReactsToDayCycle);
-	if (state.IsEmpty())
-		BlockInfo->BlockSpecificData[LightBlockConstants::ReactsToDayCycle] = FString::FromInt((uint8)ReactsToDayCycle);
-	else
-		ReactsToDayCycle = FCString::Atoi(*state) > 0 ? true : false;
-
 	PoweredBlockInfo = ElectricityComponent->ElectricityInfo->PoweredBlockInfo;
 	ensure(PoweredBlockInfo);
 
@@ -77,21 +71,9 @@ void  ALightBlock::OnConstruction(const FTransform& Transform) {
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 }
 
-void ALightBlock::BeginPlay() {
-	Super::BeginPlay();
-
-	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	ensure(inst);
-	inst->OnDaytimeChangedEvent.AddDynamic(this, &ALightBlock::OnNightChanged);
-	OnNightChanged(inst->IsNightInGame);
-}
 
 void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	ensure(inst);
-	inst->OnDaytimeChangedEvent.RemoveDynamic(this, &ALightBlock::OnNightChanged);
-
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
 
@@ -117,15 +99,8 @@ void ALightBlock::Tick(float DeltaSeconds)
 	updateLightByConsumption(actuallyObtained / elapsedSeconds, max);
 }
 
-void ALightBlock::OnNightChanged(bool isNight) {
-	isDaytime = !isNight;
-	if (usedController == NULL) {
-		Cast<IControllableBlock>(this)->Execute_SetControlState(this, isNight);
-	}
-}
-
 void ALightBlock::SetControlState_Implementation(bool isOn) {
-	
+
 	ensure(BlockInfo->ID == LightSmallID);
 	PoweredBlockInfo->IsOn = isOn;
 	updateUsingMessage();
@@ -169,16 +144,11 @@ void ALightBlock::ShowWidget_Implementation()
 	IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
 }
 
-void ALightBlock::UpdateAutoregulate(bool newAutoregulate)
-{
 
+
+
+void ALightBlock::SetAutoregulatePower(bool newAutoregulatePower)
+{
 	ensure(BlockInfo->ID == LightSmallID);
-	PoweredBlockInfo->AutoregulatePower = newAutoregulate;
-}
-
-TArray<FString> ALightBlock::GetSupportedAdditionals()
-{
-	TArray<FString> result;
-	result.Add(LightBlockConstants::ReactsToDayCycle);
-	return result;
+	PoweredBlockInfo->AutoregulatePower = newAutoregulatePower;
 }

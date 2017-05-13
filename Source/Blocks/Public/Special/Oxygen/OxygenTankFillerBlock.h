@@ -68,6 +68,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenTankFiller")
 		bool SetCurrentFillingItem(UInventoryBuildableBlockInfo* info);
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | OxygenTankFiller")
+		void SetAutoregulatePower(bool newAutoregulatePower);
+
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;

@@ -146,14 +146,15 @@ void ABlock::SetBlockInfo(UBlockInfo* info)
 	auto electricityBlock = Cast<UElectricityComponent>(GetComponentByClass(UElectricityComponent::StaticClass()));
 	if (electricityBlock)
 	{
+		info->ElectricityInfo = electricityBlock->SetInfo(info->ElectricityInfo);
+
+
 		ensure(Definition);
 		auto def = Definition->GetDefaultObject<UBlockDefinition>();
 		if (def->ElectricityComponentDef.IsControlBlock && !info->ElectricityInfo->PoweredBlockInfo)
 		{
 			info->ElectricityInfo->PoweredBlockInfo = NewObject<UPoweredBlockInfo>();
 		}
-
-		info->ElectricityInfo = electricityBlock->SetInfo(info->ElectricityInfo);
 
 	}
 	auto allowedAdditionals = GetSupportedAdditionals();

@@ -7,9 +7,18 @@
 #include "ControllerBlock.h"
 #include "ControllableBlock.h"
 #include "Commons/Public/Enums.h"
-
+#include "Commons/Public/TCF2GameInstance.h"
 #include "Info/Components/PoweredBlockInfo.h"
 #include "Switcher.generated.h"
+
+
+namespace SwitcherBlockConstants
+{
+	static FString ReactsToDayCycle = TEXT("ReactsToDayCycle");
+	static FString StateAtDay = TEXT("StateAtDay");
+	static FString StateAtNight = TEXT("StateAtNight");
+
+}
 
 /**
  *
@@ -40,6 +49,28 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherBlock")
 		bool FlipCurrentOnState();
 
+	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | SwitcherBlock")
+		bool ReactsToDayCycle;
+
+	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | SwitcherBlock")
+		bool StateAtDay;
+
+	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | SwitcherBlock")
+		bool StateAtNight;
+
+
+	UFUNCTION()
+		void OnNightChanged(bool isNight);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherBlock")
+		void SetReactsToDayCycle(bool newReactsToDayCycle);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherBlock")
+		void SetStateAtDay(bool newStateAtDay);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | SwitcherBlock")
+		void SetStateAtNight(bool newStateAtNight);
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
@@ -51,6 +82,7 @@ public:
 	virtual bool GetControlState_Implementation() override;
 	virtual TArray<ABlock*> GetControlledBlocks_Implementation() override;
 
+	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual void SetDisplayedWidget(UUserWidget* widget) override;
@@ -59,10 +91,16 @@ public:
 
 	virtual void SetBlockInfo(UBlockInfo* info) override;
 
+	virtual TArray<FString> GetSupportedAdditionals() override;
+
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{
 		return ElectricityComponent;
 	}
+
+	
+
+
 
 	FDelegateHandle ListeningHandle;
 
