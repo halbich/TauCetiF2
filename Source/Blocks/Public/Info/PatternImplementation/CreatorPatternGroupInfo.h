@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Info/PatternGroupInfo.h"
 #include "Commons/Public/GameDefinitions.h"

@@ -1,4 +1,4 @@
-#include "TauCetiF2.h"
+﻿#include "TauCetiF2.h"
 #include "GameElectricityComponent.h"
 
 const double UGameElectricityComponent::maxFloatingTime(1.0 / 30.0);		// we want to have at least 30 FPS

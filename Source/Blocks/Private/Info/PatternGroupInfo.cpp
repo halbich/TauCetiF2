@@ -1,4 +1,4 @@
-#include "Blocks.h"
+﻿#include "Blocks.h"
 #include "PatternGroupInfo.h"
 
 void UPatternGroupInfo::RegisterBlock(ABlock* block)

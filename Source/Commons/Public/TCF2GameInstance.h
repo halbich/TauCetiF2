@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Engine/GameInstance.h"
 #include "TCF2GameInstance.generated.h"

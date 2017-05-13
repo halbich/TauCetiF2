@@ -1,4 +1,4 @@
-#include "Blocks.h"
+﻿#include "Blocks.h"
 #include "BlockWithShowableWidget.h"
 
 UBlockWithShowableWidget::UBlockWithShowableWidget(const class FObjectInitializer& ObjectInitializer)

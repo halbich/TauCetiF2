@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "CurrentWeatherState.h"
 #include "GameSave/Public/Weather/FWeatherState.h"

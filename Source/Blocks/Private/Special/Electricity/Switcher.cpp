@@ -1,4 +1,4 @@
-#include "Blocks.h"
+﻿#include "Blocks.h"
 #include "Switcher.h"
 
 ASwitcher::ASwitcher()
@@ -30,7 +30,7 @@ void  ASwitcher::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
 	SelectTargetComponent->EnableUse(500);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.Switcher.Use", "P�epnout / Nastavit");
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.Switcher.Use", "Přepnout / Nastavit");
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ASwitcher::ListeningOnUse);

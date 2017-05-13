@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Widgets/ObjectWidget.h"
 #include "Blocks/Public/Special/Electricity/LightBlock.h"

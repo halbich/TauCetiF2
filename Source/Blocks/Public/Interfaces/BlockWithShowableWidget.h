@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Block.h"
 #include "Blueprint/UserWidget.h"
