@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "UObject/NoExportTypes.h"
+#include "WeatherDefinition.h"
 #include "CurrentWeatherState.generated.h"
 
 /**

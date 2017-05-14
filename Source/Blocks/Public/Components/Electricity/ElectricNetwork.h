@@ -7,6 +7,7 @@
 #include "../ElectricityComponent.h"
 #include "Interfaces/ControllerBlock.h"
 #include "Interfaces/ControllableBlock.h"
+#include "Block.h"
 #include "ElectricNetwork.generated.h"
 
 /**

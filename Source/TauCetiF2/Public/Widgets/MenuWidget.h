@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Widgets/ObjectWidget.h"
+#include "WidgetSwitcher.h"
 #include "MenuWidget.generated.h"
 
 /**
