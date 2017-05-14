@@ -353,3 +353,13 @@ TArray<FString> ABlock::GetSupportedAdditionals()
 	TArray<FString> result;
 	return result;
 }
+
+void ABlock::PropagateInventoryBuildableTags(FString tags)
+{
+
+}
+
+FString ABlock::GetInventoryBuildableTags()
+{
+	return FString();
+}

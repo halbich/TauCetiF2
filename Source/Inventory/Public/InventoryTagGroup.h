@@ -41,6 +41,12 @@ public:
 	UPROPERTY(Transient)
 		TArray<UBuildableBlockInfo*> InventoryCache;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | InventoryTagGroup")
+		int32 SatisfiedCount;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | InventoryTagGroup")
+		int32 TotalItemsCount;
+
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | InventoryTagGroup")
 		UTagGroup* AddTagGroup(UTagGroup* group);
 

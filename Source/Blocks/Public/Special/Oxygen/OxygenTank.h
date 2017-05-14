@@ -6,6 +6,13 @@
 #include "BlockWithOxygen.h"
 #include "OxygenTank.generated.h"
 
+
+namespace OxygenTankConstants
+{
+	static FString ItemTags = TEXT("ItemTags");
+}
+
+
 /**
  *
  */
@@ -24,6 +31,10 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | OxygenTank", meta = (AllowPrivateAcces = "true"))
 		UOxygenComponent* OxygenComponent;
 
+	virtual void SetBlockInfo(UBlockInfo* info) override;
+
+	virtual TArray<FString> GetSupportedAdditionals() override;
+
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
@@ -31,6 +42,9 @@ public:
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	virtual void PropagateInventoryBuildableTags(FString tags) override;
+	virtual FString GetInventoryBuildableTags() override;
 
 	FDelegateHandle ListeningHandle;
 	FDelegateHandle OxygenDataChangedHandle;

@@ -13,6 +13,23 @@ AOxygenTank::AOxygenTank()
 	AddOwnedComponent(OxygenComponent);
 }
 
+void AOxygenTank::SetBlockInfo(UBlockInfo* info)
+{
+	Super::SetBlockInfo(info);
+
+	ensure(BlockInfo->ID == OxygenTankID);
+
+	BlockInfo->BlockSpecificData.FindOrAdd(OxygenTankConstants::ItemTags);
+
+}
+
+TArray<FString> AOxygenTank::GetSupportedAdditionals()
+{
+	TArray<FString> result;
+	result.Add(OxygenTankConstants::ItemTags);
+	return result;
+}
+
 UStaticMeshComponent* AOxygenTank::GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex)
 {
 	if (BlockMeshStructureDefIndex == 0)
@@ -85,4 +102,14 @@ void AOxygenTank::EndPlay(const EEndPlayReason::Type EndPlayReason)
 		OxygenComponent->OnComponentDataChangedEvent.RemoveDynamic(this, &AOxygenTank::ListeningOnOxygenCompChanged);
 
 	Super::EndPlay(EndPlayReason);
+}
+
+void AOxygenTank::PropagateInventoryBuildableTags(FString tags)
+{
+	BlockInfo->BlockSpecificData[OxygenTankConstants::ItemTags] = tags;
+}
+
+FString AOxygenTank::GetInventoryBuildableTags()
+{
+	return BlockInfo->BlockSpecificData.FindOrAdd(OxygenTankConstants::ItemTags);
 }

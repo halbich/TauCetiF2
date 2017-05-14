@@ -9,8 +9,6 @@ void UTCF2GameInstance::SetHolderInstance(UObject* holder)
 
 void UTCF2GameInstance::DaytimeChanged(bool isNight, bool calledByLevelLoad)
 {
-	print(TEXT("C++ DayTime Changed"));
-
 	IsNightInGame = isNight;
 	OnDaytimeChangedEvent.Broadcast(isNight, calledByLevelLoad);
 }

@@ -124,7 +124,10 @@ private:
 			if (b->BlockDefinition->IsPlaceable && filterGroup->IsSatisfied(b->Tags, b->ImplicitTags))
 				filterGroup->BuildableCache.Add(b);
 		}
+
 		filterGroup->IsBuildableCacheValid = true;
+		filterGroup->SatisfiedCount = filterGroup->BuildableCache.Num();
+		filterGroup->TotalItemsCount = BuildableItems.Num();
 	}
 
 	FORCEINLINE void rebuildInventoryCache(UInventoryTagGroup* filterGroup)
@@ -136,6 +139,9 @@ private:
 				filterGroup->InventoryCache.Add(b);
 		}
 		filterGroup->IsInventoryCacheValid = true;
+
+		filterGroup->SatisfiedCount = filterGroup->InventoryCache.Num();
+		filterGroup->TotalItemsCount = InventoryItems.Num();
 	}
 
 	FORCEINLINE void selectItem(int32 offset)

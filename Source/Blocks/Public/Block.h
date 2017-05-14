@@ -70,6 +70,9 @@ public:
 
 	virtual void SetBlockInfo(UBlockInfo* info);
 
+	virtual void PropagateInventoryBuildableTags(FString tags);
+	virtual FString GetInventoryBuildableTags();
+
 	FORCEINLINE bool IsInUsableArea(AActor* owner)
 	{
 		return SelectTargetComponent && SelectTargetComponent->IsValidLowLevel() && SelectTargetComponent->IsInUsableArea(owner);

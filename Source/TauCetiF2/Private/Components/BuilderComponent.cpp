@@ -325,12 +325,16 @@ void UBuilderComponent::DoAction() {
 		{
 			TArray<FText> validationErrors;
 			float actuallyReturnedEnergy = 0.0f;
-			if (!worldController->SpawnWorldObject(GetWorld(), spawnBlock, validationErrors, true))
+			auto builtBlock = worldController->SpawnWorldObject(GetWorld(), spawnBlock, validationErrors, true);
+			if (!builtBlock)
 				BuilderElectricityComponent->PutAmount(actuallyObtainedEnergy, actuallyReturnedEnergy);
 			else
 			{
 				if (invBuildable)
+				{
+					builtBlock->PropagateInventoryBuildableTags(invBuildable->GetTagsFlatlined());
 					inventory->ItemBuilt(invBuildable);
+				}
 			}
 		}
 	}

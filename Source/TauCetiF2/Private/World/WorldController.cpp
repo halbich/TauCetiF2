@@ -371,6 +371,8 @@ void AWorldController::onPickupItem(ABlock* pickingItem)
 
 	auto invBuildable = UInventoryBuildableBlockInfo::GetInventoryBuildable(pickingItem->BlockInfo, pickingItem->Definition.GetDefaultObject());
 
+	invBuildable->SetTagsFlatlined(pickingItem->GetInventoryBuildableTags());
+
 	if (DestroyWorldObject(pickingItem))
 		invComp->AddItem(invBuildable);
 }
