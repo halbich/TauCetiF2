@@ -126,7 +126,7 @@ namespace BlockSavingHelpers {
 
 	static void FromElectricityContainer(UBlockWithElectricityInfo* info, FElectricityComponentInfo& block) {
 		info->CurrentObjectEnergy = block.CurrentObjectEnergy;
-		
+
 		if (block.HasPoweredBlockInfo)
 		{
 			info->PoweredBlockInfo = NewObject<UPoweredBlockInfo>();
@@ -237,7 +237,7 @@ namespace BlockSavingHelpers {
 		block.Location = info->Location;
 		block.Rotation = info->Rotation;
 		block.Health = info->Health;
-// TODO remove me
+		// TODO remove me
 #if WITH_EDITOR
 		block.Health = info->MaxHealth;
 #endif

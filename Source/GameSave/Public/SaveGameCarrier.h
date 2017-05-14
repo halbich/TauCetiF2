@@ -173,7 +173,6 @@ private:
 				baseStr += FString::Format(TEXT("af(b_{0}, TEXT(\"{1}\"), {2});"), elArgs);
 			}
 
-
 			for (auto fl : info.BlockSpecificData)
 			{
 				TArray<FStringFormatArg> elArgs;
@@ -183,13 +182,22 @@ private:
 				baseStr += FString::Format(TEXT("bd(b_{0}, TEXT(\"{1}\"), TEXT(\"{2}\"));"), elArgs);
 			}
 
-
 			if (info.HasElectricityData)
 			{
 				TArray<FStringFormatArg> elArgs;
 				elArgs.Add(FStringFormatArg(count));
 				elArgs.Add(FStringFormatArg(info.ElectricityInfo.CurrentObjectEnergy));
 				baseStr += FString::Format(TEXT("mE(b_{0}, {1});"), elArgs);
+
+				if (info.ElectricityInfo.HasPoweredBlockInfo)
+				{
+					TArray<FStringFormatArg> powArgs;
+					powArgs.Add(FStringFormatArg(count));
+					powArgs.Add(FStringFormatArg(info.ElectricityInfo.PoweredBlockInfo.IsOn));
+					powArgs.Add(FStringFormatArg(info.ElectricityInfo.PoweredBlockInfo.AutoregulatePower));
+					powArgs.Add(FStringFormatArg(info.ElectricityInfo.PoweredBlockInfo.PowerConsumptionPercent));
+					baseStr += FString::Format(TEXT("mEP(b_{0}, {1}, {2}, {3});"), powArgs);
+				}
 			}
 
 			if (info.HasOxygenData)
@@ -210,6 +218,7 @@ private:
 				relArgs.Add(FStringFormatArg(info.RelationshipInfo.ID.ToString()));
 				baseStr += FString::Format(TEXT("mr(b_{0}, \"{1}\");"), relArgs);
 
+				auto tcount = 0;
 				for (auto relation : info.RelationshipInfo.Relationships)
 				{
 					TArray<FStringFormatArg> relItemArgs;
@@ -219,6 +228,12 @@ private:
 
 					auto commands = TEXT("mrc(b_{0}, \"{1}\", {2});");
 					baseStr += FString::Format(commands, relItemArgs);
+
+					if (++tcount % 5 == 0)
+					{
+						UE_LOG(LogTemp, Log, TEXT("%s"), *baseStr);
+						baseStr.Empty();
+					}
 				}
 			}
 

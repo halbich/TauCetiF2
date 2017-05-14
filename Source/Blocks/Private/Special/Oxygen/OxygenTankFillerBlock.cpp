@@ -93,7 +93,6 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 
 	OxygenTankFillerMesh->SetVisibility(currentFillingItem != NULL);
 
-
 	PoweredBlockInfo = ElectricityComponent->ElectricityInfo->PoweredBlockInfo;
 	ensure(PoweredBlockInfo);
 }
@@ -180,7 +179,6 @@ void AOxygenTankFillerBlock::ShowWidget_Implementation()
 }
 
 void AOxygenTankFillerBlock::SetControlState_Implementation(bool isOn) {
-
 	ensure(BlockInfo->ID == OxygenTankFillerID);
 	PoweredBlockInfo->IsOn = isOn;
 }
@@ -255,8 +253,6 @@ void AOxygenTankFillerBlock::Tick(float DeltaSeconds)
 
 		ElectricityComponent->EnergyConsumed += FMath::Max(0.0f, originalElectricity - i->CurrentObjectEnergy);
 	}
-
-
 
 	Super::Tick(DeltaSeconds);
 }

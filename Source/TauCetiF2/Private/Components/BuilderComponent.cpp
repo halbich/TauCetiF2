@@ -57,9 +57,6 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	auto oldLocation = currentBlockInfo->Location;
 	auto newLocation = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);
 
-	/*if (!ForceRecomputePosition && currentBlockInfo->Location == newLocation)
-		return;*/
-
 	currentBlockInfo->Location = newLocation;
 	auto spawnBlock = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 	if (!worldController->IsValidSpawnPoint(spawnBlock))
@@ -254,4 +251,87 @@ void UBuilderComponent::RotateYaw(float Value)
 void UBuilderComponent::InventorySelectedChangedEvent(int32 NewIndex, UBuildableBlockInfo* BlockInfo)
 {
 	setCurrentBuildingItem(BlockInfo);
+}
+
+void UBuilderComponent::DoAction() {
+	if (!currentBuildableBlockInfo && selector->SelectedBlock)
+	{
+		selector->TryUse(true);
+		return;
+	}
+
+	if (!worldController || !currentBlockInfo || !currentBlockInfo->IsValidLowLevel() || !currentBuildableBlockInfo || !currentBuildableBlockInfo->IsValidLowLevel())
+		return;
+
+	switch (currentBuildableBlockInfo->Action)
+	{
+	case EBuildableObjectAction::None:
+		if (!selector->SelectedBlock)
+			return;
+
+		selector->TryUse(true);
+
+		return;
+	case EBuildableObjectAction::DeleteObject:
+
+		if (!selector->SelectedBlock)
+			return;
+
+		worldController->DestroyWorldObject(selector->SelectedBlock);
+
+		return;
+	case EBuildableObjectAction::ConstructObject:
+
+		if (!currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
+			return;
+
+		auto spawnBox = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+		if (!worldController->IsValidSpawnPoint(spawnBox))
+			return;
+
+		auto box = spawnBox->GetBox();
+
+		FVector origin;
+		FVector extent;
+		character->GetActorBounds(true, origin, extent);
+		auto charBox = FBox::BuildAABB(origin, extent);
+
+		if (!(box.Overlap(charBox) == 0))
+			return;
+
+		auto spawnBlock = NewObject<UBlockInfo>(this, NAME_None, RF_NoFlags, currentBlockInfo);
+
+		spawnBlock->UnderConstruction = false;
+
+		if (!worldController->IsValidSpawnPoint(BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
+			return;
+
+		UInventoryBuildableBlockInfo* invBuildable = nullptr;
+		if (currentBuildableBlockInfo->IsA(UInventoryBuildableBlockInfo::StaticClass()))
+		{
+			invBuildable = Cast<UInventoryBuildableBlockInfo>(currentBuildableBlockInfo);
+			spawnBlock->ElectricityInfo = invBuildable->ElectricityInfo;
+			spawnBlock->OxygenInfo = invBuildable->OxygenInfo;
+		}
+
+		// check if we can really build this block
+		if (!BuilderElectricityComponent || !BuilderElectricityComponent->IsValidLowLevel())
+			BuilderElectricityComponent = Cast<UElectricityComponent>(character->GetComponentByClass(UElectricityComponent::StaticClass()));
+
+		check(BuilderElectricityComponent);
+
+		float actuallyObtainedEnergy = 0.0f;
+		if (IsInCreative || BuilderElectricityComponent->ObtainAmount(currentBuildableBlockInfo->BuildingEnergyRequired, actuallyObtainedEnergy, true))
+		{
+			TArray<FText> validationErrors;
+			float actuallyReturnedEnergy = 0.0f;
+			if (!worldController->SpawnWorldObject(GetWorld(), spawnBlock, validationErrors, true))
+				BuilderElectricityComponent->PutAmount(actuallyObtainedEnergy, actuallyReturnedEnergy);
+			else
+			{
+				if (invBuildable)
+					inventory->ItemBuilt(invBuildable);
+			}
+		}
+	}
 }

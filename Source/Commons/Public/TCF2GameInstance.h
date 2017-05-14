@@ -30,8 +30,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "TCF2 | GameInstance")
 		bool IsNightInGame;
 
-
-
 	UPROPERTY(Transient)
 		TArray<FText> LoadingErrorMessages;
 
@@ -55,6 +53,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | GameInstance")
 		void ClearWarningMessages();
-
-
 };

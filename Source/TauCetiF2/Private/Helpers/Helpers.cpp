@@ -176,13 +176,6 @@ TArray<FControlsHelperStructGroup> UHelpers::GetControlsList()
 	FControlsHelperStructGroup Main;
 	Main.SectionName = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Desc", "Ovládání");
 
-	/*FControlsHelperStruct mainMove;
-	mainMove.PrimaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.MoveP", "W S A D");
-	mainMove.SecondaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.MoveS", "Nahoru dolů vlevo vpravo");
-	mainMove.Description = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.MoveD", "Pohyb postavy");
-	Main.Controls.Add(mainMove);*/
-
-
 	FControlsHelperStruct MainMove; MainMove.PrimaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Move.P", "W S A D"); MainMove.SecondaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Move.S", "Šipky klávesnice"); MainMove.Description = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Move.D", "Pohyb postavy"); Main.Controls.Add(MainMove);
 	FControlsHelperStruct MainJump; MainJump.PrimaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Jump.P", "Mezerník"); MainJump.SecondaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Jump.S", ""); MainJump.Description = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Jump.D", "Výskok"); Main.Controls.Add(MainJump);
 	FControlsHelperStruct MainLooking; MainLooking.PrimaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Looking.P", "Myš"); MainLooking.SecondaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Looking.S", ""); MainLooking.Description = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Looking.D", "Rozhlížení se"); Main.Controls.Add(MainLooking);
@@ -192,8 +185,6 @@ TArray<FControlsHelperStructGroup> UHelpers::GetControlsList()
 	FControlsHelperStruct MainInventory; MainInventory.PrimaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Inventory.P", "E"); MainInventory.SecondaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Inventory.S", ""); MainInventory.Description = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Main.Inventory.D", "Otevřít inventář"); Main.Controls.Add(MainInventory);
 
 	res.Add(Main);
-
-
 
 	FControlsHelperStructGroup Building;
 	Building.SectionName = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Building.Desc", "Stavění");
@@ -210,7 +201,6 @@ TArray<FControlsHelperStructGroup> UHelpers::GetControlsList()
 	FControlsHelperStruct BuildingShift; BuildingShift.PrimaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Building.Shift.P", "Shift"); BuildingShift.SecondaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Building.Shift.S", ""); BuildingShift.Description = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Building.Shift.D", "Přepnout zobrazení pomocné konstrukční roviny"); Building.Controls.Add(BuildingShift);
 	res.Add(Building);
 
-
 	FControlsHelperStructGroup Other;
 	Other.SectionName = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Other.Desc", "Ostatní");
 
@@ -219,7 +209,6 @@ TArray<FControlsHelperStructGroup> UHelpers::GetControlsList()
 	FControlsHelperStruct OtherQuickLoad; OtherQuickLoad.PrimaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Other.QuickLoad.P", "F9"); OtherQuickLoad.SecondaryControl = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Other.QuickLoad.S", "L"); OtherQuickLoad.Description = NSLOCTEXT("TCF2LocSpace", "LC.Controls.Other.QuickLoad.D", "Načíst poslední rychlé uložení"); Other.Controls.Add(OtherQuickLoad);
 
 	res.Add(Other);
-
 
 	return res;
 }

@@ -1,15 +1,11 @@
-﻿
-
-#include "Blocks.h"
+﻿#include "Blocks.h"
 #include "PoweredBlockInfo.h"
 
 UPoweredBlockInfo::UPoweredBlockInfo() {
-
 	IsOn = true;
 	AutoregulatePower = true;
 	PowerConsumptionPercent = 1;
 }
-
 
 float UPoweredBlockInfo::GetCurrentPowerConsumptionPercent(const float remainingEnergyPercent)
 {

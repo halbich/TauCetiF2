@@ -9,10 +9,11 @@ void UTCF2GameInstance::SetHolderInstance(UObject* holder)
 
 void UTCF2GameInstance::DaytimeChanged(bool isNight, bool calledByLevelLoad)
 {
+	print(TEXT("C++ DayTime Changed"));
+
 	IsNightInGame = isNight;
 	OnDaytimeChangedEvent.Broadcast(isNight, calledByLevelLoad);
 }
-
 
 void UTCF2GameInstance::AddErrorMessages(TArray<FText> messages) {
 	LoadingErrorMessages.Append(messages);
@@ -28,7 +29,6 @@ bool UTCF2GameInstance::TakeErrorMessages(TArray<FText>& messages) {
 void UTCF2GameInstance::ClearErrorMessages() {
 	LoadingErrorMessages.Empty();
 }
-
 
 void UTCF2GameInstance::AddWarningMessages(TArray<FText> messages) {
 	LoadingWarningMessages.Append(messages);

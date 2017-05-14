@@ -166,7 +166,7 @@ public:
 		bool NetworkChecked;
 private:
 
-	/*FORCEINLINE*/ void tryUpdateArrayBySeverity(UElectricityComponent* comp)
+	FORCEINLINE void tryUpdateArrayBySeverity(UElectricityComponent* comp)
 	{
 		auto b = comp->GetBlockInfo();
 		switch (b->HealthSeverity)
@@ -192,7 +192,7 @@ private:
 		}
 	}
 
-	/*FORCEINLINE*/ void tryUpdateArrayBySeverityRem(UElectricityComponent* comp, EHealthSeverity oldSeverity)
+	FORCEINLINE void tryUpdateArrayBySeverityRem(UElectricityComponent* comp, EHealthSeverity oldSeverity)
 	{
 		auto b = comp->GetBlockInfo();
 		switch (oldSeverity)
@@ -228,7 +228,7 @@ public:
 		NetworkState = EElectricNetworkState::Invalid;
 		for (auto netEnt : Entities)
 			netEnt->ComponentNetworkState = EElectricNetworkState::Invalid;
-		
+
 		ToRecompute.Empty();
 	}
 

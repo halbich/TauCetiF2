@@ -49,7 +49,6 @@ public:
 	UPROPERTY(Transient)
 		UUserWidget* shownWidget;
 
-
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | OxygenTankFiller")
 		ABlock* usedController;
 

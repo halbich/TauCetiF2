@@ -61,10 +61,8 @@ void ASwitcher::SetBlockInfo(UBlockInfo* info)
 	else
 		StateAtNight = FCString::Atoi(*stateAtNight) > 0 ? true : false;
 
-
 	PoweredBlockInfo = ElectricityComponent->ElectricityInfo->PoweredBlockInfo;
 	ensure(PoweredBlockInfo);
-
 
 	updateDynamicColor();
 }
@@ -88,12 +86,13 @@ void ASwitcher::ListeningOnUse(AActor* actor, bool isSpecial)
 void ASwitcher::BeginPlay() {
 	Super::BeginPlay();
 
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	ensure(inst);
+	inst->OnDaytimeChangedEvent.AddDynamic(this, &ASwitcher::OnNightChanged);
 }
-
 
 void ASwitcher::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-
 	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	ensure(inst);
 	inst->OnDaytimeChangedEvent.RemoveDynamic(this, &ASwitcher::OnNightChanged);
@@ -251,7 +250,6 @@ void ASwitcher::OnNightChanged(bool isNight, bool calledByLevelLoad)
 
 	if (calledByLevelLoad && oldValue != newIsON)	// we forced other value, thus we need to correct it
 		newIsON = oldValue;
-
 
 	PoweredBlockInfo->IsOn = newIsON;
 

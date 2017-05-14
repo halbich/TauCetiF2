@@ -237,4 +237,3 @@ bool UInventoryComponent::TryRemoveInventory(UInventoryBuildableBlockInfo* block
 
 	return removed > 0;
 }
-

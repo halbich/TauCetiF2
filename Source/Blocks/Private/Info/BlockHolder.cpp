@@ -47,7 +47,6 @@ void UBlockHolder::ReinitializeAviableBlocks()
 	AviableBlocks.KeySort([](int32 A, int32 B) {
 		return A < B; // sort keys in reverse
 	});
-
 }
 
 void UBlockHolder::tryAddBlockToAviables(UClass* blockClass)
@@ -66,7 +65,6 @@ void UBlockHolder::tryAddBlockToAviables(UClass* blockClass)
 	auto contains = AviableBlocks.Find(def->BlockID);
 	if (!contains)
 		AviableBlocks.Add(def->BlockID, b->GetClass());
-	
 }
 
 TArray<int32> UBlockHolder::GetAviableItems() {

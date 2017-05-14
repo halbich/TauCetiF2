@@ -26,11 +26,9 @@ struct TAUCETIF2_API FControlsHelperStruct
 		FText Description;
 };
 
-
 USTRUCT(BlueprintType)
 struct TAUCETIF2_API FControlsHelperStructGroup
 {
-
 	GENERATED_BODY();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = ControlsHelperStruct)

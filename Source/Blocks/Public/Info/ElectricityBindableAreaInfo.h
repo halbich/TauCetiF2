@@ -23,7 +23,5 @@ public:
 
 	void InitArea(TArray<FVector> usedPoints, FElectricityBindableArea& definedPlane, FVector& blockScale, FRotator& blockRotation, FVector worldLocation);
 
-	void DEBUG_DrawPoints(UWorld* world);
-
 	FBox GetBox();
 };

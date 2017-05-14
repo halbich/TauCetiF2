@@ -11,11 +11,6 @@ void UBuildableBlockInfo::DefinitionSet()
 
 	switch (ID)
 	{
-		/*case EmptyHandID: {
-			Action = EBuildableObjectAction::None;
-			AllowOutlineOnSelected = false;
-			break;
-		}*/
 	case DeleteID: {
 		StencilOverride = STENCIL_DELETE_OUTLINE;
 		Action = EBuildableObjectAction::DeleteObject;
@@ -32,7 +27,6 @@ void UBuildableBlockInfo::DefinitionSet()
 		ImplicitTags.Add(TEXT("X-") + FString::FormatAsNumber(FMath::FloorToInt(Scale.X)));
 		ImplicitTags.Add(TEXT("Y-") + FString::FormatAsNumber(FMath::FloorToInt(Scale.Y)));
 		ImplicitTags.Add(TEXT("Z-") + FString::FormatAsNumber(FMath::FloorToInt(Scale.Z)));
-
 
 		break;
 	}

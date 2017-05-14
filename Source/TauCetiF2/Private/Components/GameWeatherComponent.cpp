@@ -69,7 +69,6 @@ void UGameWeatherComponent::OnStormBegin()
 		// we need to plan next storm, otherwise it is loaded and planned
 		currentWeatherState->CurrentWeatherIntensity = currentWeatherState->TargetWeatherIntensity;
 
-		CurrentHitIntensity = IntensityCurve->GetFloatValue(currentWeatherState->CurrentWeatherIntensity);
 		hitpointsCounter = 0;
 		playerHitpointCounter = 0;
 
@@ -78,6 +77,8 @@ void UGameWeatherComponent::OnStormBegin()
 
 		StormState = EStormState::EaseIn;
 	}
+
+	CurrentHitIntensity = IntensityCurve->GetFloatValue(currentWeatherState->CurrentWeatherIntensity);
 
 	StormNotification.Broadcast(EStormNotification::StormBegin);
 }

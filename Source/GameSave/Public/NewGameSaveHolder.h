@@ -64,7 +64,6 @@ private:
 		return make(id, FVector(lx, ly, lz), FVector(sx, sy, sz), FRotator(rx, ry, rz), health, name);
 	}
 
-
 	void mO(FBlockInfo& blockInfo, float currentFilling)
 	{
 		blockInfo.HasOxygenData = true;
@@ -75,6 +74,14 @@ private:
 	{
 		blockInfo.HasElectricityData = true;
 		blockInfo.ElectricityInfo.CurrentObjectEnergy = currentFilling;
+	}
+
+	void mEP(FBlockInfo& blockInfo, bool isOn, bool autoregulate, float powerConsumption)
+	{
+		blockInfo.ElectricityInfo.HasPoweredBlockInfo = true;
+		blockInfo.ElectricityInfo.PoweredBlockInfo.IsOn = isOn;
+		blockInfo.ElectricityInfo.PoweredBlockInfo.AutoregulatePower = autoregulate;
+		blockInfo.ElectricityInfo.PoweredBlockInfo.PowerConsumptionPercent = powerConsumption;
 	}
 
 	void af(FBlockInfo& blockInfo, FString key, int32 value)
@@ -89,14 +96,14 @@ private:
 
 	void mr(FBlockInfo& blockInfo, FString guid)
 	{
-		blockInfo.HasRelationshipData = true; 
-		FGuid id; FGuid::Parse(guid, id); 
+		blockInfo.HasRelationshipData = true;
+		FGuid id; FGuid::Parse(guid, id);
 		blockInfo.RelationshipInfo.ID = id;
 	}
 
 	void mrc(FBlockInfo& blockInfo, FString guid, uint8 type)
 	{
-		FRelationshipInfo rel; 
+		FRelationshipInfo rel;
 		FGuid relID; FGuid::Parse(guid, relID); rel.TargetID = relID; rel.RelationshipType = type;
 		blockInfo.RelationshipInfo.Relationships.Add(rel);
 	}

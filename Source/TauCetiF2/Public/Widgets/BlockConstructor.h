@@ -52,5 +52,4 @@ private:
 		blockHolder = Cast<UBlockHolder>(inst->BlockHolder);
 		return blockHolder != NULL;
 	}
-
 };

@@ -9,8 +9,6 @@
 #include "Info/Components/PoweredBlockInfo.h"
 #include "LightBlock.generated.h"
 
-
-
 #define LIGHT_TURN_ON NSLOCTEXT("TCF2LocSpace", "LC.LightBlock.TurnOn", "Zapnout / Nastavit")
 
 #define LIGHT_TURN_OFF NSLOCTEXT("TCF2LocSpace", "LC.LightBlock.TurnOff", "Vypnout / Nastavit")
@@ -37,7 +35,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | LightBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
 
-	
 	UPROPERTY(Transient)
 		UUserWidget* shownWidget;
 
@@ -52,8 +49,6 @@ public:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 	virtual void Tick(float DeltaSeconds) override;
-
-	
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
@@ -76,9 +71,6 @@ public:
 	}
 
 	virtual void SetBlockInfo(UBlockInfo* info) override;
-
-	
-
 
 private:
 

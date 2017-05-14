@@ -87,7 +87,6 @@ bool UCommonHelpers::SetSettingsValueBool(EGameUserSettingsVariable settings, bo
 	return true;
 }
 
-
 bool UCommonHelpers::GetSettingsValueString(EGameUserSettingsVariable settings, FString& value)
 {
 	if (!GConfig)
@@ -102,7 +101,6 @@ bool UCommonHelpers::GetSettingsValueString(EGameUserSettingsVariable settings, 
 		GGameIni
 	);
 }
-
 
 bool UCommonHelpers::SetSettingsValueString(EGameUserSettingsVariable settings, FString value)
 {

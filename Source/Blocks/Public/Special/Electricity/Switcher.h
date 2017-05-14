@@ -11,13 +11,11 @@
 #include "Info/Components/PoweredBlockInfo.h"
 #include "Switcher.generated.h"
 
-
 namespace SwitcherBlockConstants
 {
 	static FString ReactsToDayCycle = TEXT("ReactsToDayCycle");
 	static FString StateAtDay = TEXT("StateAtDay");
 	static FString StateAtNight = TEXT("StateAtNight");
-
 }
 
 /**
@@ -58,7 +56,6 @@ public:
 	UPROPERTY(BlueprintReadonly, Transient, Category = "TCF2 | SwitcherBlock")
 		bool StateAtNight;
 
-
 	UFUNCTION()
 		void OnNightChanged(bool isNight, bool calledByLevelLoad);
 
@@ -97,10 +94,6 @@ public:
 	{
 		return ElectricityComponent;
 	}
-
-	
-
-
 
 	FDelegateHandle ListeningHandle;
 

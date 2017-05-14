@@ -71,12 +71,10 @@ void  ALightBlock::OnConstruction(const FTransform& Transform) {
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 }
 
-
 void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
-
 
 	Super::EndPlay(EndPlayReason);
 }
@@ -100,7 +98,6 @@ void ALightBlock::Tick(float DeltaSeconds)
 }
 
 void ALightBlock::SetControlState_Implementation(bool isOn) {
-
 	ensure(BlockInfo->ID == LightSmallID);
 	PoweredBlockInfo->IsOn = isOn;
 	updateUsingMessage();
@@ -143,9 +140,6 @@ void ALightBlock::ShowWidget_Implementation()
 	check(def);
 	IBlockWithShowableWidget::CallShowWidget(this, def->UsableDef.ShowWidgetOnUse);
 }
-
-
-
 
 void ALightBlock::SetAutoregulatePower(bool newAutoregulatePower)
 {

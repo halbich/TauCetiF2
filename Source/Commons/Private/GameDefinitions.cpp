@@ -10,7 +10,7 @@ const int32 GameDefinitions::CubeMaxSizeMultiplier(20);
 const int32 GameDefinitions::DefaultInventoryTagGroupsCount(10);
 const float GameDefinitions::CubeSurfaceInMetersSquared((GameDefinitions::CubeMinSize / 100.0f) * (GameDefinitions::CubeMinSize / 100.0f));
 
-const float GameDefinitions::GameDayLength(3600);
+const float GameDefinitions::GameDayLength(1800);
 const float GameDefinitions::GameDayMultiplier(86400.0f / GameDefinitions::GameDayLength);
 
 const float GameDefinitions::RainHitpointToEnergy(1000);

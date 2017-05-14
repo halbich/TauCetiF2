@@ -157,7 +157,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, TAr
 	bool isValid = BlockHelpers::CheckBlockValidity(definition, block, invalidReason);
 	if (!isValid)
 	{
-		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.WorldController.InvalidBlock", "Blok s ID {0} není validní. Důvod: {1}. Blok nebude ve hře použit."), FText::FromString( FString::FormatAsNumber(block->ID)), FText::FromString(invalidReason)));
+		validationErrors.Add(FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.WorldController.InvalidBlock", "Blok s ID {0} není validní. Důvod: {1}. Blok nebude ve hře použit."), FText::FromString(FString::FormatAsNumber(block->ID)), FText::FromString(invalidReason)));
 		return nullptr;
 	}
 
