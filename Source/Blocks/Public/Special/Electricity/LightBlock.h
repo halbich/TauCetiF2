@@ -50,6 +50,7 @@ public:
 	virtual void OnConstruction(const FTransform& Transform) override;
 	virtual void Tick(float DeltaSeconds) override;
 
+	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
@@ -86,6 +87,11 @@ private:
 
 	FORCEINLINE void updateUsingMessage()
 	{
+#if WITH_EDITOR
+		if (PoweredBlockInfo)
+			return;
+#endif
+
 		SelectTargetComponent->CustomUsingMessage = usedController != NULL ? LIGHT_TURN_USE : (PoweredBlockInfo->IsOn ? LIGHT_TURN_OFF : LIGHT_TURN_ON);
 	}
 };

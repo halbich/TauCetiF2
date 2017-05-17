@@ -63,18 +63,28 @@ void ALightBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 void  ALightBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
+
+}
+
+void ALightBlock::BeginPlay()
+{
+	Super::BeginPlay();
+
 	SelectTargetComponent->EnableUse(500);
 	updateUsingMessage();
 
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ALightBlock::ListeningOnUse);
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
+
 }
 
 void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
+
+	Cast<IControllableBlock>(this)->Execute_SetController(this, NULL);
 
 	Super::EndPlay(EndPlayReason);
 }

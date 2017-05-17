@@ -28,12 +28,7 @@ UStaticMeshComponent* ATerminalBlock::GetMeshStructureComponent_Implementation(i
 void  ATerminalBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
-	SelectTargetComponent->EnableUse(400);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.UseTerminal", "Doplnit energii / Otevřít");
 
-	FUseDelegate Subscriber;
-	Subscriber.BindUObject(this, &ATerminalBlock::ListeningOnUse);
-	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 }
 
 void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
@@ -66,6 +61,18 @@ void ATerminalBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 		obtainResult = ElectricityComponent->ObtainAmount(actuallyPutted, actuallyObtained);
 		check(obtainResult && FMath::IsNearlyZero(actuallyObtained - actuallyPutted));
 	}
+}
+
+void ATerminalBlock::BeginPlay()
+{
+	Super::BeginPlay();
+
+	SelectTargetComponent->EnableUse(400);
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.UseTerminal", "Doplnit energii / Otevřít");
+
+	FUseDelegate Subscriber;
+	Subscriber.BindUObject(this, &ATerminalBlock::ListeningOnUse);
+	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 }
 
 void ATerminalBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)

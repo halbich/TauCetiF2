@@ -1,5 +1,5 @@
 ﻿#include "Blocks.h"
-#include "CubeBlock.h"
+#include "CubeBlockWithoutElectricity.h"
 
 ACubeBlockWithoutElectricity::ACubeBlockWithoutElectricity()
 	: Super()

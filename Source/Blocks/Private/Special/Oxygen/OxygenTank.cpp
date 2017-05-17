@@ -45,15 +45,6 @@ UPrimitiveComponent* AOxygenTank::GetComponentForObjectOutline_Implementation() 
 void  AOxygenTank::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
-	SelectTargetComponent->EnableUse(500);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.OxygenTank.Pickup", "Doplnit kyslík / Sebrat");
-
-	FUseDelegate Subscriber;
-	Subscriber.BindUObject(this, &AOxygenTank::ListeningOnUse);
-	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
-
-	OxygenComponent->OnComponentDataChangedEvent.AddDynamic(this, &AOxygenTank::ListeningOnOxygenCompChanged);
-	OxygenComponent->onComponentDataChanged();
 }
 
 void AOxygenTank::ListeningOnUse(AActor* actor, bool isSpecial)
@@ -91,6 +82,21 @@ void AOxygenTank::ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source)
 		return;
 
 	mat->SetScalarParameterValue(TEXT("Filling"), source->GetRemainingPercentageUnit());
+}
+
+void AOxygenTank::BeginPlay()
+{
+	Super::BeginPlay();
+
+	SelectTargetComponent->EnableUse(500);
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.OxygenTank.Pickup", "Doplnit kyslík / Sebrat");
+
+	FUseDelegate Subscriber;
+	Subscriber.BindUObject(this, &AOxygenTank::ListeningOnUse);
+	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
+
+	OxygenComponent->OnComponentDataChangedEvent.AddDynamic(this, &AOxygenTank::ListeningOnOxygenCompChanged);
+	OxygenComponent->onComponentDataChanged();
 }
 
 void AOxygenTank::EndPlay(const EEndPlayReason::Type EndPlayReason)

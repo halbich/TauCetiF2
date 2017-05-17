@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "CubeBlockWithoutElectricity.h"
+#include "Block.h"
 #include "Components/ElectricityComponent.h"
 #include "BlockWithElectricity.h"
 #include "CubeBlock.generated.h"
@@ -9,12 +9,15 @@
  *
  */
 UCLASS()
-class BLOCKS_API ACubeBlock : public ACubeBlockWithoutElectricity, public IBlockWithElectricity
+class BLOCKS_API ACubeBlock : public ABlock, public IBlockWithElectricity
 {
 	GENERATED_BODY()
 
 public:
 	ACubeBlock();
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | CubeBlock")
+		UStaticMeshComponent* CubeMesh;
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "TCF2 | CubeBlock", meta = (AllowPrivateAcces = "true"))
 		UElectricityComponent* ElectricityComponent;
@@ -23,4 +26,8 @@ public:
 	{
 		return ElectricityComponent;
 	}
+
+	virtual UStaticMeshComponent* GetMeshStructureComponent_Implementation(int32 BlockMeshStructureDefIndex) override;
+
+	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 };

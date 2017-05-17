@@ -100,15 +100,7 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 void  AOxygenTankFillerBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
-	SelectTargetComponent->EnableUse(500);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.OxygenTankFillerBlock.Pickup", "Doplnit kyslík / Otevřít konzoli");
-
-	FUseDelegate Subscriber;
-	Subscriber.BindUObject(this, &AOxygenTankFillerBlock::ListeningOnUse);
-	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
-
-	OxygenComponent->OnComponentDataChangedEvent.AddDynamic(this, &AOxygenTankFillerBlock::ListeningOnOxygenCompChanged);
-	OxygenComponent->onComponentDataChanged();
+	
 
 	dynInfoMat = UMaterialInstanceDynamic::Create(OxygenTankFillerMesh->GetMaterial(0), this);
 	OxygenTankFillerMesh->SetMaterial(0, dynInfoMat);
@@ -147,17 +139,24 @@ void AOxygenTankFillerBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 	}
 }
 
-void AOxygenTankFillerBlock::ListeningOnOxygenCompChanged(UBlockWithOxygenInfo* source)
+
+void AOxygenTankFillerBlock::BeginPlay()
 {
+	Super::BeginPlay();
+
+	SelectTargetComponent->EnableUse(500);
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.OxygenTankFillerBlock.Pickup", "Doplnit kyslík / Otevřít konzoli");
+
+	FUseDelegate Subscriber;
+	Subscriber.BindUObject(this, &AOxygenTankFillerBlock::ListeningOnUse);
+	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
+
 }
 
 void AOxygenTankFillerBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	if (ListeningHandle.IsValid() && SelectTargetComponent)
 		SelectTargetComponent->RemoveEventListener(ListeningHandle);
-
-	if (OxygenComponent)
-		OxygenComponent->OnComponentDataChangedEvent.RemoveDynamic(this, &AOxygenTankFillerBlock::ListeningOnOxygenCompChanged);
 
 	Cast<IControllableBlock>(this)->Execute_SetController(this, NULL);
 

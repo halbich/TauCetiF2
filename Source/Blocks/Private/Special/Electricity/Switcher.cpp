@@ -29,14 +29,7 @@ UPrimitiveComponent* ASwitcher::GetComponentForObjectOutline_Implementation() {
 void  ASwitcher::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
-	SelectTargetComponent->EnableUse(500);
-	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.Switcher.Use", "Přepnout / Nastavit");
-
-	FUseDelegate Subscriber;
-	Subscriber.BindUObject(this, &ASwitcher::ListeningOnUse);
-	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
-
-	updateDynamicColor();
+	
 }
 
 void ASwitcher::SetBlockInfo(UBlockInfo* info)
@@ -89,6 +82,17 @@ void ASwitcher::BeginPlay() {
 	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	ensure(inst);
 	inst->OnDaytimeChangedEvent.AddDynamic(this, &ASwitcher::OnNightChanged);
+
+	SelectTargetComponent->EnableUse(500);
+	SelectTargetComponent->CustomUsingMessage = NSLOCTEXT("TCF2LocSpace", "LC.Switcher.Use", "Přepnout / Nastavit");
+
+	FUseDelegate Subscriber;
+	Subscriber.BindUObject(this, &ASwitcher::ListeningOnUse);
+	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
+
+	updateDynamicColor();
+
+
 }
 
 void ASwitcher::EndPlay(const EEndPlayReason::Type EndPlayReason)

@@ -66,7 +66,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
 		void ShowRegisteredWidget(const FString widgetID, ABlock* block = NULL);
 
-	// Override BeginPlay()
+
 	virtual void BeginPlay() override;
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;

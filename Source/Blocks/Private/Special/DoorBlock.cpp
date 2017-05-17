@@ -33,11 +33,7 @@ UStaticMeshComponent* ADoorBlock::GetMeshStructureComponent_Implementation(int32
 void ADoorBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
-	SelectTargetComponent->EnableSelect(DoorBlockFrameMesh);
-	SelectTargetComponent->EnableUse(200, DoorBlockMesh);
-	FUseDelegate Subscriber;
-	Subscriber.BindUObject(this, &ADoorBlock::ListeningOnUse);
-	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
+
 }
 
 void ADoorBlock::SetBlockInfo(UBlockInfo* info)
@@ -84,6 +80,17 @@ void ADoorBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 	}
 	else if (doorState == EDoorState::Opened)
 		doorState = EDoorState::Closing;
+}
+
+void ADoorBlock::BeginPlay()
+{
+	Super::BeginPlay();
+
+	SelectTargetComponent->EnableSelect(DoorBlockFrameMesh);
+	SelectTargetComponent->EnableUse(200, DoorBlockMesh);
+	FUseDelegate Subscriber;
+	Subscriber.BindUObject(this, &ADoorBlock::ListeningOnUse);
+	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 }
 
 void ADoorBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
