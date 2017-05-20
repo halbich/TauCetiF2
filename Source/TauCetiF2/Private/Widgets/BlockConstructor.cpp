@@ -76,18 +76,17 @@ void UBlockConstructor::InitForBlock_Implementation(ABlock* block)
 	ScaleLimit.Z = FMath::Max(ScaleLimit.X, ScaleLimit.Y);
 }
 
-FText UBlockConstructor::GetDisplayTextExtended_Implementation()
+FText UBlockConstructor::GetSizeText()
 {
-	auto val = NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.CtorValid", "Online");
-	auto inval = NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.CtorInvalid", "Offline");
-
 	FNumberFormattingOptions op;
 	op.SetMinimumFractionalDigits(0);
 	op.SetMaximumFractionalDigits(0);
 
-	FFormatOrderedArguments Arguments;
-	Arguments.Add(BaseControlDisplayName);
-	Arguments.Add(FText::AsNumber(FMath::Max(ScaleLimit.X, ScaleLimit.Y), &op));
-	Arguments.Add(RelatedToPatternGroup->IsValidCreator ? val : inval);
-	return FText::Format(NSLOCTEXT("TCF2LocSpace", "LC.BlockConstructor.ExtendedText", "{0}    |    Velikost: {1}    |    Stav: {2}"), Arguments);
+	return FText::AsNumber(FMath::Max(ScaleLimit.X, ScaleLimit.Y), &op);
+
+}
+
+bool UBlockConstructor::GetIsValidBuilder()
+{
+	return RelatedToPatternGroup->IsValidCreator;
 }

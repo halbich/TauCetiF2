@@ -36,7 +36,12 @@ public:
 
 	virtual void InitForBlock_Implementation(ABlock* block) override;
 
-	virtual FText GetDisplayTextExtended_Implementation() override;
+
+	UFUNCTION(BlueprintCallable,BlueprintPure, Category = "TCF2 | BlockConstructorSelector")
+		FText GetSizeText();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | BlockConstructorSelector")
+		bool GetIsValidBuilder();
 
 private:
 

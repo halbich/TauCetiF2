@@ -3,6 +3,7 @@
 #include "Widgets/ObjectWidget.h"
 #include "Blocks/Public/Special/TerminalBlock.h"
 #include "Blocks/Public/Components/Electricity/ElectricNetwork.h"
+#include "TerminalSelectorBaseWidget.h"
 #include "TerminalBaseWidget.generated.h"
 
 /**
@@ -29,7 +30,7 @@ public:
 		void GetControllables(TArray<ABlock*>& aviable);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | TerminalBaseWidget")
-		FText GetDisplayTextExtended();
+		UTerminalSelectorBaseWidget* GetSelectorWidget();
 
-	virtual FText GetDisplayTextExtended_Implementation();
+	virtual UTerminalSelectorBaseWidget* GetSelectorWidget_Implementation();
 };

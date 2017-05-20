@@ -33,7 +33,7 @@ void UTerminalBaseWidget::GetControllables(TArray<ABlock*>& aviable)
 	}
 }
 
-FText UTerminalBaseWidget::GetDisplayTextExtended_Implementation()
+UTerminalSelectorBaseWidget* UTerminalBaseWidget::GetSelectorWidget_Implementation()
 {
-	return BaseControlDisplayName;
+	return NULL;
 }
