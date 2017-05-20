@@ -66,6 +66,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")
 		bool IsQuickSave;
 
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | SaveGameCarrier")
+		bool IsTutorial;
+
 	// game - related stuff
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | SaveGameCarrier")

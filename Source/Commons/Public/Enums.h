@@ -62,6 +62,7 @@ enum class ENamedHardcodedLevel : uint8
 	SuperSize,
 	MiniLevel,
 	EmptyLevel,
+	TutorialLevel,
 	HardcodedLevelsMax
 };
 
