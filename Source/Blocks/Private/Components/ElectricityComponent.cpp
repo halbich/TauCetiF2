@@ -54,7 +54,7 @@ void UElectricityComponent::SetDefinition(FElectricityComponentDefinition def, F
 				if (isValidConnection(myBindable, bindable))
 				{
 					ConnectedComponents.Add(surrounding);
-					surrounding->ConnectedComponents.Add(this);
+					surrounding->ConnectedComponents.AddUnique(this);
 				}
 			}
 		}

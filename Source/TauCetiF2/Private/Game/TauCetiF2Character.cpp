@@ -88,7 +88,11 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* input
 	inputComponent->BindAction("OnEscape", IE_Pressed, this, &ATauCetiF2Character::OnEscapeKey);
 	inputComponent->BindAction("OnEnter", IE_Pressed, this, &ATauCetiF2Character::OnEnterKey);
 
-	inputComponent->BindAction("OnUse", IE_Pressed, this, &ATauCetiF2Character::OnUse);
+	// we don't want to consume - we'd like to use it in tutorial
+	FInputActionBinding use("OnUse", IE_Pressed);
+	use.ActionDelegate.BindDelegate(this, &ATauCetiF2Character::OnUse);
+	use.bConsumeInput = false;
+	inputComponent->AddActionBinding(use);
 
 	inputComponent->BindAction("OnInventory", IE_Pressed, this, &ATauCetiF2Character::OnInventory);
 

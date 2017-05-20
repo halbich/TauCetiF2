@@ -14,7 +14,7 @@ class BLOCKS_API UBlockBaseInfo : public UObject
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | BlockInfo")
 		int32 ID;
 
 	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | BlockInfo")
