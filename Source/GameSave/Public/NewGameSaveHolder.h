@@ -150,10 +150,13 @@ private:
 		return res;
 	}
 
-	FWeatherState makeRandomWeatherState()
+
+	FWeatherState makeTutorialWatherState()
 	{
 		FWeatherState res;
-
+		res.CurrentDefinitionID = 0;
+		res.CurrentWaitingTime = 0;
+		res.TargetWaitingTime = 60 * 60 * 24;
 		return res;
 	}
 };

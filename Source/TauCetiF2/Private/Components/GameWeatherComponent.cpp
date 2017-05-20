@@ -12,6 +12,7 @@ UGameWeatherComponent::UGameWeatherComponent()
 	startPointZ = 1000; // ((GameDefinitions::WorldBorders + FVector(0, 0, 25)) *  GameDefinitions::CubeMinSize).Z;
 }
 
+#pragma optimize("", off)
 void UGameWeatherComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FText>& validationErrors)
 {
 	check(carrier != NULL);
@@ -25,6 +26,10 @@ void UGameWeatherComponent::LoadFromCarrier(USaveGameCarrier* carrier, TArray<FT
 	WeatherSavingHelpers::GetAdditionals(carrier->weatherState, hitpointsCounter, playerHitpointCounter, currentEaseInTime, currentEaseOutTime, stormState);
 	StormState = (EStormState)stormState;
 }
+
+
+
+#pragma optimize("", on)
 
 void UGameWeatherComponent::SaveToCarrier(USaveGameCarrier* carrier)
 {

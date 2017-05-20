@@ -1099,6 +1099,8 @@ USaveGameCarrier* UNewGameSaveHolder::getTutorialGameSave(bool full)
 
 	c->buildableBlocks.Add(makeBuildable(DeleteID, FVector(1, 1, 1)));
 
+	c->weatherState = makeTutorialWatherState();
+
 	auto UsedBlocks = &c->usedBlocks;
 
 
@@ -1109,7 +1111,7 @@ USaveGameCarrier* UNewGameSaveHolder::getTutorialGameSave(bool full)
 	auto b_4 = make1(600, -12, -39, 9, 6, 1, 11, 0, 0, 0, 660.000000, ""); mE(b_4, 26400.000000); UsedBlocks->Add(b_4);
 	auto b_5 = make1(100, 10, -35, 1, 8, 14, 4, 0, -90, 0, 1493.333374, ""); mE(b_5, 0.000000); UsedBlocks->Add(b_5);
 	auto b_6 = make1(0, -6, -35, 1, 19, 8, 4, 0, 180, 0, 6080.000000, ""); mE(b_6, 0.000000); UsedBlocks->Add(b_6);
-	auto b_7 = make1(700, 0, -35, 9, 7, 7, 11, 0, 90, 0, 10.000000, ""); af(b_7, TEXT("DoorOpening"), 0); bd(b_7, TEXT("DoorState"), TEXT("2")); bd(b_7, TEXT("DoorYaw"), TEXT("89.0")); mE(b_7, 0.000000); UsedBlocks->Add(b_7);
+	auto b_7 = make1(700, 0, -35, 9, 7, 7, 11, 0, 90, 0, 10.000000, ""); af(b_7, TEXT("DoorOpening"), 0); bd(b_7, TEXT("DoorState"), TEXT("0")); bd(b_7, TEXT("DoorYaw"), TEXT("0.0")); mE(b_7, 0.000000); UsedBlocks->Add(b_7);
 	auto b_8 = make1(1, 3, -39, 9, 1, 1, 11, 0, 0, 0, 110.000000, ""); mE(b_8, 0.000000); UsedBlocks->Add(b_8);
 	auto b_9 = make1(600, 0, -39, 9, 6, 1, 11, 0, -180, 0, 660.000000, ""); mE(b_9, 26400.000000); UsedBlocks->Add(b_9);
 	auto b_10 = make1(600, -6, -39, 9, 5, 1, 11, 0, 0, 0, 550.000000, ""); mE(b_10, 22000.000000); UsedBlocks->Add(b_10);
