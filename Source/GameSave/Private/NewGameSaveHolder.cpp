@@ -1243,13 +1243,11 @@ USaveGameCarrier* UNewGameSaveHolder::getTutorialGameSave(bool full)
 	auto b_134 = make1(600, 24, -4, 9, 12, 1, 11, 0, 90, 0, 1320.000000, ""); mE(b_134, 57200.000000); UsedBlocks->Add(b_134);
 	auto b_135 = make1(600, 24, 11, 9, 13, 1, 11, 0, 90, 0, 1430.000000, ""); mE(b_135, 57200.000000); UsedBlocks->Add(b_135);
 
-	c->PlayerPosition = FVector(-31, -520, 163);
-	c->PlayerRotation = FRotator(0, 8, 0);
-	c->PlayerCameraRotation = FRotator(349.737701, 7.768385, 0.0);
 
-	//c->PlayerPosition = FVector(1067, -790, 82);
-	//c->PlayerRotation = FRotator(0, 154, 0);
-	//c->PlayerCameraRotation = FRotator(1.177662, 154.450226, 0.0);
+
+	c->PlayerPosition = FVector(1067, -790, 82);
+	c->PlayerRotation = FRotator(0, 154, 0);
+	c->PlayerCameraRotation = FRotator(1.177662, 154.450226, 0.0);
 
 
 	return c;
