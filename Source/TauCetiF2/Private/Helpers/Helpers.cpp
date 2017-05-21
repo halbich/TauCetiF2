@@ -212,3 +212,26 @@ TArray<FControlsHelperStructGroup> UHelpers::GetControlsList()
 
 	return res;
 }
+
+void UHelpers::TutorialAddItems(UObject* WorldContextObject, UInventoryComponent* inv)
+{
+	auto inst = Cast<UTCF2GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
+	ensure(inst);
+	auto blockHolder = Cast<UBlockHolder>(inst->BlockHolder);
+	ensure(blockHolder);
+
+	auto destr = UBuildableBlockInfo::GetBuildable(blockHolder->GetDefinitionFor(DeleteID));
+
+	auto creator = UBuildableBlockInfo::GetBuildable(blockHolder->GetDefinitionFor(CreatorID));
+
+	auto poly1 = UBuildableBlockInfo::GetBuildable(blockHolder->GetDefinitionFor(CubePolycarbonateID));
+	poly1->Scale = FVector(6, 7, 1);
+
+	auto poly2 = UBuildableBlockInfo::GetBuildable(blockHolder->GetDefinitionFor(CubePolycarbonateID));
+	poly2->Scale = FVector(3, 1, 3);
+
+	inv->AddItem(destr);
+	inv->AddItem(creator);
+	inv->AddItem(poly1);
+	inv->AddItem(poly2);
+}

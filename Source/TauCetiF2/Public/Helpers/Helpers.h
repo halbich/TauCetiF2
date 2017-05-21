@@ -9,6 +9,7 @@
 #include "Blocks/Public/Info/BuildableBlockInfo.h"
 #include "Widgets/Common/InventoryFlagItem.h"
 #include "Game/Weather/WeatherDefinition.h"
+#include "Inventory/Public/InventoryComponent.h"
 #include "Helpers.generated.h"
 
 USTRUCT(BlueprintType)
@@ -95,4 +96,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "TCF2 | Game Helpers")
 		static TArray<FControlsHelperStructGroup> GetControlsList();
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | Game Helpers", meta = (WorldContext = "WorldContextObject"))
+		static void TutorialAddItems(UObject* WorldContextObject, UInventoryComponent* inv);
 };
