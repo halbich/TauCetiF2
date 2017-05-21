@@ -51,7 +51,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		TMap<FString, UObjectWidget*> registeredWidgets;
 
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		UObjectWidget* currentShownRegisteredWidget;
 
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
