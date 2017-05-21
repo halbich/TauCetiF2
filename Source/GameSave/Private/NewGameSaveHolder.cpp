@@ -1097,7 +1097,7 @@ USaveGameCarrier* UNewGameSaveHolder::getTutorialGameSave(bool full)
 
 	c->inventoryTags = makeDefault();
 
-	c->buildableBlocks.Add(makeBuildable(DeleteID, FVector(1, 1, 1)));
+	//c->buildableBlocks.Add(makeBuildable(DeleteID, FVector(1, 1, 1)));
 
 	c->weatherState = makeTutorialWatherState();
 

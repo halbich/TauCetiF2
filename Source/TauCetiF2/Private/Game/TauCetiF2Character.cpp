@@ -94,7 +94,13 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* input
 	use.bConsumeInput = false;
 	inputComponent->AddActionBinding(use);
 
-	inputComponent->BindAction("OnInventory", IE_Pressed, this, &ATauCetiF2Character::OnInventory);
+
+	// we don't want to consume - we'd like to use it in tutorial
+	FInputActionBinding inventory("OnInventory", IE_Pressed);
+	inventory.ActionDelegate.BindDelegate(this, &ATauCetiF2Character::OnInventory);
+	inventory.bConsumeInput = false;
+	inputComponent->AddActionBinding(inventory);
+
 
 	inputComponent->BindAction("SelectNextInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnNextInventoryBank);
 	inputComponent->BindAction("SelectPrevInventoryBank", IE_Pressed, this, &ATauCetiF2Character::OnPrevInventoryBank);
