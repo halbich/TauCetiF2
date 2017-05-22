@@ -24,7 +24,7 @@ class TAUCETIF2_API ATauCetiF2PlayerController : public APlayerController
 
 public:
 
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Widgets")
 		EShownWidget CurrentShownWidget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")

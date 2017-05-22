@@ -6,16 +6,16 @@ ATerminalBlock::ATerminalBlock()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	GetRootComponent()->SetMobility(EComponentMobility::Static);
+	GetRootComponent()->SetMobility(EComponentMobility::Stationary);
 
 	TerminalBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TerminalBlockMesh"));
 	TerminalBlockMesh->SetupAttachment(GetRootComponent());
-	TerminalBlockMesh->SetMobility(EComponentMobility::Static);
+	TerminalBlockMesh->SetMobility(EComponentMobility::Stationary);
 
 	TerminalBlockMeshOutline = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TerminalBlockMeshOutline"));
 	TerminalBlockMeshOutline->SetupAttachment(TerminalBlockMesh);
 	TerminalBlockMeshOutline->SetRenderInMainPass(false);
-	TerminalBlockMeshOutline->SetMobility(EComponentMobility::Static);
+	TerminalBlockMeshOutline->SetMobility(EComponentMobility::Stationary);
 	TerminalBlockMeshOutline->SetCastShadow(false);
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));

@@ -6,11 +6,11 @@ AOxygenTankFillerBlock::AOxygenTankFillerBlock()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	GetRootComponent()->SetMobility(EComponentMobility::Static);
+	GetRootComponent()->SetMobility(EComponentMobility::Stationary);
 
 	OxygenTankFillerBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerBodyMesh"));
 	OxygenTankFillerBodyMesh->SetupAttachment(GetRootComponent());
-	OxygenTankFillerBodyMesh->SetMobility(EComponentMobility::Static);
+	OxygenTankFillerBodyMesh->SetMobility(EComponentMobility::Stationary);
 
 	OxygenTankFillerHeadMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerHeadMesh"));
 	OxygenTankFillerHeadMesh->SetupAttachment(OxygenTankFillerBodyMesh);
@@ -19,7 +19,7 @@ AOxygenTankFillerBlock::AOxygenTankFillerBlock()
 
 	OxygenTankFillerMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerMesh"));
 	OxygenTankFillerMesh->SetupAttachment(OxygenTankFillerBodyMesh);
-	OxygenTankFillerMesh->SetMobility(EComponentMobility::Static);
+	OxygenTankFillerMesh->SetMobility(EComponentMobility::Stationary);
 	OxygenTankFillerMesh->SetVisibility(false);
 
 	OxygenComponent = CreateDefaultSubobject<UOxygenComponent>(TEXT("OxygenComponent"));

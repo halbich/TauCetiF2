@@ -6,16 +6,16 @@ ACubeBlockWithoutElectricity::ACubeBlockWithoutElectricity()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	GetRootComponent()->SetMobility(EComponentMobility::Static);
+	GetRootComponent()->SetMobility(EComponentMobility::Stationary);
 
 	CubeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeMesh"));
 	CubeMesh->SetupAttachment(GetRootComponent());
-	CubeMesh->SetMobility(EComponentMobility::Static);
+	CubeMesh->SetMobility(EComponentMobility::Stationary);
 
 	CubeMeshOutline = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeMeshOutline"));
 	CubeMeshOutline->SetupAttachment(CubeMesh);
 	CubeMeshOutline->SetRenderInMainPass(false);
-	CubeMeshOutline->SetMobility(EComponentMobility::Static);
+	CubeMeshOutline->SetMobility(EComponentMobility::Stationary);
 	CubeMeshOutline->SetCastShadow(false);
 }
 

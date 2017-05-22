@@ -6,11 +6,11 @@ ABatteryBlock::ABatteryBlock()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	GetRootComponent()->SetMobility(EComponentMobility::Static);
+	GetRootComponent()->SetMobility(EComponentMobility::Stationary);
 
 	BatteryBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BatteryBlockMesh"));
 	BatteryBlockMesh->SetupAttachment(GetRootComponent());
-	BatteryBlockMesh->SetMobility(EComponentMobility::Static);
+	BatteryBlockMesh->SetMobility(EComponentMobility::Stationary);
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);

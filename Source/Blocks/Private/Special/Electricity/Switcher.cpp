@@ -6,11 +6,11 @@ ASwitcher::ASwitcher()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	GetRootComponent()->SetMobility(EComponentMobility::Static);
+	GetRootComponent()->SetMobility(EComponentMobility::Stationary);
 
 	SwitcherMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SwitcherMesh"));
 	SwitcherMesh->SetupAttachment(GetRootComponent());
-	SwitcherMesh->SetMobility(EComponentMobility::Static);
+	SwitcherMesh->SetMobility(EComponentMobility::Stationary);
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
