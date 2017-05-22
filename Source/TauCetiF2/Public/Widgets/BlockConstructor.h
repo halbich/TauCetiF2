@@ -25,7 +25,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockConstructorSelector")
 		FVector ScaleLimit;
 
-	UPROPERTY(Transient)
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BlockConstructorSelector")
 		UCreatorPatternGroupInfo* RelatedToPatternGroup;
 
 	UFUNCTION(BlueprintCallable, Category = "TCF2 | BlockConstructorSelector")

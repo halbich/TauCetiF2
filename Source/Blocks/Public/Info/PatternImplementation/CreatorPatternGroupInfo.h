@@ -7,7 +7,7 @@
 /**
  *
  */
-UCLASS()
+UCLASS(BlueprintType)
 class BLOCKS_API UCreatorPatternGroupInfo : public UPatternGroupInfo
 {
 	GENERATED_BODY()
