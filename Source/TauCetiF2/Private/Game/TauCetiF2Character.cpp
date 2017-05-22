@@ -85,7 +85,12 @@ void ATauCetiF2Character::SetupPlayerInputComponent(class UInputComponent* input
 	inputComponent->BindAxis("RotRoll", this, &ATauCetiF2Character::BuilderRotateRoll);
 	inputComponent->BindAxis("RotYaw", this, &ATauCetiF2Character::BuilderRotateYaw);
 
-	inputComponent->BindAction("OnEscape", IE_Pressed, this, &ATauCetiF2Character::OnEscapeKey);
+	// we don't want to consume - we'd like to use it in tutorial
+	FInputActionBinding escape("OnEscape", IE_Pressed);
+	escape.ActionDelegate.BindDelegate(this, &ATauCetiF2Character::OnEscapeKey);
+	escape.bConsumeInput = false;
+	inputComponent->AddActionBinding(escape);
+
 	inputComponent->BindAction("OnEnter", IE_Pressed, this, &ATauCetiF2Character::OnEnterKey);
 
 	// we don't want to consume - we'd like to use it in tutorial
