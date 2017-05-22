@@ -87,11 +87,8 @@ private:
 
 	FORCEINLINE void updateUsingMessage()
 	{
-#if WITH_EDITOR
-		if (PoweredBlockInfo)
+		if (!PoweredBlockInfo)
 			return;
-#endif
-
 		SelectTargetComponent->CustomUsingMessage = usedController != NULL ? LIGHT_TURN_USE : (PoweredBlockInfo->IsOn ? LIGHT_TURN_OFF : LIGHT_TURN_ON);
 	}
 };

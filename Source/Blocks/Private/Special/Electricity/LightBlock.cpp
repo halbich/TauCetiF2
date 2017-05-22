@@ -80,6 +80,7 @@ void ALightBlock::BeginPlay()
 	Subscriber.BindUObject(this, &ALightBlock::ListeningOnUse);
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
 
+	updateUsingMessage();
 }
 
 void ALightBlock::EndPlay(const EEndPlayReason::Type EndPlayReason)
