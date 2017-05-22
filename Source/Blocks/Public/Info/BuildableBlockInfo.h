@@ -47,6 +47,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient, Category = "TCF2 | BuildableBlockInfo")
 		bool BlockConstructorDisabled;
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | BuildableBlockInfo")
+		float GetEnergyCost(FVector currentSelectedScale);
+
 	bool ValidateObject(TArray<FText>& validationErrors, UBlockHolder* holder);
 
 	virtual void DefinitionSet();

@@ -89,3 +89,13 @@ UBuildableBlockInfo* UBuildableBlockInfo::GetCopy()
 
 	return res;
 }
+
+float UBuildableBlockInfo::GetEnergyCost(FVector currentSelectedScale)
+{
+	if (!BlockDefinition)
+		return -1;
+
+	auto baseEnergyReq = BlockDefinition->EnergyReqiredToBuild * buildingCoeficient();
+	auto dimensions = BlockDefinition->HasCustomScaling ? FVector(1, 1, 1) : currentSelectedScale;
+	return baseEnergyReq * dimensions.X * dimensions.Y * dimensions.Z;
+}
