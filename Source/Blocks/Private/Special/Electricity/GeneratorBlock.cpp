@@ -11,8 +11,11 @@ AGeneratorBlock::AGeneratorBlock()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
+
 	GeneratorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("GeneratorMesh"));
 	GeneratorMesh->SetupAttachment(GetRootComponent());
+	GeneratorMesh->SetMobility(EComponentMobility::Static);
 
 	dynamicColors = nullptr;
 	dynamicColorsFloat = nullptr;

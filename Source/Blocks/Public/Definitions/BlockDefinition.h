@@ -109,13 +109,13 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | BuildDefinition")
 		bool UsingInPatterns;
 
-	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | OxygenComponent")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | OxygenComponent")
 		bool HasOxygenComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | OxygenComponent", meta = (ShowOnlyInnerProperties, EditCondition = "HasOxygenComponent"))
 		FOxygenComponentDefinition OxygenComponentDef;
 
-	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | ElectricityComponent")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TCF2 | ElectricityComponent")
 		bool HasElectricityComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | ElectricityComponent", meta = (ShowOnlyInnerProperties, EditCondition = "HasElectricityComponent"))

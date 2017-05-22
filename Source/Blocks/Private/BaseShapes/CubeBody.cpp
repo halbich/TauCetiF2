@@ -6,9 +6,11 @@ ACubeBody::ACubeBody()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	CubeBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeBodyMesh"));
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
 
+	CubeBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeBodyMesh"));
 	CubeBodyMesh->SetupAttachment(GetRootComponent());
+	CubeBodyMesh->SetMobility(EComponentMobility::Static);
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);

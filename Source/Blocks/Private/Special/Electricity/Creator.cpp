@@ -4,8 +4,13 @@
 ACreator::ACreator()
 	: Super()
 {
+	PrimaryActorTick.bCanEverTick = false;
+
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
+
 	CreatorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CreatorMesh"));
 	CreatorMesh->SetupAttachment(GetRootComponent());
+	CreatorMesh->SetMobility(EComponentMobility::Static);
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);

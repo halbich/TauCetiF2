@@ -6,8 +6,11 @@ AOxygenTank::AOxygenTank()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
+
 	OxygenTankMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankMesh"));
 	OxygenTankMesh->SetupAttachment(GetRootComponent());
+	OxygenTankMesh->SetMobility(EComponentMobility::Static);
 
 	OxygenComponent = CreateDefaultSubobject<UOxygenComponent>(TEXT("OxygenComponent"));
 	AddOwnedComponent(OxygenComponent);

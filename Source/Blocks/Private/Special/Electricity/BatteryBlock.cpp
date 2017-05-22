@@ -6,8 +6,11 @@ ABatteryBlock::ABatteryBlock()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
+
 	BatteryBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BatteryBlockMesh"));
 	BatteryBlockMesh->SetupAttachment(GetRootComponent());
+	BatteryBlockMesh->SetMobility(EComponentMobility::Static);
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
@@ -28,9 +31,14 @@ UPrimitiveComponent* ABatteryBlock::GetComponentForObjectOutline_Implementation(
 	return BatteryBlockMesh;
 }
 
-void  ABatteryBlock::OnConstruction(const FTransform& Transform) {
+void ABatteryBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
+}
 
+
+void ABatteryBlock::BeginPlay()
+{
+	Super::BeginPlay();
 	ElectricityComponent->OnComponentDataChangedEvent.AddDynamic(this, &ABatteryBlock::ListeningOnElectricityCompChanged);
 	ElectricityComponent->onComponentDataChanged();
 }

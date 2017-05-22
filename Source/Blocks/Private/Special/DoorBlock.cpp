@@ -6,12 +6,16 @@ ADoorBlock::ADoorBlock()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
+
 	DoorBlockFrameMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DoorBlockFrameMesh"));
 	DoorBlockFrameMesh->SetupAttachment(GetRootComponent());
 	DoorBlockFrameMesh->AddLocalOffset(FVector(0, -3 * GameDefinitions::CubeMinSize, 0));
+	DoorBlockFrameMesh->SetMobility(EComponentMobility::Static);
 
 	DoorBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DoorBlockMesh"));
 	DoorBlockMesh->SetupAttachment(DoorBlockFrameMesh);
+	DoorBlockMesh->SetMobility(EComponentMobility::Movable);
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);

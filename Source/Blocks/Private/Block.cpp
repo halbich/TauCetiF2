@@ -42,27 +42,38 @@ void ABlock::OnConstruction(const FTransform& Transform)
 		BlockInfo->Health = FMath::Clamp(BlockInfo->Health, 0.0f, BlockInfo->MaxHealth);
 		HealthUpdated();
 	}
+	else
+	{
+		GetRootComponent()->SetMobility(EComponentMobility::Movable);
+	}
 
 	auto genBlock = Cast<IGenericBlock>(this);
 	int32 index = 0;
 
 	for (auto structureDef : def->MeshStructure)
 	{
-		check(structureDef.Mesh && "Structure element has no Mesh assigned!");
-
 		auto meshComp = genBlock->Execute_GetMeshStructureComponent(this, index++);
 
 		if (!meshComp)
 			continue;
 
 		check(meshComp && "Function GetMeshStructureComponent returned NULL!");
-		meshComp->SetStaticMesh(structureDef.Mesh);
+
+		if (BlockInfo->UnderConstruction)
+			meshComp->SetMobility(EComponentMobility::Movable);
 
 		for (size_t i = 0; i < structureDef.Materials.Num(); i++)
 		{
 			auto matDef = structureDef.Materials[i];
+			auto params = matDef.GetParams(currentScale);
 
-			setMaterial(meshComp, BlockInfo->UnderConstruction ? matDef.TranslucentMat : matDef.DefaultMat, i, matDef.GetParams(currentScale));
+			if (BlockInfo->UnderConstruction)
+				setMaterial(meshComp, matDef.TranslucentMat, i, params);
+			else
+				if (matDef.DefaultMat && (params.X != 0 || params.Y != 0))
+					setMaterial(meshComp, matDef.DefaultMat, i, params);
+
+
 		}
 	}
 

@@ -6,15 +6,20 @@ AOxygenTankFillerBlock::AOxygenTankFillerBlock()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
+
 	OxygenTankFillerBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerBodyMesh"));
 	OxygenTankFillerBodyMesh->SetupAttachment(GetRootComponent());
+	OxygenTankFillerBodyMesh->SetMobility(EComponentMobility::Static);
 
 	OxygenTankFillerHeadMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerHeadMesh"));
 	OxygenTankFillerHeadMesh->SetupAttachment(OxygenTankFillerBodyMesh);
+	OxygenTankFillerHeadMesh->SetMobility(EComponentMobility::Movable);
+	OxygenTankFillerHeadMesh->SetCastShadow(false);
 
 	OxygenTankFillerMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OxygenTankFillerMesh"));
 	OxygenTankFillerMesh->SetupAttachment(OxygenTankFillerBodyMesh);
-
+	OxygenTankFillerMesh->SetMobility(EComponentMobility::Static);
 	OxygenTankFillerMesh->SetVisibility(false);
 
 	OxygenComponent = CreateDefaultSubobject<UOxygenComponent>(TEXT("OxygenComponent"));
@@ -100,7 +105,7 @@ void AOxygenTankFillerBlock::SetBlockInfo(UBlockInfo* info)
 void  AOxygenTankFillerBlock::OnConstruction(const FTransform& Transform) {
 	Super::OnConstruction(Transform);
 
-	
+
 
 	dynInfoMat = UMaterialInstanceDynamic::Create(OxygenTankFillerMesh->GetMaterial(0), this);
 	OxygenTankFillerMesh->SetMaterial(0, dynInfoMat);

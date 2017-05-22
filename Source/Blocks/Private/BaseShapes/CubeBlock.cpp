@@ -4,9 +4,13 @@
 ACubeBlock::ACubeBlock()
 	: Super()
 {
+	PrimaryActorTick.bCanEverTick = false;
+
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
 
 	CubeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeMesh"));
 	CubeMesh->SetupAttachment(GetRootComponent());
+	CubeMesh->SetMobility(EComponentMobility::Static);
 
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));

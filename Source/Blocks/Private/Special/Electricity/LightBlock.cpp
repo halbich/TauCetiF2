@@ -6,14 +6,17 @@ ALightBlock::ALightBlock()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	LightBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LightBlockMesh"));
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
 
+	LightBlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LightBlockMesh"));
 	LightBlockMesh->SetupAttachment(GetRootComponent());
 	LightBlockMesh->AddLocalOffset(FVector(0, 0, -1));
+	LightBlockMesh->SetMobility(EComponentMobility::Static);
 
 	LightComp = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light Component"));
 	LightComp->SetupAttachment(GetRootComponent());
 	LightComp->AddLocalOffset(FVector(0, 0, -4));
+	LightComp->SetMobility(EComponentMobility::Movable);
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);

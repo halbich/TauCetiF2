@@ -6,6 +6,8 @@ AWindowBlock::AWindowBlock()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
+
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
 }

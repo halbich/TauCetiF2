@@ -4,8 +4,13 @@
 ASwitcher::ASwitcher()
 	: Super()
 {
+	PrimaryActorTick.bCanEverTick = false;
+
+	GetRootComponent()->SetMobility(EComponentMobility::Static);
+
 	SwitcherMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SwitcherMesh"));
 	SwitcherMesh->SetupAttachment(GetRootComponent());
+	SwitcherMesh->SetMobility(EComponentMobility::Static);
 
 	ElectricityComponent = CreateDefaultSubobject<UElectricityComponent>(TEXT("ElectricityComponent"));
 	AddOwnedComponent(ElectricityComponent);
