@@ -36,7 +36,6 @@ public:
 
 /* BlockIDs*/
 #define DeleteID -5
-#define ElectricToolID -4
 
 #define CubeBaseID 0
 #define CubeBuildingID 1
