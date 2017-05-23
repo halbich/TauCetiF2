@@ -21,4 +21,37 @@ public:
 		void OnSynchronizeProperties();
 
 	virtual void SynchronizeProperties() override;
+
+
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | User Interface")
+		void TutorialHighlight(float showForTime = -1.0f);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | User Interface")
+		void TutorialUnHighlight();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | User Interface")
+		void TutorialHide();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | User Interface")
+		void TutorialShow();
+	
+
+	UPROPERTY(Transient)
+		TArray<USynchronizeWidget*> highlighted;
+
+	UPROPERTY(Transient)
+		TArray<USynchronizeWidget*> hidden;
+
+	UPROPERTY(BlueprintReadWrite, Transient, Category = "TCF2 | User Interface")
+		TArray<USynchronizeWidget*> AllTutorialScreenWidgets;
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | User Interface")
+		void MakeHighlightScreen(TArray<USynchronizeWidget*> ToHighlight);
+
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | User Interface")
+		void MakeHighlightScreenSingle(USynchronizeWidget* ToHighlight);
+
+
+
 };
