@@ -74,7 +74,7 @@ public:
 
 	FORCEINLINE bool IsInUsableArea(AActor* selectingActor)
 	{
-		return selectingActor && IsUsable && (MaxDistance < 0 || FVector::Dist(owner->GetActorLocation(), selectingActor->GetActorLocation()) <= MaxDistance);
+		return selectingActor && IsUsable && (MaxDistance < 0 || FVector::Dist(usableObjectOutlinePrimitive->GetComponentLocation(), selectingActor->GetActorLocation()) <= MaxDistance);
 	}
 
 public:

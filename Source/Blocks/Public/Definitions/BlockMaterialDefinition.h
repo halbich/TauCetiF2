@@ -23,6 +23,9 @@ struct FBlockMaterialDefinition
 	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
 		EApplyScaleToMaterialParam KY;
 
+	UPROPERTY(EditDefaultsOnly, Category = "TCF2 | Block")
+		bool OverrideScaleApplyCustom;
+
 	FBlockMaterialDefinition()
 	{
 		DefaultMat = NULL;

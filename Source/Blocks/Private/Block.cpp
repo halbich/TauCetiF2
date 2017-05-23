@@ -65,7 +65,7 @@ void ABlock::OnConstruction(const FTransform& Transform)
 		for (size_t i = 0; i < structureDef.Materials.Num(); i++)
 		{
 			auto matDef = structureDef.Materials[i];
-			auto params = matDef.GetParams(currentScale);
+			auto params = matDef.GetParams(def->HasCustomScaling && matDef.OverrideScaleApplyCustom ? def->CustomBlockScale : currentScale);
 
 			if (BlockInfo->UnderConstruction)
 				setMaterial(meshComp, matDef.TranslucentMat, i, params);
