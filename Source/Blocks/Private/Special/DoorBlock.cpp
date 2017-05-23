@@ -77,13 +77,16 @@ void ADoorBlock::SetBlockInfo(UBlockInfo* info)
 
 void ADoorBlock::ListeningOnUse(AActor* actor, bool isSpecial)
 {
-	if (doorState == EDoorState::Closed)
-	{
-		doorState = EDoorState::Opening;
+	if (isSpecial)
 		return;
+
+	switch (doorState)
+	{
+	case EDoorState::Closed:	doorState = EDoorState::Opening; break;
+	case EDoorState::Opening:	doorState = EDoorState::Closing; break;
+	case EDoorState::Opened:	doorState = EDoorState::Closing; break;
+	case EDoorState::Closing:	doorState = EDoorState::Opening; break;
 	}
-	else if (doorState == EDoorState::Opened)
-		doorState = EDoorState::Closing;
 }
 
 void ADoorBlock::BeginPlay()
@@ -143,6 +146,8 @@ void ADoorBlock::Tick(float DeltaSeconds)
 
 	Super::Tick(DeltaSeconds);
 }
+
+
 
 TArray<FString> ADoorBlock::GetSupportedAdditionals()
 {
