@@ -51,7 +51,7 @@ void USynchronizeWidget::MakeHighlightScreen(TArray<USynchronizeWidget*> ToHighl
 
 	for (auto w : AllTutorialScreenWidgets)
 	{
-		if (highlighted.Find(w) == INDEX_NONE)	
+		if (highlighted.Find(w) == INDEX_NONE)
 		{
 			// we need to hide it
 			w->TutorialHide();
@@ -68,3 +68,17 @@ void USynchronizeWidget::MakeHighlightScreenSingle(USynchronizeWidget* ToHighlig
 	MakeHighlightScreen(ha);
 }
 
+void USynchronizeWidget::ShowHide(bool show, USynchronizeWidget* widget, UTextBlock* text)
+{
+	if (show)
+	{
+		widget->TutorialShow();
+		text->SetOpacity(1.0f);
+	}
+	else
+	{
+
+		widget->TutorialHide();
+		text->SetOpacity(0.25f);
+	}
+}

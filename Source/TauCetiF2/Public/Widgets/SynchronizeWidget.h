@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Blueprint/UserWidget.h"
+#include "TextBlock.h"
 #include "SynchronizeWidget.generated.h"
 
 /**
@@ -53,5 +54,7 @@ public:
 		void MakeHighlightScreenSingle(USynchronizeWidget* ToHighlight);
 
 
+	UFUNCTION(BlueprintCallable, Category = "TCF2 | User Interface")
+		static void ShowHide(bool show, USynchronizeWidget* widget, UTextBlock* text);
 
 };
