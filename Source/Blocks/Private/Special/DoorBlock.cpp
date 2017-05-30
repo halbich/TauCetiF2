@@ -94,7 +94,7 @@ void ADoorBlock::BeginPlay()
 	Super::BeginPlay();
 
 	SelectTargetComponent->EnableSelect(DoorBlockFrameMesh);
-	SelectTargetComponent->EnableUse(200, DoorBlockMesh);
+	SelectTargetComponent->EnableUse(400, DoorBlockMesh);
 	FUseDelegate Subscriber;
 	Subscriber.BindUObject(this, &ADoorBlock::ListeningOnUse);
 	ListeningHandle = SelectTargetComponent->AddEventListener(Subscriber);
