@@ -40,18 +40,23 @@ public:
 		UElectricityComponent* ElectricityComponent;
 
 	UPROPERTY(Transient)
-		UTexture2D* DynamicTexture;
-
-	UPROPERTY(Transient)
 		bool AnimationEnabled;
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "TCF2 | GeneratorBlock")
 		UParticleSystem* ParticleEmitter;
 
 	UPROPERTY(Transient)
-		TArray<UParticleSystem*> particles;
+		UWorld* world;
 
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(Transient)
+		TArray<UParticleSystemComponent*> particles;
+
+	UPROPERTY(Transient)
+		FVector Scale;
+
+
+	virtual void BeginPlay() override;
+
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual void OnConstruction(const FTransform& Transform) override;
@@ -67,24 +72,8 @@ public:
 		return ElectricityComponent;
 	}
 
-	UPROPERTY(Transient)
-		TArray<FHittedSpot> spots;
-
-private:
-
-	TArray<class UMaterialInstanceDynamic*> dynamicMaterials;
-	FUpdateTextureRegion2D* updateTextureRegion;
-	uint8* dynamicColors;
-	float* dynamicColorsFloat;
-	uint32 dataSize;
-	uint32 dataSqrtSize;
-
-	int32 rowSize;
-	int32 arraySize;
-
-	void UpdateTextureRegions(UTexture2D* Texture, int32 MipIndex, uint32 NumRegions, FUpdateTextureRegion2D* Regions, uint32 SrcPitch, uint32 SrcBpp, uint8* SrcData, bool bFreeData);
-
-	void UpdateCustomTexture();
-
-	int32 pixelsPerBaseBlock;
+	FORCEINLINE int32 getParticleIndex(FVector scale)
+	{
+		return FMath::FloorToInt(scale.X + Scale.X * scale.Y);
+	}
 };
