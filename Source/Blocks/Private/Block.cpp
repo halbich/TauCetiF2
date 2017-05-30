@@ -259,7 +259,7 @@ void ABlock::RenewPatternInfo()
 	InitWorldObjectComponent();
 }
 
-void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
+void ABlock::WasHitByStorm(const FVector& blockHitLocation, const float amount, const FVector& hitWorldLocation)
 {
 	auto damage = amount;
 

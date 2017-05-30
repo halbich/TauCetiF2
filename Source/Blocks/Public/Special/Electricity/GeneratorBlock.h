@@ -2,6 +2,7 @@
 
 #include "Block.h"
 #include "Components/ElectricityComponent.h"
+#include "Components/Electricity/ElectricNetwork.h"
 #include "BlockWithElectricity.h"
 #include "Commons/Public/CommonHelpers.h"
 #include "GeneratorBlock.generated.h"
@@ -44,6 +45,12 @@ public:
 	UPROPERTY(Transient)
 		bool AnimationEnabled;
 
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "TCF2 | GeneratorBlock")
+		UParticleSystem* ParticleEmitter;
+
+	UPROPERTY(Transient)
+		TArray<UParticleSystem*> particles;
+
 	virtual void Tick(float DeltaTime) override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
@@ -53,7 +60,7 @@ public:
 
 	virtual UPrimitiveComponent* GetComponentForObjectOutline_Implementation() override;
 
-	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount) override;
+	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount, const FVector& hitWorldLocation) override;
 
 	FORCEINLINE virtual UElectricityComponent* GetElectricityComponent() override
 	{

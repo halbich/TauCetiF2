@@ -211,8 +211,9 @@ UPrimitiveComponent* AGeneratorBlock::GetComponentForObjectOutline_Implementatio
 	return GeneratorMesh;
 }
 
-void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float amount)
+void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float amount, const FVector& hitWorldLocation)
 {
+
 	if (AnimationEnabled) {
 		FHittedSpot hitted;
 
@@ -233,6 +234,10 @@ void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float
 			spots[existing].ActualTime = 0;
 		else
 			spots.Insert(hitted, 0);
+	}
+	else
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ParticleEmitter, hitWorldLocation, FRotator::ZeroRotator, true);
 	}
 
 	auto energyToPut = amount *  GameDefinitions::RainHitpointToEnergy;
@@ -272,5 +277,5 @@ void AGeneratorBlock::WasHitByStorm(const FVector& blockHitLocation, const float
 	ensure(energyToPut >= 0);
 
 	if (!FMath::IsNearlyZero(energyToPut))
-		Super::WasHitByStorm(blockHitLocation, energyToPut);
+		Super::WasHitByStorm(blockHitLocation, energyToPut, hitWorldLocation);
 }

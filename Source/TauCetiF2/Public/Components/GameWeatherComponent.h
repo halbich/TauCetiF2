@@ -131,13 +131,14 @@ private:
 			check(targObj && targObj->IsValidLowLevelFast() && !targObj->IsPendingKill());
 			check(targObj->ContainingObject && targObj->ContainingObject->IsValidLowLevelFast() && !targObj->ContainingObject->IsPendingKill());
 
+			//targObj->DEBUGDrawBorder(GetWorld(), FColor::Yellow, 1);
+
 			auto bl = Cast<ABlock>(targObj->ContainingObject);
 			check(bl && bl->IsValidLowLevelFast() && !bl->IsPendingKill());
 
 			auto defBox = bl->WorldObjectComponent->DefiningBox;
-			auto myBox = targObj;
 
-			auto v = ((myBox->Min - defBox->Min) / GameDefinitions::CubeMinSize).GridSnap(1);
+			auto v = ((targObj->Min - defBox->Min) / GameDefinitions::CubeMinSize).GridSnap(1);
 
 			auto norm = FMath::RoundToInt(bl->BlockInfo->Rotation.GetNormalized().Yaw + 360) % 360;
 
@@ -163,8 +164,11 @@ private:
 				checkNoEntry();
 			}
 
+			auto hitWorld = (targObj->Max + targObj->Min) * 0.5f;
+			hitWorld.Z = bl->GetActorLocation().Z;
+
 			// TODO value
-			bl->WasHitByStorm(hitStorm, 1);
+			bl->WasHitByStorm(hitStorm, 1, hitWorld);
 		}
 	}
 

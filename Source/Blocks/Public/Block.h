@@ -80,7 +80,7 @@ public:
 
 	void InitWorldObjectComponent();
 
-	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount);
+	virtual void WasHitByStorm(const FVector& blockHitLocation, const float amount,const FVector& hitWorldLocation);
 
 	virtual UPatternGroupInfo* GetPatternGroupImpl();
 
