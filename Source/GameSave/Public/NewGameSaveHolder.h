@@ -154,11 +154,9 @@ private:
 	FWeatherState makeTutorialWatherState()
 	{
 		FWeatherState res;
-		res.CurrentDefinitionID = 2;
+		res.CurrentDefinitionID = 0;
 		res.CurrentWaitingTime = 0;
 		res.TargetWaitingTime = 60 * 60 * 24;
-
-		res.CurrentWeatherIntensity = 10;
 		return res;
 	}
 };
