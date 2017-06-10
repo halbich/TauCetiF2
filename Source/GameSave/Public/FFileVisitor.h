@@ -3,7 +3,7 @@
 /**
  *
  */
-class COMMONS_API FFileVisitor : public IPlatformFile::FDirectoryVisitor
+class GAMESAVE_API FFileVisitor : public IPlatformFile::FDirectoryVisitor
 {
 public:
 

@@ -1,7 +1,6 @@
 ﻿#include "TauCetiF2.h"
 #include "PlatformFeatures.h"
 #include "GameFramework/SaveGame.h"
-#include "FFileVisitor.h"
 #include "Helpers.h"
 
 bool UHelpers::ChangeLocalization(FString target)
