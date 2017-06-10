@@ -19,7 +19,7 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | Game Save")
 		bool SaveGame();
 
-	//classes using this interface may implement LoadGame
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "TCF2 | Game Save")
+	//classes using this interface must implement LoadGame
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TCF2 | Game Save")
 		bool LoadGame();
 };
