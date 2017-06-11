@@ -145,7 +145,7 @@ ABlock* AWorldController::SpawnWorldObject(UWorld* world, UBlockInfo* block, TAr
 		return nullptr;
 	}
 
-	UMinMaxBox* box = BlockHelpers1::GetSpawnBox(definition, block);
+	UMinMaxBox* box = WorldHelpers::GetSpawnBox(definition, block);
 	ensure(box != nullptr);
 	if (!IsValidSpawnPoint(box))
 	{

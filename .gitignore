@@ -63,3 +63,6 @@ TauCetiF2.VC.db
 enc_temp_folder/*
 
 Releases/*
+
+#Visual studio files
+.vs/*

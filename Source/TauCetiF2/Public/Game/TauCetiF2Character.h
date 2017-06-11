@@ -1,16 +1,16 @@
 ﻿// Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/Character.h"
-#include "Components/SelectorComponent.h"
+#include "Blocks/Public/Definitions/OxygenComponentDefinition.h"
+#include "Blocks/Public/Components/OxygenComponent.h"
+#include "Blocks/Public/Definitions/ElectricityComponentDefinition.h"
+#include "Blocks/Public/Components/ElectricityComponent.h"
+#include "Blocks/Public/Helpers/BlockHelpers.h"
+#include "GameSave/Public/SaveGameCarrier.h"
 #include "Inventory/Public/InventoryComponent.h"
+#include "Components/SelectorComponent.h"
 #include "Components/BuilderComponent.h"
 #include "Game/TauCetiF2PlayerController.h"
-#include "Blocks/Public/Definitions/OxygenComponentDefinition.h"
-#include "Blocks/Public/Definitions/ElectricityComponentDefinition.h"
-#include "Blocks/Public/Components/OxygenComponent.h"
-#include "Blocks/Public/Components/ElectricityComponent.h"
-#include "GameSave/Public/SaveGameCarrier.h"
-#include "Blocks/Public/Helpers/BlockHelpers.h"
 #include "TauCetiF2Character.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerDied);

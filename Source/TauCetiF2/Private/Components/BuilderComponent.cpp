@@ -58,7 +58,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	auto newLocation = BlockHelpers::GetSpawnPoint(selector->ImpactPointWithSnap, selector->ImpactNormal, currentDefinitionForBlock, currentBlockInfo);
 
 	currentBlockInfo->Location = newLocation;
-	auto spawnBlock = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+	auto spawnBlock = WorldHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 	if (!worldController->IsValidSpawnPoint(spawnBlock))
 	{
 		TMap<FVector, float> tempSuccesses;
@@ -81,7 +81,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 					auto offsetVect = FVector(x, y, z);
 					auto newTestLocation = newLocation + offsetVect;
 					currentBlockInfo->Location = newTestLocation;
-					auto testSpawnBlock = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+					auto testSpawnBlock = WorldHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 					if (worldController->IsValidSpawnPoint(testSpawnBlock))
 						tempSuccesses.Add(offsetVect, FVector::DistSquared(newTestLocation, newLocation));	// we do not need to do sqrt on results;
 				}
@@ -105,7 +105,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		{
 			auto targetOffset = keyValue.Key;
 			currentBlockInfo->Location = newLocation + targetOffset;
-			spawnBlock = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+			spawnBlock = WorldHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 			break;
 		}
 	}
@@ -172,7 +172,7 @@ void UBuilderComponent::setCurrentBuildingItem(UBuildableBlockInfo* blockInfo)
 	if (!worldController || !worldController->IsValidLowLevel())
 		return;
 
-	if (!worldController->IsValidSpawnPoint(BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo)))
+	if (!worldController->IsValidSpawnPoint(WorldHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo)))
 		return;
 
 	auto used = usedObjects.FindRef(currentBuildableBlockInfo);
@@ -285,7 +285,7 @@ void UBuilderComponent::DoAction() {
 		if (!currentSpawnedObject || !currentSpawnedObject->IsValidLowLevel())
 			return;
 
-		auto spawnBox = BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
+		auto spawnBox = WorldHelpers::GetSpawnBox(currentDefinitionForBlock, currentBlockInfo);
 		if (!worldController->IsValidSpawnPoint(spawnBox))
 			return;
 
@@ -303,7 +303,7 @@ void UBuilderComponent::DoAction() {
 
 		spawnBlock->UnderConstruction = false;
 
-		if (!worldController->IsValidSpawnPoint(BlockHelpers1::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
+		if (!worldController->IsValidSpawnPoint(WorldHelpers::GetSpawnBox(currentDefinitionForBlock, spawnBlock)))
 			return;
 
 		UInventoryBuildableBlockInfo* invBuildable = nullptr;

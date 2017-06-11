@@ -9,7 +9,7 @@
 #include "World/WorldController.h"
 #include "Blocks/Public/Info/BlockHolder.h"
 #include "Blocks/Public/Components/ElectricityComponent.h"
-#include "Helpers/BlockHelpers.h"
+#include "Helpers/WorldHelpers.h"
 #include "BuilderComponent.generated.h"
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))

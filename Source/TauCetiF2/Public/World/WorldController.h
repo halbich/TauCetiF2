@@ -4,7 +4,6 @@
 #include "Blocks/Public/Interfaces/PickableBlock.h"
 #include "Blueprint/UserWidget.h"
 #include "Blocks/Public/Interfaces/BlockWithShowableWidget.h"
-#include "Helpers/BlockHelpers.h"
 #include "Helpers/WorldHelpers.h"
 #include "MinMaxBox.h"
 #include "KDTree.h"
