@@ -93,14 +93,10 @@ namespace BlockHelpers
 	static  FVector GetSpawnPoint(const FVector& ImpactPointWithSnap, const FVector& ImpactNormal, const UBlockDefinition* definition, const UBlockInfo* blockInfo) {
 		auto baseLocation = ImpactPointWithSnap / GameDefinitions::CubeMinSize;
 		auto blockScale = definition->GetObjectScale(blockInfo->Scale);
-
 		auto rotationScale = (blockInfo->Rotation.RotateVector(blockScale)* 0.5).GridSnap(0.5f).GetAbs();
 		auto offsetInNormal = rotationScale * ImpactNormal.GetAbs();
-
 		auto rotationOffset = GetSpawnOffset(blockInfo->Rotation, blockScale).GridSnap(0.5f);
-
 		auto resCenAbs = ((rotationScale - ImpactNormal* rotationOffset) * ImpactNormal).GetAbs();
-
 		return baseLocation + ImpactNormal * FVector(FMath::FloorToInt(resCenAbs.X), FMath::FloorToInt(resCenAbs.Y), FMath::FloorToInt(resCenAbs.Z));
 	}
 };
