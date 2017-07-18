@@ -26,7 +26,7 @@ void UOxygenComponent::SetDefinition(FOxygenComponentDefinition def, FVector& bl
 {
 	SetDefinition(def);
 
-	auto oxygen = OxygenComponentDef.TotalObjectVolume; // *blockScale.X * blockScale.Y * blockScale.Z;
+	auto oxygen = OxygenComponentDef.TotalObjectVolume *blockScale.X * blockScale.Y * blockScale.Z;
 
 	OxygenInfo->CurrentObjectMaximumOxygen = oxygen;
 	OxygenInfo->CurrentObjectOxygen = FMath::Clamp(OxygenInfo->CurrentObjectOxygen, 0.0f, oxygen);

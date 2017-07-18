@@ -237,3 +237,15 @@ bool UInventoryComponent::TryRemoveInventory(UInventoryBuildableBlockInfo* block
 
 	return removed > 0;
 }
+
+void UInventoryComponent::ClearBuildableItems()
+{
+
+	BuildableItems.Empty();
+
+	for (auto grp : InventoryTags->InventoryGroupList)
+		grp->IsBuildableCacheValid = false;
+
+	ForceItemsChanged(false);
+	selectItem(0);
+}

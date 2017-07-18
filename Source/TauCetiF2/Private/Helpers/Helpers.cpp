@@ -1,6 +1,7 @@
 ﻿#include "TauCetiF2.h"
 #include "PlatformFeatures.h"
 #include "GameFramework/SaveGame.h"
+#include "Blocks/Public/Special/Electricity/Creator.h"
 #include "Helpers.h"
 
 bool UHelpers::ChangeLocalization(FString target)
@@ -233,4 +234,21 @@ void UHelpers::TutorialAddItems(UObject* WorldContextObject, UInventoryComponent
 	inv->AddItem(creator);
 	inv->AddItem(poly1);
 	inv->AddItem(poly2);
+}
+
+TArray<UCreatorPatternGroupInfo*> UHelpers::TutorialGetCreators(UObject* WorldContextObject)
+{
+	TArray<UCreatorPatternGroupInfo*> result;
+
+	TArray<AActor*> actors;
+	UGameplayStatics::GetAllActorsOfClass(WorldContextObject, ACreator::StaticClass(), actors);
+
+	for (auto c : actors)
+	{
+		auto pg = Cast<UCreatorPatternGroupInfo>(Cast<ACreator>(c)->WorldObjectComponent->PatternGroupInfo);
+		if (pg && pg->IsValidLowLevel())
+			result.AddUnique(pg);
+	}
+
+	return result;
 }
