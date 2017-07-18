@@ -424,7 +424,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMiniLevelGameSave(bool full)
 
 	auto UsedBlocks = &c->usedBlocks;
 
-	/*auto b_0 = make1(0, -146, 12, 1, 15, 15, 4, 0, -180, 0, 9000.000000, ""); mE(b_0, 0.000000); UsedBlocks->Add(b_0);
+	auto b_0 = make1(0, -146, 12, 1, 15, 15, 4, 0, -180, 0, 9000.000000, ""); mE(b_0, 0.000000); UsedBlocks->Add(b_0);
 	auto b_1 = make1(700, -142, 9, 9, 7, 7, 11, 0, 90, 0, 10.000000, ""); af(b_1, TEXT("DoorOpening"), 0); bd(b_1, TEXT("DoorState"), TEXT("0")); bd(b_1, TEXT("DoorYaw"), TEXT("0.0")); mE(b_1, 0.000000); UsedBlocks->Add(b_1);
 	auto b_2 = make1(1150, -150, 8, 4, 3, 3, 2, 0, -90, 0, 180.000000, ""); mE(b_2, 18000.000000); UsedBlocks->Add(b_2);
 	auto b_3 = make1(2, -150, 10, 6, 5, 4, 1, -90, 0, -90, 200.000000, ""); UsedBlocks->Add(b_3);
@@ -462,7 +462,7 @@ USaveGameCarrier* UNewGameSaveHolder::getMiniLevelGameSave(bool full)
 	auto b_31 = make1(1500, -140, 17, 6, 2, 2, 2, 0, 90, 0, 10.000000, ""); mO(b_31, 1000.000000); UsedBlocks->Add(b_31);
 	auto b_32 = make1(1500, -142, 17, 6, 2, 2, 2, 0, 90, 0, 10.000000, ""); mO(b_32, 1000.000000); UsedBlocks->Add(b_32);
 	auto b_33 = make1(1500, -140, 17, 8, 2, 2, 2, 0, 90, 0, 10.000000, ""); mO(b_33, 1000.000000); UsedBlocks->Add(b_33);
-	auto b_34 = make1(1500, -142, 17, 8, 2, 2, 2, 0, 90, 0, 10.000000, ""); mO(b_34, 1000.000000); UsedBlocks->Add(b_34);*/
+	auto b_34 = make1(1500, -142, 17, 8, 2, 2, 2, 0, 90, 0, 10.000000, ""); mO(b_34, 1000.000000); UsedBlocks->Add(b_34);
 
 	c->PlayerPosition = FVector(-2948, 328, 163);
 	c->PlayerRotation = FRotator(0, -57, 0);
