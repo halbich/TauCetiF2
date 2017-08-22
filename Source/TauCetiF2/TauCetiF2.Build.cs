@@ -4,7 +4,7 @@ using UnrealBuildTool;
 
 public class TauCetiF2 : ModuleRules
 {
-    public TauCetiF2(TargetInfo Target)
+    public TauCetiF2(ReadOnlyTargetRules ROTRules) : base(ROTRules)
     {
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "Slate", "SlateCore",
             "Commons", "Blocks", "GameSave", "Inventory" });

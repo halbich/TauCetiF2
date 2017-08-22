@@ -2,7 +2,7 @@ using UnrealBuildTool;
 
 public class GameSave : ModuleRules
 {
-    public GameSave(TargetInfo Target)
+    public GameSave(ReadOnlyTargetRules ROTRules) : base(ROTRules)
     {
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "Commons" });
         PrivateDependencyModuleNames.AddRange(new string[] { "RenderCore" });

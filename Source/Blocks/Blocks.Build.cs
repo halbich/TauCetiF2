@@ -2,7 +2,7 @@ using UnrealBuildTool;
 
 public class Blocks : ModuleRules
 {
-    public Blocks(TargetInfo Target)
+    public Blocks(ReadOnlyTargetRules ROTRules) : base(ROTRules)
     {
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "UMG", "Slate", "SlateCore", "Commons", "GameSave" });
         PrivateDependencyModuleNames.AddRange(new string[] { "RenderCore", "PakFile", "StreamingFile", "RHI" });

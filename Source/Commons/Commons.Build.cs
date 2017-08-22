@@ -2,7 +2,7 @@ using UnrealBuildTool;
 
 public class Commons : ModuleRules
 {
-    public Commons(TargetInfo Target)
+    public Commons(ReadOnlyTargetRules ROTRules) : base(ROTRules)
     {
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine" });
         PrivateDependencyModuleNames.AddRange(new string[] { "RenderCore" });

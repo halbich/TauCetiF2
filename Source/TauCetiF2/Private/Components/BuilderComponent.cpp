@@ -117,7 +117,7 @@ void UBuilderComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	character->GetActorBounds(true, origin, extent);
 	auto charBox = FBox::BuildAABB(origin, extent);
 
-	if (!(box.Overlap(charBox) == 0))
+	if (!(box.Overlap(charBox) == FBox(EForceInit::ForceInitToZero)))
 	{
 		toggleHiddenCurrentSpawned();
 		return;
@@ -294,9 +294,9 @@ void UBuilderComponent::DoAction() {
 		FVector origin;
 		FVector extent;
 		character->GetActorBounds(true, origin, extent);
-		auto charBox = FBox::BuildAABB(origin, extent);
+		const FBox charBox = FBox::BuildAABB(origin, extent);
 
-		if (!(box.Overlap(charBox) == 0))
+		if (!(box.Overlap(charBox) == FBox(EForceInit::ForceInitToZero)))
 			return;
 
 		auto spawnBlock = NewObject<UBlockInfo>(this, NAME_None, RF_NoFlags, currentBlockInfo);

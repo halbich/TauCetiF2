@@ -2,7 +2,7 @@ using UnrealBuildTool;
 
 public class Inventory : ModuleRules
 {
-    public Inventory(TargetInfo Target)
+    public Inventory(ReadOnlyTargetRules ROTRules) : base(ROTRules)
     {
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "Commons", "Blocks", "GameSave" });
         PrivateDependencyModuleNames.AddRange(new string[] { "RenderCore" });
